@@ -1,3 +1,10 @@
+-- Define restock parameters at the top level
+local restockCooldown = 300 -- Cooldown in seconds
+local restockLimit = 5 -- Free uses before charging
+local restockCost = 100 -- Base cost for using the restock button
+local lastRestockTime = 0
+local restockCount = 0
+
 function Shop:buildGui(window, guiType, config) -- client
     config = config or {}
 
@@ -18,20 +25,19 @@ function Shop:buildGui(window, guiType, config) -- client
     local amountBoxX = buttonX
 
     if guiType == 0 then
-        -- buying from the NPC
+        -- Buying from the NPC
         buttonCaption = "Buy"%_t
         buttonCallback = "onBuyButtonPressed"
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onSoldLeftButtonPressed")
         window:createButton(Rect(size.x - 70, 50 + 35 * 15, 60 + size.x - 60, 80 + 35 * 15), ">", "onSoldRightButtonPressed")
-		
-		self.pageLabel0 = window:createLabel(vec2(10, 50 + 35 * 15), "", 18)
+
+        self.pageLabel0 = window:createLabel(vec2(10, 50 + 35 * 15), "", 18)
         self.pageLabel0.lower = vec2(pos.x + 10, pos.y + 50 + 35 * 15)
         self.pageLabel0.upper = vec2(pos.x + size.x - 70, pos.y + 75)
         self.pageLabel0.centered = 1
-		self.soldItemsPage = 0
-
+        self.soldItemsPage = 0
     elseif guiType == 1 then
-        -- selling to the NPC
+        -- Selling to the NPC
         buttonCaption = "Sell"%_t
         buttonCallback = "onSellButtonPressed"
 
@@ -43,11 +49,13 @@ function Shop:buildGui(window, guiType, config) -- client
         self.pageLabel.upper = vec2(pos.x + size.x - 70, pos.y + 75)
         self.pageLabel.centered = 1
 
+        -- Additional buttons for selling
         self.reverseSellOrderButton = window:createButton(Rect(pictureX, -2, pictureX + 30, 30), "", "onReverseOrderPressed")
         self.reverseSellOrderButton.hasFrame = false
         self.reverseSellOrderButton.icon = "data/textures/icons/up-down.png"
         self.reverseSellOrder = false
 
+        -- Favorite items button
         self.showFavoritesButton = window:createButton(Rect(favX, 3, favX + 18, 3+18), "", "onShowFavoritesPressed")
         self.showFavoritesButton.hasFrame = false
         self.showFavoritesButton.icon = "data/textures/icons/round-star.png"
@@ -59,6 +67,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showFavoritesButton.overlayIconSizeFactor = 1
         self.showFavorites = true
 
+        -- Additional buttons for turrets, blueprints, upgrades, and default items
         local x = favX - 30
         self.showTurretsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowTurretsPressed")
         self.showTurretsButton.hasFrame = false
@@ -123,12 +132,12 @@ function Shop:buildGui(window, guiType, config) -- client
             self.showDefaultItemsButton.active = false
             self.showDefaultItemsButton:hide()
         end
-
     else
         buttonCaption = "Buy"%_t
         buttonCallback = "onBuybackButtonPressed"
     end
 
+    -- Adjust positions based on configuration
     if config.showAmountBoxes then
         materialX = materialX - 70
         techX = techX - 70
@@ -242,12 +251,11 @@ function Shop:buildGui(window, guiType, config) -- client
         self.sellTrashButton.maxTextSize = 15
     end
 
-	local itemsPerPage = self.itemsPerPage
-	if guiType == 0 then
-		itemsPerPage = 13
-	end
+    local itemsPerPage = self.itemsPerPage
+    if guiType == 0 then
+        itemsPerPage = 13
+    end
     for i = 1, itemsPerPage do
-
         local yText = y + 6 + headerY
 
         local line = {}
@@ -289,10 +297,8 @@ function Shop:buildGui(window, guiType, config) -- client
 
         if guiType == 0 then
             table.insert(self.soldItemLines, line)
-
         elseif guiType == 1 then
             table.insert(self.boughtItemLines, line)
-
         elseif guiType == 2 then
             table.insert(self.buybackItemLines, line)
         end
@@ -329,6 +335,11 @@ function Shop:buildGui(window, guiType, config) -- client
         y = y + 35
     end
 
+    -- Add restock button
+    local restockButton = window:createButton(Rect(buttonX, 0 + headerY, 160 + buttonX, 30 + headerY), "Restock" % _t,
+        "onRestockButtonPressed")
+    restockButton.maxTextSize = 15
+    restockButton.tooltip = "Restock the shop for a fee." % _t
 end
 
 function Shop:updateSellGui() -- client
@@ -915,5 +926,35 @@ if onClient() then
         result.edr_onRestockButtonPressed = function(...) return result.shop:edr_onRestockButtonPressed(...) end
 
         return result
+    end
+end
+
+function Shop:onRestockButtonPressed(button)
+    -- Check if restock is available
+    if restockCount >= restockLimit then
+        -- Calculate restock cost
+        local cost = restockCost * (restockCount - restockLimit + 1)
+        -- Check if player has enough money
+        if Player():getMoney() >= cost then
+            -- Restock the shop
+            self:restock()
+            -- Update restock count and last restock time
+            restockCount = restockCount + 1
+            lastRestockTime = os.time()
+            -- Deduct restock cost from player's money
+            Player():removeMoney(cost)
+        else
+            -- Show error message if player doesn't have enough money
+            print("Not enough money to restock the shop." % _t)
+        end
+    elseif os.time() - lastRestockTime < restockCooldown then
+        -- Show error message if restock cooldown is not over
+        print("Restock cooldown is not over yet." % _t)
+    else
+        -- Restock the shop for free
+        self:restock()
+        -- Update restock count and last restock time
+        restockCount = restockCount + 1
+        lastRestockTime = os.time()
     end
 end
