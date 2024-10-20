@@ -1,10 +1,3 @@
--- Define restock parameters at the top level
-local restockCooldown = 300 -- Cooldown in seconds
-local restockLimit = 5 -- Free uses before charging
-local restockCost = 100 -- Base cost for using the restock button
-local lastRestockTime = 0
-local restockCount = 0
-
 function Shop:buildGui(window, guiType, config) -- client
     config = config or {}
 
@@ -25,11 +18,12 @@ function Shop:buildGui(window, guiType, config) -- client
     local amountBoxX = buttonX
 
     if guiType == 0 then
-        -- Buying from the NPC
-        buttonCaption = "Buy"%_t
+        -- buying from the NPC
+        buttonCaption = "Buy" % _t
         buttonCallback = "onBuyButtonPressed"
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onSoldLeftButtonPressed")
-        window:createButton(Rect(size.x - 70, 50 + 35 * 15, 60 + size.x - 60, 80 + 35 * 15), ">", "onSoldRightButtonPressed")
+        window:createButton(Rect(size.x - 70, 50 + 35 * 15, 60 + size.x - 60, 80 + 35 * 15), ">",
+            "onSoldRightButtonPressed")
 
         self.pageLabel0 = window:createLabel(vec2(10, 50 + 35 * 15), "", 18)
         self.pageLabel0.lower = vec2(pos.x + 10, pos.y + 50 + 35 * 15)
@@ -37,8 +31,8 @@ function Shop:buildGui(window, guiType, config) -- client
         self.pageLabel0.centered = 1
         self.soldItemsPage = 0
     elseif guiType == 1 then
-        -- Selling to the NPC
-        buttonCaption = "Sell"%_t
+        -- selling to the NPC
+        buttonCaption = "Sell" % _t
         buttonCallback = "onSellButtonPressed"
 
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onLeftButtonPressed")
@@ -49,17 +43,16 @@ function Shop:buildGui(window, guiType, config) -- client
         self.pageLabel.upper = vec2(pos.x + size.x - 70, pos.y + 75)
         self.pageLabel.centered = 1
 
-        -- Additional buttons for selling
-        self.reverseSellOrderButton = window:createButton(Rect(pictureX, -2, pictureX + 30, 30), "", "onReverseOrderPressed")
+        self.reverseSellOrderButton = window:createButton(Rect(pictureX, -2, pictureX + 30, 30), "",
+            "onReverseOrderPressed")
         self.reverseSellOrderButton.hasFrame = false
         self.reverseSellOrderButton.icon = "data/textures/icons/up-down.png"
         self.reverseSellOrder = false
 
-        -- Favorite items button
-        self.showFavoritesButton = window:createButton(Rect(favX, 3, favX + 18, 3+18), "", "onShowFavoritesPressed")
+        self.showFavoritesButton = window:createButton(Rect(favX, 3, favX + 18, 3 + 18), "", "onShowFavoritesPressed")
         self.showFavoritesButton.hasFrame = false
         self.showFavoritesButton.icon = "data/textures/icons/round-star.png"
-        self.showFavoritesButton.tooltip = "Show Favorited Items"%_t
+        self.showFavoritesButton.tooltip = "Show Favorited Items" % _t
         self.showFavoritesButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showFavoritesButton.overlayIcon = ""
         self.showFavoritesButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -67,12 +60,11 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showFavoritesButton.overlayIconSizeFactor = 1
         self.showFavorites = true
 
-        -- Additional buttons for turrets, blueprints, upgrades, and default items
         local x = favX - 30
         self.showTurretsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowTurretsPressed")
         self.showTurretsButton.hasFrame = false
         self.showTurretsButton.icon = "data/textures/icons/turret.png"
-        self.showTurretsButton.tooltip = "Show Turrets"%_t
+        self.showTurretsButton.tooltip = "Show Turrets" % _t
         self.showTurretsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showTurretsButton.overlayIcon = ""
         self.showTurretsButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -84,7 +76,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showBlueprintsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowBlueprintsPressed")
         self.showBlueprintsButton.hasFrame = false
         self.showBlueprintsButton.icon = "data/textures/icons/turret-blueprint.png"
-        self.showBlueprintsButton.tooltip = "Show Blueprints"%_t
+        self.showBlueprintsButton.tooltip = "Show Blueprints" % _t
         self.showBlueprintsButton.iconColor = ColorRGB(0.35, 0.7, 1.0)
         self.showBlueprintsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showBlueprintsButton.overlayIcon = ""
@@ -97,7 +89,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showUpgradesButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowUpgradesPressed")
         self.showUpgradesButton.hasFrame = false
         self.showUpgradesButton.icon = "data/textures/icons/circuitry.png"
-        self.showUpgradesButton.tooltip = "Show Subsystems"%_t
+        self.showUpgradesButton.tooltip = "Show Subsystems" % _t
         self.showUpgradesButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showUpgradesButton.overlayIcon = ""
         self.showUpgradesButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -109,7 +101,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showDefaultItemsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowDefaultItemsPressed")
         self.showDefaultItemsButton.hasFrame = false
         self.showDefaultItemsButton.icon = "data/textures/icons/satellite.png"
-        self.showDefaultItemsButton.tooltip = "Show Items"%_t
+        self.showDefaultItemsButton.tooltip = "Show Items" % _t
         self.showDefaultItemsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showDefaultItemsButton.overlayIcon = ""
         self.showDefaultItemsButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -133,11 +125,10 @@ function Shop:buildGui(window, guiType, config) -- client
             self.showDefaultItemsButton:hide()
         end
     else
-        buttonCaption = "Buy"%_t
+        buttonCaption = "Buy" % _t
         buttonCallback = "onBuybackButtonPressed"
     end
 
-    -- Adjust positions based on configuration
     if config.showAmountBoxes then
         materialX = materialX - 70
         techX = techX - 70
@@ -156,10 +147,10 @@ function Shop:buildGui(window, guiType, config) -- client
         local specialOfferY = 60
 
         local special = {}
-        special.label = window:createLabel(vec2(nameX, 30), "SPECIAL OFFER (30% OFF)"%_t, 18)
+        special.label = window:createLabel(vec2(nameX, 30), "SPECIAL OFFER (30% OFF)" % _t, 18)
         special.label.color = ColorRGB(1.0, 1.0, 0.1)
 
-        special.timeLeftLabel = window:createLabel(vec2(materialX - 60, 30), "??"%_t, 15)
+        special.timeLeftLabel = window:createLabel(vec2(materialX - 60, 30), "??" % _t, 15)
         special.timeLeftLabel.color = ColorRGB(0.5, 0.5, 0.5)
         special.timeLabel = window:createLabel(vec2(priceX, 30), "", 15)
         special.timeLabel.color = ColorRGB(0.5, 0.5, 0.5)
@@ -170,7 +161,7 @@ function Shop:buildGui(window, guiType, config) -- client
 
         special.priceReductionLabel = window:createLabel(vec2(priceX + 40, specialOfferY + 18), "", 10)
         special.priceReductionLabel.color = ColorRGB(1, 1, 0)
-        special.priceReductionLabel.caption = "${percentage} OFF!"%_t % {percentage = "30%"}
+        special.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
 
         special.stockLabel = window:createLabel(Rect(stockX, specialOfferY, priceX - 10, specialOfferY + 30), "", 15)
         special.stockLabel:setTopRightAligned()
@@ -181,7 +172,8 @@ function Shop:buildGui(window, guiType, config) -- client
         special.priceLabel = window:createLabel(Rect(priceX, specialOfferY, amountBoxX - 20, specialOfferY + 30), "", 15)
         special.priceLabel:setTopRightAligned()
 
-        special.button = window:createButton(Rect(buttonX, specialOfferY, 160 + buttonX, 30 + specialOfferY), "BUY NOW!"%_t, "onBuyButtonPressed")
+        special.button = window:createButton(Rect(buttonX, specialOfferY, 160 + buttonX, 30 + specialOfferY),
+            "BUY NOW!" % _t, "onBuyButtonPressed")
 
         special.nameLabel.width = materialX - nameX
         special.nameLabel.shortenText = true
@@ -207,7 +199,7 @@ function Shop:buildGui(window, guiType, config) -- client
             special.stockLabel:hide()
             special.button:hide()
             special.timeLeftLabel.caption = ""
-            special.label.caption = "SOLD OUT!"%_t
+            special.label.caption = "SOLD OUT!" % _t
         end
 
         special.show = function(self)
@@ -225,13 +217,13 @@ function Shop:buildGui(window, guiType, config) -- client
         headerY = 70
     end
 
-    window:createLabel(vec2(nameX, 0), "NAME"%_t, 15)
-    local materialLabel = window:createLabel(vec2(materialX, 0), "MAT"%_t, 15)
+    window:createLabel(vec2(nameX, 0), "NAME" % _t, 15)
+    local materialLabel = window:createLabel(vec2(materialX, 0), "MAT" % _t, 15)
     if config.hideMaterialLabel then materialLabel:hide() end
 
-    local techLabel = window:createLabel(Rect(techX, 0, stockX - 10, 30), "TECH"%_t, 15)
+    local techLabel = window:createLabel(Rect(techX, 0, stockX - 10, 30), "TECH" % _t, 15)
     techLabel:setTopAligned()
-    local amountLabel = window:createLabel(Rect(stockX, 0, priceX - 10, 30), "#"%_t, 15)
+    local amountLabel = window:createLabel(Rect(stockX, 0, priceX - 10, 30), "#" % _t, 15)
     amountLabel:setTopRightAligned()
     local priceLabel = window:createLabel(Rect(priceX, 0, amountBoxX - 20, 30), "¢", 15)
     priceLabel:setTopRightAligned()
@@ -247,7 +239,8 @@ function Shop:buildGui(window, guiType, config) -- client
     local y = 35
 
     if guiType == 1 then
-        self.sellTrashButton = window:createButton(Rect(buttonX, 0 + headerY, 160 + buttonX, 30 + headerY), "Sell Trash"%_t, "onSellTrashButtonPressed")
+        self.sellTrashButton = window:createButton(Rect(buttonX, 0 + headerY, 160 + buttonX, 30 + headerY),
+            "Sell Trash" % _t, "onSellTrashButtonPressed")
         self.sellTrashButton.maxTextSize = 15
     end
 
@@ -266,7 +259,7 @@ function Shop:buildGui(window, guiType, config) -- client
         line.priceLabel = window:createLabel(vec2(priceX, yText), "", 14)
         line.priceReductionLabel = window:createLabel(vec2(priceX + 40, yText + 18), "", 10)
         line.priceReductionLabel.color = ColorRGB(1, 1, 0)
-        line.priceReductionLabel.caption = "${percentage} OFF!"%_t % {percentage = "30%"}
+        line.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
 
         line.favoriteIcon = window:createPicture(Rect(favX, yText, favX + 18, yText + 18), "")
         line.materialLabel = window:createLabel(vec2(materialX, yText), "", 14)
@@ -277,13 +270,15 @@ function Shop:buildGui(window, guiType, config) -- client
         line.priceLabel = window:createLabel(Rect(priceX, yText, amountBoxX - 20, yText + 30), "", 14)
         line.priceLabel:setTopRightAligned()
 
-        line.button = window:createButton(Rect(buttonX, y + headerY, 160 + buttonX, 30 + y + headerY), buttonCaption, buttonCallback)
+        line.button = window:createButton(Rect(buttonX, y + headerY, 160 + buttonX, 30 + y + headerY), buttonCaption,
+            buttonCallback)
         line.icon = window:createPicture(Rect(pictureX, yText - 5, 29 + pictureX, 29 + yText - 5), "")
         line.background = window:createFrame(Rect(pictureX - 1, yText - 6, 30 + pictureX, 29 + yText - 5))
         line.background.backgroundColor = ColorRGB(0.05, 0.3, 0.5)
 
         if config.showAmountBoxes then
-            line.amountBox = window:createTextBox(Rect(amountBoxX, y + headerY, 60 + amountBoxX, 30 + y + headerY), "onAmountEntered")
+            line.amountBox = window:createTextBox(Rect(amountBoxX, y + headerY, 60 + amountBoxX, 30 + y + headerY),
+                "onAmountEntered")
             line.amountBox.allowedCharacters = "0123456789"
             line.amountBox.text = "1"
         end
@@ -334,16 +329,9 @@ function Shop:buildGui(window, guiType, config) -- client
 
         y = y + 35
     end
-
-    -- Add restock button
-    local restockButton = window:createButton(Rect(buttonX, 0 + headerY, 160 + buttonX, 30 + headerY), "Restock" % _t,
-        "onRestockButtonPressed")
-    restockButton.maxTextSize = 15
-    restockButton.tooltip = "Restock the shop for a fee." % _t
 end
 
 function Shop:updateSellGui() -- client
-
     if not self.guiInitialized then return end
 
     for _, line in pairs(self.soldItemLines) do
@@ -367,11 +355,11 @@ function Shop:updateSellGui() -- client
         topLine.nameLabel:show()
         topLine.nameLabel.color = ColorRGB(1.0, 1.0, 1.0)
         topLine.nameLabel.bold = false
-        topLine.nameLabel.caption = "We are completely sold out."%_t
+        topLine.nameLabel.caption = "We are completely sold out." % _t
     end
 
     local numDifferentItems = #self.soldItems
-	local itemsPerPage = 13
+    local itemsPerPage = 13
 
     while self.soldItemsPage * itemsPerPage >= numDifferentItems do
         self.soldItemsPage = self.soldItemsPage - 1
@@ -382,13 +370,12 @@ function Shop:updateSellGui() -- client
     end
 
     local itemStart = self.soldItemsPage * itemsPerPage + 1
-    local itemEnd = math.min(numDifferentItems, itemStart + itemsPerPage -1)
-	
-	self.pageLabel0.caption = itemStart .. " - " .. itemEnd .. " / " .. numDifferentItems
-	local uiIndex = 1
+    local itemEnd = math.min(numDifferentItems, itemStart + itemsPerPage - 1)
 
-	for index = itemStart, itemEnd do
+    self.pageLabel0.caption = itemStart .. " - " .. itemEnd .. " / " .. numDifferentItems
+    local uiIndex = 1
 
+    for index = itemStart, itemEnd do
         local item = self.soldItems[index]
         if item == nil then break end
 
@@ -396,7 +383,7 @@ function Shop:updateSellGui() -- client
         uiIndex = uiIndex + 1
         line:show()
 
-        line.nameLabel.caption = item:getName()%_t
+        line.nameLabel.caption = item:getName() % _t
         line.nameLabel.color = item.rarity.color
         line.nameLabel.bold = false
 
@@ -417,7 +404,8 @@ function Shop:updateSellGui() -- client
 
         if self.priceRatio < 1 then
             line.priceReductionLabel:show()
-            line.priceReductionLabel.caption = "${percentage} OFF!"%_t % {percentage = tostring(round((1 - self.priceRatio) * 100)) .. "%"}
+            line.priceReductionLabel.caption = "${percentage} OFF!" % _t %
+            { percentage = tostring(round((1 - self.priceRatio) * 100)) .. "%" }
         else
             line.priceReductionLabel:hide()
         end
@@ -426,12 +414,12 @@ function Shop:updateSellGui() -- client
         line.techLabel.caption = item.tech or ""
 
         line.item = item
-		line.itemIndex = index
-        
+        line.itemIndex = index
+
         local msg, args = self:canBeBought(item, playerCraft, buyer)
         if msg then
             line.button.active = false
-            line.button.tooltip = string.format(msg%_t, unpack(args or {}))
+            line.button.tooltip = string.format(msg % _t, unpack(args or {}))
         else
             line.button.active = true
             line.button.tooltip = nil
@@ -441,12 +429,11 @@ function Shop:updateSellGui() -- client
     -- update the special offer frame
     local item = self.specialOffer.item
     if item then
-
         local specialUI = self.specialOfferUI
         specialUI:show()
 
         local special = self.specialOffer
-        specialUI.nameLabel.caption = item.name%_t
+        specialUI.nameLabel.caption = item.name % _t
         specialUI.nameLabel.color = item.rarity.color
         specialUI.nameLabel.bold = false
 
@@ -468,27 +455,26 @@ function Shop:updateSellGui() -- client
 
         specialUI.techLabel.caption = item.tech or ""
 
-        specialUI.timeLeftLabel.caption = "LIMITED TIME OFFER!"%_t
-        specialUI.label.caption = "SPECIAL OFFER: -30% OFF"%_t
+        specialUI.timeLeftLabel.caption = "LIMITED TIME OFFER!" % _t
+        specialUI.label.caption = "SPECIAL OFFER: -30% OFF" % _t
 
         -- for now, specialPrice is just 70% of the regular price
         -- if this gets changed, it must be changed in <Shop:sellToPlayer> also!
         local price = self:getSellPriceAndTax(item.price, faction, buyer)
         local specialPrice = price * 0.7
         specialUI.priceLabel.caption = createMonetaryString(specialPrice)
-        specialUI.priceReductionLabel.caption = "${percentage} OFF!"%_t % {percentage = "30%"}
+        specialUI.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
 
         local msg, args = self:canBeBought(item, playerCraft, buyer)
         if msg then
             specialUI.button.active = false
-            specialUI.button.tooltip = string.format(msg%_t, unpack(args or {}))
+            specialUI.button.tooltip = string.format(msg % _t, unpack(args or {}))
         else
             specialUI.button.active = true
             specialUI.button.tooltip = nil
         end
     end
 end
-
 
 function Shop:onSoldLeftButtonPressed()
     self.soldItemsPage = self.soldItemsPage - 1
@@ -499,7 +485,6 @@ function Shop:onSoldRightButtonPressed()
     self.soldItemsPage = self.soldItemsPage + 1
     self:updateSellGui()
 end
-
 
 function Shop:onBuyButtonPressed(button) -- client
     -- check if regular item (shop = 0) or special offer item (shop = 1) was bought
@@ -528,7 +513,6 @@ function Shop:onBuyButtonPressed(button) -- client
     invokeServerFunction("sellToPlayer", line.itemIndex, specialOffer, amount)
 end
 
-
 function Shop:onMouseEvent(key, pressed, x, y)
     if not pressed then return false end
     if not self.guiInitialized then return false end
@@ -541,18 +525,17 @@ function Shop:onMouseEvent(key, pressed, x, y)
 
         for i, line in pairs(self.soldItemLines) do
             local frame = line.frame
- 
+
             if line.item ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if x >= l.x and x <= u.x then
-                    if y >= l.y and y <= u.y then
-                        Player():sendChatMessage(line.item)
-                        return true
-                    end
+                        if y >= l.y and y <= u.y then
+                            Player():sendChatMessage(line.item)
+                            return true
+                        end
                     end
                 end
             end
@@ -563,29 +546,25 @@ function Shop:onMouseEvent(key, pressed, x, y)
             local u = self.specialOfferUI.frame.upper
 
             if x >= l.x and x <= u.x then
-            if y >= l.y and y <= u.y then
-                Player():sendChatMessage(self.specialOffer.item.item)
-            end
+                if y >= l.y and y <= u.y then
+                    Player():sendChatMessage(self.specialOffer.item.item)
+                end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.sellTab.index then
-
         for i, line in pairs(self.boughtItemLines) do
-
             if line.item ~= nil then
                 if Keyboard():keyPressed(KeyboardKey.LControl) or Keyboard():keyPressed(KeyboardKey.RControl) then
                     local frame = line.frame
                     if frame.visible then
-
                         local l = frame.lower
                         local u = frame.upper
 
                         if x >= l.x and x <= u.x then
-                        if y >= l.y and y <= u.y then
-                            Player():sendChatMessage(line.item.item)
-                            return true
-                        end
+                            if y >= l.y and y <= u.y then
+                                Player():sendChatMessage(line.item.item)
+                                return true
+                            end
                         end
                     end
                 else
@@ -595,15 +574,14 @@ function Shop:onMouseEvent(key, pressed, x, y)
                     local u = icon.upper
 
                     if x >= l.x and x <= u.x then
-                    if y >= l.y and y <= u.y then
-                        invokeServerFunction("cycleTags", line.item.index)
-                        return true
-                    end
+                        if y >= l.y and y <= u.y then
+                            invokeServerFunction("cycleTags", line.item.index)
+                            return true
+                        end
                     end
                 end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.buyBackTab.index then
         if not (Keyboard():keyPressed(KeyboardKey.LControl) or Keyboard():keyPressed(KeyboardKey.RControl)) then return false end
 
@@ -612,15 +590,14 @@ function Shop:onMouseEvent(key, pressed, x, y)
 
             if self.buybackItems[i] ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if x >= l.x and x <= u.x then
-                    if y >= l.y and y <= u.y then
-                        Player():sendChatMessage(self.buybackItems[i].item)
-                        return true
-                    end
+                        if y >= l.y and y <= u.y then
+                            Player():sendChatMessage(self.buybackItems[i].item)
+                            return true
+                        end
                     end
                 end
             end
@@ -628,9 +605,7 @@ function Shop:onMouseEvent(key, pressed, x, y)
     end
 end
 
-
 function Shop:onKeyboardEvent(key, pressed)
-
     if not pressed then return false end
     if key ~= KeyboardKey._E then return false end
     if not self.guiInitialized then return false end
@@ -645,14 +620,13 @@ function Shop:onKeyboardEvent(key, pressed)
 
             if line.item ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        Player():addComparisonItem(line.item)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            Player():addComparisonItem(line.item)
+                        end
                     end
                 end
             end
@@ -663,52 +637,45 @@ function Shop:onKeyboardEvent(key, pressed)
             local u = self.specialOfferUI.frame.upper
 
             if mouse.x >= l.x and mouse.x <= u.x then
-            if mouse.y >= l.y and mouse.y <= u.y then
-                Player():addComparisonItem(self.specialOffer.item.item)
-            end
+                if mouse.y >= l.y and mouse.y <= u.y then
+                    Player():addComparisonItem(self.specialOffer.item.item)
+                end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.sellTab.index then
-
         for i, line in pairs(self.boughtItemLines) do
             local frame = line.frame
 
             if line.item ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        Player():addComparisonItem(line.item.item)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            Player():addComparisonItem(line.item.item)
+                        end
                     end
                 end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.buyBackTab.index then
-
         for i, line in pairs(self.buybackItemLines) do
             local frame = line.frame
 
             if self.buybackItems[i] ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        Player():addComparisonItem(self.buybackItems[i].item)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            Player():addComparisonItem(self.buybackItems[i].item)
+                        end
                     end
                 end
             end
         end
-
     end
 end
 
@@ -723,15 +690,14 @@ function Shop:renderUI()
 
             if line.item ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        local renderer = TooltipRenderer(line.item:getTooltip())
-                        renderer:drawMouseTooltip(Mouse().position)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            local renderer = TooltipRenderer(line.item:getTooltip())
+                            renderer:drawMouseTooltip(Mouse().position)
+                        end
                     end
                 end
             end
@@ -742,55 +708,48 @@ function Shop:renderUI()
             local u = self.specialOfferUI.frame.upper
 
             if mouse.x >= l.x and mouse.x <= u.x then
-            if mouse.y >= l.y and mouse.y <= u.y then
-                local renderer = TooltipRenderer(self.specialOffer.item:getTooltip())
-                renderer:drawMouseTooltip(Mouse().position)
-            end
+                if mouse.y >= l.y and mouse.y <= u.y then
+                    local renderer = TooltipRenderer(self.specialOffer.item:getTooltip())
+                    renderer:drawMouseTooltip(Mouse().position)
+                end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.sellTab.index then
-
         for i, line in pairs(self.boughtItemLines) do
             local frame = line.frame
 
             if line.item ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        local renderer = TooltipRenderer(line.item:getTooltip())
-                        renderer:drawMouseTooltip(Mouse().position)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            local renderer = TooltipRenderer(line.item:getTooltip())
+                            renderer:drawMouseTooltip(Mouse().position)
+                        end
                     end
                 end
             end
         end
-
     elseif self.tabbedWindow:getActiveTab().index == self.buyBackTab.index then
-
         for i, line in pairs(self.buybackItemLines) do
             local frame = line.frame
 
             if self.buybackItems[i] ~= nil then
                 if frame.visible then
-
                     local l = frame.lower
                     local u = frame.upper
 
                     if mouse.x >= l.x and mouse.x <= u.x then
-                    if mouse.y >= l.y and mouse.y <= u.y then
-                        local renderer = TooltipRenderer(self.buybackItems[i]:getTooltip())
-                        renderer:drawMouseTooltip(Mouse().position)
-                    end
+                        if mouse.y >= l.y and mouse.y <= u.y then
+                            local renderer = TooltipRenderer(self.buybackItems[i]:getTooltip())
+                            renderer:drawMouseTooltip(Mouse().position)
+                        end
                     end
                 end
             end
         end
-
     end
 end
 
@@ -811,10 +770,10 @@ function PublicNamespace.CreateNamespace()
     result.updateBoughtItem = function(...) return shop:updateBoughtItem(...) end
     result.onLeftButtonPressed = function(...) return shop:onLeftButtonPressed(...) end
     result.onRightButtonPressed = function(...) return shop:onRightButtonPressed(...) end
-	
-	result.onSoldLeftButtonPressed = function(...) return shop:onSoldLeftButtonPressed(...) end
+
+    result.onSoldLeftButtonPressed = function(...) return shop:onSoldLeftButtonPressed(...) end
     result.onSoldRightButtonPressed = function(...) return shop:onSoldRightButtonPressed(...) end
-	
+
     result.onAmountEntered = function(...) return shop:onAmountEntered(...) end
     result.onBuyButtonPressed = function(...) return shop:onBuyButtonPressed(...) end
     result.onSellButtonPressed = function(...) return shop:onSellButtonPressed(...) end
@@ -835,8 +794,8 @@ function PublicNamespace.CreateNamespace()
 
     result.setSpecialOffer = function(...) return shop:setSpecialOffer(...) end
     result.onSpecialOfferSeedChanged = function(...) return shop:onSpecialOfferSeedChanged(...) end
-    result.calculateSeed = function (...) return shop:calculateSeed(...) end
-    result.generateSeed = function (...) return shop:generateSeed(...) end
+    result.calculateSeed = function(...) return shop:calculateSeed(...) end
+    result.generateSeed = function(...) return shop:generateSeed(...) end
     result.setStaticSeed = function(...) return shop:setStaticSeed(...) end
     result.updateClient = function(...) return shop:updateClient(...) end
     result.updateServer = function(...) return shop:updateServer(...) end
@@ -869,9 +828,14 @@ function PublicNamespace.CreateNamespace()
     return result
 end
 
+-- Shop Restock Button logic with new Cooldown logic
 local edr_buildBuyGui, edr_CreateNamespace -- extended functions
 local edr_restockButton                    -- UI
 local edr_specialOfferSeed = 0             -- restock the special offer
+local restockCooldown = 15 * 60            -- 15 minutes in seconds
+local lastRestockTime = 0
+local freeRestockCount = 5                 -- Allow 5 free restocks
+local usedFreeRestocks = 0                 -- Counter for used free restocks
 
 -- Handle the actual restocking part
 if onServer() then
@@ -885,7 +849,7 @@ if onServer() then
     end
 
     function Shop:remoteRestock()
-        edr_specialOfferSeed = edr_specialOfferSeed + 1
+        edr_specialOfferSeed = edr_specialOfferSeed + 1 -- Call the restock function to update the items
         self:restock()
     end
 
@@ -910,51 +874,43 @@ if onClient() then
         -- Defined within the BuildGui function in shop.lua for the Buy buttons
         local x = 720
 
+        -- Create the restock button
         edr_restockButton = tab:createButton(Rect(x, 0, x + 160, 30), "", "edr_onRestockButtonPressed")
         edr_restockButton.icon = "data/textures/icons/clockwise-rotation.png"
-        edr_restockButton.tooltip = "Restock the shop" % _t
+        edr_restockButton.tooltip = "Click to restock the shop" % _t
     end
 
     function Shop:edr_onRestockButtonPressed(button)
-        invokeServerFunction("remoteRestock")
+        local currentTime = os.time()
+
+        -- Check if the player can restock
+        if usedFreeRestocks < freeRestockCount then
+            -- Allow free restock
+            usedFreeRestocks = usedFreeRestocks + 1
+            invokeServerFunction("remoteRestock") -- Call the server function to restock
+            Player():sendChatMessage(
+                "Free restock used. You have " .. (freeRestockCount - usedFreeRestocks) .. " free restocks left.", 1)
+        elseif currentTime - lastRestockTime >= restockCooldown then
+            -- Cooldown has passed
+            lastRestockTime = currentTime         -- Update the last restock time
+            invokeServerFunction("remoteRestock") -- Call the server function to restock
+            Player():sendChatMessage("Shop restocked. Next restock available in 15 minutes.", 1)
+        else
+            -- Calculate remaining cooldown time
+            local remainingCooldown = restockCooldown - (currentTime - lastRestockTime)
+            local minutes = math.floor(remainingCooldown / 60)
+            local seconds = remainingCooldown % 60
+
+            -- Provide feedback to the player with remaining cooldown time
+            Player():sendChatMessage(
+                string.format("Restock is on cooldown for %d minutes and %d seconds. Please wait.", minutes, seconds), 1)
+        end
     end
 
     edr_CreateNamespace = PublicNamespace.CreateNamespace
     function PublicNamespace.CreateNamespace(...)
         local result = edr_CreateNamespace(...)
-
         result.edr_onRestockButtonPressed = function(...) return result.shop:edr_onRestockButtonPressed(...) end
-
         return result
-    end
-end
-
-function Shop:onRestockButtonPressed(button)
-    -- Check if restock is available
-    if restockCount >= restockLimit then
-        -- Calculate restock cost
-        local cost = restockCost * (restockCount - restockLimit + 1)
-        -- Check if player has enough money
-        if Player():getMoney() >= cost then
-            -- Restock the shop
-            self:restock()
-            -- Update restock count and last restock time
-            restockCount = restockCount + 1
-            lastRestockTime = os.time()
-            -- Deduct restock cost from player's money
-            Player():removeMoney(cost)
-        else
-            -- Show error message if player doesn't have enough money
-            print("Not enough money to restock the shop." % _t)
-        end
-    elseif os.time() - lastRestockTime < restockCooldown then
-        -- Show error message if restock cooldown is not over
-        print("Restock cooldown is not over yet." % _t)
-    else
-        -- Restock the shop for free
-        self:restock()
-        -- Update restock count and last restock time
-        restockCount = restockCount + 1
-        lastRestockTime = os.time()
     end
 end
