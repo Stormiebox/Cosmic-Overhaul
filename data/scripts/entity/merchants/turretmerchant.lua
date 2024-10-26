@@ -119,19 +119,19 @@ function TurretMerchant.shop:addItems()
         pair.amount = amount
 
         if turret.rarity.value == -1 then    -- Petty
-            pair.amount = math.random(20, 35)
+            pair.amount = math.random(11, 35)
         elseif turret.rarity.value == 0 then -- Common
-            pair.amount = math.random(20, 35)
+            pair.amount = math.random(9, 25)
         elseif turret.rarity.value == 1 then -- Uncommon
-            pair.amount = math.random(15, 25)
+            pair.amount = math.random(7, 15)
         elseif turret.rarity.value == 2 then -- Rare
-            pair.amount = math.random(15, 25)
+            pair.amount = math.random(5, 9)
         elseif turret.rarity.value == 3 then -- Exceptional
-            pair.amount = math.random(10, 15)
-        elseif turret.rarity.value == 4 then -- Exotic
-            pair.amount = math.random(3, 6)
-        elseif turret.rarity.value == 5 then -- Legendary
             pair.amount = math.random(2, 4)
+        elseif turret.rarity.value == 4 then -- Exotic
+            pair.amount = math.random(1, 3)
+        elseif turret.rarity.value == 5 then -- Legendary
+            pair.amount = math.random(1, 2)
         end
 
         table.insert(turrets, pair)

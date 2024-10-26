@@ -613,7 +613,7 @@ function Scrapyard.buyLicense(duration)
 
     local buyer, ship, player = getInteractingFaction(callingPlayer, AlliancePrivilege.SpendResources)
     if not buyer then return end
-
+    -- Commented out the actualDurationBought to allow players to purchase as many licenses as they want
     local currentDuration = licenses[buyer.index]
     local actualDurationBought = duration
     if currentDuration and (currentDuration + duration) > 60  * 60 then
@@ -670,6 +670,7 @@ callable(Scrapyard, "sendLicenseDuration")
 function Scrapyard.onEntityDestroyed(id)
     -- when an entity is destroyed, we don't count wreckages that are created for a few seconds
     local entity = Entity(id)
+    if not entity then return end
     if not entity:hasComponent(ComponentType.WreckageCreator) then return end
 
     if entity.type == EntityType.Ship or entity.type == EntityType.Station then
@@ -714,7 +715,7 @@ function Scrapyard.onEntityDocked(parentId, childId)
 
     Sector():broadcastChatMessage(Entity(), ChatMessageType.Normal, "Docking and stealing wreckages is not permitted!"%_T)
 
-    changeRelations(Faction(), parentId, -2500, RelationChangeType.GeneralIllegal)
+    changeRelations(Faction(), parentId, -2500, RelationChangeType.GeneralIllegal, nil, nil, Faction())
 
     dockedWreckages[childId.string] = true
 
@@ -738,7 +739,7 @@ function Scrapyard.onEntityJump(id)
     local parentId = wreckage.dockingParent
     if not parentId then return end
 
-    changeRelations(Faction(), parentId, -10000, RelationChangeType.GeneralIllegal)
+    changeRelations(Faction(), parentId, -10000, RelationChangeType.GeneralIllegal, nil, nil, Faction())
 end
 
 function Scrapyard.cleanUpDockedWreckages()
@@ -985,7 +986,7 @@ function Scrapyard.unallowedDamaging(shooter, faction, damage)
     end
 
     if newActions > 5 then
-        changeRelations(Faction(), faction, -newActions / 100, RelationChangeType.GeneralIllegal)
+        changeRelations(Faction(), faction, -newActions / 100, RelationChangeType.GeneralIllegal, nil, nil, Faction())
     end
 
     illegalActions[faction.index] = newActions
