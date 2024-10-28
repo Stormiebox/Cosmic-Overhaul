@@ -832,7 +832,7 @@ end
 local edr_buildBuyGui, edr_CreateNamespace -- extended functions
 local edr_restockButton                    -- UI
 local edr_specialOfferSeed = 0             -- restock the special offer
-local restockCooldown = 15 * 60            -- 15 minutes in seconds
+local restockCooldown = 45 * 60            -- 45 minutes in seconds
 local lastRestockTime = 0
 local freeRestockCount = 5                 -- Allow 5 free restocks
 local usedFreeRestocks = 0                 -- Counter for used free restocks
@@ -894,7 +894,7 @@ if onClient() then
             -- Cooldown has passed
             lastRestockTime = currentTime         -- Update the last restock time
             invokeServerFunction("remoteRestock") -- Call the server function to restock
-            Player():sendChatMessage("Shop restocked. Next restock available in 15 minutes.", 1)
+            Player():sendChatMessage("Shop restocked. Next restock available in 45 minutes.", 1)
         else
             -- Calculate remaining cooldown time
             local remainingCooldown = restockCooldown - (currentTime - lastRestockTime)

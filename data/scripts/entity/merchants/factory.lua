@@ -1,4 +1,82 @@
 package.path = package.path .. ";data/scripts/galaxy/?.lua"
+package.path = package.path .. ";data/scripts/lib/?.lua"
+include("utility")
+include("faction")
+include("callable")
+
+-- Cosmic Overhaul shuttle delivery modifications start here
+
+-- Constants for shuttle volume
+Factory.BaseShuttleVolume = 50
+Factory.MaxShuttleVolume = 500
+Factory.ShuttleVolumeIncrement = 50
+
+-- Initialize shuttle volume to the base value
+Factory.shuttleVolume = Factory.BaseShuttleVolume
+
+-- Modify the upgrade function for shuttles
+function Factory.onUpgradeShuttlesButtonPressed()
+	if onClient() then
+		invokeServerFunction("onUpgradeShuttlesButtonPressed")
+		return
+	end
+
+	local buyer, _, player = getInteractingFaction(callingPlayer, AlliancePrivilege.SpendResources, AlliancePrivilege.ManageStations)
+	if not buyer then return end
+
+	if Factory.shuttleVolume >= Factory.MaxShuttleVolume then
+		player:sendChatMessage("", ChatMessageType.Error, "Transport capacity is already at maximum."%_t)
+		return
+	end
+
+	local price = Factory.getShuttleUpgradeCost(production, factorySize + 1)
+
+	local canPay, msg, args = buyer:canPay(price)
+	if not canPay then -- if there was an error, print it
+		player:sendChatMessage(Entity(), 1, msg, unpack(args))
+		return
+	end
+
+	buyer:pay(price)
+
+	-- Increase shuttle volume by the defined increment
+	Factory.shuttleVolume = math.min(Factory.shuttleVolume + Factory.ShuttleVolumeIncrement, Factory.MaxShuttleVolume)
+
+	Factory.sync()
+	invokeClientFunction(player, "refreshConfigUI")
+end
+
+callable(Factory, "onUpgradeShuttlesButtonPressed")
+
+-- Update the cost calculation for shuttle upgrades
+function Factory.getShuttleUpgradeCost()
+	local stage = (Factory.shuttleVolume - Factory.BaseShuttleVolume) / Factory.ShuttleVolumeIncrement
+	local price = getFactoryUpgradeCost(production, stage + 1) / 10 -- Adjust as needed
+	return price
+end
+
+-- Override the original refreshConfigUI function
+local DynamicShuttleRefreshUI = Factory.refreshConfigUI
+function Factory.refreshConfigUI()
+	DynamicShuttleRefreshUI()
+
+	if Factory.shuttleVolume < Factory.MaxShuttleVolume then
+		local price = createMonetaryString(Factory.getShuttleUpgradeCost())
+		upgradeShuttlesPriceLabel.caption = "${price} Cr"%_t % {price = price}
+
+		upgradeShuttlesButton.visible = true
+		upgradeShuttlesPriceLabel.visible = true
+
+		upgradeShuttlesButton.tooltip = "Upgrade to allow up to ${volume} transported volume per shuttle every ${seconds} seconds."%_t % {volume = Factory.shuttleVolume + 50, seconds = Factory.SectorTradeInterval}
+	else
+		upgradeShuttlesPriceLabel.visible = false
+		upgradeShuttlesButton.visible = true
+		upgradeShuttlesButton.active = false
+		upgradeShuttlesButton.tooltip = nil
+	end
+end
+
+-- Cosmic Overhaul shuttle delivery modifications end here
 
 function print_info(message) -- for adding the factory name to the messages, helps debugging when the player has more than one
 	local name = Entity().name

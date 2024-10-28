@@ -5,7 +5,7 @@ include ("randomext")
 include ("faction")
 include ("stringutility")
 include ("weapontype")
-local Multiplier = 25
+local Multiplier = 5
 local ShopAPI = include ("shop")
 local SectorTurretGenerator = include ("sectorturretgenerator")
 

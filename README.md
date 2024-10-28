@@ -19,6 +19,9 @@ Cosmic Overhaul is a comprehensive mod designed to enhance the quality-of-life f
 
 ## Key Features
 
+- **Allied Relations Enhancer**: Strengthen your alliances in Avorion by doubling relation changes between players and allied factions, creating a more immersive and dynamic faction interaction experience.
+- **Dynamic Reputation Decay**: Introduces a realistic reputation decay mechanic in Avorion, where faction relations gradually diminish over time if neglected, encouraging players to actively engage and maintain their connections. With a scalable decay rate that increases after prolonged inactivity, this feature ensures that every choice has lasting consequences in the game's universe.
+- **Dynamic Station Shuttles**: Introduces significant enhancements to shuttle mechanics, increasing the base shuttle volume from 25 to 50 and allowing upgrades up to 500. With dynamic upgrade costs based on factory production and size.
 - **Dynamic Stock Management**: Stations consume goods based on activity level, station type, and good-specific consumption rates, leading to more realistic trade and profit generation.
 - **Equipment Dock Upgrade**: Increases the amount and variety of subsystems, turrets, and fighters available in equipment docks, balancing rarity probabilities.
 - **Expanded Galaxy Map Hotkeys**: Added a hotkey in the galaxy map for faster navigation, including the ability to quickly switch between ships. Press [T]-Key to switch to the first selected ship.
