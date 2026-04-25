@@ -7,6 +7,8 @@ include("randomext")
 include("moddata")
 
 local isInHotkeyCommandMode
+local GMHK_lastSelectionGroupTapIndex
+local GMHK_lastSelectionGroupTapTimeMs
 
 local GMHK_MapCommands_onGalaxyMapKeyboardEvent_shadow = MapCommands.onGalaxyMapKeyboardEvent
 function MapCommands.onGalaxyMapKeyboardEvent(key, pressed)
@@ -34,10 +36,10 @@ function MapCommands.onGalaxyMapKeyboardEvent(key, pressed)
         GMHK_onSelectionGroupTapped(tappedIndex)
     elseif key == KeyboardKey._T and pressed then
         local firstPortrait = MapCommands.getFirstSelectedPortrait()
-        if firstPortrait then
+        if firstPortrait and firstPortrait.coordinates and firstPortrait.owner and firstPortrait.name then
             Player():sendChatMessage(
-            string.format("/teleporttoship %i %i %i \"%s\"", firstPortrait.coordinates.x, firstPortrait.coordinates.y,
-                firstPortrait.owner, firstPortrait.name), 1)
+                string.format("/teleporttoship %i %i %i \"%s\"", firstPortrait.coordinates.x, firstPortrait.coordinates.y,
+                    firstPortrait.owner, firstPortrait.name), 1)
         end
     elseif keyToCommandMap[key] and pressed then
         GMHK_tryDoHotkeyCaptainCommand(keyToCommandMap[key])
@@ -96,7 +98,9 @@ function GMHK_tryDoHotkeyCaptainCommand(commandType)
         if portrait.portrait.available then return false end
         MapCommands.onRecallPressed()
     else
-        MapCommands[commandType .. "_CommandButtonPressed"]()
+        local fn = MapCommands[commandType .. "_CommandButtonPressed"]
+        if type(fn) ~= "function" then return false end
+        fn()
     end
     return true
 end
@@ -104,6 +108,7 @@ end
 function GMHK_onSelectionGroupTapped(tappedIndex)
     local nowMs = appTimeMs()
     if GMHK_lastSelectionGroupTapIndex == tappedIndex
+        and GMHK_lastSelectionGroupTapTimeMs
         and GMHK_lastSelectionGroupTapTimeMs + 500 >= nowMs
     then
         local ship, coordinates = GMHK_getFirstShipFromSelectionGroup(tappedIndex)
@@ -121,7 +126,10 @@ function GMHK_getFirstShipFromSelectionGroup(index)
     for ship, groupIndex in pairs(Player():getSelectionGroup(index)) do
         if groupIndex == index then
             for _, portraitWrapper in pairs(shipList.selectedPortraits) do
-                if portraitWrapper.owner == ship.factionIndex and ship.name == portraitWrapper.name then
+                if portraitWrapper.owner == ship.factionIndex
+                    and ship.name == portraitWrapper.name
+                    and portraitWrapper.coordinates
+                then
                     return ship, { x = portraitWrapper.coordinates.x, y = portraitWrapper.coordinates.y }
                 end
             end

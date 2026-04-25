@@ -94,7 +94,7 @@ if onClient() then
     function PlayerBulletinBoard.onTakeButtonPressed(button)
         for _, line in pairs(self.lines) do
             if line.button.index == button.index then
-                entity = Sector():getEntity(line.entityIndex)
+                local entity = Sector():getEntity(line.entityIndex)
                 if valid(entity) then
                     entity:invokeFunction("entity/bulletinboard.lua", "acceptMission", line.bulletinIndex)
                 else
@@ -107,7 +107,7 @@ if onClient() then
     function PlayerBulletinBoard.onSourceButtonPressed(button)
         for _, line in pairs(self.lines) do
             if line.source.index == button.index then
-                entity = Entity(line.entityIndex)
+                local entity = Entity(line.entityIndex)
                 if valid(entity) then
                     Player().selectedObject = entity
                 else
@@ -193,6 +193,8 @@ if onClient() then
     end
 
     function PlayerBulletinBoard.updateBulletins(bulletins, entityIndex)
+        if not entityIndex then return end
+        bulletins = bulletins or {}
 
         local found = false
         for _, missions in pairs(self.entityMissions) do
@@ -215,9 +217,11 @@ if onClient() then
         self.missions = {}
 
         for _, missions in pairs(self.entityMissions) do
-            for __, bulletin in pairs(missions.bulletins) do
-                if bulletin ~= nil then
-                    table.insert(self.missions, { bulletin = bulletin, entityIndex = missions.entityIndex })
+            if missions.bulletins then
+                for __, bulletin in pairs(missions.bulletins) do
+                    if bulletin ~= nil then
+                        table.insert(self.missions, { bulletin = bulletin, entityIndex = missions.entityIndex })
+                    end
                 end
             end
         end
@@ -277,7 +281,7 @@ if onClient() then
     -- Filtering Missions by Type
     -- Still not fully implemented yet, work in progress!
     function filterMissionsByType(type)
-        filteredMissions = {}
+        local filteredMissions = {}
         for _, mission in pairs(self.missions) do
             if mission.bulletin.type == type then
                 table.insert(filteredMissions, mission)
@@ -292,9 +296,16 @@ if onClient() then
         self.missions = {}
         self.entityMissions = {}
 
-        for _, entity in pairs({ Sector():getEntitiesByScript("entity/bulletinboard.lua") }) do
-            local ok, bulletins = entity:invokeFunction("entity/bulletinboard.lua", "getDisplayedBulletins")
-            table.insert(self.entityMissions, { bulletins = bulletins, entityIndex = entity.index })
+        local entities = { Sector():getEntitiesByScript("entity/bulletinboard.lua") }
+        for _, entity in pairs(entities) do
+            if valid(entity) then
+                local ok, bulletins = entity:invokeFunction("entity/bulletinboard.lua", "getDisplayedBulletins")
+                if ok and bulletins then
+                    table.insert(self.entityMissions, { bulletins = bulletins, entityIndex = entity.index })
+                else
+                    table.insert(self.entityMissions, { bulletins = {}, entityIndex = entity.index })
+                end
+            end
         end
 
         self.refreshList()

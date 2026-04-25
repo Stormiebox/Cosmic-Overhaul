@@ -28,7 +28,7 @@ Cosmic Overhaul is a comprehensive mod designed to enhance the quality-of-life f
 - **Factory Overview Tab**: Track expenses, revenues, and profits of factories via a new tab in the player window. Hourly profit estimates update after five minutes of playtime.
 - **ReSeed - Quality Randomizer**: Turret and upgrade seeds are randomized at the sector level, increasing galaxy-wide loot diversity with over 1,000,000 unique seeds.
 - **Subsystem Removal**: Permanently installed subsystems can now be removed at various stations such as Repair Dock, Scrapyard, Shipyard, Military Outpost, and Research Station, giving you flexibility in managing your ship systems.
-- **Shop Restock Button**: A button allows you to restock shop inventories at will. (Use sparingly to avoid crashes!)
+- **Shop Restock Button (Overhaul Variant)**: Includes a built-in manual restock button with overhaul-balanced limits (free restocks first, then cooldown-based use). This is intentionally different from the standalone Shop Restock Revamped mod, which is designed for broader restock customization and higher-frequency usage.
 - **Scrapyard Timer Removal**: Eliminates the 1-hour scrapyard time limit, allowing for unlimited time purchases.
 - **Ship Flight Recorder**: Provides detailed fleet information via a new player window tab.
 - **Trash Manager**: Bulk sell unwanted items at merchants using a customizable UI.

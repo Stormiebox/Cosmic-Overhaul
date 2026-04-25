@@ -7,8 +7,12 @@ local __CMB_Base_BulletinBoard_receiveData = BulletinBoard.receiveData
 function BulletinBoard.receiveData(bulletins_in)
     __CMB_Base_BulletinBoard_receiveData(bulletins_in)
 
-    local bulletins = BulletinBoard.getDisplayedBulletins()
-    Player():invokeFunction("player/ui/playerbulletinboard.lua", "updateBulletins", bulletins, Entity().index)
+    local player = Player()
+    local entity = Entity()
+    if not player or not entity then return end
+
+    local bulletins = BulletinBoard.getDisplayedBulletins() or {}
+    player:invokeFunction("player/ui/playerbulletinboard.lua", "updateBulletins", bulletins, entity.index)
 end
 
 if onClient() then
@@ -34,7 +38,10 @@ if onClient() then
 
     function BulletinBoard.onShowWindow()
         window:hide()
-        Player():invokeFunction("player/ui/playerbulletinboard.lua", "showBulletins")
+        local player = Player()
+        if player then
+            player:invokeFunction("player/ui/playerbulletinboard.lua", "showBulletins")
+        end
     end
 
     function BulletinBoard.acceptMission(index)
@@ -48,6 +55,11 @@ if onClient() then
             print("No missions available in this sector!")
             return
         end
-        Player():invokeFunction("player/ui/playerbulletinboard.lua", "updateBulletins", missions, Entity().index)
+
+        local player = Player()
+        local entity = Entity()
+        if player and entity then
+            player:invokeFunction("player/ui/playerbulletinboard.lua", "updateBulletins", missions, entity.index)
+        end
     end
 end -- onClient()

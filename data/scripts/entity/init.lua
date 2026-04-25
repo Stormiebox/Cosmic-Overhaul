@@ -1,5 +1,8 @@
 if onServer() then
     local entity = Entity()
+    if not entity then
+        return
+    end
 
     -- Add shipinfo.lua to ships
     if not entity.aiOwned and entity.isShip then

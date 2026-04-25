@@ -1,4 +1,6 @@
 if onServer() then
 	local galaxy = Galaxy()
-	galaxy:addScriptOnce("factoryregister.lua")
+	if galaxy then
+		galaxy:addScriptOnce("factoryregister.lua")
+	end
 end

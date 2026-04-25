@@ -14,11 +14,15 @@ Inner content structure
 ]]--
 
 -- Entry point to call from the factories to register. 
-function register(factionIndex, allianceFactory, entity_data) 
+function register(factionIndex, allianceFactory, entity_data)
 	--print("Register called " .. tostring(factionIndex) .. " + " .. tostring(entity_data['id']) )
-	fi = factionIndex
+	if not entity_data then
+		return
+	end
+
+	local fi = factionIndex
 	if allianceFactory then
-		fi = 'a_' .. factionIndex
+		fi = "a_" .. tostring(factionIndex)
 	end
 	createOrUpdate(fi, entity_data)
 end
@@ -29,9 +33,9 @@ function createOrUpdate(factionIndex, entity_data)
 		rf[factionIndex] = {}
 	end
 	local entityId = tostring(entity_data['id'])
-	if not entityId then 
+	if not entityId or entityId == "" or entityId == "nil" then
 		print("Issue with register call in Galaxy, data is not formatted correctly")
-		return 
+		return
 	end
 
 	local faction_registry = rf[factionIndex]
@@ -49,9 +53,9 @@ function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise
 		initial[factionIndex] = {}
 	end
 	local entityId = tostring(entity_data['id'])
-	if not entityId then -- ideally we shouldn't be here if this is happening, but things change
+	if not entityId or entityId == "" or entityId == "nil" then -- ideally we shouldn't be here if this is happening, but things change
 		print("Issue with registerNewFactory call in Galaxy, data is not formatted correctly")
-		return 
+		return
 	end
 	
 	local existingContent = initial[factionIndex][entityId] -- inside the faction, all entities are stored with their id
@@ -67,18 +71,19 @@ function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise
 end
 
 -- used by the player to get a list of all of their factories. Combines current and initial data
-function getFactoriesFor(factionId, allianceFactory) 
-	fi = factionId
+function getFactoriesFor(factionId, allianceFactory)
+	local fi = factionId
 	if allianceFactory then
-		fi = 'a_' .. factionId
+		fi = "a_" .. tostring(factionId)
 	end
+
 	if rf[fi] then
-		return merge(fi) 
+		return merge(fi)
 		--return rf[factionId]
-	else
-		print("FactionID [" .. tostring(fi) .. "] is not registered.")
-		return {}
 	end
+
+	print("FactionID [" .. tostring(fi) .. "] is not registered.")
+	return {}
 end
 
 function printRegisteredFactions() -- just for debugging
@@ -100,7 +105,10 @@ function merge(factionId)
 		local factories = {}
 		for index, data in pairs(rf_content) do
 			local init_fdata = init_content[index]
-			
+			if not init_fdata then
+				init_fdata = data
+			end
+
 			local factoryData = {}
 			factoryData['id'] = data['id']
 			factoryData['index'] = data['index']
