@@ -1,20 +1,33 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include("relations")       -- Include the original relations script
+include("relations") -- Include and extend vanilla relations behavior.
 
-local lastInteraction = {} -- Table to store the last interaction time for each faction
+-- Track last interaction timestamp by AI faction index.
+local lastInteraction = {}
 
--- Function to record the last interaction time for a given faction
-local function onFactionInteraction(factionIndex)
-    lastInteraction[factionIndex] = Server().unpausedRuntime
+-- Configuration with explicit units for readability.
+local DecayConfig = {
+    baseDecayPerHour = 100,
+    maxDecayPerHour = 3000,
+    increaseIntervalSec = 5 * 60 * 60, -- 5 hours
+    increaseAmountPerInterval = 100,
+    startAfterSec = 60 * 60, -- 1 hour inactivity
+    updateIntervalSec = 10, -- throttle expensive processing
+}
+
+local updateAccumulator = 0
+
+local function onFactionInteraction(aiFactionIndex)
+    if not aiFactionIndex then return end
+    lastInteraction[aiFactionIndex] = Server().unpausedRuntime
 end
 
-local cCounter = 0 -- Counter for relation change types
+local cCounter = 0
 local function c()
     cCounter = cCounter + 1
     return cCounter
 end
 
--- All relation change types. When you want to change relations and the type doesn't fit into any category, use 'nil'.
+-- Intentionally global to stay compatible with scripts expecting these symbols.
 RelationChangeType = {
     Default = c(),
     CraftDestroyed = c(),
@@ -34,13 +47,11 @@ RelationChangeType = {
     Tribute = c(),
 }
 
--- Populate RelationChangeNames for each change type
 RelationChangeNames = {}
 for k, v in pairs(RelationChangeType) do
     RelationChangeNames[v] = k
 end
 
--- Maximum relation change caps for different types of interactions
 RelationChangeMaxCap = {
     [RelationChangeType.ServiceUsage] = 45000,
     [RelationChangeType.ResourceTrade] = 45000,
@@ -51,77 +62,75 @@ RelationChangeMaxCap = {
     [RelationChangeType.Tribute] = 0,
 }
 
--- Minimum relation change caps for illegal activities
 RelationChangeMinCap = {
     [RelationChangeType.Smuggling] = -75000,
     [RelationChangeType.GeneralIllegal] = -75000,
 }
 
--- Decay parameters
-local baseDecayRate = 100                 -- Base decay per hour
-local maxDecayRate = 3000                 -- Maximum decay
-local decayIncreaseInterval = 5 * 60 * 60 -- 5 hours in seconds
-local decayIncreaseAmount = 100           -- Decay increase per interval
-
--- Function to change relations between factions
+-- Keep signature compatible with vanilla relations script.
 function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
     if not delta or delta == 0 then return end
 
-    local a, b, ai, player = getInteractingFactions(a, b)
-    if not a or not b then return end
-    if a.isAIFaction and b.isAIFaction then return end
-    if a.index == b.index then return end
-    if a.alwaysAtWar or b.alwaysAtWar then return end
-    if a.staticRelationsToAll or b.staticRelationsToAll then return end
-    if a.staticRelationsToPlayers and (b.isPlayer or b.isAlliance) then return end
-    if b.staticRelationsToPlayers and (a.isPlayer or a.isAlliance) then return end
+    local factionA, factionB, aiFaction, playerFaction = getInteractingFactions(a, b)
+    if not factionA or not factionB then return end
+    if factionA.isAIFaction and factionB.isAIFaction then return end
+    if factionA.index == factionB.index then return end
+    if factionA.alwaysAtWar or factionB.alwaysAtWar then return end
+    if factionA.staticRelationsToAll or factionB.staticRelationsToAll then return end
+    if factionA.staticRelationsToPlayers and (factionB.isPlayer or factionB.isAlliance) then return end
+    if factionB.staticRelationsToPlayers and (factionA.isPlayer or factionA.isAlliance) then return end
 
     local galaxy = Galaxy()
-    local relations = galaxy:getFactionRelations(a, b)
-    local status = galaxy:getFactionRelationStatus(a, b)
-    local newStatus
+    local relations = galaxy:getFactionRelations(factionA, factionB)
 
-    -- Call onFactionInteraction to reset decay timer for the interacting faction
-    if player and ai then
-        onFactionInteraction(b.index)
+    if playerFaction and aiFaction then
+        onFactionInteraction(aiFaction.index)
 
-        -- Existing logic for changing relations...
-        local uncappedDelta = delta
         if delta > 0 then
-            delta = hardCapGain(relations, delta, RelationChangeMaxCap[changeType])
+            local maxCap = RelationChangeMaxCap[changeType]
+            if maxCap ~= nil then
+                delta = hardCapGain(relations, delta, maxCap)
+            end
         elseif delta < 0 then
-            delta = hardCapLoss(relations, delta, RelationChangeMinCap[changeType])
+            local minCap = RelationChangeMinCap[changeType]
+            if minCap ~= nil then
+                delta = hardCapLoss(relations, delta, minCap)
+            end
         end
 
-        -- Apply relation changes and check for status changes...
-        galaxy:changeFactionRelations(a, b, delta, notifyA, notifyB)
-
-        -- Handle status changes...
-        if newStatus and newStatus ~= status then
-            setRelationStatus(a, b, newStatus, notifyA, notifyB)
-        end
+        galaxy:changeFactionRelations(factionA, factionB, delta, notifyA, notifyB)
     end
 end
 
--- Decay management logic
-function onUpdate()
+-- Runs server-side to apply inactivity-based decay to player/alliance -> AI relations.
+function onUpdate(timeStep)
+    if not onServer() then return end
+
+    updateAccumulator = updateAccumulator + (timeStep or 0)
+    if updateAccumulator < DecayConfig.updateIntervalSec then return end
+    updateAccumulator = 0
+
+    local now = Server().unpausedRuntime
     local galaxy = Galaxy()
-    local factions = galaxy:getAllFactions()
 
-    for _, faction in pairs(factions) do
-        if faction.isAIFaction then
-            local relations = galaxy:getFactionRelations(faction.index, faction.index)
+    -- Iterate only factions with known interactions, not every faction in the galaxy.
+    for aiFactionIndex, lastTime in pairs(lastInteraction) do
+        local timeSinceLastInteraction = now - lastTime
+        if timeSinceLastInteraction >= DecayConfig.startAfterSec then
+            local decayAmount = math.min(
+                DecayConfig.baseDecayPerHour + (timeSinceLastInteraction / DecayConfig.increaseIntervalSec) * DecayConfig.increaseAmountPerInterval,
+                DecayConfig.maxDecayPerHour
+            )
 
-            -- Check for player interactions
-            if lastInteraction[faction.index] then
-                local timeSinceLastInteraction = Server().unpausedRuntime - lastInteraction[faction.index]
+            local players = galaxy:getPlayers() or {}
+            for _, player in pairs(players) do
+                if player then
+                    galaxy:changeFactionRelations(player.index, aiFactionIndex, -decayAmount, false, false)
 
-                -- If the player has not interacted for a while, start the decay process
-                if timeSinceLastInteraction >= 3600 then -- 1 hour in seconds
-                    local decayAmount = math.min(
-                    baseDecayRate + (timeSinceLastInteraction / decayIncreaseInterval) * decayIncreaseAmount,
-                        maxDecayRate)
-                    galaxy:changeFactionRelations(faction.index, faction.index, -decayAmount, false, false)
+                    local allianceIndex = player.allianceIndex
+                    if allianceIndex then
+                        galaxy:changeFactionRelations(allianceIndex, aiFactionIndex, -decayAmount, false, false)
+                    end
                 end
             end
         end

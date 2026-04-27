@@ -10,6 +10,8 @@ local SellableInventoryItem = include ("sellableinventoryitem")
 TrashMan = {}
 
 local systemsBox
+local minTechBox
+local maxTechBox
 local checkBoxes = {}
 local checkBoxAllianz = {}
 local listBoxes = {}
@@ -52,7 +54,7 @@ end
 -- create all required UI elements for the client side
 function TrashMan.initUI()
     local res = getResolution();
-    local size = vec2(350, 390) 
+    local size = vec2(350, 390)
     local menu = ScriptUI()
     window = menu:createWindow(Rect(res * 0.5 - size * 0.5, res * 0.5 + size * 0.5));
     menu:registerWindow(window, "Trash Man"%_t);
@@ -82,7 +84,7 @@ function TrashMan.initUI()
         systemsBox:addEntry(rarity.name)
     end
     py = py + pyDelta
-	
+
     -- Turrets to Trash
     window:createLabel(vec2(column1, py),  "Turrets to trash"%_t, 15)
     py = py + pyDelta
@@ -92,9 +94,21 @@ function TrashMan.initUI()
         py = py + pyDelta
     end
 
-	-- private // allianz
-	checkBoxAllianz[0] = window:createCheckBox(Rect(column2, py, column2 + 20, py + 20), "", "")
-	window:createLabel(vec2(column2+25,py), "Allianz", 15 )
+    -- private // alliance
+    checkBoxAllianz[0] = window:createCheckBox(Rect(column2, py, column2 + 20, py + 20), "", "")
+    window:createLabel(vec2(column2 + 25, py), "Alliance", 15)
+    py = py + pyDelta
+
+    window:createLabel(vec2(column1, py), "Tech level filter (optional)"%_t, 15)
+    py = py + pyDelta
+    minTechBox = window:createComboBox(Rect(column2, py, column2 + 140, py + lineHeight), "")
+    maxTechBox = window:createComboBox(Rect(column2 + 160, py, column2 + 300, py + lineHeight), "")
+    minTechBox:addEntry("Min: Any"%_t)
+    maxTechBox:addEntry("Max: Any"%_t)
+    for i = 1, 52 do
+        minTechBox:addEntry("Min: " .. i)
+        maxTechBox:addEntry("Max: " .. i)
+    end
 
     local qFrame = window:createFrame(Rect(310, 10, 330, 30))
     local qLabel = window:createLabel(vec2(310, 10), " ?", 15)
@@ -109,130 +123,127 @@ function TrashMan.initUI()
     button2.maxTextSize = 15
 end
 
--- private-start
-function TrashMan.onMarkTrashPressedServer1(systemRarity, turretRarities)
-    if onClient() then return end
-		
-    local itemsMarked = 0
-    local inv = Player(callingPlayer):getInventory()
-    
-    for index, slotItem in pairs(inv:getItems()) do
-        local iitem = slotItem.item
-        if ((iitem == nil) or iitem.trash or iitem.favorite) then goto continue end
+local function getItemTechLevel(sItem)
+    if not sItem or not sItem.item then return nil end
+    local item = sItem.item
 
-        local sItem = SellableInventoryItem(iitem, index, buyer)
-        if (sItem.item.itemType == InventoryItemType.VanillaItem) then goto continue end		
-        local rarity = sItem.rarity.value
-		
-        if (sItem.item.itemType == InventoryItemType.SystemUpgrade) then 
-            if rarity > systemRarity then goto continue end
-            -- print("Trashing " .. sItem.rarity.name .. " " ..sItem:getName())
-            iitem.trash = true
-            local amount = inv:amount(index)
-            inv:removeAll(index)
-            inv:addAt(iitem, index, amount)				
-            itemsMarked = itemsMarked + amount	
-        elseif sItem.material ~= nil then
-            local material = sItem.material.value
-            if (turretRarities[material]) then
-                local selectedMaxRarity = turretRarities[material]
-                if (rarity <= turretRarities[material]) then	
-                    local name = sItem.rarity.name .. " " .. Material(sItem:getMaterial()).name .. " " ..sItem:getName()
-                    --print("Trashing " .. name)
-                    iitem.trash = true
-                    local amount = inv:amount(index)
-                    inv:removeAll(index)
-                    inv:addAt(iitem, index, amount)				
-                    itemsMarked = itemsMarked + amount
-                end
-            end
-        end
-
-        ::continue::
+    if (item.itemType == InventoryItemType.Turret or item.itemType == InventoryItemType.TurretTemplate) and item.averageTech then
+        return round(item.averageTech, 1)
     end
 
-    Player(callingPlayer):sendChatMessage("Server", 0, itemsMarked .. " items have been marked as trash (private).")
+    if item.getValue and item:getValue("tech") then
+        return item:getValue("tech")
+    end
+
+    return nil
+end
+
+local function canTrashByFilters(sItem, systemRarity, turretRarities, minTech, maxTech)
+    if not sItem or not sItem.item then return false end
+    local item = sItem.item
+
+    if item.itemType == InventoryItemType.VanillaItem then
+        return false
+    end
+
+    local rarity = sItem.rarity and sItem.rarity.value or nil
+    if rarity == nil then return false end
+
+    local tech = getItemTechLevel(sItem)
+    if minTech and tech and tech < minTech then return false end
+    if maxTech and tech and tech > maxTech then return false end
+
+    if item.itemType == InventoryItemType.SystemUpgrade then
+        return rarity <= (systemRarity or -1)
+    end
+
+    if sItem.material ~= nil then
+        local material = sItem.material.value
+        local selectedMaxRarity = turretRarities and turretRarities[material]
+        if selectedMaxRarity == nil then return false end
+        return rarity <= selectedMaxRarity
+    end
+
+    return false
+end
+
+local function markTrashInInventory(inv, buyer, systemRarity, turretRarities, minTech, maxTech)
+    local itemsMarked = 0
+    if not inv then return itemsMarked end
+
+    for index, slotItem in pairs(inv:getItems()) do
+        local iitem = slotItem.item
+        if (iitem ~= nil) and (not iitem.trash) and (not iitem.favorite) then
+            local sItem = SellableInventoryItem(iitem, index, buyer)
+            if canTrashByFilters(sItem, systemRarity, turretRarities, minTech, maxTech) then
+                iitem.trash = true
+                local amount = inv:amount(index)
+                inv:removeAll(index)
+                inv:addAt(iitem, index, amount)
+                itemsMarked = itemsMarked + amount
+            end
+        end
+    end
+
+    return itemsMarked
+end
+
+-- private-start
+function TrashMan.onMarkTrashPressedServer1(systemRarity, turretRarities, minTech, maxTech)
+    if onClient() then return end
+
+    local player = Player(callingPlayer)
+    if not player then return end
+
+    local inv = player:getInventory()
+    local itemsMarked = markTrashInInventory(inv, player, systemRarity, turretRarities, minTech, maxTech)
+
+    player:sendChatMessage("Server", 0, itemsMarked .. " items have been marked as trash (private).")
 end
 callable(TrashMan, "onMarkTrashPressedServer1")
 
 function TrashMan.onUnmarkAllPressedServer1()
     if onClient() then return end
 
+    local player = Player(callingPlayer)
+    if not player then return end
+
     local itemsMarked = 0
-    local inv = Player(callingPlayer):getInventory()
+    local inv = player:getInventory()
     local totalItems = 0
-	
+
     for index, slotItem in pairs(inv:getItems()) do
         local iitem = slotItem.item
-        if (iitem ~= nil) then
+        if iitem ~= nil then
             local amount = inv:amount(index)
-            local iitem = slotItem.item
-            
             totalItems = totalItems + amount
 
-            if (iitem.trash) then
-                local sItem = SellableInventoryItem(iitem, index, buyer)
-                local name = Rarity(sItem.rarity.value).name .. " " .. Material(sItem:getMaterial()).name .. " " ..sItem:getName()
-                name = name .. "(" .. iitem.itemType .. ")"
-
-                -- print("Untrashing " .. name)
+            if iitem.trash then
                 iitem.trash = false
-                
                 inv:removeAll(index)
-                inv:addAt(iitem, index, amount)				
+                inv:addAt(iitem, index, amount)
                 itemsMarked = itemsMarked + amount
             end
         end
     end
 
-    Player(callingPlayer):sendChatMessage("Server", 0, itemsMarked .. " of " .. totalItems .. " items are no longer marked for trash  (private).")
+    player:sendChatMessage("Server", 0, itemsMarked .. " of " .. totalItems .. " items are no longer marked for trash (private).")
 end
 callable(TrashMan, "onUnmarkAllPressedServer1")
 -- private-end
 
 -- allianz-start
-function TrashMan.onMarkTrashPressedServer2(systemRarity, turretRarities)
+function TrashMan.onMarkTrashPressedServer2(systemRarity, turretRarities, minTech, maxTech)
     if onClient() then return end
 
-    local itemsMarked = 0
     local buyer, ship, player = getInteractingFaction(callingPlayer, AlliancePrivilege.SpendItems)
-    if not buyer then return end
-    local inv = buyer:getInventory()
-    
-    for index, slotItem in pairs(inv:getItems()) do
-        local iitem = slotItem.item
-        if ((iitem == nil) or iitem.trash or iitem.favorite) then goto continue end
-
-        local sItem = SellableInventoryItem(iitem, index, buyer)
-        if (sItem.item.itemType == InventoryItemType.VanillaItem) then goto continue end		
-        local rarity = sItem.rarity.value
-		
-        if (sItem.item.itemType == InventoryItemType.SystemUpgrade) then 
-            if rarity > systemRarity then goto continue end
-            -- print("Trashing " .. sItem.rarity.name .. " " ..sItem:getName())
-            iitem.trash = true
-            local amount = inv:amount(index)
-            inv:removeAll(index)
-            inv:addAt(iitem, index, amount)				
-            itemsMarked = itemsMarked + amount	
-        elseif sItem.material ~= nil then
-            local material = sItem.material.value
-            if (turretRarities[material]) then
-                local selectedMaxRarity = turretRarities[material]
-                if (rarity <= turretRarities[material]) then	
-                    local name = sItem.rarity.name .. " " .. Material(sItem:getMaterial()).name .. " " ..sItem:getName()
-                    --print("Trashing " .. name)
-                    iitem.trash = true
-                    local amount = inv:amount(index)
-                    inv:removeAll(index)
-                    inv:addAt(iitem, index, amount)				
-                    itemsMarked = itemsMarked + amount
-                end
-            end
-        end
-
-        ::continue::
+    if not buyer then
+        Player(callingPlayer):sendChatMessage("Server", 1, "Missing alliance permissions to modify alliance trash items.")
+        return
     end
+
+    local inv = buyer:getInventory()
+    local itemsMarked = markTrashInInventory(inv, buyer, systemRarity, turretRarities, minTech, maxTech)
 
     Player(callingPlayer):sendChatMessage("Server", 0, itemsMarked .. " items have been marked as trash (alliance).")
 end
@@ -241,69 +252,62 @@ callable(TrashMan, "onMarkTrashPressedServer2")
 function TrashMan.onUnmarkAllPressedServer2()
     if onClient() then return end
 
-    local itemsMarked = 0
     local buyer, ship, player = getInteractingFaction(callingPlayer, AlliancePrivilege.SpendItems)
     if not buyer then return end
+
+    local itemsMarked = 0
     local inv = buyer:getInventory()
     local totalItems = 0
-	
+
     for index, slotItem in pairs(inv:getItems()) do
         local iitem = slotItem.item
-        if (iitem ~= nil) then
+        if iitem ~= nil then
             local amount = inv:amount(index)
-            local iitem = slotItem.item
-            
             totalItems = totalItems + amount
 
-            if (iitem.trash) then
-                local sItem = SellableInventoryItem(iitem, index, buyer)
-                local name = Rarity(sItem.rarity.value).name .. " " .. Material(sItem:getMaterial()).name .. " " ..sItem:getName()
-                name = name .. "(" .. iitem.itemType .. ")"
-
-                -- print("Untrashing " .. name)
+            if iitem.trash then
                 iitem.trash = false
-                
                 inv:removeAll(index)
-                inv:addAt(iitem, index, amount)				
+                inv:addAt(iitem, index, amount)
                 itemsMarked = itemsMarked + amount
             end
         end
     end
 
-    Player(callingPlayer):sendChatMessage("Server", 0, itemsMarked .. " of " .. totalItems .. " items are no longer marked for trash  (alliance).")
+    Player(callingPlayer):sendChatMessage("Server", 0, itemsMarked .. " of " .. totalItems .. " items are no longer marked for trash (alliance).")
 end
 callable(TrashMan, "onUnmarkAllPressedServer2")
 -- allianz-end
 
 function TrashMan.onMarkTrashPressed()
     local turretRarities = {}
-    
+
     for mat = MaterialType.Iron, MaterialType.Avorion do
-        if (checkBoxes[mat].checked) then
+        if checkBoxes[mat].checked then
             turretRarities[mat] = listBoxes[mat].selectedIndex - 1
         end
     end
-	
-	if checkBoxAllianz[0].checked then
-		print("Allianz...")
-		invokeServerFunction("onMarkTrashPressedServer2", (systemsBox.selectedIndex - 2), turretRarities)
-	else
-		print("Private...")
-		invokeServerFunction("onMarkTrashPressedServer1", (systemsBox.selectedIndex - 2), turretRarities)
-	end
 
-    --invokeServerFunction("onMarkTrashPressedServer", (systemsBox.selectedIndex - 2), turretRarities)
-    --window:hide()
+    local minTech = nil
+    local maxTech = nil
+    if minTechBox and minTechBox.selectedIndex > 0 then
+        minTech = minTechBox.selectedIndex
+    end
+    if maxTechBox and maxTechBox.selectedIndex > 0 then
+        maxTech = maxTechBox.selectedIndex
+    end
+
+    if checkBoxAllianz[0].checked then
+        invokeServerFunction("onMarkTrashPressedServer2", (systemsBox.selectedIndex - 2), turretRarities, minTech, maxTech)
+    else
+        invokeServerFunction("onMarkTrashPressedServer1", (systemsBox.selectedIndex - 2), turretRarities, minTech, maxTech)
+    end
 end
 
 function TrashMan.onUnmarkAllPressed()
-    --invokeServerFunction("onUnmarkAllPressedServer")
-    --window:hide()
-	if checkBoxAllianz[0].checked then
-		print("Allianz...")
-		invokeServerFunction("onUnmarkAllPressedServer2")
-	else
-		print("Private...")
-		invokeServerFunction("onUnmarkAllPressedServer1")
-	end
+    if checkBoxAllianz[0].checked then
+        invokeServerFunction("onUnmarkAllPressedServer2")
+    else
+        invokeServerFunction("onUnmarkAllPressedServer1")
+    end
 end
