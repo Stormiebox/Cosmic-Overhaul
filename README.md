@@ -31,7 +31,7 @@ Cosmic Overhaul is a comprehensive mod designed to enhance the quality-of-life f
 - **Shop Restock Button (Overhaul Variant)**: Includes a built-in manual restock button with overhaul-balanced limits (free restocks first, then cooldown-based use). This is intentionally different from the standalone Shop Restock Revamped mod, which is designed for broader restock customization and higher-frequency usage.
 - **Scrapyard Timer Removal**: Eliminates the 1-hour scrapyard time limit, allowing for unlimited time purchases.
 - **Ship Flight Recorder**: Provides detailed fleet information via a new player window tab.
-- **Trash Manager**: Bulk sell unwanted items at merchants using a customizable UI.
+- **Trash Manager (Latest confirmed preview build)**: Filter-driven bulk trash marking with in-game confirmed preview flow. Supports private and alliance inventory contexts, optional min/max tech filtering (1–52), and safe non-destructive marking (favorites are skipped; items are flagged for normal merchant trash selling, not force-sold).
 - **Transfer Window Enhancements**: Improved sorting, clearer highlights for stolen/dangerous goods, and options for partial and stacked cargo transfers.
 - **Trade Heatmap Expansion**: Expands the trade heatmap to multiple quadrants based on subsystem quality.
 - **Transponder Range Scaling**: Transporter subsystem range scales with the number of transporter blocks installed.
