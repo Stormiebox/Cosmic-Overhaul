@@ -392,7 +392,7 @@ end
 
 
 function Scrapyard.getUpdateInterval()
-    return 1
+    return 2
 end
 
 -- this function gets called each tick, on client only
@@ -466,91 +466,89 @@ function Scrapyard.updateServer(timeStep)
         time = time - timeStep
 
         local faction = Faction(factionIndex)
-        if not faction then goto continue end
+        if faction then
+            local here = false
+            if faction.isAlliance then
+                faction = Alliance(factionIndex)
+            elseif faction.isPlayer then
+                faction = Player(factionIndex)
 
-        local here = false
-        if faction.isAlliance then
-            faction = Alliance(factionIndex)
-        elseif faction.isPlayer then
-            faction = Player(factionIndex)
+                local px, py = faction:getSectorCoordinates()
+                local sx, sy = Sector():getCoordinates()
 
-            local px, py = faction:getSectorCoordinates()
-            local sx, sy = Sector():getCoordinates()
+                here = (px == sx and py == sy)
+            end
 
-            here = (px == sx and py == sy)
-        end
+            local doubleSend = false
+            local msg = nil
 
-        local doubleSend = false
-        local msg = nil
+            -- warn player if time is running out
+            if time + 1 > 10 and time <= 10 then
+                if here then
+                    msg = "Your salvaging license will run out in 10 seconds."%_t
+                else
+                    msg = "Your salvaging license in %s will run out in 10 seconds."%_t
+                end
 
-        -- warn player if time is running out
-        if time + 1 > 10 and time <= 10 then
-            if here then
-                msg = "Your salvaging license will run out in 10 seconds."%_t
+                doubleSend = true
+            end
+
+            if time + 1 > 20 and time <= 20 then
+                if here then
+                    msg = "Your salvaging license will run out in 20 seconds."%_t
+                else
+                    msg = "Your salvaging license in %s will run out in 20 seconds."%_t
+                end
+
+                doubleSend = true
+            end
+
+            if time + 1 > 30 and time <= 30 then
+                if here then
+                    msg = "Your salvaging license will run out in 30 seconds. Renew it and save yourself some trouble!"%_t
+                else
+                    msg = "Your salvaging license in %s will run out in 30 seconds. Renew it and save yourself some trouble!"%_t
+                end
+            end
+
+            if time + 1 > 60 and time <= 60 then
+                if here then
+                    msg = "Your salvaging license will run out in 60 seconds. Renew it NOW and save yourself some trouble!"%_t
+                else
+                    msg = "Your salvaging license in %s will run out in 60 seconds. Renew it NOW and save yourself some trouble!"%_t
+                end
+            end
+
+            if time + 1 > 120 and time <= 120 then
+                if here then
+                    msg = "Your salvaging license will run out in 2 minutes. Renew it immediately and save yourself some trouble!"%_t
+                else
+                    msg = "Your salvaging license in %s will run out in 2 minutes. Renew it immediately and save yourself some trouble!"%_t
+                end
+            end
+
+            if time < 0 then
+                licenses[factionIndex] = nil
+
+                if here then
+                    msg = "Your salvaging license has expired. You may no longer salvage in this area."%_t
+                else
+                    msg = "Your salvaging license in %s has expired. You may no longer salvage in this area."%_t
+                end
             else
-                msg = "Your salvaging license in %s will run out in 10 seconds."%_t
+                licenses[factionIndex] = time
             end
 
-            doubleSend = true
-        end
+            if msg then
+                local x, y = Sector():getCoordinates()
+                local coordinates = "${x}:${y}" % {x = x, y = y}
 
-        if time + 1 > 20 and time <= 20 then
-            if here then
-                msg = "Your salvaging license will run out in 20 seconds."%_t
-            else
-                msg = "Your salvaging license in %s will run out in 20 seconds."%_t
-            end
-
-            doubleSend = true
-        end
-
-        if time + 1 > 30 and time <= 30 then
-            if here then
-                msg = "Your salvaging license will run out in 30 seconds. Renew it and save yourself some trouble!"%_t
-            else
-                msg = "Your salvaging license in %s will run out in 30 seconds. Renew it and save yourself some trouble!"%_t
+                faction:sendChatMessage(station, 0, msg, coordinates)
+                if doubleSend then
+                    faction:sendChatMessage(station, 2, msg, coordinates)
+                end
             end
         end
-
-        if time + 1 > 60 and time <= 60 then
-            if here then
-                msg = "Your salvaging license will run out in 60 seconds. Renew it NOW and save yourself some trouble!"%_t
-            else
-                msg = "Your salvaging license in %s will run out in 60 seconds. Renew it NOW and save yourself some trouble!"%_t
-            end
-        end
-
-        if time + 1 > 120 and time <= 120 then
-            if here then
-                msg = "Your salvaging license will run out in 2 minutes. Renew it immediately and save yourself some trouble!"%_t
-            else
-                msg = "Your salvaging license in %s will run out in 2 minutes. Renew it immediately and save yourself some trouble!"%_t
-            end
-        end
-
-        if time < 0 then
-            licenses[factionIndex] = nil
-
-            if here then
-                msg = "Your salvaging license has expired. You may no longer salvage in this area."%_t
-            else
-                msg = "Your salvaging license in %s has expired. You may no longer salvage in this area."%_t
-            end
-        else
-            licenses[factionIndex] = time
-        end
-
-        if msg then
-            local x, y = Sector():getCoordinates()
-            local coordinates = "${x}:${y}" % {x = x, y = y}
-
-            faction:sendChatMessage(station, 0, msg, coordinates)
-            if doubleSend then
-                faction:sendChatMessage(station, 2, msg, coordinates)
-            end
-        end
-
-        ::continue::
     end
 
 end
@@ -793,44 +791,37 @@ function Scrapyard.dismantleTrash()
     if not buyer then return end
 
     local inventory = buyer:getInventory()
-
-    local items = buyer:getInventory():getItems()
+    local items = inventory:getItems()
 
     for inventoryIndex, slotItem in pairs(items) do
-
         local turret = slotItem.item
-        if turret == nil then goto continue end
-        if not turret.trash then goto continue end
-        if turret.itemType ~= InventoryItemType.Turret then goto continue end
+        if turret ~= nil and turret.trash and turret.itemType == InventoryItemType.Turret then
+            local stop = false
 
-        local stop = false
+            for i = 1, slotItem.amount do
+                local goods = Scrapyard.getTurretGoods(turret)
 
-        for i = 1, slotItem.amount do
-
-            local goods = Scrapyard.getTurretGoods(turret)
-
-            local totalSize = 0
-            for _, result in pairs(goods) do
-                totalSize = totalSize + result.amount + result.good.size
-            end
-
-            local cargoBay = CargoBay(ship)
-            if not cargoBay or cargoBay.freeSpace < totalSize then
-                player:sendChatMessage(Entity(), ChatMessageType.Error, "Not enough cargo space for all dismantled goods!"%_T)
-                stop = true
-                break
-            end
-
-            if inventory:take(inventoryIndex) then
+                local totalSize = 0
                 for _, result in pairs(goods) do
-                    cargoBay:addCargo(result.good, result.amount)
+                    totalSize = totalSize + result.amount + result.good.size
+                end
+
+                local cargoBay = CargoBay(ship)
+                if not cargoBay or cargoBay.freeSpace < totalSize then
+                    player:sendChatMessage(Entity(), ChatMessageType.Error, "Not enough cargo space for all dismantled goods!"%_T)
+                    stop = true
+                    break
+                end
+
+                if inventory:take(inventoryIndex) then
+                    for _, result in pairs(goods) do
+                        cargoBay:addCargo(result.good, result.amount)
+                    end
                 end
             end
+
+            if stop then break end
         end
-
-        if stop then break end
-
-        ::continue::
     end
 
     invokeClientFunction(player, "onTurretDismantled")
@@ -951,7 +942,7 @@ function Scrapyard.unallowedDamaging(shooter, faction, damage)
         actions = 0
     end
 
-    newActions = actions + damage
+    local newActions = actions + damage
 
     for _, player in pairs(pilots) do
         if actions < 10 and newActions >= 10 then

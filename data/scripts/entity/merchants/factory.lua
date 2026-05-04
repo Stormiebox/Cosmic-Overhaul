@@ -4,6 +4,8 @@ include("utility")
 include("faction")
 include("callable")
 
+if not Factory then return end
+
 -- Cosmic Overhaul shuttle delivery modifications start here
 
 -- Constants for shuttle volume
@@ -12,7 +14,7 @@ Factory.MaxShuttleVolume = 500
 Factory.ShuttleVolumeIncrement = 50
 
 -- Initialize shuttle volume to the base value
-Factory.shuttleVolume = Factory.BaseShuttleVolume
+Factory.shuttleVolume = Factory.shuttleVolume or Factory.BaseShuttleVolume
 
 -- Modify the upgrade function for shuttles
 function Factory.onUpgradeShuttlesButtonPressed()
@@ -83,7 +85,7 @@ function print_info(message) -- for adding the factory name to the messages, hel
 	print(name .. ": " .. message)
 end
 
-local DATA_REFRESH_FREQUECY = 10 -- controls how often factories call in with new data, in seconds. Could be a bigger number.
+local DATA_REFRESH_FREQUECY = 30 -- controls how often factories call in with new data, in seconds.
 
 local runtime = 0 -- to measure actual elapsed time, without the time spent in paused state
 local productionStateRegister = {} -- stores the time spent in different states, working vs. different errors
@@ -142,7 +144,7 @@ function Factory.updateProduction(timeStep)
 	end
 end
 
-newProductionError = "" -- Will this fix that issue in the function call below? 
+local newProductionError = "" -- local to avoid cross-script/global pollution
 
 -- We are storing a snapshot of the state every time when there is an update. Later this is used to show the ratio of working vs.
 -- not working for various errors. 

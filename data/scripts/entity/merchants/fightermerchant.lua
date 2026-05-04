@@ -19,6 +19,17 @@ local function getRandomFighterAmount(rarityValue)
     end
 end
 
+local function comp(a, b)
+    local fa = a.fighter
+    local fb = b.fighter
+
+    if fa.rarity.value == fb.rarity.value then
+        return (a.amount or 0) > (b.amount or 0)
+    end
+
+    return fa.rarity.value > fb.rarity.value
+end
+
 function FighterMerchant.shop:addItems()
 
     -- Simply init with a 'random' seed

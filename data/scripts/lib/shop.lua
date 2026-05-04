@@ -405,7 +405,7 @@ function Shop:updateSellGui() -- client
         if self.priceRatio < 1 then
             line.priceReductionLabel:show()
             line.priceReductionLabel.caption = "${percentage} OFF!" % _t %
-            { percentage = tostring(round((1 - self.priceRatio) * 100)) .. "%" }
+                { percentage = tostring(round((1 - self.priceRatio) * 100)) .. "%" }
         else
             line.priceReductionLabel:hide()
         end
@@ -834,7 +834,7 @@ local edr_restockButton                    -- UI
 local edr_specialOfferSeed = 0             -- restock the special offer
 local restockCooldown = 45 * 60            -- 45 minutes in seconds
 local lastRestockTime = 0
-local freeRestockCount = 10                 -- Allow 10 free restocks
+local freeRestockCount = 15                -- Allow 15 free restocks
 local usedFreeRestocks = 0                 -- Counter for used free restocks
 
 -- Handle the actual restocking part
