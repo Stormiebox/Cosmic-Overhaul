@@ -1,8 +1,10 @@
-# Cosmic Overhaul README
+# Cosmic Overhaul
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Overview
 
-Cosmic Overhaul is a comprehensive mod designed to enhance the quality-of-life features of various game systems. This mod streamlines and improves gameplay experiences with a set of tweaks, balancing changes, and new features.
+**Cosmic Overhaul** is part of the *Cosmic* mod series. It is a comprehensive mod designed to enhance the quality-of-life features of various game systems. This mod streamlines and improves gameplay experiences with a set of tweaks, balancing changes, and new features.
 
 ## Features
 
