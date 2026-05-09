@@ -15,7 +15,7 @@ This mod changes multiple core gameplay loops (trade, logistics, station managem
 
 Due to the extensive nature of this overhaul, the full detailed feature list has been moved to our GitHub Wiki!
 
-👉 **[Click here to read the full feature breakdown on the Official Wiki](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Features-&-Enhancements)**
+👉 **[Click here to read the full feature breakdown on the Official Wiki](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Features-and-Enhancements)**
 
 ### Quick Overview
 
