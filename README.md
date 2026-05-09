@@ -4,54 +4,375 @@
 
 ## Overview
 
-**Cosmic Overhaul** is part of the *Cosmic* mod series. It is a comprehensive mod designed to enhance the quality-of-life features of various game systems. This mod streamlines and improves gameplay experiences with a set of tweaks, balancing changes, and new features.
+**Cosmic Overhaul** is a large-scale Avorion quality-of-life and systems-rebalance mod in the *Cosmic* series.  
+It combines many battle-tested gameplay improvements into one package, with a strong focus on usability, economy flow, command simulation quality, and reducing friction in long campaigns.
 
-## Features
+This mod changes multiple core gameplay loops (trade, logistics, station management, faction relations, UI workflows, and captain command simulation), so starting a **new galaxy** is strongly recommended.
 
-- **Streamlined gameplay experience**
-- **Comprehensive set of tweaks and balancing changes**
-- **New features to enhance gameplay**
-- **Depth and efficiency added to various game aspects**
-- **Compatible with the latest versions and DLCs**
+---
 
-## Requirements
+## Installation
 
-- **New Game Required**: Yes, strongly recommended. This mod adds/modifies many game aspects, and a new save is required to avoid issues.
-- **Mod Incompatibilities and Issues**: Please refer to the discussion page for more information: [Mod Incompatibilities](https://steamcommunity.com/workshop/filedetails/discussion/3315794988/4429940134629435555/)
+1. Place the mod folder into:
+   - **Windows:** `%AppData%\Avorion\mods\`
+   - **Linux:** `~/.avorion/mods/`
+2. Start Avorion.
+3. Enable **Cosmic Overhaul** in **Settings -> Mods**.
+4. Restart the game when prompted.
 
-## Key Features
+---
 
-- **Allied Relations Enhancer**: Strengthen your alliances in Avorion by doubling relation changes between players and allied factions, creating a more immersive and dynamic faction interaction experience.
-- **Dynamic Reputation Decay**: Introduces a realistic reputation decay mechanic in Avorion, where faction relations gradually diminish over time if neglected, encouraging players to actively engage and maintain their connections. With a scalable decay rate that increases after prolonged inactivity, this feature ensures that every choice has lasting consequences in the game's universe.
-- **Dynamic Station Shuttles**: Introduces significant enhancements to shuttle mechanics, increasing the base shuttle volume from 25 to 50 and allowing upgrades up to 500. With dynamic upgrade costs based on factory production and size.
-- **Dynamic Stock Management**: Stations consume goods based on activity level, station type, and good-specific consumption rates, leading to more realistic trade and profit generation.
-- **Equipment Dock Upgrade**: Increases the amount and variety of subsystems, turrets, and fighters available in equipment docks, balancing rarity probabilities.
-- **Expanded Galaxy Map Hotkeys**: Added a hotkey in the galaxy map for faster navigation, including the ability to quickly switch between ships. Press [T]-Key to switch to the first selected ship.
-- **Factory Overview Tab**: Track expenses, revenues, and profits of factories via a new tab in the player window. Hourly profit estimates update after five minutes of playtime.
-- **ReSeed - Quality Randomizer**: Turret and upgrade seeds are randomized at the sector level, increasing galaxy-wide loot diversity with over 1,000,000 unique seeds.
-- **Subsystem Removal**: Permanently installed subsystems can now be removed at various stations such as Repair Dock, Scrapyard, Shipyard, Military Outpost, and Research Station, giving you flexibility in managing your ship systems.
-- **Shop Restock Button (Overhaul Variant)**: Includes a built-in manual restock button with overhaul-balanced limits (free restocks first, then cooldown-based use). This is intentionally different from the standalone Shop Restock Revamped mod, which is designed for broader restock customization and higher-frequency usage.
-- **Scrapyard Timer Removal**: Eliminates the 1-hour scrapyard time limit, allowing for unlimited time purchases.
-- **Ship Flight Recorder**: Provides detailed fleet information via a new player window tab.
-- **Trash Manager (Latest confirmed preview build)**: Filter-driven bulk trash marking with in-game confirmed preview flow. Supports private and alliance inventory contexts, optional min/max tech filtering (1–52), and safe non-destructive marking (favorites are skipped; items are flagged for normal merchant trash selling, not force-sold).
-- **Transfer Window Enhancements**: Improved sorting, clearer highlights for stolen/dangerous goods, and options for partial and stacked cargo transfers.
-- **Trade Heatmap Expansion**: Expands the trade heatmap to multiple quadrants based on subsystem quality.
-- **Transponder Range Scaling**: Transporter subsystem range scales with the number of transporter blocks installed.
-- **Universal Bulletin Board**: Centralized mission acquisition through the player UI for easier access.
-- **UI Setting Persistence**: Save and restore various UI settings across sessions, including mining and salvage modes. Retains radar blip visibility (if 'Galaxy Map QoL' is installed).
-- **Wreckage Tab in Strategy Mode**: Adds a tab in strategy view listing mass-sorted salvageable wrecks for easy targeting.
+## Requirements / Compatibility
 
-## Commands and Captain Enhancements
+- **New game strongly recommended:** Yes.
+- **saveGameAltering:** true
+- **serverSideOnly:** false (intentional due to mixed client/server script paths in Avorion architecture)
+- **Major incompatibilities:** See Workshop discussion and `modinfo.lua` incompatibility list.
 
-- **Persistent Captain Commands**: Captain commands persist when offline and are now fast-forwarded upon returning to the game, with ambushes triggered retroactively. Time progresses at a 2/3 rate, adding a risk/reward factor to the real-time management aspect.
-- **Scout Command Improvements**: Real-time galaxy map updates during scouting missions, scaling mission duration based on equipment, providing hidden mass sector discoveries, and reworked Operation Exodus beacons are now discoverable by Explorer captains.
-- **Trade Command Enhancements**: Trade missions scale with captain class and ship capabilities. Immediate deliveries and charity options are also available for reputation gains. Any captain can trade; however, non-merchants will be less efficient.
-- **Refine Command Updates**: Refining checks for sector-based possibilities to reduce ambush chances and shorten mission duration. Assessment text reflects these bonuses when applicable.
-- **Travel Command Refinement**: Speeds are automatically maximized when no ambushes are possible.
+---
+
+## Full Feature Rundown
+
+Below is a complete, user-facing rundown of what Cosmic Overhaul currently includes, with practical details on what each feature does.
+
+---
+
+### 1) Allied Relations Enhancer
+
+**What it does:**  
+Improves alliance/faction relation progression feel by increasing the impact of your positive interaction loops, making allied diplomacy feel more responsive and meaningful.
+
+**Gameplay impact:**  
+- Faster reinforcement of good-standing faction ties.
+- Better payoff for trade/protection/helpful actions in sustained faction play.
+
+---
+
+### 2) Dynamic Reputation Decay
+
+**What it does:**  
+Introduces inactivity-based relation decay to AI factions over time. If you ignore relations for too long, they naturally cool down.
+
+**How it works (high level):**
+- Server-side timed decay checks.
+- Scales with inactivity windows (not instant penalties).
+- Applies to player/alliance relation pathways.
+
+**Gameplay impact:**  
+- Encourages ongoing diplomacy and engagement.
+- Prevents “set-and-forget” permanent max reputation states in long saves.
+
+---
+
+### 3) Dynamic Station Shuttle Scaling
+
+**What it does:**  
+Expands and rebalances shuttle behavior/capacity progression for station logistics.
+
+**Gameplay impact:**  
+- Better station throughput scaling.
+- Improved late-game station utility and production responsiveness.
+
+---
+
+### 4) Dynamic Stock / Goods Flow Improvements
+
+**What it does:**  
+Adjusts station goods behavior and trade flow assumptions to feel less static and more activity-driven.
+
+**Gameplay impact:**  
+- More believable commerce loops.
+- Better opportunities to profit from active logistics and supply positioning.
+
+---
+
+### 5) Equipment Dock / Merchant Inventory Improvements
+
+**What it does:**  
+Rebalances availability and variety in relevant merchant inventories (subsystems, turrets, fighters, etc.).
+
+**Gameplay impact:**  
+- Reduced frustration from low-value refresh cycles.
+- Better progression feel when searching for useful components.
+
+---
+
+### 6) Shop Restock Button (Overhaul Variant)
+
+**What it does:**  
+Adds integrated restock functionality with overhaul-specific balancing (free uses first, then cooldown-sensitive behavior).
+
+**Gameplay impact:**  
+- Better merchant usability during active fitting sessions.
+- Preserves balance versus unlimited spam restocking.
+
+**Note:**  
+This is intentionally not the same behavior as the standalone **Shop Restock Revamped** mod.
+
+---
+
+### 7) Permanent Subsystem Removal at More Stations
+
+**What it does:**  
+Enables permanent subsystem removal at additional station types (e.g. Repair Dock, Shipyard, Military Outpost, Research, Scrapyard, etc.).
+
+**Gameplay impact:**  
+- More ship build flexibility.
+- Easier correction of long-term build mistakes without extreme rerouting.
+
+---
+
+### 8) Scrapyard QoL / Time-Limit Removal
+
+**What it does:**  
+Removes restrictive scrapyard timing friction and improves scrapyard flow.
+
+**Gameplay impact:**  
+- Smoother salvage gameplay sessions.
+- Less downtime and fewer unnecessary interruptions.
+
+---
+
+### 9) Transfer Window Enhancements (Cargo UX)
+
+**What it does:**  
+Improves transfer UI behavior, readability, and handling (including better visual handling for risky cargo states).
+
+**Gameplay impact:**  
+- Faster cargo management.
+- Better clarity while handling mixed legal/illegal/stolen inventories.
+
+---
+
+### 10) Universal Bulletin Board (Player-Centric Access)
+
+**What it does:**  
+Adds/extends bulletin board accessibility from the player-side UI workflow for quicker mission access and less station-by-station friction.
+
+**Gameplay impact:**  
+- Faster mission acquisition.
+- Better flow when juggling fleets and objectives.
+
+---
+
+### 11) Factory Overview Tab (Economic Analytics)
+
+**What it does:**  
+Adds player-side factory analytics with tracking for:
+- money gained,
+- money spent,
+- tax contribution,
+- profitability tendencies,
+- working-state status over runtime.
+
+**Gameplay impact:**  
+- Better strategic visibility into production chains.
+- Easier identification of underperforming factories and bottlenecks.
+
+---
+
+### 12) Trade Heatmap Expansion
+
+**What it does:**  
+Extends trade heatmap behavior and range utility based on subsystem quality progression.
+
+**Gameplay impact:**  
+- Better route planning quality.
+- Stronger value from higher-end trading configurations.
+
+---
+
+### 13) Transporter Range Scaling by Block Investment
+
+**What it does:**  
+Transporter subsystem range receives extra scaling from transporter block investment on the ship plan.
+
+**Gameplay impact:**  
+- More consistent “build investment -> functional payoff”.
+- Better support for logistics-focused ship design.
+
+---
+
+### 14) Ship/Fleet Info Extensions
+
+**What it does:**  
+Extends player ship information flows (including strategy/fleet utility visibility) for better operational awareness.
+
+**Gameplay impact:**  
+- Better command and logistics oversight.
+- More informed decisions during multitask/fleet-heavy play.
+
+---
+
+### 15) ReSeed / Randomization Improvements
+
+**What it does:**  
+Expands randomization quality in relevant generation paths to improve diversity and reduce repetitive outcomes.
+
+**Gameplay impact:**  
+- More varied progression and loot/session feel.
+- Less repetition in long campaigns.
+
+---
+
+### 16) UI Settings Persistence for Command/Workflow States
+
+**What it does:**  
+Persists selected UI/config states across sessions for improved continuity in map-command workflows.
+
+**Gameplay impact:**  
+- Less repetitive reconfiguration after relog/restart.
+- Better long-session convenience.
+
+---
+
+### 17) Wreckage / Salvage Workflow Improvements
+
+**What it does:**  
+Adds strategy-mode salvage quality-of-life support for quicker targeting and cleanup flow.
+
+**Gameplay impact:**  
+- Faster post-combat salvage management.
+- Better high-volume debris handling.
+
+---
+
+### 18) Trash Manager (Integrated)
+
+**What it does:**  
+Adds robust inventory filtering + bulk trash marking flow with preview support, for private and alliance inventory contexts.
+
+**Details:**
+- Marks as trash (does **not** force-delete/sell immediately).
+- Favorites are protected/skipped.
+- Tech-range filtering support.
+- Supports merchant-driven “Sell Trash” loops.
+
+**Gameplay impact:**  
+- Dramatically faster inventory cleanup.
+- Safer mass-processing of loot without accidental important-item loss.
+
+---
+
+## Captain Command & Simulation Enhancements (Detailed)
+
+Cosmic Overhaul includes substantial enhancements to Avorion background command simulation.
+
+### A) Persistent Background Command Progression
+
+**What it does:**  
+Background captain commands are treated more consistently during offline/return scenarios, with improved progression behavior and risk continuity.
+
+**Gameplay impact:**  
+- Better strategic continuity.
+- Less “frozen world” feeling when returning to active saves.
+
+---
+
+### B) Trade Command Overhaul (Major)
+
+**What it does:**  
+Extensively upgrades trade command behavior and outcomes, including:
+- broader captain usability (not only strict merchant lock-in),
+- adjusted efficiency curves by captain quality/class context,
+- immediate delivery toggle support,
+- charity mission mode for relationship-focused runs,
+- improved prediction/assessment messaging and balancing.
+
+**Gameplay impact:**  
+- Trade command is more flexible, less binary, and more strategic.
+- Better alignment between captain identity, ship capability, and command output.
+
+---
+
+### C) Scout Command Improvements
+
+**What it does:**  
+Enhances scouting reliability/quality with better simulation behavior and exploration utility scaling.
+
+**Gameplay impact:**  
+- Better scouting value in real campaign conditions.
+- Improved map progression quality for exploration-focused playstyles.
+
+---
+
+### D) Refine Command Improvements
+
+**What it does:**  
+Adds refinement-path improvements with better simulation behavior and contextual outcomes.
+
+**Gameplay impact:**  
+- Better usability and reduced friction in refinement operations.
+- More coherent risk/time feel.
+
+---
+
+### E) Travel Command Refinements
+
+**What it does:**  
+Refines travel behavior and practical timing outcomes under safer/no-ambush contexts.
+
+**Gameplay impact:**  
+- Better pacing in non-combat logistics travel.
+- Reduced dead-time in routine route execution.
+
+---
+
+### F) Salvage / Mine / Procure / Sell Simulation QoL
+
+**What it does:**  
+Extends and improves several simulation command scripts for consistency and better persistence of selected behavior toggles.
+
+**Gameplay impact:**  
+- More predictable autonomous fleet operation.
+- Less micromanagement overhead.
+
+---
+
+## Black Market / Smuggler’s Market Rework (New Feature Detail)
+
+A major user-requested feature in Cosmic Overhaul is the black market economy pass so illegal cargo is no longer disproportionately low-value versus its acquisition risk.
+
+### What changed
+
+The Smuggler’s Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
+
+- **Illegal cargo** can now be sold at a much stronger multiplier (up to full base value in current tuning).
+- **Dangerous goods** are accepted with a moderate multiplier.
+- **Stolen goods** retain discounted handling but at improved rates compared to strict vanilla expectations.
+- **Unbranding costs** are rebalanced to make the “steal -> clean -> sell/use” loop less punishing and more practical.
+
+### Why this exists
+
+In vanilla, illegal/stolen loops often felt under-rewarded:
+- high procurement risk,
+- smuggling/detection risk,
+- reputation/route risk,
+- but insufficient final economic upside.
+
+This overhaul aims to keep the fantasy and risk while making the reward side economically worthwhile.
+
+### Gameplay impact
+
+- Smuggling-focused runs become legitimately viable.
+- Black market station interactions matter more.
+- Illegal-cargo logistics can support real progression instead of novelty-only gameplay.
+
+---
+
+## Design Principles
+
+- Uses Avorion-compatible `include()` extension patterns.
+- Preserves vanilla behavior where possible via wrappers/overrides.
+- Focuses on practical QoL with systemic payoff.
+- Prefers gameplay depth without excessive busywork.
+
+---
 
 ## Credits
 
-A big thanks to the original mod authors who inspired and contributed to this overhaul. Full credit goes to:
+Cosmic Overhaul builds on community ideas, prior workshop innovations, and long-term iteration.  
+Special thanks and credit to original authors and contributors whose work inspired components and approaches:
 
 - TheDeadlyShoe
 - Nyrin
@@ -67,3 +388,12 @@ A big thanks to the original mod authors who inspired and contributed to this ov
 - KnifeHeart
 - Madranis
 - The_Rusty_Geek
+
+---
+
+## Support / Notes
+
+- For incompatibilities and troubleshooting, refer to:
+  - Workshop discussion thread
+  - your logs (`clientlog` / server logs)
+- If you maintain heavily modded stacks, test load order and script overlap carefully when combining multiple large overhauls.

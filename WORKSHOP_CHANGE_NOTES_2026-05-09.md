@@ -1,6 +1,6 @@
 # Cosmic Overhaul - Workshop Change Notes (2026-05-09)
 
-## Stability & Compatibility Update
+## New Feature, Stability & Compatibility Update
 
 This update focuses on runtime stability and compatibility with newer Avorion behavior and mixed mod stacks.
 
@@ -23,11 +23,34 @@ This update focuses on runtime stability and compatibility with newer Avorion be
   - rarity shaping still active in special offer logic
 
 ### Verification Summary
-- Latest provided logs indicate:
-  - Cosmic Overhaul issue appears resolved in current test runs
-  - no reoccurring Fighter Merchant crash chain from the previous failing path
 
----
+- Latest provided logs indicate:
+  - Cosmic Overhaul issue appears resolved in current test runs,
+  - no reoccurring Fighter Merchant crash chain from the previous failing path.
+
+## Black Market / Smuggler’s Market Rework (New Feature Detail)
+
+A major user-requested feature in Cosmic Overhaul is the black market economy pass so illegal cargo is no longer disproportionately low-value versus its acquisition risk.
+
+### What changed
+
+The Smuggler’s Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
+
+- **Illegal cargo** can now be sold at a much stronger multiplier (up to full base value in current tuning).
+- **Dangerous goods** are accepted with a moderate multiplier.
+- **Stolen goods** retain discounted handling but at improved rates compared to strict vanilla expectations.
+- **Unbranding costs** are rebalanced to make the “steal -> clean -> sell/use” loop less punishing and more practical.
+
+### Why this exists
+
+In vanilla, illegal/stolen loops often felt under-rewarded:
+
+- high procurement risk,
+- smuggling/detection risk,
+- reputation/route risk,
+- but insufficient final economic upside.
+
+This overhaul aims to keep the fantasy and risk while making the reward side economically worthwhile.
 
 ## Recommended player note (short form)
 If you encounter `FighterType.CargoShuttle` errors, another mod is likely overriding `inventoryitemprice.lua` with pre-2.x logic. Disable that override mod or use an updated version.
