@@ -1,4 +1,5 @@
-include ("moddata")
+include("moddata")
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_MineCommand_buildUI_original = MineCommand.buildUI
 function MineCommand:buildUI(...)
@@ -17,7 +18,7 @@ function MineCommand:buildUI(...)
                 ui.safeModeCheckBox:setCheckedNoCallback(saveData.safeMode)
             end
         end
-    end                
+    end
     return ui
 end
 
@@ -28,4 +29,13 @@ function MineCommand:onStart(...)
     saveData.safeMode = self.config.safeMode
     saveData.immediateDelivery = self.config.immediateDelivery
     saveData:save()
+end
+
+local mcm_MineCommand_getAreaSize_original = MineCommand.getAreaSize
+function MineCommand:getAreaSize(...)
+    local area = mcm_MineCommand_getAreaSize_original and mcm_MineCommand_getAreaSize_original(self, ...) or
+    { x = 30, y = 30 }
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
+    local bonus = (cfg and cfg.extraLongRangeMineBonus) or 0
+    return { x = area.x + bonus, y = area.y + bonus }
 end

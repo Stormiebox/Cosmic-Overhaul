@@ -4,12 +4,15 @@ local CaptainClass = include 'captainclass'
 local CaptainUtility = include 'captainutility'
 local LuaHacks = include 'utils/luahacks'
 local PerkType = CaptainUtility.PerkType or {}
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_uiTimestamp
 
 local mcm_TradeCommand_buildUI_original = TradeCommand.buildUI
-function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, recallPressedCallback, configChangedCallback)
-    local ui = mcm_TradeCommand_buildUI_original(self, startPressedCallback, changeAreaPressedCallback, recallPressedCallback, configChangedCallback)
+function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, recallPressedCallback,
+                              configChangedCallback)
+    local ui = mcm_TradeCommand_buildUI_original(self, startPressedCallback, changeAreaPressedCallback,
+        recallPressedCallback, configChangedCallback)
 
     -- Change: make the deposit slider default to the maximum that the player can afford, as it's
     -- the common case to want to maximize investment and return on investment
@@ -28,9 +31,9 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
         local highestDeposit = routeLine.minPrice * ui.depositSlider.max
 
         local highestValue = math.floor(lerp(
-                getParentFaction().money,
-                lowestDeposit, highestDeposit,
-                ui.depositSlider.min, ui.depositSlider.max))
+            getParentFaction().money,
+            lowestDeposit, highestDeposit,
+            ui.depositSlider.min, ui.depositSlider.max))
 
         ui.depositSlider:setValueNoCallback(highestValue)
         self.mapCommands[configChangedCallback]()
@@ -41,7 +44,8 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
     ui.buildConfig = function(self)
         local config = buildConfig_original(self)
         config.mcm = config.mcm or {}
-        config.mcm.immediateDelivery = ui.mcm and ui.mcm.immediateDeliveryCheckBox and ui.mcm.immediateDeliveryCheckBox.checked
+        config.mcm.immediateDelivery = ui.mcm and ui.mcm.immediateDeliveryCheckBox and
+        ui.mcm.immediateDeliveryCheckBox.checked
         config.mcm.charityMission = ui.mcm and ui.mcm.charityMissionCheckBox and ui.mcm.charityMissionCheckBox.checked
         return config
     end
@@ -92,15 +96,15 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
     -- At last! New row for immediate delivery option:
     local rect = vlist:nextRect(22)
     local frame = ui.window:createFrame(rect)
-    frame.tooltip = "Directly deposit returns as soon as they're available"%_t
+    frame.tooltip = "Directly deposit returns as soon as they're available" % _t
     local vsplit2 = UIVerticalSplitter(rect, 0, 0, 0.6)
-    local label = ui.window:createLabel(vsplit2.left, "Immediate delivery"%_t, 14)
+    local label = ui.window:createLabel(vsplit2.left, "Immediate delivery" % _t, 14)
     ui.mcm.immediateDeliveryCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
 
     -- And another for charity missions:
     local rect = vlist:nextRect(22)
     local frame = ui.window:createFrame(rect)
-    frame.tooltip = "Trade most of this contract's profit for increased reputation gain"%_t
+    frame.tooltip = "Trade most of this contract's profit for increased reputation gain" % _t
     local vsplit2 = UIVerticalSplitter(rect, 0, 0, 0.6)
     local label = ui.window:createLabel(vsplit2.left, "Charity mission", 14)
     ui.mcm.charityMissionCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
@@ -143,6 +147,7 @@ end
 -- Factor in the new "charity mission" option that converts per-flight profit to reputation
 
 function TradeCommand.getRelationChangeRatioForTrade() return 0.15 end
+
 function TradeCommand.getRelationChangeRatioForCharity() return 0.25 end
 
 function TradeCommand:computeRelationImpacts()
@@ -237,20 +242,24 @@ function TradeCommand:getAreaSize(ownerIndex, shipName)
             3. a tall rectangle (vanilla 11x29)
     ]]
     local squareBase = 10 + bonus
-    local longerEdge = math.floor((29/17) * squareBase)
-    local shorterEdge = math.floor((11/17) * squareBase)
+    local longerEdge = math.floor((29 / 17) * squareBase)
+    local shorterEdge = math.floor((11 / 17) * squareBase)
     return { x = squareBase, y = squareBase },
         { x = longerEdge, y = shorterEdge },
         { x = shorterEdge, y = longerEdge }
 end
 
 function TradeCommand:mcm_getAreaSizeBonus(ship)
-
     local bonus = 0
 
     bonus = bonus + self:mcm_getAreaSizeBonusForShip(ship)
     bonus = bonus + self:mcm_getAreaSizeBonusForSubsystems(ship)
     bonus = bonus + self:mcm_getAreaSizeBonusForCaptain(ship:getCaptain())
+
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
+    if cfg then
+        bonus = bonus + (cfg.extraLongRangeTradeBonus or 0)
+    end
 
     return bonus
 end
@@ -276,7 +285,7 @@ end
 local function mcm_captainLevelScaleFunc(table)
     return function(captain)
         local bonus = 0
-        for i = 0, captain.level do 
+        for i = 0, captain.level do
             bonus = math.max((table[i] or 0), bonus)
         end
         return bonus
@@ -289,7 +298,7 @@ local mcm_captainClassAreaBonusFuncs = {
     [CaptainClass.Smuggler] = mcm_captainLevelScaleFunc({ [0] = 2, [3] = 3, [6] = 4 }),
     [false] = mcm_captainLevelScaleFunc({ [0] = 0, [4] = 1 }),
 }
-local function mcm_getCaptainClassAreaBonusFunc(class) 
+local function mcm_getCaptainClassAreaBonusFunc(class)
     return mcm_captainClassAreaBonusFuncs[class] or mcm_captainClassAreaBonusFuncs[false]
 end
 local mcm_captainPerkAreaBonusFuncs = {
@@ -304,7 +313,7 @@ function TradeCommand:mcm_getAreaSizeBonusForCaptain(captain)
         mcm_getCaptainClassAreaBonusFunc(captain.secondaryClass)(captain))
 
     local perkBonus = 0
-    for _, perk in pairs({captain:getPerks()}) do
+    for _, perk in pairs({ captain:getPerks() }) do
         local perkFunc = mcm_captainPerkAreaBonusFuncs[perk] or mcm_captainPerkAreaBonusFuncs[false]
         perkBonus = perkBonus + perkFunc(captain)
     end
@@ -351,7 +360,8 @@ end
 local function sumtf(table, evalFunc)
     local sum = 0
     for k, v in pairs(table) do
-        sum = sum + evalFunc(k, v) end
+        sum = sum + evalFunc(k, v)
+    end
     return sum
 end
 
@@ -365,7 +375,7 @@ end
 local mcm_tradeCaptainClassFlightTimeMultipliers = {
     [CaptainClass.Merchant] = 1.0,
     [CaptainClass.Smuggler] = 1.4,
-    [false] = 2.2,    
+    [false] = 2.2,
 }
 
 local mcm_TradeCommand_calculatePrediction_original = TradeCommand.calculatePrediction
@@ -391,11 +401,11 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
 
     local ship = ShipDatabaseEntry(ownerIndex, shipName)
     local captain = ship:getCaptain()
-    local timeFunc = function(c) 
+    local timeFunc = function(c)
         return mcm_tradeCaptainClassFlightTimeMultipliers[c] or mcm_tradeCaptainClassFlightTimeMultipliers[false]
     end
     local timeFactor = math.min(timeFunc(captain.primaryClass), timeFunc(captain.secondaryClass))
-    
+
     prediction.flightTime.value = prediction.flightTime.value * timeFactor
 
     return prediction

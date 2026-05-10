@@ -26,7 +26,7 @@ meta =
     -- This will be used to check for unmet dependencies or incompatibilities, and to check compatibility between clients and dedicated servers with mods.
     -- If a client with an unmatching major or minor mod version wants to log into a server, login is prohibited.
     -- Unmatching patch version still allows logging into a server. This works in both ways (server or client higher or lower version).
-    version = "2.4.0",
+    version = "2.6.0",
 
     -- If your mod requires dependencies, enter them here. The game will check that all dependencies given here are met.
     -- Possible attributes:
@@ -68,6 +68,7 @@ meta =
         { id = "2589975318", exact = "*.*", incompatible = true },
         { id = "3232924424", exact = "*.*", incompatible = true },
         { id = "3232919558", exact = "*.*", incompatible = true },
+        { id = "3674093144", min = "1.0",   max = "9.9" },
         { id = "Avorion",    min = "1.0",   max = "5.0" }
     },
 

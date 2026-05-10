@@ -1,5 +1,5 @@
-
 local SimulationUtility = include 'simulationutility'
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_uiTimestamp
 
@@ -20,8 +20,8 @@ function RefineCommand:onAreaAnalysisFinished(results, meta)
         return
     end
 
-    for _, name in pairs({shipSectorView:getStationTitles()}) do
-        if string.match(name.text, "Resource Depot"%_t) then
+    for _, name in pairs({ shipSectorView:getStationTitles() }) do
+        if string.match(name.text, "Resource Depot" % _t) then
             results.sameSectorDepot = true
         end
     end
@@ -45,8 +45,8 @@ function RefineCommand:calculatePrediction(ownerIndex, shipName, area, config)
 end
 
 -- Update the assessment generator with nice flavor text for the refine bonuses
-local mcm_RefineCommand_generateAssessmentFromPrediction_original 
-    = RefineCommand.generateAssessmentFromPrediction
+local mcm_RefineCommand_generateAssessmentFromPrediction_original
+= RefineCommand.generateAssessmentFromPrediction
 function RefineCommand:generateAssessmentFromPrediction(prediction, captain, ownerIndex, shipName, area, config)
     local originalResult = mcm_RefineCommand_generateAssessmentFromPrediction_original(
         self, prediction, captain, ownerIndex, shipName, area, config)
@@ -73,4 +73,13 @@ function RefineCommand:buildUI(...)
         originalRefresh(self, ownerIndex, shipName, area, config)
     end
     return ui
+end
+
+local mcm_RefineCommand_getAreaSize_original = RefineCommand.getAreaSize
+function RefineCommand:getAreaSize(...)
+    local area = mcm_RefineCommand_getAreaSize_original and mcm_RefineCommand_getAreaSize_original(self, ...) or
+    { x = 30, y = 30 }
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
+    local bonus = (cfg and cfg.extraLongRangeRefineBonus) or 0
+    return { x = area.x + bonus, y = area.y + bonus }
 end
