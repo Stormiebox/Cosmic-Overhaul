@@ -3,6 +3,8 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 local mcm = include("mcm")
 local config = mcm and mcm.bind("Cosmic_Overhaul") or nil
 
+include("cosmicvaultconfig")
+
 CosmicOverhaulConfig = CosmicOverhaulConfig or {}
 
 local defaults =
@@ -24,8 +26,6 @@ local defaults =
     profitableStationsInterval = 120,
     profitableStationsPayoutMultiplier = 1.00,
     profitableStationsSpawnTraderWhenLoaded = true,
-
-    debugLogs = false,
 }
 
 local function clampNumber(v, minV, maxV, fallback)
@@ -80,7 +80,8 @@ local function build()
     out.profitableStationsSpawnTraderWhenLoaded = readBool("profitableStationsSpawnTraderWhenLoaded",
         defaults.profitableStationsSpawnTraderWhenLoaded)
 
-    out.debugLogs = readBool("debugLogs", defaults.debugLogs)
+    local vaultCfg = (CosmicVaultConfig and CosmicVaultConfig.get and CosmicVaultConfig.get()) or nil
+    out.debugLogs = (vaultCfg and type(vaultCfg.debugEnabled) == "boolean") and vaultCfg.debugEnabled or false
 
     return out
 end

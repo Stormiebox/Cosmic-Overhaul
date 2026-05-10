@@ -134,17 +134,5 @@ return {
                 },
             },
         },
-        {
-            title = "Diagnostics",
-            options = {
-                {
-                    key = "debugLogs",
-                    type = "bool",
-                    title = "Enable Cosmic Overhaul Debug Logs",
-                    description = "Enables informational debug prints in logs for CO systems.",
-                    default = false,
-                },
-            },
-        },
     },
 }

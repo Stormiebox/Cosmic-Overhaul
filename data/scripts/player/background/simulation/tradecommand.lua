@@ -4,7 +4,7 @@ local CaptainClass = include 'captainclass'
 local CaptainUtility = include 'captainutility'
 local LuaHacks = include 'utils/luahacks'
 local PerkType = CaptainUtility.PerkType or {}
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
+include("cosmicoverhaulconfig")
 
 local mcm_uiTimestamp
 
@@ -45,7 +45,7 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
         local config = buildConfig_original(self)
         config.mcm = config.mcm or {}
         config.mcm.immediateDelivery = ui.mcm and ui.mcm.immediateDeliveryCheckBox and
-        ui.mcm.immediateDeliveryCheckBox.checked
+            ui.mcm.immediateDeliveryCheckBox.checked
         config.mcm.charityMission = ui.mcm and ui.mcm.charityMissionCheckBox and ui.mcm.charityMissionCheckBox.checked
         return config
     end
