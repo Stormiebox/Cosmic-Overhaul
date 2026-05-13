@@ -1,10 +1,12 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
+
 include 'moddata'
 local SimulationUtility = include 'simulationutility'
 local CaptainClass = include 'captainclass'
 local CaptainUtility = include 'captainutility'
 local LuaHacks = include 'utils/luahacks'
 local PerkType = CaptainUtility.PerkType or {}
-include("cosmicoverhaulconfig")
 
 local mcm_uiTimestamp
 
@@ -256,11 +258,9 @@ function TradeCommand:mcm_getAreaSizeBonus(ship)
     bonus = bonus + self:mcm_getAreaSizeBonusForSubsystems(ship)
     bonus = bonus + self:mcm_getAreaSizeBonusForCaptain(ship:getCaptain())
 
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
-    if cfg then
-        bonus = bonus + (cfg.extraLongRangeTradeBonus or 0)
-    end
-
+    -- Stability-first parity with workshop backup:
+    -- keep integrated captain/subsystem/ship logic but remove MCM-driven dynamic bonus.
+    bonus = math.max(0, math.floor(tonumber(bonus) or 0))
     return bonus
 end
 

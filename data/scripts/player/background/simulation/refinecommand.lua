@@ -1,5 +1,4 @@
 local SimulationUtility = include 'simulationutility'
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_uiTimestamp
 
@@ -37,8 +36,12 @@ function RefineCommand:calculatePrediction(ownerIndex, shipName, area, config)
         -- never below 3 minutes
         local reduction = math.max(0.33 * prediction.duration, 3 * 60)
         prediction.duration = math.max(prediction.duration - reduction, 3 * 60)
-        -- And, come on, it's in the same friendly sector, there's no ambushing going on
-        prediction.attackChance = 0
+        -- Keep attackChance shape compatible with vanilla/UI expectations.
+        if type(prediction.attackChance) == "table" then
+            prediction.attackChance.value = 0
+        else
+            prediction.attackChance = 0
+        end
     end
     prediction.timestamp = appTimeMs()
     return prediction
@@ -78,8 +81,10 @@ end
 local mcm_RefineCommand_getAreaSize_original = RefineCommand.getAreaSize
 function RefineCommand:getAreaSize(...)
     local area = mcm_RefineCommand_getAreaSize_original and mcm_RefineCommand_getAreaSize_original(self, ...) or
-    { x = 30, y = 30 }
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
-    local bonus = (cfg and cfg.extraLongRangeRefineBonus) or 0
-    return { x = area.x + bonus, y = area.y + bonus }
+        { x = 30, y = 30 }
+
+    -- Stability-first parity with workshop backup:
+    -- static long-range bonus instead of MCM-driven dynamic sizing.
+    local staticBonus = 0
+    return { x = area.x + staticBonus, y = area.y + staticBonus }
 end

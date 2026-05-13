@@ -7,11 +7,9 @@ local SimulationUtility = include("simulationutility")
 local CaptainUtility = include("captainutility")
 local GatesMap = include("gatesmap")
 local SectorSpecifics = include("sectorspecifics")
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 function SellCommand:getAreaSize(shipName)
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
-    local bonus = (cfg and cfg.extraLongRangeSellBonus) or 0
-    local size = 30 + bonus
-    return { x = size, y = size }
+    -- Stability-first parity with workshop backup:
+    -- static range sizing for command area.
+    return { x = 30, y = 30 }
 end

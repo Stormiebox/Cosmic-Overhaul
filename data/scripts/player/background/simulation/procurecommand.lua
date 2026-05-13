@@ -11,11 +11,7 @@ local SectorSpecifics = include("sectorspecifics")
 include("utility")
 include("stringutility")
 include("goods")
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 function ProcureCommand:getAreaSize(ownerIndex, shipName)
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
-    local bonus = (cfg and cfg.extraLongRangeTradeBonus) or 0
-    local size = 30 + bonus
-    return { x = size, y = size }
+    return { x = 30, y = 30 }
 end

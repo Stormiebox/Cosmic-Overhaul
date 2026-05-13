@@ -1,3 +1,6 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
+
 include("moddata")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 include("randomext")
@@ -36,9 +39,11 @@ local mcm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
 function SalvageCommand:getAreaSize(...)
     local area = mcm_SalvageCommand_getAreaSize_original and mcm_SalvageCommand_getAreaSize_original(self, ...) or
         { x = 30, y = 30 }
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
-    local bonus = (cfg and cfg.extraLongRangeSalvageBonus) or 0
-    return { x = area.x + bonus, y = area.y + bonus }
+
+    -- Stability-first parity with workshop backup:
+    -- static long-range bonus instead of MCM-driven dynamic sizing.
+    local staticBonus = 0
+    return { x = area.x + staticBonus, y = area.y + staticBonus }
 end
 
 local mcm_SalvageCommand_generateItems_original = SalvageCommand.generateItems
@@ -79,10 +84,19 @@ function SalvageCommand:generateItems(amount)
         return RarityType.Common
     end
 
+    -- Keep deterministic behavior consistent with vanilla prediction flow:
+    -- use one stable RNG seed per command context instead of random() per item.
+    local rollSeed = string.format("co_salvage_rarity_%s_%s_%s_%s",
+        tostring(self.shipName or "ship"),
+        tostring((self.area and self.area.lower and self.area.lower.x) or 0),
+        tostring((self.area and self.area.lower and self.area.lower.y) or 0),
+        tostring(amount or 0))
+    local rarityRandom = Random(Seed(rollSeed))
+
     local function upgradeListRarities(list)
         for _, item in pairs(list or {}) do
             if item then
-                item.rarity = rollRarity(random())
+                item.rarity = rollRarity(rarityRandom)
             end
         end
     end
