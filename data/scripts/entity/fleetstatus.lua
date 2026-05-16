@@ -55,7 +55,7 @@ function fs.initialize(...)
             fs.window.caption = "Fleet Ship Status"
             fs.window.showCloseButton = 1
             fs.window.moveable = 1
-            menu:registerWindow(fs.window, "FSS")
+            menu:registerWindow(fs.window, "Fleet Ship Status")
         end
     end
 end
@@ -92,7 +92,7 @@ function fs.initUI()
     local AllSettingsArea = UIVerticalLister(ShipsLabelsPadding.bottom, 25, 25)
     AllSettingsArea.marginTop = 20
 
-    fs.EnableHUDCheckbox = container:createCheckBox(AllSettingsArea:nextRect(15), "Enable Fleet Status in Hud",
+    fs.EnableHUDCheckbox = container:createCheckBox(AllSettingsArea:nextRect(15), "Enable Fleet Status in HUD",
         'onEnableHUD')
     fs.EnableHUDCheckbox.bold = true
     fs.EnableHUDCheckbox.fontSize = 16
