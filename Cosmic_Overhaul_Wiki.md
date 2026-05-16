@@ -102,6 +102,27 @@ Below is a complete, user-facing rundown of what Cosmic Overhaul currently inclu
 **Gameplay impact:** - Better command and logistics oversight.
 - More informed decisions during multitask/fleet-heavy play.
 
+#### Fleet Ship Status UI (Integrated + Refactored)
+Cosmic Overhaul now includes integrated Fleet Ship Status functionality with the original proven **entity-owned** architecture.
+
+**Implementation model:**
+- Active script owner: `data/scripts/entity/fleetstatus.lua`
+- Entity attach path: `data/scripts/entity/init.lua`
+- Deprecated player path removed from auto-init:
+  - `data/scripts/player/init.lua` no longer attaches `data/scripts/player/fleetstatus.lua`
+- A compatibility no-op shim remains at:
+  - `data/scripts/player/fleetstatus.lua`
+  - This prevents stale legacy invoke paths from crashing saves.
+
+**Why this architecture was used:**
+A previous split player/entity flow caused ScriptUI to initialize in player context, which can fail because Fleet Status window/hud creation is entity-context dependent.
+
+**Resolved behavior after fix:**
+- FSS icon appears correctly.
+- Clicking FSS opens the Fleet Ship Status window.
+- Fleet/HUD options function correctly.
+- No repeated FleetStatus stack traces during option interaction.
+
 ### 15) ReSeed / Randomization Improvements
 **What it does:** Expands randomization quality in relevant generation paths to improve diversity and reduce repetitive outcomes.
 

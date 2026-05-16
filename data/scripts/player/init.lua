@@ -3,6 +3,7 @@ if onServer() then
 
     -- Add scripts to the player
     player:addScriptOnce("data/scripts/player/ui/shipinfo.lua")
+    -- Fleet Status runs as an entity script (data/scripts/entity/fleetstatus.lua)
     player:addScriptOnce("data/scripts/player/ui/factory_overview_tab.lua")
     player:addScriptOnce("data/scripts/player/ui/playerbulletinboard.lua")
 end
