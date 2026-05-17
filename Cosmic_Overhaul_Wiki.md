@@ -1,228 +1,406 @@
 # Cosmic Overhaul - Detailed Features
 
-Below is a complete, user-facing rundown of what Cosmic Overhaul currently includes, with practical details on what each feature does.
+Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
+
+---
+
+## Table of Contents
+- [System Features](#system-features)
+- [Command & Captain Enhancements](#command--captain-enhancements)
+- [Black Market / Smuggler’s Market Rework](#black-market--smugglers-market-rework)
 
 ---
 
 ## System Features
 
 ### 1) Allied Relations Enhancer
-**What it does:** Improves alliance/faction relation progression feel by increasing the impact of your positive interaction loops, making allied diplomacy feel more responsive and meaningful.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Faster reinforcement of good-standing faction ties.
-- Better payoff for trade/protection/helpful actions in sustained faction play.
+**What it does:**
+Improves alliance and faction relation progression by increasing the impact of your positive interaction loops, making diplomacy feel more responsive and meaningful.
+
+**Gameplay Impact:**
+- Faster reinforcement of good-standing faction ties.
+- Better payoff for trade, protection, and helpful actions during sustained faction play.
+</details>
 
 ### 2) Dynamic Reputation Decay
-**What it does:** Introduces inactivity-based relation decay to AI factions over time. If you ignore relations for too long, they naturally cool down.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**How it works (high level):**
+**What it does:**
+Introduces inactivity-based relation decay to AI factions over time. If you ignore relations for too long, they will naturally cool down.
+
+**How it works:**
 - Server-side timed decay checks.
-- Scales with inactivity windows (not instant penalties).
-- Applies to player/alliance relation pathways.
+- Scales with inactivity windows (penalties are gradual, not instant).
+- Applies to both player and alliance relation pathways.
 
-**Gameplay impact:** - Encourages ongoing diplomacy and engagement.
-- Prevents “set-and-forget” permanent max reputation states in long saves.
+**Gameplay Impact:**
+- Encourages ongoing diplomacy and engagement.
+- Prevents “set-and-forget” permanent max reputation states in long campaigns.
+</details>
 
 ### 3) Dynamic Station Shuttle Scaling
-**What it does:** Expands and rebalances shuttle behavior/capacity progression for station logistics.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better station throughput scaling.
+**What it does:**
+Expands and rebalances shuttle behavior and capacity progression for station logistics.
+
+**Gameplay Impact:**
+- Better station throughput scaling.
 - Improved late-game station utility and production responsiveness.
+</details>
 
 ### 4) Dynamic Stock / Goods Flow Improvements
-**What it does:** Adjusts station goods behavior and trade flow assumptions to feel less static and more activity-driven.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - More believable commerce loops.
+**What it does:**
+Adjusts station goods behavior and trade flow assumptions to feel less static and more activity-driven.
+
+**Gameplay Impact:**
+- More believable commerce loops.
 - Better opportunities to profit from active logistics and supply positioning.
+</details>
 
 ### 5) Equipment Dock / Merchant Inventory Improvements
-**What it does:** Rebalances availability and variety in relevant merchant inventories (subsystems, turrets, fighters, etc.).
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Reduced frustration from low-value refresh cycles.
+**What it does:**
+Rebalances availability and variety in relevant merchant inventories (e.g., subsystems, turrets, fighters).
+
+**Gameplay Impact:**
+- Reduced frustration from low-value refresh cycles.
 - Better progression feel when searching for useful components.
+</details>
 
 ### 6) Shop Restock Button (Overhaul Variant)
-**What it does:** Adds integrated restock functionality with overhaul-specific balancing (free uses first, then cooldown-sensitive behavior).
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better merchant usability during active fitting sessions.
-- Preserves balance versus unlimited spam restocking.
+**What it does:**
+Adds integrated restock functionality with overhaul-specific balancing (grants free uses first, then transitions to cooldown-sensitive behavior).
 
-*Note: This is intentionally not the same behavior as the standalone Shop Restock Revamped mod.*
+**Gameplay Impact:**
+- Better merchant usability during active fitting sessions.
+- Preserves balance by preventing unlimited spam restocking.
+
+*Note: This is intentionally different from the standalone **Shop Restock Revamped** mod.*
+</details>
 
 ### 7) Permanent Subsystem Removal at More Stations
-**What it does:** Enables permanent subsystem removal at additional station types (e.g. Repair Dock, Shipyard, Military Outpost, Research, Scrapyard, etc.).
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - More ship build flexibility.
-- Easier correction of long-term build mistakes without extreme rerouting.
+**What it does:**
+Enables permanent subsystem removal at additional station types (e.g., `Repair Dock`, `Shipyard`, `Military Outpost`, `Research Station`, and `Scrapyard`).
+
+**Gameplay Impact:**
+- More ship building flexibility.
+- Easier correction of long-term build mistakes without requiring extreme rerouting.
+</details>
 
 ### 8) Scrapyard QoL / Time-Limit Removal
-**What it does:** Removes restrictive scrapyard timing friction and improves scrapyard flow.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Smoother salvage gameplay sessions.
+**What it does:**
+Removes restrictive scrapyard timing friction and improves overall scrapyard flow.
+
+**Gameplay Impact:**
+- Smoother salvage gameplay sessions.
 - Less downtime and fewer unnecessary interruptions.
+</details>
 
 ### 9) Transfer Window Enhancements (Cargo UX)
-**What it does:** Improves transfer UI behavior, readability, and handling (including better visual handling for risky cargo states).
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Faster cargo management.
-- Better clarity while handling mixed legal/illegal/stolen inventories.
+**What it does:**
+Improves transfer UI behavior, readability, and handling, including better visual feedback for risky cargo states.
+
+**Gameplay Impact:**
+- Faster cargo management.
+- Better clarity while handling mixed legal, illegal, or stolen inventories.
+</details>
 
 ### 10) Universal Bulletin Board (Player-Centric Access)
-**What it does:** Adds/extends bulletin board accessibility from the player-side UI workflow for quicker mission access and less station-by-station friction.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Faster mission acquisition.
+**What it does:**
+Extends bulletin board accessibility from the player-side UI workflow for quicker mission access and reduced station-by-station friction.
+
+**Gameplay Impact:**
+- Faster mission acquisition.
 - Better flow when juggling fleets and objectives.
+</details>
 
 ### 11) Factory Overview Tab (Economic Analytics)
-**What it does:** Adds player-side factory analytics with tracking for:
-- money gained,
-- money spent,
-- tax contribution,
-- profitability tendencies,
-- working-state status over runtime.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better strategic visibility into production chains.
+**What it does:**
+Adds player-side factory analytics with tracking for money gained, money spent, tax contributions, profitability tendencies, and working-state status over time.
+
+**Gameplay Impact:**
+- Better strategic visibility into production chains.
 - Easier identification of underperforming factories and bottlenecks.
+</details>
 
 ### 12) Trade Heatmap Expansion
-**What it does:** Extends trade heatmap behavior and range utility based on subsystem quality progression.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better route planning quality.
+**What it does:**
+Extends trade heatmap behavior and range utility based on subsystem quality progression.
+
+**Gameplay Impact:**
+- Better route planning quality.
 - Stronger value from higher-end trading configurations.
+</details>
 
 ### 13) Transporter Range Scaling by Block Investment
-**What it does:** Transporter subsystem range receives extra scaling from transporter block investment on the ship plan.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - More consistent “build investment -> functional payoff”.
-- Better support for logistics-focused ship design.
+**What it does:**
+Transporter subsystem range receives extra scaling based on the transporter block investment on the ship plan.
+
+**Gameplay Impact:**
+- More consistent “build investment to functional payoff” ratio.
+- Better support for logistics-focused ship designs.
+</details>
 
 ### 14) Ship/Fleet Info Extensions
-**What it does:** Extends player ship information flows (including strategy/fleet utility visibility) for better operational awareness.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better command and logistics oversight.
-- More informed decisions during multitask/fleet-heavy play.
+**What it does:**
+Extends player ship information flows to provide better operational awareness, including strategy and fleet utility visibility. Includes the integrated **Fleet Ship Status UI**.
 
 #### Fleet Ship Status UI (Integrated + Refactored)
-Cosmic Overhaul now includes integrated Fleet Ship Status functionality with the original proven **entity-owned** architecture.
+Cosmic Overhaul includes integrated **Fleet Ship Status** functionality utilizing the original proven **entity-owned** architecture.
 
-**Implementation model:**
-- Active script owner: `data/scripts/entity/fleetstatus.lua`
-- Entity attach path: `data/scripts/entity/init.lua`
-- Deprecated player path removed from auto-init:
-  - `data/scripts/player/init.lua` no longer attaches `data/scripts/player/fleetstatus.lua`
-- A compatibility no-op shim remains at:
-  - `data/scripts/player/fleetstatus.lua`
-  - This prevents stale legacy invoke paths from crashing saves.
+**Technical Details:**
+- **Active script owner:** `data/scripts/entity/fleetstatus.lua`
+- **Entity attach path:** `data/scripts/entity/init.lua`
+- **Deprecated player path removed:** `data/scripts/player/init.lua` no longer attaches `data/scripts/player/fleetstatus.lua`.
+- A compatibility no-op shim remains at `data/scripts/player/fleetstatus.lua` to prevent stale legacy invoke paths from crashing saves.
 
-**Why this architecture was used:**
-A previous split player/entity flow caused ScriptUI to initialize in player context, which can fail because Fleet Status window/hud creation is entity-context dependent.
+*Note: This architecture prevents `ScriptUI` from initializing in the player context, which would otherwise fail because the window and HUD creation depends on the entity context.*
 
-**Resolved behavior after fix:**
-- FSS icon appears correctly.
-- Clicking FSS opens the Fleet Ship Status window.
-- Fleet/HUD options function correctly.
-- No repeated FleetStatus stack traces during option interaction.
+**Gameplay Impact:**
+- Better command and logistics oversight.
+- More informed decisions during multitask or fleet-heavy play.
+- FSS icon appears correctly, opens the window reliably, and prevents repeated stack traces.
+</details>
 
 ### 15) ReSeed / Randomization Improvements
-**What it does:** Expands randomization quality in relevant generation paths to improve diversity and reduce repetitive outcomes.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - More varied progression and loot/session feel.
+**What it does:**
+Expands randomization quality in relevant generation paths to improve diversity and reduce repetitive outcomes.
+
+**Gameplay Impact:**
+- More varied progression and loot drops.
 - Less repetition in long campaigns.
+</details>
 
 ### 16) UI Settings Persistence for Command/Workflow States
-**What it does:** Persists selected UI/config states across sessions for improved continuity in map-command workflows.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Less repetitive reconfiguration after relog/restart.
-- Better long-session convenience.
+**What it does:**
+Persists selected UI and configuration states across sessions for improved continuity in map-command workflows.
+
+**Gameplay Impact:**
+- Less repetitive reconfiguration after a relog or restart.
+- Better convenience during long play sessions.
+</details>
 
 ### 17) Wreckage / Salvage Workflow Improvements
-**What it does:** Adds strategy-mode salvage quality-of-life support for quicker targeting and cleanup flow.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Faster post-combat salvage management.
+**What it does:**
+Adds strategy-mode salvage quality-of-life support for quicker targeting and cleanup flow.
+
+**Gameplay Impact:**
+- Faster post-combat salvage management.
 - Better high-volume debris handling.
+</details>
 
 ### 18) Trash Manager (Integrated)
-**What it does:** Adds robust inventory filtering + bulk trash marking flow with preview support, for private and alliance inventory contexts.
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds robust inventory filtering and a bulk trash marking flow with preview support, available for both private and alliance inventory contexts.
 
 **Details:**
-- Marks as trash (does **not** force-delete/sell immediately).
-- Favorites are protected/skipped.
+- Marks items as trash (does **not** force-delete or sell them immediately).
+- Favorites are protected and skipped.
 - Tech-range filtering support.
 - Supports merchant-driven “Sell Trash” loops.
 
-**Gameplay impact:** - Dramatically faster inventory cleanup.
-- Safer mass-processing of loot without accidental important-item loss.
+**Gameplay Impact:**
+- Dramatically faster inventory cleanup.
+- Safer mass-processing of loot without the risk of accidentally losing important items.
+</details>
+
+### 19) Gate Travel Priority & Icon Compasses
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Inverts Avorion's priority for player-issued travel commands via the map, placing emphasis on gates and wormholes instead of hyperspace jumps.
+
+**Details:**
+- When enchaining jump orders on the map, ships will prioritize gate and wormhole connections. If the ship is in a system with known gate connections, enchaining jump commands to those targets will order the ship to fly through the gates instead. This even works for wormholes with distant connections.
+- Changes gate icons to display a compass arrow (`North`, `South`, `West`, `East`, `NW`, `SW`, etc.), indicating which way they lead.
+
+**Gameplay Impact:**
+- Smoother map navigation and travel routing logic.
+- Better visual clarity on the galaxy map for where gates connect.
+</details>
 
 ---
 
 ## Command & Captain Enhancements
 
-Cosmic Overhaul includes substantial enhancements to Avorion background command simulation.
+Cosmic Overhaul includes substantial enhancements to Avorion's background command simulation.
 
 ### A) Persistent Background Command Progression
-**What it does:** Background captain commands are treated more consistently during offline/return scenarios, with improved progression behavior and risk continuity.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better strategic continuity.
-- Less “frozen world” feeling when returning to active saves.
+**What it does:**
+Background captain commands are treated more consistently during offline or return scenarios, featuring improved progression behavior and risk continuity.
+
+**Gameplay Impact:**
+- Better strategic continuity.
+- Less of a “frozen world” feeling when returning to active saves.
+</details>
 
 ### B) Trade Command Overhaul (Major)
-**What it does:** Extensively upgrades trade command behavior and outcomes, including:
-- broader captain usability (not only strict merchant lock-in),
-- adjusted efficiency curves by captain quality/class context,
-- immediate delivery toggle support,
-- charity mission mode for relationship-focused runs,
-- improved prediction/assessment messaging and balancing.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Trade command is more flexible, less binary, and more strategic.
+**What it does:**
+Extensively upgrades trade command behavior and outcomes.
+
+**Details:**
+- Broader captain usability (removes strict merchant lock-in).
+- Adjusted efficiency curves based on captain quality and class context.
+- Immediate delivery toggle support.
+- Charity mission mode for relationship-focused runs.
+- Improved prediction, assessment messaging, and balancing.
+
+**Gameplay Impact:**
+- Trade commands are more flexible, less binary, and more strategic.
 - Better alignment between captain identity, ship capability, and command output.
+</details>
 
 ### C) Scout Command Improvements
-**What it does:** Enhances scouting reliability/quality with better simulation behavior and exploration utility scaling.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better scouting value in real campaign conditions.
+**What it does:**
+Enhances scouting reliability and quality with better simulation behavior and exploration utility scaling.
+
+**Gameplay Impact:**
+- Better scouting value in real campaign conditions.
 - Improved map progression quality for exploration-focused playstyles.
+</details>
 
 ### D) Refine Command Improvements
-**What it does:** Adds refinement-path improvements with better simulation behavior and contextual outcomes.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better usability and reduced friction in refinement operations.
-- More coherent risk/time feel.
+**What it does:**
+Adds refinement-path improvements with better simulation behavior and contextual outcomes.
+
+**Gameplay Impact:**
+- Better usability and reduced friction in refinement operations.
+- More coherent risk vs. time feel.
+</details>
 
 ### E) Travel Command Refinements
-**What it does:** Refines travel behavior and practical timing outcomes under safer/no-ambush contexts.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - Better pacing in non-combat logistics travel.
-- Reduced dead-time in routine route execution.
+**What it does:**
+Refines travel behavior and practical timing outcomes under safer, no-ambush contexts.
+
+**Gameplay Impact:**
+- Better pacing in non-combat logistics travel.
+- Reduced dead-time during routine route execution.
+</details>
 
 ### F) Salvage / Mine / Procure / Sell Simulation QoL
-**What it does:** Extends and improves several simulation command scripts for consistency and better persistence of selected behavior toggles.
+<details>
+<summary><b>Click to expand details</b></summary>
 
-**Gameplay impact:** - More predictable autonomous fleet operation.
+**What it does:**
+Extends and improves several simulation command scripts for consistency and better persistence of selected behavior toggles.
+
+**Gameplay Impact:**
+- More predictable autonomous fleet operation.
 - Less micromanagement overhead.
+</details>
+
+### G) New Captain Operations and Other Operations!
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Enhances captain operations with new modifiers, improved ranges, and updated loot tables.
+
+**Details:**
+- Adds **Exotic** and **Legendary** items into the salvage operation's loot table.
+- Adds a modifier to increase the rewards, quality of items, or swiftness for various operations (currently modifies mining, scrap, travel, and scout).
+- Adds a modifier to double the range of various operations. *Note: This will make certain operations take longer.*
+- Adds a modifier to lower the ambush chance of various operations by 40%.
+
+**Gameplay Impact:**
+- Stronger incentives to run salvage operations late-game.
+- Increased operational flexibility with improved ranges and rewards.
+- Less frustration from random ambushes during map commands.
+</details>
 
 ---
 
 ## Black Market / Smuggler’s Market Rework
 
-A major user-requested feature in Cosmic Overhaul is the black market economy pass so illegal cargo is no longer disproportionately low-value versus its acquisition risk.
+A major user-requested feature in **Cosmic Overhaul** is the black market economy pass, ensuring illegal cargo is no longer disproportionately low-value versus its acquisition risk.
 
-### What changed
+<details>
+<summary><b>Click to expand Black Market details</b></summary>
+
+### What Changed
 The Smuggler’s Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
-- **Illegal cargo** can now be sold at a much stronger multiplier (up to full base value in current tuning).
-- **Dangerous goods** are accepted with a moderate multiplier.
-- **Stolen goods** retain discounted handling but at improved rates compared to strict vanilla expectations.
-- **Unbranding costs** are rebalanced to make the “steal -> clean -> sell/use” loop less punishing and more practical.
+- **Illegal Cargo:** Can now be sold at a much stronger multiplier (up to full base value in current tuning).
+- **Dangerous Goods:** Accepted with a moderate multiplier.
+- **Stolen Goods:** Retain discounted handling but at improved rates compared to strict vanilla expectations.
+- **Unbranding Costs:** Rebalanced to make the “steal -> clean -> sell/use” loop less punishing and more practical.
 
-### Why this exists
-In vanilla, illegal/stolen loops often felt under-rewarded:
-- high procurement risk,
-- smuggling/detection risk,
-- reputation/route risk,
-- but insufficient final economic upside.
+### Why This Exists
+In vanilla Avorion, illegal and stolen loops often felt under-rewarded due to:
+- High procurement risk.
+- Smuggling and detection risk.
+- Reputation and route risk.
+- Insufficient final economic upside.
 
-This overhaul aims to keep the fantasy and risk while making the reward side economically worthwhile.
+This overhaul aims to keep the fantasy and risk alive while making the reward side economically worthwhile.
 
-### Gameplay impact
+### Gameplay Impact
 - Smuggling-focused runs become legitimately viable.
 - Black market station interactions matter more.
 - Illegal-cargo logistics can support real progression instead of novelty-only gameplay.
+</details>
