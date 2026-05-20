@@ -1,0 +1,404 @@
+# ==========data/scripts/entity/TranserWindowFix.lua ==========
+
+# ==========data/scripts/entity/TrashMan.lua ==========
+#: data/scripts/entity/TrashMan.lua:
+msgid "Trash Man"
+msgstr "Мусорщик"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Systems to trash"
+msgstr "Системы в мусор"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Turrets to trash"
+msgstr "Турели в мусор"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
+msgstr "Выберите, какие типы предметов инвентаря пометить как мусор. Эти предметы не будут уничтожены или немедленно проданы. Вместо этого при следующем посещении соответствующего торговца их можно будет продать с помощью кнопки «Продать мусор».\nПредметы, отмеченные как избранные, не будут помечены как мусор!"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Mark"
+msgstr "Отметить"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Unmark"
+msgstr "Снять отметку"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Preview"
+msgstr "Предварительный просмотр"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Preview: not run yet"
+msgstr "Предварительный просмотр: еще не запущен"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Tech level filter (optional)"
+msgstr "Фильтр тех. уровня (необязательно)"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Min: 1"
+msgstr "Мин: 1"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Max: 52"
+msgstr "Макс: 52"
+
+
+# ==========data/scripts/entity/ancientgate.lua ==========
+#: data/scripts/entity/ancientgate.lua:
+msgid "${dir} Ancient Gate to ${sector}"
+msgstr "${dir} Древние врата в ${sector}"
+
+
+# ==========data/scripts/entity/bulletinboard.lua ==========
+
+# ==========data/scripts/entity/gate.lua ==========
+
+# ==========data/scripts/entity/merchants/equipmentdock.lua ==========
+
+# ==========data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Running"
+msgstr "Работает"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Running?"
+msgstr "Работает?"
+
+
+# ==========data/scripts/entity/merchants/fightermerchant.lua ==========
+
+# ==========data/scripts/entity/merchants/scrapyard.lua ==========
+
+# ==========data/scripts/entity/merchants/smugglersmarket.lua ==========
+
+# ==========data/scripts/entity/merchants/turretmerchant.lua ==========
+
+# ==========data/scripts/lib/shop.lua ==========
+#: data/scripts/lib/shop.lua:
+msgid "Click to restock the shop"
+msgstr "Нажмите, чтобы пополнить запасы магазина"
+
+
+# ==========data/scripts/player/background/simulation/refinecommand.lua ==========
+
+# ==========data/scripts/player/background/simulation/scoutcommand.lua ==========
+
+# ==========data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We saw a very large, very old gate in this sector."
+msgstr "Мы видели в этом секторе очень большие и старые врата."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There is a big gate here."
+msgstr "Здесь большие врата."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A large, unusual, inactive gate is in this sector."
+msgstr "В этом секторе находятся большие, необычные, неактивные врата."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some strange, glowing asteroids in this sector. We stayed away."
+msgstr "В этом секторе есть странные, светящиеся астероиды. Мы держались подальше."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A very unusual ring of asteroids here. Are they charging something?"
+msgstr "Очень необычное кольцо астероидов здесь. Они что-то заряжают?"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An unnatural arrangement of asteroids with a weird signal in this sector."
+msgstr "Неестественное расположение астероидов со странным сигналом в этом секторе."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some very odd people are gathered around a big asteroid here."
+msgstr "Здесь вокруг большого астероида собрались очень странные люди."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "People around an asteroid. Lots of chanting."
+msgstr "Люди вокруг астероида. Много песнопений."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "I think there are people worshipping a rock in this sector. Really."
+msgstr "Я думаю, в этом секторе люди поклоняются камню. Правда."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "It looked empty at first, but there's a wormhole here."
+msgstr "Сначала казалось, что здесь пусто, но здесь есть червоточина."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We almost stumbled straight into a wormhole in this sector."
+msgstr "Мы чуть не угодили прямо в червоточину в этом секторе."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Not sure where it goes, but there's a wormhole."
+msgstr "Не уверен, куда она ведет, но там есть червоточина."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An unusual satellite looping some research notes here."
+msgstr "Необычный спутник, транслирующий здесь какие-то исследовательские записи."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A satellite in this sector talking about energy and stone."
+msgstr "Спутник в этом секторе рассказывает об энергии и камне."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There's a satellite registered to 'M.A.D. Science' in this sector."
+msgstr "В этом секторе есть спутник, зарегистрированный на «M.A.D. Science»."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "I couldn't believe it, but there are still people surviving in this sector."
+msgstr "Я не мог в это поверить, но в этом секторе все еще есть выжившие люди."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Against all odds, there's a small outpost hiding from the Xsotan here."
+msgstr "Несмотря ни на что, здесь прячется от Ксотанов небольшой аванпост."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some people claiming to be part of a resistance are stationed here."
+msgstr "Здесь дислоцируются люди, называющие себя частью сопротивления."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A very strange ring of asteroids here. Xsotan energy signatures."
+msgstr "Здесь очень странное кольцо астероидов. Энергетические сигнатуры Ксотанов."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There's a circular formation of strange, numbered asteroids here."
+msgstr "Здесь есть круглое образование странных пронумерованных астероидов."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A ring of asteroids with inactive stations. Waiting for something."
+msgstr "Кольцо астероидов с неактивными станциями. Чего-то ждут."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An abandoned ship is here that looks largely intact. It may be repairable."
+msgstr "Здесь находится заброшенный корабль, который выглядит почти нетронутым. Возможно, он подлежит ремонту."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A good repair crew might be able to get a ship we found flying again."
+msgstr "Хорошая ремонтная бригада, возможно, сможет снова поднять в воздух найденный нами корабль."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A wreck in this sector is only lightly damaged. I bet we can repair it."
+msgstr "Обломки в этом секторе повреждены лишь незначительно. Могу поспорить, мы сможем это починить."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Also, some sort of communication beacon was active here."
+msgstr "Кроме того, здесь был активен какой-то коммуникационный маяк."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We also detected a signal from some sort of beacon."
+msgstr "Мы также засекли сигнал от какого-то маяка."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Oh, and there was a beacon broadcasting something about 'Exodus'."
+msgstr "О, и еще там был маяк, транслирующий что-то об «Исходе»."
+
+
+# ==========data/scripts/player/background/simulation/simulation.lua ==========
+#: data/scripts/player/background/simulation/simulation.lua:
+msgid "Your captains continued working while you were away."
+msgstr "Ваши капитаны продолжали работать, пока вас не было."
+
+
+# ==========data/scripts/player/background/simulation/simulationutility.lua ==========
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "I'll have regular data for you as the mission progresses."
+msgstr "По мере выполнения миссии я буду регулярно предоставлять вам данные."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "You'll receive frequent updates as we learn more."
+msgstr "Вы будете часто получать обновления по мере того, как мы узнаем больше."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Expect a continual flow of new information."
+msgstr "Ожидайте непрерывный поток новой информации."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We have no deep scan ability and will have to visit every sector."
+msgstr "У нас нет возможности глубокого сканирования, и нам придется посещать каждый сектор."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Travel time will be extreme without more deep scan coverage."
+msgstr "Время в пути будет очень большим без большего охвата глубоким сканированием."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We can't see where hidden mass sectors are without better radar."
+msgstr "Без улучшенного радара мы не сможем увидеть, где находятся сектора со скрытой массой."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "With our weak sensors, we'll waste a lot of time jumping blindly."
+msgstr "Со слабыми датчиками мы потеряем много времени, прыгая вслепую."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We'd be a lot faster with more deep scan coverage."
+msgstr "Мы бы действовали намного быстрее с большим охватом глубоким сканированием."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Hidden mass sectors will be hard to find without better radar."
+msgstr "Сектора со скрытой массой будет трудно найти без улучшенного радара."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "There's a refinery right here, so this will be fast and safe."
+msgstr "Здесь прямо есть нефтеперерабатывающий завод, поэтому все будет быстро и безопасно."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Refining will be no problem with a depot right in this sector."
+msgstr "С переработкой не будет проблем, так как склад находится прямо в этом секторе."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "I can autopilot right to the depot in this sector."
+msgstr "Я могу на автопилоте долететь прямо до склада в этом секторе."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "People are sure to appreciate our work here."
+msgstr "Люди обязательно оценят нашу работу здесь."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "This will help a lot of people."
+msgstr "Это поможет многим людям."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Our generosity will help to build trust."
+msgstr "Наша щедрость поможет укрепить доверие."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "This isn't my specialty, but I'll see what I can do."
+msgstr "Это не моя специальность, но я посмотрю, что смогу сделать."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "A merchant would do this better, but I can give it a go."
+msgstr "Торговец справился бы с этим лучше, но я могу попробовать."
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "No merchants available, commander?"
+msgstr "Нет доступных торговцев, командир?"
+
+
+# ==========data/scripts/player/background/simulation/tradecommand.lua ==========
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Directly deposit returns as soon as they're available"
+msgstr "Вносить прибыль напрямую, как только она станет доступна"
+
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Immediate delivery"
+msgstr "Немедленная доставка"
+
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Trade most of this contract's profit for increased reputation gain"
+msgstr "Обменять большую часть прибыли от этого контракта на увеличенный прирост репутации"
+
+
+# ==========data/scripts/player/ui/factory_overview_tab.lua ==========
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Factory Overview"
+msgstr "Обзор фабрики"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Factory Overview"
+msgstr "Обзор фабрики"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Income"
+msgstr "Доход"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Expense"
+msgstr "Расходы"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Profit / h"
+msgstr "Прибыль / ч"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Refresh Factory Data"
+msgstr "Обновить данные фабрики"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Goto Selected"
+msgstr "Перейти к выбранному"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Jump to selected station"
+msgstr "Прыгнуть к выбранной станции"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Sorting: "
+msgstr "Сортировка: "
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Alliance: "
+msgstr "Альянс: "
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Sort by "
+msgstr "Сортировать по "
+
+
+# ==========data/scripts/player/ui/playerbulletinboard.lua ==========
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Source"
+msgstr "Источник"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "No missions available in this sector!"
+msgstr "В этом секторе нет доступных миссий!"
+
+
+# ==========data/scripts/player/ui/sectorshipoverview.lua ==========
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Husk"
+msgstr "Каркас"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Derelict"
+msgstr "Покинутый"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Ruin"
+msgstr "Руины"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Hulk"
+msgstr "Остов"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Skeleton"
+msgstr "Скелет"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Remnant"
+msgstr "Остаток"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Flotsam"
+msgstr "Обломки"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Wreck"
+msgstr "Крушение"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Salvage"
+msgstr "Утиль"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Dross"
+msgstr "Шлак"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Fragments"
+msgstr "Фрагменты"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Debris"
+msgstr "Мусор"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Scraps"
+msgstr "Металлолом"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Detritus"
+msgstr "Осколки"

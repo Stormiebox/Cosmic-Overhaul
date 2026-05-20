@@ -1,0 +1,404 @@
+# ==========data/scripts/entity/TranserWindowFix.lua ==========
+
+# ==========data/scripts/entity/TrashMan.lua ==========
+#: data/scripts/entity/TrashMan.lua:
+msgid "Trash Man"
+msgstr "垃圾收集者"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Systems to trash"
+msgstr "要丢弃的系统"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Turrets to trash"
+msgstr "要丢弃的炮塔"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
+msgstr "选择要将哪些类型的库存物品标记为垃圾。这些物品不会被立即销毁或出售。相反，下次您访问合适的商人时，可以使用商人的“出售垃圾”按钮将它们出售。\n标记为收藏的物品不会被标记为垃圾！"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Mark"
+msgstr "标记"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Unmark"
+msgstr "取消标记"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Preview"
+msgstr "预览"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Preview: not run yet"
+msgstr "预览：尚未运行"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Tech level filter (optional)"
+msgstr "技术等级过滤器（可选）"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Min: 1"
+msgstr "最小：1"
+
+#: data/scripts/entity/TrashMan.lua:
+msgid "Max: 52"
+msgstr "最大：52"
+
+
+# ==========data/scripts/entity/ancientgate.lua ==========
+#: data/scripts/entity/ancientgate.lua:
+msgid "${dir} Ancient Gate to ${sector}"
+msgstr "${dir} 通往 ${sector} 的远古星门"
+
+
+# ==========data/scripts/entity/bulletinboard.lua ==========
+
+# ==========data/scripts/entity/gate.lua ==========
+
+# ==========data/scripts/entity/merchants/equipmentdock.lua ==========
+
+# ==========data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Running"
+msgstr "运行中"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Running?"
+msgstr "运行中？"
+
+
+# ==========data/scripts/entity/merchants/fightermerchant.lua ==========
+
+# ==========data/scripts/entity/merchants/scrapyard.lua ==========
+
+# ==========data/scripts/entity/merchants/smugglersmarket.lua ==========
+
+# ==========data/scripts/entity/merchants/turretmerchant.lua ==========
+
+# ==========data/scripts/lib/shop.lua ==========
+#: data/scripts/lib/shop.lua:
+msgid "Click to restock the shop"
+msgstr "点击以补进商店存货"
+
+
+# ==========data/scripts/player/background/simulation/refinecommand.lua ==========
+
+# ==========data/scripts/player/background/simulation/scoutcommand.lua ==========
+
+# ==========data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We saw a very large, very old gate in this sector."
+msgstr "我们在这个星区看到了一座非常巨大、非常古老的星门。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There is a big gate here."
+msgstr "这里有一座大星门。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A large, unusual, inactive gate is in this sector."
+msgstr "这个星区有一座巨大的、不寻常的、未激活的星门。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some strange, glowing asteroids in this sector. We stayed away."
+msgstr "这个星区有一些奇怪的发光小行星。我们避开了它们。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A very unusual ring of asteroids here. Are they charging something?"
+msgstr "这里有一个非常不寻常的小行星环。它们在给什么东西充电吗？"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An unnatural arrangement of asteroids with a weird signal in this sector."
+msgstr "这个星区有一个发出奇怪信号的不自然小行星排列。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some very odd people are gathered around a big asteroid here."
+msgstr "有一些非常奇怪的人聚集在这里的一颗大小行星周围。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "People around an asteroid. Lots of chanting."
+msgstr "一颗小行星周围有人。很多吟唱声。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "I think there are people worshipping a rock in this sector. Really."
+msgstr "我想这个星区有人在崇拜一块石头。真的。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "It looked empty at first, but there's a wormhole here."
+msgstr "一开始看起来是空的，但这里有一个虫洞。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We almost stumbled straight into a wormhole in this sector."
+msgstr "我们在该星区差点一头撞进虫洞里。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Not sure where it goes, but there's a wormhole."
+msgstr "不知道它通向哪里，但那里有一个虫洞。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An unusual satellite looping some research notes here."
+msgstr "这里有一颗不寻常的卫星，正在循环播放一些研究笔记。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A satellite in this sector talking about energy and stone."
+msgstr "这个星区的一颗卫星正在谈论能量和石头。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There's a satellite registered to 'M.A.D. Science' in this sector."
+msgstr "这个星区有一颗注册为“M.A.D. 科学”的卫星。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "I couldn't believe it, but there are still people surviving in this sector."
+msgstr "我简直不敢相信，但这个星区竟然还有人幸存下来。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Against all odds, there's a small outpost hiding from the Xsotan here."
+msgstr "不顾一切困难，这里有一个躲避 Xsotan 的小型前哨站。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Some people claiming to be part of a resistance are stationed here."
+msgstr "一些声称是抵抗组织成员的人驻扎在这里。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A very strange ring of asteroids here. Xsotan energy signatures."
+msgstr "这里有一个非常奇怪的小行星环。Xsotan 能量特征。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "There's a circular formation of strange, numbered asteroids here."
+msgstr "这里有一个由奇怪的编号小行星组成的圆形编队。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A ring of asteroids with inactive stations. Waiting for something."
+msgstr "带有不活动空间站的小行星环。似乎在等待什么。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "An abandoned ship is here that looks largely intact. It may be repairable."
+msgstr "这里有一艘看起来基本完好的废弃飞船。也许可以修复。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A good repair crew might be able to get a ship we found flying again."
+msgstr "一支优秀的维修队伍也许能让我们找到的飞船重新起飞。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "A wreck in this sector is only lightly damaged. I bet we can repair it."
+msgstr "这个星区的一艘残骸只受了轻微的损坏。我敢打赌我们可以修复它。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Also, some sort of communication beacon was active here."
+msgstr "另外，这里有某种通信信标处于激活状态。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "We also detected a signal from some sort of beacon."
+msgstr "我们还检测到了某种信标发出的信号。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid "Oh, and there was a beacon broadcasting something about 'Exodus'."
+msgstr "哦，还有一个信标在广播关于“Exodus（出埃及记/大迁徙）”的内容。"
+
+
+# ==========data/scripts/player/background/simulation/simulation.lua ==========
+#: data/scripts/player/background/simulation/simulation.lua:
+msgid "Your captains continued working while you were away."
+msgstr "在您离开期间，您的舰长们继续工作。"
+
+
+# ==========data/scripts/player/background/simulation/simulationutility.lua ==========
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "I'll have regular data for you as the mission progresses."
+msgstr "随着任务的进展，我会为您提供定期的数据。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "You'll receive frequent updates as we learn more."
+msgstr "随着我们了解得更多，您会收到频繁的更新。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Expect a continual flow of new information."
+msgstr "期待源源不断的新信息。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We have no deep scan ability and will have to visit every sector."
+msgstr "我们没有深度扫描能力，将不得不访问每一个星区。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Travel time will be extreme without more deep scan coverage."
+msgstr "如果没有更多的深度扫描覆盖，旅行时间将会非常漫长。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We can't see where hidden mass sectors are without better radar."
+msgstr "如果没有更好的雷达，我们无法发现隐藏的质量星区在哪里。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "With our weak sensors, we'll waste a lot of time jumping blindly."
+msgstr "由于我们的传感器很弱，我们会浪费很多时间盲目跳跃。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "We'd be a lot faster with more deep scan coverage."
+msgstr "如果有更多的深度扫描覆盖，我们会快得多。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Hidden mass sectors will be hard to find without better radar."
+msgstr "如果没有更好的雷达，隐藏的质量星区将很难被发现。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "There's a refinery right here, so this will be fast and safe."
+msgstr "这里就有一家精炼厂，所以这将又快又安全。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Refining will be no problem with a depot right in this sector."
+msgstr "既然这个星区就有一个仓库，精炼将不成问题。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "I can autopilot right to the depot in this sector."
+msgstr "我可以通过自动驾驶直接前往这个星区的仓库。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "People are sure to appreciate our work here."
+msgstr "人们肯定会感激我们在这里的工作。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "This will help a lot of people."
+msgstr "这会帮助很多人。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "Our generosity will help to build trust."
+msgstr "我们的慷慨将有助于建立信任。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "This isn't my specialty, but I'll see what I can do."
+msgstr "这不是我的专长，但我会看看能做些什么。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "A merchant would do this better, but I can give it a go."
+msgstr "商人会做得更好，但我可以试一试。"
+
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "No merchants available, commander?"
+msgstr "没有可用的商人吗，指挥官？"
+
+
+# ==========data/scripts/player/background/simulation/tradecommand.lua ==========
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Directly deposit returns as soon as they're available"
+msgstr "收益一有就直接存入"
+
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Immediate delivery"
+msgstr "立即送达"
+
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Trade most of this contract's profit for increased reputation gain"
+msgstr "用这份合同的大部分利润换取更多的声望增长"
+
+
+# ==========data/scripts/player/ui/factory_overview_tab.lua ==========
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Factory Overview"
+msgstr "工厂概览"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Factory Overview"
+msgstr "工厂概览"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Income"
+msgstr "收入"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Expense"
+msgstr "支出"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Profit / h"
+msgstr "利润/小时"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Refresh Factory Data"
+msgstr "刷新工厂数据"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Goto Selected"
+msgstr "转到选定项"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Jump to selected station"
+msgstr "跳跃到选定空间站"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Sorting: "
+msgstr "排序："
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Alliance: "
+msgstr "联盟："
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Sort by "
+msgstr "排序方式 "
+
+
+# ==========data/scripts/player/ui/playerbulletinboard.lua ==========
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Source"
+msgstr "来源"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "No missions available in this sector!"
+msgstr "此星区没有可用任务！"
+
+
+# ==========data/scripts/player/ui/sectorshipoverview.lua ==========
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Husk"
+msgstr "躯壳"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Derelict"
+msgstr "遗弃物"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Ruin"
+msgstr "废墟"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Hulk"
+msgstr "残骸"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Skeleton"
+msgstr "骨架"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Remnant"
+msgstr "残存物"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Flotsam"
+msgstr "漂浮物"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Wreck"
+msgstr "失事船只"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Salvage"
+msgstr "打捞物"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Dross"
+msgstr "渣滓"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Fragments"
+msgstr "碎片"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Debris"
+msgstr "碎片"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Scraps"
+msgstr "废料"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Detritus"
+msgstr "碎石"

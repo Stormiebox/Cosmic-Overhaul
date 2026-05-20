@@ -19,7 +19,7 @@ function Shop:buildGui(window, guiType, config) -- client
 
     if guiType == 0 then
         -- buying from the NPC
-        buttonCaption = "Buy" % _t
+        buttonCaption = "Buy"%_t
         buttonCallback = "onBuyButtonPressed"
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onSoldLeftButtonPressed")
         window:createButton(Rect(size.x - 70, 50 + 35 * 15, 60 + size.x - 60, 80 + 35 * 15), ">",
@@ -32,7 +32,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.soldItemsPage = 0
     elseif guiType == 1 then
         -- selling to the NPC
-        buttonCaption = "Sell" % _t
+        buttonCaption = "Sell"%_t
         buttonCallback = "onSellButtonPressed"
 
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onLeftButtonPressed")
@@ -52,7 +52,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showFavoritesButton = window:createButton(Rect(favX, 3, favX + 18, 3 + 18), "", "onShowFavoritesPressed")
         self.showFavoritesButton.hasFrame = false
         self.showFavoritesButton.icon = "data/textures/icons/round-star.png"
-        self.showFavoritesButton.tooltip = "Show Favorited Items" % _t
+        self.showFavoritesButton.tooltip = "Show Favorited Items"%_t
         self.showFavoritesButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showFavoritesButton.overlayIcon = ""
         self.showFavoritesButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -64,7 +64,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showTurretsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowTurretsPressed")
         self.showTurretsButton.hasFrame = false
         self.showTurretsButton.icon = "data/textures/icons/turret.png"
-        self.showTurretsButton.tooltip = "Show Turrets" % _t
+        self.showTurretsButton.tooltip = "Show Turrets"%_t
         self.showTurretsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showTurretsButton.overlayIcon = ""
         self.showTurretsButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -76,7 +76,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showBlueprintsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowBlueprintsPressed")
         self.showBlueprintsButton.hasFrame = false
         self.showBlueprintsButton.icon = "data/textures/icons/turret-blueprint.png"
-        self.showBlueprintsButton.tooltip = "Show Blueprints" % _t
+        self.showBlueprintsButton.tooltip = "Show Blueprints"%_t
         self.showBlueprintsButton.iconColor = ColorRGB(0.35, 0.7, 1.0)
         self.showBlueprintsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showBlueprintsButton.overlayIcon = ""
@@ -89,7 +89,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showUpgradesButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowUpgradesPressed")
         self.showUpgradesButton.hasFrame = false
         self.showUpgradesButton.icon = "data/textures/icons/circuitry.png"
-        self.showUpgradesButton.tooltip = "Show Subsystems" % _t
+        self.showUpgradesButton.tooltip = "Show Subsystems"%_t
         self.showUpgradesButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showUpgradesButton.overlayIcon = ""
         self.showUpgradesButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -101,7 +101,7 @@ function Shop:buildGui(window, guiType, config) -- client
         self.showDefaultItemsButton = window:createButton(Rect(x, 0, x + 21, 21), "", "onShowDefaultItemsPressed")
         self.showDefaultItemsButton.hasFrame = false
         self.showDefaultItemsButton.icon = "data/textures/icons/satellite.png"
-        self.showDefaultItemsButton.tooltip = "Show Items" % _t
+        self.showDefaultItemsButton.tooltip = "Show Items"%_t
         self.showDefaultItemsButton.overlayIcon = "data/textures/icons/cross-mark.png"
         self.showDefaultItemsButton.overlayIcon = ""
         self.showDefaultItemsButton.overlayIconColor = ColorRGB(1, 0.3, 0.3)
@@ -125,7 +125,7 @@ function Shop:buildGui(window, guiType, config) -- client
             self.showDefaultItemsButton:hide()
         end
     else
-        buttonCaption = "Buy" % _t
+        buttonCaption = "Buy"%_t
         buttonCallback = "onBuybackButtonPressed"
     end
 
@@ -147,10 +147,10 @@ function Shop:buildGui(window, guiType, config) -- client
         local specialOfferY = 60
 
         local special = {}
-        special.label = window:createLabel(vec2(nameX, 30), "SPECIAL OFFER (30% OFF)" % _t, 18)
+        special.label = window:createLabel(vec2(nameX, 30), "SPECIAL OFFER (30% OFF)"%_t, 18)
         special.label.color = ColorRGB(1.0, 1.0, 0.1)
 
-        special.timeLeftLabel = window:createLabel(vec2(materialX - 60, 30), "??" % _t, 15)
+        special.timeLeftLabel = window:createLabel(vec2(materialX - 60, 30), "??"%_t, 15)
         special.timeLeftLabel.color = ColorRGB(0.5, 0.5, 0.5)
         special.timeLabel = window:createLabel(vec2(priceX, 30), "", 15)
         special.timeLabel.color = ColorRGB(0.5, 0.5, 0.5)
@@ -161,7 +161,7 @@ function Shop:buildGui(window, guiType, config) -- client
 
         special.priceReductionLabel = window:createLabel(vec2(priceX + 40, specialOfferY + 18), "", 10)
         special.priceReductionLabel.color = ColorRGB(1, 1, 0)
-        special.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
+        special.priceReductionLabel.caption = "${percentage} OFF!"%_t % { percentage = "30%" }
 
         special.stockLabel = window:createLabel(Rect(stockX, specialOfferY, priceX - 10, specialOfferY + 30), "", 15)
         special.stockLabel:setTopRightAligned()
@@ -173,7 +173,7 @@ function Shop:buildGui(window, guiType, config) -- client
         special.priceLabel:setTopRightAligned()
 
         special.button = window:createButton(Rect(buttonX, specialOfferY, 160 + buttonX, 30 + specialOfferY),
-            "BUY NOW!" % _t, "onBuyButtonPressed")
+            "BUY NOW!"%_t, "onBuyButtonPressed")
 
         special.nameLabel.width = materialX - nameX
         special.nameLabel.shortenText = true
@@ -199,7 +199,7 @@ function Shop:buildGui(window, guiType, config) -- client
             special.stockLabel:hide()
             special.button:hide()
             special.timeLeftLabel.caption = ""
-            special.label.caption = "SOLD OUT!" % _t
+            special.label.caption = "SOLD OUT!"%_t
         end
 
         special.show = function(self)
@@ -217,13 +217,13 @@ function Shop:buildGui(window, guiType, config) -- client
         headerY = 70
     end
 
-    window:createLabel(vec2(nameX, 0), "NAME" % _t, 15)
-    local materialLabel = window:createLabel(vec2(materialX, 0), "MAT" % _t, 15)
+    window:createLabel(vec2(nameX, 0), "NAME"%_t, 15)
+    local materialLabel = window:createLabel(vec2(materialX, 0), "MAT"%_t, 15)
     if config.hideMaterialLabel then materialLabel:hide() end
 
-    local techLabel = window:createLabel(Rect(techX, 0, stockX - 10, 30), "TECH" % _t, 15)
+    local techLabel = window:createLabel(Rect(techX, 0, stockX - 10, 30), "TECH"%_t, 15)
     techLabel:setTopAligned()
-    local amountLabel = window:createLabel(Rect(stockX, 0, priceX - 10, 30), "#" % _t, 15)
+    local amountLabel = window:createLabel(Rect(stockX, 0, priceX - 10, 30), "#"%_t, 15)
     amountLabel:setTopRightAligned()
     local priceLabel = window:createLabel(Rect(priceX, 0, amountBoxX - 20, 30), "¢", 15)
     priceLabel:setTopRightAligned()
@@ -240,7 +240,7 @@ function Shop:buildGui(window, guiType, config) -- client
 
     if guiType == 1 then
         self.sellTrashButton = window:createButton(Rect(buttonX, 0 + headerY, 160 + buttonX, 30 + headerY),
-            "Sell Trash" % _t, "onSellTrashButtonPressed")
+            "Sell Trash"%_t, "onSellTrashButtonPressed")
         self.sellTrashButton.maxTextSize = 15
     end
 
@@ -259,7 +259,7 @@ function Shop:buildGui(window, guiType, config) -- client
         line.priceLabel = window:createLabel(vec2(priceX, yText), "", 14)
         line.priceReductionLabel = window:createLabel(vec2(priceX + 40, yText + 18), "", 10)
         line.priceReductionLabel.color = ColorRGB(1, 1, 0)
-        line.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
+        line.priceReductionLabel.caption = "${percentage} OFF!"%_t % { percentage = "30%" }
 
         line.favoriteIcon = window:createPicture(Rect(favX, yText, favX + 18, yText + 18), "")
         line.materialLabel = window:createLabel(vec2(materialX, yText), "", 14)
@@ -355,7 +355,7 @@ function Shop:updateSellGui() -- client
         topLine.nameLabel:show()
         topLine.nameLabel.color = ColorRGB(1.0, 1.0, 1.0)
         topLine.nameLabel.bold = false
-        topLine.nameLabel.caption = "We are completely sold out." % _t
+        topLine.nameLabel.caption = "We are completely sold out."%_t
     end
 
     local numDifferentItems = #self.soldItems
@@ -383,7 +383,7 @@ function Shop:updateSellGui() -- client
         uiIndex = uiIndex + 1
         line:show()
 
-        line.nameLabel.caption = item:getName() % _t
+        line.nameLabel.caption = item:getName()%_t
         line.nameLabel.color = item.rarity.color
         line.nameLabel.bold = false
 
@@ -404,7 +404,7 @@ function Shop:updateSellGui() -- client
 
         if self.priceRatio < 1 then
             line.priceReductionLabel:show()
-            line.priceReductionLabel.caption = "${percentage} OFF!" % _t %
+            line.priceReductionLabel.caption = "${percentage} OFF!"%_t %
                 { percentage = tostring(round((1 - self.priceRatio) * 100)) .. "%" }
         else
             line.priceReductionLabel:hide()
@@ -419,7 +419,7 @@ function Shop:updateSellGui() -- client
         local msg, args = self:canBeBought(item, playerCraft, buyer)
         if msg then
             line.button.active = false
-            line.button.tooltip = string.format(msg % _t, unpack(args or {}))
+            line.button.tooltip = string.format(msg%_t, unpack(args or {}))
         else
             line.button.active = true
             line.button.tooltip = nil
@@ -433,7 +433,7 @@ function Shop:updateSellGui() -- client
         specialUI:show()
 
         local special = self.specialOffer
-        specialUI.nameLabel.caption = item.name % _t
+        specialUI.nameLabel.caption = item.name%_t
         specialUI.nameLabel.color = item.rarity.color
         specialUI.nameLabel.bold = false
 
@@ -455,20 +455,20 @@ function Shop:updateSellGui() -- client
 
         specialUI.techLabel.caption = item.tech or ""
 
-        specialUI.timeLeftLabel.caption = "LIMITED TIME OFFER!" % _t
-        specialUI.label.caption = "SPECIAL OFFER: -30% OFF" % _t
+        specialUI.timeLeftLabel.caption = "LIMITED TIME OFFER!"%_t
+        specialUI.label.caption = "SPECIAL OFFER: -30% OFF"%_t
 
         -- for now, specialPrice is just 70% of the regular price
         -- if this gets changed, it must be changed in <Shop:sellToPlayer> also!
         local price = self:getSellPriceAndTax(item.price, faction, buyer)
         local specialPrice = price * 0.7
         specialUI.priceLabel.caption = createMonetaryString(specialPrice)
-        specialUI.priceReductionLabel.caption = "${percentage} OFF!" % _t % { percentage = "30%" }
+        specialUI.priceReductionLabel.caption = "${percentage} OFF!"%_t % { percentage = "30%" }
 
         local msg, args = self:canBeBought(item, playerCraft, buyer)
         if msg then
             specialUI.button.active = false
-            specialUI.button.tooltip = string.format(msg % _t, unpack(args or {}))
+            specialUI.button.tooltip = string.format(msg%_t, unpack(args or {}))
         else
             specialUI.button.active = true
             specialUI.button.tooltip = nil
@@ -877,7 +877,7 @@ if onClient() then
         -- Create the restock button
         edr_restockButton = tab:createButton(Rect(x, 0, x + 160, 30), "", "edr_onRestockButtonPressed")
         edr_restockButton.icon = "data/textures/icons/clockwise-rotation.png"
-        edr_restockButton.tooltip = "Click to restock the shop" % _t
+        edr_restockButton.tooltip = "Click to restock the shop"%_t
     end
 
     function Shop:edr_onRestockButtonPressed(button)

@@ -14,7 +14,7 @@ if onClient() then
     function PlayerBulletinBoard.initialize()
         Player():registerCallback("onSectorChanged", "onSectorChanged")
 
-        self.tab = PlayerWindow():createTab("Bulletin Board" % _t, "data/textures/icons/warning-system.png","Bulletin Board" % _t)
+        self.tab = PlayerWindow():createTab("Bulletin Board"%_t, "data/textures/icons/warning-system.png","Bulletin Board"%_t)
 
         self.tab.onSelectedFunction = "onTabSelected"
         local hsplit = UIHorizontalSplitter(Rect(self.tab.size), 10, 10, 0.6)
@@ -23,10 +23,10 @@ if onClient() then
 
         local vsplit = UIArbitraryVerticalSplitter(lister:placeCenter(vec2(lister.inner.width, 30)), 10, 5, 430, 530, 700) -- 430, 530 originally
 
-        self.tab:createLabel(vsplit:partition(0).lower, "Description" % _t, 15)
-        self.tab:createLabel(vsplit:partition(1).lower, "Difficulty" % _t, 15)
-        self.tab:createLabel(vsplit:partition(2).lower, "Reward" % _t, 15)
-        self.tab:createLabel(vsplit:partition(3).lower, "Source" % _t, 15)
+        self.tab:createLabel(vsplit:partition(0).lower, "Description"%_t, 15)
+        self.tab:createLabel(vsplit:partition(1).lower, "Difficulty"%_t, 15)
+        self.tab:createLabel(vsplit:partition(2).lower, "Reward"%_t, 15)
+        self.tab:createLabel(vsplit:partition(3).lower, "Source"%_t, 15)
 
         self.lines = {}
 
@@ -50,7 +50,7 @@ if onClient() then
             local reward = self.tab:createLabel(avsplit:partition(i).lower, "", 14); i = i + 1
             local source = self.tab:createButton(avsplit:partition(i), "Select", "onSourceButtonPressed"); i = i + 1
             source.icon = "data/textures/icons/position-marker.png"
-            local button = self.tab:createButton(vsplit.right, "Accept" % _t, "onTakeButtonPressed")
+            local button = self.tab:createButton(vsplit.right, "Accept"%_t, "onTakeButtonPressed")
             local hide = function(self)
                 self.brief:hide()
                 self.difficulty:hide()
@@ -152,20 +152,20 @@ if onClient() then
 
                 line.entityIndex = self.missions[entry].entityIndex
                 line.bulletinIndex = bulletin.bulletinIndex
-                line.brief.caption = bulletin.brief % _t % bulletin.formatArguments
-                line.difficulty.caption = bulletin.difficulty % _t % bulletin.formatArguments
-                line.reward.caption = bulletin.reward % _t % bulletin.formatArguments
+                line.brief.caption = bulletin.brief%_t % bulletin.formatArguments
+                line.difficulty.caption = bulletin.difficulty%_t % bulletin.formatArguments
+                line.reward.caption = bulletin.reward%_t % bulletin.formatArguments
 
                 if bulletin.BMDLCOwnersOnly and not Player().ownsBlackMarketDLC then
                     line.button.active = false
-                    line.button.tooltip = "This mission is only available for owners of the Black Market DLC." % _t
+                    line.button.tooltip = "This mission is only available for owners of the Black Market DLC."%_t
                 else
                     line.button.active = true
                     line.button.tooltip = nil
                 end
 
                 if line.selected then
-                    self.description.text = (bulletin.description or bulletin.brief or "") % _t % bulletin.formatArguments
+                    self.description.text = (bulletin.description or bulletin.brief or "")%_t % bulletin.formatArguments
                 end
 
                 line:show()
@@ -177,7 +177,7 @@ if onClient() then
         if #self.missions == 0 then
             local line = self.lines[1]
             line:show()
-            line.brief.caption = "No missions available in this sector!" % _t
+            line.brief.caption = "No missions available in this sector!"%_t
             line.difficulty.caption = ""
             line.reward.caption = ""
             line.source:hide()

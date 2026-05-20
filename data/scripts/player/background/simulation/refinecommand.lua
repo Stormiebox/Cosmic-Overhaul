@@ -20,7 +20,7 @@ function RefineCommand:onAreaAnalysisFinished(results, meta)
     end
 
     for _, name in pairs({ shipSectorView:getStationTitles() }) do
-        if string.match(name.text, "Resource Depot" % _t) then
+        if string.match(name.text, "Resource Depot"%_t) then
             results.sameSectorDepot = true
         end
     end

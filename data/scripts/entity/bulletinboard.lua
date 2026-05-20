@@ -25,10 +25,10 @@ if onClient() then
         local menu = ScriptUI()
         window = menu:createWindow(Rect(res * 0.5 - size * 0.5, res * 0.5 + size * 0.5))
 
-        window.caption = "${entity} Bulletin Board" % _t % { entity = (Entity().translatedTitle or "") % _t }
+        window.caption = "${entity} Bulletin Board"%_t % { entity = (Entity().translatedTitle or "")%_t }
         window.showCloseButton = 1
         window.moveable = 1
-        menu:registerWindow(window, "Bulletin Board" % _t, 4);
+        menu:registerWindow(window, "Bulletin Board"%_t, 4);
 
         BulletinBoard.fetchData()
     end

@@ -98,15 +98,15 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
     -- At last! New row for immediate delivery option:
     local rect = vlist:nextRect(22)
     local frame = ui.window:createFrame(rect)
-    frame.tooltip = "Directly deposit returns as soon as they're available" % _t
+    frame.tooltip = "Directly deposit returns as soon as they're available"%_t
     local vsplit2 = UIVerticalSplitter(rect, 0, 0, 0.6)
-    local label = ui.window:createLabel(vsplit2.left, "Immediate delivery" % _t, 14)
+    local label = ui.window:createLabel(vsplit2.left, "Immediate delivery"%_t, 14)
     ui.mcm.immediateDeliveryCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
 
     -- And another for charity missions:
     local rect = vlist:nextRect(22)
     local frame = ui.window:createFrame(rect)
-    frame.tooltip = "Trade most of this contract's profit for increased reputation gain" % _t
+    frame.tooltip = "Trade most of this contract's profit for increased reputation gain"%_t
     local vsplit2 = UIVerticalSplitter(rect, 0, 0, 0.6)
     local label = ui.window:createLabel(vsplit2.left, "Charity mission", 14)
     ui.mcm.charityMissionCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
