@@ -403,4 +403,99 @@ msgstr ""
 msgid "Detritus"
 msgstr ""
 
+# ==========data/scripts/player/ui/command_center_tab.lua ==========
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Command Center"
+msgstr ""
 
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh Active Operations"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Fleet Operations"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Ship"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Operation"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Location"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "ETA"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Status"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown Operation"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recalled"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Mining"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Salvaging"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Traveling"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Selling"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Procuring"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Trading"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Supplying"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Expedition"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Scouting"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Restocking"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining"
+msgstr ""

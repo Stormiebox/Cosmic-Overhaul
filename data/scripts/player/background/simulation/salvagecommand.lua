@@ -96,7 +96,7 @@ function SalvageCommand:generateItems(amount)
     local function upgradeListRarities(list)
         for _, item in pairs(list or {}) do
             if item then
-                item.rarity = rollRarity(rarityRandom)
+                item.rarity = Rarity(rollRarity(rarityRandom))
             end
         end
     end

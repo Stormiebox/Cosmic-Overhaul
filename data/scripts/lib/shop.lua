@@ -832,10 +832,6 @@ end
 local edr_buildBuyGui, edr_CreateNamespace -- extended functions
 local edr_restockButton                    -- UI
 local edr_specialOfferSeed = 0             -- restock the special offer
-local restockCooldown = 45 * 60            -- 45 minutes in seconds
-local lastRestockTime = 0
-local freeRestockCount = 15                -- Allow 15 free restocks
-local usedFreeRestocks = 0                 -- Counter for used free restocks
 
 -- Handle the actual restocking part
 if onServer() then
@@ -849,8 +845,32 @@ if onServer() then
     end
 
     function Shop:remoteRestock()
-        edr_specialOfferSeed = edr_specialOfferSeed + 1 -- Call the restock function to update the items
-        self:restock()
+        local player = Player(callingPlayer)
+        local current = os.time()
+        local entity = Entity()
+
+        local lastRestockTime = entity:getValue("co_last_restock") or 0
+        local usedFreeRestocks = entity:getValue("co_free_restocks") or 0
+        local restockCooldown = 45 * 60
+
+        if usedFreeRestocks < 15 then
+            entity:setValue("co_free_restocks", usedFreeRestocks + 1)
+            edr_specialOfferSeed = edr_specialOfferSeed + 1
+            self:restock()
+            if player then player:sendChatMessage("Shop", 0, "Free restock used. %1% free restocks left.", 15 - (usedFreeRestocks + 1)) end
+        elseif current - lastRestockTime >= restockCooldown then
+            entity:setValue("co_last_restock", current)
+            edr_specialOfferSeed = edr_specialOfferSeed + 1
+            self:restock()
+            if player then player:sendChatMessage("Shop", 0, "Shop restocked. Next restock available in 45 minutes.") end
+        else
+            if player then
+                local remainingCooldown = restockCooldown - (current - lastRestockTime)
+                local minutes = math.floor(remainingCooldown / 60)
+                local seconds = remainingCooldown % 60
+                player:sendChatMessage("Shop", 1, string.format("Restock is on cooldown for %d minutes and %d seconds. Please wait.", minutes, seconds))
+            end
+        end
     end
 
     edr_CreateNamespace = PublicNamespace.CreateNamespace
@@ -881,30 +901,8 @@ if onClient() then
     end
 
     function Shop:edr_onRestockButtonPressed(button)
-        local currentTime = os.time()
-
-        -- Check if the player can restock
-        if usedFreeRestocks < freeRestockCount then
-            -- Allow free restock
-            usedFreeRestocks = usedFreeRestocks + 1
-            invokeServerFunction("remoteRestock") -- Call the server function to restock
-            Player():sendChatMessage(
-                "Free restock used. You have " .. (freeRestockCount - usedFreeRestocks) .. " free restocks left.", 1)
-        elseif currentTime - lastRestockTime >= restockCooldown then
-            -- Cooldown has passed
-            lastRestockTime = currentTime         -- Update the last restock time
-            invokeServerFunction("remoteRestock") -- Call the server function to restock
-            Player():sendChatMessage("Shop restocked. Next restock available in 45 minutes.", 1)
-        else
-            -- Calculate remaining cooldown time
-            local remainingCooldown = restockCooldown - (currentTime - lastRestockTime)
-            local minutes = math.floor(remainingCooldown / 60)
-            local seconds = remainingCooldown % 60
-
-            -- Provide feedback to the player with remaining cooldown time
-            Player():sendChatMessage(
-                string.format("Restock is on cooldown for %d minutes and %d seconds. Please wait.", minutes, seconds), 1)
-        end
+        -- Trigger the server to handle the cooldown logic and actual restocking
+        invokeServerFunction("remoteRestock")
     end
 
     edr_CreateNamespace = PublicNamespace.CreateNamespace

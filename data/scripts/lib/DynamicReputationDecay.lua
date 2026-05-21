@@ -122,8 +122,7 @@ function onUpdate(timeStep)
                 DecayConfig.maxDecayPerHour
             )
 
-            local players = galaxy:getPlayers() or {}
-            for _, player in pairs(players) do
+            for _, player in pairs({Server():getPlayers()}) do
                 if player then
                     galaxy:changeFactionRelations(player.index, aiFactionIndex, -decayAmount, false, false)
 

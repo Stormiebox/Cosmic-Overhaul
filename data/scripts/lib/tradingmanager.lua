@@ -28,11 +28,11 @@ function TradingManager:getActivityLevel()
         baseActivityLevel = 4 -- Military Outposts have lower activity
     end
 
-    -- Add some randomness based on the number of docking ships
+    -- Add some randomness based on the number of active ships in the sector
     local shipsInSector = { Sector():getEntitiesByType(EntityType.Ship) }
-    local dockedShips = math.min(#shipsInSector, 10) -- Cap the impact of docked ships to avoid excessive values
+    local activeShips = math.min(#shipsInSector, 10) -- Cap the impact of ships to avoid excessive values
 
-    return baseActivityLevel + dockedShips * randomFloat(0.1, 0.5)
+    return baseActivityLevel + activeShips * randomFloat(0.1, 0.5)
 end
 
 function TradingManager:generateRevenue(good, amount)
@@ -75,7 +75,7 @@ function TradingManager:useUpBoughtGoods(timeStep)
 
     self.useTimeCounter = self.useTimeCounter + timeStep
     if self.useTimeCounter > tickTime then
-        self.useTimeCounter = self.useTimeCounter - tickTime
+        self.useTimeCounter = 0
 
         -- Process up to 2 goods per tick to distribute the load across multiple ticks
         local maxGoodsProcessed = 2
@@ -104,32 +104,6 @@ function TradingManager:useUpBoughtGoods(timeStep)
 
                     -- Generate revenue for the faction
                     self:generateRevenue(good, amount)
-
-                    -- Calculate the revenue and notify the faction
-                    local price = self:getBuyPrice(good.name)
-                    local received = price * 1.10 * amount
-                    local x, y = Sector():getCoordinates()
-
-                    -- Create detailed log messages for the transaction
-                    local station = Entity()
-                    if not station then
-                        print("Error: Station is nil.")
-                        return
-                    end
-
-                    local description = string.format(
-                        "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue.",
-                        x, y, station.name, math.floor(amount),
-                        good:pluralForm(math.floor(amount)),
-                        createMonetaryString(received))
-
-                    local faction = Faction()
-                    if faction then
-                        faction:receive(description, received)
-                        self.stats.moneyGainedFromGoods = self.stats.moneyGainedFromGoods + received
-                    else
-                        print("Error: Faction is nil.")
-                    end
 
                     break -- Exit loop after processing a valid good
                 end

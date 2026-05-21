@@ -402,3 +402,100 @@ msgstr "Ferraille"
 #: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Detritus"
 msgstr "Détritus"
+
+# ==========data/scripts/player/ui/command_center_tab.lua ==========
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Command Center"
+msgstr "Centre de commandement"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh Active Operations"
+msgstr "Actualiser les opérations actives"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Fleet Operations"
+msgstr "Opérations actives de la flotte"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Ship"
+msgstr "Vaisseau"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Operation"
+msgstr "Opération"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Location"
+msgstr "Emplacement"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "ETA"
+msgstr "Heure d'arrivée"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Status"
+msgstr "Statut"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown Operation"
+msgstr "Opération inconnue"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recalled"
+msgstr "Rappelé"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active"
+msgstr "Actif"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Mining"
+msgstr "Minage"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Salvaging"
+msgstr "Recyclage"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Traveling"
+msgstr "Voyage"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Selling"
+msgstr "Vente"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Procuring"
+msgstr "Approvisionnement"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Trading"
+msgstr "Commerce"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Supplying"
+msgstr "Ravitaillement"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Expedition"
+msgstr "Expédition"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Scouting"
+msgstr "Reconnaissance"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Restocking"
+msgstr "Réapprovisionnement"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining"
+msgstr "Raffinage"

@@ -402,3 +402,100 @@ msgstr "スクラップ"
 #: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Detritus"
 msgstr "岩屑"
+
+# ==========data/scripts/player/ui/command_center_tab.lua ==========
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Command Center"
+msgstr "コマンドセンター"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh"
+msgstr "更新"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refresh Active Operations"
+msgstr "アクティブなオペレーションを更新"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Fleet Operations"
+msgstr "アクティブな艦隊オペレーション"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Ship"
+msgstr "船"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Operation"
+msgstr "オペレーション"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Location"
+msgstr "場所"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "ETA"
+msgstr "到着予定時刻"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Status"
+msgstr "ステータス"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown"
+msgstr "不明"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Unknown Operation"
+msgstr "不明なオペレーション"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recalled"
+msgstr "帰還"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active"
+msgstr "アクティブ"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Mining"
+msgstr "採掘"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Salvaging"
+msgstr "サルベージ"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Traveling"
+msgstr "移動中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Selling"
+msgstr "販売中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Procuring"
+msgstr "調達中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Trading"
+msgstr "取引中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Supplying"
+msgstr "補給中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Expedition"
+msgstr "遠征"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Scouting"
+msgstr "偵察"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Restocking"
+msgstr "補充中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining"
+msgstr "精製中"

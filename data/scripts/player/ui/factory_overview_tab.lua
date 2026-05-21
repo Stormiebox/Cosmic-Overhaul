@@ -12,30 +12,30 @@ local all_check
 if onClient() then
 	function FactoryOverview.initialize()
 		local playerWindow = PlayerWindow()
-	
+
     	self.tab = playerWindow:createTab("Factory Overview"%_t, "data/textures/icons/pay-crew.png", "Factory Overview"%_t)
 		self.tab.onSelectedFunction = "clientFetchDataFromGalaxy"
-		self.tab.onShowFunction = "clientFetchDataFromGalaxy"		
+		self.tab.onShowFunction = "clientFetchDataFromGalaxy"
 		playerWindow:moveTabToTheRight(self.tab)
 		FactoryOverview.buildWindow(self.tab)
 		FactoryOverview.clientFetchDataFromGalaxy()
 	end
 
-	function FactoryOverview.refresh() 
+	function FactoryOverview.refresh()
 		FactoryOverview.clientFetchDataFromGalaxy()
 	end
 end
 
-function FactoryOverview.clientFetchDataFromGalaxy() 
-	invokeServerFunction("fetchDataFromGalaxy", (all_check ~= nil and all_check.checked) )	
+function FactoryOverview.clientFetchDataFromGalaxy()
+	invokeServerFunction("fetchDataFromGalaxy", (all_check ~= nil and all_check.checked) )
 end
 
 function FactoryOverview.fetchDataFromGalaxy(alliance_v) -- fetches the current and initial monetary data for each factory registered for the player
 	if onClient() then
-		invokeServerFunction("fetchDataFromGalaxy", alliance_v)	
+		invokeServerFunction("fetchDataFromGalaxy", alliance_v)
 		return
 	end
-	
+
 	local galaxy = Galaxy()
 	if not galaxy then
 		print("Galaxy is not accessible from fetchDataFromGalaxy")
@@ -48,10 +48,10 @@ function FactoryOverview.fetchDataFromGalaxy(alliance_v) -- fetches the current 
 		end
 		--print("Index: " .. tostring(index) .. " av: " .. tostring(av))
 		local errorcode, factories = galaxy:invokeFunction("factoryregister", "getFactoriesFor", index, av)
-		
+
 		if errorcode ~= 0 then
 			print("Error while calling getFactoriesFor on Galaxy from Player: " .. tostring(errorcode))
-			return 
+			return
 		end
 
 		invokeClientFunction(Player(callingPlayer), "loadData", factories)
@@ -68,7 +68,7 @@ local sortingLabels = {"Name"%_t, "Type"%_t, "Income"%_t, "Expense"%_t, "Profit"
 local selectedSorting = 5 -- which column do we use for sorting, same as sortingLabels
 local sortingType = -1 -- ascending: 1 or descending: -1
 
-local sortingFunctions = {} -- 
+local sortingFunctions = {} --
 	sortingFunctions[1] = function(f1, f2) return f1['name'] < f2['name'] end
 	sortingFunctions[-1] = function(f1, f2) return f1['name'] > f2['name'] end
 
@@ -104,12 +104,13 @@ The window should show a scrollable, sortable, table where each line is a factor
 name, type, income, expense, profit, profit/time (based on initial data)
 Tooltip is working state, line data is location <- should use an id and look this up from stored data
 ]]--
-function FactoryOverview.buildWindow(container) 
+function FactoryOverview.buildWindow(container)
 
 	local hsplit = UIHorizontalSplitter(Rect(container.size), 5, 5, 0.1)
-	
+
 	local margin = 10
-	local b_width = (container.size.x - 2 * margin) / 6 -- should use the length of sortingLabels
+	-- Account for the scrollbar width (~20px) so the last column doesn't get clipped
+	local b_width = (container.size.x - 2 * margin - 20) / #sortingLabels
 
 	local refreshButton = container:createButton(Rect(hsplit.top.width - 40, 5, hsplit.top.width, hsplit.top.height - 25), "Refresh"%_t, "clientFetchDataFromGalaxy")
 	refreshButton.icon = "data/textures/icons/refresh.png"
@@ -123,17 +124,17 @@ function FactoryOverview.buildWindow(container)
 	separator.color = ColorRGB(0.6, 0.6, 0.6)
 	local separator2 = container:createLine(vec2(hsplit.top.width - 91, 0), vec2(hsplit.top.width-91, hsplit.top.height - 23))
 	separator2.color = ColorRGB(0.6, 0.6, 0.6)
-	
+
 	container:createLabel(Rect(margin, 5, margin + 70, hsplit.top.height - 5), "Sorting: "%_t, 20)
 
 	all_check = container:createCheckBox(Rect(hsplit.top.width - 197, 5, hsplit.top.width - 97, hsplit.top.height - 5), "Alliance: "%_t, "switchAllianceFlag")
 	all_check.checked = false
-	
+
 	-- This is not the most beautiful solution, but I couldn't make clicking on the List Header work for this
 	for ndx, sortingLabel in pairs(sortingLabels) do
 		local sortingButton = container:createButton(
 			Rect(margin + (ndx-1) * b_width + 2, hsplit.top.height - 20, margin + ndx * b_width - 3, hsplit.top.height),
-			"", 
+			"",
 			"updateSorting"..tostring(ndx)
 		)
 		sortingButton.tooltip = "Sort by "%_t .. sortingLabel
@@ -148,20 +149,20 @@ function FactoryOverview.buildWindow(container)
 
 
 	for ndx=0, 5, 1 do
-		factory_ui_list:setColumnWidth(ndx, b_width) 
+		factory_ui_list:setColumnWidth(ndx, b_width)
 	end
 
 	factory_ui_list.headline = true -- to fix the first line as header
 end
 
-function FactoryOverview.switchAllianceFlag() 
-	FactoryOverview.clientFetchDataFromGalaxy() 
+function FactoryOverview.switchAllianceFlag()
+	FactoryOverview.clientFetchDataFromGalaxy()
 end
 
 local current_list -- stores the last data shown
 
 -- populates the lines in the factory_ui_list based on the passed data or the list we used the last
-function FactoryOverview.loadData(factory_list) 
+function FactoryOverview.loadData(factory_list)
 	if not factory_ui_list then return end
 
 	local list_to_use -- to enable reuse of the last data for sorting
@@ -179,7 +180,7 @@ function FactoryOverview.loadData(factory_list)
 	end
 
 	table.sort(sortedList, sortingFunctions[selectedSorting * sortingType]) -- pick sorting function based on column and direction
-	
+
 	factory_ui_list:clear()
 	local white = ColorRGB(1, 1, 1)
 	local gray = ColorRGB(0.8, 0.8, 0.8)
@@ -214,14 +215,14 @@ function FactoryOverview.updateSorting5() FactoryOverview.updateSorting(5) end
 function FactoryOverview.updateSorting6() FactoryOverview.updateSorting(6) end
 
 -- sets the selected sorting button to an up or down arrow and the rest to empty
-function FactoryOverview.updateSortingIcons() 
+function FactoryOverview.updateSortingIcons()
 	for ndx, button in pairs(sortingButtons) do
 		if ndx == selectedSorting then
 			local icon
-			if sortingType < 0 then 
-				icon = "data/textures/icons/arrow-down2.png" 
-			else 
-				icon = "data/textures/icons/arrow-up2.png" 
+			if sortingType < 0 then
+				icon = "data/textures/icons/arrow-down2.png"
+			else
+				icon = "data/textures/icons/arrow-up2.png"
 			end
 			button.icon = icon
 		else
@@ -237,7 +238,7 @@ function FactoryOverview.getCoordinates(coo_string) -- assuming 15,-40 format
 	local y = tonumber(coo_string:sub(comma+1))
 	return x, y
 end
-	
+
 -- Opens the Galaxy map and goes to the coordinates of the selected factory
 function FactoryOverview.gotoSelectedCoordinates()
 	if not factory_ui_list.selectedValue then return end
@@ -249,7 +250,7 @@ function FactoryOverview.gotoSelectedCoordinates()
 end
 
 -- Lists the percentage of time spent in different states of production, that is, Running vs. some error state
-function getRowTooltip(factoryData) 
+function getRowTooltip(factoryData)
 	local tooltip = ""
 
 	if not factoryData['working_state'] then

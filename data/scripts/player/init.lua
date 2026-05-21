@@ -6,4 +6,6 @@ if onServer() then
     -- Fleet Status runs as an entity script (data/scripts/entity/fleetstatus.lua)
     player:addScriptOnce("data/scripts/player/ui/factory_overview_tab.lua")
     player:addScriptOnce("data/scripts/player/ui/playerbulletinboard.lua")
+    -- Attach our new UI tab script to the player
+    player:addScriptOnce("player/ui/command_center_tab.lua")
 end

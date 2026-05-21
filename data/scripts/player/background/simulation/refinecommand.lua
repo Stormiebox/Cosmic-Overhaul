@@ -19,8 +19,9 @@ function RefineCommand:onAreaAnalysisFinished(results, meta)
         return
     end
 
-    for _, name in pairs({ shipSectorView:getStationTitles() }) do
-        if string.match(name.text, "Resource Depot"%_t) then
+    for _, title in pairs({ shipSectorView:getStationTitles() }) do
+        local titleString = type(title) == "table" and title.text or tostring(title)
+        if string.match(titleString, "Resource Depot"%_t) then
             results.sameSectorDepot = true
         end
     end

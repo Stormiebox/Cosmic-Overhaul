@@ -13,7 +13,16 @@ Inner content structure
 	... other fields, see in factory.lua, merge function
 ]]--
 
--- Entry point to call from the factories to register. 
+function secure()
+	return {rf = rf, initial = initial}
+end
+
+function restore(data)
+	rf = data.rf or {}
+	initial = data.initial or {}
+end
+
+-- Entry point to call from the factories to register.
 function register(factionIndex, allianceFactory, entity_data)
 	--print("Register called " .. tostring(factionIndex) .. " + " .. tostring(entity_data['id']) )
 	if not entity_data then
@@ -25,6 +34,16 @@ function register(factionIndex, allianceFactory, entity_data)
 		fi = "a_" .. tostring(factionIndex)
 	end
 	createOrUpdate(fi, entity_data)
+end
+
+-- Called to clean up destroyed/sold factories so they disappear from the UI
+function unregister(factionIndex, allianceFactory, entityIdString)
+	local fi = factionIndex
+	if allianceFactory then
+		fi = "a_" .. tostring(factionIndex)
+	end
+	if rf[fi] then rf[fi][entityIdString] = nil end
+	if initial[fi] then initial[fi][entityIdString] = nil end
 end
 
 -- creates or updates the factory registry with the state passed in
@@ -40,7 +59,7 @@ function createOrUpdate(factionIndex, entity_data)
 
 	local faction_registry = rf[factionIndex]
 	local existingContent = faction_registry[entityId] -- inside the faction, all entities are stored with their id
-	
+
 	if not existingContent then
 		--print("Previously not registered: " .. entityId)
 		registerNewFactory(factionIndex, entity_data) -- registering the content for later comparisons
@@ -57,14 +76,14 @@ function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise
 		print("Issue with registerNewFactory call in Galaxy, data is not formatted correctly")
 		return
 	end
-	
+
 	local existingContent = initial[factionIndex][entityId] -- inside the faction, all entities are stored with their id
-	
+
 	if not existingContent then
 		--print("Initial register for " .. tostring(entity_data['name']))
 		entity_data['time'] = os.time()
 		initial[factionIndex][entityId] = entity_data -- registering the content for later comparisons
-	else 
+	else
 		-- this is an issue, this function should be called only once for each factory
 		print("!!! Double registering " .. tostring(entity_data['name']))
 	end
@@ -157,7 +176,7 @@ function addWorkingStrings(data, init_fdata, factoryData)
 	factoryData['working_state'] = production_percentages
 
 	if time_check == 0 or math.abs( (time_check-totalTime) / totalTime) > 0.01 then
-		print("Error with time calc: " .. tostring(time_check) .. " vs. " .. tostring(totalTime)) 
+		print("Error with time calc: " .. tostring(time_check) .. " vs. " .. tostring(totalTime))
 	end
 
 	return factoryData
@@ -165,20 +184,22 @@ end
 
 -- Calculates the expected profit / hour based on the elapsed time and money changes since the beginning of this play session
 function calculateProfitability(data, init_fdata, factoryData)
-	local totalTime = data['runtime'] -- actual elapsed time in seconds
-	if not totalTime or totalTime == 0 then
-		print("Error in elapsed time in registered factory data in Galaxy / 2")
+	local session_runtime = data['runtime'] - (init_fdata['runtime'] or 0) -- elapsed time for THIS tracking period
+	if session_runtime < 0 then session_runtime = 0 end
+
+	if session_runtime == 0 then
+		factoryData['profitability'] = 0
 		return factoryData
 	end
 
-	local total_money_gained = data['money_gained'] - init_fdata['money_gained'] -- current - the gains at the beginning of the session
-	local total_money_tax = data['money_tax'] - init_fdata['money_tax']
-	local total_money_spent = data['money_spent'] - init_fdata['money_spent']
+	local total_money_gained = data['money_gained'] - (init_fdata['money_gained'] or 0)
+	local total_money_tax = data['money_tax'] - (init_fdata['money_tax'] or 0)
+	local total_money_spent = data['money_spent'] - (init_fdata['money_spent'] or 0)
 
 	local total_profit = total_money_gained + total_money_tax - total_money_spent -- profit in this play session
-	local profitability = 3600 * (total_profit / totalTime) -- profit / second scaled up to the hour
+	local profitability = 3600 * (total_profit / session_runtime) -- profit / second scaled up to the hour
 
 	factoryData['profitability'] = profitability
-	
+
 	return factoryData
 end

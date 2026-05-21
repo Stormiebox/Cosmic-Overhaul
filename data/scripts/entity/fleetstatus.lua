@@ -273,8 +273,10 @@ function fs.renderShipStatus()
         if player.craft.name == shipData.name then goto continue end
 
         local entry = ShipDatabaseEntry(shipData.faction, shipData.name)
-        fs._drawShipStatus(entry, y_offset)
-        y_offset = y_offset + 75
+        if entry then
+            fs._drawShipStatus(entry, y_offset)
+            y_offset = y_offset + 75
+        end
         ::continue::
     end
 end
