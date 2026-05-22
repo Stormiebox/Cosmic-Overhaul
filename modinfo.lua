@@ -44,8 +44,27 @@ meta =
     --      {id = "OptionalMod", min = "0.2", optional = true}, -- we support OptionalMod optionally, starting at version 0.2
     -- },
     dependencies = {
+        { id = "2565262170", incompatible = true },
+        { id = "2746508433", incompatible = true },
+        { id = "3629149685", incompatible = true },
+        { id = "3713051056", incompatible = true },
+        { id = "3504174674", incompatible = true },
+        { id = "2853246039", incompatible = true },
+        { id = "2853141522", incompatible = true },
+        { id = "2853436262", incompatible = true },
+        { id = "3352306685", incompatible = true },
+        { id = "3715684735", incompatible = true },
+        { id = "2778851215", incompatible = true },
+        { id = "2323452485", incompatible = true },
+        { id = "2305699026", incompatible = true },
+        { id = "3042506675", incompatible = true },
+        { id = "2614650527", incompatible = true },
+        { id = "2606086199", incompatible = true },
+        { id = "2619827652", incompatible = true },
+        { id = "2900683208", incompatible = true },
+        { id = "3290187742", incompatible = true },
         { id = "3727542782", min = "1.0" },
-        { id = "Avorion",    min = "1.0", max = "5.0" }
+        { id = "Avorion",    min = "1.0",        max = "5.0" }
     },
 
     -- Set to true if the mod only has to run on the server. Clients will get notified that the mod is running on the server, but they won't download it to themselves

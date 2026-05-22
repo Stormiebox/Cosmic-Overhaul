@@ -43,7 +43,7 @@ function TradingManager:generateRevenue(good, amount)
     end
 
     local price = self:getBuyPrice(good.name)
-    local received = price * 1.10 * amount
+    local received = math.floor(price * 1.10 * amount)
     self.stats.moneyGainedFromGoods = self.stats.moneyGainedFromGoods + received
 
     local x, y = Sector():getCoordinates()
@@ -55,7 +55,7 @@ function TradingManager:generateRevenue(good, amount)
 
     local faction = Faction()
     if faction then
-        faction:receive(received, description)
+        faction:receive(description, received)
     else
         print("Error: Faction is nil.")
     end

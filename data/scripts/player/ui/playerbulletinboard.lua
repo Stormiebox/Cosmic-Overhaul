@@ -27,7 +27,7 @@ if onClient() then
         local filterRect = lister:placeCenter(vec2(lister.inner.width, 30))
         local filterSplit = UIVerticalSplitter(filterRect, 10, 0, 0.25)
         self.tab:createLabel(filterSplit.left.lower, "Filter:"%_t, 15)
-        self.filterComboBox = self.tab:createComboBox(filterSplit.right, "onFilterChanged")
+        self.filterComboBox = self.tab:createValueComboBox(filterSplit.right, "onFilterChanged")
 
         local vsplit = UIArbitraryVerticalSplitter(lister:placeCenter(vec2(lister.inner.width, 30)), 10, 5, 430, 530, 700) -- 430, 530 originally
 
@@ -245,31 +245,22 @@ if onClient() then
     function PlayerBulletinBoard.updateFilterComboBox()
         if not self.filterComboBox then return end
 
-        local currentIndex = self.filterComboBox.selectedIndex
-        local currentSelection = nil
-        if currentIndex > 0 then
-            currentSelection = self.filterComboBox:getItem(currentIndex)
-        end
+        local currentSelection = self.filterComboBox.selectedValue
 
         self.filterComboBox:clear()
-        self.filterComboBox:addEntry("All"%_t)
+        self.filterComboBox:addEntry("All"%_t, "All"%_t)
 
         local uniqueTypes = {}
         for _, mission in pairs(self.allMissions) do
             local b = (mission.bulletin.brief or "")%_t % (mission.bulletin.formatArguments or {})
             if not uniqueTypes[b] then
                 uniqueTypes[b] = true
-                self.filterComboBox:addEntry(b)
+                self.filterComboBox:addEntry(b, b)
             end
         end
 
         if currentSelection then
-            for i = 0, self.filterComboBox.numEntries - 1 do
-                if self.filterComboBox:getItem(i) == currentSelection then
-                    self.filterComboBox:setSelectedIndexNoCallback(i)
-                    break
-                end
-            end
+            self.filterComboBox:setSelectedValueNoCallback(currentSelection)
         else
             self.filterComboBox:setSelectedIndexNoCallback(0)
         end
@@ -298,7 +289,7 @@ if onClient() then
         self.missions = {}
         local filterText = nil
         if self.filterComboBox and self.filterComboBox.selectedIndex > 0 then
-            filterText = self.filterComboBox:getItem(self.filterComboBox.selectedIndex)
+            filterText = self.filterComboBox.selectedValue
         end
 
         for _, mission in pairs(self.allMissions) do
@@ -314,14 +305,23 @@ if onClient() then
             return tonumber(s) or 0
         end
 
+        local difficultyOrder = {
+            ["Easy"] = 1,
+            ["Normal"] = 2,
+            ["Hard"] = 3,
+            ["Difficult"] = 4,
+            ["Extreme"] = 5,
+            ["Insane"] = 6
+        }
+
         local function compare(a, b)
             local valA, valB
             if self.currentSort == "description" then
                 valA = (a.bulletin.brief or "")%_t % (a.bulletin.formatArguments or {})
                 valB = (b.bulletin.brief or "")%_t % (b.bulletin.formatArguments or {})
             elseif self.currentSort == "difficulty" then
-                valA = (a.bulletin.difficulty or "")%_t % (a.bulletin.formatArguments or {})
-                valB = (b.bulletin.difficulty or "")%_t % (b.bulletin.formatArguments or {})
+                valA = difficultyOrder[a.bulletin.difficulty] or 0
+                valB = difficultyOrder[b.bulletin.difficulty] or 0
             elseif self.currentSort == "reward" then
                 valA = parseReward((a.bulletin.reward or "")%_t % (a.bulletin.formatArguments or {}))
                 valB = parseReward((b.bulletin.reward or "")%_t % (b.bulletin.formatArguments or {}))
