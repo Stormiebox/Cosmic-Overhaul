@@ -345,6 +345,38 @@ msgstr "ソース"
 msgid "No missions available in this sector!"
 msgstr "このセクターには利用可能なミッションはありません！"
 
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Bulletin Board"
+msgstr "掲示板"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Filter:"
+msgstr "フィルター:"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "All"
+msgstr "すべて"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Description"
+msgstr "説明"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Difficulty"
+msgstr "難易度"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Reward"
+msgstr "報酬"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Accept"
+msgstr "承認"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr "このミッションはBlack Market DLCの所有者のみ利用可能です。"
+
 
 # ==========data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -499,3 +531,76 @@ msgstr "補充中"
 #: data/scripts/player/ui/command_center_tab.lua:
 msgid "Refining"
 msgstr "精製中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall Ship"
+msgstr "船を呼び戻す"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall selected ship from its operation"
+msgstr "選択した船をオペレーションから呼び戻す"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining Ores"
+msgstr "鉱石の精製"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Looping Orders"
+msgstr "ループオーダー"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Route"
+msgstr "アクティブルート"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Continuous"
+msgstr "継続中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "In-Sector"
+msgstr "セクター内"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Idle"
+msgstr "待機中"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Destroyed"
+msgstr "破壊された"
+
+# ==========data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Upgrade to allow up to ${volume} transported volume per shuttle every ${seconds} seconds."
+msgstr "アップグレードすると、${seconds} 秒ごとにシャトルあたり最大 ${volume} の輸送ボリュームが可能になります。"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- None -"
+msgstr "- なし -"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- Garbage Output -"
+msgstr "- ゴミ出力 -"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Error with partner station!"
+msgstr "パートナーステーションでエラーが発生しました！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods!"
+msgstr "もう商品はありません！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more space."
+msgstr "もうスペースはありません。"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods on partner station!"
+msgstr "パートナーステーションにもう商品はありません！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Station at full capacity!"
+msgstr "ステーションは満杯です！"
+
+#: data/scripts/lib/tradingmanager.lua:
+msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
+msgstr "\\s(%d:%d) %s の人口が %d 単位の %s を消費し、¢%s の収益を上げました。"

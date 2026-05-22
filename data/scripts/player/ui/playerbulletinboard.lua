@@ -6,8 +6,11 @@ local self = PlayerBulletinBoard
 
 self.entityMissions = {}
 
+self.allMissions = {}
 self.missions = {}
 self.page = 0
+self.currentSort = "reward"
+self.sortReverse = true
 
 if onClient() then
 
@@ -21,12 +24,21 @@ if onClient() then
 
         local lister = UIVerticalLister(hsplit.top, 7, 10)
 
+        local filterRect = lister:placeCenter(vec2(lister.inner.width, 30))
+        local filterSplit = UIVerticalSplitter(filterRect, 10, 0, 0.25)
+        self.tab:createLabel(filterSplit.left.lower, "Filter:"%_t, 15)
+        self.filterComboBox = self.tab:createComboBox(filterSplit.right, "onFilterChanged")
+
         local vsplit = UIArbitraryVerticalSplitter(lister:placeCenter(vec2(lister.inner.width, 30)), 10, 5, 430, 530, 700) -- 430, 530 originally
 
-        self.tab:createLabel(vsplit:partition(0).lower, "Description"%_t, 15)
-        self.tab:createLabel(vsplit:partition(1).lower, "Difficulty"%_t, 15)
-        self.tab:createLabel(vsplit:partition(2).lower, "Reward"%_t, 15)
-        self.tab:createLabel(vsplit:partition(3).lower, "Source"%_t, 15)
+        self.btnDesc = self.tab:createButton(vsplit:partition(0), "Description"%_t, "onSortDescription")
+        self.btnDesc.textSize = 14
+        self.btnDiff = self.tab:createButton(vsplit:partition(1), "Difficulty"%_t, "onSortDifficulty")
+        self.btnDiff.textSize = 14
+        self.btnReward = self.tab:createButton(vsplit:partition(2), "Reward"%_t, "onSortReward")
+        self.btnReward.textSize = 14
+        self.btnSource = self.tab:createButton(vsplit:partition(3), "Source"%_t, "onSortSource")
+        self.btnSource.textSize = 14
 
         self.lines = {}
 
@@ -214,17 +226,127 @@ if onClient() then
     end
 
     function PlayerBulletinBoard.buildMissionsTable()
-        self.missions = {}
+        self.allMissions = {}
 
         for _, missions in pairs(self.entityMissions) do
             if missions.bulletins then
                 for __, bulletin in pairs(missions.bulletins) do
                     if bulletin ~= nil then
-                        table.insert(self.missions, { bulletin = bulletin, entityIndex = missions.entityIndex })
+                        table.insert(self.allMissions, { bulletin = bulletin, entityIndex = missions.entityIndex })
                     end
                 end
             end
         end
+
+        self.updateFilterComboBox()
+        self.applyFilterAndSort()
+    end
+
+    function PlayerBulletinBoard.updateFilterComboBox()
+        if not self.filterComboBox then return end
+
+        local currentIndex = self.filterComboBox.selectedIndex
+        local currentSelection = nil
+        if currentIndex > 0 then
+            currentSelection = self.filterComboBox:getItem(currentIndex)
+        end
+
+        self.filterComboBox:clear()
+        self.filterComboBox:addEntry("All"%_t)
+
+        local uniqueTypes = {}
+        for _, mission in pairs(self.allMissions) do
+            local b = (mission.bulletin.brief or "")%_t % (mission.bulletin.formatArguments or {})
+            if not uniqueTypes[b] then
+                uniqueTypes[b] = true
+                self.filterComboBox:addEntry(b)
+            end
+        end
+
+        if currentSelection then
+            for i = 0, self.filterComboBox.numEntries - 1 do
+                if self.filterComboBox:getItem(i) == currentSelection then
+                    self.filterComboBox:setSelectedIndexNoCallback(i)
+                    break
+                end
+            end
+        else
+            self.filterComboBox:setSelectedIndexNoCallback(0)
+        end
+    end
+
+    function PlayerBulletinBoard.onFilterChanged()
+        self.applyFilterAndSort()
+    end
+
+    function PlayerBulletinBoard.setSort(criteria)
+        if self.currentSort == criteria then
+            self.sortReverse = not self.sortReverse
+        else
+            self.currentSort = criteria
+            self.sortReverse = false
+        end
+        self.applyFilterAndSort()
+    end
+
+    function PlayerBulletinBoard.onSortDescription() self.setSort("description") end
+    function PlayerBulletinBoard.onSortDifficulty() self.setSort("difficulty") end
+    function PlayerBulletinBoard.onSortReward() self.setSort("reward") end
+    function PlayerBulletinBoard.onSortSource() self.setSort("source") end
+
+    function PlayerBulletinBoard.applyFilterAndSort()
+        self.missions = {}
+        local filterText = nil
+        if self.filterComboBox and self.filterComboBox.selectedIndex > 0 then
+            filterText = self.filterComboBox:getItem(self.filterComboBox.selectedIndex)
+        end
+
+        for _, mission in pairs(self.allMissions) do
+            local b = (mission.bulletin.brief or "")%_t % (mission.bulletin.formatArguments or {})
+            if not filterText or filterText == "All"%_t or b == filterText then
+                table.insert(self.missions, mission)
+            end
+        end
+
+        local function parseReward(r)
+            if not r then return 0 end
+            local s = tostring(r):gsub("[^%d]", "")
+            return tonumber(s) or 0
+        end
+
+        local function compare(a, b)
+            local valA, valB
+            if self.currentSort == "description" then
+                valA = (a.bulletin.brief or "")%_t % (a.bulletin.formatArguments or {})
+                valB = (b.bulletin.brief or "")%_t % (b.bulletin.formatArguments or {})
+            elseif self.currentSort == "difficulty" then
+                valA = (a.bulletin.difficulty or "")%_t % (a.bulletin.formatArguments or {})
+                valB = (b.bulletin.difficulty or "")%_t % (b.bulletin.formatArguments or {})
+            elseif self.currentSort == "reward" then
+                valA = parseReward((a.bulletin.reward or "")%_t % (a.bulletin.formatArguments or {}))
+                valB = parseReward((b.bulletin.reward or "")%_t % (b.bulletin.formatArguments or {}))
+            elseif self.currentSort == "source" then
+                local eA = Entity(a.entityIndex)
+                local eB = Entity(b.entityIndex)
+                valA = eA and eA.title or ""
+                valB = eB and eB.title or ""
+            else
+                return false
+            end
+
+            if valA == valB then return false end
+
+            if self.sortReverse then
+                return valA > valB
+            else
+                return valA < valB
+            end
+        end
+
+        table.sort(self.missions, compare)
+
+        self.page = 0
+        self.refreshList()
     end
 
     function PlayerBulletinBoard.update()
@@ -263,32 +385,6 @@ if onClient() then
         if refresh then
             self.refreshList()
         end
-    end
-
-    -- Sorting Missions
-    -- Still not fully implemented yet, work in progress!
-    function sortMissionsBy(criteria)
-        if criteria == "reward" then
-            table.sort(self.missions, function(a, b) return a.bulletin.reward > b.bulletin.reward end)
-        elseif criteria == "difficulty" then
-            table.sort(self.missions, function(a, b) return a.bulletin.difficulty > b.bulletin.difficulty end)
-        elseif criteria == "distance" then
-            table.sort(self.missions, function(a, b) return a.bulletin.distance < b.bulletin.distance end)
-        end
-        self.refreshList()
-    end
-
-    -- Filtering Missions by Type
-    -- Still not fully implemented yet, work in progress!
-    function filterMissionsByType(type)
-        local filteredMissions = {}
-        for _, mission in pairs(self.missions) do
-            if mission.bulletin.type == type then
-                table.insert(filteredMissions, mission)
-            end
-        end
-        self.missions = filteredMissions
-        self.refreshList()
     end
 
     function PlayerBulletinBoard.onSectorChanged()

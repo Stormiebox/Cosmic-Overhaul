@@ -345,6 +345,38 @@ msgstr "来源"
 msgid "No missions available in this sector!"
 msgstr "此星区没有可用任务！"
 
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Bulletin Board"
+msgstr "公告板"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Filter:"
+msgstr "过滤器:"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "All"
+msgstr "全部"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Description"
+msgstr "描述"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Difficulty"
+msgstr "难度"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Reward"
+msgstr "奖励"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Accept"
+msgstr "接受"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr "此任务仅适用于拥有黑市DLC的玩家。"
+
 
 # ==========data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -499,3 +531,76 @@ msgstr "补货"
 #: data/scripts/player/ui/command_center_tab.lua:
 msgid "Refining"
 msgstr "精炼"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall Ship"
+msgstr "召回飞船"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall selected ship from its operation"
+msgstr "将选定的飞船从其行动中召回"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining Ores"
+msgstr "精炼矿石"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Looping Orders"
+msgstr "循环命令"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Route"
+msgstr "活动路线"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Continuous"
+msgstr "持续"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "In-Sector"
+msgstr "星区内"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Idle"
+msgstr "空闲"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Destroyed"
+msgstr "已摧毁"
+
+# ==========data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Upgrade to allow up to ${volume} transported volume per shuttle every ${seconds} seconds."
+msgstr "升级以允许每 ${seconds} 秒每架穿梭机最多运输 ${volume} 体积。"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- None -"
+msgstr "- 无 -"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- Garbage Output -"
+msgstr "- 垃圾输出 -"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Error with partner station!"
+msgstr "合作空间站出错！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods!"
+msgstr "没有更多货物了！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more space."
+msgstr "没有更多空间了。"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods on partner station!"
+msgstr "合作空间站没有更多货物了！"
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Station at full capacity!"
+msgstr "空间站已满负荷！"
+
+#: data/scripts/lib/tradingmanager.lua:
+msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
+msgstr "\\s(%d:%d) %s 的人口消耗了 %d 单位的 %s，产生了 ¢%s 的收入。"

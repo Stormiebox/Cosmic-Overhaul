@@ -345,6 +345,38 @@ msgstr ""
 msgid "No missions available in this sector!"
 msgstr ""
 
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Bulletin Board"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Filter:"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "All"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Description"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Difficulty"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Reward"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Accept"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr ""
+
 
 # ==========data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -498,4 +530,77 @@ msgstr ""
 
 #: data/scripts/player/ui/command_center_tab.lua:
 msgid "Refining"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall Ship"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall selected ship from its operation"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Refining Ores"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Looping Orders"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Active Route"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Continuous"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "In-Sector"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Idle"
+msgstr ""
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Destroyed"
+msgstr ""
+
+# ==========data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Upgrade to allow up to ${volume} transported volume per shuttle every ${seconds} seconds."
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- None -"
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "- Garbage Output -"
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Error with partner station!"
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods!"
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more space."
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "No more goods on partner station!"
+msgstr ""
+
+#: data/scripts/entity/merchants/factory.lua:
+msgid "Station at full capacity!"
+msgstr ""
+
+#: data/scripts/lib/tradingmanager.lua:
+msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
 msgstr ""

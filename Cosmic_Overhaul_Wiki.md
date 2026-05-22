@@ -133,11 +133,12 @@ Improves transfer UI behavior, readability, and handling, including better visua
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Extends bulletin board accessibility from the player-side UI workflow for quicker mission access and reduced station-by-station friction.
+Extends bulletin board accessibility from the player-side UI workflow with advanced sorting and filtering.
 
 **Gameplay Impact:**
 - Faster mission acquisition.
 - Better flow when juggling fleets and objectives.
+- **Sorting & Filtering:** Sort by Reward, Difficulty, or Source, and filter by specific mission types to find exactly what you need.
 </details>
 
 ### 11) Factory Overview Tab (Economic Analytics)
@@ -268,6 +269,43 @@ Inverts Avorion's priority for player-issued travel commands via the map, placin
 **Gameplay Impact:**
 - Smoother map navigation and travel routing logic.
 - Better visual clarity on the galaxy map for where gates connect.
+</details>
+
+### 20) Command Center Tab
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds a centralized "Command Center" tab to the Player Window that tracks every active ship in your fleet.
+
+**Gameplay Impact:**
+- Real-time tracking of background simulation commands (Mine, Trade, etc.) and physical sector orders (Looping, Patrolling).
+- Displays ETAs for background missions and current status (Active, Recalled, Idle).
+- **Remote Recall:** Recall any ship from its operation directly from the list without opening the Galaxy Map.
+</details>
+
+### 21) Restored 1.0 Orders & Looping
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Restores the classic map orders from Avorion 1.0, enabling complex automation loops.
+
+**Gameplay Impact:**
+- **Restored Orders:** Mine, Refine, Salvage, and Loop.
+- **Advanced Looping:** Queue multiple orders (e.g., Jump -> Mine -> Jump -> Refine) and use the Loop command to repeat the entire sequence indefinitely.
+</details>
+
+### 22) Simulated Station Profits
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Simulates civilian traffic and commercial usage for player-owned service stations.
+
+**Gameplay Impact:**
+- Stations like Casinos, Repair Docks, and Resource Depots now generate passive income and resources as NPCs "dock" and use your facilities.
+- **Conflict Impact:** Revenue stops in War Zones or Hazard Zones, requiring you to protect your trade hubs to keep the credits flowing.
 </details>
 
 ---

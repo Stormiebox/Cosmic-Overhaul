@@ -48,14 +48,14 @@ function TradingManager:generateRevenue(good, amount)
 
     local x, y = Sector():getCoordinates()
     local description = string.format(
-        "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue.",
+        "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."%_T,
         x, y, station.name, math.floor(amount),
         good:pluralForm(math.floor(amount)),
         createMonetaryString(received))
 
     local faction = Faction()
     if faction then
-        faction:receive(description, received)
+        faction:receive(received, description)
     else
         print("Error: Faction is nil.")
     end
@@ -63,6 +63,8 @@ end
 
 function TradingManager:useUpBoughtGoods(timeStep)
     if not self.useUpGoodsEnabled then return end
+
+    if #self.boughtGoods == 0 then return end
 
     -- Dynamic tickTime based on custom activity level logic
     local activityLevel = self:getActivityLevel()
@@ -110,5 +112,20 @@ function TradingManager:useUpBoughtGoods(timeStep)
             end
         end
     end
+end
+
+-- Factory Tweaks
+local base_restoreTradingGoods = TradingManager.restoreTradingGoods
+function TradingManager:restoreTradingGoods(data)
+    if base_restoreTradingGoods then base_restoreTradingGoods(self, data) end
+    self.garbageStations = data.garbageStations or {}
+end
+
+local base_secureTradingGoods = TradingManager.secureTradingGoods
+function TradingManager:secureTradingGoods()
+    local data = {}
+    if base_secureTradingGoods then data = base_secureTradingGoods(self) end
+    data.garbageStations = self.garbageStations or {}
+    return data
 end
 -- Cosmic Overhaul Dynamic Stock Management ends here

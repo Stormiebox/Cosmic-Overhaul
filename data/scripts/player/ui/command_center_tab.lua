@@ -134,6 +134,14 @@ function CommandCenter.serverFetchData()
     cmdNames["Restock"] = "Restocking"%_t
     cmdNames["Refine"] = "Refining"%_t
 
+    -- OAL (1.0 Orders and Looping) integration support
+    cmdNames["co_mine"] = "Mining"%_t
+    cmdNames["co_refine"] = "Refining Ores"%_t
+    cmdNames["co_salvage"] = "Salvaging"%_t
+    cmdNames["co_loop"] = "Looping Orders"%_t
+
+    local backgroundShips = {}
+
     for shipName, cmd in pairs(secureData.commands) do
         -- Safety check: ensure cmd is a table and actually has a 'type' before parsing
         if type(cmd) == "table" and cmd.type then
@@ -148,6 +156,8 @@ function CommandCenter.serverFetchData()
                 else
                     entry.location = string.format("(%d:%d) to (%d:%d)", cmd.area.lower.x, cmd.area.lower.y, cmd.area.upper.x, cmd.area.upper.y)
                 end
+            elseif cmd.type == "co_loop" or cmd.type == "Loop" then
+                entry.location = "Active Route"%_t
             else
                 entry.location = "Unknown"%_t
             end
@@ -158,8 +168,12 @@ function CommandCenter.serverFetchData()
                     entry.status = "Recalled"%_t
                     entry.eta = "-"
                 else
-                    local remaining = math.max(0, (cmd.data.duration or 0) - (cmd.data.runTime or 0))
-                    entry.eta = createReadableShortTimeString(math.floor(remaining))
+                    if cmd.type == "co_loop" or cmd.type == "Loop" then
+                        entry.eta = "Continuous"%_t
+                    else
+                        local remaining = math.max(0, (cmd.data.duration or 0) - (cmd.data.runTime or 0))
+                        entry.eta = createReadableShortTimeString(math.floor(remaining))
+                    end
                     entry.status = "Active"%_t
                 end
             else
@@ -168,6 +182,26 @@ function CommandCenter.serverFetchData()
             end
 
             table.insert(formattedData, entry)
+            backgroundShips[entry.shipName] = true
+        end
+    end
+
+    -- Also fetch standard physical orders for loaded/unloaded ships tracked by the server
+    local ok, shipNames = pcall(function() return player:getShipNames() end)
+    if ok and shipNames and type(shipNames) == "table" then
+        for _, sName in pairs(shipNames) do
+            if not backgroundShips[sName] then
+                local okStatus, status = pcall(function() return player:getShipStatus(sName) end)
+                if okStatus and status and status ~= "" and status ~= "Idle"%_t and status ~= "Destroyed"%_t then
+                    local entry = {}
+                    entry.shipName = sName
+                    entry.commandName = status
+                    entry.location = "In-Sector"%_t
+                    entry.eta = "Continuous"%_t
+                    entry.status = "Active"%_t
+                    table.insert(formattedData, entry)
+                end
+            end
         end
     end
 
