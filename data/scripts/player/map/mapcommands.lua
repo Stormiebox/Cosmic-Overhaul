@@ -53,6 +53,51 @@ if onClient() then
 
         OALMapCommands._updateOrderButtons()
     end
+
+    -- Intercept the keyboard event to check for the [T] key
+    local original_onGalaxyMapKeyboardEvent = MapCommands.onGalaxyMapKeyboardEvent
+    function MapCommands.onGalaxyMapKeyboardEvent(key, pressed)
+        if original_onGalaxyMapKeyboardEvent then
+            original_onGalaxyMapKeyboardEvent(key, pressed)
+        end
+
+        if key == KeyboardKey._T and pressed then
+            local firstPortrait = MapCommands.getFirstSelectedPortrait()
+            if firstPortrait then
+                Player():sendChatMessage(string.format("/teleporttoship %i %i %i \"%s\"", firstPortrait.coordinates.x, firstPortrait.coordinates.y, firstPortrait.owner, firstPortrait.name), 1)
+            end
+        elseif key == KeyboardKey._C and pressed and Keyboard().shiftPressed then
+            -- Determine context: Alliance home if flying an alliance ship, else Player home
+            local player = Player()
+            local craft = player.craft
+            local faction = player
+
+            if craft and craft.factionIndex == player.allianceIndex then
+                faction = player.alliance
+            end
+
+            local hx, hy = faction:getHomeSectorCoordinates()
+
+            if hx and hy then
+                local galaxyMap = GalaxyMap()
+                galaxyMap:setSelectedCoordinates(hx, hy)
+                galaxyMap:lookAtSmooth(hx, hy)
+            end
+        end
+    end
+
+    -- Update the input hints UI to display the new hotkeys
+    local original_updateInputHints = MapCommands.updateInputHints
+    function MapCommands.updateInputHints()
+        if original_updateInputHints then original_updateInputHints() end
+        if inputHints and inputHints.label then
+            local hints = "[Shift+C] Center on Home"%_t
+            if #shipList.selectedPortraits > 0 then
+                hints = "[T] Switch to selected"%_t .. "   " .. hints
+            end
+            inputHints.label.caption = inputHints.label.caption .. "\n" .. hints
+        end
+    end
 end
 
 -- Base commands with fixed integer IDs from vanilla

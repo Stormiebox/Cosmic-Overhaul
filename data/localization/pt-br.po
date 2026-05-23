@@ -604,3 +604,44 @@ msgstr "Estação na capacidade máxima!"
 #: data/scripts/lib/tradingmanager.lua:
 msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
 msgstr "\\s(%d:%d) A população de %s consumiu %d unidades de %s, gerando ¢%s em receita."
+
+# ==========data/scripts/player/map/mapcommands.lua ==========
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[Shift+C] Center on Home"
+msgstr "[Shift+C] Centralizar na Base"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[T] Switch to selected"
+msgstr "[T] Mudar para o selecionado"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Undo"
+msgstr "Desfazer"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Patrol Sector"
+msgstr "Patrulhar setor"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Attack Enemies"
+msgstr "Atacar inimigos"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Repair"
+msgstr "Reparar"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Mine"
+msgstr "Minerar"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Refine Ores"
+msgstr "Refinar minérios"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Salvage"
+msgstr "Sucatear"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Loop"
+msgstr "Repetir"

@@ -604,3 +604,44 @@ msgstr ""
 #: data/scripts/lib/tradingmanager.lua:
 msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
 msgstr ""
+
+# ==========data/scripts/player/map/mapcommands.lua ==========
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[Shift+C] Center on Home"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[T] Switch to selected"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Undo"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Patrol Sector"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Attack Enemies"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Repair"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Mine"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Refine Ores"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Salvage"
+msgstr ""
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Loop"
+msgstr ""

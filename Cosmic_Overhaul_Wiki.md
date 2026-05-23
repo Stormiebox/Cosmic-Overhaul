@@ -382,6 +382,24 @@ Simulates civilian traffic and commercial usage for player-owned service station
 
 </details>
 
+### 23) Galaxy Map Hotkeys & Smart Centering
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds highly requested quality-of-life hotkeys directly to the galaxy map for faster fleet management and navigation.
+
+**Details:**
+- **[T] Switch to Selected:** Instantly teleport to and take control of the ship you currently have selected on the galaxy map.
+- **[Shift + C] Center on Home:** Instantly centers the galaxy map camera on your home sector. Dynamically centers on your Alliance home sector if you are piloting an alliance ship, or your personal home sector if piloting a personal ship.
+
+**Gameplay Impact:**
+- Drastically reduces mouse travel and clicking when managing large fleets.
+- Faster recovery when panning across massive distances on the map.
+
+</details>
+
 ---
 
 ## Command & Captain Enhancements

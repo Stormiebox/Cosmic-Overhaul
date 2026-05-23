@@ -604,3 +604,44 @@ msgstr "空间站已满负荷！"
 #: data/scripts/lib/tradingmanager.lua:
 msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
 msgstr "\\s(%d:%d) %s 的人口消耗了 %d 单位的 %s，产生了 ¢%s 的收入。"
+
+# ==========data/scripts/player/map/mapcommands.lua ==========
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[Shift+C] Center on Home"
+msgstr "[Shift+C] 视角居中于母星"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "[T] Switch to selected"
+msgstr "[T] 切换到所选"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Undo"
+msgstr "撤销"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Patrol Sector"
+msgstr "巡逻星区"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Attack Enemies"
+msgstr "攻击敌人"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Repair"
+msgstr "修理"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Mine"
+msgstr "采矿"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Refine Ores"
+msgstr "精炼矿石"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Salvage"
+msgstr "打捞"
+
+#: data/scripts/player/map/mapcommands.lua:
+msgid "Loop"
+msgstr "循环"
