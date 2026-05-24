@@ -5,7 +5,7 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.1.1]
+## [3.2.0]
 ### Added
 - **Galaxy Map Hotkeys**: Players can now quickly switch to their selected ship on the galaxy map using the `[T]` key.
 - **Smart Camera Centering**: Using `[Shift + C]` on the galaxy map will now instantly center the camera on your home sector (dynamically choosing your personal or alliance home sector based on the ship you are currently piloting).
