@@ -15,7 +15,8 @@ return {
                     key = "profitableStationsInterval",
                     type = "number",
                     title = "Profitable Stations Interval (s)",
-                    description = "Update interval for profitable stations simulation. (Default: 600s / 10m | Min: 30s | Max: 7200s / 2h)",
+                    description =
+                    "Update interval for profitable stations simulation. (Default: 600s / 10m | Min: 30s | Max: 7200s / 2h)",
                     default = 600,
                     min = 30,
                     max = 7200,
@@ -41,6 +42,42 @@ return {
                     type = "bool",
                     title = "Enable Exotic/Legendary Salvage",
                     description = "Applies weighted rarity upgrades to salvage-generated items. (Default: true)",
+                    default = true,
+                },
+            },
+        },
+        {
+            title = "Map Commands & Captains",
+            options = {
+                {
+                    key = "captainEfficientTravelMultiplier",
+                    type = "slider",
+                    title = "Travel Time Multiplier",
+                    description =
+                    "Scales travel time for Navigators. Lower is faster. (Default: 85% | Min: 25% | Max: 200%)",
+                    default = 85,
+                    min = 25,
+                    max = 200,
+                    step = 1,
+                    unit = "%",
+                },
+                {
+                    key = "captainSafeAttackChanceMultiplier",
+                    type = "slider",
+                    title = "Ambush Chance Multiplier",
+                    description =
+                    "Scales ambush chance for Navigators. Lower is safer. (Default: 60% | Min: 5% | Max: 200%)",
+                    default = 60,
+                    min = 5,
+                    max = 200,
+                    step = 1,
+                    unit = "%",
+                },
+                {
+                    key = "enableGateTravelPriority",
+                    type = "bool",
+                    title = "Enable Gate Travel Priority",
+                    description = "Ships prioritize gates/wormholes when executing map travel orders. (Default: true)",
                     default = true,
                 },
             },

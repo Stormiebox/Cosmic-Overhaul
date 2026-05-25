@@ -4,6 +4,7 @@ include("stringutility")
 include("randomext")
 include("callable")
 include("playerstationutils")
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 local cw_success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
 local UpgradeGenerator = include("upgradegenerator")()
 local TurretGenerator = include("sectorturretgenerator")()
@@ -44,7 +45,8 @@ function ManageStationIncomes.onTradeSuccess(stationId, buyerId)
 end
 
 function ManageStationIncomes.getUpdateInterval()
-    return 120
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    return cfg.profitableStationsInterval or 120
 end
 
 function ManageStationIncomes.isStationReserved(station)
@@ -64,12 +66,16 @@ function ManageStationIncomes.giveStationResources(station, _seller)
     local faction = Faction(station.factionIndex)
     local amounts = ManageStationIncomes.getResourceIncome()
     local mapping = ManageStationIncomes.getMapping(station)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
+
     if not faction then return end
 
     for i = 1, NumMaterials() do
         local amount = math.floor(amounts[i])
         local mat = Material(i-1)
         amount = math.floor(amount*mapping.quantity)
+        amount = math.floor(amount*payoutMult)
         if amount > 0 then
             local amountStr = createMonetaryString(amount) .. " " .. mat.name
             local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
@@ -109,6 +115,8 @@ end
 function ManageStationIncomes.giveStationMoney(station, _seller)
     local faction = Faction(station.factionIndex)
     local mapping = ManageStationIncomes.getMapping(station)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
     if not faction then return end
 
     -- Cosmic Overhaul Balance tweak: Reduced base payout from 16k to 8k
@@ -116,6 +124,7 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     if math.random() < 0.2 then money = money*2 end
     money = math.floor(money*mapping.quantity)
     money = money*ManageStationIncomes.getWarHeatMultiplier()
+    money = math.floor(money*payoutMult)
 
     local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
     local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
@@ -143,6 +152,9 @@ function ManageStationIncomes.getResourceIncome()
     local x, y = Sector():getCoordinates()
     local probabilities = Balancing_GetMaterialProbability(x, y)
     local richness = Balancing_GetSectorRichnessFactor(x, y, 1)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
+
     local amounts = {}
 
     for i = 1, NumMaterials() do
@@ -154,6 +166,7 @@ function ManageStationIncomes.getResourceIncome()
             mats = (0.5+math.random()/2)*3500
             mats = mats*matRichness
             mats = mats*ManageStationIncomes.getWarHeatMultiplier()
+            mats = mats*payoutMult
             if random():test(0.2) then
                 mats = mats*2
                 if random():test(0.1) then mats = mats*2 end
@@ -193,6 +206,9 @@ function ManageStationIncomes.isInstantTrade()
 end
 
 function ManageStationIncomes.updateServer(timeStep)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    if cfg.enableProfitableStations == false then return end
+
     if not ManageStationIncomes.isSectorTradeable() then return end
     local stations = { Sector():getEntitiesByType(EntityType.Station) }
     for _, station in pairs(stations) do

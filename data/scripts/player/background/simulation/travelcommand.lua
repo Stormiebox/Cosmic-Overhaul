@@ -3,6 +3,7 @@ local mcm_lastPrediction
 
 local CaptainClass = include("captainclass")
 local SimulationUtility = include("simulationutility")
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_TravelCommand_initialize_original = TravelCommand.initialize
 function TravelCommand:initialize(...)
@@ -41,17 +42,17 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
     -- Navigators and Explorers have supreme mastery over long-distance routes
     if captain:hasClass(CaptainClass.Navigator) then
         if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
-            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value * 0.75
+            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.75
         end
         if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
-            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value * 0.50
+            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.50
         end
     elseif captain:hasClass(CaptainClass.Explorer) then
         if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
-            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value * 0.85
+            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.85
         end
         if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
-            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value * 0.75
+            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.75
         end
     end
 
@@ -60,12 +61,14 @@ end
 
 local mcm_TravelCommand_generateAssessmentFromPrediction_original = TravelCommand.generateAssessmentFromPrediction
 function TravelCommand:generateAssessmentFromPrediction(prediction, captain, ...)
-    local lines = mcm_TravelCommand_generateAssessmentFromPrediction_original and mcm_TravelCommand_generateAssessmentFromPrediction_original(self, prediction, captain, ...) or {}
+    local lines = mcm_TravelCommand_generateAssessmentFromPrediction_original and
+    mcm_TravelCommand_generateAssessmentFromPrediction_original(self, prediction, captain, ...) or {}
     if type(lines) == "string" and lines == "" then return "" end
     if type(lines) ~= "table" then return lines end
 
     if captain:hasClass(CaptainClass.Navigator) then
-        table.insert(lines, 2, "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"%_t)
+        table.insert(lines, 2,
+            "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"%_t)
     end
     return lines
 end

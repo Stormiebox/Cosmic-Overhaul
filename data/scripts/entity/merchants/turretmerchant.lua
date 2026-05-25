@@ -5,7 +5,7 @@ include ("randomext")
 include ("faction")
 include ("stringutility")
 include ("weapontype")
-local Multiplier = 5
+local Multiplier = 1.5 -- Nerfed from 5 (65 turrets). 1.5 generates ~19 turrets, perfect for restocking.
 local ShopAPI = include ("shop")
 local SectorTurretGenerator = include ("sectorturretgenerator")
 
@@ -119,19 +119,19 @@ function TurretMerchant.shop:addItems()
         pair.amount = amount
 
         if turret.rarity.value == -1 then    -- Petty
-            pair.amount = math.random(11, 35)
+            pair.amount = math.random(5, 12)
         elseif turret.rarity.value == 0 then -- Common
-            pair.amount = math.random(9, 25)
+            pair.amount = math.random(4, 9)
         elseif turret.rarity.value == 1 then -- Uncommon
-            pair.amount = math.random(7, 15)
+            pair.amount = math.random(3, 6)
         elseif turret.rarity.value == 2 then -- Rare
-            pair.amount = math.random(5, 9)
-        elseif turret.rarity.value == 3 then -- Exceptional
             pair.amount = math.random(2, 4)
-        elseif turret.rarity.value == 4 then -- Exotic
-            pair.amount = math.random(1, 3)
-        elseif turret.rarity.value == 5 then -- Legendary
+        elseif turret.rarity.value == 3 then -- Exceptional
             pair.amount = math.random(1, 2)
+        elseif turret.rarity.value == 4 then -- Exotic
+            pair.amount = 1
+        elseif turret.rarity.value == 5 then -- Legendary
+            pair.amount = 1
         end
 
         table.insert(turrets, pair)

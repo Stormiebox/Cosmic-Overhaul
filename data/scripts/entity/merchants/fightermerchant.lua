@@ -78,8 +78,8 @@ function FighterMerchant.shop:addItems()
     local allFighters = {}
     local generator = SectorFighterGenerator()
 
-    -- Cosmic Overhaul intent: increase fighter amount/variety at merchants
-    local fighterCount = 33 + math.floor(33 * math.random())
+    -- Nerfed from 33-66. With on-demand restocking, a smaller, curated selection is better.
+    local fighterCount = 8 + math.floor(8 * math.random())
     for i = 1, fighterCount do
         local x, y = Sector():getCoordinates()
         local fighter = generator:generate(x, y)
@@ -87,7 +87,7 @@ function FighterMerchant.shop:addItems()
         if isFighterPriceSafe(fighter) then
             local pair = {}
             pair.fighter = fighter
-            pair.amount = getInt(25, 80)
+            pair.amount = getInt(10, 30)
             table.insert(allFighters, pair)
         end
     end

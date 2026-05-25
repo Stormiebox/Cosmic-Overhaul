@@ -61,7 +61,7 @@ function EquipmentDock.shop:addItems()
     end
 
     local counter = 0
-    while counter < 125 do -- Change this value to increase or decrease amount of subsystems generated
+    while counter < 18 do -- Nerfed from 125. With on-demand restocking, a smaller, curated selection is better.
         local prototype = generator:generateSectorSystem(x, y, nil, rarities)
 
         local script = prototype.script
@@ -80,7 +80,7 @@ function EquipmentDock.shop:addItems()
     table.sort(systems, sortSystems)
 
     for _, system in pairs(systems) do
-        EquipmentDock.shop:add(system, getInt(5, 15))
+        EquipmentDock.shop:add(system, getInt(1, 3))
     end
 end
 
