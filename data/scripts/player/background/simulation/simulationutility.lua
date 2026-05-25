@@ -16,9 +16,9 @@ end
 -- provide incremental information
 function SimulationUtility.getIncrementalReportAssessmentLines()
     local lines = {
-        "I'll have regular data for you as the mission progresses."%_t,
-        "You'll receive frequent updates as we learn more."%_t,
-        "Expect a continual flow of new information."%_t,
+        "I'll have regular data for you as the mission progresses."%_T,
+        "You'll receive frequent updates as we learn more."%_T,
+        "Expect a continual flow of new information."%_T,
     }
     return lines
 end
@@ -30,14 +30,14 @@ end
 -- scan on (e.g. Scout) mission time
 function SimulationUtility.getDeepScanAssessmentLines(deepScanRange)
     if not deepScanRange or deepScanRange == 0 then return {
-        red("We have no deep scan ability and will have to visit every sector."%_t),
-        red("Travel time will be extreme without more deep scan coverage."%_t),
-        red("We can't see where hidden mass sectors are without better radar."%_t),
+        red("We have no deep scan ability and will have to visit every sector."%_T),
+        red("Travel time will be extreme without more deep scan coverage."%_T),
+        red("We can't see where hidden mass sectors are without better radar."%_T),
     }
     elseif deepScanRange < 3 then return {
-        yellow("With our weak sensors, we'll waste a lot of time jumping blindly."%_t),
-        yellow("We'd be a lot faster with more deep scan coverage."%_t),
-        yellow("Hidden mass sectors will be hard to find without better radar."%_t),
+        yellow("With our weak sensors, we'll waste a lot of time jumping blindly."%_T),
+        yellow("We'd be a lot faster with more deep scan coverage."%_T),
+        yellow("Hidden mass sectors will be hard to find without better radar."%_T),
     }
     else return {}
     end
@@ -48,9 +48,9 @@ end
 
 function SimulationUtility.getSameSectorDepotLines()
     return {
-        green("There's a refinery right here, so this will be fast and safe."%_t),
-        green("Refining will be no problem with a depot right in this sector."%_t),
-        green("I can autopilot right to the depot in this sector."%_t),
+        green("There's a refinery right here, so this will be fast and safe."%_T),
+        green("Refining will be no problem with a depot right in this sector."%_T),
+        green("I can autopilot right to the depot in this sector."%_T),
     }
 end
 function SimulationUtility.getSameSectorDepotLine(seedValue)
@@ -60,9 +60,9 @@ end
 
 function SimulationUtility.getTradeCharityLines()
     return {
-        green("People are sure to appreciate our work here."%_t),
-        green("This will help a lot of people."%_t),
-        green("Our generosity will help to build trust."%_t),
+        green("People are sure to appreciate our work here."%_T),
+        green("This will help a lot of people."%_T),
+        green("Our generosity will help to build trust."%_T),
     }
 end
 function SimulationUtility.getTradeCharityLine(seedValue)
@@ -71,9 +71,9 @@ end
 
 function SimulationUtility.getImperfectTradeClassLines()
     return {
-        yellow("This isn't my specialty, but I'll see what I can do."%_t),
-        yellow("A merchant would do this better, but I can give it a go."%_t),
-        yellow("No merchants available, commander?"%_t),
+        yellow("This isn't my specialty, but I'll see what I can do."%_T),
+        yellow("A merchant would do this better, but I can give it a go."%_T),
+        yellow("No merchants available, commander?"%_T),
     }
 end
 function SimulationUtility.getImperfectTradeClassLine(seedValue)

@@ -6,11 +6,9 @@ shipinfo = {}
 local ships = {}
 
 if onClient() then
-
 	local tab, lister, frame, rowList, update, coordinates
 
 	function shipinfo.initialize()
-
 		rowList = {}
 		tab = PlayerWindow():createTab("ShipInfo", "data/textures/icons/rss.png", "Ship Info")
 
@@ -39,21 +37,20 @@ if onClient() then
 			update = true
 			updateTimer = 0.5
 		else
-			updateTimer = updateTimer - timeStep
+			updateTimer = updateTimer-timeStep
 		end
 	end
 
 	function shipinfo.handlePreRenderHud(state)
-    
 		if update == true then
 			local player = Player()
-			
+
 			local shipsCount = tablelength(ships)
-			local rowCount = tablelength(rowList)			
-			
+			local rowCount = tablelength(rowList)
+
 			local num = 0
 			if shipsCount > rowCount then
-				for key, ship in pairs (ships) do
+				for key, ship in pairs(ships) do
 					if ship ~= nil then
 						if rowList[num] == nil then
 							local rect = lister:placeRight(vec2(lister.inner.width, 25))
@@ -62,10 +59,11 @@ if onClient() then
 
 							local vSplit = UIVerticalMultiSplitter(rect, 10, 0, 2)
 							local vSplit2 = UIVerticalMultiSplitter(vSplit:partition(2), 0, 0, 1)
-							rowList[num]["nameLabel"] = frame:createLabel(vSplit:partition(0), "*Ship*", 16)
-							rowList[num]["statusLabel"] = frame:createLabel(vSplit:partition(1), "*Status*", 16)
-							rowList[num]["percentLabel"] = frame:createLabel(vSplit2:partition(0), "*Cargo*", 16)
-							rowList[num]["typeIcon"] = frame:createPicture(vSplit2:partition(1), "data/textures/icons/player.png")
+							rowList[num]["nameLabel"] = frame:createLabel(vSplit:partition(0), "*Ship*"%_t, 16)
+							rowList[num]["statusLabel"] = frame:createLabel(vSplit:partition(1), "*Status*"%_t, 16)
+							rowList[num]["percentLabel"] = frame:createLabel(vSplit2:partition(0), "*Cargo*"%_t, 16)
+							rowList[num]["typeIcon"] = frame:createPicture(vSplit2:partition(1),
+								"data/textures/icons/player.png")
 							rowList[num]["typeIcon"].isIcon = true
 							rowList[num]["typeIcon"].height = 20
 							rowList[num]["typeIcon"].width = 20
@@ -76,14 +74,14 @@ if onClient() then
 							rowList[num]["percentLabel"].visible = true
 							rowList[num]["typeIcon"].visible = true
 						end
-						num = num + 1
+						num = num+1
 					end
 				end
 			end
 
 			num = shipsCount
 			if shipsCount <= rowCount then
-				for k, v in pairs (rowList) do
+				for k, v in pairs(rowList) do
 					if k >= num then
 						v["nameLabel"].visible = false
 						v["statusLabel"].visible = false
@@ -97,99 +95,115 @@ if onClient() then
 					end
 				end
 			end
-	
+
 			-- add sorting by name (eventually)
 			-- list alliance ships and playerships separately
 			-- player ships first
 			num = 0
-			for key, ship in pairs (ships) do
-				if ship ~= nil then		
-					if(ship.allianceOwned) then
+			for key, ship in pairs(ships) do
+				if ship ~= nil then
+					if (ship.allianceOwned) then
 					else
-					local occupiedCargoSpace = ((ship.occupiedCargoSpace >= 0) and ship.occupiedCargoSpace or 0)
-					local maxCargoSpace = ((ship.maxCargoSpace >= 0) and ship.maxCargoSpace or 0)
-					local hullPoints = ((ship.maxDurability >= 0) and ship.maxDurability or 0)
-					local shieldPoints = ((ship.shieldMaxDurability >= 0) and ship.shieldMaxDurability or 0)
-					local hull = ((hullPoints > 0) and round(ship.durability) or 0)
-					local shield = ((shieldPoints > 0) and round(ship.shieldDurability) or 0)
-			
-					if hull > 1000000 then hull = round((hull / 1000000),2) .. "M"
-					else if hull > 1000 then hull = round((hull / 1000),2) .. "k" end
+						local occupiedCargoSpace = ((ship.occupiedCargoSpace >= 0) and ship.occupiedCargoSpace or 0)
+						local maxCargoSpace = ((ship.maxCargoSpace >= 0) and ship.maxCargoSpace or 0)
+						local hullPoints = ((ship.maxDurability >= 0) and ship.maxDurability or 0)
+						local shieldPoints = ((ship.shieldMaxDurability >= 0) and ship.shieldMaxDurability or 0)
+						local hull = ((hullPoints > 0) and round(ship.durability) or 0)
+						local shield = ((shieldPoints > 0) and round(ship.shieldDurability) or 0)
+
+						if hull > 1000000 then
+							hull = round((hull/1000000), 2) .. "M"
+						elseif hull > 1000 then
+							hull = round((hull/1000), 2) .. "k"
+						end
+						if shield > 1000000 then
+							shield = round((shield/1000000), 2) .. "M"
+						elseif shield > 1000 then
+							shield = round((shield/1000), 2) .. "k"
+						end
+
+						rowList[num]["nameLabel"].caption = ship.name
+
+						rowList[num]["nameLabel"].tooltip = "(" .. ship.xPos .. ":" .. ship.yPos .. ")"
+						--rowList[num]["nameLabel"].mouseDownFunction =
+
+						rowList[num]["statusLabel"].caption = ((hullPoints > 0) and round((ship.durability/ship.maxDurability)*100, 1) or 0) ..
+						"% / " ..
+						((shieldPoints > 0) and round((ship.shieldDurability/ship.shieldMaxDurability)*100, 1) or 0) ..
+						"%"
+						rowList[num]["statusLabel"].tooltip = hull .. " / " .. shield
+
+						rowList[num]["percentLabel"].caption = ((maxCargoSpace > 0) and round(100/maxCargoSpace*occupiedCargoSpace, 1) or 0) ..
+						"%"
+						rowList[num]["percentLabel"].tooltip = ((maxCargoSpace > 0) and round(occupiedCargoSpace) or 0) ..
+						" / " .. ((maxCargoSpace > 0) and round(maxCargoSpace) or 0)
+
+						rowList[num]["typeIcon"].picture = "data/textures/icons/player.png"
+						rowList[num]["typeIcon"].tooltip = "Player"%_t
+						num = num+1
 					end
-					if shield > 1000000 then shield = round((shield / 1000000),2) .. "M"
-					else if shield > 1000 then shield = round((shield / 1000),2) .. "k" end
-					end
-					
-					rowList[num]["nameLabel"].caption = ship.name
-
-					rowList[num]["nameLabel"].tooltip = "(" .. ship.xPos .. ":" .. ship.yPos .. ")"
-					--rowList[num]["nameLabel"].mouseDownFunction = 
-					
-					rowList[num]["statusLabel"].caption = ((hullPoints > 0) and round((ship.durability / ship.maxDurability)*100,1) or 0) .. "% / " .. ((shieldPoints > 0) and round((ship.shieldDurability / ship.shieldMaxDurability)*100,1) or 0) .. "%"
-					rowList[num]["statusLabel"].tooltip =  hull .. " / " .. shield
-
-					rowList[num]["percentLabel"].caption = ((maxCargoSpace > 0) and round(100 / maxCargoSpace * occupiedCargoSpace,1) or 0) .. "%"
-					rowList[num]["percentLabel"].tooltip = ((maxCargoSpace > 0) and round(occupiedCargoSpace) or 0) .. " / " .. ((maxCargoSpace > 0) and round(maxCargoSpace) or 0)
-
-					rowList[num]["typeIcon"].picture = "data/textures/icons/player.png"
-					rowList[num]["typeIcon"].tooltip = "Player"
-					num = num + 1
-					end			
 				end
 			end
-			
+
 			-- alliance ships second
-			for key, ship in pairs (ships) do
-				if ship ~= nil then		
-					if(ship.allianceOwned) then
-					local occupiedCargoSpace = ((ship.occupiedCargoSpace >= 0) and ship.occupiedCargoSpace or 0)
-					local maxCargoSpace = ((ship.maxCargoSpace >= 0) and ship.maxCargoSpace or 0)
-					local hullPoints = ((ship.maxDurability >= 0) and ship.maxDurability or 0)
-					local shieldPoints = ((ship.shieldMaxDurability >= 0) and ship.shieldMaxDurability or 0)
-					local hull = ((hullPoints > 0) and round(ship.durability) or 0)
-					local shield = ((shieldPoints > 0) and round(ship.shieldDurability) or 0)
+			for key, ship in pairs(ships) do
+				if ship ~= nil then
+					if (ship.allianceOwned) then
+						local occupiedCargoSpace = ((ship.occupiedCargoSpace >= 0) and ship.occupiedCargoSpace or 0)
+						local maxCargoSpace = ((ship.maxCargoSpace >= 0) and ship.maxCargoSpace or 0)
+						local hullPoints = ((ship.maxDurability >= 0) and ship.maxDurability or 0)
+						local shieldPoints = ((ship.shieldMaxDurability >= 0) and ship.shieldMaxDurability or 0)
+						local hull = ((hullPoints > 0) and round(ship.durability) or 0)
+						local shield = ((shieldPoints > 0) and round(ship.shieldDurability) or 0)
 
-					if hull > 1000000 then hull = round((hull / 1000000),2) .. "M"
-					else if hull > 1000 then hull = round((hull / 1000),2) .. "k" end
-					end
-					if shield > 1000000 then shield = round((shield / 1000000),2) .. "M"
-					else if shield > 1000 then shield = round((shield / 1000),2) .. "k" end
-					end
-					
-					rowList[num]["nameLabel"].caption = ship.name
-					rowList[num]["nameLabel"].tooltip = "(" .. ship.xPos .. ":" .. ship.yPos .. ")"
-					
-					rowList[num]["statusLabel"].caption = ((hullPoints > 0) and round((ship.durability / ship.maxDurability)*100,1) or 0) .. "% / " .. ((shieldPoints > 0) and round((ship.shieldDurability / ship.shieldMaxDurability)*100,1) or 0) .. "%"
-					rowList[num]["statusLabel"].tooltip =  hull .. " / " .. shield
-					
-					rowList[num]["percentLabel"].caption = ((maxCargoSpace > 0) and round(100 / maxCargoSpace * occupiedCargoSpace,1) or 0) .. "%"
-					rowList[num]["percentLabel"].tooltip = ((maxCargoSpace > 0) and round(occupiedCargoSpace) or 0) .. " / " .. ((maxCargoSpace > 0) and round(maxCargoSpace) or 0)
+						if hull > 1000000 then
+							hull = round((hull/1000000), 2) .. "M"
+						elseif hull > 1000 then
+							hull = round((hull/1000), 2) .. "k"
+						end
+						if shield > 1000000 then
+							shield = round((shield/1000000), 2) .. "M"
+						elseif shield > 1000 then
+							shield = round((shield/1000), 2) .. "k"
+						end
 
-					rowList[num]["typeIcon"].picture = "data/textures/icons/alliance.png"
-					rowList[num]["typeIcon"].tooltip = "Alliance"
-					num = num + 1
+						rowList[num]["nameLabel"].caption = ship.name
+						rowList[num]["nameLabel"].tooltip = "(" .. ship.xPos .. ":" .. ship.yPos .. ")"
+
+						rowList[num]["statusLabel"].caption = ((hullPoints > 0) and round((ship.durability/ship.maxDurability)*100, 1) or 0) ..
+						"% / " ..
+						((shieldPoints > 0) and round((ship.shieldDurability/ship.shieldMaxDurability)*100, 1) or 0) ..
+						"%"
+						rowList[num]["statusLabel"].tooltip = hull .. " / " .. shield
+
+						rowList[num]["percentLabel"].caption = ((maxCargoSpace > 0) and round(100/maxCargoSpace*occupiedCargoSpace, 1) or 0) ..
+						"%"
+						rowList[num]["percentLabel"].tooltip = ((maxCargoSpace > 0) and round(occupiedCargoSpace) or 0) ..
+						" / " .. ((maxCargoSpace > 0) and round(maxCargoSpace) or 0)
+
+						rowList[num]["typeIcon"].picture = "data/textures/icons/alliance.png"
+						rowList[num]["typeIcon"].tooltip = "Alliance"%_t
+						num = num+1
 					else
 					end
 				end
-			end	
+			end
 			update = false
 		end
 	end
-	
+
 	function shipinfo.cargoSpaceUpdateShipClient(ship)
 		ships[ship.number] = ship
 	end
 
 	function shipinfo.cargoSpaceDeleteShipClient(shipNumber)
 		if ships[shipNumber] ~= nil then
-		ships[shipNumber] = nil
+			ships[shipNumber] = nil
 		end
 	end
-
 end
 
 if onServer() then
-
 	function shipinfo.cargoSpaceUpdateShip(ship)
 		if ships[ship.number] == nil then
 			ships[ship.number] = ship
@@ -208,5 +222,4 @@ if onServer() then
 			invokeClientFunction(Player(), "cargoSpaceDeleteShipClient", shipNumber)
 		end
 	end
-
 end

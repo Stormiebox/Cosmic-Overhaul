@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-include("moddata")
+local PlayerSettings = include("cosmicvaultplayersettings")
 
 local mcm_MineCommand_buildUI_original = MineCommand.buildUI
 function MineCommand:buildUI(...)
@@ -11,13 +11,13 @@ function MineCommand:buildUI(...)
         if originalRefresh then
             originalRefresh(self, ...)
         end
-        local saveData = ReadModData('NyrinsMapCommandMod.mineCommand')
-        if saveData then
+        if PlayerSettings then
+            local player = Player()
             if ui.immediateDeliveryCheckBox then
-                ui.immediateDeliveryCheckBox:setCheckedNoCallback(saveData.immediateDelivery)
+                ui.immediateDeliveryCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "mine_immediateDelivery", false))
             end
             if ui.safeModeCheckBox then
-                ui.safeModeCheckBox:setCheckedNoCallback(saveData.safeMode)
+                ui.safeModeCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "mine_safeMode", false))
             end
         end
     end
@@ -27,10 +27,11 @@ end
 local mcm_MineCommand_onStart_original = MineCommand.onStart
 function MineCommand:onStart(...)
     mcm_MineCommand_onStart_original(self, ...)
-    local saveData = CreateModData('NyrinsMapCommandMod.mineCommand')
-    saveData.safeMode = self.config.safeMode
-    saveData.immediateDelivery = self.config.immediateDelivery
-    saveData:save()
+    if PlayerSettings then
+        local player = Player()
+        PlayerSettings.set(player, "CosmicOverhaul", "mine_safeMode", self.config.safeMode)
+        PlayerSettings.set(player, "CosmicOverhaul", "mine_immediateDelivery", self.config.immediateDelivery)
+    end
 end
 
 local mcm_MineCommand_getAreaSize_original = MineCommand.getAreaSize

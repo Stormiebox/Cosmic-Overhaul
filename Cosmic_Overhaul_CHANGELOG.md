@@ -5,14 +5,28 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.3.0] - 2026/05/25
+## [4.0.0] - 2026/05/25
+
+### Added
+
+- **Captain Synergy (Sell & Procure):** Fully overhauled the `Sell` and `Procure` background map operations. Merchants and Smugglers now gain massive bonuses to trading range (searching a wider area for goods) and complete transactions up to 30% faster than other classes!
+
+### Fixed
+
+- **Global Translation Pass:** Found and fixed several "Server-Side Translation Traps" hidden inside background simulation utilities (`simulationutility.lua`) and scout note generators (`scoutcommandnotetable.lua`) that forced operation mails to render exclusively in English for international players.
+- **Profitable Stations Fix:** Resolved an `attempt to index a boolean value` server crash related to the Cosmic War bridge, and ensured its mail notifications are correctly localized.
+- **Simulation Stability:** Fixed a crash related to the background simulation (`simulation.lua`) throwing an `attempt to index global 'self'` error during the offline catch-up phase.
+- **Factory Overview Translation:** Corrected an issue in the Factory Overview UI where station titles were not properly translated for non-English players.
+- **Ship Info Optimization:** Cleaned up unoptimized nested `else if` statements and added missing localization tags to the Fleet Info UI.
 
 ### Changed
-- **Player Settings Storage**: Completely refactored the mod to use the new `CosmicVaultPlayerSettings` API for storing persistent UI settings (like checkboxes in the Trade and Salvage command windows).
+
+- **Player Settings Storage**: Completely refactored the mod to use the new `CosmicVaultPlayerSettings` API for storing persistent UI settings across all map commands (Trade, Salvage, Mine, etc.).
 - **War Economy Synergy**: Player-owned stations now have their passive income from the "Profitable Stations" feature dynamically reduced based on the local `War Heat` from the *Cosmic War* mod. High-conflict zones are now less profitable, requiring players to protect their economic hubs.
 
 ### Removed
-- **`moddata.lua`**: Removed the legacy file-based data storage system (`moddata.lua`), which was a source of server crashes on new installations. All player settings are now handled by the robust `Cosmic Vault` API.
+
+- **`moddata.lua`**: Completely removed the legacy file-based data storage system (`moddata.lua`). This was a major source of server crashes on fresh installations. All player settings are now handled by the robust, persistent `Cosmic Vault` API.
 
 ## [3.2.1] - 2026/05/25
 

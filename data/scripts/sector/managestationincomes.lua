@@ -71,7 +71,8 @@ function ManageStationIncomes.giveStationResources(station, _seller)
         local mat = Material(i-1)
         amount = math.floor(amount*mapping.quantity)
         if amount > 0 then
-            local msg = string.format(mapping.giveMsg, createMonetaryString(amount) .. " " .. mat.name, station.name)
+            local amountStr = createMonetaryString(amount) .. " " .. mat.name
+            local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
             faction:receiveResource(msg, mat, amount)
         end
     end
@@ -85,7 +86,7 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
 
     local faction = Faction(station.factionIndex)
     local inv = faction:getInventory()
-    local msg = string.format(mapping.giveMsg, "a system", station.name)
+    local msg = mapping.giveMsg%{ amount = "a system"%_T, station = station.name }
 
     inv:addOrDrop(system)
     faction:sendChatMessage(station, ChatMessageType.Economy, msg)
@@ -99,7 +100,7 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
     local turret = InventoryTurret(TurretGenerator:generate(x, y))
     local faction = Faction(station.factionIndex)
     local inv = faction:getInventory()
-    local msg = string.format(mapping.giveMsg, "a turret", station.name)
+    local msg = mapping.giveMsg%{ amount = "a turret"%_T, station = station.name }
 
     inv:addOrDrop(turret)
     faction:sendChatMessage(station, ChatMessageType.Economy, msg)
@@ -116,7 +117,8 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     money = math.floor(money*mapping.quantity)
     money = money*ManageStationIncomes.getWarHeatMultiplier()
 
-    local msg = string.format(mapping.giveMsg, createMonetaryString(money) .. " credits", station.name)
+    local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
+    local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
     faction:receive(msg, money)
 end
 
@@ -204,77 +206,77 @@ end
 stationMappings = {
     ["Resource Depot"%_t] = {
         giveFunction = ManageStationIncomes.giveStationResources,
-        giveMsg = "Earned %s in taxes from Resource Depot %s.",
+        giveMsg = "Earned ${amount} in taxes from Resource Depot ${station}."%_T,
         chance = 0.5,
         quantity = 1.0,
         traderTypes = { "freighter" },
     },
     ["Smuggler's Market"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received %s in unbranding fees from Smuggler's Market %s.",
+        giveMsg = "Received ${amount} in unbranding fees from Smuggler's Market ${station}."%_T,
         chance = 0.6,
         quantity = 1.25,
         traderTypes = { "freighter", "trader", "military" }
     },
     ["Casino"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received %s in gambling income from Casino %s.",
+        giveMsg = "Received ${amount} in gambling income from Casino ${station}."%_T,
         chance = 0.7,
         quantity = 1.5,
         traderTypes = { "freighter", "trader", "military" }
     },
     ["Repair Dock"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received %s in repair fees from Repair Dock %s.",
+        giveMsg = "Received ${amount} in repair fees from Repair Dock ${station}."%_T,
         chance = 0.2,
         quantity = 3.0,
         traderTypes = { "freighter", "trader", "military" }
     },
     ["Shipyard"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received %s in repair fees from Shipyard %s.",
+        giveMsg = "Received ${amount} in repair fees from Shipyard ${station}."%_T,
         chance = 0.3,
         quantity = 2.3,
         traderTypes = { "freighter", "trader", "military" }
     },
     ["Travel Hub"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Gained %s in travel fees from Travel Hub %s.",
+        giveMsg = "Gained ${amount} in travel fees from Travel Hub ${station}."%_T,
         chance = 0.3,
         quantity = 2.3,
         traderTypes = { "freighter", "trader", "military", "torpedo" }
     },
     ["Equipment Dock"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.1, 0.0, 0.7, 0.2),
-        giveMsg = "Received %s in taxes from Equipment Dock %s.",
+        giveMsg = "Received ${amount} in taxes from Equipment Dock ${station}."%_T,
         chance = 0.4,
         quantity = 1.0,
         traderTypes = { "military", "torpedo", "freighter", "trader" }
     },
     ["Research Station"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.8, 0.2),
-        giveMsg = "Received %s in taxes from Research Station %s.",
+        giveMsg = "Received ${amount} in taxes from Research Station ${station}."%_T,
         chance = 0.4,
         quantity = 1.0,
         traderTypes = { "freighter", "trader", "military", "torpedo" }
     },
     ["Military Outpost"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.3, 0.7),
-        giveMsg = "Received %s in taxes from Military Outpost %s.",
+        giveMsg = "Received ${amount} in taxes from Military Outpost ${station}."%_T,
         chance = 0.35,
         quantity = 1.0,
         traderTypes = { "military", "torpedo" }
     },
     ["Turret Factory"%_t] = {
         giveFunction = ManageStationIncomes.giveStationTurret,
-        giveMsg = "Gained %s in taxes from Turret Factory %s.",
+        giveMsg = "Gained ${amount} in taxes from Turret Factory ${station}."%_T,
         chance = 0.4,
         quantity = 1.0,
         traderTypes = { "military", "torpedo" }
     },
     ["Fighter Factory"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Earned %s in fighter costs from Fighter Factory %s.",
+        giveMsg = "Earned ${amount} in fighter costs from Fighter Factory ${station}."%_T,
         chance = 0.4,
         quantity = 1.0,
         traderTypes = { "military", "torpedo" }

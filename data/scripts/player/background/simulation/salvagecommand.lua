@@ -3,6 +3,8 @@ package.path = package.path .. ";data/scripts/player/background/simulation/?.lua
 
 local PlayerSettings = include("cosmicvaultplayersettings")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
+local CaptainClass = include("captainclass")
+local CaptainUtility = include("captainutility")
 include("randomext")
 
 local mcm_SalvageCommand_buildUI_original = SalvageCommand.buildUI
@@ -37,15 +39,27 @@ function SalvageCommand:onStart(...)
 end
 
 local mcm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
-function SalvageCommand:getAreaSize(...)
-    local area = mcm_SalvageCommand_getAreaSize_original and mcm_SalvageCommand_getAreaSize_original(self, ...) or
+function SalvageCommand:getAreaSize(ownerIndex, shipName)
+    local area = mcm_SalvageCommand_getAreaSize_original and mcm_SalvageCommand_getAreaSize_original(self, ownerIndex, shipName) or
         { x = 30, y = 30 }
 
-    -- Stability-first parity with workshop backup:
-    -- static long-range bonus instead of MCM-driven dynamic sizing.
-    --- TODO: Continue working on SalvageCommand for further tweaks.
-    local staticBonus = 0
-    return { x = area.x + staticBonus, y = area.y + staticBonus }
+    local ship = ShipDatabaseEntry(ownerIndex, shipName)
+    local captain = ship:getCaptain()
+    local bonus = 0
+
+    if captain:hasClass(CaptainClass.Scavenger) then
+        bonus = bonus + 15
+    elseif captain:hasClass(CaptainClass.Miner) then
+        bonus = bonus + 10
+    end
+
+    for _, perk in pairs({captain:getPerks()}) do
+        if perk == CaptainUtility.PerkType.Navigator then
+            bonus = bonus + 5
+        end
+    end
+
+    return { x = area.x + bonus, y = area.y + bonus }
 end
 
 local mcm_SalvageCommand_generateItems_original = SalvageCommand.generateItems

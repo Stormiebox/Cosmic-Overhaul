@@ -1,4 +1,6 @@
 local SimulationUtility = include 'simulationutility'
+local CaptainClass = include("captainclass")
+local CaptainUtility = include("captainutility")
 
 local mcm_uiTimestamp
 
@@ -80,12 +82,25 @@ function RefineCommand:buildUI(...)
 end
 
 local mcm_RefineCommand_getAreaSize_original = RefineCommand.getAreaSize
-function RefineCommand:getAreaSize(...)
-    local area = mcm_RefineCommand_getAreaSize_original and mcm_RefineCommand_getAreaSize_original(self, ...) or
+function RefineCommand:getAreaSize(ownerIndex, shipName)
+    local area = mcm_RefineCommand_getAreaSize_original and mcm_RefineCommand_getAreaSize_original(self, ownerIndex, shipName) or
         { x = 30, y = 30 }
 
-    -- Stability-first parity with workshop backup:
-    -- static long-range bonus instead of MCM-driven dynamic sizing.
-    local staticBonus = 0
-    return { x = area.x + staticBonus, y = area.y + staticBonus }
+    local ship = ShipDatabaseEntry(ownerIndex, shipName)
+    local captain = ship:getCaptain()
+    local bonus = 0
+
+    if captain:hasClass(CaptainClass.Merchant) then
+        bonus = bonus + 15
+    elseif captain:hasClass(CaptainClass.Miner) then
+        bonus = bonus + 10
+    end
+
+    for _, perk in pairs({captain:getPerks()}) do
+        if perk == CaptainUtility.PerkType.MarketExpert or perk == CaptainUtility.PerkType.Navigator then
+            bonus = bonus + 5
+        end
+    end
+
+    return { x = area.x + bonus, y = area.y + bonus }
 end

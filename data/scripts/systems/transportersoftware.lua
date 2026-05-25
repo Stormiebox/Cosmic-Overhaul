@@ -12,7 +12,7 @@ function getRealBonuses(seed, rarity, permanent)
 	for _, v in pairs(transporterBlocks) do
 		local block = plan:getBlock(v)
 		if block and block.box and block.box.size then
-			transporterVolume = transporterVolume + length(block.box.size)
+			transporterVolume = transporterVolume+length(block.box.size)
 		end
 	end
 
@@ -21,7 +21,7 @@ function getRealBonuses(seed, rarity, permanent)
 	fighter = fighter or 0
 	local rarityValue = (rarity and rarity.value) or 0
 
-	return oldRange + transporterVolume * (rarityValue / 2 + 1) * 3, fighter
+	return oldRange+transporterVolume*(rarityValue/2+1)*3, fighter
 end
 
 local transporterRangeFromBlocks_onInstalled = onInstalled
@@ -43,7 +43,7 @@ function getTooltipLines(seed, rarity, permanent)
 
 	local texts = right or left or {}
 	if texts[1] and texts[1].rtext then
-		texts[1].rtext = texts[1].rtext .. " + more from transporter blocks"
+		texts[1].rtext = texts[1].rtext .. " + more from transporter blocks"%_t
 	end
 
 	if not permanent then
