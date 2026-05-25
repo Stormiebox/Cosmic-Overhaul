@@ -64,14 +64,21 @@ local function readFromFile(filename)
     -- a+ because we're trying to overachieve here
     -- that and because it does read, write, and create all at once
 	local file, err = io.open(filename, "a+")
-	if err then print(err) return nil end
+	if err then
+        print("Cosmic Overhaul [ModData]: " .. tostring(err))
+        return {}
+    end
 	local line = file:read()
-    if not line then return {} end
+    if not line then
+        if file then file:close() end
+        return {}
+    end
     -- Note: this would normally be a security nightmare.
     --          ¯\_(ツ)_/¯
 	local getData = loadstring('return ' .. line)
 	file:close()
-	return getData and getData()
+	local result = getData and getData()
+    return type(result) == "table" and result or {}
 end
 
 local function GenericModData(dottedPath, createIfEmpty)
@@ -82,7 +89,7 @@ local function GenericModData(dottedPath, createIfEmpty)
     if not instances[name] then
         -- We haven't loaded this file yet; do that and add a new root instance node
         local instance = { path = 'moddata/' .. name .. '.moddata' }
-        instance.data = readFromFile(instance.path)
+        instance.data = readFromFile(instance.path) or {}
         setmetatable(instance.data, ModDataEntry)
         instances[name] = instance
     end

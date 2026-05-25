@@ -1,9 +1,9 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-include ("callable")
-include ("utility")
-include ("stringutility")
+include("callable")
+include("utility")
+include("stringutility")
 
 local CommandType = include("commandtype")
 
@@ -17,7 +17,7 @@ if onClient() then
 
         -- Using custom CommandCenter icon for the tab
         self.tab = playerWindow:createTab("Command Center"%_t, "data/textures/icons/CommandCenter.png",
-        "Command Center"%_t)
+            "Command Center"%_t)
         self.tab.onSelectedFunction = "clientFetchData"
         self.tab.onShowFunction = "clientFetchData"
         playerWindow:moveTabToTheRight(self.tab)
@@ -32,23 +32,26 @@ if onClient() then
 
         local margin = 10
         -- 5 Columns width calculation accounting for the scrollbar (~20px)
-        local b_width = (container.size.x - 2 * margin - 20) / 5
+        local b_width = (container.size.x-2*margin-20)/5
 
-        local refreshButton = container:createButton(Rect(hsplit.top.width - 40, 5, hsplit.top.width, hsplit.top.height - 25), "Refresh"%_t, "clientFetchData")
+        local refreshButton = container:createButton(
+        Rect(hsplit.top.width-40, 5, hsplit.top.width, hsplit.top.height-25), "Refresh"%_t, "clientFetchData")
         refreshButton.icon = "data/textures/icons/refresh.png"
         refreshButton.tooltip = "Refresh Active Operations"%_t
 
-        local recallButton = container:createButton(Rect(hsplit.top.width - 200, 5, hsplit.top.width - 50, hsplit.top.height - 25), "Recall Ship"%_t, "clientRecallShip")
+        local recallButton = container:createButton(
+        Rect(hsplit.top.width-200, 5, hsplit.top.width-50, hsplit.top.height-25), "Recall Ship"%_t, "clientRecallShip")
         recallButton.icon = "data/textures/icons/cancel.png"
         recallButton.tooltip = "Recall selected ship from its operation"%_t
 
-        container:createLabel(Rect(margin, 5, margin + 200, hsplit.top.height - 5), "Active Fleet Operations"%_t, 20)
+        container:createLabel(Rect(margin, 5, margin+200, hsplit.top.height-5), "Active Fleet Operations"%_t, 20)
 
-        commandList = container:createListBoxEx(Rect(margin, hsplit.top.height, hsplit.bottom.width - 2*margin, hsplit.bottom.height))
+        commandList = container:createListBoxEx(Rect(margin, hsplit.top.height, hsplit.bottom.width-2*margin,
+            hsplit.bottom.height))
         commandList.columns = 5
         commandList.rowHeight = 40
 
-        for ndx=0, 4 do
+        for ndx = 0, 4 do
             commandList:setColumnWidth(ndx, b_width)
         end
 
@@ -81,20 +84,20 @@ if onClient() then
 
         for _, cmd in pairs(data) do
             commandList:addRow(cmd.shipName)
-            local row = commandList.rows - 1
+            local row = commandList.rows-1
 
             local statusColor = gray
-            if cmd.status == "Active"%_t then
+            if cmd.status == "Active"%_T then
                 statusColor = ColorRGB(0.2, 1.0, 0.2) -- Green
-            elseif cmd.status == "Recalled"%_t then
+            elseif cmd.status == "Recalled"%_T then
                 statusColor = ColorRGB(1.0, 0.4, 0.4) -- Red
             end
 
             commandList:setEntryNoCallback(0, row, cmd.shipName, false, false, white)
-            commandList:setEntryNoCallback(1, row, cmd.commandName, false, false, gray)
-            commandList:setEntryNoCallback(2, row, cmd.location, false, false, gray)
-            commandList:setEntryNoCallback(3, row, cmd.eta, false, false, gray)
-            commandList:setEntryNoCallback(4, row, cmd.status, false, false, statusColor)
+            commandList:setEntryNoCallback(1, row, cmd.commandName%_t, false, false, gray)
+            commandList:setEntryNoCallback(2, row, cmd.location%_t, false, false, gray)
+            commandList:setEntryNoCallback(3, row, cmd.eta%_t, false, false, gray)
+            commandList:setEntryNoCallback(4, row, cmd.status%_t, false, false, statusColor)
         end
     end
 end
@@ -118,27 +121,27 @@ function CommandCenter.serverFetchData()
     local cmdNames = {}
     local function safeAdd(key, name) if key ~= nil then cmdNames[key] = name end end
 
-    safeAdd(CommandType.Mine, "Mining"%_t)
-    safeAdd(CommandType.Salvage, "Salvaging"%_t)
-    safeAdd(CommandType.Travel, "Traveling"%_t)
-    safeAdd(CommandType.Sell, "Selling"%_t)
-    safeAdd(CommandType.Procure, "Procuring"%_t)
-    safeAdd(CommandType.Trade, "Trading"%_t)
-    safeAdd(CommandType.Supply, "Supplying"%_t)
-    safeAdd(CommandType.Expedition, "Expedition"%_t)
-    safeAdd(CommandType.Scout, "Scouting"%_t)
-    safeAdd(CommandType.Restock, "Restocking"%_t)
-    safeAdd(CommandType.Refine, "Refining"%_t)
+    safeAdd(CommandType.Mine, "Mining"%_T)
+    safeAdd(CommandType.Salvage, "Salvaging"%_T)
+    safeAdd(CommandType.Travel, "Traveling"%_T)
+    safeAdd(CommandType.Sell, "Selling"%_T)
+    safeAdd(CommandType.Procure, "Procuring"%_T)
+    safeAdd(CommandType.Trade, "Trading"%_T)
+    safeAdd(CommandType.Supply, "Supplying"%_T)
+    safeAdd(CommandType.Expedition, "Expedition"%_T)
+    safeAdd(CommandType.Scout, "Scouting"%_T)
+    safeAdd(CommandType.Restock, "Restocking"%_T)
+    safeAdd(CommandType.Refine, "Refining"%_T)
 
     -- Fallbacks in case the custom commands store their string name directly
-    cmdNames["Restock"] = "Restocking"%_t
-    cmdNames["Refine"] = "Refining"%_t
+    cmdNames["Restock"] = "Restocking"%_T
+    cmdNames["Refine"] = "Refining"%_T
 
     -- OAL (1.0 Orders and Looping) integration support
-    cmdNames["co_mine"] = "Mining"%_t
-    cmdNames["co_refine"] = "Refining Ores"%_t
-    cmdNames["co_salvage"] = "Salvaging"%_t
-    cmdNames["co_loop"] = "Looping Orders"%_t
+    cmdNames["co_mine"] = "Mining"%_T
+    cmdNames["co_refine"] = "Refining Ores"%_T
+    cmdNames["co_salvage"] = "Salvaging"%_T
+    cmdNames["co_loop"] = "Looping Orders"%_T
 
     local backgroundShips = {}
 
@@ -146,39 +149,40 @@ function CommandCenter.serverFetchData()
         -- Safety check: ensure cmd is a table and actually has a 'type' before parsing
         if type(cmd) == "table" and cmd.type then
             local entry = {}
-            entry.shipName = cmd.shipName or (type(shipName) == "string" and shipName) or "Unknown"%_t
-            entry.commandName = cmdNames[cmd.type] or "Unknown Operation"%_t
+            entry.shipName = cmd.shipName or (type(shipName) == "string" and shipName) or "Unknown"%_T
+            entry.commandName = cmdNames[cmd.type] or "Unknown Operation"%_T
 
             -- Format the location string
             if cmd.area and cmd.area.lower and cmd.area.upper then
                 if cmd.area.lower.x == cmd.area.upper.x and cmd.area.lower.y == cmd.area.upper.y then
                     entry.location = string.format("(%d:%d)", cmd.area.lower.x, cmd.area.lower.y)
                 else
-                    entry.location = string.format("(%d:%d) to (%d:%d)", cmd.area.lower.x, cmd.area.lower.y, cmd.area.upper.x, cmd.area.upper.y)
+                    entry.location = string.format("(%d:%d) to (%d:%d)", cmd.area.lower.x, cmd.area.lower.y,
+                        cmd.area.upper.x, cmd.area.upper.y)
                 end
             elseif cmd.type == "co_loop" or cmd.type == "Loop" then
-                entry.location = "Active Route"%_t
+                entry.location = "Active Route"%_T
             else
-                entry.location = "Unknown"%_t
+                entry.location = "Unknown"%_T
             end
 
             -- Format ETA and Status
             if cmd.data then
                 if cmd.data.mcm and cmd.data.mcm.recalled then
-                    entry.status = "Recalled"%_t
+                    entry.status = "Recalled"%_T
                     entry.eta = "-"
                 else
                     if cmd.type == "co_loop" or cmd.type == "Loop" then
-                        entry.eta = "Continuous"%_t
+                        entry.eta = "Continuous"%_T
                     else
-                        local remaining = math.max(0, (cmd.data.duration or 0) - (cmd.data.runTime or 0))
+                        local remaining = math.max(0, (cmd.data.duration or 0)-(cmd.data.runTime or 0))
                         entry.eta = createReadableShortTimeString(math.floor(remaining))
                     end
-                    entry.status = "Active"%_t
+                    entry.status = "Active"%_T
                 end
             else
                 entry.eta = "?"
-                entry.status = "Unknown"%_t
+                entry.status = "Unknown"%_T
             end
 
             table.insert(formattedData, entry)
@@ -192,13 +196,13 @@ function CommandCenter.serverFetchData()
         for _, sName in pairs(shipNames) do
             if not backgroundShips[sName] then
                 local okStatus, status = pcall(function() return player:getShipStatus(sName) end)
-                if okStatus and status and status ~= "" and status ~= "Idle"%_t and status ~= "Destroyed"%_t then
+                if okStatus and status and status ~= "" and status ~= "Idle"%_T and status ~= "Destroyed"%_T then
                     local entry = {}
                     entry.shipName = sName
                     entry.commandName = status
-                    entry.location = "In-Sector"%_t
-                    entry.eta = "Continuous"%_t
-                    entry.status = "Active"%_t
+                    entry.location = "In-Sector"%_T
+                    entry.eta = "Continuous"%_T
+                    entry.status = "Active"%_T
                     table.insert(formattedData, entry)
                 end
             end
@@ -207,6 +211,7 @@ function CommandCenter.serverFetchData()
 
     invokeClientFunction(player, "receiveData", formattedData)
 end
+
 callable(CommandCenter, "serverFetchData")
 
 function CommandCenter.serverRecallShip(shipName)
@@ -219,4 +224,5 @@ function CommandCenter.serverRecallShip(shipName)
 
     CommandCenter.serverFetchData() -- Instantly refresh UI to show "Recalled"
 end
+
 callable(CommandCenter, "serverRecallShip")
