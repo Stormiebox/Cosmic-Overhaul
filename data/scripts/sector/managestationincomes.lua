@@ -4,7 +4,7 @@ include("stringutility")
 include("randomext")
 include("callable")
 include("playerstationutils")
-local CosmicWarBridge = pcall(require, "cosmicwarbridge")
+local cw_success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
 local UpgradeGenerator = include("upgradegenerator")()
 local TurretGenerator = include("sectorturretgenerator")()
 
@@ -20,19 +20,19 @@ end
 
 function ManageStationIncomes.getWarHeatMultiplier()
     local heat = 0
-    if CosmicWarBridge then
+    if cw_success and type(CosmicWarBridge) == "table" and CosmicWarBridge.getFactionWarHeat then
         local sector = Sector()
-        local factions = {sector:getPresentFactions()}
+        local factions = { sector:getPresentFactions() }
         for _, f_idx in pairs(factions) do
-             local f = Faction(f_idx)
-             if f and f.isAIFaction then
+            local f = Faction(f_idx)
+            if f and f.isAIFaction then
                 heat = math.max(heat, CosmicWarBridge.getFactionWarHeat(f.index) or 0)
-             end
+            end
         end
     end
     -- Income is reduced as heat increases. At max heat (1.0), income is only 20%.
     -- TODO: Keep testing to ensure it integrates properly or if values need to be increased/decreased accordingly.
-    return 1.0 - (heat * 0.8)
+    return 1.0-(heat*0.8)
 end
 
 function ManageStationIncomes.onTradeSuccess(stationId, buyerId)
@@ -68,8 +68,8 @@ function ManageStationIncomes.giveStationResources(station, _seller)
 
     for i = 1, NumMaterials() do
         local amount = math.floor(amounts[i])
-        local mat = Material(i - 1)
-        amount = math.floor(amount * mapping.quantity)
+        local mat = Material(i-1)
+        amount = math.floor(amount*mapping.quantity)
         if amount > 0 then
             local msg = string.format(mapping.giveMsg, createMonetaryString(amount) .. " " .. mat.name, station.name)
             faction:receiveResource(msg, mat, amount)
@@ -111,26 +111,26 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     if not faction then return end
 
     -- Cosmic Overhaul Balance tweak: Reduced base payout from 16k to 8k
-    local money = math.floor((0.3 + (2 * math.random() / 3)) * 8000)
-    if math.random() < 0.2 then money = money * 2 end
-    money = math.floor(money * mapping.quantity)
-    money = money * ManageStationIncomes.getWarHeatMultiplier()
+    local money = math.floor((0.3+(2*math.random()/3))*8000)
+    if math.random() < 0.2 then money = money*2 end
+    money = math.floor(money*mapping.quantity)
+    money = money*ManageStationIncomes.getWarHeatMultiplier()
 
     local msg = string.format(mapping.giveMsg, createMonetaryString(money) .. " credits", station.name)
     faction:receive(msg, money)
 end
 
 function ManageStationIncomes.giveStationDistribution(moneyChance, resourceChance, systemChance, turretChance)
-    local totalChance = moneyChance + resourceChance + systemChance + turretChance
+    local totalChance = moneyChance+resourceChance+systemChance+turretChance
     local resultFunc = function(station, _seller)
         local choice = random():getFloat(0, totalChance)
         if choice < moneyChance then
             ManageStationIncomes.giveStationMoney(station, _seller)
-        elseif choice < moneyChance + resourceChance then
+        elseif choice < moneyChance+resourceChance then
             ManageStationIncomes.giveStationResources(station, _seller)
-        elseif choice < moneyChance + resourceChance + systemChance then
+        elseif choice < moneyChance+resourceChance+systemChance then
             ManageStationIncomes.giveStationSystem(station, _seller)
-        elseif choice < moneyChance + resourceChance + systemChance + turretChance then
+        elseif choice < moneyChance+resourceChance+systemChance+turretChance then
             ManageStationIncomes.giveStationTurret(station, _seller)
         end
     end
@@ -144,16 +144,17 @@ function ManageStationIncomes.getResourceIncome()
     local amounts = {}
 
     for i = 1, NumMaterials() do
-        local probFactor = math.max(0, probabilities[i - 1])
+        local probFactor = math.max(0, probabilities[i-1])
         local mats = 0
         if probFactor > 0.05 then
-            local matRichness = math.max(probFactor * (richness), 0.2)
+            local matRichness = math.max(probFactor*(richness), 0.2)
             -- Cosmic Overhaul Balance tweak: Reduced from 8000 base to 3500 base
-            mats = (0.5 + math.random() / 2) * 3500
-            mats = mats * matRichness
-            mats = mats * ManageStationIncomes.getWarHeatMultiplier()
-            if random():test(0.2) then mats = mats * 2
-                if random():test(0.1) then mats = mats * 2 end
+            mats = (0.5+math.random()/2)*3500
+            mats = mats*matRichness
+            mats = mats*ManageStationIncomes.getWarHeatMultiplier()
+            if random():test(0.2) then
+                mats = mats*2
+                if random():test(0.1) then mats = mats*2 end
             end
         end
         amounts[i] = mats
@@ -204,56 +205,78 @@ stationMappings = {
     ["Resource Depot"%_t] = {
         giveFunction = ManageStationIncomes.giveStationResources,
         giveMsg = "Earned %s in taxes from Resource Depot %s.",
-        chance = 0.5, quantity = 1.0, traderTypes = { "freighter" },
+        chance = 0.5,
+        quantity = 1.0,
+        traderTypes = { "freighter" },
     },
     ["Smuggler's Market"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Received %s in unbranding fees from Smuggler's Market %s.",
-        chance = 0.6, quantity = 1.25, traderTypes = { "freighter", "trader", "military" }
+        chance = 0.6,
+        quantity = 1.25,
+        traderTypes = { "freighter", "trader", "military" }
     },
     ["Casino"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Received %s in gambling income from Casino %s.",
-        chance = 0.7, quantity = 1.5, traderTypes = { "freighter", "trader", "military" }
+        chance = 0.7,
+        quantity = 1.5,
+        traderTypes = { "freighter", "trader", "military" }
     },
     ["Repair Dock"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Received %s in repair fees from Repair Dock %s.",
-        chance = 0.2, quantity = 3.0, traderTypes = { "freighter", "trader", "military" }
+        chance = 0.2,
+        quantity = 3.0,
+        traderTypes = { "freighter", "trader", "military" }
     },
     ["Shipyard"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Received %s in repair fees from Shipyard %s.",
-        chance = 0.3, quantity = 2.3, traderTypes = { "freighter", "trader", "military" }
+        chance = 0.3,
+        quantity = 2.3,
+        traderTypes = { "freighter", "trader", "military" }
     },
     ["Travel Hub"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Gained %s in travel fees from Travel Hub %s.",
-        chance = 0.3, quantity = 2.3, traderTypes = { "freighter", "trader", "military", "torpedo" }
+        chance = 0.3,
+        quantity = 2.3,
+        traderTypes = { "freighter", "trader", "military", "torpedo" }
     },
     ["Equipment Dock"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.1, 0.0, 0.7, 0.2),
         giveMsg = "Received %s in taxes from Equipment Dock %s.",
-        chance = 0.4, quantity = 1.0, traderTypes = { "military", "torpedo", "freighter", "trader" }
+        chance = 0.4,
+        quantity = 1.0,
+        traderTypes = { "military", "torpedo", "freighter", "trader" }
     },
     ["Research Station"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.8, 0.2),
         giveMsg = "Received %s in taxes from Research Station %s.",
-        chance = 0.4, quantity = 1.0, traderTypes = { "freighter", "trader", "military", "torpedo" }
+        chance = 0.4,
+        quantity = 1.0,
+        traderTypes = { "freighter", "trader", "military", "torpedo" }
     },
     ["Military Outpost"%_t] = {
         giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.3, 0.7),
         giveMsg = "Received %s in taxes from Military Outpost %s.",
-        chance = 0.35, quantity = 1.0, traderTypes = { "military", "torpedo" }
+        chance = 0.35,
+        quantity = 1.0,
+        traderTypes = { "military", "torpedo" }
     },
     ["Turret Factory"%_t] = {
         giveFunction = ManageStationIncomes.giveStationTurret,
         giveMsg = "Gained %s in taxes from Turret Factory %s.",
-        chance = 0.4, quantity = 1.0, traderTypes = { "military", "torpedo" }
+        chance = 0.4,
+        quantity = 1.0,
+        traderTypes = { "military", "torpedo" }
     },
     ["Fighter Factory"%_t] = {
         giveFunction = ManageStationIncomes.giveStationMoney,
         giveMsg = "Earned %s in fighter costs from Fighter Factory %s.",
-        chance = 0.4, quantity = 1.0, traderTypes = { "military", "torpedo" }
+        chance = 0.4,
+        quantity = 1.0,
+        traderTypes = { "military", "torpedo" }
     },
 }
