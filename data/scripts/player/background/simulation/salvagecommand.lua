@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-include("moddata")
+local PlayerSettings = include("cosmicvaultplayersettings")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 include("randomext")
 
@@ -13,13 +13,13 @@ function SalvageCommand:buildUI(...)
         if originalRefresh then
             originalRefresh(self, ...)
         end
-        local saveData = ReadModData('NyrinsMapCommandMod.salvageCommand')
-        if saveData then
+        if PlayerSettings then
+            local player = Player()
             if ui.immediateDeliveryCheckBox then
-                ui.immediateDeliveryCheckBox:setCheckedNoCallback(saveData.immediateDelivery)
+                ui.immediateDeliveryCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "salvage_immediateDelivery", false))
             end
             if ui.safeModeCheckBox then
-                ui.safeModeCheckBox:setCheckedNoCallback(saveData.safeMode)
+                ui.safeModeCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "salvage_safeMode", false))
             end
         end
     end
@@ -29,10 +29,11 @@ end
 local mcm_SalvageCommand_onStart_original = SalvageCommand.onStart
 function SalvageCommand:onStart(...)
     mcm_SalvageCommand_onStart_original(self, ...)
-    local saveData = CreateModData('NyrinsMapCommandMod.salvageCommand')
-    saveData.safeMode = self.config.safeMode
-    saveData.immediateDelivery = self.config.immediateDelivery
-    saveData:save()
+    if PlayerSettings then
+        local player = Player()
+        PlayerSettings.set(player, "CosmicOverhaul", "salvage_safeMode", self.config.safeMode)
+        PlayerSettings.set(player, "CosmicOverhaul", "salvage_immediateDelivery", self.config.immediateDelivery)
+    end
 end
 
 local mcm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
@@ -42,6 +43,7 @@ function SalvageCommand:getAreaSize(...)
 
     -- Stability-first parity with workshop backup:
     -- static long-range bonus instead of MCM-driven dynamic sizing.
+    --- TODO: Continue working on SalvageCommand for further tweaks.
     local staticBonus = 0
     return { x = area.x + staticBonus, y = area.y + staticBonus }
 end

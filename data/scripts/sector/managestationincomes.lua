@@ -4,6 +4,7 @@ include("stringutility")
 include("randomext")
 include("callable")
 include("playerstationutils")
+local CosmicWarBridge = pcall(require, "cosmicwarbridge")
 local UpgradeGenerator = include("upgradegenerator")()
 local TurretGenerator = include("sectorturretgenerator")()
 
@@ -15,6 +16,23 @@ local stationMappings
 function ManageStationIncomes.initialize()
     local sector = Sector()
     sector:registerCallback("onTradeSuccess", "onTradeSuccess")
+end
+
+function ManageStationIncomes.getWarHeatMultiplier()
+    local heat = 0
+    if CosmicWarBridge then
+        local sector = Sector()
+        local factions = {sector:getPresentFactions()}
+        for _, f_idx in pairs(factions) do
+             local f = Faction(f_idx)
+             if f and f.isAIFaction then
+                heat = math.max(heat, CosmicWarBridge.getFactionWarHeat(f.index) or 0)
+             end
+        end
+    end
+    -- Income is reduced as heat increases. At max heat (1.0), income is only 20%.
+    -- TODO: Keep testing to ensure it integrates properly or if values need to be increased/decreased accordingly.
+    return 1.0 - (heat * 0.8)
 end
 
 function ManageStationIncomes.onTradeSuccess(stationId, buyerId)
@@ -96,6 +114,7 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     local money = math.floor((0.3 + (2 * math.random() / 3)) * 8000)
     if math.random() < 0.2 then money = money * 2 end
     money = math.floor(money * mapping.quantity)
+    money = money * ManageStationIncomes.getWarHeatMultiplier()
 
     local msg = string.format(mapping.giveMsg, createMonetaryString(money) .. " credits", station.name)
     faction:receive(msg, money)
@@ -132,6 +151,7 @@ function ManageStationIncomes.getResourceIncome()
             -- Cosmic Overhaul Balance tweak: Reduced from 8000 base to 3500 base
             mats = (0.5 + math.random() / 2) * 3500
             mats = mats * matRichness
+            mats = mats * ManageStationIncomes.getWarHeatMultiplier()
             if random():test(0.2) then mats = mats * 2
                 if random():test(0.1) then mats = mats * 2 end
             end

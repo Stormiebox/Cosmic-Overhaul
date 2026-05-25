@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-include 'moddata'
+local PlayerSettings = include("cosmicvaultplayersettings")
 local SimulationUtility = include 'simulationutility'
 local CaptainClass = include 'captainclass'
 local CaptainUtility = include 'captainutility'
@@ -111,9 +111,11 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
     local label = ui.window:createLabel(vsplit2.left, "Charity mission", 14)
     ui.mcm.charityMissionCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
 
-    local saveData = ReadModData('NyrinsMapCommandMod.tradeCommand')
-    ui.mcm.immediateDeliveryCheckBox:setCheckedNoCallback(saveData and saveData.immediateDelivery)
-    ui.mcm.charityMissionCheckBox:setCheckedNoCallback(saveData and saveData.charityMission)
+    if PlayerSettings then
+        local player = Player()
+        ui.mcm.immediateDeliveryCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "trade_immediateDelivery", false))
+        ui.mcm.charityMissionCheckBox:setCheckedNoCallback(PlayerSettings.get(player, "CosmicOverhaul", "trade_charityMission", false))
+    end
     ui:buildConfig()
 
     return ui
@@ -125,10 +127,11 @@ function TradeCommand:onStart()
         self:computeRelationImpacts()
     end
     mcm_TradeCommand_onStart_original(self)
-    local saveData = CreateModData('NyrinsMapCommandMod.tradeCommand')
-    saveData.immediateDelivery = self.config.mcm and self.config.mcm.immediateDelivery
-    saveData.charityMission = self.config.mcm and self.config.mcm.charityMission
-    saveData:save()
+    if PlayerSettings then
+        local player = Player()
+        PlayerSettings.set(player, "CosmicOverhaul", "trade_immediateDelivery", self.config.mcm and self.config.mcm.immediateDelivery)
+        PlayerSettings.set(player, "CosmicOverhaul", "trade_charityMission", self.config.mcm and self.config.mcm.charityMission)
+    end
 end
 
 local mcm_TradeCommand_onRecall_original = TradeCommand.onRecall

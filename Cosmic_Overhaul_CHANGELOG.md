@@ -5,7 +5,18 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.2.1]
+## [3.3.0] - 2026/05/25
+
+### Changed
+- **Player Settings Storage**: Completely refactored the mod to use the new `CosmicVaultPlayerSettings` API for storing persistent UI settings (like checkboxes in the Trade and Salvage command windows).
+- **War Economy Synergy**: Player-owned stations now have their passive income from the "Profitable Stations" feature dynamically reduced based on the local `War Heat` from the *Cosmic War* mod. High-conflict zones are now less profitable, requiring players to protect their economic hubs.
+
+### Removed
+- **`moddata.lua`**: Removed the legacy file-based data storage system (`moddata.lua`), which was a source of server crashes on new installations. All player settings are now handled by the robust `Cosmic Vault` API.
+
+## [3.2.1] - 2026/05/25
+
+-- TODO: Combine all versions on this changelog starting from 3.2.1+. This will be a long project.
 
 ### Fixed
 
