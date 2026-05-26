@@ -8,6 +8,7 @@ include ("merchantutility")
 include ("stringutility")
 include ("callable")
 include ("relations")
+local CaptainClass = include ("captainclass")
 local TradingAPI = include ("tradingmanager")
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -236,7 +237,7 @@ function SmugglersMarket.onShowWindow()
                     line:show()
                     line.icon.picture = good.icon
                     line.name.caption = good:displayName(2)
-                    line.price.caption = createMonetaryString(round(SmugglersMarket.getStolenBuyPrice(good.name)))
+                    line.price.caption = createMonetaryString(round(SmugglersMarket.getStolenBuyPrice(good.name, ship)))
                     line.size.caption = round(good.size, 2)
                     line.you.caption = amount
                     line.stock.caption = "   -"
@@ -250,7 +251,7 @@ function SmugglersMarket.onShowWindow()
                     line.icon.picture = good.icon
                     line.name.caption = good:displayName(2)
 
-                    local unbrandPrice = SmugglersMarket.getUnbrandPriceAndTax(good.price, 1, faction, buyer)
+                    local unbrandPrice = SmugglersMarket.getUnbrandPriceAndTax(good.price, 1, faction, buyer, ship)
                     line.price.caption = createMonetaryString(round(unbrandPrice))
                     line.numbers.text = amount
 
@@ -499,7 +500,7 @@ function SmugglersMarket.buyIllegalGood(goodName, amount)
 
     -- begin transaction
     -- calculate price
-    local price = SmugglersMarket.getStolenBuyPrice(good.name) * amount
+    local price = SmugglersMarket.getStolenBuyPrice(good.name, ship) * amount
 
     if not noDockCheck then
         -- test the docking last so the player can know what he can buy from afar already
@@ -582,7 +583,7 @@ function SmugglersMarket.unbrand(goodName, amount)
         return
     end
 
-    local price, tax = SmugglersMarket.getUnbrandPriceAndTax(good.price, amount, Faction(), buyer)
+    local price, tax = SmugglersMarket.getUnbrandPriceAndTax(good.price, amount, Faction(), buyer, ship)
 
     local canPay, msg, args = buyer:canPay(price)
     if not canPay then
@@ -610,8 +611,16 @@ function SmugglersMarket.unbrand(goodName, amount)
 end
 callable(SmugglersMarket, "unbrand")
 
-function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, buyerFaction)
-    local price = num * round(goodPrice * SmugglersMarket.coConfig.unbrandPriceFactor)
+function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, buyerFaction, ship)
+    local factor = SmugglersMarket.coConfig.unbrandPriceFactor
+    if ship then
+        local captain = ship:getCaptain()
+        if captain and captain:hasClass(CaptainClass.Smuggler) then
+            factor = math.max(0.10, factor - 0.15) -- Smuggler Synergy: 15% discount on unbranding fees
+        end
+    end
+
+    local price = num * round(goodPrice * factor)
     local tax = round(price * SmugglersMarket.trader.tax)
 
     if stationFaction.index == buyerFaction.index then
@@ -624,7 +633,7 @@ function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, b
 end
 
 function SmugglersMarket.getUnbrandPriceAndTaxTest(goodPrice, num)
-    return SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, Faction(), Faction(Player(callingPlayer).craft.factionIndex))
+    return SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, Faction(), Faction(Player(callingPlayer).craft.factionIndex), Player(callingPlayer).craft)
 end
 
 function SmugglersMarket.receiveGoods()
@@ -647,16 +656,24 @@ function SmugglersMarket.buyFromShip(...)
 end
 
 -- price for which goods are bought from players
-function SmugglersMarket.getStolenBuyPrice(goodName)
+function SmugglersMarket.getStolenBuyPrice(goodName, ship)
     local good = goods[goodName]
     if not good then return 0 end
 
     -- Cosmic Overhaul Black Market multipliers
+    local multiplier = SmugglersMarket.coConfig.stolenBuyMultiplier
     if good.illegal then
-        return round(good.price * SmugglersMarket.coConfig.illegalBuyMultiplier)
+        multiplier = SmugglersMarket.coConfig.illegalBuyMultiplier
     elseif good.dangerous then
-        return round(good.price * SmugglersMarket.coConfig.dangerousBuyMultiplier)
-    else
-        return round(good.price * SmugglersMarket.coConfig.stolenBuyMultiplier)
+        multiplier = SmugglersMarket.coConfig.dangerousBuyMultiplier
     end
+
+    if ship then
+        local captain = ship:getCaptain()
+        if captain and captain:hasClass(CaptainClass.Smuggler) then
+            multiplier = multiplier + 0.15 -- Smuggler Synergy: 15% bonus payout on stolen/illegal goods
+        end
+    end
+
+    return round(good.price * multiplier)
 end

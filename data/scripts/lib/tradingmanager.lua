@@ -1,4 +1,6 @@
 -- Cosmic Overhaul Dynamic Stock Management starts here
+local CaptainClass = include("captainclass")
+
 function randomFloat(lesser, greater)
     return lesser + math.random() * (greater - lesser)
 end
@@ -127,5 +129,61 @@ function TradingManager:secureTradingGoods()
     if base_secureTradingGoods then data = base_secureTradingGoods(self) end
     data.garbageStations = self.garbageStations or {}
     return data
+end
+
+-- Merchant Captain Synergy: 15% discount when buying goods (Globally applied)
+local original_getBuyPrice = TradingManager.getBuyPrice
+function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
+    local price, tax
+    if original_getBuyPrice then
+        price, tax = original_getBuyPrice(self, goodName, amount, faction, buyer)
+    end
+
+    local player
+    if onClient() then
+        player = Player()
+    elseif callingPlayer then
+        player = Player(callingPlayer)
+    end
+
+    if player then
+        local ship = player.craft
+        if ship then
+            local captain = ship:getCaptain()
+            if captain and captain:hasClass(CaptainClass.Merchant) then
+                price = math.max(1, math.floor((price or 0) * 0.85))
+                if tax then tax = math.max(0, math.floor(tax * 0.85)) end
+            end
+        end
+    end
+    return price, tax
+end
+
+-- Merchant Captain Synergy: 15% bonus payout when selling goods (Globally applied)
+local original_getSellPrice = TradingManager.getSellPrice
+function TradingManager:getSellPrice(goodName, amount, faction, buyer)
+    local price, tax
+    if original_getSellPrice then
+        price, tax = original_getSellPrice(self, goodName, amount, faction, buyer)
+    end
+
+    local player
+    if onClient() then
+        player = Player()
+    elseif callingPlayer then
+        player = Player(callingPlayer)
+    end
+
+    if player then
+        local ship = player.craft
+        if ship then
+            local captain = ship:getCaptain()
+            if captain and captain:hasClass(CaptainClass.Merchant) then
+                price = math.max(1, math.floor((price or 0) * 1.15))
+                if tax then tax = math.max(0, math.floor(tax * 1.15)) end
+            end
+        end
+    end
+    return price, tax
 end
 -- Cosmic Overhaul Dynamic Stock Management ends here

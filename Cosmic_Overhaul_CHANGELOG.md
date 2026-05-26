@@ -10,12 +10,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Added
 
 - **Captain Synergy Expansion:** Fully overhauled the `Sell`, `Procure`, `Salvage`, `Refine`, and `Travel` map operations. Relevant Captain classes (like Merchants, Navigators, and Scavengers) now gain massive synergistic bonuses to their operational range, reduce their travel and completion times by up to 25%, and significantly lower their ambush chances!
+- **Active Merchant Synergy:** When actively piloting a ship commanded by a Merchant Captain, players now receive a global 15% discount on purchases and a 15% bonus payout on sales at all commercial stations (Trading Posts, Factories, Resource Depots, etc.).
+- **Active Smuggler Synergy:** When actively piloting a ship commanded by a Smuggler Captain, players now receive a 15% discount on unbranding fees and a 15% bonus payout on black market sales at the Smuggler's Market.
 - **Scavenger Strategy Intel:** If you pilot a ship with a Scavenger captain, the "Wreckages" tab in Strategy Mode will now bypass generic names (like "Husk" or "Derelict") and reveal the exact original identity of the destroyed ships, helping you identify high-value targets in massive graveyards.
 - New texture icon for the "Factory Overview" tab in `data/textures/icons/FactoryOverview.png`.
 - New texture icon for the "Wreckages" tab in `data/textures/icons/WreckagesTab.png`.
 
 ### Fixed
 
+- **Invisible Player Factories:** Added a self-healing loop to player-owned stations. Factories built before Cosmic Overhaul was installed will now automatically detect their missing registration and permanently add themselves to your Factory Overview UI the moment their sector is loaded.
 - **Global Translation Pass:** Found and fixed several "Server-Side Translation Traps" hidden inside background simulation utilities (`simulationutility.lua`) and scout note generators (`scoutcommandnotetable.lua`) that forced operation mails to render exclusively in English for international players.
 - **Profitable Stations Fix:** Resolved an `attempt to index a boolean value` server crash related to the Cosmic War bridge, and ensured its mail notifications are correctly localized.
 - **Simulation & UI Stability:** Fixed an `attempt to index global 'self'` crash during the offline catch-up phase, and resolved a massive scope/double-wrap bug in `sectorshipoverview.lua` that would crash the Strategy UI.
@@ -23,6 +26,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Ship Info Optimization:** Cleaned up unoptimized nested `else if` statements and added missing localization tags to the Fleet Info UI.
 - **Shop Restock Translation Trap:** Fixed an issue where the new "Shop Restock" cooldown messages were broadcasting to clients in English instead of using the local `.po` file translations.
 - **Loot Seed Hash Collision:** Fixed a coordinate overlap bug in `upgradegenerator.lua` and `sectorturretgenerator.lua` that accidentally caused hundreds of different sectors to share the exact same generation seed.
+- **Command Center Localization:** Corrected a Server-to-Client translation trap where background operations (e.g., "Mining", "Active") were being translated into the Server Host's language instead of the local Client's UI language.
 
 ### Changed
 
@@ -35,14 +39,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - **`moddata.lua`**: Completely removed the legacy file-based data storage system (`moddata.lua`). This was a major source of server crashes on fresh installations. All player settings are now handled by the robust, persistent `Cosmic Vault` API.
 
-## [3.2.1] - 2026/05/25
-
 -- TODO: Combine all versions on this changelog starting from 3.2.1+. This will be a long project.
+
+## [3.2.1] - 2026/05/25
 
 ### Fixed
 
 - **Map Command Data Crash:** Fixed a critical server crash where starting a map operation (Mine, Salvage, etc.) on a fresh dedicated server would fail due to the `moddata` directory not existing on the host machine. The data loader now gracefully handles missing folders and defaults to clean tables.
-- **Command Center Localization:** Corrected a Server-to-Client translation trap where background operations (e.g., "Mining", "Active") were being translated into the Server Host's language instead of the local Client's UI language.
 
 ## [3.2.0]
 
