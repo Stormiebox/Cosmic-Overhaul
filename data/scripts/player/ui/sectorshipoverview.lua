@@ -1,9 +1,11 @@
 -- Concept: add a new "Wreckages" tab to the strategy mode tabs.
 -- Display a list of all wreckages in the sector, sorted by how big they are.
--- Cool to add: benefits for Scavenger captains and particular subsystem upgrades
--- (scanners?) to see more information, e.g. resource richness.
+-- TODO: Adding benefits for Scavenger captains and particular subsystem upgrades
+-- TODO: Possible (scanners?) to see more information, e.g. resource richness.
 
 if onClient() then
+
+local CaptainClass = include("captainclass")
 
 local swt_initialize_original = SectorShipOverview.initialize
 function SectorShipOverview.initialize()
@@ -15,7 +17,7 @@ end
 local swt_show_original = SectorShipOverview.show
 function SectorShipOverview.show()
     swt_show_original()
-    self.refreshWreckagesList()
+    SectorShipOverview.refreshWreckagesList()
 end
 
 -- The wreckages refresh is somewhat expensive so we won't do it each and every
@@ -25,44 +27,36 @@ local swt_update_frequency = 3
 
 local swt_updateClient_original = SectorShipOverview.updateClient
 function SectorShipOverview.updateClient(timestep)
-    local lastTab = self.lastActiveTab
     swt_updateClient_original(timestep)
-    local activeTab = self.lastActiveTab
 
-    -- We get called a little out of order and need some additional checking
-    if not self.wreckagesTab then return end
+    if not SectorShipOverview.wreckagesTab then return end
 
-    if activeTab == self.wreckagesTab.index
-        and (lastTab ~= activeTab or swt_update_counter % swt_update_frequency == 0)
-    then
-        SectorShipOverview.refreshWreckagesList()
+    local activeTab = SectorShipOverview.tabbedWindow and SectorShipOverview.tabbedWindow.activeTab
+    if activeTab == SectorShipOverview.wreckagesTab.index then
+        if swt_update_counter % swt_update_frequency == 0 then
+            SectorShipOverview.refreshWreckagesList()
+        end
+        swt_update_counter = swt_update_counter + 1
     end
-
-    swt_update_counter = swt_update_counter + 1
-end
-
-local swt_show_original = SectorShipOverview.show
-function SectorShipOverview.show()
-    swt_show_original()
-    SectorShipOverview.refreshWreckagesList()
 end
 
 function SectorShipOverview.buildWreckagesUI()
-    self.wreckagesTab = self.tabbedWindow:createTab("Wreckages"%_t, "data/textures/icons/wreckage.png", "Wreckages"%_t)
-    local hsplit = UIHorizontalSplitter(Rect(self.wreckagesTab.size), 0, 0, 0.0)
-    self.wreckagesList = self.wreckagesTab:createListBoxEx(hsplit.bottom)
-    self.wreckagesList.columns = 3
-    self.wreckagesList.rowHeight = self.rowHeight
-    self.wreckagesList:setColumnWidth(0, self.iconColumnWidth)
-    local notColumnWidth = self.wreckagesList.width - self.iconColumnWidth
-    self.wreckagesList:setColumnWidth(1, notColumnWidth * 2 / 3)
-    self.wreckagesList:setColumnWidth(2, notColumnWidth / 3)
-    self.wreckagesList.onSelectFunction = "onEntrySelected"
+        SectorShipOverview.wreckagesTab = SectorShipOverview.tabbedWindow:createTab("Wreckages"%_t,
+        "data/textures/icons/WreckagesTab.png", "Wreckages"%_t)
+    local hsplit = UIHorizontalSplitter(Rect(SectorShipOverview.wreckagesTab.size), 0, 0, 0.0)
+    SectorShipOverview.wreckagesList = SectorShipOverview.wreckagesTab:createListBoxEx(hsplit.bottom)
+    SectorShipOverview.wreckagesList.columns = 3
+    SectorShipOverview.wreckagesList.rowHeight = SectorShipOverview.rowHeight
+    SectorShipOverview.wreckagesList:setColumnWidth(0, SectorShipOverview.iconColumnWidth)
+    local notColumnWidth = SectorShipOverview.wreckagesList.width - SectorShipOverview.iconColumnWidth
+    SectorShipOverview.wreckagesList:setColumnWidth(1, notColumnWidth * 2 / 3)
+    SectorShipOverview.wreckagesList:setColumnWidth(2, notColumnWidth / 3)
+    SectorShipOverview.wreckagesList.onSelectFunction = "onEntrySelected"
 end
 
 local wreckageNames = {
     huge = {
-        "Husk"%_t, 
+        "Husk"%_t,
         "Derelict"%_t,
         "Ruin"%_t,
         "Hulk"%_t,
@@ -89,16 +83,28 @@ local wreckageNames = {
 }
 
 function SectorShipOverview.refreshWreckagesList()
-    if not self.wreckagesList then return end
+    if not SectorShipOverview.wreckagesList then return end
 
-    local startingScrollPosition = self.wreckagesList.scrollPosition
+    local startingScrollPosition = SectorShipOverview.wreckagesList.scrollPosition
 
     local sector = Sector()
     local player = Player()
     local ship = player.craft
+
+    local hasScavenger = false
+    if ship then
+        local shipEntry = ShipDatabaseEntry(player.index, ship.name)
+        if shipEntry then
+            local captain = shipEntry:getCaptain()
+            if captain and captain:hasClass(CaptainClass.Scavenger) then
+                hasScavenger = true
+            end
+        end
+    end
+
     local wreckages = {sector:getEntitiesByType(EntityType.Wreckage)}
     table.sort(wreckages, function (w1, w2) return w1.mass > w2.mass end)
-    self.wreckagesList:clear()
+    SectorShipOverview.wreckagesList:clear()
 
     local white = ColorRGB(1, 1, 1)
     local gray = ColorRGB(0.6, 0.6, 0.6)
@@ -107,27 +113,36 @@ function SectorShipOverview.refreshWreckagesList()
         if not entity then return "" end
         local seed = Seed(entity.id.string)
         local name = function(list) return randomEntry(Random(seed), list) end
+        local flavorName = ""
+
         if entity.mass >= 100 * 1000 * 1000 then
-            return round(entity.mass / 1000 / 1000, 0) .. " Mt -- "
+            flavorName = round(entity.mass / 1000 / 1000, 0) .. " Mt -- "
                 .. name(wreckageNames.huge)
         elseif entity.mass >= 1000 * 1000 then
-            return round(entity.mass / 1000 / 1000, 1) .. " Mt -- "
+            flavorName = round(entity.mass / 1000 / 1000, 1) .. " Mt -- "
                 .. name(wreckageNames.huge)
         elseif entity.mass >= 100 * 1000 then
-            return round(entity.mass / 1000, 0) .. " Kt -- "
+            flavorName = round(entity.mass / 1000, 0) .. " Kt -- "
                 .. name(wreckageNames.large)
         elseif entity.mass >= 1000 then
-            return round(entity.mass / 1000, 1) .. " Kt -- "
+            flavorName = round(entity.mass / 1000, 1) .. " Kt -- "
                 .. name(wreckageNames.medium)
         elseif entity.mass >= 100 then
-            return round(entity.mass, 0) .. " t -- "
+            flavorName = round(entity.mass, 0) .. " t -- "
                 .. name(wreckageNames.small)
         else
-            return round(entity.mass, 1) .. " t -- "
+            flavorName = round(entity.mass, 1) .. " t -- "
                 .. name(wreckageNames.tiny)
         end
+
+        -- Scavenger Captain Synergy: Reveal the true identity of the wreckage!
+        if hasScavenger and entity.translatedTitle and entity.translatedTitle ~= "" then
+            return flavorName .. " (" .. entity.translatedTitle .. ")"
+        end
+
+        return flavorName
     end
-        
+
     local getDistString = function(entity)
         if not ship or not entity then return "" end
         local dist = ship:getNearestDistance(entity)
@@ -138,18 +153,18 @@ function SectorShipOverview.refreshWreckagesList()
     local scrapIcon = "data/textures/icons/scrap-metal.png"
 
     for _, wreckage in pairs(wreckages) do
-        self.wreckagesList:addRow(wreckage.id.string)
-        self.wreckagesList:setEntry(0, self.wreckagesList.rows - 1, scrapIcon, false, false, gray)
-        self.wreckagesList:setEntry(1, self.wreckagesList.rows - 1, getMassString(wreckage), false, false, white)
-        self.wreckagesList:setEntry(2, self.wreckagesList.rows - 1, getDistString(wreckage), false, false, gray)
-        self.wreckagesList:setEntryType(0, self.wreckagesList.rows - 1, ListBoxEntryType.Icon)
+        SectorShipOverview.wreckagesList:addRow(wreckage.id.string)
+        SectorShipOverview.wreckagesList:setEntry(0, SectorShipOverview.wreckagesList.rows - 1, scrapIcon, false, false, gray)
+        SectorShipOverview.wreckagesList:setEntry(1, SectorShipOverview.wreckagesList.rows - 1, getMassString(wreckage), false, false, white)
+        SectorShipOverview.wreckagesList:setEntry(2, SectorShipOverview.wreckagesList.rows - 1, getDistString(wreckage), false, false, gray)
+        SectorShipOverview.wreckagesList:setEntryType(0, SectorShipOverview.wreckagesList.rows - 1, ListBoxEntryType.Icon)
     end
 
     if player.selectedObject then
-        self.wreckagesList:selectValueNoCallback(player.selectedObject.string)
+        SectorShipOverview.wreckagesList:selectValueNoCallback(player.selectedObject.string)
     end
 
-    self.wreckagesList.scrollPosition = startingScrollPosition
+    SectorShipOverview.wreckagesList.scrollPosition = startingScrollPosition
 end
 
 end -- if onClient()

@@ -13,7 +13,7 @@ if onClient() then
 	function FactoryOverview.initialize()
 		local playerWindow = PlayerWindow()
 
-		self.tab = playerWindow:createTab("Factory Overview"%_t, "data/textures/icons/pay-crew.png",
+		self.tab = playerWindow:createTab("Factory Overview"%_t, "data/textures/icons/FactoryOverview.png",
 			"Factory Overview"%_t)
 		self.tab.onSelectedFunction = "clientFetchDataFromGalaxy"
 		self.tab.onShowFunction = "clientFetchDataFromGalaxy"

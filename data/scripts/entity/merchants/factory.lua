@@ -133,7 +133,15 @@ end
 
 function Factory.initialize(producedGood, productionIndex, size)
     base_initialize(producedGood, productionIndex, size)
-    if onServer() then Factory.applyShuttleVolume() end
+    if onServer() then
+        Factory.applyShuttleVolume()
+
+        -- Self-Healing: Register player/alliance factories on the UI if they were built before the mod was installed
+        local faction = Faction()
+        if faction and (faction.isPlayer or faction.isAlliance) then
+            Galaxy():invokeFunction("factoryregister", "register", Entity().id)
+        end
+    end
 end
 
 function Factory.sync(data)

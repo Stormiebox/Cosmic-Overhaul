@@ -9,13 +9,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- **Captain Synergy (Sell & Procure):** Fully overhauled the `Sell` and `Procure` background map operations. Merchants and Smugglers now gain massive bonuses to trading range (searching a wider area for goods) and complete transactions up to 30% faster than other classes!
+- **Captain Synergy Expansion:** Fully overhauled the `Sell`, `Procure`, `Salvage`, `Refine`, and `Travel` map operations. Relevant Captain classes (like Merchants, Navigators, and Scavengers) now gain massive synergistic bonuses to their operational range, reduce their travel and completion times by up to 25%, and significantly lower their ambush chances!
+- **Scavenger Strategy Intel:** If you pilot a ship with a Scavenger captain, the "Wreckages" tab in Strategy Mode will now bypass generic names (like "Husk" or "Derelict") and reveal the exact original identity of the destroyed ships, helping you identify high-value targets in massive graveyards.
+- New texture icon for the "Factory Overview" tab in `data/textures/icons/FactoryOverview.png`.
+- New texture icon for the "Wreckages" tab in `data/textures/icons/WreckagesTab.png`.
 
 ### Fixed
 
 - **Global Translation Pass:** Found and fixed several "Server-Side Translation Traps" hidden inside background simulation utilities (`simulationutility.lua`) and scout note generators (`scoutcommandnotetable.lua`) that forced operation mails to render exclusively in English for international players.
 - **Profitable Stations Fix:** Resolved an `attempt to index a boolean value` server crash related to the Cosmic War bridge, and ensured its mail notifications are correctly localized.
-- **Simulation Stability:** Fixed a crash related to the background simulation (`simulation.lua`) throwing an `attempt to index global 'self'` error during the offline catch-up phase.
+- **Simulation & UI Stability:** Fixed an `attempt to index global 'self'` crash during the offline catch-up phase, and resolved a massive scope/double-wrap bug in `sectorshipoverview.lua` that would crash the Strategy UI.
 - **Factory Overview Translation:** Corrected an issue in the Factory Overview UI where station titles were not properly translated for non-English players.
 - **Ship Info Optimization:** Cleaned up unoptimized nested `else if` statements and added missing localization tags to the Fleet Info UI.
 - **Shop Restock Translation Trap:** Fixed an issue where the new "Shop Restock" cooldown messages were broadcasting to clients in English instead of using the local `.po` file translations.
