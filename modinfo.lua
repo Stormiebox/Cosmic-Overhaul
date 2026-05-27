@@ -65,6 +65,8 @@ meta =
         { id = "3290187742", incompatible = true },
         { id = "2597082448", incompatible = true },
         { id = "3689503637", incompatible = true },
+        { id = "2058470633", incompatible = true },
+        { id = "2087839890", incompatible = true },
         { id = "3727542782", min = "1.4.0" },
         { id = "Avorion",    min = "1.0",        max = "5.0" }
     },
