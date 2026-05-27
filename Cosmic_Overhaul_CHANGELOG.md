@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [4.0.0] - TBD On Release
---- TODO: Place all changes here for v4.0.0. This is a "Work-In-Progress" huge overhaul update.
+--- NOTE: This is a "Work-In-Progress" huge overhaul update. No release date yet.
+--- NOTE: For the duration of this v4.0.0 project all changes, additions and fixes will be logged into v4.0.0
 
 ### Added
 
@@ -14,8 +15,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Active Merchant Synergy:** When actively piloting a ship commanded by a Merchant Captain, players now receive a global 15% discount on purchases and a 15% bonus payout on sales at all commercial stations (Trading Posts, Factories, Resource Depots, etc.).
 - **Active Smuggler Synergy:** When actively piloting a ship commanded by a Smuggler Captain, players now receive a 15% discount on unbranding fees and a 15% bonus payout on black market sales at the Smuggler's Market.
 - **Scavenger Strategy Intel:** If you pilot a ship with a Scavenger captain, the "Wreckages" tab in Strategy Mode will now bypass generic names (like "Husk" or "Derelict") and reveal the exact original identity of the destroyed ships, helping you identify high-value targets in massive graveyards.
-- New texture icon for the "Factory Overview" tab in `data/textures/icons/FactoryOverview.png`.
+- **Resource Display UI:** Added a native, highly configurable Resource Display HUD widget. Tracks personal/alliance credits, resources, cargo space, and inventory slots. Completely rebuilt without legacy `AzimuthLib` dependencies, it automatically saves UI positions and preferences directly to the player's profile.
+- New texture icon for the "Factory Overview" tab in `data/textures/icons/FactoryOverviewTab.png`.
 - New texture icon for the "Wreckages" tab in `data/textures/icons/WreckagesTab.png`.
+- New texture icon for the "Resource Display" tab in `data/textures/icons/ResourceDisplayTab.png`.
 
 ### Fixed
 
@@ -38,12 +41,20 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Loot Micro-Variance:** Injected a micro-variance into the 1x1 sector seed grid for Turrets and System Upgrades. Merchants and Pirates in the same sector will no longer drop exact, identical clones of the same item.
 - **NPC Ship Naming & Performance:** Completely rewrote the procedural naming arrays for NPC ships. Military ships now use realistic naval tiers (Corvette to Leviathan), Freighters use logistics terms, Miners use industrial terms, and Traders use commerce terms. Additionally, heavily optimized the sector generation volume search loops by caching tables, resulting in massive performance gains during sector generation.
 - **Piracy Economy Buff:** Increased the hard-cap on illegal cargo dropped by destroyed civilian ships from a measly 25,000 credits up to a massive 250,000 credits to make piracy and smuggling highly lucrative.
+- **Cargo Transfer Overhaul:** Completely modernized the Cargo Transfer UI (`transfercrewgoods.lua`). Added live Search/Filter text boxes, alphabetical sorting, and color-coded cargo bars (Red for illegal/stolen, Yellow for dangerous). Built natively to handle massive late-game cargo holds flawlessly.
+- **Advanced Cargo Transfers:** Transferring items will no longer fail completely if the receiving ship lacks space; it will now transfer as much as possible. Added a new "Stacking" feature: hold Right Mouse Button (RMB) when clicking "Transfer All" to only transfer items that the receiving ship already has in its hold.
+- **Texture Update:** Updated `data/textures/icons/CommandCenter.png` into `data/textures/icons/CommandCenterTab.png` applied appropiate texture reference change to `command_center_tab.lua`.
+- **Texture Update:**: Updated `data/textures/icons/FactoryOverview.png` into `data/textures/icons/FactoryOverviewTab.png` applied appropiate texture reference change to `factory_overview_tab.lua`.
+- **Texture Update:** Updated `data/textures/icons/Wreckages.png` into `data/textures/icons/WreckagesTab.png` applied appropiate texture reference change to `sectorshipoverview.lua`.
 
 ### Removed
 
 - **`moddata.lua`**: Completely removed the legacy file-based data storage system (`moddata.lua`). This was a major source of server crashes on fresh installations. All player settings are now handled by the robust, persistent `Cosmic Vault` API.
+- **`TransferWindowFix.lua`**: Completely removed the legacy file as it was overhauled and integrated into `transfercrewgoods.lua`.
 
--- TODO: Combine all versions on this changelog starting from 3.2.1+. This will be a long project.
+--- Current changes made for v4.0.0 will be added above this line for the duration of this overhaul project (v4.0.0).
+
+--- 3.2.1 and previous versions are now legacy versions of Cosmic Overhaul. Being kept for historical tracking purposes only.
 
 ## [3.2.1] - 2026/05/25
 

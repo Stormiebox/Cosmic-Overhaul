@@ -32,9 +32,10 @@ function ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
     -- Keep mod values in their own part of the prediction
     prediction.mcm = {}
 
-    -- Record the "real" raw values in the prediction
+    -- Record the "real" raw values in the prediction (Extract Jump Reach)
     prediction.mcm.deepScanRange = ScoutCommand.getEstimatedDeepScanRange(ship)
-    _, _, prediction.mcm.hyperspaceCooldown = ship:getHyperspaceProperties()
+    local reach, passedTime, cooldown = ship:getHyperspaceProperties()
+    prediction.mcm.hyperspaceCooldown = cooldown or 0
 
     -- We use a scaled version of the raw inputs to keep things a little smoother and not have
     -- numbers change too wildly, even if it's a little less true to simulation
@@ -48,30 +49,35 @@ function ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
 
     -- Count how many sectors are just flybys and how many might have a real look
     local numInterestingSectors = #prediction.mcm.sectorsLeftToExplore
-    local numBoringSectors = #area.analysis.reachableCoordinates - numInterestingSectors
+    local numBoringSectors = #area.analysis.reachableCoordinates-numInterestingSectors
 
     local captain = ship:getCaptain()
     local duration = 0
 
     -- Now we add up the time for the interesting and non-interesting sectors that will
     -- be visited
-    local numBoringJumps = math.ceil(numBoringSectors / deepScanImpact)
-    local timePerBoringJump = ScoutCommand.getTimePerBoringSector(captain, scaledCooldown)
-    duration = duration + numBoringJumps * timePerBoringJump
+    local numBoringJumps = math.ceil(numBoringSectors/deepScanImpact)
+
+    -- Cosmic Overhaul: Factor in Jump Reach to drastically speed up traversing boring sectors.
+    -- A ship with 15 reach will traverse empty sectors 3x faster than a ship with 5 reach.
+    local reachMultiplier = math.max(0.25, 5.0/math.max(1.0, reach or 5.0))
+    local timePerBoringJump = ScoutCommand.getTimePerBoringSector(captain, scaledCooldown)*reachMultiplier
+
+    duration = duration+numBoringJumps*timePerBoringJump
 
     local timePerInterestingJump = ScoutCommand.getTimePerNewSector(captain, scaledCooldown)
-    duration = duration + numInterestingSectors * timePerInterestingJump
+    duration = duration+numInterestingSectors*timePerInterestingJump
 
-    duration = duration * ScoutCommand.getCargoDurationMultiplier(ship)
+    duration = duration*ScoutCommand.getCargoDurationMultiplier(ship)
 
     -- This double applies the perk impact on a little bit of the overall value, but
     -- that's not too significant
-    for _, perk in pairs({captain:getPerks()}) do
-        duration = duration * (1 + CaptainUtility.getScoutPerkImpact(captain, perk))
+    for _, perk in pairs({ captain:getPerks() }) do
+        duration = duration*(1+CaptainUtility.getScoutPerkImpact(captain, perk))
     end
 
     prediction.duration.value = duration
-    prediction.mcm.timePerSector = duration / #prediction.mcm.sectorsLeftToExplore
+    prediction.mcm.timePerSector = duration/#prediction.mcm.sectorsLeftToExplore
 
     return prediction
 end
@@ -90,13 +96,13 @@ function ScoutCommand:mcm_update()
 
     -- Figure out how many sectors we should reveal for how far we are in the command,
     -- storing them in a (small) table
-    local ratioComplete = self.data.runTime / self.data.duration
+    local ratioComplete = self.data.runTime/self.data.duration
     local totalSectors = self.data.mcm.numSectorsToExplore
-    local expectedComplete = math.floor(ratioComplete * totalSectors)
-    
+    local expectedComplete = math.floor(ratioComplete*totalSectors)
+
     local sectorsThisUpdate = {}
 
-    while (totalSectors - #self.data.mcm.sectorsLeftToExplore) < expectedComplete do
+    while (totalSectors-#self.data.mcm.sectorsLeftToExplore) < expectedComplete do
         local nextSector = table.remove(self.data.mcm.sectorsLeftToExplore)
         table.insert(sectorsThisUpdate, nextSector)
     end
@@ -143,16 +149,16 @@ function ScoutCommand.getEstimatedDeepScanRange(ship)
         if subsystem.script == "data/scripts/systems/radarbooster.lua" then
             -- Radar boosters give 1 and then 1-1.5 per rarity, doubled if permanent
             local multiplier = (info.permanent and 2.5) or 1.25
-            range = range + 1 + math.max(0, subsystem.rarity.value * multiplier)
+            range = range+1+math.max(0, subsystem.rarity.value*multiplier)
         elseif subsystem.script == "data/scripts/systems/teleporterkey5.lua" then
             -- The 4's artifact gives a flat 3
-            range = range + (info.permanent and 3) or 0
+            range = range+(info.permanent and 3) or 0
         end
     end
 
     if ship:getCaptain():hasClass(CaptainClass.Explorer) then
         -- Explorer captains give another 3
-        range = range + 3
+        range = range+3
     end
 
     return range
@@ -161,14 +167,14 @@ end
 function ScoutCommand.mcm_getDeepScanImpact(rawRange)
     -- The intent of this math is to make the effect of range progression feel a little
     -- more linear and gradual on both ends
-    local maxPowerBase = 9 
+    local maxPowerBase = 9
     local powerFactor = 1.5
     local multFactor = 2
     local flatFactor = 2
 
     local powerComponent = math.pow(math.min(rawRange, maxPowerBase), powerFactor)
-    local multComponent = rawRange * multFactor
-    return powerComponent + multComponent + flatFactor
+    local multComponent = rawRange*multFactor
+    return powerComponent+multComponent+flatFactor
 end
 
 function ScoutCommand.mcm_getScaledHyperdriveSpeed(rawSpeed)
@@ -177,33 +183,33 @@ function ScoutCommand.mcm_getScaledHyperdriveSpeed(rawSpeed)
     local powerOffset = 30
     local power = 2
 
-    return rawSpeed * (1 - math.pow(rawSpeed, power) / math.pow(rawSpeed + powerOffset, power))
+    return rawSpeed*(1-math.pow(rawSpeed, power)/math.pow(rawSpeed+powerOffset, power))
 end
 
 function ScoutCommand.getTimePerBoringSector(captain, scaledStartTime)
     -- Five seconds to charge the hyperdrive plus the greatest of the ship's sped up
     -- hyperdrive cooldown and the captain reacting to the jump (bad captains slow down fast ships)
-    local hyperspaceTime = scaledStartTime / 4
+    local hyperspaceTime = scaledStartTime/4
 
     local captainAwarenessTime = 8
-    for _, perk in pairs({captain:getPerks()}) do
-        captainAwarenessTime = captainAwarenessTime * (1 + CaptainUtility.getTravelPerkImpact(captain, perk))
+    for _, perk in pairs({ captain:getPerks() }) do
+        captainAwarenessTime = captainAwarenessTime*(1+CaptainUtility.getTravelPerkImpact(captain, perk))
     end
 
-    return 5 + math.max(hyperspaceTime, captainAwarenessTime)
+    return 5+math.max(hyperspaceTime, captainAwarenessTime)
 end
 
 function ScoutCommand.getTimePerNewSector(captain, scaledStartTime)
-    local hyperspaceTime = scaledStartTime / 3
+    local hyperspaceTime = scaledStartTime/3
 
     local captainNoteTime = 20
-    for _, perk in pairs({captain:getPerks()}) do
-        captainNoteTime = captainNoteTime * (1 + CaptainUtility.getScoutPerkImpact(captain, perk))
+    for _, perk in pairs({ captain:getPerks() }) do
+        captainNoteTime = captainNoteTime*(1+CaptainUtility.getScoutPerkImpact(captain, perk))
     end
 
     -- Odds are that the hyperspace drive is already cooled down by the time the notes are
     -- written, but for particularly bad cooldowns that'll be the weakest link
-    return 5 + math.max(hyperspaceTime, captainNoteTime)
+    return 5+math.max(hyperspaceTime, captainNoteTime)
 end
 
 function ScoutCommand.getCargoDurationMultiplier(ship)
@@ -259,10 +265,8 @@ function ScoutCommand:buildUI(...)
     return ui
 end
 
-
-
-local OperationExodus = include ("story/operationexodus")
-local ScoutCommandNoteTable = include ("scoutcommandnotetable")
+local OperationExodus = include("story/operationexodus")
+local ScoutCommandNoteTable = include("scoutcommandnotetable")
 
 -- Optimization
 local scf_seed = GameSeed()
@@ -285,7 +289,7 @@ function ScoutCommand:revealSectors(ratio)
 
     shuffle(sectorsToReveal)
 
-    local numSectorsToReveal = math.floor(#sectorsToReveal * ratio)
+    local numSectorsToReveal = math.floor(#sectorsToReveal*ratio)
     for index, view in pairs(sectorsToReveal) do
         if index > numSectorsToReveal then break end
 
@@ -317,7 +321,7 @@ function ScoutCommand:getViewToAdd(x, y, captain, faction)
         or view.hasContent
         or string.match(view.note.text, "${sectorNote}")
     then
-        -- Sector is already explored or noted by a captain -- don't add it 
+        -- Sector is already explored or noted by a captain -- don't add it
         return nil
     end
     specifics:fillSectorView(view, scf_gatesMap, true)
@@ -328,7 +332,7 @@ end
 function ScoutCommand:generatePotentialNote(x, y, specifics, captain)
     local templatePath = specifics.generationTemplate.path
 
-     -- If there are no lines for the off-grid sector, it means the captain can't explore it. Nil!
+    -- If there are no lines for the off-grid sector, it means the captain can't explore it. Nil!
     local lines = ScoutCommandNoteTable:getLines(templatePath, captain)
     if not lines then return nil end
 

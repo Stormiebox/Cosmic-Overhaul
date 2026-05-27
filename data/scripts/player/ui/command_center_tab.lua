@@ -16,7 +16,7 @@ if onClient() then
         local playerWindow = PlayerWindow()
 
         -- Using custom CommandCenter icon for the tab
-        self.tab = playerWindow:createTab("Command Center"%_t, "data/textures/icons/CommandCenter.png",
+        self.tab = playerWindow:createTab("Command Center"%_t, "data/textures/icons/CommandCenterTab.png",
             "Command Center"%_t)
         self.tab.onSelectedFunction = "clientFetchData"
         self.tab.onShowFunction = "clientFetchData"
