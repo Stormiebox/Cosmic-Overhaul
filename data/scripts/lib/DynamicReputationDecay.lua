@@ -1,56 +1,41 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("relations") -- Include and extend vanilla relations behavior.
 
--- Track last interaction timestamp by AI faction index.
-local lastInteraction = {}
+-- Cosmic Overhaul: Dynamic Reputation Decay Namespace
+DynamicReputationDecay = {}
 
 -- Configuration with explicit units for readability.
 local DecayConfig = {
     baseDecayPerHour = 100,
     maxDecayPerHour = 3000,
-    increaseIntervalSec = 5 * 60 * 60, -- 5 hours
+    increaseIntervalSec = 5*60*60,     -- 5 hours
     increaseAmountPerInterval = 100,
-    startAfterSec = 60 * 60, -- 1 hour inactivity
-    updateIntervalSec = 10, -- throttle expensive processing
+    startAfterSec = 60*60,             -- 1 hour inactivity
+    updateIntervalSec = 60,            -- Throttle to once a minute for optimal server performance
 }
 
-local updateAccumulator = 0
-
-local function onFactionInteraction(aiFactionIndex)
-    if not aiFactionIndex then return end
-    lastInteraction[aiFactionIndex] = Server().unpausedRuntime
+-- Cosmic Overhaul: Safely inject custom enums without destroying the vanilla table!
+local function injectRelationEnum(name)
+    if not RelationChangeType[name] then
+        local max = 0
+        for _, v in pairs(RelationChangeType) do
+            if type(v) == "number" and v > max then max = v end
+        end
+        RelationChangeType[name] = max+1
+        RelationChangeNames[max+1] = name
+    end
 end
 
-local cCounter = 0
-local function c()
-    cCounter = cCounter + 1
-    return cCounter
-end
-
--- Intentionally global to stay compatible with scripts expecting these symbols.
-RelationChangeType = {
-    Default = c(),
-    CraftDestroyed = c(),
-    ShieldsDamaged = c(),
-    HullDamaged = c(),
-    Boarding = c(),
-    CombatSupport = c(),
-    Smuggling = c(),
-    Raiding = c(),
-    GeneralIllegal = c(),
-    ServiceUsage = c(),
-    ResourceTrade = c(),
-    GoodsTrade = c(),
-    EquipmentTrade = c(),
-    WeaponsTrade = c(),
-    Commerce = c(),
-    Tribute = c(),
-}
-
-RelationChangeNames = {}
-for k, v in pairs(RelationChangeType) do
-    RelationChangeNames[v] = k
-end
+injectRelationEnum("Smuggling")
+injectRelationEnum("Raiding")
+injectRelationEnum("GeneralIllegal")
+injectRelationEnum("ServiceUsage")
+injectRelationEnum("ResourceTrade")
+injectRelationEnum("GoodsTrade")
+injectRelationEnum("EquipmentTrade")
+injectRelationEnum("WeaponsTrade")
+injectRelationEnum("Commerce")
+injectRelationEnum("Tribute")
 
 RelationChangeMaxCap = {
     [RelationChangeType.ServiceUsage] = 45000,
@@ -67,24 +52,27 @@ RelationChangeMinCap = {
     [RelationChangeType.GeneralIllegal] = -75000,
 }
 
--- Keep signature compatible with vanilla relations script.
+-- Cosmic Overhaul: Non-Destructive Hook!
+-- We save the vanilla function so we don't break trait processing, alliance syncing, or notifications.
+-- Since the previous version of this, did exactly just that. Yikes!
+local co_vanilla_changeRelations = changeRelations
 function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
     if not delta or delta == 0 then return end
 
     local factionA, factionB, aiFaction, playerFaction = getInteractingFactions(a, b)
-    if not factionA or not factionB then return end
-    if factionA.isAIFaction and factionB.isAIFaction then return end
-    if factionA.index == factionB.index then return end
-    if factionA.alwaysAtWar or factionB.alwaysAtWar then return end
-    if factionA.staticRelationsToAll or factionB.staticRelationsToAll then return end
-    if factionA.staticRelationsToPlayers and (factionB.isPlayer or factionB.isAlliance) then return end
-    if factionB.staticRelationsToPlayers and (factionA.isPlayer or factionA.isAlliance) then return end
-
-    local galaxy = Galaxy()
-    local relations = galaxy:getFactionRelations(factionA, factionB)
 
     if playerFaction and aiFaction then
-        onFactionInteraction(aiFaction.index)
+        -- 1. Persistent State Tracking (Fixes Lua VM Isolation bug)
+        -- Save the timestamp to the Player/Alliance database so it survives server restarts and sector jumps
+        if playerFaction.isPlayer then
+            Player(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+        elseif playerFaction.isAlliance then
+            Alliance(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+        end
+
+        -- 2. Apply Custom Hard Caps before passing to Vanilla
+        local galaxy = Galaxy()
+        local relations = galaxy:getFactionRelations(factionA, factionB)
 
         if delta > 0 then
             local maxCap = RelationChangeMaxCap[changeType]
@@ -97,41 +85,76 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
                 delta = hardCapLoss(relations, delta, minCap)
             end
         end
+    end
 
-        galaxy:changeFactionRelations(factionA, factionB, delta, notifyA, notifyB)
+    -- 3. Pass the capped delta back to the Vanilla function
+    if co_vanilla_changeRelations then
+        co_vanilla_changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
     end
 end
 
--- Runs server-side to apply inactivity-based decay to player/alliance -> AI relations.
-function onUpdate(timeStep)
+-- =========================================================================
+-- Background Decay Loop (Attached to the Player via player/init.lua)
+-- =========================================================================
+
+function DynamicReputationDecay.getUpdateInterval()
+    return DecayConfig.updateIntervalSec
+end
+
+-- Processes the decay math for a specific entity (Player or Alliance)
+local function processDecayForEntity(entity, factionStr, now, galaxy)
+    for idStr in string.gmatch(factionStr, "([^,]+)") do
+        local aiFactionIndex = tonumber(idStr)
+
+        -- Fetch the persistent timestamp for this faction
+        local lastTime = entity:getValue("co_rep_interact_" .. aiFactionIndex)
+        if lastTime then
+            local timeSinceLastInteraction = now-lastTime
+
+            -- Has the 1-hour grace period expired?
+            if timeSinceLastInteraction >= DecayConfig.startAfterSec then
+                local hourlyDecayAmount = math.min(
+                    DecayConfig.baseDecayPerHour+
+                    (timeSinceLastInteraction/DecayConfig.increaseIntervalSec)*DecayConfig.increaseAmountPerInterval,
+                    DecayConfig.maxDecayPerHour
+                )
+
+                -- Calculate actual decay for this specific tick interval (e.g. 60 seconds)
+                local tickDecay = hourlyDecayAmount*(DecayConfig.updateIntervalSec/3600)
+                local currentRel = galaxy:getFactionRelations(entity.index, aiFactionIndex)
+
+                -- Cosmic Overhaul: Decay towards Neutral (0)
+                -- Hostile factions slowly forgive, Allied factions slowly forget
+                if currentRel > 0 then
+                    local actualDecay = math.min(tickDecay, currentRel)
+                    galaxy:changeFactionRelations(entity.index, aiFactionIndex, -actualDecay, false, false)
+                elseif currentRel < 0 then
+                    local actualDecay = math.min(tickDecay, math.abs(currentRel))
+                    galaxy:changeFactionRelations(entity.index, aiFactionIndex, actualDecay, false, false)
+                end
+            end
+        end
+    end
+end
+
+function DynamicReputationDecay.updateServer(timeStep)
     if not onServer() then return end
 
-    updateAccumulator = updateAccumulator + (timeStep or 0)
-    if updateAccumulator < DecayConfig.updateIntervalSec then return end
-    updateAccumulator = 0
+    local player = Player()
+    if not player then return end
 
     local now = Server().unpausedRuntime
     local galaxy = Galaxy()
 
-    -- Iterate only factions with known interactions, not every faction in the galaxy.
-    for aiFactionIndex, lastTime in pairs(lastInteraction) do
-        local timeSinceLastInteraction = now - lastTime
-        if timeSinceLastInteraction >= DecayConfig.startAfterSec then
-            local decayAmount = math.min(
-                DecayConfig.baseDecayPerHour + (timeSinceLastInteraction / DecayConfig.increaseIntervalSec) * DecayConfig.increaseAmountPerInterval,
-                DecayConfig.maxDecayPerHour
-            )
+    -- Cosmic Synergy: Fetch the active AI factions efficiently from the Cosmic Vault index!
+    local factionStr = Server():getValue("factions")
+    if type(factionStr) ~= "string" or factionStr == "" then return end
 
-            for _, player in pairs({Server():getPlayers()}) do
-                if player then
-                    galaxy:changeFactionRelations(player.index, aiFactionIndex, -decayAmount, false, false)
+    -- Process Player
+    processDecayForEntity(player, factionStr, now, galaxy)
 
-                    local allianceIndex = player.allianceIndex
-                    if allianceIndex then
-                        galaxy:changeFactionRelations(allianceIndex, aiFactionIndex, -decayAmount, false, false)
-                    end
-                end
-            end
-        end
+    -- Process Alliance
+    if player.alliance then
+        processDecayForEntity(player.alliance, factionStr, now, galaxy)
     end
 end

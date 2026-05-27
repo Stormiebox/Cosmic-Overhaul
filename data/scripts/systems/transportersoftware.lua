@@ -8,11 +8,12 @@ function getRealBonuses(seed, rarity, permanent)
 	end
 
 	local transporterBlocks = plan:getBlocksByType(BlockType.Transporter) or {}
-	local transporterVolume = 0
+	local transporterScale = 0
 	for _, v in pairs(transporterBlocks) do
 		local block = plan:getBlock(v)
 		if block and block.box and block.box.size then
-			transporterVolume = transporterVolume+length(block.box.size)
+			-- Cosmic Overhaul: Using length (diagonal dimension) prevents exponential range scaling from massive blocks
+			transporterScale = transporterScale+length(block.box.size)
 		end
 	end
 
@@ -21,7 +22,17 @@ function getRealBonuses(seed, rarity, permanent)
 	fighter = fighter or 0
 	local rarityValue = (rarity and rarity.value) or 0
 
-	return oldRange+transporterVolume*(rarityValue/2+1)*3, fighter
+	-- Cosmic Overhaul: Progressive Rarity Scaling
+	-- Standardized the scaling curve across all Cosmic Overhaul subsystems
+	local multiplier = 2 -- Baseline 2x for Common/Petty
+	if rarityValue >= RarityType.Legendary then multiplier = 10
+	elseif rarityValue >= RarityType.Exotic then multiplier = 8
+	elseif rarityValue >= RarityType.Exceptional then multiplier = 6
+	elseif rarityValue >= RarityType.Rare then multiplier = 4
+	elseif rarityValue >= RarityType.Uncommon then multiplier = 3
+	end
+
+	return oldRange+(transporterScale*multiplier), fighter
 end
 
 local transporterRangeFromBlocks_onInstalled = onInstalled
@@ -43,7 +54,8 @@ function getTooltipLines(seed, rarity, permanent)
 
 	local texts = right or left or {}
 	if texts[1] and texts[1].rtext then
-		texts[1].rtext = texts[1].rtext .. " + more from transporter blocks"%_t
+		-- Cosmic Overhaul: Updated tooltip to explicitly mention the progressive scaling
+		texts[1].rtext = texts[1].rtext .. " (+ scaled by Transporter Blocks)"%_t
 	end
 
 	if not permanent then

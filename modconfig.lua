@@ -2,7 +2,7 @@ return {
     image = "data/textures/MCM_Cosmic_Overhaul.png",
     pages = {
         {
-            title = "Systems",
+            title = "Profit Configurations",
             options = {
                 {
                     key = "enableProfitableStations",
@@ -30,11 +30,16 @@ return {
                     min = 0.10,
                     max = 10.00,
                 },
+            },
+        },
+        {
+            title = "Other Configurations",
+            options = {
                 {
-                    key = "profitableStationsSpawnTraderWhenLoaded",
+                    key = "enableGateTravelPriority",
                     type = "bool",
-                    title = "Spawn Trader In Loaded Sectors",
-                    description = "Allows trader presence logic while the sector is loaded. (Default: true)",
+                    title = "Enable Gate Travel Priority",
+                    description = "Ships prioritize gates/wormholes when executing map travel orders. (Default: true)",
                     default = true,
                 },
                 {
@@ -42,42 +47,6 @@ return {
                     type = "bool",
                     title = "Enable Exotic/Legendary Salvage",
                     description = "Applies weighted rarity upgrades to salvage-generated items. (Default: true)",
-                    default = true,
-                },
-            },
-        },
-        {
-            title = "Map Commands & Captains",
-            options = {
-                {
-                    key = "captainEfficientTravelMultiplier",
-                    type = "slider",
-                    title = "Travel Time Multiplier",
-                    description =
-                    "Scales travel time for Navigators. Lower is faster. (Default: 85% | Min: 25% | Max: 200%)",
-                    default = 85,
-                    min = 25,
-                    max = 200,
-                    step = 1,
-                    unit = "%",
-                },
-                {
-                    key = "captainSafeAttackChanceMultiplier",
-                    type = "slider",
-                    title = "Ambush Chance Multiplier",
-                    description =
-                    "Scales ambush chance for Navigators. Lower is safer. (Default: 60% | Min: 5% | Max: 200%)",
-                    default = 60,
-                    min = 5,
-                    max = 200,
-                    step = 1,
-                    unit = "%",
-                },
-                {
-                    key = "enableGateTravelPriority",
-                    type = "bool",
-                    title = "Enable Gate Travel Priority",
-                    description = "Ships prioritize gates/wormholes when executing map travel orders. (Default: true)",
                     default = true,
                 },
             },

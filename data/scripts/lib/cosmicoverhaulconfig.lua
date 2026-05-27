@@ -9,23 +9,12 @@ CosmicOverhaulConfig = CosmicOverhaulConfig or {}
 
 local defaults =
 {
-    captainEfficientTravelMultiplier = 0.85,  -- lower is faster
-    captainSafeAttackChanceMultiplier = 0.60, -- lower is safer
-
-    extraLongRangeTradeBonus = 0,
-    extraLongRangeSellBonus = 0,
-    extraLongRangeMineBonus = 0,
-    extraLongRangeRefineBonus = 0,
-    extraLongRangeSalvageBonus = 0,
-    extraLongRangeScoutBonus = 0,
-
     enableGateTravelPriority = true,
     enableProfitableStations = true,
     enableExoticLegendarySalvage = true,
 
     profitableStationsInterval = 120,
     profitableStationsPayoutMultiplier = 1.00,
-    profitableStationsSpawnTraderWhenLoaded = true,
 }
 
 local function clampNumber(v, minV, maxV, fallback)
@@ -51,24 +40,6 @@ end
 local function build()
     local out = {}
 
-    out.captainEfficientTravelMultiplier = readNumber("captainEfficientTravelMultiplier", 0.25, 2.0,
-        defaults.captainEfficientTravelMultiplier)
-    out.captainSafeAttackChanceMultiplier = readNumber("captainSafeAttackChanceMultiplier", 0.05, 2.0,
-        defaults.captainSafeAttackChanceMultiplier)
-
-    out.extraLongRangeTradeBonus = math.floor(readNumber("extraLongRangeTradeBonus", 0, 40,
-        defaults.extraLongRangeTradeBonus))
-    out.extraLongRangeSellBonus = math.floor(readNumber("extraLongRangeSellBonus", 0, 40,
-        defaults.extraLongRangeSellBonus))
-    out.extraLongRangeMineBonus = math.floor(readNumber("extraLongRangeMineBonus", 0, 40,
-        defaults.extraLongRangeMineBonus))
-    out.extraLongRangeRefineBonus = math.floor(readNumber("extraLongRangeRefineBonus", 0, 40,
-        defaults.extraLongRangeRefineBonus))
-    out.extraLongRangeSalvageBonus = math.floor(readNumber("extraLongRangeSalvageBonus", 0, 40,
-        defaults.extraLongRangeSalvageBonus))
-    out.extraLongRangeScoutBonus = math.floor(readNumber("extraLongRangeScoutBonus", 0, 40,
-        defaults.extraLongRangeScoutBonus))
-
     out.enableGateTravelPriority = readBool("enableGateTravelPriority", defaults.enableGateTravelPriority)
     out.enableProfitableStations = readBool("enableProfitableStations", defaults.enableProfitableStations)
     out.enableExoticLegendarySalvage = readBool("enableExoticLegendarySalvage", defaults.enableExoticLegendarySalvage)
@@ -77,8 +48,6 @@ local function build()
         defaults.profitableStationsInterval))
     out.profitableStationsPayoutMultiplier = readNumber("profitableStationsPayoutMultiplier", 0.10, 10.0,
         defaults.profitableStationsPayoutMultiplier)
-    out.profitableStationsSpawnTraderWhenLoaded = readBool("profitableStationsSpawnTraderWhenLoaded",
-        defaults.profitableStationsSpawnTraderWhenLoaded)
 
     local vaultCfg = (CosmicVaultConfig and CosmicVaultConfig.get and CosmicVaultConfig.get()) or nil
     out.debugLogs = (vaultCfg and type(vaultCfg.debugEnabled) == "boolean") and vaultCfg.debugEnabled or false

@@ -16,6 +16,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Active Smuggler Synergy:** When actively piloting a ship commanded by a Smuggler Captain, players now receive a 15% discount on unbranding fees and a 15% bonus payout on black market sales at the Smuggler's Market.
 - **Scavenger Strategy Intel:** If you pilot a ship with a Scavenger captain, the "Wreckages" tab in Strategy Mode will now bypass generic names (like "Husk" or "Derelict") and reveal the exact original identity of the destroyed ships, helping you identify high-value targets in massive graveyards.
 - **Resource Display UI:** Added a native, highly configurable Resource Display HUD widget. Tracks personal/alliance credits, resources, cargo space, and inventory slots. Completely rebuilt without legacy `AzimuthLib` dependencies, it automatically saves UI positions and preferences directly to the player's profile.
+- **Dynamic Reputation Decay:** Added an inactivity-based reputation decay system. If you ignore factions for too long, relations will slowly drift back towards neutral (Allies forget, Hostiles forgive).
+- **Alliance Reputation Synergy:** Player reputation changes now mirror to their Alliance at 2x intensity, forcing individual actions to have massive diplomatic weight for the group.
+- **Gate Travel Priority:** When enchaining jump orders on the galaxy map, ships will now actively prioritize using known Gates and Wormholes instead of forcing hyperspace jumps.
 - New texture icon for the "Factory Overview" tab in `data/textures/icons/FactoryOverviewTab.png`.
 - New texture icon for the "Wreckages" tab in `data/textures/icons/WreckagesTab.png`.
 - New texture icon for the "Resource Display" tab in `data/textures/icons/ResourceDisplayTab.png`.
@@ -46,11 +49,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Texture Update:** Updated `data/textures/icons/CommandCenter.png` into `data/textures/icons/CommandCenterTab.png` applied appropiate texture reference change to `command_center_tab.lua`.
 - **Texture Update:**: Updated `data/textures/icons/FactoryOverview.png` into `data/textures/icons/FactoryOverviewTab.png` applied appropiate texture reference change to `factory_overview_tab.lua`.
 - **Texture Update:** Updated `data/textures/icons/Wreckages.png` into `data/textures/icons/WreckagesTab.png` applied appropiate texture reference change to `sectorshipoverview.lua`.
+- **Transporter Range Scaling:** The Transporter Software subsystem range now progressively scales up to a 10x multiplier based on rarity and the ship's transporter block volume.
+- **Trade Heatmap Expansion:** The Trading Overview subsystem now progressively scales the economy heatmap range up to a 10x multiplier based on rarity.
 
 ### Removed
 
 - **`moddata.lua`**: Completely removed the legacy file-based data storage system (`moddata.lua`). This was a major source of server crashes on fresh installations. All player settings are now handled by the robust, persistent `Cosmic Vault` API.
 - **`TransferWindowFix.lua`**: Completely removed the legacy file as it was overhauled and integrated into `transfercrewgoods.lua`.
+- **Deprecated Configs:** Removed unused and deprecated captain, map command modifiers and trader toggles from the Mod Configuration Menu (MCM) to align with the new dynamic progression systems.
 
 --- Current changes made for v4.0.0 will be added above this line for the duration of this overhaul project (v4.0.0).
 

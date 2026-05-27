@@ -10,4 +10,6 @@ if onServer() then
     player:addScriptOnce("player/ui/command_center_tab.lua")
     -- Resource Display UI
     player:addScriptOnce("player/ui/resourcedisplay.lua")
+    -- Cosmic Overhaul: Dynamic Reputation Decay Background Loop
+    player:addScriptOnce("data/scripts/lib/DynamicReputationDecay.lua")
 end
