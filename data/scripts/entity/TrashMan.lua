@@ -39,13 +39,12 @@ function TrashMan.interactionPossible(playerIndex, option)
     local self = Entity()
     local player = Player(playerIndex)
 
-    -- Cosmic Overhaul: Trash Man is now globally attached to the Player entity.
-    -- This fixes the bug where the UI was inaccessible while piloting Drones or Alliance ships.
-    if self.isPlayer then
-        return self.index == player.index
-    end
+    local craft = player.craft
+    if craft == nil then return false end
 
-    -- Hide legacy instances of this script that were mistakenly attached to ships in older versions
+    if craft.index == self.index then
+        return true
+    end
     return false
 end
 

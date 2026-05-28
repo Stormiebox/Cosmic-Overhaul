@@ -31,8 +31,8 @@ function SectorShipOverview.updateClient(timestep)
 
     if not SectorShipOverview.wreckagesTab then return end
 
-    local activeTab = SectorShipOverview.tabbedWindow and SectorShipOverview.tabbedWindow.activeTab
-    if activeTab == SectorShipOverview.wreckagesTab.index then
+        -- Cosmic Overhaul: Use .visible to avoid UIElement property read errors
+        if SectorShipOverview.wreckagesTab.visible then
         if swt_update_counter % swt_update_frequency == 0 then
             SectorShipOverview.refreshWreckagesList()
         end

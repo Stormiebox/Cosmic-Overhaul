@@ -16,8 +16,7 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description =
-    "Overhauls and adds many Quality of Life features for Avorion. For full description please read the mod page.",
+    description = "A massive systems and Quality of Life overhaul. Enhances fleet automation, background map commands, UI (Command Center, Resource Display), diplomacy, and the economy. Designed for smoother long-session gameplay and richer captain behavior.",
 
     -- Insert all authors into this list
     authors = { "Stormbox" },
@@ -67,7 +66,7 @@ meta =
         { id = "3689503637", incompatible = true },
         { id = "2058470633", incompatible = true },
         { id = "2087839890", incompatible = true },
-        { id = "3727542782", min = "1.4.0" },
+        { id = "3727542782", min = "1.0" },
         { id = "Avorion",    min = "1.0",        max = "5.0" }
     },
 

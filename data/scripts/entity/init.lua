@@ -10,4 +10,9 @@ if onServer() then
         entity:addScriptOnce("data/scripts/entity/shipinfo.lua")
         entity:addScriptOnce("data/scripts/entity/fleetstatus.lua")
     end
+
+    -- Cosmic Overhaul: Add TrashMan.lua to all ships, stations, and drones you pilot (including Alliance)
+    if not entity.aiOwned and (entity.isShip or entity.isStation or entity.isDrone) and (entity.playerOwned or entity.allianceOwned) then
+        entity:addScriptOnce("data/scripts/entity/TrashMan.lua")
+    end
 end

@@ -110,7 +110,7 @@ if onClient() then
                 if valid(entity) then
                     entity:invokeFunction("entity/bulletinboard.lua", "acceptMission", line.bulletinIndex)
                 else
-                    printlog("DEBUG: bad entity?")
+                    print("DEBUG: bad entity?")
                 end
             end
         end

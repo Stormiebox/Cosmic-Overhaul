@@ -5,7 +5,7 @@ include("randomext")
 include("callable")
 include("playerstationutils")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
-local cw_success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
+local cw_success = pcall(include, "cosmicwarbridge")
 local UpgradeGenerator = include("upgradegenerator")()
 local TurretGenerator = include("sectorturretgenerator")()
 
@@ -21,13 +21,13 @@ end
 
 function ManageStationIncomes.getWarHeatMultiplier()
     local heat = 0
-    if cw_success and type(CosmicWarBridge) == "table" and CosmicWarBridge.getFactionWarHeat then
+    if cw_success and type(_G.CosmicWarBridge) == "table" and _G.CosmicWarBridge.getFactionWarHeat then
         local sector = Sector()
         local factions = { sector:getPresentFactions() }
         for _, f_idx in pairs(factions) do
             local f = Faction(f_idx)
             if f and f.isAIFaction then
-                heat = math.max(heat, CosmicWarBridge.getFactionWarHeat(f.index) or 0)
+                heat = math.max(heat, _G.CosmicWarBridge.getFactionWarHeat(f.index) or 0)
             end
         end
     end

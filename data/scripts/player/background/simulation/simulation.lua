@@ -108,7 +108,7 @@ Balancing:
     end
 
     -- Retrieves the smallest timestep among all current commands
-    function ARCC_getSmallestTimestep(self)
+    function ARCC_getSmallestTimestep()
         local timestep = 60*60
         for _, command in pairs(Simulation.commands or {}) do
             if command.data.yieldTime then
@@ -131,7 +131,7 @@ Balancing:
         return timestep
     end
 
-    function ARCC_getTimeToApply(self, rawTimeToDeduct)
+    function ARCC_getTimeToApply(rawTimeToDeduct)
         local restoreTime = os.time()
 
         -- Assumption: all commands were secured at about the same time
@@ -156,11 +156,11 @@ Balancing:
         return timeToApply
     end
 
-    function ARCC_applyCatchUpTime(self, timeToApply)
+    function ARCC_applyCatchUpTime(timeToApply)
         if timeToApply <= 0 or not Simulation.commands or #Simulation.commands == 0 then return end
 
         while (#Simulation.commands > 0 and timeToApply > 0) do
-            local nextStep = ARCC_getSmallestTimestep(self)
+            local nextStep = ARCC_getSmallestTimestep()
             nextStep = math.min(nextStep, timeToApply)
             print("[ARCC] Simulating catch-up of ${time} for ${num} active commands"%{
                 time = createReadableShortTimeString(nextStep),
