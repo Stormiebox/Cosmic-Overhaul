@@ -19,45 +19,52 @@ return SectorClassNoteLineTable.new()
     :forNewClass(CaptainUtility.ClassType.Explorer)
     :forNewSector("sectors/ancientgates")
     :addLines({
-        "We saw a very large, very old gate in this sector."%_T,
-        "There is a big gate here."%_T,
-        "A large, unusual, inactive gate is in this sector."%_T
+        "Sensors picked up a massive, dormant gate structure adrift in this sector."%_T,
+        "We found a colossal ring gate here. It looks ancient and entirely dead."%_T,
+        "There is an enormous, deactivated hyperspace gate floating silently in this sector."%_T,
+        "We mapped a monolithic ancient gate construct. Its original builders are long gone."%_T
     })
     :forNewSector("sectors/asteroidshieldboss")
     :addLines({
-        "Some strange, glowing asteroids in this sector. We stayed away."%_T,
-        "A very unusual ring of asteroids here. Are they charging something?"%_T,
-        "An unnatural arrangement of asteroids with a weird signal in this sector."%_T
+        "Asteroids in a perfect ring formation are emitting bizarre energy readings here. We kept our distance."%_T,
+        "We detected a massive energy shield tethered to a cluster of glowing asteroids."%_T,
+        "There is a highly suspicious, shielded rock formation in this sector. Proceed with caution."%_T,
+        "An unnatural arrangement of asteroids is broadcasting a hostile energy signature in this area."%_T
     })
     :forNewSector("sectors/cultists")
     :addLines({
-        "Some very odd people are gathered around a big asteroid here."%_T,
-        "People around an asteroid. Lots of chanting."%_T,
-        "I think there are people worshipping a rock in this sector. Really."%_T
+        "Sensors picked up a group of zealots obsessing over a massive asteroid."%_T,
+        "A strange cult seems to have set up camp around a giant rock in this sector."%_T,
+        "We intercepted some unhinged radio chatter. Cultists are congregating around an asteroid here."%_T,
+        "There are fanatics out here worshipping an asteroid. Space madness is a terrible thing."%_T
     })
     :forNewSector("sectors/lonewormhole")
     :addLines({
-        "It looked empty at first, but there's a wormhole here."%_T,
-        "We almost stumbled straight into a wormhole in this sector."%_T,
-        "Not sure where it goes, but there's a wormhole."%_T
+        "A localized spatial tear is present here. Looks like a stable wormhole."%_T,
+        "Scanners picked up a lone wormhole hidden in the void of this sector."%_T,
+        "There is a wormhole phenomenon active here. Destination unknown."%_T,
+        "We almost stumbled straight into a spatial anomaly. A wormhole is open in this sector."%_T
     })
     :forNewSector("sectors/researchsatellite")
     :addLines({
-        "An unusual satellite looping some research notes here."%_T,
-        "A satellite in this sector talking about energy and stone."%_T,
-        "There's a satellite registered to 'M.A.D. Science' in this sector."%_T
+        "We intercepted a repeating broadcast from a lone research satellite."%_T,
+        "An automated science probe is transmitting strange data about asteroids here."%_T,
+        "A solitary satellite is pinging complex research telemetry in this sector."%_T,
+        "There is an abandoned satellite registered to 'M.A.D. Science' looping its logs here."%_T
     })
     :forNewSector("sectors/resistancecell")
     :addLines({
-        "I couldn't believe it, but there are still people surviving in this sector."%_T,
-        "Against all odds, there's a small outpost hiding from the Xsotan here."%_T,
-        "Some people claiming to be part of a resistance are stationed here."%_T
+        "We stumbled upon a hidden resistance cell operating completely off the grid."%_T,
+        "Against all odds, there's a scrappy survivor outpost tucked away in this sector."%_T,
+        "A heavily concealed resistance faction is holding out against the Xsotan here."%_T,
+        "We found a pocket of survivors out here claiming to be part of a rebellion."%_T
     })
     :forNewSector("sectors/teleporter")
     :addLines({
-        "A very strange ring of asteroids here. Xsotan energy signatures."%_T,
-        "There's a circular formation of strange, numbered asteroids here."%_T,
-        "A ring of asteroids with inactive stations. Waiting for something."%_T
+        "An artificial ring of numbered asteroids and strange stations is adrift here."%_T,
+        "We found a complex arrangement of asteroids with strange numerical markings."%_T,
+        "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."%_T,
+        "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."%_T
     })
     -- Functional Wreckage: special notes (Explorer/Scavenger)
     :forNewSector("sectors/functionalwreckage")
@@ -66,9 +73,10 @@ return SectorClassNoteLineTable.new()
         CaptainUtility.ClassType.Scavenger,
     })
     :addLines({
-        "An abandoned ship is here that looks largely intact. It may be repairable."%_T,
-        "A good repair crew might be able to get a ship we found flying again."%_T,
-        "A wreck in this sector is only lightly damaged. I bet we can repair it."%_T,
+        "Sensors show a derelict ship with an intact core. We could restore it to working order."%_T,
+        "There's a heavily damaged but structurally sound ship abandoned in this sector."%_T,
+        "We located an intact derelict vessel here. With a solid repair crew, she'll fly again."%_T,
+        "I spotted a salvageable ship out here. It is practically begging to be claimed and repaired."%_T,
     })
     -- Other Wreckages: Explorer and Scavenger
     :forNewSectors({
@@ -81,9 +89,10 @@ return SectorClassNoteLineTable.new()
         CaptainUtility.ClassType.Scavenger,
     })
     :addLines({
-        "There are wrecks in this sector."%_T,
-        "We found wrecks in this sector."%_T,
-        "This sector contains wrecks."%_T,
+        "Massive debris fields and wrecked hulls detected in this sector."%_T,
+        "We mapped a graveyard of destroyed ships here. Prime salvaging territory."%_T,
+        "This sector is littered with the husks of dead ships."%_T,
+        "Sensors show heavy wreckage concentrations in this area. Bring your salvage lasers."%_T,
     })
     -- Container field notes (Explorer)
     :forNewSectors({
@@ -92,9 +101,10 @@ return SectorClassNoteLineTable.new()
     })
     :forNewClass(CaptainUtility.ClassType.Explorer)
     :addLines({
-        "Containers are stored in this sector."%_T,
-        "We found a container field in this sector."%_T,
-        "There is a container field in this sector."%_T,
+        "A massive stash of lost cargo containers is floating freely here."%_T,
+        "We detected a dense cluster of abandoned shipping containers in this sector."%_T,
+        "There is a veritable goldmine of unbranded cargo crates adrift out here."%_T,
+        "Sensors picked up a large, unsecured container cache drifting in the void."%_T,
     })
     -- Smuggler's Market (Smuggler Hideout): Explorer and Smuggler
     :forNewSector("sectors/smugglerhideout")
@@ -103,9 +113,10 @@ return SectorClassNoteLineTable.new()
         CaptainUtility.ClassType.Smuggler,
     })
     :addLines({
-        "Smugglers hide here."%_T,
-        "There are smugglers hanging around here."%_T,
-        "Smugglers use this sector as their hideout."%_T,
+        "We picked up encrypted comms. Looks like a black market hub is nearby."%_T,
+        "A shady syndicate operates a hidden Smuggler's Market in this sector."%_T,
+        "Sensors detected a heavily cloaked Smuggler's Hideout operating off the books."%_T,
+        "There is a hive of scum and villainy tucked away in this area."%_T,
     })
     -- Asteroids: Explorer and Miner
     :forNewSectors({
@@ -121,10 +132,10 @@ return SectorClassNoteLineTable.new()
         CaptainUtility.ClassType.Miner,
     })
     :addLines({
-        "There are asteroids here."%_T,
-        "We found an asteroid field in this sector."%_T,
-        "We found asteroids here."%_T,
-        "There are asteroids in this sector."%_T,
+        "Dense asteroid clusters detected. Good prospects for a mining operation."%_T,
+        "We mapped a massive, resource-rich asteroid field in this sector."%_T,
+        "Heavy asteroid presence here. Prime territory for our mining lasers."%_T,
+        "Scanners show a dense field of unmined rocks in this sector."%_T,
     })
     -- Pirates: Explorer and Daredevil
     :forNewSectors({
@@ -137,9 +148,10 @@ return SectorClassNoteLineTable.new()
         CaptainUtility.ClassType.Daredevil,
     })
     :addLines({
-        "There are pirates hiding here."%_T,
-        "We saw pirates in this sector."%_T,
-        "This sector is infested with pirates."%_T,
+        "Hostile pirate signatures detected. They are heavily entrenched in this sector."%_T,
+        "A major pirate syndicate controls this area. Approach with weapons hot."%_T,
+        "Sensors are lighting up with raider transponders. It's a pirate stronghold."%_T,
+        "We spotted a large contingent of pirate scum operating in this sector."%_T,
     })
     -- Xsotan: still Explorer and Daredevil
     :forNewSectors({
@@ -148,15 +160,17 @@ return SectorClassNoteLineTable.new()
         "sectors/xsotanbreeders",
     })
     :addLines({
-        "There are Xsotan here."%_T,
-        "We saw Xsotan in this sector."%_T,
-        "Don't go here if you don't like Xsotan."%_T,
+        "Massive alien energy spikes detected. The Xsotan are swarming here."%_T,
+        "We barely avoided a massive Xsotan breeding cluster in this sector."%_T,
+        "This sector is heavily infested by the Xsotan menace."%_T,
+        "Alien bio-signatures confirmed. The Xsotan have claimed this space."%_T,
     })
     -- Extra for Operation Exodus; overloading use of sector
     :forNewSector("story/operationexodusbeacon")
     :forNewClass(CaptainUtility.ClassType.Explorer)
     :addLines({
-        "Also, some sort of communication beacon was active here."%_T,
-        "We also detected a signal from some sort of beacon."%_T,
-        "Oh, and there was a beacon broadcasting something about 'Exodus'."%_T,
+        "We also picked up a repeating automated beacon on a forgotten frequency."%_T,
+        "There's a strange navigational beacon here transmitting encrypted coordinates."%_T,
+        "Also, a lone beacon is pulsing an 'Exodus' distress signal."%_T,
+        "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."%_T,
     })

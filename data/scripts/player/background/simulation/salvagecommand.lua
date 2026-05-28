@@ -40,8 +40,11 @@ end
 
 local mcm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
 function SalvageCommand:getAreaSize(ownerIndex, shipName)
-    local area = mcm_SalvageCommand_getAreaSize_original and mcm_SalvageCommand_getAreaSize_original(self, ownerIndex, shipName) or
-        { x = 30, y = 30 }
+    local a1, a2, a3
+    if mcm_SalvageCommand_getAreaSize_original then
+        a1, a2, a3 = mcm_SalvageCommand_getAreaSize_original(self, ownerIndex, shipName)
+    end
+    if not a1 then a1 = { x = 15, y = 15 } end
 
     local ship = ShipDatabaseEntry(ownerIndex, shipName)
     local captain = ship:getCaptain()
@@ -59,7 +62,15 @@ function SalvageCommand:getAreaSize(ownerIndex, shipName)
         end
     end
 
-    return { x = area.x + bonus, y = area.y + bonus }
+    -- Cosmic Overhaul: Ensure all 3 rectangular shapes are properly returned and cleanly floored
+    -- This prevents the "off by one cell" boundary UI validation error when players select the maximum edge.
+    local squareBase = math.floor(a1.x + bonus)
+    local longerEdge = math.floor((29 / 17) * squareBase)
+    local shorterEdge = math.floor((11 / 17) * squareBase)
+
+    return { x = squareBase, y = squareBase },
+           { x = longerEdge, y = shorterEdge },
+           { x = shorterEdge, y = longerEdge }
 end
 
 local mcm_SalvageCommand_generateItems_original = SalvageCommand.generateItems

@@ -274,15 +274,6 @@ function TradeCommand:mcm_getAreaSizeBonusForShip(ship)
     return 0
 end
 
-local function genericGetAreaSizeBonusForCaptainLevel(table, key, level)
-    local levelMap = table[key] or table[false]
-    local bonus = 0
-    for i = 0, level do
-        bonus = math.max(bonus, (levelMap[level] or 0))
-    end
-    return bonus
-end
-
 -- Given a level table, returns a function that when evaluated on a captain will give the highest value
 -- defined for an index <= the captain's level
 local function mcm_captainLevelScaleFunc(table)

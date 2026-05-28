@@ -2,8 +2,6 @@
 local mcm_lastPrediction
 
 local CaptainClass = include("captainclass")
-local SimulationUtility = include("simulationutility")
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local mcm_TravelCommand_initialize_original = TravelCommand.initialize
 function TravelCommand:initialize(...)

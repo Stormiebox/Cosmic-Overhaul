@@ -36,8 +36,18 @@ end
 
 local mcm_MineCommand_getAreaSize_original = MineCommand.getAreaSize
 function MineCommand:getAreaSize(...)
-    local area = mcm_MineCommand_getAreaSize_original and mcm_MineCommand_getAreaSize_original(self, ...) or
-        { x = 30, y = 30 }
+    local a1, a2, a3
+    if mcm_MineCommand_getAreaSize_original then
+        a1, a2, a3 = mcm_MineCommand_getAreaSize_original(self, ...)
+    end
+    if not a1 then a1 = { x = 15, y = 15 } end
+
     local staticBonus = 0
-    return { x = area.x + staticBonus, y = area.y + staticBonus }
+    local squareBase = math.floor(a1.x + staticBonus)
+    local longerEdge = math.floor((29 / 17) * squareBase)
+    local shorterEdge = math.floor((11 / 17) * squareBase)
+
+    return { x = squareBase, y = squareBase },
+           { x = longerEdge, y = shorterEdge },
+           { x = shorterEdge, y = longerEdge }
 end

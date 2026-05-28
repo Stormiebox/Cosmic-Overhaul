@@ -1,13 +1,9 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-local CommandType = include("commandtype")
-local FactoryMap = include("factorymap")
 local SimulationUtility = include("simulationutility")
 local CaptainUtility = include("captainutility")
 local CaptainClass = include("captainclass")
-local GatesMap = include("gatesmap")
-local SectorSpecifics = include("sectorspecifics")
 
 include("utility")
 include("stringutility")
@@ -15,7 +11,11 @@ include("goods")
 
 local original_ProcureCommand_getAreaSize = ProcureCommand.getAreaSize
 function ProcureCommand:getAreaSize(ownerIndex, shipName)
-    local base = original_ProcureCommand_getAreaSize and original_ProcureCommand_getAreaSize(self, ownerIndex, shipName) or { x = 30, y = 30 }
+    local a1, a2, a3
+    if original_ProcureCommand_getAreaSize then
+        a1, a2, a3 = original_ProcureCommand_getAreaSize(self, ownerIndex, shipName)
+    end
+    if not a1 then a1 = { x = 15, y = 15 } end
 
     local ship = ShipDatabaseEntry(ownerIndex, shipName)
     local captain = ship:getCaptain()
@@ -33,7 +33,15 @@ function ProcureCommand:getAreaSize(ownerIndex, shipName)
         end
     end
 
-    return { x = base.x + bonus, y = base.y + bonus }
+    -- Cosmic Overhaul: Ensure all 3 rectangular shapes are properly returned and cleanly floored
+    -- This prevents the "off by one cell" boundary UI validation error when players select the maximum edge.
+    local squareBase = math.floor(a1.x + bonus)
+    local longerEdge = math.floor((29 / 17) * squareBase)
+    local shorterEdge = math.floor((11 / 17) * squareBase)
+
+    return { x = squareBase, y = squareBase },
+           { x = longerEdge, y = shorterEdge },
+           { x = shorterEdge, y = longerEdge }
 end
 
 local original_ProcureCommand_calculatePrediction = ProcureCommand.calculatePrediction
