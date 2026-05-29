@@ -40,6 +40,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Map Command Boundary UI:** Fixed an "off by one cell" boundary calculation in the `Sell`, `Salvage`, `Mine`, `Procure`, and `Refine` map commands that caused a "ship is not inside the target area" error when players dragged the selection box to its absolute edge.
 - **Trash Man Alliance/Drone Bug:** Fixed an issue where the "Trash Man" UI icon would disappear when piloting Drones or Alliance ships. The script is now safely attached to physical crafts in `entity/init.lua` using strict ownership checks, ensuring the UI engine always draws the interaction icon.
 - **Fleet Status UI Attachment:** Fixed a severe misplaced logic bug in `entity/init.lua` where player UI scripts were mistakenly being attached to ships, restoring the correct Fleet Status initialization.
+- **Scout Command Offline Progress:** Fixed a logic bug in `scoutcommand.lua` where the offline simulation catch-up tick was evaluated *after* the incremental sector reveal loop. Scout operations will now correctly and instantly reveal all progress made while the player was offline.
 
 ### Changed
 

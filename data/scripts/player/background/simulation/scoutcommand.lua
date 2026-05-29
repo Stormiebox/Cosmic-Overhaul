@@ -84,8 +84,8 @@ end
 
 local mcm_ScoutCommand_update_original = ScoutCommand.update
 function ScoutCommand:update(...)
-    self:mcm_update()
     mcm_ScoutCommand_update_original(self, ...)
+    self:mcm_update()
 end
 
 function ScoutCommand:mcm_update()
