@@ -17,19 +17,23 @@ function ProcureCommand:getAreaSize(ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
     local bonus = 0
 
-    if captain:hasClass(CaptainClass.Merchant) then
-        bonus = bonus + 15
-    elseif captain:hasClass(CaptainClass.Smuggler) then
-        bonus = bonus + 10
-    end
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            if captain:hasClass(CaptainClass.Merchant) then
+                bonus = bonus + 15
+            elseif captain:hasClass(CaptainClass.Smuggler) then
+                bonus = bonus + 10
+            end
 
-    for _, perk in pairs({captain:getPerks()}) do
-        if perk == CaptainUtility.PerkType.MarketExpert or perk == CaptainUtility.PerkType.Navigator then
-            bonus = bonus + 5
+            for _, perk in pairs({captain:getPerks()}) do
+                if perk == CaptainUtility.PerkType.MarketExpert or perk == CaptainUtility.PerkType.Navigator then
+                    bonus = bonus + 5
+                end
+            end
         end
     end
 
@@ -48,15 +52,19 @@ local original_ProcureCommand_calculatePrediction = ProcureCommand.calculatePred
 function ProcureCommand:calculatePrediction(ownerIndex, shipName, area, config)
     local prediction = original_ProcureCommand_calculatePrediction and original_ProcureCommand_calculatePrediction(self, ownerIndex, shipName, area, config) or {}
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
 
-    -- Merchants and Smugglers are much faster at procuring goods
     local timeMultiplier = 1.0
-    if captain:hasClass(CaptainClass.Merchant) then
-        timeMultiplier = 0.70
-    elseif captain:hasClass(CaptainClass.Smuggler) then
-        timeMultiplier = 0.85
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            -- Merchants and Smugglers are much faster at procuring goods
+            if captain:hasClass(CaptainClass.Merchant) then
+                timeMultiplier = 0.70
+            elseif captain:hasClass(CaptainClass.Smuggler) then
+                timeMultiplier = 0.85
+            end
+        end
     end
 
     if prediction and prediction.duration and prediction.duration.value then

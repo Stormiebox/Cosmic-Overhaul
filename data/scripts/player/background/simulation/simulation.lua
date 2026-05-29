@@ -1,4 +1,7 @@
 if onServer() then
+    -- Cosmic Overhaul: Ensure relations API is available for Trade/Charity mission yields
+    include("relations")
+
     --[[
 Balancing:
     - Replay ratio controls how much command time a given amount of real-world time can receive,
@@ -170,9 +173,10 @@ Balancing:
             timeToApply = timeToApply-nextStep
         end
 
-        local player = Player(callingPlayer)
-        if player then
-            player:sendChatMessage("", 3, "Your captains continued working while you were away."%_t)
+        -- Cosmic Overhaul: Safely handle both Player and Alliance contexts (callingPlayer is nil in update loops)
+        local faction = getParentFaction()
+        if faction then
+            faction:sendChatMessage("", 3, "Your captains continued working while you were away."%_t)
         end
     end
 end -- if onServer()

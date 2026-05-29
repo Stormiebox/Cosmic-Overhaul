@@ -13,19 +13,23 @@ function SellCommand:getAreaSize(ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
     local bonus = 0
 
-    if captain:hasClass(CaptainClass.Merchant) then
-        bonus = bonus+15
-    elseif captain:hasClass(CaptainClass.Smuggler) then
-        bonus = bonus+10
-    end
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            if captain:hasClass(CaptainClass.Merchant) then
+                bonus = bonus+15
+            elseif captain:hasClass(CaptainClass.Smuggler) then
+                bonus = bonus+10
+            end
 
-    for _, perk in pairs({ captain:getPerks() }) do
-        if perk == CaptainUtility.PerkType.MarketExpert or perk == CaptainUtility.PerkType.Navigator then
-            bonus = bonus+5
+            for _, perk in pairs({ captain:getPerks() }) do
+                if perk == CaptainUtility.PerkType.MarketExpert or perk == CaptainUtility.PerkType.Navigator then
+                    bonus = bonus+5
+                end
+            end
         end
     end
 
@@ -43,19 +47,23 @@ end
 local original_SellCommand_calculatePrediction = SellCommand.calculatePrediction
 function SellCommand:calculatePrediction(ownerIndex, shipName, area, config)
     local prediction = original_SellCommand_calculatePrediction and
-    original_SellCommand_calculatePrediction(self, ownerIndex, shipName, area, config) or {}
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
+        original_SellCommand_calculatePrediction(self, ownerIndex, shipName, area, config) or {}
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
 
-    local timeMultiplier = 1.0
-    if captain:hasClass(CaptainClass.Merchant) then
-        timeMultiplier = 0.70
-    elseif captain:hasClass(CaptainClass.Smuggler) then
-        timeMultiplier = 0.85
-    end
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            local timeMultiplier = 1.0
+            if captain:hasClass(CaptainClass.Merchant) then
+                timeMultiplier = 0.70
+            elseif captain:hasClass(CaptainClass.Smuggler) then
+                timeMultiplier = 0.85
+            end
 
-    if prediction and prediction.duration and prediction.duration.value then
-        prediction.duration.value = prediction.duration.value*timeMultiplier
+            if prediction and prediction.duration and prediction.duration.value then
+                prediction.duration.value = prediction.duration.value*timeMultiplier
+            end
+        end
     end
     return prediction
 end
@@ -63,7 +71,7 @@ end
 local original_SellCommand_generateAssessmentFromPrediction = SellCommand.generateAssessmentFromPrediction
 function SellCommand:generateAssessmentFromPrediction(prediction, captain, ...)
     local lines = original_SellCommand_generateAssessmentFromPrediction and
-    original_SellCommand_generateAssessmentFromPrediction(self, prediction, captain, ...) or {}
+        original_SellCommand_generateAssessmentFromPrediction(self, prediction, captain, ...) or {}
     if type(lines) == "string" and lines == "" then return "" end
     if type(lines) ~= "table" then return lines end
 

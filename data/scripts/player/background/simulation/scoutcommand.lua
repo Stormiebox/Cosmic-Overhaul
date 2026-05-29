@@ -21,9 +21,13 @@ local original_ScoutCommand_calculatePrediction = ScoutCommand.calculatePredicti
 function ScoutCommand:calculatePrediction(ownerIndex, shipName, area, config)
     local prediction = original_ScoutCommand_calculatePrediction(self, ownerIndex, shipName, area, config)
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
 
-    prediction = ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
+    if ship then
+        prediction = ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
+    else
+        prediction.mcm = {}
+    end
 
     return prediction
 end

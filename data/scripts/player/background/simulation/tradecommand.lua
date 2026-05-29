@@ -236,9 +236,11 @@ function TradeCommand:generateAssessmentFromPrediction(prediction, captain, ...)
 end
 
 function TradeCommand:getAreaSize(ownerIndex, shipName)
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-
-    local bonus = TradeCommand:mcm_getAreaSizeBonus(ship)
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    local bonus = 0
+    if ship then
+        bonus = TradeCommand:mcm_getAreaSizeBonus(ship)
+    end
 
     --[[
         Three size choices:
@@ -393,14 +395,18 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
         }
     end
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
-    local timeFunc = function(c)
-        return mcm_tradeCaptainClassFlightTimeMultipliers[c] or mcm_tradeCaptainClassFlightTimeMultipliers[false]
-    end
-    local timeFactor = math.min(timeFunc(captain.primaryClass), timeFunc(captain.secondaryClass))
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            local timeFunc = function(c)
+                return mcm_tradeCaptainClassFlightTimeMultipliers[c] or mcm_tradeCaptainClassFlightTimeMultipliers[false]
+            end
+            local timeFactor = math.min(timeFunc(captain.primaryClass), timeFunc(captain.secondaryClass))
 
-    prediction.flightTime.value = prediction.flightTime.value * timeFactor
+            prediction.flightTime.value = prediction.flightTime.value * timeFactor
+        end
+    end
 
     return prediction
 end

@@ -2,6 +2,8 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
 local PlayerSettings = include("cosmicvaultplayersettings")
+local CaptainClass = include("captainclass")
+local CaptainUtility = include("captainutility")
 
 local mcm_MineCommand_buildUI_original = MineCommand.buildUI
 function MineCommand:buildUI(...)
@@ -35,15 +37,34 @@ function MineCommand:onStart(...)
 end
 
 local mcm_MineCommand_getAreaSize_original = MineCommand.getAreaSize
-function MineCommand:getAreaSize(...)
+function MineCommand:getAreaSize(ownerIndex, shipName)
     local a1, a2, a3
     if mcm_MineCommand_getAreaSize_original then
-        a1, a2, a3 = mcm_MineCommand_getAreaSize_original(self, ...)
+        a1, a2, a3 = mcm_MineCommand_getAreaSize_original(self, ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 
-    local staticBonus = 0
-    local squareBase = math.floor(a1.x + staticBonus)
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    local bonus = 0
+
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            if captain:hasClass(CaptainClass.Miner) then
+                bonus = bonus + 15
+            elseif captain:hasClass(CaptainClass.Scavenger) then
+                bonus = bonus + 10
+            end
+
+            for _, perk in pairs({captain:getPerks()}) do
+                if perk == CaptainUtility.PerkType.Navigator then
+                    bonus = bonus + 5
+                end
+            end
+        end
+    end
+
+    local squareBase = math.floor(a1.x + bonus)
     local longerEdge = math.floor((29 / 17) * squareBase)
     local shorterEdge = math.floor((11 / 17) * squareBase)
 

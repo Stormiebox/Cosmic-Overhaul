@@ -46,19 +46,23 @@ function SalvageCommand:getAreaSize(ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
     local bonus = 0
 
-    if captain:hasClass(CaptainClass.Scavenger) then
-        bonus = bonus + 15
-    elseif captain:hasClass(CaptainClass.Miner) then
-        bonus = bonus + 10
-    end
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            if captain:hasClass(CaptainClass.Scavenger) then
+                bonus = bonus + 15
+            elseif captain:hasClass(CaptainClass.Miner) then
+                bonus = bonus + 10
+            end
 
-    for _, perk in pairs({captain:getPerks()}) do
-        if perk == CaptainUtility.PerkType.Navigator then
-            bonus = bonus + 5
+            for _, perk in pairs({captain:getPerks()}) do
+                if perk == CaptainUtility.PerkType.Navigator then
+                    bonus = bonus + 5
+                end
+            end
         end
     end
 
@@ -69,8 +73,8 @@ function SalvageCommand:getAreaSize(ownerIndex, shipName)
     local shorterEdge = math.floor((11 / 17) * squareBase)
 
     return { x = squareBase, y = squareBase },
-           { x = longerEdge, y = shorterEdge },
-           { x = shorterEdge, y = longerEdge }
+        { x = longerEdge, y = shorterEdge },
+        { x = shorterEdge, y = longerEdge }
 end
 
 local mcm_SalvageCommand_generateItems_original = SalvageCommand.generateItems

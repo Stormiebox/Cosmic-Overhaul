@@ -1,11 +1,4 @@
 
-local function colored(code, line)
-    return '\\c(' .. code .. ')' .. line .. '\\c()'
-end
-local green = function(line) return colored('0d0', line) end
-local yellow = function(line) return colored('dd5', line) end
-local red = function(line) return colored('d93', line) end
-
 local function randOneOf(seedValue, sourceFunc, ...)
     local rand = Random(Seed('' .. tostring(seedValue)))
     local lines = sourceFunc(...)
@@ -30,14 +23,14 @@ end
 -- scan on (e.g. Scout) mission time
 function SimulationUtility.getDeepScanAssessmentLines(deepScanRange)
     if not deepScanRange or deepScanRange == 0 then return {
-        red("We have no deep scan ability and will have to visit every sector."%_T),
-        red("Travel time will be extreme without more deep scan coverage."%_T),
-        red("We can't see where hidden mass sectors are without better radar."%_T),
+        "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"%_T,
+        "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"%_T,
+        "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"%_T,
     }
     elseif deepScanRange < 3 then return {
-        yellow("With our weak sensors, we'll waste a lot of time jumping blindly."%_T),
-        yellow("We'd be a lot faster with more deep scan coverage."%_T),
-        yellow("Hidden mass sectors will be hard to find without better radar."%_T),
+        "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"%_T,
+        "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"%_T,
+        "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"%_T,
     }
     else return {}
     end
@@ -48,9 +41,9 @@ end
 
 function SimulationUtility.getSameSectorDepotLines()
     return {
-        green("There's a refinery right here, so this will be fast and safe."%_T),
-        green("Refining will be no problem with a depot right in this sector."%_T),
-        green("I can autopilot right to the depot in this sector."%_T),
+        "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"%_T,
+        "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"%_T,
+        "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"%_T,
     }
 end
 function SimulationUtility.getSameSectorDepotLine(seedValue)
@@ -60,9 +53,9 @@ end
 
 function SimulationUtility.getTradeCharityLines()
     return {
-        green("People are sure to appreciate our work here."%_T),
-        green("This will help a lot of people."%_T),
-        green("Our generosity will help to build trust."%_T),
+        "\\c(0d0)People are sure to appreciate our work here.\\c()"%_T,
+        "\\c(0d0)This will help a lot of people.\\c()"%_T,
+        "\\c(0d0)Our generosity will help to build trust.\\c()"%_T,
     }
 end
 function SimulationUtility.getTradeCharityLine(seedValue)
@@ -71,9 +64,9 @@ end
 
 function SimulationUtility.getImperfectTradeClassLines()
     return {
-        yellow("This isn't my specialty, but I'll see what I can do."%_T),
-        yellow("A merchant would do this better, but I can give it a go."%_T),
-        yellow("No merchants available, commander?"%_T),
+        "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"%_T,
+        "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"%_T,
+        "\\c(dd5)No merchants available, commander?\\c()"%_T,
     }
 end
 function SimulationUtility.getImperfectTradeClassLine(seedValue)

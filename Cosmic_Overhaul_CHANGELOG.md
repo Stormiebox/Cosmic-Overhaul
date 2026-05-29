@@ -43,6 +43,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Fleet Status UI Attachment:** Fixed a severe misplaced logic bug in `entity/init.lua` where player UI scripts were mistakenly being attached to ships, restoring the correct Fleet Status initialization.
 - **Scout Command Offline Progress:** Fixed a logic bug in `scoutcommand.lua` where the offline simulation catch-up tick was evaluated *after* the incremental sector reveal loop. Scout operations will now correctly and instantly reveal all progress made while the player was offline.
 - **Universal Bulletin Board:** Fixed a logic bug in `playerbulletinboard.lua` where the script attempts to format strings using `%` operator without providing fallback empty table for `bulletin.formatArguments`. Which would most likely cause a UI tab crash if any mission that does not use string variables is displayed.
+- **Map Command Alliance Crash (Ghost Ship):** Fixed a critical UI thread crash in all map background simulation commands (Mine, Trade, Salvage, etc.) when playing in an Alliance. The map UI occasionally passes a 'Faction 0' placeholder while updating, which our Captain Synergy system tried to index. All map commands now safely verify the ship owner context.
+- **Simulation Offline Catch-Up Notification:** Fixed a bug in `simulation.lua` where the offline catch-up notification failed to send to players who were actively commanding Alliance fleets when they logged out.
+- **Charity Mission Crash:** Fixed a silent simulation loop crash in `simulation.lua` when yielding relations from Charity Trade missions by adding the missing vanilla `relations.lua` API include.
+- **Simulation Translation Trap:** Fixed a major Server-Side Translation Trap in `simulationutility.lua` where applying color tags was breaking the C++ `Format` objects, causing map command assessments to permanently render in English for international clients.
 
 ### Changed
 

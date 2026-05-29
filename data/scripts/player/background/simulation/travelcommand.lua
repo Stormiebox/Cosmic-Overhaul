@@ -34,23 +34,26 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
 
     if not mcm_lastPrediction then return mcm_lastPrediction end
 
-    local ship = ShipDatabaseEntry(ownerIndex, shipName)
-    local captain = ship:getCaptain()
-
-    -- Navigators and Explorers have supreme mastery over long-distance routes
-    if captain:hasClass(CaptainClass.Navigator) then
-        if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
-            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.75
-        end
-        if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
-            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.50
-        end
-    elseif captain:hasClass(CaptainClass.Explorer) then
-        if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
-            mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.85
-        end
-        if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
-            mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.75
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            -- Navigators and Explorers have supreme mastery over long-distance routes
+            if captain:hasClass(CaptainClass.Navigator) then
+                if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
+                    mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.75
+                end
+                if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
+                    mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.50
+                end
+            elseif captain:hasClass(CaptainClass.Explorer) then
+                if mcm_lastPrediction.duration and mcm_lastPrediction.duration.value then
+                    mcm_lastPrediction.duration.value = mcm_lastPrediction.duration.value*0.85
+                end
+                if mcm_lastPrediction.attackChance and mcm_lastPrediction.attackChance.value then
+                    mcm_lastPrediction.attackChance.value = mcm_lastPrediction.attackChance.value*0.75
+                end
+            end
         end
     end
 
@@ -60,7 +63,7 @@ end
 local mcm_TravelCommand_generateAssessmentFromPrediction_original = TravelCommand.generateAssessmentFromPrediction
 function TravelCommand:generateAssessmentFromPrediction(prediction, captain, ...)
     local lines = mcm_TravelCommand_generateAssessmentFromPrediction_original and
-    mcm_TravelCommand_generateAssessmentFromPrediction_original(self, prediction, captain, ...) or {}
+        mcm_TravelCommand_generateAssessmentFromPrediction_original(self, prediction, captain, ...) or {}
     if type(lines) == "string" and lines == "" then return "" end
     if type(lines) ~= "table" then return lines end
 
