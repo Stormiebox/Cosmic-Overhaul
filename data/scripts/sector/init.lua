@@ -4,5 +4,5 @@ if CO_ShipUtilityInjector then CO_ShipUtilityInjector.inject() end
 
 if onServer() then
     local sector = Sector()
-    sector:addScriptOnce("sector/managestationincomes.lua")
+    sector:addScriptOnce("data/scripts/sector/managestationincomes.lua")
 end

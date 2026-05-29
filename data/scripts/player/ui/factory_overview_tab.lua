@@ -48,7 +48,7 @@ function FactoryOverview.fetchDataFromGalaxy(alliance_v) -- fetches the current 
 			index = Player().allianceIndex
 		end
 		--print("Index: " .. tostring(index) .. " av: " .. tostring(av))
-		local errorcode, factories = galaxy:invokeFunction("factoryregister", "getFactoriesFor", index, av)
+		local errorcode, factories = galaxy:invokeFunction("galaxy/factoryregister.lua", "getFactoriesFor", index, av)
 
 		if errorcode ~= 0 then
 			print("Error while calling getFactoriesFor on Galaxy from Player: " .. tostring(errorcode))
