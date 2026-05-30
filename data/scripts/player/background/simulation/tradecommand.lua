@@ -108,7 +108,7 @@ function TradeCommand:buildUI(startPressedCallback, changeAreaPressedCallback, r
     local frame = ui.window:createFrame(rect)
     frame.tooltip = "Trade most of this contract's profit for increased reputation gain"%_t
     local vsplit2 = UIVerticalSplitter(rect, 0, 0, 0.6)
-    local label = ui.window:createLabel(vsplit2.left, "Charity mission", 14)
+    local label = ui.window:createLabel(vsplit2.left, "Charity mission"%_t, 14)
     ui.mcm.charityMissionCheckBox = ui.window:createCheckBox(vsplit2.right, "", configChangedCallback)
 
     if PlayerSettings then
@@ -327,18 +327,6 @@ local function mcm_rarityScaleFunc(table)
     end
 end
 
-local function TableWithFallback(values, fallback)
-    return setmetatable(values, { __index = function(self, k, ...) return fallback end })
-end
-
-local mcm_subsystemRarityBonuses = TableWithFallback({
-    ['data/scripts/systems/tradingoverview.lua'] = TableWithFallback({
-        [RarityType.Uncommon] = 1,
-        [RarityType.Exceptional] = 2,
-        [RarityType.Legendary] = 4,
-    }, 0)
-}, TableWithFallback({}, 0))
-
 local mcm_subsystemAreaBonusFuncs = {
     ['data/scripts/systems/tradingoverview.lua'] = mcm_rarityScaleFunc({
         [RarityType.Uncommon] = 1,
@@ -364,7 +352,8 @@ end
 
 function TradeCommand:mcm_getAreaSizeBonusForSubsystems(ship)
     return sumtf(ship:getSystems(), function(system)
-        return mcm_subsystemRarityBonuses[system.script][system.rarity.value]
+        local bonusFunc = mcm_getSubsystemAreaBonusFunc(system)
+        return bonusFunc(system.rarity)
     end)
 end
 

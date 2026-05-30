@@ -1,1061 +1,1039 @@
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+# ========== data/scripts/entity/TrashMan.lua ==========
+#: data/scripts/entity/TrashMan.lua:
 msgid "Trash Man"
 msgstr "Müllmann"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Systems to trash"
 msgstr "Systeme in den Müll"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Turrets to trash"
 msgstr "Geschütze in den Müll"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
 msgstr "Wählen Sie aus, welche Arten von Inventargegenständen als Müll markiert werden sollen. Diese Gegenstände werden nicht sofort zerstört oder verkauft. Stattdessen können sie beim nächsten Besuch beim entsprechenden Händler mit der Schaltfläche 'Müll verkaufen' verkauft werden.\nGegenstände, die als Favoriten markiert sind, werden nicht als Müll markiert!"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Mark"
 msgstr "Markieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Unmark"
 msgstr "Demarkieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Preview"
 msgstr "Vorschau"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Preview: not run yet"
 msgstr "Vorschau: noch nicht ausgeführt"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Tech level filter (optional)"
 msgstr "Tech-Level-Filter (optional)"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Min: 1"
 msgstr "Min: 1"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/TrashMan.lua:
+#: data/scripts/entity/TrashMan.lua:
 msgid "Max: 52"
 msgstr "Max: 52"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/ancientgate.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/ancientgate.lua:
+# ========== data/scripts/entity/ancientgate.lua ==========
+#: data/scripts/entity/ancientgate.lua:
 msgid "${dir} Ancient Gate to ${sector}"
 msgstr "${dir} Antikes Tor nach ${sector}"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/bulletinboard.lua ==========
+# ========== data/scripts/entity/bulletinboard.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/gate.lua ==========
+# ========== data/scripts/entity/gate.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/equipmentdock.lua ==========
+# ========== data/scripts/entity/merchants/equipmentdock.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/factory.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/factory.lua:
+# ========== data/scripts/entity/merchants/factory.lua ==========
+#: data/scripts/entity/merchants/factory.lua:
 msgid " "
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/factory.lua:
+#: data/scripts/entity/merchants/factory.lua:
 msgid "Transport capacity is already at maximum (${c}/${m})."
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/factory.lua:
+#: data/scripts/entity/merchants/factory.lua:
 msgid ""
 msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/fightermerchant.lua ==========
+# ========== data/scripts/entity/merchants/fightermerchant.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/scrapyard.lua ==========
+# ========== data/scripts/entity/merchants/managestationincomes.lua ==========
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "a system"
+msgstr ""
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/smugglersmarket.lua ==========
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "a turret"
+msgstr ""
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/merchants/turretmerchant.lua ==========
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Earned ${amount} in taxes from Resource Depot ${station}."
+msgstr ""
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/orderchain.lua ==========
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in unbranding fees from Smuggler's Market ${station}."
+msgstr ""
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/transfercrewgoods.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/entity/transfercrewgoods.lua:
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in gambling income from Casino ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in repair fees from Repair Dock ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in repair fees from Shipyard ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Gained ${amount} in travel fees from Travel Hub ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in taxes from Equipment Dock ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in taxes from Research Station ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Received ${amount} in taxes from Military Outpost ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Gained ${amount} in taxes from Turret Factory ${station}."
+msgstr ""
+
+#: data/scripts/entity/merchants/managestationincomes.lua:
+#: data/scripts/sector/managestationincomes.lua:
+msgid "Earned ${amount} in fighter costs from Fighter Factory ${station}."
+msgstr ""
+
+
+# ========== data/scripts/entity/merchants/scrapyard.lua ==========
+
+# ========== data/scripts/entity/merchants/smugglersmarket.lua ==========
+
+# ========== data/scripts/entity/merchants/turretmerchant.lua ==========
+
+# ========== data/scripts/entity/orderchain.lua ==========
+
+# ========== data/scripts/entity/transfercrewgoods.lua ==========
+#: data/scripts/entity/transfercrewgoods.lua:
 msgid "Search Cargo..."
 msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+# ========== data/scripts/lib/co_shiputility_injector.lua ==========
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Light Prospector"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Prospector"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Prospector"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Medium Miner"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Mining Barge"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Mining Barge"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Extraction Vessel"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Extraction Vessel"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Asteroid Crusher"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Planet Cracker"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Cargo Shuttle"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Light Loader"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Loader"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Light Transporter"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Transporter"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Light Freighter"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Freighter"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Superfreighter"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Logistics Leviathan"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Light Courier"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Courier"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Courier"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Trade Vessel"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Merchant Vessel"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Merchant Vessel"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Commerce Ship"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Commerce Ship"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Trade Galleon"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Exchange Hub"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Grand Exchange"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Commercial Colossus"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Trade Leviathan"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Interceptor"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Heavy Cruiser"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Battlecruiser"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Juggernaut"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Titan"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shiputility.lua:
+#: data/scripts/lib/co_shiputility_injector.lua:
 msgctxt "ship title"
 msgid "Leviathan"
 msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua:
+# ========== data/scripts/lib/shop.lua ==========
+#: data/scripts/lib/shop.lua:
 msgid "Shop"
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua:
+#: data/scripts/lib/shop.lua:
 msgid "Free restock used. %1% free restocks left."
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua:
+#: data/scripts/lib/shop.lua:
 msgid "Shop restocked. Next restock available in 45 minutes."
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua:
+#: data/scripts/lib/shop.lua:
 msgid "Restock is on cooldown for %1% minutes and %2% seconds. Please wait."
 msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/shop.lua:
+#: data/scripts/lib/shop.lua:
 msgid "Click to restock the shop"
 msgstr "Klicken, um den Laden aufzufüllen"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/tradingmanager.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/lib/tradingmanager.lua:
+# ========== data/scripts/lib/tradingmanager.lua ==========
+#: data/scripts/lib/tradingmanager.lua:
 msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
 msgstr "\\s(%d:%d) Die Bevölkerung von %s hat %d Einheiten %s verbraucht und dabei ¢%s Einnahmen erzielt."
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/refinecommand.lua ==========
+# ========== data/scripts/player/background/simulation/refinecommand.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommand.lua ==========
+# ========== data/scripts/player/background/simulation/scoutcommand.lua ==========
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+# ========== data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors picked up a massive, dormant gate structure adrift in this sector."
-msgstr ""
+msgstr "Sensoren haben eine massive, inaktive Torstruktur erfasst, die in diesem Sektor treibt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We found a colossal ring gate here. It looks ancient and entirely dead."
-msgstr ""
+msgstr "Wir haben hier ein kolossales Ringtor gefunden. Es sieht uralt und völlig tot aus."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is an enormous, deactivated hyperspace gate floating silently in this sector."
-msgstr ""
+msgstr "In diesem Sektor treibt lautlos ein riesiges, deaktiviertes Hyperraumtor."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a monolithic ancient gate construct. Its original builders are long gone."
-msgstr ""
+msgstr "Wir haben ein monolithisches antikes Tor-Konstrukt kartiert. Seine ursprünglichen Erbauer sind längst verschwunden."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Asteroids in a perfect ring formation are emitting bizarre energy readings here. We kept our distance."
-msgstr ""
+msgstr "Asteroiden in einer perfekten Ringformation strahlen hier bizarre Energiewerte ab. Wir haben Abstand gehalten."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We detected a massive energy shield tethered to a cluster of glowing asteroids."
-msgstr ""
+msgstr "Wir haben einen massiven Energieschild entdeckt, der an einen Haufen leuchtender Asteroiden gebunden ist."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a highly suspicious, shielded rock formation in this sector. Proceed with caution."
-msgstr ""
+msgstr "In diesem Sektor befindet sich eine höchst verdächtige, abgeschirmte Felsformation. Vorsicht walten lassen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "An unnatural arrangement of asteroids is broadcasting a hostile energy signature in this area."
-msgstr ""
+msgstr "Eine unnatürliche Anordnung von Asteroiden sendet in diesem Bereich eine feindliche Energiesignatur aus."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors picked up a group of zealots obsessing over a massive asteroid."
-msgstr ""
+msgstr "Sensoren haben eine Gruppe von Eiferern erfasst, die von einem massiven Asteroiden besessen sind."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A strange cult seems to have set up camp around a giant rock in this sector."
-msgstr ""
+msgstr "Ein seltsamer Kult scheint in diesem Sektor um einen riesigen Felsen herum ein Lager aufgeschlagen zu haben."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We intercepted some unhinged radio chatter. Cultists are congregating around an asteroid here."
-msgstr ""
+msgstr "Wir haben verwirrten Funkverkehr abgefangen. Kultisten versammeln sich hier um einen Asteroiden."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There are fanatics out here worshipping an asteroid. Space madness is a terrible thing."
-msgstr ""
+msgstr "Hier draußen verehren Fanatiker einen Asteroiden. Weltraumwahnsinn ist eine schreckliche Sache."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A localized spatial tear is present here. Looks like a stable wormhole."
-msgstr ""
+msgstr "Hier ist ein lokalisierter Riss im Raum. Sieht aus wie ein stabiles Wurmloch."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners picked up a lone wormhole hidden in the void of this sector."
-msgstr ""
+msgstr "Scanner haben ein einsames Wurmloch erfasst, das in der Leere dieses Sektors verborgen ist."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a wormhole phenomenon active here. Destination unknown."
-msgstr ""
+msgstr "Hier ist ein Wurmloch-Phänomen aktiv. Ziel unbekannt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We almost stumbled straight into a spatial anomaly. A wormhole is open in this sector."
-msgstr ""
+msgstr "Wir sind fast direkt in eine Raumanomalie gestolpert. Ein Wurmloch ist in diesem Sektor offen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We intercepted a repeating broadcast from a lone research satellite."
-msgstr ""
+msgstr "Wir haben eine sich wiederholende Übertragung von einem einsamen Forschungssatelliten abgefangen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "An automated science probe is transmitting strange data about asteroids here."
-msgstr ""
+msgstr "Eine automatisierte Wissenschaftssonde überträgt hier seltsame Daten über Asteroiden."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A solitary satellite is pinging complex research telemetry in this sector."
-msgstr ""
+msgstr "Ein einzelner Satellit sendet in diesem Sektor komplexe Forschungstelemetrie."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is an abandoned satellite registered to 'M.A.D. Science' looping its logs here."
-msgstr ""
+msgstr "Hier schleift ein verlassener Satellit, der auf 'M.A.D. Science' registriert ist, seine Protokolle."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We stumbled upon a hidden resistance cell operating completely off the grid."
-msgstr ""
+msgstr "Wir sind auf eine versteckte Widerstandszelle gestoßen, die völlig autark operiert."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Against all odds, there's a scrappy survivor outpost tucked away in this sector."
-msgstr ""
+msgstr "Entgegen allen Erwartungen gibt es in diesem Sektor einen hartnäckigen Überlebensaußenposten."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A heavily concealed resistance faction is holding out against the Xsotan here."
-msgstr ""
+msgstr "Eine stark getarnte Widerstandsfraktion hält hier gegen die Xsotan stand."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We found a pocket of survivors out here claiming to be part of a rebellion."
-msgstr ""
+msgstr "Wir haben hier draußen eine Gruppe von Überlebenden gefunden, die behaupten, Teil einer Rebellion zu sein."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "An artificial ring of numbered asteroids and strange stations is adrift here."
-msgstr ""
+msgstr "Ein künstlicher Ring aus nummerierten Asteroiden und seltsamen Stationen treibt hier."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We found a complex arrangement of asteroids with strange numerical markings."
-msgstr ""
+msgstr "Wir haben eine komplexe Anordnung von Asteroiden mit seltsamen numerischen Markierungen gefunden."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."
-msgstr ""
+msgstr "Ein ruhendes, kreisförmiges Array von Asteroiden und Xsotan-Technologie treibt in diesem Sektor."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."
-msgstr ""
+msgstr "Es gibt einen bizarren, rituellen Ring aus markierten Asteroiden, der schwache Energiespitzen erzeugt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors show a derelict ship with an intact core. We could restore it to working order."
-msgstr ""
+msgstr "Sensoren zeigen ein verlassenes Schiff mit intaktem Kern. Wir könnten es wieder fahrbereit machen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There's a heavily damaged but structurally sound ship abandoned in this sector."
-msgstr ""
+msgstr "In diesem Sektor gibt es ein stark beschädigtes, aber strukturell intaktes Schiff."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We located an intact derelict vessel here. With a solid repair crew, she'll fly again."
-msgstr ""
+msgstr "Wir haben hier ein intaktes, verlassenes Schiff gefunden. Mit einer guten Reparaturcrew wird es wieder fliegen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "I spotted a salvageable ship out here. It is practically begging to be claimed and repaired."
-msgstr ""
+msgstr "Ich habe hier draußen ein bergbares Schiff entdeckt. Es bettelt praktisch darum, beansprucht und repariert zu werden."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive debris fields and wrecked hulls detected in this sector."
-msgstr ""
+msgstr "In diesem Sektor wurden massive Trümmerfelder und zerstörte Schiffsrümpfe entdeckt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a graveyard of destroyed ships here. Prime salvaging territory."
-msgstr ""
+msgstr "Wir haben hier einen Friedhof zerstörter Schiffe kartiert. Bestes Gebiet für Abwrackarbeiten."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is littered with the husks of dead ships."
-msgstr ""
+msgstr "Dieser Sektor ist übersät mit den Hüllen toter Schiffe."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors show heavy wreckage concentrations in this area. Bring your salvage lasers."
-msgstr ""
+msgstr "Sensoren zeigen starke Wrackkonzentrationen in diesem Bereich. Bringen Sie Ihre Abwracklaser mit."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A massive stash of lost cargo containers is floating freely here."
-msgstr ""
+msgstr "Ein riesiges Versteck mit verlorenen Frachtcontainern treibt hier frei."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We detected a dense cluster of abandoned shipping containers in this sector."
-msgstr ""
+msgstr "Wir haben in diesem Sektor eine dichte Ansammlung verlassener Frachtcontainer entdeckt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a veritable goldmine of unbranded cargo crates adrift out here."
-msgstr ""
+msgstr "Hier draußen treibt eine wahre Goldmine aus nicht markierten Frachtkisten."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors picked up a large, unsecured container cache drifting in the void."
-msgstr ""
+msgstr "Sensoren haben ein großes, ungesichertes Container-Versteck erfasst, das in der Leere treibt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We picked up encrypted comms. Looks like a black market hub is nearby."
-msgstr ""
+msgstr "Wir haben verschlüsselte Kommunikation empfangen. Sieht so aus, als wäre ein Schwarzmarktknoten in der Nähe."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A shady syndicate operates a hidden Smuggler's Market in this sector."
-msgstr ""
+msgstr "Ein zwielichtiges Syndikat betreibt in diesem Sektor einen versteckten Schmugglermarkt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors detected a heavily cloaked Smuggler's Hideout operating off the books."
-msgstr ""
+msgstr "Sensoren haben ein stark getarntes Schmugglerversteck entdeckt, das inoffiziell operiert."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a hive of scum and villainy tucked away in this area."
-msgstr ""
+msgstr "In dieser Gegend ist ein Hort von Abschaum und Schurkerei versteckt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Dense asteroid clusters detected. Good prospects for a mining operation."
-msgstr ""
+msgstr "Dichte Asteroiden-Cluster entdeckt. Gute Aussichten für einen Bergbaubetrieb."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a massive, resource-rich asteroid field in this sector."
-msgstr ""
+msgstr "Wir haben in diesem Sektor ein riesiges, ressourcenreiches Asteroidenfeld kartiert."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Heavy asteroid presence here. Prime territory for our mining lasers."
-msgstr ""
+msgstr "Starkes Asteroidenaufkommen hier. Bestes Gebiet für unsere Bergbaulaser."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners show a dense field of unmined rocks in this sector."
-msgstr ""
+msgstr "Scanner zeigen in diesem Sektor ein dichtes Feld an noch nicht abgebauten Felsen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Hostile pirate signatures detected. They are heavily entrenched in this sector."
-msgstr ""
+msgstr "Feindliche Piratensignaturen entdeckt. Sie haben sich in diesem Sektor stark verschanzt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A major pirate syndicate controls this area. Approach with weapons hot."
-msgstr ""
+msgstr "Ein großes Piratensyndikat kontrolliert dieses Gebiet. Nähern Sie sich mit feuerbereiten Waffen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Sensors are lighting up with raider transponders. It's a pirate stronghold."
-msgstr ""
+msgstr "Die Sensoren leuchten mit Räuber-Transpondern auf. Es ist eine Piratenhochburg."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We spotted a large contingent of pirate scum operating in this sector."
-msgstr ""
+msgstr "Wir haben ein großes Aufgebot an Piratenabschaum in diesem Sektor entdeckt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive alien energy spikes detected. The Xsotan are swarming here."
-msgstr ""
+msgstr "Massive außerirdische Energiespitzen entdeckt. Die Xsotan schwärmen hier."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We barely avoided a massive Xsotan breeding cluster in this sector."
-msgstr ""
+msgstr "Wir konnten einem massiven Xsotan-Brutcluster in diesem Sektor nur knapp ausweichen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is heavily infested by the Xsotan menace."
-msgstr ""
+msgstr "Dieser Sektor ist stark von der Xsotan-Bedrohung befallen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Alien bio-signatures confirmed. The Xsotan have claimed this space."
-msgstr ""
+msgstr "Außerirdische Bio-Signaturen bestätigt. Die Xsotan haben diesen Raum beansprucht."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We also picked up a repeating automated beacon on a forgotten frequency."
-msgstr ""
+msgstr "Wir haben auch ein sich wiederholendes automatisiertes Signal auf einer vergessenen Frequenz empfangen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There's a strange navigational beacon here transmitting encrypted coordinates."
-msgstr ""
+msgstr "Hier gibt es ein seltsames Navigationssignal, das verschlüsselte Koordinaten überträgt."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Also, a lone beacon is pulsing an 'Exodus' distress signal."
-msgstr ""
+msgstr "Außerdem pulsiert ein einsames Signal mit einem 'Exodus'-Notsignal."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."
-msgstr ""
+msgstr "Oh, und ich habe ein altes Signal bemerkt, das Fragmente einer mysteriösen Nachricht sendet."
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulation.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulation.lua:
+# ========== data/scripts/player/background/simulation/simulation.lua ==========
+#: data/scripts/player/background/simulation/simulation.lua:
 msgid "Your captains continued working while you were away."
 msgstr "Ihre Kapitäne haben weitergearbeitet, während Sie weg waren."
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
+# ========== data/scripts/player/background/simulation/simulationutility.lua ==========
+#: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "I'll have regular data for you as the mission progresses."
 msgstr "Ich werde im Laufe der Mission regelmäßig Daten für Sie haben."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
+#: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "You'll receive frequent updates as we learn more."
 msgstr "Sie erhalten häufige Updates, wenn wir mehr erfahren."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
+#: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "Expect a continual flow of new information."
 msgstr "Erwarten Sie einen kontinuierlichen Fluss neuer Informationen."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "We have no deep scan ability and will have to visit every sector."
-msgstr "Wir haben keine Tiefenscan-Fähigkeit und müssen jeden Sektor besuchen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "Travel time will be extreme without more deep scan coverage."
-msgstr "Die Reisezeit wird extrem sein ohne eine größere Tiefenscan-Abdeckung."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "We can't see where hidden mass sectors are without better radar."
-msgstr "Ohne besseres Radar können wir nicht sehen, wo sich verborgene Massensektoren befinden."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "With our weak sensors, we'll waste a lot of time jumping blindly."
-msgstr "Mit unseren schwachen Sensoren werden wir viel Zeit mit blindem Springen verschwenden."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "We'd be a lot faster with more deep scan coverage."
-msgstr "Wir wären mit mehr Tiefenscan-Abdeckung viel schneller."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "Hidden mass sectors will be hard to find without better radar."
-msgstr "Verborgene Massensektoren werden ohne besseres Radar schwer zu finden sein."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "There's a refinery right here, so this will be fast and safe."
-msgstr "Hier gibt es eine Raffinerie, also wird das schnell und sicher gehen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "Refining will be no problem with a depot right in this sector."
-msgstr "Raffinieren wird mit einem Depot direkt in diesem Sektor kein Problem sein."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "I can autopilot right to the depot in this sector."
-msgstr "Ich kann direkt per Autopilot zum Depot in diesem Sektor fliegen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "People are sure to appreciate our work here."
-msgstr "Die Leute werden unsere Arbeit hier sicherlich zu schätzen wissen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)People are sure to appreciate our work here.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "This will help a lot of people."
-msgstr "Das wird vielen Leuten helfen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)This will help a lot of people.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "Our generosity will help to build trust."
-msgstr "Unsere Großzügigkeit wird helfen, Vertrauen aufzubauen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(0d0)Our generosity will help to build trust.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "This isn't my specialty, but I'll see what I can do."
-msgstr "Das ist nicht mein Fachgebiet, aber ich werde sehen, was ich tun kann."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "A merchant would do this better, but I can give it a go."
-msgstr "Ein Händler würde das besser machen, aber ich kann es versuchen."
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"
+msgstr ""
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/simulationutility.lua:
-msgid "No merchants available, commander?"
-msgstr "Keine Händler verfügbar, Kommandant?"
+#: data/scripts/player/background/simulation/simulationutility.lua:
+msgid "\\c(dd5)No merchants available, commander?\\c()"
+msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/tradecommand.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/tradecommand.lua:
+# ========== data/scripts/player/background/simulation/tradecommand.lua ==========
+#: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Directly deposit returns as soon as they're available"
 msgstr "Erträge direkt einzahlen, sobald sie verfügbar sind"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/tradecommand.lua:
+#: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Immediate delivery"
 msgstr "Sofortige Lieferung"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/tradecommand.lua:
+#: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Trade most of this contract's profit for increased reputation gain"
 msgstr "Tauschen Sie den größten Teil des Gewinns dieses Vertrags gegen einen höheren Reputationsgewinn"
 
+#: data/scripts/player/background/simulation/tradecommand.lua:
+msgid "Charity mission"
+msgstr "Wohltätigkeitsmission"
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/travelcommand.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/background/simulation/travelcommand.lua:
+
+# ========== data/scripts/player/background/simulation/travelcommand.lua ==========
+#: data/scripts/player/background/simulation/travelcommand.lua:
 msgid "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"
 msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/mapcommands.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/mapcommands.lua:
+# ========== data/scripts/player/map/mapcommands.lua ==========
+#: data/scripts/player/map/mapcommands.lua:
 msgid "[Shift+C] Center on Home"
 msgstr "[Shift+C] Auf Heimat zentrieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/mapcommands.lua:
+#: data/scripts/player/map/mapcommands.lua:
 msgid "[T] Switch to selected"
 msgstr "[T] Zum Ausgewählten wechseln"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/mapcommands.lua:
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/map/mapcommands.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Salvage"
 msgstr "Abwracken"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/mapcommands.lua:
+#: data/scripts/player/map/mapcommands.lua:
 msgid "Loop"
 msgstr "Wiederholen"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/maproutes.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/map/maproutes.lua:
+# ========== data/scripts/player/map/maproutes.lua ==========
+#: data/scripts/player/map/maproutes.lua:
 msgid "[${i}] Repair"
 msgstr ""
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+# ========== data/scripts/player/ui/command_center_tab.lua ==========
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Command Center"
 msgstr "Kommandozentrale"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+#: data/scripts/player/ui/command_center_tab.lua:
+msgid "Recall Ship"
+msgstr "Schiff zurückrufen"
+
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Refresh Active Operations"
 msgstr "Aktive Operationen aktualisieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Recall selected ship from its operation"
 msgstr "Ausgewähltes Schiff von seiner Operation zurückrufen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Active Fleet Operations"
 msgstr "Aktive Flottenoperationen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Operation"
 msgstr "Operation"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Location"
 msgstr "Ort"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "ETA"
 msgstr "Ankunftszeit"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Active"
 msgstr "Aktiv"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Recalled"
 msgstr "Zurückgerufen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Traveling"
 msgstr "Reisen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Selling"
 msgstr "Verkaufen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Supplying"
 msgstr "Versorgen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Scouting"
 msgstr "Erkunden"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Restocking"
 msgstr "Auffüllen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Refining Ores"
 msgstr "Erze raffinieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Looping Orders"
 msgstr "Befehle wiederholen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Unknown Operation"
 msgstr "Unbekannte Operation"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Active Route"
 msgstr "Aktive Route"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Continuous"
 msgstr "Kontinuierlich"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "Destroyed"
 msgstr "Zerstört"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/command_center_tab.lua:
+#: data/scripts/player/ui/command_center_tab.lua:
 msgid "In-Sector"
 msgstr "Im Sektor"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+# ========== data/scripts/player/ui/factory_overview_tab.lua ==========
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Factory Overview"
 msgstr "Fabrikübersicht"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Name"
+msgstr "Name"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Type"
+msgstr "Typ"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
+msgid "Profit"
+msgstr "Gewinn"
+
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Income"
 msgstr "Einnahmen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Expense"
 msgstr "Ausgaben"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Profit / h"
 msgstr "Gewinn / h"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Refresh Factory Data"
 msgstr "Fabrikdaten aktualisieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Goto Selected"
 msgstr "Gehe zu Ausgewähltem"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Jump to selected station"
 msgstr "Zur ausgewählten Station springen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Sorting: "
 msgstr "Sortierung: "
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Alliance: "
 msgstr "Allianz: "
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/factory_overview_tab.lua:
+#: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Sort by "
 msgstr "Sortieren nach "
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/playerbulletinboard.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/playerbulletinboard.lua:
+# ========== data/scripts/player/ui/playerbulletinboard.lua ==========
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Bulletin Board"
+msgstr "Schwarzes Brett"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "Filter:"
 msgstr "Filter:"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/playerbulletinboard.lua:
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "All"
+msgstr "Alle"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Description"
+msgstr "Beschreibung"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Difficulty"
+msgstr "Schwierigkeit"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Reward"
+msgstr "Belohnung"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "Source"
 msgstr "Quelle"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/playerbulletinboard.lua:
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "Accept"
+msgstr "Annehmen"
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr "Diese Mission ist nur für Besitzer des Black Market DLC verfügbar."
+
+#: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "No missions available in this sector!"
 msgstr "Keine Missionen in diesem Sektor verfügbar!"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+# ========== data/scripts/player/ui/resourcedisplay.lua ==========
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Resources Display"
-msgstr ""
+msgstr "Ressourcenanzeige"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Enable UI movement"
-msgstr ""
+msgstr "UI-Bewegung aktivieren"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Reset UI position"
-msgstr ""
+msgstr "UI-Position zurücksetzen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show current ship cargo capacity"
-msgstr ""
+msgstr "Aktuelle Frachtkapazität des Schiffs anzeigen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show currently used and total inventory slots"
-msgstr ""
+msgstr "Aktuell belegte und gesamte Inventarplätze anzeigen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show inventory capacity for alliance/ship at the same time"
-msgstr ""
+msgstr "Inventarkapazität für Allianz/Schiff gleichzeitig anzeigen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show alliance resources when piloting an alliance ship"
-msgstr ""
+msgstr "Allianz-Ressourcen beim Steuern eines Allianz-Schiffs anzeigen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/resourcedisplay.lua:
+#: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Inventory Slots"
-msgstr ""
+msgstr "Inventarplätze"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+# ========== data/scripts/player/ui/sectorshipoverview.lua ==========
+#: data/scripts/player/ui/sectorshipoverview.lua:
+msgid "Wreckages"
+msgstr "Wracks"
+
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Husk"
 msgstr "Hülle"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Derelict"
 msgstr "Verlassen"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Ruin"
 msgstr "Ruine"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Hulk"
 msgstr "Rumpf"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Remnant"
 msgstr "Überrest"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Flotsam"
 msgstr "Treibgut"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Wreck"
 msgstr "Wrack"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Dross"
 msgstr "Schlacke"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Fragments"
 msgstr "Fragmente"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Debris"
 msgstr "Trümmer"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Scraps"
 msgstr "Schrott"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/player/ui/sectorshipoverview.lua:
+#: data/scripts/player/ui/sectorshipoverview.lua:
 msgid "Detritus"
 msgstr "Detritus"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "a system"
-msgstr ""
+# ========== data/scripts/sector/managestationincomes.lua ==========
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "a turret"
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Earned ${amount} in taxes from Resource Depot ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in unbranding fees from Smuggler's Market ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in gambling income from Casino ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in repair fees from Repair Dock ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in repair fees from Shipyard ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Gained ${amount} in travel fees from Travel Hub ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in taxes from Equipment Dock ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in taxes from Research Station ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in taxes from Military Outpost ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Gained ${amount} in taxes from Turret Factory ${station}."
-msgstr ""
-
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/sector/managestationincomes.lua:
-msgid "Earned ${amount} in fighter costs from Fighter Factory ${station}."
-msgstr ""
-
-
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/systems/transportersoftware.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Overhaul/data/scripts/systems/transportersoftware.lua:
+# ========== data/scripts/systems/transportersoftware.lua ==========
+#: data/scripts/systems/transportersoftware.lua:
 msgid " (+ scaled by Transporter Blocks)"
-msgstr ""
-
-
-# ========== old ==========
-# msgid "- Garbage Output -"
-# msgstr "- Müllausgabe -"
-
-# msgid "A good repair crew might be able to get a ship we found flying again."
-# msgstr "Eine gute Reparaturcrew könnte ein Schiff, das wir gefunden haben, wieder zum Fliegen bringen."
-
-# msgid "A large, unusual, inactive gate is in this sector."
-# msgstr "In diesem Sektor befindet sich ein großes, ungewöhnliches, inaktives Tor."
-
-# msgid "A ring of asteroids with inactive stations. Waiting for something."
-# msgstr "Ein Ring aus Asteroiden mit inaktiven Stationen. Warten auf etwas."
-
-# msgid "A satellite in this sector talking about energy and stone."
-# msgstr "Ein Satellit in diesem Sektor, der über Energie und Stein spricht."
-
-# msgid "A very strange ring of asteroids here. Xsotan energy signatures."
-# msgstr "Ein sehr seltsamer Ring aus Asteroiden hier. Xsotan-Energiesignaturen."
-
-# msgid "A very unusual ring of asteroids here. Are they charging something?"
-# msgstr "Ein sehr ungewöhnlicher Ring aus Asteroiden hier. Laden sie etwas auf?"
-
-# msgid "A wreck in this sector is only lightly damaged. I bet we can repair it."
-# msgstr "Ein Wrack in diesem Sektor ist nur leicht beschädigt. Ich wette, wir können es reparieren."
-
-# msgid "Against all odds, there's a small outpost hiding from the Xsotan here."
-# msgstr "Allen Widrigkeiten zum Trotz versteckt sich hier ein kleiner Außenposten vor den Xsotan."
-
-# msgid "Also, some sort of communication beacon was active here."
-# msgstr "Außerdem war hier eine Art Kommunikationsbake aktiv."
-
-# msgid "An abandoned ship is here that looks largely intact. It may be repairable."
-# msgstr "Hier befindet sich ein verlassenes Schiff, das weitgehend intakt aussieht. Es ist möglicherweise reparierbar."
-
-# msgid "An unnatural arrangement of asteroids with a weird signal in this sector."
-# msgstr "Eine unnatürliche Anordnung von Asteroiden mit einem seltsamen Signal in diesem Sektor."
-
-# msgid "An unusual satellite looping some research notes here."
-# msgstr "Ein ungewöhnlicher Satellit, der hier einige Forschungsnotizen in einer Schleife abspielt."
-
-# msgid "I couldn't believe it, but there are still people surviving in this sector."
-# msgstr "Ich konnte es nicht glauben, aber in diesem Sektor überleben immer noch Menschen."
-
-# msgid "I think there are people worshipping a rock in this sector. Really."
-# msgstr "Ich glaube, in diesem Sektor beten Leute einen Felsen an. Wirklich."
-
-# msgid "It looked empty at first, but there's a wormhole here."
-# msgstr "Zuerst sah es leer aus, aber hier gibt es ein Wurmloch."
-
-# msgid "Not sure where it goes, but there's a wormhole."
-# msgstr "Nicht sicher, wohin es führt, aber da ist ein Wurmloch."
-
-# msgid "Oh, and there was a beacon broadcasting something about 'Exodus'."
-# msgstr "Oh, und da war eine Bake, die etwas über 'Exodus' übertrug."
-
-# msgid "People around an asteroid. Lots of chanting."
-# msgstr "Leute um einen Asteroiden. Viel Sprechgesang."
-
-# msgid "Running"
-# msgstr "Läuft"
-
-# msgid "Running?"
-# msgstr "Läuft?"
-
-# msgid "Some people claiming to be part of a resistance are stationed here."
-# msgstr "Einige Leute, die behaupten, Teil eines Widerstands zu sein, sind hier stationiert."
-
-# msgid "Some strange, glowing asteroids in this sector. We stayed away."
-# msgstr "Einige seltsame, leuchtende Asteroiden in diesem Sektor. Wir sind ferngeblieben."
-
-# msgid "Some very odd people are gathered around a big asteroid here."
-# msgstr "Einige sehr seltsame Leute haben sich hier um einen großen Asteroiden versammelt."
-
-# msgid "There is a big gate here."
-# msgstr "Hier gibt es ein großes Tor."
-
-# msgid "There's a circular formation of strange, numbered asteroids here."
-# msgstr "Hier gibt es eine kreisförmige Formation aus seltsamen, nummerierten Asteroiden."
-
-# msgid "There's a satellite registered to 'M.A.D. Science' in this sector."
-# msgstr "In diesem Sektor gibt es einen Satelliten, der auf 'M.A.D. Science' registriert ist."
-
-# msgid "We almost stumbled straight into a wormhole in this sector."
-# msgstr "Wir wären in diesem Sektor fast direkt in ein Wurmloch gestolpert."
-
-# msgid "We also detected a signal from some sort of beacon."
-# msgstr "Wir haben auch ein Signal von einer Art Bake entdeckt."
-
-# msgid "We saw a very large, very old gate in this sector."
-# msgstr "Wir haben in diesem Sektor ein sehr großes, sehr altes Tor gesehen."
-
-
+msgstr " (+ skaliert durch Transporter-Blöcke)"
