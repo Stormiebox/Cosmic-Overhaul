@@ -251,10 +251,12 @@ end
 
 -- parses the location from the original string
 function FactoryOverview.getCoordinates(coo_string) -- assuming 15,-40 format
+	if not coo_string or type(coo_string) ~= "string" then return 0, 0 end
 	local comma = coo_string:find(',')
+	if not comma then return 0, 0 end
 	local x = tonumber(coo_string:sub(1, comma-1))
 	local y = tonumber(coo_string:sub(comma+1))
-	return x, y
+	return x or 0, y or 0
 end
 
 -- Opens the Galaxy map and goes to the coordinates of the selected factory

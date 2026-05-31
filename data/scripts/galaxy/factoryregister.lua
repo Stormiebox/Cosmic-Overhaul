@@ -38,6 +38,13 @@ end
 
 -- Called to clean up destroyed/sold factories so they disappear from the UI
 function unregister(factionIndex, allianceFactory, entityIdString)
+	-- Self-Healing: Safely handle cases where the caller only passed 2 arguments (factionIndex, entityIdString)
+	if type(allianceFactory) == "string" and entityIdString == nil then
+		entityIdString = allianceFactory
+		local faction = Faction(factionIndex)
+		allianceFactory = faction and faction.isAlliance or false
+	end
+
 	local fi = factionIndex
 	if allianceFactory then
 		fi = "a_" .. tostring(factionIndex)

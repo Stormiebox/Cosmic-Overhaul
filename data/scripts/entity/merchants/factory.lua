@@ -20,6 +20,8 @@ local base_restore = Factory.restore
 local base_initialize = Factory.initialize
 local base_sync = Factory.sync
 local base_updateServer = Factory.updateServer
+local base_updateProduction = Factory.updateProduction
+local base_onRemove = Factory.onRemove
 
 local base_getShuttleUpgradeCost = Factory.getShuttleUpgradeCost
 local base_onUpgradeShuttlesButtonPressed = Factory.onUpgradeShuttlesButtonPressed
@@ -42,6 +44,12 @@ local ft_maxGates = 4
 local ft_gateTradeMult = 0.25
 Factory.MinShuttleVolume = ft_minVolume
 Factory.shuttleVolume = ft_minVolume
+
+-- Factory Overview Telemetry Variables
+local fo_refreshFrequency = 10
+local fo_runtime = 0
+local fo_refreshTime = fo_refreshFrequency
+local fo_productionStateRegister = {}
 
 local garbageStations = {}
 local garbageStationCombo = nil
@@ -372,6 +380,62 @@ function Factory.updateServer(timeStep)
             Galaxy():invokeFunction("galaxy/factoryregister.lua", "register", Entity().id)
         end
         Factory._co_registered = true
+    end
+end
+
+function Factory.updateProduction(timeStep)
+    if base_updateProduction then base_updateProduction(timeStep) end
+
+    local owner = Owner()
+    if owner and (owner.isPlayer or owner.isAlliance) then
+        local alliance = owner.isAlliance
+        fo_refreshTime = fo_refreshTime + timeStep
+        fo_runtime = fo_runtime + timeStep
+
+        -- Capture vanilla production error state, default to "Running" if no error
+        local currentError = Factory.productionError
+        if not currentError or currentError == "" then
+            currentError = "Running"%_T
+        end
+
+        fo_productionStateRegister[currentError] = (fo_productionStateRegister[currentError] or 0) + timeStep
+
+        if fo_refreshTime > fo_refreshFrequency then
+            fo_refreshTime = 0
+            Factory.FactoryOverview_updateGalaxy(alliance)
+        end
+    end
+end
+
+function Factory.FactoryOverview_updateGalaxy(allianceFactory)
+    local galaxy = Galaxy()
+    if not galaxy then return end
+
+    local self = Entity()
+    local x, y = Sector():getCoordinates()
+    local stats = Factory.trader.stats
+
+    local factoryData = {
+        id = self.id.string,
+        index = self.index,
+        name = self.name,
+        title = (self.title or "") % (self:getTitleArguments() or {}),
+        money_gained = stats.moneyGainedFromGoods or 0,
+        money_tax = stats.moneyGainedFromTax or 0,
+        money_spent = stats.moneySpentOnGoods or 0,
+        location = tostring(x) .. "," .. tostring(y),
+        runtime = fo_runtime,
+        production_register = fo_productionStateRegister
+    }
+
+    galaxy:invokeFunction("galaxy/factoryregister.lua", "register", self.factionIndex, allianceFactory, factoryData)
+end
+
+function Factory.onRemove()
+    if base_onRemove then base_onRemove() end
+    local faction = Faction()
+    if faction and (faction.isPlayer or faction.isAlliance) then
+        Galaxy():invokeFunction("galaxy/factoryregister.lua", "unregister", faction.index, Entity().id.string)
     end
 end
 

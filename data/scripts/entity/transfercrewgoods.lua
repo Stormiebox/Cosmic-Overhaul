@@ -391,8 +391,8 @@ function TransferCrewGoods.createCargoTab(tabbedWindow)
     local vSplit = UIVerticalSplitter(Rect(cargoTab.size), 10, 0, 0.5)
 
     -- Cosmic Overhaul: Split horizontally to make room for Search Bars
-    local leftHSplit = UIHorizontalSplitter(vSplit.left, 10, 0, 25, true)
-    local rightHSplit = UIHorizontalSplitter(vSplit.right, 10, 0, 25, true)
+    local leftHSplit = UIHorizontalSplitter(vSplit.left, 10, 0, 25)
+    local rightHSplit = UIHorizontalSplitter(vSplit.right, 10, 0, 25)
 
     -- Cosmic Overhaul: Live Search/Filter TextBoxes for massive cargo holds
     TransferCrewGoods.playerCargoSearch = cargoTab:createTextBox(leftHSplit.top, "refreshUI")
