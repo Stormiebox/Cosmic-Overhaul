@@ -60,7 +60,7 @@ We have heavily modernized how you interact with your cargo holds, inventories, 
 * **The Trash Manager:** You can now safely mark unwanted inventory items as "Trash". This doesn't delete them, but it allows you to safely mass-sell them to merchants without risking your favorite gear.
 * **Shop Restock Button & Cleaner Shops:** We cleaned up the massive, cluttered lists at Equipment Docks. To compensate, you can now manually restock station shops using a built-in button (grants free uses first, then utilizes a fair cooldown system) to easily roll for the gear you actually want.
 * **Resource Display HUD:** A new, highly configurable widget on your screen lets you track your credits, resources, cargo space, and inventory slots in real-time. It automatically switches to tracking your Alliance vault if you hop into an alliance ship.
-* **Freer Ship Building:** You can now permanently remove installed subsystems at Repair Docks, Shipyards, Military Outposts, Research Stations, and Scrapyards.
+* **Subsystem Removal:** You can now permanently remove installed subsystems at Repair Docks, Shipyards, Military Outposts, Research Stations, and Scrapyards.
 * **Relaxing Scrapyards:** The stressful time limits and restrictive friction at Scrapyards have been completely removed. Take your time and salvage in peace!
 * **Scaling Subsystems:** Transporters and Trading Systems now get massive range boosts (up to 10x) based on their rarity. Transporters get even more range based on how many physical transporter blocks you've built into your ship design.
 
