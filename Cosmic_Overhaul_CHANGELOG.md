@@ -5,7 +5,7 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.0.0] - TBD On Release
+## [4.0.0] - Release Date & Time: 05/31/2026 @ 8:00 PM PST
 --- NOTE: This is a "Work-In-Progress" huge overhaul update. No release date yet.
 --- NOTE: For the duration of this v4.0.0 project all changes, additions and fixes will be logged into v4.0.0
 
@@ -47,6 +47,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Simulation Offline Catch-Up Notification:** Fixed a bug in `simulation.lua` where the offline catch-up notification failed to send to players who were actively commanding Alliance fleets when they logged out.
 - **Charity Mission Crash:** Fixed a silent simulation loop crash in `simulation.lua` when yielding relations from Charity Trade missions by adding the missing vanilla `relations.lua` API include.
 - **Simulation Translation Trap:** Fixed a major Server-Side Translation Trap in `simulationutility.lua` where applying color tags was breaking the C++ `Format` objects, causing map command assessments to permanently render in English for international clients.
+- **Exchange Cargo UI Crash:** Fixed a UI thread crash when opening the Cargo Transfer window with an entirely empty cargo hold by adding safety fallbacks for empty text assignments.
+- **Missing Asteroid Mines:** Fixed an issue where claimed Asteroid Mines (e.g., Ice Mines) would fail to register in the Factory Overview UI. The self-healing registration loop now correctly catches claimed neutral stations during the server update cycle instead of initialization.
+- **Trading Manager Userdata Bug:** Fixed a bug in `tradingmanager.lua` where station consumption notifications were printing raw `userdata` memory addresses instead of the actual item's name.
 
 ### Changed
 
