@@ -52,7 +52,7 @@ function TradingManager:generateRevenue(good, amount)
     local description = string.format(
         "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."%_T,
         x, y, station.name, math.floor(amount),
-        good:pluralForm(math.floor(amount)),
+        tostring(good.name),
         createMonetaryString(received))
 
     local faction = Faction()

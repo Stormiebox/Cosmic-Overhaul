@@ -1,7 +1,5 @@
 # Cosmic Overhaul - Detailed Features
 
-<img width="1200" height="400" alt="GitHubWiki_CO_Thumb" src="https://github.com/user-attachments/assets/ec905746-b76a-43b0-99a1-b4f0e2204d09" />
-
 Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
 
 ---
@@ -149,11 +147,17 @@ Removes restrictive scrapyard timing friction and improves overall scrapyard flo
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Improves transfer UI behavior, readability, and handling, including better visual feedback for risky cargo states.
+Completely modernizes the Cargo Transfer UI to handle massive late-game cargo holds flawlessly.
+
+**Details:**
+- **Live Filtering:** Added live Search/Filter text boxes and alphabetical sorting.
+- **Visual Feedback:** Color-coded cargo bars (Red for illegal/stolen, Yellow for dangerous).
+- **Smart Transfers:** Transferring items will no longer fail completely if the receiving ship lacks space; it will transfer as much as possible.
+- **Stacking:** Hold Right Mouse Button (RMB) when clicking "Transfer All" to only transfer items that the receiving ship already has in its hold.
 
 **Gameplay Impact:**
 
-- Faster cargo management.
+- Drastically faster cargo management.
 - Better clarity while handling mixed legal, illegal, or stolen inventories.
 
 </details>
@@ -391,12 +395,64 @@ Simulates civilian traffic and commercial usage for player-owned service station
 Adds highly requested quality-of-life hotkeys directly to the galaxy map for faster fleet management and navigation.
 
 **Details:**
+
 - **[T] Switch to Selected:** Instantly teleport to and take control of the ship you currently have selected on the galaxy map.
 - **[Shift + C] Center on Home:** Instantly centers the galaxy map camera on your home sector. Dynamically centers on your Alliance home sector if you are piloting an alliance ship, or your personal home sector if piloting a personal ship.
 
 **Gameplay Impact:**
+
 - Drastically reduces mouse travel and clicking when managing large fleets.
 - Faster recovery when panning across massive distances on the map.
+
+</details>
+
+### 24) Resource Display UI
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds a native, highly configurable HUD widget to track personal/alliance credits, resources, cargo space, and inventory slots.
+
+**Details:**
+- Automatically switches between tracking personal or alliance resources based on the ship you are piloting.
+- Completely rebuilt without legacy library dependencies, saving UI positions and preferences directly to the player's profile.
+
+**Gameplay Impact:**
+- Better real-time visibility of critical logistics and economic data.
+- Streamlines managing massive cargo holds and alliance vaults.
+
+</details>
+
+### 25) Alliance Reputation Synergy
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Player reputation changes now mirror to their Alliance at 2x intensity.
+
+**Gameplay Impact:**
+- Individual diplomatic actions have massive weight for the entire group.
+- Prevents frustrating disconnects where a player is beloved by a faction, but their alliance is hated.
+
+</details>
+
+### 26) Wreckages Strategy Tab
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds a new "Wreckages" tab to the Sector Strategy map (F9).
+
+**Details:**
+- Displays a sortable list of all wrecked ships and stations in the current sector.
+- Sorts by mass/size (from "Tiny Scraps" up to "Colossal Husks") and distance from your ship.
+
+**Gameplay Impact:**
+- Makes cleaning up massive post-battle graveyards much easier.
+- Helps identify the largest and most lucrative salvage targets at a glance.
 
 </details>
 
@@ -524,6 +580,43 @@ Enhances captain operations with new modifiers, improved ranges, and updated loo
 - Stronger incentives to run salvage operations late-game.
 - Increased operational flexibility with improved ranges and rewards.
 - Less frustration from random ambushes during map commands.
+
+</details>
+
+### H) Captain Synergy Expansion (Map Commands)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Fully overhauls the `Sell`, `Procure`, `Salvage`, `Refine`, and `Travel` map operations to heavily reward specialized captains.
+
+**Details:**
+- Relevant Captain classes (like Merchants, Navigators, and Scavengers) gain massive synergistic bonuses to their operational range.
+- Travel and completion times are reduced by up to 25%.
+- Ambush chances during operations are significantly lowered.
+
+**Gameplay Impact:**
+- Highly rewards assigning the correct captain class to the right background job.
+- Makes high-tier, multi-class captains incredibly valuable strategic assets.
+
+</details>
+
+### I) Active Captain Synergies (Piloting)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Provides global passive bonuses when you are actively piloting a ship commanded by specific captain classes.
+
+**Details:**
+- **Active Merchant:** Grants a global 15% discount on purchases and a 15% bonus payout on sales at all commercial stations (Trading Posts, Factories, Resource Depots, etc.).
+- **Active Smuggler:** Grants a 15% discount on unbranding fees and a 15% bonus payout on black market sales at the Smuggler's Market.
+- **Scavenger Strategy Intel:** When piloting a ship with a Scavenger captain, the "Wreckages" tab in Strategy Mode bypasses generic names (like "Husk" or "Derelict") and reveals the exact original identity of destroyed ships, helping you pinpoint high-value targets in massive graveyards.
+
+**Gameplay Impact:**
+- Gives players a strong reason to keep specialized captains on their personal flagship rather than just assigning them to background fleets.
 
 </details>
 
