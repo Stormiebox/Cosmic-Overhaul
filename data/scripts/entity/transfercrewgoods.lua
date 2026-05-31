@@ -2065,10 +2065,10 @@ function TransferCrewGoods.onShowWindow()
         box.text = "1"
     end
     for _, box in pairs(playerCargoTextBoxes) do
-        box.text = playerAmount
+        box.text = tostring(playerAmount or 1)
     end
     for _, box in pairs(selfCargoTextBoxes) do
-        box.text = selfAmount
+        box.text = tostring(selfAmount or 1)
     end
 
     TransferCrewGoods.refreshUI()

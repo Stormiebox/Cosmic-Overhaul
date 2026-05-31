@@ -135,12 +135,6 @@ function Factory.initialize(producedGood, productionIndex, size)
     base_initialize(producedGood, productionIndex, size)
     if onServer() then
         Factory.applyShuttleVolume()
-
-        -- Self-Healing: Register player/alliance factories on the UI if they were built before the mod was installed
-        local faction = Faction()
-        if faction and (faction.isPlayer or faction.isAlliance) then
-            Galaxy():invokeFunction("factoryregister", "register", Entity().id)
-        end
     end
 end
 
@@ -369,6 +363,16 @@ end
 function Factory.updateServer(timeStep)
     base_updateServer(timeStep)
     Factory.updateGarbageDeliveryToOtherStations(timeStep)
+
+    -- Cosmic Overhaul Self-Healing: Asteroid Mines (like Ice Mines) are claimed from neutral entities,
+    -- so their initialize() fires before the player owns them! We catch them here in the update loop instead.
+    if not Factory._co_registered then
+        local faction = Faction()
+        if faction and (faction.isPlayer or faction.isAlliance) then
+            Galaxy():invokeFunction("galaxy/factoryregister.lua", "register", Entity().id)
+        end
+        Factory._co_registered = true
+    end
 end
 
 function Factory.updateDelivery(stations, dockedOnly, isSelling, debugSource)
