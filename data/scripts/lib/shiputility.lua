@@ -104,7 +104,7 @@ ShipUtility.getMilitaryNameByVolume = function(volume)
 end
 
 -- Rebuild the vanilla private table so our script can access it natively
-local goods = include("goods")
+include("goods")
 local co_illegalSpawnableGoods = {}
 for _, g in pairs(goods.getGoods()) do
     if g.illegal and g.price > 100 then
