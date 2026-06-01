@@ -1,7 +1,4 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
--- Cosmic Overhaul: Dynamically inject ShipUtility modifications
-local CO_ShipUtilityInjector = include("co_shiputility_injector")
-if CO_ShipUtilityInjector then CO_ShipUtilityInjector.inject() end
 
 if onServer() then
     local player = Player()
@@ -17,4 +14,3 @@ if onServer() then
     -- Cosmic Overhaul: Dynamic Reputation Decay Background Loop
     player:addScriptOnce("data/scripts/lib/DynamicReputationDecay.lua")
 end
-

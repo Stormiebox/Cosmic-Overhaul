@@ -153,193 +153,193 @@ msgid "Search Cargo..."
 msgstr ""
 
 
-# ========== data/scripts/lib/co_shiputility_injector.lua ==========
-#: data/scripts/lib/co_shiputility_injector.lua:
+# ========== data/scripts/lib/shiputility.lua ==========
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Prospector"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Prospector"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Prospector"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Medium Miner"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Mining Barge"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Mining Barge"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Extraction Vessel"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Extraction Vessel"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Asteroid Crusher"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Planet Cracker"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Cargo Shuttle"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Loader"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Loader"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Transporter"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Transporter"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Freighter"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Freighter"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Superfreighter"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Logistics Leviathan"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Courier"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Courier"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Courier"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Vessel"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Merchant Vessel"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Merchant Vessel"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commerce Ship"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Commerce Ship"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Galleon"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Exchange Hub"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Grand Exchange"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commercial Colossus"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Leviathan"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Interceptor"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Cruiser"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Battlecruiser"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Juggernaut"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Titan"
 msgstr ""
 
-#: data/scripts/lib/co_shiputility_injector.lua:
+#: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Leviathan"
 msgstr ""

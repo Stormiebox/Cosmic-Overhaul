@@ -665,7 +665,7 @@ Deploys sweeping passive modifiers that activate globally exclusively when the p
 
 ### Structural Engineering: Dynamic API Injection
 
-The massive, conflict-heavy legacy file override for `shiputility.lua` has been completely decommissioned and replaced with a surgical dynamic hook script (`co_shiputility_injector.lua`). This advanced implementation strictly abides by Avorion’s Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
+The massive, conflict-heavy legacy file override for `shiputility.lua` has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion’s Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
 
 <details>
 <summary><b>Click to expand Black Market details</b></summary>

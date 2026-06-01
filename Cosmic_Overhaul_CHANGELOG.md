@@ -53,7 +53,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
-- **Dynamic API Injection:** Refactored the massive `shiputility.lua` library override into a surgical, memory-safe dynamic injector (`co_shiputility_injector.lua`). This strictly adheres to Avorion's Highlander Virtual File System rules, completely eliminating conflicts with other mods and bulletproofing the mod against future game updates.
+- **Dynamic API Injection:** Refactored the massive `shiputility.lua` library override into a surgical, memory-safe dynamic injector. This strictly adheres to Avorion's Highlander Virtual File System rules, completely eliminating conflicts with other mods and bulletproofing the mod against future game updates.
 - **Piracy Economy Buff Restored:** Restored the Black Market piracy buff inside the new ship utility injector. Destroyed civilian ships now drop massive amounts of illegal cargo (scaling up to 250,000 credits based on sector richness), making piracy highly lucrative again!
 - **Player Settings Storage**: Completely refactored the mod to use the new `CosmicVaultPlayerSettings` API for storing persistent UI settings across all map commands (Trade, Salvage, Mine, etc.).
 - **War Economy Synergy**: Player-owned stations now have their passive income from the "Profitable Stations" feature dynamically reduced based on the local `War Heat` from the *Cosmic War* mod. High-conflict zones are now less profitable, requiring players to protect their economic hubs.
