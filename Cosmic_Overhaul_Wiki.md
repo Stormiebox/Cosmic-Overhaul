@@ -463,6 +463,29 @@ Adds a new "Wreckages" tab to the Sector Strategy map (F9).
 
 </details>
 
+### 26) NPC Ship Naming Overhaul
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Completely rewrites the procedural naming arrays for NPC ships, safely injecting new terminology into the vanilla generation engine. Replaces generic, repetitive titles with highly immersive, volume-scaled naval and industrial classes.
+
+**Details:**
+Ship names now scale dynamically based on their generated block volume across four primary archetypes:
+
+- **Military:** Scales realistically from nimble *Interceptors* and *Corvettes* up through *Cruisers*, *Dreadnoughts*, and colossal *Leviathans*.
+- **Freighters:** Progresses from humble *Cargo Shuttles* and *Loaders* up to massive *Superfreighters* and *Logistics Leviathans*.
+- **Miners:** Ranges from small *Light Prospectors* up through heavy *Mining Barges* to staggering *Planet Crackers* and *Mining Molochs*.
+- **Traders:** Scales from fast *Couriers* to massive *Trade Galleons* and *Commercial Colossuses*.
+
+**Gameplay Impact:**
+
+- Massively improves immersion when scanning sectors or evaluating neutral traffic.
+- Provides immediate, intuitive feedback on the actual size and threat level of an NPC vessel simply by reading its title.
+
+</details>
+
 ---
 
 ## Command & Captain Enhancements

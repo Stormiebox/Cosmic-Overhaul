@@ -391,8 +391,10 @@ function TransferCrewGoods.createCargoTab(tabbedWindow)
     local vSplit = UIVerticalSplitter(Rect(cargoTab.size), 10, 0, 0.5)
 
     -- Cosmic Overhaul: Split horizontally to make room for Search Bars
-    local leftHSplit = UIHorizontalSplitter(vSplit.left, 10, 0, 25)
-    local rightHSplit = UIHorizontalSplitter(vSplit.right, 10, 0, 25)
+    local leftHSplit = UIHorizontalSplitter(vSplit.left, 10, 0, 0.5)
+    leftHSplit.topSize = 25
+    local rightHSplit = UIHorizontalSplitter(vSplit.right, 10, 0, 0.5)
+    rightHSplit.topSize = 25
 
     -- Cosmic Overhaul: Live Search/Filter TextBoxes for massive cargo holds
     TransferCrewGoods.playerCargoSearch = cargoTab:createTextBox(leftHSplit.top, "refreshUI")
@@ -403,9 +405,10 @@ function TransferCrewGoods.createCargoTab(tabbedWindow)
     TransferCrewGoods.selfCargoSearch.backgroundText = "Search Cargo..."%_t
     TransferCrewGoods.selfCargoSearch.clearOnClick = true
 
-    -- have to use "left" twice here since the coordinates are relative and the UI would be displaced to the right otherwise
-    local leftLister = UIVerticalLister(leftHSplit.bottom, 10, 10)
-    local rightLister = UIVerticalLister(leftHSplit.bottom, 10, 10)
+    -- Cosmic Overhaul: We use a local 0,0 Rect matching the split's size so the UI elements don't get displaced inside the ScrollFrame
+    local listerRect = Rect(vec2(0, 0), leftHSplit.bottom.size)
+    local leftLister = UIVerticalLister(listerRect, 10, 10)
+    local rightLister = UIVerticalLister(listerRect, 10, 10)
 
     leftLister.marginRight = 30
     rightLister.marginRight = 30
