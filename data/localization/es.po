@@ -640,63 +640,63 @@ msgstr "Espera un flujo continuo de información nueva."
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"
-msgstr ""
+msgstr "\\c(d93)No tenemos capacidad de escaneo profundo y tendremos que visitar cada sector.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(d93)El tiempo de viaje será extremo sin más cobertura de escaneo profundo.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"
-msgstr ""
+msgstr "\\c(d93)No podemos ver dónde están los sectores de masa oculta sin un mejor radar.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Con nuestros débiles sensores, perderemos mucho tiempo saltando a ciegas.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Seríamos mucho más rápidos con más cobertura de escaneo profundo.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Los sectores de masa oculta serán difíciles de encontrar sin un mejor radar.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Hay una refinería justo aquí, así que esto será rápido y seguro.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Refinar no será un problema con un depósito en este mismo sector.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Puedo usar el piloto automático directo al depósito en este sector.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)People are sure to appreciate our work here.\\c()"
-msgstr ""
+msgstr "\\c(0d0)La gente seguro apreciará nuestro trabajo aquí.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)This will help a lot of people.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Esto ayudará a mucha gente.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)Our generosity will help to build trust.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Nuestra generosidad ayudará a generar confianza.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Esta no es mi especialidad, pero veré qué puedo hacer.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Un mercader lo haría mejor, pero puedo intentarlo.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)No merchants available, commander?\\c()"
-msgstr ""
+msgstr "\\c(dd5)¿No hay mercaderes disponibles, comandante?\\c()"
 
 
 # ========== data/scripts/player/background/simulation/tradecommand.lua ==========
@@ -716,7 +716,7 @@ msgstr "Cambiar la mayor parte de las ganancias de este contrato por un mayor au
 # ========== data/scripts/player/background/simulation/travelcommand.lua ==========
 #: data/scripts/player/background/simulation/travelcommand.lua:
 msgid "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Conozco estas rutas espaciales como la palma de mi mano. Haremos un tiempo increíble.\\c()"
 
 
 # ========== data/scripts/player/map/mapcommands.lua ==========

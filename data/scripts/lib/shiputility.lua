@@ -103,19 +103,10 @@ ShipUtility.getMilitaryNameByVolume = function(volume)
     return names[size].name, names[size].type
 end
 
--- Rebuild the vanilla private table so our script can access it natively
-include("goods")
-local co_illegalSpawnableGoods = {}
-for _, g in pairs(goods.getGoods()) do
-    if g.illegal and g.price > 100 then
-        table.insert(co_illegalSpawnableGoods, g)
-    end
-end
-
 -- Cosmic Overhaul: Piracy Economy Buff
 -- Overrides the default illegal cargo generation to make piracy highly lucrative!
 ShipUtility.addIllegalCargoToCraft = function(entity)
-    local g = co_illegalSpawnableGoods[math.random(1, #co_illegalSpawnableGoods)]
+    local g = illegalSpawnableGoods[math.random(1, #illegalSpawnableGoods)]
 
     local x, y = Sector():getCoordinates()
     -- Cosmic Overhaul: Massive boost to illegal cargo dropped by destroyed civil ships to encourage piracy!
