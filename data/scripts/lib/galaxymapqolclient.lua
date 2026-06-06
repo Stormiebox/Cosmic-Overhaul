@@ -198,7 +198,6 @@ function GalaxyMapQoL.initUI()
 	selectedColorIndex = 1
 
 	-- removed edit button
-	btn.maxTextSize = 14
 
 	partition = partitions[4]
 	editIconScrollFrame = editIconWindow:createScrollFrame(partition)
@@ -416,7 +415,7 @@ function GalaxyMapQoL.updateClient(timeStep)
 		end
 	end
 
-	if GT112 and GalaxyMap().visible then
+	if GT112 and GalaxyMap().visible and allianceNotesContainer and highlightAllianceNotesCheckBox then
 		allianceNotesContainer.visible = GalaxyMap().showAllianceInfo and highlightAllianceNotesCheckBox.checked
 	end
 end
@@ -1162,7 +1161,9 @@ function GalaxyMapQoL.onLockRadarCheckBoxChecked()
 end
 
 function GalaxyMapQoL.onHighlightAllianceNotesChecked()
-    allianceNotesContainer.visible = GalaxyMap().showAllianceInfo and highlightAllianceNotesCheckBox.checked
+    if allianceNotesContainer and highlightAllianceNotesCheckBox then
+        allianceNotesContainer.visible = GalaxyMap().showAllianceInfo and highlightAllianceNotesCheckBox.checked
+    end
 end
 
 function GalaxyMapQoL.galaxyMapQoL_onFactionColorsCheckBoxChecked()
