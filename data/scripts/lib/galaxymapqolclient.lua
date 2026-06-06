@@ -7,7 +7,7 @@ local SectorSpecifics = include("sectorspecifics")
 
 
 local Azimuth, ConfigTemplate, Log = unpack(include("galaxymapqolinit"))
-local function UIHorizontalProportionalSplitter(rect, padding, innerPadding, proportions)
+local function CosmicUIHorizontalProportionalSplitter(rect, padding, innerPadding, proportions)
     local sum = 0
     local parts = {}
     for _, p in ipairs(proportions) do sum = sum + p end
@@ -160,7 +160,7 @@ function GalaxyMapQoL.initUI()
 	local partitions, picture
 	legendRows = {}
 	for i = 1, #materialDistances do
-		partitions = UIVerticalProportionalSplitter(lister:placeCenter(vec2(lister.inner.width, 18)), 5, 0, {18, 0.5})
+		partitions = CosmicUIVerticalProportionalSplitter(lister:placeCenter(vec2(lister.inner.width, 18)), 5, 0, {18, 0.5})
 		picture = container:createPicture(partitions[1], "data/textures/icons/galaxymapqol/ui-filled.png")
 		local label = container:createLabel(partitions[2].lower, "", 12)
 		picture.visible = false
@@ -171,7 +171,7 @@ function GalaxyMapQoL.initUI()
 
 	editIconWindow = map:createWindow(Rect(709, 50, 1009, 340))
 	editIconWindow.visible = false
-	partitions = UIHorizontalProportionalSplitter(Rect(editIconWindow.size), 10, 10, {15, 20, 24, 0.5, 25})
+	partitions = CosmicUIHorizontalProportionalSplitter(Rect(editIconWindow.size), 10, 10, {15, 20, 24, 0.5, 25})
 
 	coordinatesLabel = editIconWindow:createLabel(partitions[1], "", 14)
 	coordinatesLabel.centered = true
@@ -1576,3 +1576,5 @@ function GalaxyMapQoL.initOtherNamespace(namespace)
 end
 
 return GalaxyMapQoL
+
+

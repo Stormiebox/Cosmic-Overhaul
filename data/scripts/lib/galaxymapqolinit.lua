@@ -23,7 +23,7 @@ end
 
 local function saveConfig(name, data)
     local path = getModDataFolder() .. name .. ".json"
-    os.execute("mkdir \"" .. getModDataFolder() .. "\" 2> NUL")
+    createDirectory(getModDataFolder())
     local f = io.open(path, "w")
     if f then
         -- We write a simple serialization for our specific data

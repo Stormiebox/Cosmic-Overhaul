@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [4.2.0] - Release Date TBD (Work In Progress)
+### Fixed
+- **Galaxy Map QoL Initialization:** Fixed a fatal client-side crash caused by deprecated os.execute folder creation. The mod now correctly uses Avorion's native createDirectory() API for configuration folders.
+- **Improved Stashes Override Fix:** Repaired a catastrophic bug where the custom stash.lua file was completely deleting the vanilla game's stash script from memory, resulting in broken stashes that could not be opened. The stash modifications have been safely injected into a cloned vanilla file to ensure UI and interactions work flawlessly while still delivering boosted loot.
+- **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
 ### Added
 - **Integrated Galaxy Map QoL:** Completely integrated the `Galaxy Map QoL` mod directly into Cosmic Overhaul. It has received the "Cosmic Overhaul Treatment" which includes completely stripping out the dependency on `AzimuthLib` (players no longer need to download it) and converting it to natively use standard Avorion code and UI systems. You can now freely place customizable icons and notes directly on the galaxy map!
@@ -201,3 +205,4 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - installation and compatibility snapshot,
   - and pointer to full wiki details.
 - Wiki remains the canonical source for full detailed feature documentation.
+

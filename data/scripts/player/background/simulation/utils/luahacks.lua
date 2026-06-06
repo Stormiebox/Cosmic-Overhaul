@@ -109,7 +109,11 @@ end
 -- When enabled, all calls to ShipDatabaseEntry will be modified to return modified Captain objects via
 -- getCaptain() such that captain:hasClass(CaptainClass.Merchant) will always evaluate to true.
 function LuaHacks.SetShipDatabaseEntryCaptainAlwaysHasMerchant(enabled)
-    hackToggles.ShipDatabaseEntry.CaptainAlwaysHasMerchant = enabled
+    if enabled then
+        LuaHacks.Hacks.ShipDatabaseEntry.CaptainAlwaysHasMerchant:enable()
+    else
+        LuaHacks.Hacks.ShipDatabaseEntry.CaptainAlwaysHasMerchant:disable()
+    end
 end
 
 function LuaHacks.RunWithHacks(hacks, func, ...)
