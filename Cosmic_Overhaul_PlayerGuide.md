@@ -18,10 +18,11 @@ As your fleet grows, keeping track of everything becomes difficult. We've added 
 * **Universal Bulletin Board:** You no longer need to dock at every single station in a sector to find a good mission. The Bulletin Board tab lets you view, sort by reward or difficulty, and accept missions from *any* station in your current sector.
 * **The Wreckages Tab:** When you open Sector Strategy Mode (default `F9`), you will see a new **Wreckages** tab. This sorts every piece of scrap in the sector by size and distance, making post-battle salvage operations a breeze.
 
-### Galaxy Map Hotkeys
+### Galaxy Map Enhancements
 
-Navigating the Galaxy Map is now much faster:
+The Galaxy Map has been heavily upgraded to make navigation and planning easier:
 
+* **Custom Notes & Icons:** You can now freely place customizable icons, draw colorful shapes, and leave sticky notes directly on the galaxy map! Perfect for marking hazard zones, lucrative trade routes, or alliance borders.
 * **`[T]` (Teleport):** Select one of your ships on the map and press `T` to instantly jump into its captain's chair.
 * **`[Shift + C]` (Center):** Instantly snaps the map camera back to your Home Sector (or your Alliance's Home Sector if you are flying an alliance ship).
 
@@ -95,3 +96,9 @@ Your passive empire is now much smarter and more integrated.
 
 Enjoy your time in the Cosmic Overhaul!
 
+
+---
+
+## 6. Full Localization Support
+
+Cosmic Overhaul is fully translated into multiple languages! If you play the game in Chinese, French, Japanese, Portuguese, Spanish, German, or Russian, all custom UIs, captain commands, and items will seamlessly adapt to your native language.

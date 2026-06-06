@@ -1,4 +1,7 @@
 # ========== data/scripts/entity/TrashMan.lua ==========
+msgid ""
+msgstr ""
+
 #: data/scripts/entity/TrashMan.lua:
 msgid "Trash Man"
 msgstr "Lixeiro"
@@ -12,8 +15,12 @@ msgid "Turrets to trash"
 msgstr "Torres para o lixo"
 
 #: data/scripts/entity/TrashMan.lua:
-msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
-msgstr "Selecione quais tipos de itens do inventário marcar como lixo. Estes itens não serão destruídos ou vendidos imediatamente. Em vez disso, na próxima vez que você visitar o comerciante apropriado, eles poderão ser vendidos com o botão 'Vender Lixo' do comerciante.\nItens marcados como favoritos não serão marcados como lixo!"
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\n"
+"Items that are marked as favorites will not get marked for trash!"
+msgstr ""
+"Selecione quais tipos de itens do inventário marcar como lixo. Estes itens não serão destruídos ou vendidos imediatamente. Em vez disso, na próxima vez que você visitar o comerciante apropriado, eles poderão ser vendidos com o botão 'Vender Lixo' do comerciante.\n"
+"Itens marcados como favoritos não serão marcados como lixo!"
 
 #: data/scripts/entity/TrashMan.lua:
 msgid "Mark"
@@ -43,19 +50,14 @@ msgstr "Mín: 1"
 msgid "Max: 52"
 msgstr "Máx: 52"
 
-
 # ========== data/scripts/entity/ancientgate.lua ==========
 #: data/scripts/entity/ancientgate.lua:
 msgid "${dir} Ancient Gate to ${sector}"
 msgstr "${dir} Portal Antigo para ${sector}"
 
-
 # ========== data/scripts/entity/bulletinboard.lua ==========
-
 # ========== data/scripts/entity/gate.lua ==========
-
 # ========== data/scripts/entity/merchants/equipmentdock.lua ==========
-
 # ========== data/scripts/entity/merchants/factory.lua ==========
 #: data/scripts/entity/merchants/factory.lua:
 msgid " "
@@ -63,569 +65,730 @@ msgstr ""
 
 #: data/scripts/entity/merchants/factory.lua:
 msgid "Transport capacity is already at maximum (${c}/${m})."
-msgstr ""
-
-#: data/scripts/entity/merchants/factory.lua:
-msgid ""
-msgstr ""
-
+msgstr "A capacidade de transporte já está no máximo (${c}/${m})."
 
 # ========== data/scripts/entity/merchants/fightermerchant.lua ==========
-
 # ========== data/scripts/entity/merchants/managestationincomes.lua ==========
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a system"
-msgstr ""
+msgstr "um sistema"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a turret"
-msgstr ""
+msgstr "uma torre"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in taxes from Resource Depot ${station}."
-msgstr ""
+msgstr "Ganhou${amount}em impostos do Resource Depot${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in unbranding fees from Smuggler's Market ${station}."
+msgid ""
+"Received ${amount} in unbranding fees from Smuggler's Market ${station}."
 msgstr ""
+"Recebeu${amount}em taxas de remoção de marca do Smuggler's Market${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in gambling income from Casino ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em receitas de jogos de azar do Casino${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Repair Dock ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em taxas de reparo da Repair Dock${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Shipyard ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em taxas de reparo do Estaleiro${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in travel fees from Travel Hub ${station}."
-msgstr ""
+msgstr "Ganhou${amount}em taxas de viagem do Travel Hub${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Equipment Dock ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em impostos da Doca de Equipamentos${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Research Station ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em impostos da Estação de Pesquisa${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Military Outpost ${station}."
-msgstr ""
+msgstr "Recebeu${amount}em impostos do Posto Avançado Militar${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in taxes from Turret Factory ${station}."
-msgstr ""
+msgstr "Ganhou${amount}em impostos da Fábrica de Torres${station}."
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in fighter costs from Fighter Factory ${station}."
-msgstr ""
-
+msgstr "Ganhou${amount}em custos de caça na Fábrica de Caças${station}."
 
 # ========== data/scripts/entity/merchants/scrapyard.lua ==========
-
 # ========== data/scripts/entity/merchants/smugglersmarket.lua ==========
-
 # ========== data/scripts/entity/merchants/turretmerchant.lua ==========
-
 # ========== data/scripts/entity/orderchain.lua ==========
-
 # ========== data/scripts/entity/transfercrewgoods.lua ==========
 #: data/scripts/entity/transfercrewgoods.lua:
 msgid "Search Cargo..."
-msgstr ""
-
+msgstr "Pesquisar carga..."
 
 # ========== data/scripts/lib/shiputility.lua ==========
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Prospector"
-msgstr ""
+msgstr "Prospector de Luz"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Prospector"
-msgstr ""
+msgstr "Prospector"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Prospector"
-msgstr ""
+msgstr "Prospector Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Medium Miner"
-msgstr ""
+msgstr "Mineiro Médio"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Mining Barge"
-msgstr ""
+msgstr "Barcaça de mineração"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Mining Barge"
-msgstr ""
+msgstr "Barcaça de mineração pesada"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Extraction Vessel"
-msgstr ""
+msgstr "Navio de extração"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Extraction Vessel"
-msgstr ""
+msgstr "Navio de Extração Pesada"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Asteroid Crusher"
-msgstr ""
+msgstr "Triturador de asteróides"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Planet Cracker"
-msgstr ""
+msgstr "Planeta Cracker"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Cargo Shuttle"
-msgstr ""
+msgstr "Transporte de carga"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Loader"
-msgstr ""
+msgstr "Carregador leve"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Loader"
-msgstr ""
+msgstr "Carregador Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Transporter"
-msgstr ""
+msgstr "Transportador Leve"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Transporter"
-msgstr ""
+msgstr "Transportador Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Freighter"
-msgstr ""
+msgstr "Cargueiro Leve"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Freighter"
-msgstr ""
+msgstr "Cargueiro Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Superfreighter"
-msgstr ""
+msgstr "Supercargueiro"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Logistics Leviathan"
-msgstr ""
+msgstr "Leviatã Logístico"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Courier"
-msgstr ""
+msgstr "Correio Leve"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Courier"
-msgstr ""
+msgstr "Correio"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Courier"
-msgstr ""
+msgstr "Correio Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Vessel"
-msgstr ""
+msgstr "Navio comercial"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Merchant Vessel"
-msgstr ""
+msgstr "Navio Mercante"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Merchant Vessel"
-msgstr ""
+msgstr "Navio Mercante Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commerce Ship"
-msgstr ""
+msgstr "Navio comercial"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Commerce Ship"
-msgstr ""
+msgstr "Navio de comércio pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Galleon"
-msgstr ""
+msgstr "Galeão comercial"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Exchange Hub"
-msgstr ""
+msgstr "Central do Exchange"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Grand Exchange"
-msgstr ""
+msgstr "Mercado Geral"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commercial Colossus"
-msgstr ""
+msgstr "Colosso Comercial"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Leviathan"
-msgstr ""
+msgstr "Leviatã comercial"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Interceptor"
-msgstr ""
+msgstr "Interceptor"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Cruiser"
-msgstr ""
+msgstr "Cruzador Pesado"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Battlecruiser"
-msgstr ""
+msgstr "Cruzador de batalha"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Juggernaut"
-msgstr ""
+msgstr "Juggernaut"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Titan"
-msgstr ""
+msgstr "Titã"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Leviathan"
-msgstr ""
-
+msgstr "Leviatã"
 
 # ========== data/scripts/lib/shop.lua ==========
 #: data/scripts/lib/shop.lua:
 msgid "Shop"
-msgstr ""
+msgstr "Comprar"
 
 #: data/scripts/lib/shop.lua:
 msgid "Free restock used. %1% free restocks left."
 msgstr ""
+"Reabastecimento gratuito usado.%1%reabastecimentos gratuitos restantes."
 
 #: data/scripts/lib/shop.lua:
 msgid "Shop restocked. Next restock available in 45 minutes."
-msgstr ""
+msgstr "Loja reabastecida. Próximo reabastecimento disponível em 45 minutos."
 
 #: data/scripts/lib/shop.lua:
 msgid "Restock is on cooldown for %1% minutes and %2% seconds. Please wait."
 msgstr ""
+"O reabastecimento está em espera por%1%minutos e%2%segundos. Por favor, "
+"aguarde."
 
 #: data/scripts/lib/shop.lua:
 msgid "Click to restock the shop"
 msgstr "Clique para reabastecer a loja"
 
-
 # ========== data/scripts/lib/tradingmanager.lua ==========
 #: data/scripts/lib/tradingmanager.lua:
-msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
-msgstr "\\s(%d:%d) A população de %s consumiu %d unidades de %s, gerando ¢%s em receita."
-
-
-# ========== data/scripts/player/background/simulation/refinecommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
-#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a massive, dormant gate structure adrift in this sector."
+msgid ""
+"\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in "
+"revenue."
 msgstr ""
+"\\s(%d:%d) A população de %s consumiu %d unidades de %s, gerando ¢%s em "
+"receita."
 
+# ========== data/scripts/player/background/simulation/refinecommand.lua
+# ==========
+# ========== data/scripts/player/background/simulation/scoutcommand.lua
+# ==========
+# ==========
+# data/scripts/player/background/simulation/scoutcommandnotetable.lua
+# ==========
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a colossal ring gate here. It looks ancient and entirely dead."
+msgid ""
+"Sensors picked up a massive, dormant gate structure adrift in this sector."
 msgstr ""
-
-#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an enormous, deactivated hyperspace gate floating silently in this sector."
-msgstr ""
-
-#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a monolithic ancient gate construct. Its original builders are long gone."
-msgstr ""
+"Os sensores detectaram uma enorme estrutura de portão adormecida à deriva "
+"neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Asteroids in a perfect ring formation are emitting bizarre energy readings here. We kept our distance."
+msgid ""
+"We found a colossal ring gate here. It looks ancient and entirely dead."
 msgstr ""
+"Encontramos um portão circular colossal aqui. Parece antigo e totalmente "
+"morto."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a massive energy shield tethered to a cluster of glowing asteroids."
+msgid ""
+"There is an enormous, deactivated hyperspace gate floating silently in this "
+"sector."
 msgstr ""
+"Há um enorme portão hiperespacial desativado flutuando silenciosamente neste"
+" setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a highly suspicious, shielded rock formation in this sector. Proceed with caution."
+msgid ""
+"We mapped a monolithic ancient gate construct. Its original builders are "
+"long gone."
 msgstr ""
+"Mapeamos uma construção de portão antigo monolítico. Seus construtores "
+"originais já se foram."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An unnatural arrangement of asteroids is broadcasting a hostile energy signature in this area."
+msgid ""
+"Asteroids in a perfect ring formation are emitting bizarre energy readings "
+"here. We kept our distance."
 msgstr ""
+"Asteróides em uma formação de anel perfeita estão emitindo leituras de "
+"energia bizarras aqui. Mantivemos distância."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a group of zealots obsessing over a massive asteroid."
+msgid ""
+"We detected a massive energy shield tethered to a cluster of glowing "
+"asteroids."
 msgstr ""
+"Detectámos um enorme escudo de energia preso a um aglomerado de asteróides "
+"brilhantes."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A strange cult seems to have set up camp around a giant rock in this sector."
+msgid ""
+"There is a highly suspicious, shielded rock formation in this sector. "
+"Proceed with caution."
 msgstr ""
+"Há uma formação rochosa altamente suspeita e protegida neste setor. Proceda "
+"com cautela."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We intercepted some unhinged radio chatter. Cultists are congregating around an asteroid here."
+msgid ""
+"An unnatural arrangement of asteroids is broadcasting a hostile energy "
+"signature in this area."
 msgstr ""
+"Um arranjo não natural de asteroides está transmitindo uma assinatura de "
+"energia hostil nesta área."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There are fanatics out here worshipping an asteroid. Space madness is a terrible thing."
+msgid ""
+"Sensors picked up a group of zealots obsessing over a massive asteroid."
 msgstr ""
+"Sensores detectaram um grupo de fanáticos obcecados por um enorme asteroide."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A localized spatial tear is present here. Looks like a stable wormhole."
+msgid ""
+"A strange cult seems to have set up camp around a giant rock in this sector."
 msgstr ""
+"Um estranho culto parece ter montado acampamento em torno de uma rocha "
+"gigante neste setor."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid ""
+"We intercepted some unhinged radio chatter. Cultists are congregating around"
+" an asteroid here."
+msgstr ""
+"Interceptamos algumas conversas descontroladas no rádio. Os cultistas estão "
+"se reunindo em torno de um asteroide aqui."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid ""
+"There are fanatics out here worshipping an asteroid. Space madness is a "
+"terrible thing."
+msgstr ""
+"Há fanáticos por aqui adorando um asteroide. A loucura espacial é uma coisa "
+"terrível."
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid ""
+"A localized spatial tear is present here. Looks like a stable wormhole."
+msgstr ""
+"Um rasgo espacial localizado está presente aqui. Parece um buraco de minhoca"
+" estável."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners picked up a lone wormhole hidden in the void of this sector."
 msgstr ""
+"Os scanners detectaram um buraco de minhoca solitário escondido no vazio "
+"deste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a wormhole phenomenon active here. Destination unknown."
-msgstr ""
+msgstr "Há um fenômeno de buraco de minhoca ativo aqui. Destino desconhecido."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We almost stumbled straight into a spatial anomaly. A wormhole is open in this sector."
+msgid ""
+"We almost stumbled straight into a spatial anomaly. A wormhole is open in "
+"this sector."
 msgstr ""
+"Quase tropeçamos direto em uma anomalia espacial. Um buraco de minhoca está "
+"aberto neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We intercepted a repeating broadcast from a lone research satellite."
 msgstr ""
+"Interceptamos uma transmissão repetida de um único satélite de pesquisa."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An automated science probe is transmitting strange data about asteroids here."
+msgid ""
+"An automated science probe is transmitting strange data about asteroids "
+"here."
 msgstr ""
+"Uma sonda científica automatizada está transmitindo dados estranhos sobre "
+"asteróides aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A solitary satellite is pinging complex research telemetry in this sector."
+msgid ""
+"A solitary satellite is pinging complex research telemetry in this sector."
 msgstr ""
+"Um satélite solitário está efetuando pings de telemetria de investigação "
+"complexa neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an abandoned satellite registered to 'M.A.D. Science' looping its logs here."
+msgid ""
+"There is an abandoned satellite registered to 'M.A.D. Science' looping its "
+"logs here."
 msgstr ""
+"Existe um satélite abandonado registrado em nome de 'M.A.D. A ciência está "
+"fazendo um loop aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We stumbled upon a hidden resistance cell operating completely off the grid."
+msgid ""
+"We stumbled upon a hidden resistance cell operating completely off the grid."
 msgstr ""
+"Deparamo-nos com uma célula de resistência oculta operando completamente "
+"fora da rede."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Against all odds, there's a scrappy survivor outpost tucked away in this sector."
+msgid ""
+"Against all odds, there's a scrappy survivor outpost tucked away in this "
+"sector."
 msgstr ""
+"Contra todas as probabilidades, há um posto avançado de sobreviventes "
+"escondido neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A heavily concealed resistance faction is holding out against the Xsotan here."
+msgid ""
+"A heavily concealed resistance faction is holding out against the Xsotan "
+"here."
 msgstr ""
+"Uma facção de resistência fortemente ocultada está resistindo aos Xsotan "
+"aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a pocket of survivors out here claiming to be part of a rebellion."
+msgid ""
+"We found a pocket of survivors out here claiming to be part of a rebellion."
 msgstr ""
+"Encontrámos aqui um grupo de sobreviventes que afirmam fazer parte de uma "
+"rebelião."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An artificial ring of numbered asteroids and strange stations is adrift here."
+msgid ""
+"An artificial ring of numbered asteroids and strange stations is adrift "
+"here."
 msgstr ""
+"Um anel artificial de asteróides numerados e estações estranhas está à "
+"deriva aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a complex arrangement of asteroids with strange numerical markings."
+msgid ""
+"We found a complex arrangement of asteroids with strange numerical markings."
 msgstr ""
+"Encontramos um arranjo complexo de asteroides com estranhas marcações "
+"numéricas."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."
+msgid ""
+"A dormant, circular array of asteroids and Xsotan tech is floating in this "
+"sector."
 msgstr ""
+"Um conjunto circular e adormecido de asteróides e tecnologia Xsotan está "
+"flutuando neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."
+msgid ""
+"There is a bizarre, ritualistic ring of marked asteroids generating faint "
+"energy spikes."
 msgstr ""
+"Há um anel bizarro e ritualístico de asteroides marcados gerando fracos "
+"picos de energia."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show a derelict ship with an intact core. We could restore it to working order."
+msgid ""
+"Sensors show a derelict ship with an intact core. We could restore it to "
+"working order."
 msgstr ""
+"Sensores mostram uma nave abandonada com núcleo intacto. Poderíamos "
+"restaurá-lo para funcionar."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a heavily damaged but structurally sound ship abandoned in this sector."
+msgid ""
+"There's a heavily damaged but structurally sound ship abandoned in this "
+"sector."
 msgstr ""
+"Há um navio fortemente danificado, mas estruturalmente sólido, abandonado "
+"neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We located an intact derelict vessel here. With a solid repair crew, she'll fly again."
+msgid ""
+"We located an intact derelict vessel here. With a solid repair crew, she'll "
+"fly again."
 msgstr ""
+"Localizamos aqui uma embarcação abandonada intacta. Com uma equipe de "
+"reparos sólida, ela voará novamente."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "I spotted a salvageable ship out here. It is practically begging to be claimed and repaired."
+msgid ""
+"I spotted a salvageable ship out here. It is practically begging to be "
+"claimed and repaired."
 msgstr ""
+"Avistei um navio recuperável aqui. Está praticamente implorando para ser "
+"reclamado e reparado."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive debris fields and wrecked hulls detected in this sector."
 msgstr ""
+"Enormes campos de detritos e cascos destruídos detectados neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a graveyard of destroyed ships here. Prime salvaging territory."
+msgid ""
+"We mapped a graveyard of destroyed ships here. Prime salvaging territory."
 msgstr ""
+"Mapeámos aqui um cemitério de navios destruídos. Território de salvamento "
+"principal."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is littered with the husks of dead ships."
-msgstr ""
+msgstr "Este setor está repleto de carcaças de navios mortos."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show heavy wreckage concentrations in this area. Bring your salvage lasers."
+msgid ""
+"Sensors show heavy wreckage concentrations in this area. Bring your salvage "
+"lasers."
 msgstr ""
+"Sensores mostram grandes concentrações de destroços nesta área. Traga seus "
+"lasers de resgate."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A massive stash of lost cargo containers is floating freely here."
 msgstr ""
+"Um enorme estoque de contêineres de carga perdidos flutua livremente aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a dense cluster of abandoned shipping containers in this sector."
+msgid ""
+"We detected a dense cluster of abandoned shipping containers in this sector."
 msgstr ""
+"Detectamos um denso aglomerado de contêineres abandonados neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a veritable goldmine of unbranded cargo crates adrift out here."
+msgid ""
+"There is a veritable goldmine of unbranded cargo crates adrift out here."
 msgstr ""
+"Há uma verdadeira mina de ouro de caixas de carga sem marca à deriva por "
+"aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a large, unsecured container cache drifting in the void."
+msgid ""
+"Sensors picked up a large, unsecured container cache drifting in the void."
 msgstr ""
+"Os sensores detectaram um grande cache de contêiner inseguro flutuando no "
+"vazio."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We picked up encrypted comms. Looks like a black market hub is nearby."
 msgstr ""
+"Captámos comunicações encriptadas. Parece que um centro do mercado negro "
+"está próximo."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A shady syndicate operates a hidden Smuggler's Market in this sector."
 msgstr ""
+"Um sindicato obscuro opera um mercado de contrabandistas oculto neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors detected a heavily cloaked Smuggler's Hideout operating off the books."
+msgid ""
+"Sensors detected a heavily cloaked Smuggler's Hideout operating off the "
+"books."
 msgstr ""
+"Sensores detectaram um esconderijo de contrabandista fortemente camuflado "
+"operando fora dos livros."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a hive of scum and villainy tucked away in this area."
-msgstr ""
+msgstr "Há uma colmeia de escória e vilania escondida nesta área."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Dense asteroid clusters detected. Good prospects for a mining operation."
+msgid ""
+"Dense asteroid clusters detected. Good prospects for a mining operation."
 msgstr ""
+"Densos aglomerados de asteróides detectados. Boas perspectivas para uma "
+"operação mineira."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a massive, resource-rich asteroid field in this sector."
 msgstr ""
+"Mapeamos um campo de asteróides enorme e rico em recursos neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Heavy asteroid presence here. Prime territory for our mining lasers."
 msgstr ""
+"Presença pesada de asteróides aqui. Território privilegiado para nossos "
+"lasers de mineração."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners show a dense field of unmined rocks in this sector."
-msgstr ""
+msgstr "Os scanners mostram um denso campo de rochas não minadas neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Hostile pirate signatures detected. They are heavily entrenched in this sector."
+msgid ""
+"Hostile pirate signatures detected. They are heavily entrenched in this "
+"sector."
 msgstr ""
+"Assinaturas de piratas hostis detectadas. Eles estão fortemente enraizados "
+"neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A major pirate syndicate controls this area. Approach with weapons hot."
+msgid ""
+"A major pirate syndicate controls this area. Approach with weapons hot."
 msgstr ""
+"Um grande sindicato pirata controla esta área. Aproxime-se com armas "
+"quentes."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors are lighting up with raider transponders. It's a pirate stronghold."
+msgid ""
+"Sensors are lighting up with raider transponders. It's a pirate stronghold."
 msgstr ""
+"Os sensores estão acendendo com transponders raider. É uma fortaleza pirata."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We spotted a large contingent of pirate scum operating in this sector."
-msgstr ""
+msgstr "Vimos um grande contingente de piratas operando neste setor."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive alien energy spikes detected. The Xsotan are swarming here."
 msgstr ""
+"Enormes picos de energia alienígena detectados. Os Xsotan estão fervilhando "
+"aqui."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We barely avoided a massive Xsotan breeding cluster in this sector."
 msgstr ""
+"Por pouco não conseguimos evitar um enorme aglomerado de criação de Xsotan "
+"neste sector."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is heavily infested by the Xsotan menace."
-msgstr ""
+msgstr "Este sector está fortemente infestado pela ameaça Xsotan."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Alien bio-signatures confirmed. The Xsotan have claimed this space."
 msgstr ""
+"Assinaturas biológicas alienígenas confirmadas. Os Xsotan reivindicaram este"
+" espaço."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We also picked up a repeating automated beacon on a forgotten frequency."
+msgid ""
+"We also picked up a repeating automated beacon on a forgotten frequency."
 msgstr ""
+"Também detectámos um sinal automático repetido numa frequência esquecida."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a strange navigational beacon here transmitting encrypted coordinates."
+msgid ""
+"There's a strange navigational beacon here transmitting encrypted "
+"coordinates."
 msgstr ""
+"Há um estranho farol de navegação aqui transmitindo coordenadas "
+"criptografadas."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Also, a lone beacon is pulsing an 'Exodus' distress signal."
 msgstr ""
+"Além disso, um farol solitário está pulsando um sinal de socorro 'Êxodo'."
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."
+msgid ""
+"Oh, and I noted an ancient beacon broadcasting fragments of a mysterious "
+"message."
 msgstr ""
+"Ah, e notei um antigo farol transmitindo fragmentos de uma mensagem "
+"misteriosa."
 
-
-# ========== data/scripts/player/background/simulation/simulation.lua ==========
+# ========== data/scripts/player/background/simulation/simulation.lua
+# ==========
 #: data/scripts/player/background/simulation/simulation.lua:
 msgid "Your captains continued working while you were away."
 msgstr "Seus capitães continuaram trabalhando enquanto você estava fora."
 
-
-# ========== data/scripts/player/background/simulation/simulationutility.lua ==========
+# ========== data/scripts/player/background/simulation/simulationutility.lua
+# ==========
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "I'll have regular data for you as the mission progresses."
 msgstr "Terei dados regulares para você à medida que a missão avança."
@@ -639,67 +802,90 @@ msgid "Expect a continual flow of new information."
 msgstr "Espere um fluxo contínuo de novas informações."
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"
+msgid ""
+"\\c(d93)We have no deep scan ability and will have to visit every "
+"sector.\\c()"
 msgstr ""
+"\\c(d93)Não temos capacidade de varredura profunda e teremos que visitar "
+"todos os setores.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"
 msgstr ""
+"\\c(d93)O tempo de viagem será extremo sem uma cobertura de varredura mais "
+"profunda.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"
+msgid ""
+"\\c(d93)We can't see where hidden mass sectors are without better "
+"radar.\\c()"
 msgstr ""
+"\\c(d93)Não podemos ver onde estão os setores de massa ocultos sem um radar "
+"melhor.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"
+msgid ""
+"\\c(dd5)With our weak sensors, we'll waste a lot of time jumping "
+"blindly.\\c()"
 msgstr ""
+"\\c(dd5)Com nossos sensores fracos, perderemos muito tempo pulando às "
+"cegas.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"
 msgstr ""
+"\\c(dd5)Seríamos muito mais rápidos com uma cobertura de varredura mais "
+"profunda.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
+msgid ""
+"\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
 msgstr ""
+"\\c(dd5) Setores de massa ocultos serão difíceis de encontrar sem um radar "
+"melhor.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Há uma refinaria bem aqui, então isso será rápido e seguro.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
-msgstr ""
+msgid ""
+"\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
+msgstr "\\c(0d0)Refinar não será problema com um depósito neste setor.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"
 msgstr ""
+"\\c(0d0)Posso pilotar automaticamente direto para o depósito neste "
+"setor.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)People are sure to appreciate our work here.\\c()"
-msgstr ""
+msgstr "\\c(0d0)As pessoas certamente apreciarão nosso trabalho aqui.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)This will help a lot of people.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Isso ajudará muitas pessoas.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)Our generosity will help to build trust.\\c()"
-msgstr ""
+msgstr "\\c(0d0)Nossa generosidade ajudará a construir confiança.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"
 msgstr ""
+"\\c(dd5)Essa não é minha especialidade, mas vou ver o que posso fazer.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"
-msgstr ""
+msgstr "\\c(dd5)Um comerciante faria isso melhor, mas posso tentar.\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)No merchants available, commander?\\c()"
-msgstr ""
+msgstr "\\c(dd5)Nenhum comerciante disponível, comandante?\\c()"
 
-
-# ========== data/scripts/player/background/simulation/tradecommand.lua ==========
+# ========== data/scripts/player/background/simulation/tradecommand.lua
+# ==========
 #: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Directly deposit returns as soon as they're available"
 msgstr "Depositar os retornos diretamente assim que estiverem disponíveis"
@@ -710,14 +896,18 @@ msgstr "Entrega imediata"
 
 #: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Trade most of this contract's profit for increased reputation gain"
-msgstr "Trocar a maior parte do lucro deste contrato por um ganho de reputação maior"
-
-
-# ========== data/scripts/player/background/simulation/travelcommand.lua ==========
-#: data/scripts/player/background/simulation/travelcommand.lua:
-msgid "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"
 msgstr ""
+"Trocar a maior parte do lucro deste contrato por um ganho de reputação maior"
 
+# ========== data/scripts/player/background/simulation/travelcommand.lua
+# ==========
+#: data/scripts/player/background/simulation/travelcommand.lua:
+msgid ""
+"\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\c()"
+msgstr ""
+"\\c(0d0)Conheço essas rotas espaciais como a palma da minha mão. Faremos um "
+"tempo incrível.\\c()"
 
 # ========== data/scripts/player/map/mapcommands.lua ==========
 #: data/scripts/player/map/mapcommands.lua:
@@ -737,12 +927,10 @@ msgstr "Sucatear"
 msgid "Loop"
 msgstr "Repetir"
 
-
 # ========== data/scripts/player/map/maproutes.lua ==========
 #: data/scripts/player/map/maproutes.lua:
 msgid "[${i}] Repair"
-msgstr ""
-
+msgstr "[${i}] Reparar"
 
 # ========== data/scripts/player/ui/command_center_tab.lua ==========
 #: data/scripts/player/ui/command_center_tab.lua:
@@ -829,7 +1017,6 @@ msgstr "Destruído"
 msgid "In-Sector"
 msgstr "No Setor"
 
-
 # ========== data/scripts/player/ui/factory_overview_tab.lua ==========
 #: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Factory Overview"
@@ -871,7 +1058,6 @@ msgstr "Aliança: "
 msgid "Sort by "
 msgstr "Classificar por "
 
-
 # ========== data/scripts/player/ui/playerbulletinboard.lua ==========
 #: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "Filter:"
@@ -885,40 +1071,38 @@ msgstr "Fonte"
 msgid "No missions available in this sector!"
 msgstr "Nenhuma missão disponível neste setor!"
 
-
 # ========== data/scripts/player/ui/resourcedisplay.lua ==========
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Resources Display"
-msgstr ""
+msgstr "Exibição de recursos"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Enable UI movement"
-msgstr ""
+msgstr "Ativar movimento da IU"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Reset UI position"
-msgstr ""
+msgstr "Redefinir a posição da IU"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show current ship cargo capacity"
-msgstr ""
+msgstr "Mostrar a capacidade atual de carga do navio"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show currently used and total inventory slots"
-msgstr ""
+msgstr "Mostrar slots de inventário atualmente usados ​​e totais"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show inventory capacity for alliance/ship at the same time"
-msgstr ""
+msgstr "Mostrar capacidade de inventário para aliança/navio ao mesmo tempo"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show alliance resources when piloting an alliance ship"
-msgstr ""
+msgstr "Mostrar recursos da aliança ao pilotar um navio da aliança"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Inventory Slots"
-msgstr ""
-
+msgstr "Espaços de inventário"
 
 # ========== data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -973,10 +1157,1203 @@ msgstr "Restos"
 msgid "Detritus"
 msgstr "Detritos"
 
-
 # ========== data/scripts/sector/managestationincomes.lua ==========
-
 # ========== data/scripts/systems/transportersoftware.lua ==========
 #: data/scripts/systems/transportersoftware.lua:
 msgid " (+ scaled by Transporter Blocks)"
+msgstr "(+ dimensionado por Blocos Transportadores)"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
 msgstr ""
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Incorrect icon"
+msgstr "\", 1, \"Ícone incorreto"
+
+#: data/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Maximum amount of icons reached"
+msgstr "\", 1, \"Quantidade máxima de ícones alcançada"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Missing hangar."
+msgstr "\", 1, \"Hangar desaparecido."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in hangar."
+msgstr "\", 1, \"Não há espaço suficiente no hangar."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in squad."
+msgstr "\", 1, \"Não há espaço suficiente na equipe."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space on the other craft."
+msgstr "\", 1, \"Não há espaço suficiente na outra nave."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"The fighter type doesn't match the squad type."
+msgstr "\", 1, \"O tipo de lutador não corresponde ao tipo de esquadrão."
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid ""
+"\", 1, \"You don't have permission to do that in the name of your alliance."
+msgstr "\", 1, \"Você não tem permissão para fazer isso em nome de sua aliança."
+
+#: data/scripts/player/background/simulation/simulation.lua
+msgid "\", 3, \"Your captains continued working while you were away."
+msgstr "\", 3, \"Seus capitães continuaram trabalhando enquanto você estava fora."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free space in torpedo shaft %1%."
+msgstr ""
+"\", ChatMessageType.Error, \"Não há espaço livre suficiente no eixo do "
+"torpedo%1%."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free torpedo storage."
+msgstr ""
+"\", ChatMessageType.Error, \"Armazenamento de torpedos livre insuficiente."
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"\", ChatMessageType.Error, \"Transport capacity is already at maximum "
+"(${c}/${m})."
+msgstr ""
+"\", ChatMessageType.Error, \"A capacidade de transporte já está no máximo "
+"(${c}/${m})."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You don't own this craft."
+msgstr "\", ChatMessageType.Error, \"Você não possui esta nave."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You're too far away."
+msgstr "\", ChatMessageType.Error, \"Você está muito longe."
+
+#: data/scripts/lib/shop.lua
+msgid "#"
+msgstr ""
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${amount} ${good}"
+msgstr "${amount}${good}"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "${c}${money}"
+msgstr "${c}${money}"
+
+#: data/scripts/entity/gate.lua
+msgid "${dir} Gate to ${sector}"
+msgstr "${dir}Portão para${sector}"
+
+#: data/scripts/entity/bulletinboard.lua
+msgid "${entity} Bulletin Board"
+msgstr "${entity}Quadro de avisos"
+
+#: data/scripts/lib/shop.lua
+msgid "${percentage} OFF!"
+msgstr "${percentage}DESLIGADO!"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession}"
+msgstr "${profession}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession} (Specialist level ${level})"
+msgstr "${profession}(nível especialista${level})"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "${x} : ${y} (dist: ${num})"
+msgstr "${x}:${y}(dist:${num})"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"%s cannot be held responsible for any damage to ships or deaths caused by "
+"salvaging."
+msgstr ""
+"%snão pode ser responsabilizado por quaisquer danos a navios ou mortes "
+"causadas por salvamento."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */<< Transfer All"
+msgstr "/* Mercadorias */<< Transferir tudo"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */Transfer All >>"
+msgstr "/* Mercadorias */Transferir tudo >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer"
+msgstr "<< Transferir"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer All"
+msgstr "<< Transferir tudo"
+
+#: data/scripts/lib/shop.lua
+msgid "??"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Accept"
+msgstr "Aceitar"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "All"
+msgstr "Todos"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Alliance"
+msgstr "Aliança"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Apply"
+msgstr "Aplicar"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Attack\", \"Attack Enemies"
+msgstr "Atacar\", \"Atacar Inimigos"
+
+#: data/scripts/lib/shop.lua
+msgid "BUY NOW!"
+msgstr "COMPRAR AGORA!"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Background Opacity (Min: 0.0, Max: 1.0)"
+msgstr "Opacidade do plano de fundo (Mín.: 0,0, Máx.: 1,0)"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Best wares in the galaxy."
+msgstr "Os melhores produtos da galáxia."
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Boss Swoks ${num}"
+msgstr "Chefe Swoks${num}"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Bosses\", \"Bosses"
+msgstr "Chefes\", \"Chefes"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Brand new offer: We now dismantle turrets into parts!"
+msgstr "Nova oferta: agora desmontamos as torres em partes!"
+
+#: data/scripts/entity/bulletinboard.lua
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Bulletin Board"
+msgstr "Quadro de avisos"
+
+#: data/scripts/lib/shop.lua
+msgid "Buy"
+msgstr "Comprar"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Buy License"
+msgstr "Comprar licença"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Buy a temporary salvaging license of maximum 60 minutes here. This license "
+"makes it legal to damage or mine wreckages in this sector."
+msgstr ""
+"Compre uma licença de salvamento temporária de no máximo 60 minutos aqui. "
+"Esta licença torna legal danificar ou extrair destroços neste setor."
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Buy turrets! Your crew will thank you for it!"
+msgstr "Compre torres! Sua tripulação vai agradecer por isso!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Captain: ${name}"
+msgstr "Capitão:${name}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Cargo"
+msgstr "Carga"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Cargo Hold"
+msgstr "Porão de carga"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Casino"
+msgstr "Cassino"
+
+#: data/scripts/player/background/simulation/tradecommand.lua
+msgid "Charity mission"
+msgstr "Missão de caridade"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Compact number formatting (e.g. 1.5M)"
+msgstr "Formatação compacta de números (por exemplo, 1,5M)"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Confirm Dismantling"
+msgstr "Confirme a desmontagem"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Credits"
+msgstr "Créditos"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Crew"
+msgstr "Equipe"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Description"
+msgstr "Descrição"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Difficulty"
+msgstr "Dificuldade"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle"
+msgstr "Desmantelar"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle Trash"
+msgstr "Desmontar Lixo"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Don't like your ship anymore? We'll turn it into scrap and even give you "
+"some Credits for it!"
+msgstr ""
+"Não gosta mais do seu navio? Vamos transformá-lo em sucata e até lhe dar "
+"alguns créditos por isso!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Don't make any trouble."
+msgstr "Não crie problemas."
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "E /*direction*/"
+msgstr "E /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ENE /*direction*/"
+msgstr "ENE /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ESE /*direction*/"
+msgstr "ESE /*direção*/"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"EXPERIMENTAL: Highlights faction territories with various colors allowing to"
+" distinguish them from other nearby factions.\\nFactions won't have unique "
+"colors!"
+msgstr ""
+"EXPERIMENTAL: Destaca os territórios das facções com várias cores, "
+"permitindo distingui-los de outras facções próximas.\\nAs facções não terão "
+"cores exclusivas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Easy salvage, easy profit! Salvaging licenses for sale!"
+msgstr "Salvamento fácil, lucro fácil! Recuperando licenças para venda!"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit icon"
+msgstr "Editar ícone"
+
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit selected color"
+msgstr "Editar cor selecionada"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Enable Resource Display HUD"
+msgstr "Habilitar HUD de exibição de recursos"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Equipment Dock"
+msgstr "Doca de equipamentos"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Equipment of all sorts, for a great price! No refunds."
+msgstr "Equipamentos de todos os tipos, por um ótimo preço! Sem reembolsos."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"Everything's legal here, of course. As long as you don't look too closely..."
+msgstr ""
+"Tudo é legal aqui, é claro. Contanto que você não olhe muito de perto..."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Exchange Torpedoes"
+msgstr "Trocar Torpedos"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Faction Colors"
+msgstr "Cores da Facção"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Fighter Factory"
+msgstr "Fábrica de caças"
+
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighter Merchant"
+msgstr "Comerciante de Lutadores"
+
+#: data/scripts/entity/transfercrewgoods.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighters"
+msgstr "Lutadores"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Get a salvaging license now and try your luck with the wreckages!"
+msgstr ""
+"Obtenha uma licença de salvamento agora e tente a sorte com os destroços!"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Gunners not included."
+msgstr "Artilheiros não incluídos."
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Guns Guns Guns!"
+msgstr "Armas Armas Armas!"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hazard Zones"
+msgstr "Zonas de perigo"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hide icons"
+msgstr "Ocultar ícones"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight Alliance Notes"
+msgstr "Destacar notas da aliança"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight alliance notes with magenta at the bottom right corner"
+msgstr "Destaque as notas da aliança com magenta no canto inferior direito"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "I'd like to see something brand new for once."
+msgstr "Eu gostaria de ver algo totalmente novo pelo menos uma vez."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "I'm sure you'll find what you're looking for."
+msgstr "Tenho certeza que você encontrará o que procura."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "If you get in trouble, it's your own fault."
+msgstr "Se você tiver problemas, a culpa é sua."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Illegal salvaging will be punished by destruction. Buy a salvaging license "
+"or there will be consequences."
+msgstr ""
+"O salvamento ilegal será punido com a destruição. Compre uma licença de "
+"salvamento ou haverá consequências."
+
+#: data/scripts/lib/shop.lua
+msgid "LIMITED TIME OFFER!"
+msgstr "OFERTA POR TEMPO LIMITADO!"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Lock Radar Signatures"
+msgstr "Bloquear assinaturas de radar"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Loop\", \"Loop"
+msgstr "Laço\", \"Laço"
+
+#: data/scripts/lib/shop.lua
+msgid "MAT"
+msgstr "ESTEIRA"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Makes radar blips always visible"
+msgstr "Torna os sinais de radar sempre visíveis"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"Marks Hazard Zone sectors with a red rectangle in the bottom right corner"
+msgstr ""
+"Marca os setores da Zona de Risco com um retângulo vermelho no canto "
+"inferior direito"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Military Outpost"
+msgstr "Posto Avançado Militar"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Mine\", \"Mine"
+msgstr "Meu\", \"Meu"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Minutes"
+msgstr "Minutos"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Mobile Energy Lab"
+msgstr "Laboratório de Energia Móvel"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "N /*direction*/"
+msgstr "N /*direção*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "NAME"
+msgstr "NOME"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NE /*direction*/"
+msgstr "NE /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNE /*direction*/"
+msgstr "NNE /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNW /*direction*/"
+msgstr "NNW /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NW /*direction*/"
+msgstr "NO /*direção*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Name"
+msgstr "Nome"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "New Squad"
+msgstr "Novo Esquadrão"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "No refunds."
+msgstr "Sem reembolsos."
+
+#: data/scripts/entity/TrashMan.lua
+msgid "None"
+msgstr "Nenhum"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Not enough resources? Get a mining laser and change that!"
+msgstr ""
+"Não há recursos suficientes? Obtenha um laser de mineração e mude isso!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "OK"
+msgstr "OK"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Off"
+msgstr "Desligado"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Oh. That must have gotten lost."
+msgstr "Oh. Isso deve ter se perdido."
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "On"
+msgstr "Sobre"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Only the best turrets, subsystems and fighters!"
+msgstr "Apenas as melhores torres, subsistemas e caças!"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Our fighters are ready for you! Pilots not included."
+msgstr "Nossos lutadores estão prontos para você! Pilotos não incluídos."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "PRICE/U"
+msgstr "PREÇO/U"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Patrol\", \"Patrol Sector"
+msgstr "Patrulha\", \"Setor Patrulha"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Pilots not included."
+msgstr "Pilotos não incluídos."
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Player"
+msgstr "Jogador"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Please, do come again."
+msgstr "Por favor, volte novamente."
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Problems with pirates? No more with our weaponry!"
+msgstr "Problemas com piratas? Chega de nosso armamento!"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Profit"
+msgstr "Lucro"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Pssst! You wanna take a look?"
+msgstr "Psiu! Você quer dar uma olhada?"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Recall Ship"
+msgstr "Recall do Navio"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "RefineOres\", \"Refine Ores"
+msgstr "RefineOres\", \"Refinar Minérios"
+
+#: data/scripts/player/ui/command_center_tab.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Refresh"
+msgstr "Atualizar"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Remaining license time: ${time} Minutes"
+msgstr "Tempo restante da licença:${time}minutos"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Repair Dock"
+msgstr "Doca de reparo"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Repair\", \"Repair"
+msgstr "Reparar\", \"Reparar"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Research Station"
+msgstr "Estação de Pesquisa"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/player/background/simulation/refinecommand.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Resource Depot"
+msgstr "Depósito de recursos"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Resources\", \"Resources"
+msgstr "Recursos\", \"Recursos"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Reward"
+msgstr "Recompensa"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "S /*direction*/"
+msgstr "S /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SE /*direction*/"
+msgstr "SE /*direção*/"
+
+#: data/scripts/lib/shop.lua
+msgid "SOLD OUT!"
+msgstr "VENDIDO!"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER (30% OFF)"
+msgstr "OFERTA ESPECIAL (30% DE DESCONTO)"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER: -30% OFF"
+msgstr "OFERTA ESPECIAL: -30% DE DESCONTO"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSE /*direction*/"
+msgstr "SSE /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSW /*direction*/"
+msgstr "SSW /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SW /*direction*/"
+msgstr "SW /*direção*/"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Salvage\", \"Salvage"
+msgstr "Salvamento\", \"Salvamento"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Salvaging /*UI Tab title*/"
+msgstr "Salvando /*Título da guia UI*/"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging or damaging wreckages in this sector is illegal. Please buy a "
+"salvaging license."
+msgstr ""
+"Salvar ou danificar destroços neste setor é ilegal. Por favor, compre uma "
+"licença de recuperação."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging wreckages in this sector is forbidden. Please buy a salvaging "
+"license."
+msgstr ""
+"É proibido resgatar destroços neste setor. Por favor, compre uma licença de "
+"recuperação."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Scrapyard"
+msgstr "Sucata"
+
+#: data/scripts/entity/TrashMan.lua
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not"
+" be destroyed or immediately sold. Instead, the next time you visit the "
+"appropriate merchant they can be sold with the merchant's 'Sell Trash' "
+"button.\\nItems that are marked as favorites will not get marked for trash!"
+msgstr ""
+"Selecione quais tipos de itens de inventário serão marcados como lixo. Esses"
+" itens não serão destruídos ou vendidos imediatamente. Em vez disso, na "
+"próxima vez que você visitar o comerciante apropriado, eles poderão ser "
+"vendidos com o botão 'Vender lixo' do comerciante.\\nOs itens marcados como "
+"favoritos não serão marcados como lixo!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "Sell"
+msgstr "Vender"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Sell Ship"
+msgstr "Vender Navio"
+
+#: data/scripts/lib/shop.lua
+msgid "Sell Trash"
+msgstr "Vender lixo"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Shafts"
+msgstr "Eixos"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Ship"
+msgstr "Enviar"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Ship Value:"
+msgstr "Valor do navio:"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Shipyard"
+msgstr "Estaleiro"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Blueprints"
+msgstr "Mostrar projetos"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Favorited Items"
+msgstr "Mostrar itens favoritos"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show Galaxy Map QoL options"
+msgstr "Mostrar opções de qualidade de vida do Galaxy Map"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Items"
+msgstr "Mostrar itens"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Subsystems"
+msgstr "Mostrar subsistemas"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Turrets"
+msgstr "Mostrar torres"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show overlay"
+msgstr "Mostrar sobreposição"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Show the Xsotan who's boss with our chain guns!"
+msgstr "Mostre ao Xsotan quem manda com nossas armas de corrente!"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Smuggler's Market"
+msgstr "Mercado do contrabandista"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Status"
+msgstr "Status"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Storage"
+msgstr "Armazenar"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Subsystems"
+msgstr "Subsistemas"
+
+#: data/scripts/lib/shop.lua
+msgid "TECH"
+msgstr "TECNOLOGIA"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Tech"
+msgstr "Tecnologia"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "TechLevels\", \"Tech Level"
+msgstr "TechLevels\", \"Nível Técnico"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Text"
+msgstr "Texto"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for choosing %1%'s salvage services. We have you listed as an "
+"licensee for the next %2% minutes."
+msgstr ""
+"Obrigado por escolher os serviços de salvamento de%1%. Você está listado "
+"como licenciado pelos próximos%2%minutos."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for your continuing trust in us. We updated your salvaging license"
+" to %s minutes."
+msgstr ""
+"Obrigado pela sua confiança contínua em nós. Atualizamos sua licença de "
+"recuperação para%sminutos."
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "That's sold out, sorry."
+msgstr "Está esgotado, desculpe."
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "The AI"
+msgstr "A IA"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "This action is irreversible."
+msgstr "Esta ação é irreversível."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "This is a free station, where everybody can mind their own business."
+msgstr "Esta é uma estação gratuita, onde todos podem cuidar da sua vida."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"This is your last warning. If you do not stop salvaging without a license, "
+"you will be destroyed."
+msgstr ""
+"Este é o seu último aviso. Se você não parar de salvar sem licença, você "
+"será destruído."
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr ""
+"Esta missão está disponível apenas para proprietários do DLC Black Market."
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Tired of being chronically unarmed? We're here for you!"
+msgstr "Cansado de estar cronicamente desarmado? Estamos aqui para ajudá-lo!"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Torpedoes"
+msgstr "Torpedos"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Trade Equipment"
+msgstr "Equipamento comercial"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer >>"
+msgstr "Transferir >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All >>"
+msgstr "Transferir tudo >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All Torpedoes of This Shaft"
+msgstr "Transferir todos os torpedos deste eixo"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew, Cargo and Fighters"
+msgstr "Transferir Tripulação, Carga e Caças"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew/Cargo/Fighters"
+msgstr "Transferir tripulação/carga/caças"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Squad"
+msgstr "Esquadrão de Transferência"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Travel Hub"
+msgstr "Centro de viagens"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Turret Dismantling /*UI Tab title*/"
+msgstr "Desmontagem da torre /*Título da guia UI*/"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Turret Factory"
+msgstr "Fábrica de torres"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turret Merchant"
+msgstr "Comerciante de torre"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turrets"
+msgstr "Torretas"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Type"
+msgstr "Tipo"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand"
+msgstr "Remover marca"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand Stolen Goods"
+msgstr "Produtos roubados sem marca"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Undo\",   \"Undo"
+msgstr "Desfazer\", \"Desfazer"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"Upgrade to allow up to ${volume} transported volume per shuttle every "
+"${seconds} seconds."
+msgstr ""
+"Atualize para permitir até${volume}volume transportado por ônibus a "
+"cada${seconds}segundos."
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "W /*direction*/"
+msgstr "C /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WNW /*direction*/"
+msgstr "WNW /*direção*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WSW /*direction*/"
+msgstr "WSW /*direção*/"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning"
+msgstr "Aviso"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning! You will not get refunds for crews or turrets!"
+msgstr "Aviso! Você não receberá reembolso por tripulações ou torres!"
+
+#: data/scripts/lib/shop.lua
+msgid "We are completely sold out."
+msgstr "Estamos completamente esgotados."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "We do Secured Containers only, we don't want no bug infestations."
+msgstr "Fazemos apenas contêineres seguros, não queremos infestações de bugs."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"We don't take any responsibility for any lost limbs while using the turret "
+"dismantler."
+msgstr ""
+"Não assumimos qualquer responsabilidade por quaisquer membros perdidos "
+"durante a utilização do desmontador de torres."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Welcome to the true, free market."
+msgstr "Bem-vindo ao verdadeiro mercado livre."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What do you want?"
+msgstr "O que você quer?"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What's up?"
+msgstr "E aí?"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckage"
+msgstr "Destroços"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckages"
+msgstr "Destroços"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Wreckages in this sector are the property of %s. Please buy a salvaging "
+"license."
+msgstr ""
+"Os destroços neste setor são propriedade de%s. Por favor, compre uma licença"
+" de recuperação."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "YOU"
+msgstr "VOCÊ"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You bring 'em, we crack 'em. Secured Containers only."
+msgstr "Você os traz, nós os quebramos. Somente contêineres protegidos."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You can't sell ${displayPlural} here."
+msgstr "Você não pode vender${displayPlural}aqui."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You don't have a valid license."
+msgstr "Você não tem uma licença válida."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s on your ship."
+msgstr "Você não tem nenhum%sem seu navio."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s to sell!"
+msgstr "Você não tem nenhum%spara vender!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any of this!"
+msgstr "Você não tem nada disso!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any stolen %s!"
+msgstr "Você não tem nenhum%sroubado!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"You have been warned. You will be considered an enemy of %s if you do not "
+"stop your illegal activities."
+msgstr ""
+"Você foi avisado. Você será considerado um inimigo de%sse não interromper "
+"suas atividades ilegais."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have no stolen goods on you."
+msgstr "Você não tem bens roubados com você."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have to be docked to the station to unbrand goods!"
+msgstr "Você tem que estar atracado na estação para desmarcar as mercadorias!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You need a salvaging license for this sector."
+msgstr "Você precisa de uma licença de salvamento para este setor."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You will not get refunds for crews or turrets!"
+msgstr "Você não receberá reembolso por tripulações ou torres!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"You'll find members for nearly everything on this station, if the coin is "
+"right."
+msgstr ""
+"Você encontrará membros para quase tudo nesta estação, se a moeda estiver "
+"certa."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license has expired. You may no longer salvage in this area."
+msgstr ""
+"Sua licença de recuperação expirou. Você não pode mais fazer salvamentos "
+"nesta área."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s has expired. You may no longer salvage in this "
+"area."
+msgstr ""
+"Sua licença de recuperação em%sexpirou. Você não pode mais fazer salvamentos"
+" nesta área."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 10 seconds."
+msgstr "Sua licença de recuperação em%sexpirará em 10 segundos."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 2 minutes. Renew it immediately"
+" and save yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação em%sexpirará em 2 minutos. Renove-o imediatamente"
+" e evite problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 20 seconds."
+msgstr "Sua licença de recuperação em%sexpirará em 20 segundos."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação em%sexpirará em 30 segundos. Renove-o e evite "
+"problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 60 seconds. Renew it NOW and "
+"save yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação em%sexpirará em 60 segundos. Renove-o AGORA e "
+"evite problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 10 seconds."
+msgstr "Sua licença de recuperação expirará em 10 segundos."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 2 minutes. Renew it immediately and "
+"save yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação expirará em 2 minutos. Renove-o imediatamente e "
+"evite problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 20 seconds."
+msgstr "Sua licença de recuperação expirará em 20 segundos."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação expirará em 30 segundos. Renove-o e evite "
+"problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 60 seconds. Renew it NOW and save "
+"yourself some trouble!"
+msgstr ""
+"Sua licença de recuperação expirará em 60 segundos. Renove-o AGORA e evite "
+"problemas!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your ship will be dismantled and you will be returned to your drone."
+msgstr "Sua nave será desmontada e você retornará ao seu drone."
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "[A]  /* Alliance resource prefix */"
+msgstr "[A] /* Prefixo do recurso da aliança */"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "[Drag & Drop / Shift Click] Transfer Passengers"
+msgstr "[Arrastar e soltar/Shift Click] Transferir passageiros"
+
+#: data/scripts/player/background/simulation/travelcommand.lua
+msgid ""
+"\\\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\\\c()"
+msgstr ""
+"\\\\c(0d0)Conheço essas rotas espaciais como a palma da minha mão. Faremos "
+"um tempo incrível.\\\\c()"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "\\n Hazard Zone"
+msgstr "\\n Zona de perigo"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "data/textures/icons/WreckagesTab.png\", \"Wreckages"
+msgstr "data/textures/icons/WreckagesTab.png\", \"Destroços"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/crew.png\", \"Exchange Crew"
+msgstr "data/textures/icons/crew.png\", \"Troca Tripulação"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/domino-mask.png\", \"Unbrand Stolen Goods"
+msgstr "data/textures/icons/domino-mask.png\", \"Desmarcar produtos roubados"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/fighter.png\", \"Exchange Fighters"
+msgstr "data/textures/icons/fighter.png\", \"Trocar lutadores"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-arrows.png\", \"Buy a salvaging license."
+msgstr ""
+"data/textures/icons/recycle-arrows.png\", \"Compre uma licença de "
+"recuperação."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-turret.png\", \"Dismantle turrets into goods."
+msgstr ""
+"data/textures/icons/recycle-turret.png\", \"Desmontar torres em mercadorias."
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/sell-ship.png\", \"Sell your ship to the scrapyard."
+msgstr ""
+"data/textures/icons/sell-ship.png\", \"Venda seu navio para o ferro-velho."
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/sell.png\", \"Sell Stolen Goods"
+msgstr "data/textures/icons/sell.png\", \"Vender produtos roubados"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/trade.png\", \"Exchange Cargo"
+msgstr "data/textures/icons/trade.png\", \"Trocar carga"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "data/textures/icons/warning-system.png\",\"Bulletin Board"
+msgstr "data/textures/icons/warning-system.png\",\"Quadro de avisos"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "¢${money}"
+msgstr "¢${money}"

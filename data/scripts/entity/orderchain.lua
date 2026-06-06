@@ -93,9 +93,40 @@ function OrderChain.addJumpOrder(x, y)
         return
     end
 
-    -- Jump not possible
+    -- Cosmic Overhaul: Restore Vanilla Fallback (if priority is OFF but jump is invalid, check gates anyway)
     if not callingPlayer then return end
     local player = Player(callingPlayer)
+
+    if not useGatePriority then
+        local sectorViewsToCheck = {}
+        local view = player:getKnownSector(shipX, shipY)
+        if view then table.insert(sectorViewsToCheck, view) end
+
+        local alliance = Alliance()
+        if alliance then
+            local aView = alliance:getKnownSector(shipX, shipY)
+            if aView then table.insert(sectorViewsToCheck, aView) end
+        end
+
+        for _, sectorView in pairs(sectorViewsToCheck) do
+            for _, dest in pairs({sectorView:getWormHoleDestinations()}) do
+                if dest.x == x and dest.y == y then
+                    local order = { action = OrderType.FlyThroughWormhole, x = x, y = y, gate = false }
+                    if OrderChain.canEnchain(order) then OrderChain.enchain(order) end
+                    return
+                end
+            end
+            for _, dest in pairs({sectorView:getGateDestinations()}) do
+                if dest.x == x and dest.y == y then
+                    local order = { action = OrderType.FlyThroughWormhole, x = x, y = y, gate = true }
+                    if OrderChain.canEnchain(order) then OrderChain.enchain(order) end
+                    return
+                end
+            end
+        end
+    end
+
+    -- Jump not possible
     player:sendChatMessage("", ChatMessageType.Error, error)
 end
 callable(OrderChain, "addJumpOrder")

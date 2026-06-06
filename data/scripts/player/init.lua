@@ -14,3 +14,7 @@ if onServer() then
     -- Cosmic Overhaul: Dynamic Reputation Decay Background Loop
     player:addScriptOnce("data/scripts/lib/DynamicReputationDecay.lua")
 end
+
+if onServer() then
+    Player():addScriptOnce("data/scripts/player/map/galaxymapqol.lua")
+end

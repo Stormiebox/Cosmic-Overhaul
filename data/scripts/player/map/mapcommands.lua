@@ -8,6 +8,12 @@ if onClient() then
         -- Run copy of base initUI
         OALMapCommands._initUI()
 
+        if shipList then
+            shipList.shipsContainer.layer = 3
+            shipList.ordersContainer.layer = 3
+            shipList.contextMenuContainer.layer = 3
+        end
+
         -- Extract base orders/missions
         local baseOrders = {}
         for i = #orders, 1, -1 do

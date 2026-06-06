@@ -1,4 +1,7 @@
 # ========== data/scripts/entity/TrashMan.lua ==========
+msgid ""
+msgstr ""
+
 #: data/scripts/entity/TrashMan.lua:
 msgid "Trash Man"
 msgstr "ゴミ収集人"
@@ -12,8 +15,12 @@ msgid "Turrets to trash"
 msgstr "ゴミにするタレット"
 
 #: data/scripts/entity/TrashMan.lua:
-msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
-msgstr "ゴミとしてマークするインベントリアイテムの種類を選択します。これらのアイテムはすぐに破壊されたり販売されたりすることはありません。代わりに、次回適切な商人を訪問したときに、商人の「ゴミを売る」ボタンで販売できます。\nお気に入りとしてマークされているアイテムはゴミとしてマークされません！"
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\n"
+"Items that are marked as favorites will not get marked for trash!"
+msgstr ""
+"ゴミとしてマークするインベントリアイテムの種類を選択します。これらのアイテムはすぐに破壊されたり販売されたりすることはありません。代わりに、次回適切な商人を訪問したときに、商人の「ゴミを売る」ボタンで販売できます。\n"
+"お気に入りとしてマークされているアイテムはゴミとしてマークされません！"
 
 #: data/scripts/entity/TrashMan.lua:
 msgid "Mark"
@@ -43,19 +50,14 @@ msgstr "最小：1"
 msgid "Max: 52"
 msgstr "最大：52"
 
-
 # ========== data/scripts/entity/ancientgate.lua ==========
 #: data/scripts/entity/ancientgate.lua:
 msgid "${dir} Ancient Gate to ${sector}"
 msgstr "${dir} ${sector}への古代のゲート"
 
-
 # ========== data/scripts/entity/bulletinboard.lua ==========
-
 # ========== data/scripts/entity/gate.lua ==========
-
 # ========== data/scripts/entity/merchants/equipmentdock.lua ==========
-
 # ========== data/scripts/entity/merchants/factory.lua ==========
 #: data/scripts/entity/merchants/factory.lua:
 msgid " "
@@ -63,569 +65,626 @@ msgstr ""
 
 #: data/scripts/entity/merchants/factory.lua:
 msgid "Transport capacity is already at maximum (${c}/${m})."
-msgstr ""
-
-#: data/scripts/entity/merchants/factory.lua:
-msgid ""
-msgstr ""
-
+msgstr "輸送能力はすでに最大値 (${c}/${m}) に達しています。"
 
 # ========== data/scripts/entity/merchants/fightermerchant.lua ==========
-
 # ========== data/scripts/entity/merchants/managestationincomes.lua ==========
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a system"
-msgstr ""
+msgstr "システム"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a turret"
-msgstr ""
+msgstr "砲塔"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in taxes from Resource Depot ${station}."
-msgstr ""
+msgstr "資源倉庫${station}から税金として${amount}を獲得しました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in unbranding fees from Smuggler's Market ${station}."
-msgstr ""
+msgid ""
+"Received ${amount} in unbranding fees from Smuggler's Market ${station}."
+msgstr "密輸業者市場${station}からブランド解除手数料として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in gambling income from Casino ${station}."
-msgstr ""
+msgstr "カジノ${station}からギャンブル収入として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Repair Dock ${station}."
-msgstr ""
+msgstr "修理ドック${station}から修理料金として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Shipyard ${station}."
-msgstr ""
+msgstr "造船所${station}から修理費として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in travel fees from Travel Hub ${station}."
-msgstr ""
+msgstr "Travel Hub${station}から旅行代金として${amount}を獲得しました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Equipment Dock ${station}."
-msgstr ""
+msgstr "設備ドック${station}から税金として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Research Station ${station}."
-msgstr ""
+msgstr "研究ステーション${station}から税金として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Military Outpost ${station}."
-msgstr ""
+msgstr "軍事前哨基地${station}から税金として${amount}を受け取りました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in taxes from Turret Factory ${station}."
-msgstr ""
+msgstr "タレット工場${station}から税金で${amount}を獲得しました。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in fighter costs from Fighter Factory ${station}."
-msgstr ""
-
+msgstr "戦闘機工場${station}から戦闘機コストとして${amount}を獲得しました。"
 
 # ========== data/scripts/entity/merchants/scrapyard.lua ==========
-
 # ========== data/scripts/entity/merchants/smugglersmarket.lua ==========
-
 # ========== data/scripts/entity/merchants/turretmerchant.lua ==========
-
 # ========== data/scripts/entity/orderchain.lua ==========
-
 # ========== data/scripts/entity/transfercrewgoods.lua ==========
 #: data/scripts/entity/transfercrewgoods.lua:
 msgid "Search Cargo..."
-msgstr ""
-
+msgstr "貨物を検索..."
 
 # ========== data/scripts/lib/shiputility.lua ==========
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Prospector"
-msgstr ""
+msgstr "ライトプロスペクター"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Prospector"
-msgstr ""
+msgstr "探鉱者"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Prospector"
-msgstr ""
+msgstr "ヘビープロスペクター"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Medium Miner"
-msgstr ""
+msgstr "ミディアムマイナー"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Mining Barge"
-msgstr ""
+msgstr "鉱山バージ"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Mining Barge"
-msgstr ""
+msgstr "大型鉱山バージ"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Extraction Vessel"
-msgstr ""
+msgstr "抽出容器"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Extraction Vessel"
-msgstr ""
+msgstr "重量抽出容器"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Asteroid Crusher"
-msgstr ""
+msgstr "アステロイドクラッシャー"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Planet Cracker"
-msgstr ""
+msgstr "プラネットクラッカー"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Cargo Shuttle"
-msgstr ""
+msgstr "カーゴシャトル"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Loader"
-msgstr ""
+msgstr "ライトローダー"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Loader"
-msgstr ""
+msgstr "ヘビーローダー"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Transporter"
-msgstr ""
+msgstr "ライトトランスポーター"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Transporter"
-msgstr ""
+msgstr "ヘビートランスポーター"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Freighter"
-msgstr ""
+msgstr "軽貨物船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Freighter"
-msgstr ""
+msgstr "大型貨物船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Superfreighter"
-msgstr ""
+msgstr "スーパー貨物船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Logistics Leviathan"
-msgstr ""
+msgstr "物流リヴァイアサン"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Courier"
-msgstr ""
+msgstr "ライトクーリエ"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Courier"
-msgstr ""
+msgstr "宅配便"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Courier"
-msgstr ""
+msgstr "重量宅配便"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Vessel"
-msgstr ""
+msgstr "貿易船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Merchant Vessel"
-msgstr ""
+msgstr "商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Merchant Vessel"
-msgstr ""
+msgstr "大型商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commerce Ship"
-msgstr ""
+msgstr "商業船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Commerce Ship"
-msgstr ""
+msgstr "大型商業船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Galleon"
-msgstr ""
+msgstr "貿易ガレオン船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Exchange Hub"
-msgstr ""
+msgstr "交換ハブ"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Grand Exchange"
-msgstr ""
+msgstr "グランドエクスチェンジ"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commercial Colossus"
-msgstr ""
+msgstr "コマーシャルコロッサス"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Leviathan"
-msgstr ""
+msgstr "リヴァイアサンをトレードする"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Interceptor"
-msgstr ""
+msgstr "インターセプター"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Cruiser"
-msgstr ""
+msgstr "重巡洋艦"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Battlecruiser"
-msgstr ""
+msgstr "巡洋戦艦"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Juggernaut"
-msgstr ""
+msgstr "ジャガーノート"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Titan"
-msgstr ""
+msgstr "タイタン"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Leviathan"
-msgstr ""
-
+msgstr "リヴァイアサン"
 
 # ========== data/scripts/lib/shop.lua ==========
 #: data/scripts/lib/shop.lua:
 msgid "Shop"
-msgstr ""
+msgstr "店"
 
 #: data/scripts/lib/shop.lua:
 msgid "Free restock used. %1% free restocks left."
-msgstr ""
+msgstr "無料再入荷中古品。 無料の再入荷は%1%個残っています。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Shop restocked. Next restock available in 45 minutes."
-msgstr ""
+msgstr "ショップに再入荷しました。次回の再入荷は 45 分以内です。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Restock is on cooldown for %1% minutes and %2% seconds. Please wait."
-msgstr ""
+msgstr "ストックのクールダウンは%1%分と%2%秒かかります。お待ちください。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Click to restock the shop"
 msgstr "クリックしてショップを補充"
 
-
 # ========== data/scripts/lib/tradingmanager.lua ==========
 #: data/scripts/lib/tradingmanager.lua:
-msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
+msgid ""
+"\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in "
+"revenue."
 msgstr "\\s(%d:%d) %s の人口が %d 単位の %s を消費し、¢%s の収益を上げました。"
 
-
-# ========== data/scripts/player/background/simulation/refinecommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
+# ========== data/scripts/player/background/simulation/refinecommand.lua
+# ==========
+# ========== data/scripts/player/background/simulation/scoutcommand.lua
+# ==========
+# ==========
+# data/scripts/player/background/simulation/scoutcommandnotetable.lua
+# ==========
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a massive, dormant gate structure adrift in this sector."
-msgstr ""
-
-#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a colossal ring gate here. It looks ancient and entirely dead."
-msgstr ""
+msgid ""
+"Sensors picked up a massive, dormant gate structure adrift in this sector."
+msgstr "センサーは、このセクターに漂流している巨大な休眠中のゲート構造を検出しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an enormous, deactivated hyperspace gate floating silently in this sector."
-msgstr ""
+msgid ""
+"We found a colossal ring gate here. It looks ancient and entirely dead."
+msgstr "ここで巨大な環状門を発見しました。それは古代で完全に死んでいるように見えます。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a monolithic ancient gate construct. Its original builders are long gone."
-msgstr ""
+msgid ""
+"There is an enormous, deactivated hyperspace gate floating silently in this "
+"sector."
+msgstr "このセクターには、非アクティブ化された巨大なハイパースペース ゲートが静かに浮かんでいます。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Asteroids in a perfect ring formation are emitting bizarre energy readings here. We kept our distance."
-msgstr ""
+msgid ""
+"We mapped a monolithic ancient gate construct. Its original builders are "
+"long gone."
+msgstr "モノリシックな古代の門構造をマッピングしました。元の建設者はとうの昔に亡くなっています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a massive energy shield tethered to a cluster of glowing asteroids."
-msgstr ""
+msgid ""
+"Asteroids in a perfect ring formation are emitting bizarre energy readings "
+"here. We kept our distance."
+msgstr "ここでは、完璧な環を形成している小惑星が奇妙なエネルギー測定値を放出しています。私たちは距離を置きました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a highly suspicious, shielded rock formation in this sector. Proceed with caution."
-msgstr ""
+msgid ""
+"We detected a massive energy shield tethered to a cluster of glowing "
+"asteroids."
+msgstr "私たちは、輝く小惑星の集団に繋がれた巨大なエネルギーシールドを検出しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An unnatural arrangement of asteroids is broadcasting a hostile energy signature in this area."
-msgstr ""
+msgid ""
+"There is a highly suspicious, shielded rock formation in this sector. "
+"Proceed with caution."
+msgstr "この区域には非常に疑わしい、遮蔽された岩層があります。慎重に作業を進めてください。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a group of zealots obsessing over a massive asteroid."
-msgstr ""
+msgid ""
+"An unnatural arrangement of asteroids is broadcasting a hostile energy "
+"signature in this area."
+msgstr "小惑星の不自然な配置により、この地域では敵対的なエネルギーの兆候が発信されています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A strange cult seems to have set up camp around a giant rock in this sector."
-msgstr ""
+msgid ""
+"Sensors picked up a group of zealots obsessing over a massive asteroid."
+msgstr "センサーは、巨大な小惑星に執着する狂信者のグループを捉えました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We intercepted some unhinged radio chatter. Cultists are congregating around an asteroid here."
-msgstr ""
+msgid ""
+"A strange cult seems to have set up camp around a giant rock in this sector."
+msgstr "奇妙なカルトがこの区域の巨大な岩の周りにキャンプを張っているようです。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There are fanatics out here worshipping an asteroid. Space madness is a terrible thing."
-msgstr ""
+msgid ""
+"We intercepted some unhinged radio chatter. Cultists are congregating around"
+" an asteroid here."
+msgstr "私たちは、いくつかの乱れた無線会話を傍受しました。ここの小惑星の周りに狂信徒たちが集まっている。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A localized spatial tear is present here. Looks like a stable wormhole."
-msgstr ""
+msgid ""
+"There are fanatics out here worshipping an asteroid. Space madness is a "
+"terrible thing."
+msgstr "ここには小惑星を崇拝する狂信者たちがいる。宇宙の狂気は恐ろしいものです。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid ""
+"A localized spatial tear is present here. Looks like a stable wormhole."
+msgstr "ここには局所的な空間的裂け目が存在します。安定したワームホールのようです。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners picked up a lone wormhole hidden in the void of this sector."
-msgstr ""
+msgstr "スキャナーは、このセクターの空白に隠された唯一のワームホールを発見しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a wormhole phenomenon active here. Destination unknown."
-msgstr ""
+msgstr "ここではワームホール現象が活発です。目的地不明。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We almost stumbled straight into a spatial anomaly. A wormhole is open in this sector."
-msgstr ""
+msgid ""
+"We almost stumbled straight into a spatial anomaly. A wormhole is open in "
+"this sector."
+msgstr "私たちは危うく空間異常に遭遇するところだった。このセクターにはワームホールが開いています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We intercepted a repeating broadcast from a lone research satellite."
-msgstr ""
+msgstr "私たちは単独の研究衛星からの繰り返し放送を傍受しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An automated science probe is transmitting strange data about asteroids here."
-msgstr ""
+msgid ""
+"An automated science probe is transmitting strange data about asteroids "
+"here."
+msgstr "自動科学探査機がここで小惑星に関する奇妙なデータを送信しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A solitary satellite is pinging complex research telemetry in this sector."
-msgstr ""
+msgid ""
+"A solitary satellite is pinging complex research telemetry in this sector."
+msgstr "孤立した衛星が、この分野の複雑な研究​​テレメトリーに ping を送信しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an abandoned satellite registered to 'M.A.D. Science' looping its logs here."
-msgstr ""
+msgid ""
+"There is an abandoned satellite registered to 'M.A.D. Science' looping its "
+"logs here."
+msgstr "「M.A.D.」に登録されている放棄された衛星があります。 Science のログがここにループしています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We stumbled upon a hidden resistance cell operating completely off the grid."
-msgstr ""
+msgid ""
+"We stumbled upon a hidden resistance cell operating completely off the grid."
+msgstr "私たちは、完全にグリッドから外れて動作している隠れた抵抗細胞に遭遇しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Against all odds, there's a scrappy survivor outpost tucked away in this sector."
-msgstr ""
+msgid ""
+"Against all odds, there's a scrappy survivor outpost tucked away in this "
+"sector."
+msgstr "あらゆる予想に反して、このセクターには残忍な生存者の前哨基地がひっそりと存在しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A heavily concealed resistance faction is holding out against the Xsotan here."
-msgstr ""
+msgid ""
+"A heavily concealed resistance faction is holding out against the Xsotan "
+"here."
+msgstr "ここでは厳重に隠蔽されたレジスタンス派がクソタンに対して抵抗を続けている。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a pocket of survivors out here claiming to be part of a rebellion."
-msgstr ""
+msgid ""
+"We found a pocket of survivors out here claiming to be part of a rebellion."
+msgstr "ここで反乱に参加したと主張する生存者の集団を発見しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An artificial ring of numbered asteroids and strange stations is adrift here."
-msgstr ""
+msgid ""
+"An artificial ring of numbered asteroids and strange stations is adrift "
+"here."
+msgstr "ここには、番号が付けられた小惑星と奇妙なステーションの人工リングが漂っています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a complex arrangement of asteroids with strange numerical markings."
-msgstr ""
+msgid ""
+"We found a complex arrangement of asteroids with strange numerical markings."
+msgstr "私たちは、奇妙な数字のマークが付いた複雑な小惑星の配置を発見しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."
-msgstr ""
+msgid ""
+"A dormant, circular array of asteroids and Xsotan tech is floating in this "
+"sector."
+msgstr "この宙域には、休眠中の円形の小惑星とソタン技術が浮遊している。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."
-msgstr ""
+msgid ""
+"There is a bizarre, ritualistic ring of marked asteroids generating faint "
+"energy spikes."
+msgstr "かすかなエネルギースパイクを生成する、マークされた小惑星の奇妙で儀式的なリングがあります。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show a derelict ship with an intact core. We could restore it to working order."
-msgstr ""
+msgid ""
+"Sensors show a derelict ship with an intact core. We could restore it to "
+"working order."
+msgstr "センサーは無傷の炉心を備えた遺棄船を示しています。正常に動作する状態に戻すことができました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a heavily damaged but structurally sound ship abandoned in this sector."
-msgstr ""
+msgid ""
+"There's a heavily damaged but structurally sound ship abandoned in this "
+"sector."
+msgstr "この区域には、ひどく損傷したが構造的には健全な船が放棄されている。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We located an intact derelict vessel here. With a solid repair crew, she'll fly again."
-msgstr ""
+msgid ""
+"We located an intact derelict vessel here. With a solid repair crew, she'll "
+"fly again."
+msgstr "ここで無傷の遺棄船を発見しました。充実した修理隊員がいれば、彼女は再び飛び立つだろう。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "I spotted a salvageable ship out here. It is practically begging to be claimed and repaired."
-msgstr ""
+msgid ""
+"I spotted a salvageable ship out here. It is practically begging to be "
+"claimed and repaired."
+msgstr "ここで回収可能な船を見つけました。事実上、請求と修理を求められています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive debris fields and wrecked hulls detected in this sector."
-msgstr ""
+msgstr "この区域で大量の瓦礫地帯と大破した船体が検出されました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a graveyard of destroyed ships here. Prime salvaging territory."
-msgstr ""
+msgid ""
+"We mapped a graveyard of destroyed ships here. Prime salvaging territory."
+msgstr "ここに破壊された船の墓場をマッピングしました。主要なサルベージ領域。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is littered with the husks of dead ships."
-msgstr ""
+msgstr "この区域には死んだ船の残骸が散らばっている。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show heavy wreckage concentrations in this area. Bring your salvage lasers."
-msgstr ""
+msgid ""
+"Sensors show heavy wreckage concentrations in this area. Bring your salvage "
+"lasers."
+msgstr "センサーは、この地域に大量の残骸が集中していることを示しています。サルベージレーザーを持参してください。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A massive stash of lost cargo containers is floating freely here."
-msgstr ""
+msgstr "失われた貨物コンテナの大量の隠し場所がここに自由に浮かんでいます。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a dense cluster of abandoned shipping containers in this sector."
-msgstr ""
+msgid ""
+"We detected a dense cluster of abandoned shipping containers in this sector."
+msgstr "この分野で放棄された輸送コンテナが密集していることを検出しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a veritable goldmine of unbranded cargo crates adrift out here."
-msgstr ""
+msgid ""
+"There is a veritable goldmine of unbranded cargo crates adrift out here."
+msgstr "ここにはブランドのない貨物箱が漂流するまさに宝の山があります。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a large, unsecured container cache drifting in the void."
-msgstr ""
+msgid ""
+"Sensors picked up a large, unsecured container cache drifting in the void."
+msgstr "センサーは、空間に漂っている安全ではない大型のコンテナー キャッシュを検出しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We picked up encrypted comms. Looks like a black market hub is nearby."
-msgstr ""
+msgstr "暗号化された通信を入手しました。闇市場の拠点が近くにあるようです。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A shady syndicate operates a hidden Smuggler's Market in this sector."
-msgstr ""
+msgstr "怪しいシンジケートがこの分野で秘密の密輸市場を運営しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors detected a heavily cloaked Smuggler's Hideout operating off the books."
-msgstr ""
+msgid ""
+"Sensors detected a heavily cloaked Smuggler's Hideout operating off the "
+"books."
+msgstr "センサーは厳重に隠蔽された密輸業者の隠れ家が秘密裏に活動していることを検出した。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a hive of scum and villainy tucked away in this area."
-msgstr ""
+msgstr "この地域には、クズと悪党の巣が隠れています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Dense asteroid clusters detected. Good prospects for a mining operation."
-msgstr ""
+msgid ""
+"Dense asteroid clusters detected. Good prospects for a mining operation."
+msgstr "密集した小惑星群が検出されました。採掘作業の見通しは良好です。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a massive, resource-rich asteroid field in this sector."
-msgstr ""
+msgstr "私たちはこの分野で、資源が豊富な大規模な小惑星領域の地図を作成しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Heavy asteroid presence here. Prime territory for our mining lasers."
-msgstr ""
+msgstr "ここに重い小惑星が存在します。当社のマイニングレーザーにとって主要な領域です。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners show a dense field of unmined rocks in this sector."
-msgstr ""
+msgstr "スキャナーは、この地域に未採掘の岩石が密集していることを示しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Hostile pirate signatures detected. They are heavily entrenched in this sector."
-msgstr ""
+msgid ""
+"Hostile pirate signatures detected. They are heavily entrenched in this "
+"sector."
+msgstr "敵対的な海賊の署名が検出されました。彼らはこの分野に深く根付いています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A major pirate syndicate controls this area. Approach with weapons hot."
-msgstr ""
+msgid ""
+"A major pirate syndicate controls this area. Approach with weapons hot."
+msgstr "主要な海賊シンジケートがこの地域を支配しています。熱い武器を持って近づいてください。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors are lighting up with raider transponders. It's a pirate stronghold."
-msgstr ""
+msgid ""
+"Sensors are lighting up with raider transponders. It's a pirate stronghold."
+msgstr "センサーはレイダートランスポンダーで点灯しています。海賊の拠点です。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We spotted a large contingent of pirate scum operating in this sector."
-msgstr ""
+msgstr "私たちは、この分野で活動している海賊のクズの大規模な部隊を発見しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive alien energy spikes detected. The Xsotan are swarming here."
-msgstr ""
+msgstr "大規模なエイリアンのエネルギースパイクが検出されました。 Xsotanがここに群がっています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We barely avoided a massive Xsotan breeding cluster in this sector."
-msgstr ""
+msgstr "私たちは、この分野における大規模なクソタン繁殖クラスターをかろうじて回避しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is heavily infested by the Xsotan menace."
-msgstr ""
+msgstr "このセクターは Xsotan の脅威にひどく侵食されています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Alien bio-signatures confirmed. The Xsotan have claimed this space."
-msgstr ""
+msgstr "エイリアンの生体署名が確認された。 Xsotan はこの空間を主張しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We also picked up a repeating automated beacon on a forgotten frequency."
-msgstr ""
+msgid ""
+"We also picked up a repeating automated beacon on a forgotten frequency."
+msgstr "また、忘れられた周波数で繰り返し自動ビーコンを受信しました。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a strange navigational beacon here transmitting encrypted coordinates."
-msgstr ""
+msgid ""
+"There's a strange navigational beacon here transmitting encrypted "
+"coordinates."
+msgstr "ここには暗号化された座標を送信する奇妙なナビゲーション ビーコンがあります。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Also, a lone beacon is pulsing an 'Exodus' distress signal."
-msgstr ""
+msgstr "また、唯一のビーコンが「エクソダス」救難信号を発信しています。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."
-msgstr ""
+msgid ""
+"Oh, and I noted an ancient beacon broadcasting fragments of a mysterious "
+"message."
+msgstr "ああ、そして私は、古代のビーコンが謎のメッセージの断片を放送していることに気づきました。"
 
-
-# ========== data/scripts/player/background/simulation/simulation.lua ==========
+# ========== data/scripts/player/background/simulation/simulation.lua
+# ==========
 #: data/scripts/player/background/simulation/simulation.lua:
 msgid "Your captains continued working while you were away."
 msgstr "あなたが不在の間も、キャプテンたちは働き続けていました。"
 
-
-# ========== data/scripts/player/background/simulation/simulationutility.lua ==========
+# ========== data/scripts/player/background/simulation/simulationutility.lua
+# ==========
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "I'll have regular data for you as the mission progresses."
 msgstr "ミッションの進行に合わせて、定期的なデータを提供します。"
@@ -639,67 +698,75 @@ msgid "Expect a continual flow of new information."
 msgstr "継続的な新しい情報の流れを期待してください。"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"
-msgstr ""
+msgid ""
+"\\c(d93)We have no deep scan ability and will have to visit every "
+"sector.\\c()"
+msgstr "\\c(d93)私たちにはディープ スキャン機能がないため、すべてのセクターを訪問する必要があります。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(d93)スキャン範囲をさらに深くしないと、移動時間が極端に長くなります。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"
-msgstr ""
+msgid ""
+"\\c(d93)We can't see where hidden mass sectors are without better "
+"radar.\\c()"
+msgstr "\\c(d93)より優れたレーダーがなければ、隠れたマスセクターがどこにあるのかを確認することはできません。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"
-msgstr ""
+msgid ""
+"\\c(dd5)With our weak sensors, we'll waste a lot of time jumping "
+"blindly.\\c()"
+msgstr "\\c(dd5)センサーが弱いと、やみくもにジャンプして多くの時間を無駄にしてしまいます。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(dd5)より詳細なスキャン範囲があれば、はるかに高速になります。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
-msgstr ""
+msgid ""
+"\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
+msgstr "\\c(dd5)より優れたレーダーがなければ、隠れたマスセクターを見つけるのは困難です。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"
-msgstr ""
+msgstr "\\c(0d0)ここには製油所があるので、早くて安全です。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
-msgstr ""
+msgid ""
+"\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
+msgstr "\\c(0d0)このセクターのすぐ近くに倉庫があれば精製は問題ありません。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"
-msgstr ""
+msgstr "\\c(0d0)このセクターの車両基地まで自動操縦できます。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)People are sure to appreciate our work here.\\c()"
-msgstr ""
+msgstr "\\c(0d0)人々はきっとここでの私たちの仕事を高く評価してくれるでしょう。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)This will help a lot of people.\\c()"
-msgstr ""
+msgstr "\\c(0d0)これは多くの人を助けるでしょう。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)Our generosity will help to build trust.\\c()"
-msgstr ""
+msgstr "\\c(0d0)私たちの寛大さは信頼を築くのに役立ちます。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"
-msgstr ""
+msgstr "\\c(dd5)これは私の専門ではありませんが、何ができるか考えてみます。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"
-msgstr ""
+msgstr "\\c(dd5)商人ならもっとうまくやってくれるでしょうが、私もやってみます。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)No merchants available, commander?\\c()"
-msgstr ""
+msgstr "\\c(dd5)利用できる商人はいません、指揮官?\\c()"
 
-
-# ========== data/scripts/player/background/simulation/tradecommand.lua ==========
+# ========== data/scripts/player/background/simulation/tradecommand.lua
+# ==========
 #: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Directly deposit returns as soon as they're available"
 msgstr "利益が利用可能になり次第、直接預け入れる"
@@ -712,12 +779,13 @@ msgstr "即時配達"
 msgid "Trade most of this contract's profit for increased reputation gain"
 msgstr "この契約の利益のほとんどを、より高い評判の獲得と交換する"
 
-
-# ========== data/scripts/player/background/simulation/travelcommand.lua ==========
+# ========== data/scripts/player/background/simulation/travelcommand.lua
+# ==========
 #: data/scripts/player/background/simulation/travelcommand.lua:
-msgid "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"
-msgstr ""
-
+msgid ""
+"\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\c()"
+msgstr "\\c(0d0) 私はこれらの空間ルートを手の甲のように知っています。信じられないほどの時間を作りましょう。\\c()"
 
 # ========== data/scripts/player/map/mapcommands.lua ==========
 #: data/scripts/player/map/mapcommands.lua:
@@ -737,12 +805,10 @@ msgstr "サルベージ"
 msgid "Loop"
 msgstr "ループ"
 
-
 # ========== data/scripts/player/map/maproutes.lua ==========
 #: data/scripts/player/map/maproutes.lua:
 msgid "[${i}] Repair"
-msgstr ""
-
+msgstr "[${i}] 修理"
 
 # ========== data/scripts/player/ui/command_center_tab.lua ==========
 #: data/scripts/player/ui/command_center_tab.lua:
@@ -829,7 +895,6 @@ msgstr "破壊された"
 msgid "In-Sector"
 msgstr "セクター内"
 
-
 # ========== data/scripts/player/ui/factory_overview_tab.lua ==========
 #: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Factory Overview"
@@ -871,7 +936,6 @@ msgstr "アライアンス： "
 msgid "Sort by "
 msgstr "並べ替え基準 "
 
-
 # ========== data/scripts/player/ui/playerbulletinboard.lua ==========
 #: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "Filter:"
@@ -885,40 +949,38 @@ msgstr "ソース"
 msgid "No missions available in this sector!"
 msgstr "このセクターには利用可能なミッションはありません！"
 
-
 # ========== data/scripts/player/ui/resourcedisplay.lua ==========
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Resources Display"
-msgstr ""
+msgstr "リソースの表示"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Enable UI movement"
-msgstr ""
+msgstr "UIの動きを有効にする"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Reset UI position"
-msgstr ""
+msgstr "UIの位置をリセット"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show current ship cargo capacity"
-msgstr ""
+msgstr "現在の船舶の貨物積載量を表示します"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show currently used and total inventory slots"
-msgstr ""
+msgstr "現在使用されている在庫スロットと合計の在庫スロットを表示します"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show inventory capacity for alliance/ship at the same time"
-msgstr ""
+msgstr "同盟/船の在庫容量を同時に表示"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show alliance resources when piloting an alliance ship"
-msgstr ""
+msgstr "同盟船を操縦するときに同盟リソースを表示する"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Inventory Slots"
-msgstr ""
-
+msgstr "インベントリスロット"
 
 # ========== data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -973,10 +1035,1137 @@ msgstr "スクラップ"
 msgid "Detritus"
 msgstr "岩屑"
 
-
 # ========== data/scripts/sector/managestationincomes.lua ==========
-
 # ========== data/scripts/systems/transportersoftware.lua ==========
 #: data/scripts/systems/transportersoftware.lua:
 msgid " (+ scaled by Transporter Blocks)"
+msgstr "(+ Transporter Blocks によってスケーリング)"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
 msgstr ""
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Incorrect icon"
+msgstr "\", 1, \"アイコンが正しくありません"
+
+#: data/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Maximum amount of icons reached"
+msgstr "\", 1, \"アイコンの最大数に達しました"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Missing hangar."
+msgstr "\", 1, \"格納庫がなくなった。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in hangar."
+msgstr "\", 1, \"格納庫に十分なスペースがありません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in squad."
+msgstr "\", 1, \"分隊に十分なスペースがありません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space on the other craft."
+msgstr "\", 1, \"他の船には十分なスペースがありません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"The fighter type doesn't match the squad type."
+msgstr "\", 1,\"戦闘機のタイプが分隊のタイプと一致しません。"
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid ""
+"\", 1, \"You don't have permission to do that in the name of your alliance."
+msgstr "\", 1, \"同盟の名においてそれを行う許可はありません。"
+
+#: data/scripts/player/background/simulation/simulation.lua
+msgid "\", 3, \"Your captains continued working while you were away."
+msgstr "\", 3, \"あなたが不在の間も、船長たちは仕事を続けました。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free space in torpedo shaft %1%."
+msgstr "\", ChatMessageType.Error, \"魚雷シャフト%1%に十分な空きスペースがありません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free torpedo storage."
+msgstr "\", ChatMessageType.Error, \"空き魚雷保管庫が不足しています。"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"\", ChatMessageType.Error, \"Transport capacity is already at maximum "
+"(${c}/${m})."
+msgstr "\", ChatMessageType.Error, \"トランスポート容量はすでに最大値 (${c}/${m}) です。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You don't own this craft."
+msgstr "\", ChatMessageType.Error, \"あなたはこのクラフトを所有していません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You're too far away."
+msgstr "\", ChatMessageType.Error, \"遠すぎます。"
+
+#: data/scripts/lib/shop.lua
+msgid "#"
+msgstr ""
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${amount} ${good}"
+msgstr "${amount}${good}"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "${c}${money}"
+msgstr "${c}${money}"
+
+#: data/scripts/entity/gate.lua
+msgid "${dir} Gate to ${sector}"
+msgstr "${dir}${sector}へのゲート"
+
+#: data/scripts/entity/bulletinboard.lua
+msgid "${entity} Bulletin Board"
+msgstr "${entity}掲示板"
+
+#: data/scripts/lib/shop.lua
+msgid "${percentage} OFF!"
+msgstr "${percentage}オフ!"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession}"
+msgstr "${profession}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession} (Specialist level ${level})"
+msgstr "${profession}(スペシャリストレベル${level})"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "${x} : ${y} (dist: ${num})"
+msgstr "${x}:${y}(距離:${num})"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"%s cannot be held responsible for any damage to ships or deaths caused by "
+"salvaging."
+msgstr "%sは、引き揚げによって生じた船舶への損害または死亡については責任を負いません。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */<< Transfer All"
+msgstr "/* 商品 */<< 全て転送"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */Transfer All >>"
+msgstr "/*グッズ*/全て転送>>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer"
+msgstr "<< 転送"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer All"
+msgstr "<< すべて転送"
+
+#: data/scripts/lib/shop.lua
+msgid "??"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Accept"
+msgstr "受け入れる"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "All"
+msgstr "全て"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Alliance"
+msgstr "アライアンス"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Apply"
+msgstr "適用する"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Attack\", \"Attack Enemies"
+msgstr "攻撃」、「敵を攻撃」"
+
+#: data/scripts/lib/shop.lua
+msgid "BUY NOW!"
+msgstr "今すぐ購入！"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Background Opacity (Min: 0.0, Max: 1.0)"
+msgstr "背景の不透明度 (最小: 0.0、最大: 1.0)"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Best wares in the galaxy."
+msgstr "銀河系で最高の商品。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Boss Swoks ${num}"
+msgstr "ボス・スウォーク${num}"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Bosses\", \"Bosses"
+msgstr "ボス」、「ボス」"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Brand new offer: We now dismantle turrets into parts!"
+msgstr "新しいオファー: 砲塔をパーツに分解できるようになりました。"
+
+#: data/scripts/entity/bulletinboard.lua
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Bulletin Board"
+msgstr "掲示板"
+
+#: data/scripts/lib/shop.lua
+msgid "Buy"
+msgstr "買う"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Buy License"
+msgstr "ライセンスを購入する"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Buy a temporary salvaging license of maximum 60 minutes here. This license "
+"makes it legal to damage or mine wreckages in this sector."
+msgstr ""
+"ここで最大 60 分の一時的なサルベージ ライセンスを購入します。このライセンスにより、この分野で残骸を損傷したり採掘したりすることが合法になります。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Buy turrets! Your crew will thank you for it!"
+msgstr "砲塔を購入しましょう！あなたの乗組員はあなたに感謝するでしょう！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Captain: ${name}"
+msgstr "船長:${name}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Cargo"
+msgstr "貨物"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Cargo Hold"
+msgstr "貨物倉"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Casino"
+msgstr "カジノ"
+
+#: data/scripts/player/background/simulation/tradecommand.lua
+msgid "Charity mission"
+msgstr "チャリティーミッション"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Compact number formatting (e.g. 1.5M)"
+msgstr "コンパクトな数値フォーマット (例: 1.5M)"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Confirm Dismantling"
+msgstr "解体の確認"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Credits"
+msgstr "クレジット"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Crew"
+msgstr "クルー"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Description"
+msgstr "説明"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Difficulty"
+msgstr "困難"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle"
+msgstr "解体する"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle Trash"
+msgstr "ゴミの解体"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Don't like your ship anymore? We'll turn it into scrap and even give you "
+"some Credits for it!"
+msgstr "もうあなたの船が気に入らないですか？それをスクラップにして、クレジットも差し上げます。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Don't make any trouble."
+msgstr "迷惑をかけないでください。"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "E /*direction*/"
+msgstr "E /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ENE /*direction*/"
+msgstr "ENE /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ESE /*direction*/"
+msgstr "ESE /*方向*/"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"EXPERIMENTAL: Highlights faction territories with various colors allowing to"
+" distinguish them from other nearby factions.\\nFactions won't have unique "
+"colors!"
+msgstr "実験的: 派閥の領土をさまざまな色で強調表示し、近くの他の派閥と区別できるようにします。\\n派閥には固有の色がありません。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Easy salvage, easy profit! Salvaging licenses for sale!"
+msgstr "簡単に回収、簡単に利益！サルベージライセンスを販売中！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit icon"
+msgstr "編集アイコン"
+
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit selected color"
+msgstr "選択した色を編集する"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Enable Resource Display HUD"
+msgstr "リソース表示 HUD を有効にする"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Equipment Dock"
+msgstr "機器ドック"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Equipment of all sorts, for a great price! No refunds."
+msgstr "あらゆる装備品をお買い得価格で！返金はありません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"Everything's legal here, of course. As long as you don't look too closely..."
+msgstr "もちろん、ここではすべてが合法です。よほどよく見ない限りは…"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Exchange Torpedoes"
+msgstr "魚雷を交換する"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Faction Colors"
+msgstr "派閥の色"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Fighter Factory"
+msgstr "戦闘機工場"
+
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighter Merchant"
+msgstr "戦闘機商人"
+
+#: data/scripts/entity/transfercrewgoods.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighters"
+msgstr "ファイターズ"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Get a salvaging license now and try your luck with the wreckages!"
+msgstr "今すぐサルベージライセンスを取得して、残骸の回収に挑戦してください!"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Gunners not included."
+msgstr "ガンナーは付属しません。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Guns Guns Guns!"
+msgstr "ガンズガンズガンズ！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hazard Zones"
+msgstr "危険区域"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hide icons"
+msgstr "アイコンを非表示にする"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight Alliance Notes"
+msgstr "アライアンスノートをハイライトする"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight alliance notes with magenta at the bottom right corner"
+msgstr "右下隅にある提携メモをマゼンタで強調表示します"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "I'd like to see something brand new for once."
+msgstr "一度は新品を見てみたいと思います。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "I'm sure you'll find what you're looking for."
+msgstr "探しているものがきっと見つかります。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "If you get in trouble, it's your own fault."
+msgstr "困ったことがあったら自己責任です。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Illegal salvaging will be punished by destruction. Buy a salvaging license "
+"or there will be consequences."
+msgstr "違法な引き揚げは破壊によって罰せられます。サルベージライセンスを購入しないと、何らかの結果が生じるでしょう。"
+
+#: data/scripts/lib/shop.lua
+msgid "LIMITED TIME OFFER!"
+msgstr "期間限定オファー！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Lock Radar Signatures"
+msgstr "レーダー署名をロックする"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Loop\", \"Loop"
+msgstr "ループ」、「ループ」"
+
+#: data/scripts/lib/shop.lua
+msgid "MAT"
+msgstr "マット"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Makes radar blips always visible"
+msgstr "レーダーブリップを常に見えるようにします"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"Marks Hazard Zone sectors with a red rectangle in the bottom right corner"
+msgstr "ハザードゾーンのセクターを右下隅の赤い四角形でマークします。"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Military Outpost"
+msgstr "軍事前哨基地"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Mine\", \"Mine"
+msgstr "私のもの」、「私のもの"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Minutes"
+msgstr "分"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Mobile Energy Lab"
+msgstr "モバイルエネルギーラボ"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "N /*direction*/"
+msgstr "N /*方向*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "NAME"
+msgstr "名前"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NE /*direction*/"
+msgstr "北東 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNE /*direction*/"
+msgstr "NNE /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNW /*direction*/"
+msgstr "北西北西 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NW /*direction*/"
+msgstr "北西 /*方向*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Name"
+msgstr "名前"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "New Squad"
+msgstr "新しい分隊"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "No refunds."
+msgstr "返金はありません。"
+
+#: data/scripts/entity/TrashMan.lua
+msgid "None"
+msgstr "なし"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Not enough resources? Get a mining laser and change that!"
+msgstr "リソースが足りませんか?マイニングレーザーを手に入れて状況を変えましょう!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "OK"
+msgstr "わかりました"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Off"
+msgstr "オフ"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Oh. That must have gotten lost."
+msgstr "おお。それはきっと道に迷ってしまったのだろう。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "On"
+msgstr "の上"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Only the best turrets, subsystems and fighters!"
+msgstr "最高の砲塔、サブシステム、戦闘機のみです。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Our fighters are ready for you! Pilots not included."
+msgstr "私たちの戦闘機があなたのために準備ができています!パイロットは含まれません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "PRICE/U"
+msgstr "価格/U"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Patrol\", \"Patrol Sector"
+msgstr "パトロール」、「パトロール部門」"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Pilots not included."
+msgstr "パイロットは含まれません。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Player"
+msgstr "プレーヤー"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Please, do come again."
+msgstr "ぜひまた来てください。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Problems with pirates? No more with our weaponry!"
+msgstr "海賊との問題？私たちの武器はもう必要ありません!"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Profit"
+msgstr "利益"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Pssst! You wanna take a look?"
+msgstr "くっそー！見てみたいですか？"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Recall Ship"
+msgstr "船のリコール"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "RefineOres\", \"Refine Ores"
+msgstr "鉱石の精錬」、「鉱石の精錬」"
+
+#: data/scripts/player/ui/command_center_tab.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Refresh"
+msgstr "リフレッシュ"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Remaining license time: ${time} Minutes"
+msgstr "残りのライセンス時間:${time}分"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Repair Dock"
+msgstr "修理ドック"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Repair\", \"Repair"
+msgstr "修理」、「修理」"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Research Station"
+msgstr "研究ステーション"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/player/background/simulation/refinecommand.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Resource Depot"
+msgstr "資源倉庫"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Resources\", \"Resources"
+msgstr "リソース」、「リソース」"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Reward"
+msgstr "褒美"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "S /*direction*/"
+msgstr "S /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SE /*direction*/"
+msgstr "南東 /*方向*/"
+
+#: data/scripts/lib/shop.lua
+msgid "SOLD OUT!"
+msgstr "完売！"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER (30% OFF)"
+msgstr "特別オファー (30% オフ)"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER: -30% OFF"
+msgstr "特別オファー: -30% オフ"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSE /*direction*/"
+msgstr "SSE /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSW /*direction*/"
+msgstr "SSW /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SW /*direction*/"
+msgstr "SW /*方向*/"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Salvage\", \"Salvage"
+msgstr "サルベージ」、「サルベージ」"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Salvaging /*UI Tab title*/"
+msgstr "/*UI タブのタイトル*/をサルベージ中"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging or damaging wreckages in this sector is illegal. Please buy a "
+"salvaging license."
+msgstr "この分野で残骸を回収したり損傷したりすることは違法です。サルベージライセンスを購入してください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging wreckages in this sector is forbidden. Please buy a salvaging "
+"license."
+msgstr "この区域での残骸の回収は禁止されています。サルベージライセンスを購入してください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Scrapyard"
+msgstr "スクラップヤード"
+
+#: data/scripts/entity/TrashMan.lua
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not"
+" be destroyed or immediately sold. Instead, the next time you visit the "
+"appropriate merchant they can be sold with the merchant's 'Sell Trash' "
+"button.\\nItems that are marked as favorites will not get marked for trash!"
+msgstr ""
+"ゴミ箱としてマークする在庫アイテムのタイプを選択します。これらのアイテムは破棄されたり、すぐに売却されたりすることはありません。代わりに、次回適切な販売者を訪問するときに、販売者の"
+" [ゴミ箱を販売] ボタンを使用して販売できます。\\nお気に入りとしてマークされたアイテムはゴミ箱としてマークされません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "Sell"
+msgstr "売る"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Sell Ship"
+msgstr "船を売る"
+
+#: data/scripts/lib/shop.lua
+msgid "Sell Trash"
+msgstr "ゴミを売る"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Shafts"
+msgstr "シャフト"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Ship"
+msgstr "船"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Ship Value:"
+msgstr "出荷価格:"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Shipyard"
+msgstr "造船所"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Blueprints"
+msgstr "ブループリントを表示する"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Favorited Items"
+msgstr "お気に入りのアイテムを表示"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show Galaxy Map QoL options"
+msgstr "Galaxy Map QoL オプションを表示"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Items"
+msgstr "アイテムを表示"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Subsystems"
+msgstr "サブシステムの表示"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Turrets"
+msgstr "タレットを表示する"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show overlay"
+msgstr "オーバーレイを表示する"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Show the Xsotan who's boss with our chain guns!"
+msgstr "チェーンガンで誰がボスなのかをクソタンに見せつけろ！"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Smuggler's Market"
+msgstr "密輸業者の市場"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Status"
+msgstr "状態"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Storage"
+msgstr "ストレージ"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Subsystems"
+msgstr "サブシステム"
+
+#: data/scripts/lib/shop.lua
+msgid "TECH"
+msgstr "テック"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Tech"
+msgstr "技術"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "TechLevels\", \"Tech Level"
+msgstr "技術レベル」、「技術レベル」"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Text"
+msgstr "文章"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for choosing %1%'s salvage services. We have you listed as an "
+"licensee for the next %2% minutes."
+msgstr "%1%のサルベージ サービスをお選びいただきありがとうございます。今後%2%分間、ライセンシーとしてリストに掲載されます。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for your continuing trust in us. We updated your salvaging license"
+" to %s minutes."
+msgstr "今後とも弊社を信頼していただき、誠にありがとうございます。サルベージ ライセンスを%s分に更新しました。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "That's sold out, sorry."
+msgstr "完売しました、ごめんなさい。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "The AI"
+msgstr "AI"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "This action is irreversible."
+msgstr "この操作は元に戻すことができません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "This is a free station, where everybody can mind their own business."
+msgstr "ここは誰もが自分の用事を気にすることができる無料のステーションです。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"This is your last warning. If you do not stop salvaging without a license, "
+"you will be destroyed."
+msgstr "これが最後の警告です。無許可でサルベージをやめないと破壊されます。"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr "このミッションは、Black Market DLC の所有者のみが利用できます。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Tired of being chronically unarmed? We're here for you!"
+msgstr "慢性的に非武装であることにうんざりしていませんか?私たちはあなたのためにここにいます！"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Torpedoes"
+msgstr "魚雷"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Trade Equipment"
+msgstr "貿易機器"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer >>"
+msgstr "転送 >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All >>"
+msgstr "すべて転送 >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All Torpedoes of This Shaft"
+msgstr "このシャフトのすべての魚雷を転送"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew, Cargo and Fighters"
+msgstr "乗組員、貨物、戦闘機の移送"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew/Cargo/Fighters"
+msgstr "乗組員/貨物/戦闘機の移送"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Squad"
+msgstr "転送部隊"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Travel Hub"
+msgstr "トラベルハブ"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Turret Dismantling /*UI Tab title*/"
+msgstr "タレットの解体 /*UI タブのタイトル*/"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Turret Factory"
+msgstr "タレットファクトリー"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turret Merchant"
+msgstr "タレット商人"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turrets"
+msgstr "タレット"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Type"
+msgstr "タイプ"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand"
+msgstr "ノーブランド"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand Stolen Goods"
+msgstr "ノーブランドの盗品"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Undo\",   \"Undo"
+msgstr "元に戻す」、「元に戻す"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"Upgrade to allow up to ${volume} transported volume per shuttle every "
+"${seconds} seconds."
+msgstr "アップグレードすると、${seconds}秒ごとにシャトルごとに最大${volume}個の輸送量が可能になります。"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "W /*direction*/"
+msgstr "W /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WNW /*direction*/"
+msgstr "西北西 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WSW /*direction*/"
+msgstr "西南西 /*方向*/"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning"
+msgstr "警告"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning! You will not get refunds for crews or turrets!"
+msgstr "警告！乗組員や砲塔の払い戻しはありません。"
+
+#: data/scripts/lib/shop.lua
+msgid "We are completely sold out."
+msgstr "完売致しました。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "We do Secured Containers only, we don't want no bug infestations."
+msgstr "私たちはセキュリティで保護されたコンテナのみを使用しており、バグの蔓延を望んでいません。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"We don't take any responsibility for any lost limbs while using the turret "
+"dismantler."
+msgstr "タレット解体機の使用中に手足が失われた場合、当社は一切の責任を負いません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Welcome to the true, free market."
+msgstr "真の自由市場へようこそ。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What do you want?"
+msgstr "なんでしょう？"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What's up?"
+msgstr "どうしたの？"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckage"
+msgstr "残骸"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckages"
+msgstr "残骸"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Wreckages in this sector are the property of %s. Please buy a salvaging "
+"license."
+msgstr "このセクターの残骸は%sの所有物です。サルベージライセンスを購入してください。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "YOU"
+msgstr "あなた"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You bring 'em, we crack 'em. Secured Containers only."
+msgstr "あなたがそれらを持ってきて、私たちがそれらを解読します。安全なコンテナのみ。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You can't sell ${displayPlural} here."
+msgstr "ここでは${displayPlural}は売れません。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You don't have a valid license."
+msgstr "有効なライセンスを持っていません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s on your ship."
+msgstr "あなたの船には%sがありません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s to sell!"
+msgstr "売るべき%sがありません!"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any of this!"
+msgstr "あなたはこれを何も持っていません！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any stolen %s!"
+msgstr "盗まれた%sはありません!"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"You have been warned. You will be considered an enemy of %s if you do not "
+"stop your illegal activities."
+msgstr "あなたは警告を受けました。違法行為をやめない場合、あなたは%sの敵とみなされます。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have no stolen goods on you."
+msgstr "あなたは盗品を持っていません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have to be docked to the station to unbrand goods!"
+msgstr "ノーブランド品を購入するにはステーションに停泊する必要があります。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You need a salvaging license for this sector."
+msgstr "この分野のサルベージライセンスが必要です。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You will not get refunds for crews or turrets!"
+msgstr "乗組員や砲塔の払い戻しはありません。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"You'll find members for nearly everything on this station, if the coin is "
+"right."
+msgstr "コインが適切であれば、このステーションではほぼすべての会員を見つけることができます。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license has expired. You may no longer salvage in this area."
+msgstr "サルベージライセンスの有効期限が切れています。このエリアではもうサルベージできません。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s has expired. You may no longer salvage in this "
+"area."
+msgstr "%sのサルベージ ライセンスの有効期限が切れました。このエリアではもうサルベージできません。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 10 seconds."
+msgstr "%sのサルベージ ライセンスは 10 秒以内に期限切れになります。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 2 minutes. Renew it immediately"
+" and save yourself some trouble!"
+msgstr "%sのサルベージ ライセンスは 2 分以内に期限切れになります。すぐに更新して、手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 20 seconds."
+msgstr "%sのサルベージ ライセンスは 20 秒以内に期限切れになります。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr "%sのサルベージ ライセンスは 30 秒以内に期限切れになります。更新して手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 60 seconds. Renew it NOW and "
+"save yourself some trouble!"
+msgstr "%sのサルベージ ライセンスは 60 秒以内に期限切れになります。今すぐ更新して、手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 10 seconds."
+msgstr "サルベージ ライセンスは 10 秒以内に期限切れになります。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 2 minutes. Renew it immediately and "
+"save yourself some trouble!"
+msgstr "サルベージ ライセンスは 2 分で期限切れになります。すぐに更新して、手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 20 seconds."
+msgstr "サルベージ ライセンスは 20 秒以内に期限切れになります。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr "サルベージ ライセンスは 30 秒以内に期限切れになります。更新して手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 60 seconds. Renew it NOW and save "
+"yourself some trouble!"
+msgstr "サルベージ ライセンスは 60 秒以内に期限切れになります。今すぐ更新して、手間を省いてください。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your ship will be dismantled and you will be returned to your drone."
+msgstr "船は解体され、ドローンに戻されます。"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "[A]  /* Alliance resource prefix */"
+msgstr "[A] /* アライアンス リソースのプレフィックス */"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "[Drag & Drop / Shift Click] Transfer Passengers"
+msgstr "[ドラッグ＆ドロップ / Shift クリック] 乗客の移動"
+
+#: data/scripts/player/background/simulation/travelcommand.lua
+msgid ""
+"\\\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\\\c()"
+msgstr "\\\\c(0d0)私はこれらの空間ルートを手の甲のように知っています。信じられないほどの時間を作りましょう。\\\\c()"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "\\n Hazard Zone"
+msgstr "\\n 危険区域"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "data/textures/icons/WreckagesTab.png\", \"Wreckages"
+msgstr "data/textures/icons/WreckagesTab.png\",\"残骸"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/crew.png\", \"Exchange Crew"
+msgstr "data/textures/icons/crew.png\",\"交換クルー"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/domino-mask.png\", \"Unbrand Stolen Goods"
+msgstr "data/textures/icons/domino-mask.png\",\"ノーブランドの盗品"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/fighter.png\", \"Exchange Fighters"
+msgstr "data/textures/icons/fighter.png\",\"ファイターを交換する"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-arrows.png\", \"Buy a salvaging license."
+msgstr "data/textures/icons/recycle-arrows.png\",\"サルベージ ライセンスを購入します。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-turret.png\", \"Dismantle turrets into goods."
+msgstr "data/textures/icons/recycle-turret.png\",\"タレットを商品に分解します。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/sell-ship.png\", \"Sell your ship to the scrapyard."
+msgstr "data/textures/icons/sell-ship.png\",\"船をスクラップ置き場に売りましょう。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/sell.png\", \"Sell Stolen Goods"
+msgstr "data/textures/icons/sell.png\",\"盗品を売る"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/trade.png\", \"Exchange Cargo"
+msgstr "data/textures/icons/trade.png\",\"貨物の交換"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "data/textures/icons/warning-system.png\",\"Bulletin Board"
+msgstr "data/textures/icons/warning-system.png\",\"掲示板"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "¢${money}"
+msgstr "¢${money}"

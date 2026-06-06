@@ -402,16 +402,17 @@ Simulates organic civilian traffic loops and service utility consumption across 
 
 </details>
 
-### 23) Galaxy Map Hotkeys & Smart Centering
+### 23) Galaxy Map Enhancements & QoL
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Adds highly requested quality-of-life hotkeys directly to the galaxy map for faster fleet management and navigation.
+The Galaxy Map has received massive visual and mechanical upgrades to reduce friction when planning out trade routes or organizing your fleets.
 
 **Details:**
 
+- **Custom Notes & Icons:** You can now freely place customizable icons, draw colorful rectangles, and leave persistent "sticky notes" directly on your galaxy map to mark hazard zones, lucrative trade routes, or alliance borders.
 - **[T] Switch to Selected:** Instantly teleport to and take control of the ship you currently have selected on the galaxy map.
 - **[Shift + C] Center on Home:** Instantly centers the galaxy map camera on your home sector. Dynamically centers on your Alliance home sector if you are piloting an alliance ship, or your personal home sector if piloting a personal ship.
 
@@ -688,3 +689,18 @@ In vanilla Avorion, illegal and stolen loops often felt under-rewarded due to hi
 
 </details>
 
+
+
+### 24) Full Localization Support
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Provides native language support for non-English players.
+
+**Details:**
+
+- **7 Supported Languages:** Cosmic Overhaul has been meticulously translated and integrated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese. Every custom UI, captain interaction, and background logic prompt will seamlessly display in the player's native language.
+
+</details>

@@ -1,4 +1,7 @@
 # ========== data/scripts/entity/TrashMan.lua ==========
+msgid ""
+msgstr ""
+
 #: data/scripts/entity/TrashMan.lua:
 msgid "Trash Man"
 msgstr "垃圾收集者"
@@ -12,8 +15,12 @@ msgid "Turrets to trash"
 msgstr "要丢弃的炮塔"
 
 #: data/scripts/entity/TrashMan.lua:
-msgid "Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\nItems that are marked as favorites will not get marked for trash!"
-msgstr "选择要将哪些类型的库存物品标记为垃圾。这些物品不会被立即销毁或出售。相反，下次您访问合适的商人时，可以使用商人的“出售垃圾”按钮将它们出售。\n标记为收藏的物品不会被标记为垃圾！"
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not be destroyed or immediately sold. Instead, the next time you visit the appropriate merchant they can be sold with the merchant's 'Sell Trash' button.\n"
+"Items that are marked as favorites will not get marked for trash!"
+msgstr ""
+"选择要将哪些类型的库存物品标记为垃圾。这些物品不会被立即销毁或出售。相反，下次您访问合适的商人时，可以使用商人的“出售垃圾”按钮将它们出售。\n"
+"标记为收藏的物品不会被标记为垃圾！"
 
 #: data/scripts/entity/TrashMan.lua:
 msgid "Mark"
@@ -43,19 +50,14 @@ msgstr "最小：1"
 msgid "Max: 52"
 msgstr "最大：52"
 
-
 # ========== data/scripts/entity/ancientgate.lua ==========
 #: data/scripts/entity/ancientgate.lua:
 msgid "${dir} Ancient Gate to ${sector}"
 msgstr "${dir} 通往 ${sector} 的远古星门"
 
-
 # ========== data/scripts/entity/bulletinboard.lua ==========
-
 # ========== data/scripts/entity/gate.lua ==========
-
 # ========== data/scripts/entity/merchants/equipmentdock.lua ==========
-
 # ========== data/scripts/entity/merchants/factory.lua ==========
 #: data/scripts/entity/merchants/factory.lua:
 msgid " "
@@ -63,569 +65,626 @@ msgstr ""
 
 #: data/scripts/entity/merchants/factory.lua:
 msgid "Transport capacity is already at maximum (${c}/${m})."
-msgstr ""
-
-#: data/scripts/entity/merchants/factory.lua:
-msgid ""
-msgstr ""
-
+msgstr "运输能力已达到最大 (${c}/${m})。"
 
 # ========== data/scripts/entity/merchants/fightermerchant.lua ==========
-
 # ========== data/scripts/entity/merchants/managestationincomes.lua ==========
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a system"
-msgstr ""
+msgstr "一个系统"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "a turret"
-msgstr ""
+msgstr "一个炮塔"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in taxes from Resource Depot ${station}."
-msgstr ""
+msgstr "从资源库${station}获得${amount}税金。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
-msgid "Received ${amount} in unbranding fees from Smuggler's Market ${station}."
-msgstr ""
+msgid ""
+"Received ${amount} in unbranding fees from Smuggler's Market ${station}."
+msgstr "从走私者市场${station}收到${amount}的去品牌费。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in gambling income from Casino ${station}."
-msgstr ""
+msgstr "从赌场${station}获得${amount}的赌博收入。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Repair Dock ${station}."
-msgstr ""
+msgstr "从维修码头${station}收到${amount}维修费。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in repair fees from Shipyard ${station}."
-msgstr ""
+msgstr "从造船厂${station}收到${amount}修理费。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in travel fees from Travel Hub ${station}."
-msgstr ""
+msgstr "从 Travel Hub${station}获得${amount}的旅行费。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Equipment Dock ${station}."
-msgstr ""
+msgstr "从设备码头${station}收到${amount}税款。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Research Station ${station}."
-msgstr ""
+msgstr "从研究站${station}收到${amount}税款。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Received ${amount} in taxes from Military Outpost ${station}."
-msgstr ""
+msgstr "从军事前哨${station}收到${amount}的税款。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Gained ${amount} in taxes from Turret Factory ${station}."
-msgstr ""
+msgstr "从炮塔工厂${station}获得${amount}税收。"
 
 #: data/scripts/entity/merchants/managestationincomes.lua:
 #: data/scripts/sector/managestationincomes.lua:
 msgid "Earned ${amount} in fighter costs from Fighter Factory ${station}."
-msgstr ""
-
+msgstr "从战斗机工厂${station}获得${amount}的战斗机成本。"
 
 # ========== data/scripts/entity/merchants/scrapyard.lua ==========
-
 # ========== data/scripts/entity/merchants/smugglersmarket.lua ==========
-
 # ========== data/scripts/entity/merchants/turretmerchant.lua ==========
-
 # ========== data/scripts/entity/orderchain.lua ==========
-
 # ========== data/scripts/entity/transfercrewgoods.lua ==========
 #: data/scripts/entity/transfercrewgoods.lua:
 msgid "Search Cargo..."
-msgstr ""
-
+msgstr "搜索货物..."
 
 # ========== data/scripts/lib/shiputility.lua ==========
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Prospector"
-msgstr ""
+msgstr "光探矿者"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Prospector"
-msgstr ""
+msgstr "探矿者"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Prospector"
-msgstr ""
+msgstr "重型探矿者"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Medium Miner"
-msgstr ""
+msgstr "中型矿工"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Mining Barge"
-msgstr ""
+msgstr "采矿驳船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Mining Barge"
-msgstr ""
+msgstr "重型采矿驳船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Extraction Vessel"
-msgstr ""
+msgstr "提取容器"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Extraction Vessel"
-msgstr ""
+msgstr "重型提取容器"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Asteroid Crusher"
-msgstr ""
+msgstr "小行星破碎机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Planet Cracker"
-msgstr ""
+msgstr "行星饼干"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Cargo Shuttle"
-msgstr ""
+msgstr "货运班车"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Loader"
-msgstr ""
+msgstr "轻型装载机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Loader"
-msgstr ""
+msgstr "重型装载机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Transporter"
-msgstr ""
+msgstr "轻型运输车"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Transporter"
-msgstr ""
+msgstr "重型运输车"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Freighter"
-msgstr ""
+msgstr "轻型货机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Freighter"
-msgstr ""
+msgstr "重型货机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Superfreighter"
-msgstr ""
+msgstr "超级货机"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Logistics Leviathan"
-msgstr ""
+msgstr "物流利维坦"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Light Courier"
-msgstr ""
+msgstr "光信使"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Courier"
-msgstr ""
+msgstr "导游"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Courier"
-msgstr ""
+msgstr "重货快递"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Vessel"
-msgstr ""
+msgstr "贸易船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Merchant Vessel"
-msgstr ""
+msgstr "商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Merchant Vessel"
-msgstr ""
+msgstr "重型商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commerce Ship"
-msgstr ""
+msgstr "商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Commerce Ship"
-msgstr ""
+msgstr "重型商船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Galleon"
-msgstr ""
+msgstr "贸易帆船"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Exchange Hub"
-msgstr ""
+msgstr "交换中心"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Grand Exchange"
-msgstr ""
+msgstr "盛大交换"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Commercial Colossus"
-msgstr ""
+msgstr "商业巨头"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Trade Leviathan"
-msgstr ""
+msgstr "贸易利维坦"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Interceptor"
-msgstr ""
+msgstr "拦截器"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Heavy Cruiser"
-msgstr ""
+msgstr "重型巡洋舰"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Battlecruiser"
-msgstr ""
+msgstr "战列巡洋舰"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Juggernaut"
-msgstr ""
+msgstr "主宰"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Titan"
-msgstr ""
+msgstr "泰坦"
 
 #: data/scripts/lib/shiputility.lua:
 msgctxt "ship title"
 msgid "Leviathan"
-msgstr ""
-
+msgstr "利维坦"
 
 # ========== data/scripts/lib/shop.lua ==========
 #: data/scripts/lib/shop.lua:
 msgid "Shop"
-msgstr ""
+msgstr "店铺"
 
 #: data/scripts/lib/shop.lua:
 msgid "Free restock used. %1% free restocks left."
-msgstr ""
+msgstr "使用后免费补货。%1%还剩免费补货。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Shop restocked. Next restock available in 45 minutes."
-msgstr ""
+msgstr "商店补货了。下次补货将在 45 分钟后完成。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Restock is on cooldown for %1% minutes and %2% seconds. Please wait."
-msgstr ""
+msgstr "补货冷却时间为%1%分%2%秒。请稍等。"
 
 #: data/scripts/lib/shop.lua:
 msgid "Click to restock the shop"
 msgstr "点击以补进商店存货"
 
-
 # ========== data/scripts/lib/tradingmanager.lua ==========
 #: data/scripts/lib/tradingmanager.lua:
-msgid "\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in revenue."
+msgid ""
+"\\s(%d:%d) %s's population consumed %d units of %s, generating ¢%s in "
+"revenue."
 msgstr "\\s(%d:%d) %s 的人口消耗了 %d 单位的 %s，产生了 ¢%s 的收入。"
 
-
-# ========== data/scripts/player/background/simulation/refinecommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommand.lua ==========
-
-# ========== data/scripts/player/background/simulation/scoutcommandnotetable.lua ==========
+# ========== data/scripts/player/background/simulation/refinecommand.lua
+# ==========
+# ========== data/scripts/player/background/simulation/scoutcommand.lua
+# ==========
+# ==========
+# data/scripts/player/background/simulation/scoutcommandnotetable.lua
+# ==========
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a massive, dormant gate structure adrift in this sector."
-msgstr ""
-
-#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a colossal ring gate here. It looks ancient and entirely dead."
-msgstr ""
+msgid ""
+"Sensors picked up a massive, dormant gate structure adrift in this sector."
+msgstr "传感器在该区域发现了一个巨大的、休眠的门结构。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an enormous, deactivated hyperspace gate floating silently in this sector."
-msgstr ""
+msgid ""
+"We found a colossal ring gate here. It looks ancient and entirely dead."
+msgstr "我们在这里发现了一个巨大的环形门。它看起来古老而且完全死了。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a monolithic ancient gate construct. Its original builders are long gone."
-msgstr ""
+msgid ""
+"There is an enormous, deactivated hyperspace gate floating silently in this "
+"sector."
+msgstr "有一个巨大的、停用的超空间门静静地漂浮在这个区域中。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Asteroids in a perfect ring formation are emitting bizarre energy readings here. We kept our distance."
-msgstr ""
+msgid ""
+"We mapped a monolithic ancient gate construct. Its original builders are "
+"long gone."
+msgstr "我们绘制了一个整体的古代门结构。它最初的建造者早已不复存在。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a massive energy shield tethered to a cluster of glowing asteroids."
-msgstr ""
+msgid ""
+"Asteroids in a perfect ring formation are emitting bizarre energy readings "
+"here. We kept our distance."
+msgstr "形成完美环的小行星在这里发出奇怪的能量读数。我们保持着距离。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a highly suspicious, shielded rock formation in this sector. Proceed with caution."
-msgstr ""
+msgid ""
+"We detected a massive energy shield tethered to a cluster of glowing "
+"asteroids."
+msgstr "我们检测到一个巨大的能量护盾系在一群发光的小行星上。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An unnatural arrangement of asteroids is broadcasting a hostile energy signature in this area."
-msgstr ""
+msgid ""
+"There is a highly suspicious, shielded rock formation in this sector. "
+"Proceed with caution."
+msgstr "该区域有一个高度可疑的屏蔽岩层。谨慎行事。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a group of zealots obsessing over a massive asteroid."
-msgstr ""
+msgid ""
+"An unnatural arrangement of asteroids is broadcasting a hostile energy "
+"signature in this area."
+msgstr "小行星的不自然排列正在该区域传播敌对的能量信号。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A strange cult seems to have set up camp around a giant rock in this sector."
-msgstr ""
+msgid ""
+"Sensors picked up a group of zealots obsessing over a massive asteroid."
+msgstr "传感器发现一群狂热者对一颗巨大的小行星着迷。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We intercepted some unhinged radio chatter. Cultists are congregating around an asteroid here."
-msgstr ""
+msgid ""
+"A strange cult seems to have set up camp around a giant rock in this sector."
+msgstr "一个奇怪的邪教似乎在这个区域的一块巨大岩石周围扎营。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There are fanatics out here worshipping an asteroid. Space madness is a terrible thing."
-msgstr ""
+msgid ""
+"We intercepted some unhinged radio chatter. Cultists are congregating around"
+" an asteroid here."
+msgstr "我们截获了一些疯狂的无线电聊天记录。邪教徒聚集在一颗小行星周围。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A localized spatial tear is present here. Looks like a stable wormhole."
-msgstr ""
+msgid ""
+"There are fanatics out here worshipping an asteroid. Space madness is a "
+"terrible thing."
+msgstr "这里有狂热分子崇拜小行星。太空疯狂是一件可怕的事情。"
+
+#: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
+msgid ""
+"A localized spatial tear is present here. Looks like a stable wormhole."
+msgstr "这里存在局部空间撕裂。看起来像一个稳定的虫洞。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners picked up a lone wormhole hidden in the void of this sector."
-msgstr ""
+msgstr "扫描仪发现了一个隐藏在这个区域的空隙中的孤独虫洞。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a wormhole phenomenon active here. Destination unknown."
-msgstr ""
+msgstr "这里有活跃的虫洞现象。目的地不明。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We almost stumbled straight into a spatial anomaly. A wormhole is open in this sector."
-msgstr ""
+msgid ""
+"We almost stumbled straight into a spatial anomaly. A wormhole is open in "
+"this sector."
+msgstr "我们差点就直接陷入了空间异常之中。该区域中存在一个虫洞。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We intercepted a repeating broadcast from a lone research satellite."
-msgstr ""
+msgstr "我们截获了一颗孤独研究卫星的重复广播。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An automated science probe is transmitting strange data about asteroids here."
-msgstr ""
+msgid ""
+"An automated science probe is transmitting strange data about asteroids "
+"here."
+msgstr "一个自动科学探测器正在向这里传输有关小行星的奇怪数据。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A solitary satellite is pinging complex research telemetry in this sector."
-msgstr ""
+msgid ""
+"A solitary satellite is pinging complex research telemetry in this sector."
+msgstr "一颗孤立的卫星正在对该领域进行复杂的研究遥测。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is an abandoned satellite registered to 'M.A.D. Science' looping its logs here."
-msgstr ""
+msgid ""
+"There is an abandoned satellite registered to 'M.A.D. Science' looping its "
+"logs here."
+msgstr "有一颗废弃的卫星注册为“M.A.D.” 《科学》在这里循环其日志。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We stumbled upon a hidden resistance cell operating completely off the grid."
-msgstr ""
+msgid ""
+"We stumbled upon a hidden resistance cell operating completely off the grid."
+msgstr "我们偶然发现了一个完全脱离电网运行的隐藏电阻单元。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Against all odds, there's a scrappy survivor outpost tucked away in this sector."
-msgstr ""
+msgid ""
+"Against all odds, there's a scrappy survivor outpost tucked away in this "
+"sector."
+msgstr "尽管困难重重，这个区域却隐藏着一个斗志旺盛的幸存者前哨站。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A heavily concealed resistance faction is holding out against the Xsotan here."
-msgstr ""
+msgid ""
+"A heavily concealed resistance faction is holding out against the Xsotan "
+"here."
+msgstr "一个高度隐蔽的抵抗派系正在这里抵抗索坦人。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a pocket of survivors out here claiming to be part of a rebellion."
-msgstr ""
+msgid ""
+"We found a pocket of survivors out here claiming to be part of a rebellion."
+msgstr "我们在这里发现了一小群幸存者，他们声称自己是叛乱的一部分。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "An artificial ring of numbered asteroids and strange stations is adrift here."
-msgstr ""
+msgid ""
+"An artificial ring of numbered asteroids and strange stations is adrift "
+"here."
+msgstr "一个由编号的小行星和奇怪的空间站组成的人造环漂浮在这里。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We found a complex arrangement of asteroids with strange numerical markings."
-msgstr ""
+msgid ""
+"We found a complex arrangement of asteroids with strange numerical markings."
+msgstr "我们发现了小行星的复杂排列，带有奇怪的数字标记。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."
-msgstr ""
+msgid ""
+"A dormant, circular array of asteroids and Xsotan tech is floating in this "
+"sector."
+msgstr "休眠的圆形小行星阵列和 Xsotan 技术漂浮在这个区域。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."
-msgstr ""
+msgid ""
+"There is a bizarre, ritualistic ring of marked asteroids generating faint "
+"energy spikes."
+msgstr "有一个奇怪的、仪式性的标记小行星环，产生微弱的能量尖峰。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show a derelict ship with an intact core. We could restore it to working order."
-msgstr ""
+msgid ""
+"Sensors show a derelict ship with an intact core. We could restore it to "
+"working order."
+msgstr "传感器显示一艘废弃船的核心完好无损。我们可以将其恢复到工作状态。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a heavily damaged but structurally sound ship abandoned in this sector."
-msgstr ""
+msgid ""
+"There's a heavily damaged but structurally sound ship abandoned in this "
+"sector."
+msgstr "有一艘严重受损但结构完好的船被遗弃在这个区域。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We located an intact derelict vessel here. With a solid repair crew, she'll fly again."
-msgstr ""
+msgid ""
+"We located an intact derelict vessel here. With a solid repair crew, she'll "
+"fly again."
+msgstr "我们在这里找到了一艘完好无损的废弃船只。有了可靠的维修人员，她将再次飞翔。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "I spotted a salvageable ship out here. It is practically begging to be claimed and repaired."
-msgstr ""
+msgid ""
+"I spotted a salvageable ship out here. It is practically begging to be "
+"claimed and repaired."
+msgstr "我在这里发现了一艘可打捞的船。它实际上是在乞求被认领和修复。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive debris fields and wrecked hulls detected in this sector."
-msgstr ""
+msgstr "在该区域发现了大量碎片场和失事船体。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We mapped a graveyard of destroyed ships here. Prime salvaging territory."
-msgstr ""
+msgid ""
+"We mapped a graveyard of destroyed ships here. Prime salvaging territory."
+msgstr "我们在这里绘制了被毁船只墓地的地图。主要抢救领地。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is littered with the husks of dead ships."
-msgstr ""
+msgstr "这个区域散落着废弃船只的残骸。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors show heavy wreckage concentrations in this area. Bring your salvage lasers."
-msgstr ""
+msgid ""
+"Sensors show heavy wreckage concentrations in this area. Bring your salvage "
+"lasers."
+msgstr "传感器显示该区域残骸密集。带上你的打捞激光器。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A massive stash of lost cargo containers is floating freely here."
-msgstr ""
+msgstr "大量丢失的集装箱正自由地漂浮在这里。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We detected a dense cluster of abandoned shipping containers in this sector."
-msgstr ""
+msgid ""
+"We detected a dense cluster of abandoned shipping containers in this sector."
+msgstr "我们在该区域发现了密集的废弃集装箱。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There is a veritable goldmine of unbranded cargo crates adrift out here."
-msgstr ""
+msgid ""
+"There is a veritable goldmine of unbranded cargo crates adrift out here."
+msgstr "这里漂流着一座名副其实的无品牌货箱金矿。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors picked up a large, unsecured container cache drifting in the void."
-msgstr ""
+msgid ""
+"Sensors picked up a large, unsecured container cache drifting in the void."
+msgstr "传感器发现了一个漂浮在虚空中的大型、不安全的容器缓存。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We picked up encrypted comms. Looks like a black market hub is nearby."
-msgstr ""
+msgstr "我们收到了加密通讯。看起来附近有一个黑市中心。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "A shady syndicate operates a hidden Smuggler's Market in this sector."
-msgstr ""
+msgstr "一个阴暗的集团在这个区域经营着一个隐藏的走私市场。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors detected a heavily cloaked Smuggler's Hideout operating off the books."
-msgstr ""
+msgid ""
+"Sensors detected a heavily cloaked Smuggler's Hideout operating off the "
+"books."
+msgstr "传感器检测到一个身着厚重斗篷的走私者藏身处正在秘密进行活动。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "There is a hive of scum and villainy tucked away in this area."
-msgstr ""
+msgstr "这个地区隐藏着大量的败类和邪恶。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Dense asteroid clusters detected. Good prospects for a mining operation."
-msgstr ""
+msgid ""
+"Dense asteroid clusters detected. Good prospects for a mining operation."
+msgstr "检测到密集的小行星团。采矿作业前景良好。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We mapped a massive, resource-rich asteroid field in this sector."
-msgstr ""
+msgstr "我们在这个区域绘制了一个巨大的、资源丰富的小行星带。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Heavy asteroid presence here. Prime territory for our mining lasers."
-msgstr ""
+msgstr "重型小行星存在于此。我们的采矿激光器的主要领域。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Scanners show a dense field of unmined rocks in this sector."
-msgstr ""
+msgstr "扫描仪显示该区域有一片密集的未开采岩石。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Hostile pirate signatures detected. They are heavily entrenched in this sector."
-msgstr ""
+msgid ""
+"Hostile pirate signatures detected. They are heavily entrenched in this "
+"sector."
+msgstr "检测到敌对盗版签名。他们在这个领域根深蒂固。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "A major pirate syndicate controls this area. Approach with weapons hot."
-msgstr ""
+msgid ""
+"A major pirate syndicate controls this area. Approach with weapons hot."
+msgstr "一个主要的海盗集团控制着这个地区。使用热武器接近。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Sensors are lighting up with raider transponders. It's a pirate stronghold."
-msgstr ""
+msgid ""
+"Sensors are lighting up with raider transponders. It's a pirate stronghold."
+msgstr "袭击者应答器的传感器亮起。这是一个海盗据点。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We spotted a large contingent of pirate scum operating in this sector."
-msgstr ""
+msgstr "我们发现有一大批海盗败类在这个区域活动。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Massive alien energy spikes detected. The Xsotan are swarming here."
-msgstr ""
+msgstr "检测到大量外星能量尖峰。索坦人蜂拥而至。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "We barely avoided a massive Xsotan breeding cluster in this sector."
-msgstr ""
+msgstr "我们勉强避免了该领域的大规模 Xsotan 养殖集群。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "This sector is heavily infested by the Xsotan menace."
-msgstr ""
+msgstr "该区域受到 Xsotan 威胁的严重侵扰。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Alien bio-signatures confirmed. The Xsotan have claimed this space."
-msgstr ""
+msgstr "外星人生物特征得到证实。索坦人已经占领了这个空间。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "We also picked up a repeating automated beacon on a forgotten frequency."
-msgstr ""
+msgid ""
+"We also picked up a repeating automated beacon on a forgotten frequency."
+msgstr "我们还在一个被遗忘的频率上发现了一个重复的自动信标。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "There's a strange navigational beacon here transmitting encrypted coordinates."
-msgstr ""
+msgid ""
+"There's a strange navigational beacon here transmitting encrypted "
+"coordinates."
+msgstr "这里有一个奇怪的导航信标，传输加密的坐标。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
 msgid "Also, a lone beacon is pulsing an 'Exodus' distress signal."
-msgstr ""
+msgstr "此外，一个孤独的灯塔正在发出“出埃及记”求救信号。"
 
 #: data/scripts/player/background/simulation/scoutcommandnotetable.lua:
-msgid "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."
-msgstr ""
+msgid ""
+"Oh, and I noted an ancient beacon broadcasting fragments of a mysterious "
+"message."
+msgstr "哦，我注意到一座古老的灯塔正在广播一条神秘信息的片段。"
 
-
-# ========== data/scripts/player/background/simulation/simulation.lua ==========
+# ========== data/scripts/player/background/simulation/simulation.lua
+# ==========
 #: data/scripts/player/background/simulation/simulation.lua:
 msgid "Your captains continued working while you were away."
 msgstr "在您离开期间，您的舰长们继续工作。"
 
-
-# ========== data/scripts/player/background/simulation/simulationutility.lua ==========
+# ========== data/scripts/player/background/simulation/simulationutility.lua
+# ==========
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "I'll have regular data for you as the mission progresses."
 msgstr "随着任务的进展，我会为您提供定期的数据。"
@@ -639,67 +698,75 @@ msgid "Expect a continual flow of new information."
 msgstr "期待源源不断的新信息。"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We have no deep scan ability and will have to visit every sector.\\c()"
-msgstr ""
+msgid ""
+"\\c(d93)We have no deep scan ability and will have to visit every "
+"sector.\\c()"
+msgstr "\\c(d93)我们没有深度扫描能力，必须访问每个扇区。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(d93)Travel time will be extreme without more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(d93)如果没有更深入的扫描覆盖，旅行时间将会非常长。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(d93)We can't see where hidden mass sectors are without better radar.\\c()"
-msgstr ""
+msgid ""
+"\\c(d93)We can't see where hidden mass sectors are without better "
+"radar.\\c()"
+msgstr "\\c(d93)如果没有更好的雷达，我们无法看到隐藏的质量扇区在哪里。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)With our weak sensors, we'll waste a lot of time jumping blindly.\\c()"
-msgstr ""
+msgid ""
+"\\c(dd5)With our weak sensors, we'll waste a lot of time jumping "
+"blindly.\\c()"
+msgstr "\\c(dd5)由于我们的传感器较弱，我们会浪费大量时间盲目跳跃。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)We'd be a lot faster with more deep scan coverage.\\c()"
-msgstr ""
+msgstr "\\c(dd5)通过更深入的扫描覆盖范围，我们的速度会快很多。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
-msgstr ""
+msgid ""
+"\\c(dd5)Hidden mass sectors will be hard to find without better radar.\\c()"
+msgstr "\\c(dd5)如果没有更好的雷达，隐藏的质量区域将很难找到。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)There's a refinery right here, so this will be fast and safe.\\c()"
-msgstr ""
+msgstr "\\c(0d0)这里有一个炼油厂，所以这会既快速又安全。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
-msgid "\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
-msgstr ""
+msgid ""
+"\\c(0d0)Refining will be no problem with a depot right in this sector.\\c()"
+msgstr "\\c(0d0)在这个区域有一个仓库，精炼是没有问题的。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)I can autopilot right to the depot in this sector.\\c()"
-msgstr ""
+msgstr "\\c(0d0)我可以自动驾驶到该区域的仓库。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)People are sure to appreciate our work here.\\c()"
-msgstr ""
+msgstr "\\c(0d0)人们一定会欣赏我们在这里的工作。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)This will help a lot of people.\\c()"
-msgstr ""
+msgstr "\\c(0d0)这会对很多人有帮助。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(0d0)Our generosity will help to build trust.\\c()"
-msgstr ""
+msgstr "\\c(0d0)我们的慷慨将有助于建立信任。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)This isn't my specialty, but I'll see what I can do.\\c()"
-msgstr ""
+msgstr "\\c(dd5)这不是我的专长，但我会看看我能做什么。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)A merchant would do this better, but I can give it a go.\\c()"
-msgstr ""
+msgstr "\\c(dd5)商人会做得更好，但我可以尝试一下。\\c()"
 
 #: data/scripts/player/background/simulation/simulationutility.lua:
 msgid "\\c(dd5)No merchants available, commander?\\c()"
-msgstr ""
+msgstr "\\c(dd5)指挥官，没有可用的商人？\\c()"
 
-
-# ========== data/scripts/player/background/simulation/tradecommand.lua ==========
+# ========== data/scripts/player/background/simulation/tradecommand.lua
+# ==========
 #: data/scripts/player/background/simulation/tradecommand.lua:
 msgid "Directly deposit returns as soon as they're available"
 msgstr "收益一有就直接存入"
@@ -712,12 +779,13 @@ msgstr "立即送达"
 msgid "Trade most of this contract's profit for increased reputation gain"
 msgstr "用这份合同的大部分利润换取更多的声望增长"
 
-
-# ========== data/scripts/player/background/simulation/travelcommand.lua ==========
+# ========== data/scripts/player/background/simulation/travelcommand.lua
+# ==========
 #: data/scripts/player/background/simulation/travelcommand.lua:
-msgid "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"
-msgstr ""
-
+msgid ""
+"\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\c()"
+msgstr "\\c(0d0)我对这些空间路线了如指掌。我们将度过令人难以置信的时光。\\c()"
 
 # ========== data/scripts/player/map/mapcommands.lua ==========
 #: data/scripts/player/map/mapcommands.lua:
@@ -737,12 +805,10 @@ msgstr "打捞"
 msgid "Loop"
 msgstr "循环"
 
-
 # ========== data/scripts/player/map/maproutes.lua ==========
 #: data/scripts/player/map/maproutes.lua:
 msgid "[${i}] Repair"
-msgstr ""
-
+msgstr "[${i}] 修复"
 
 # ========== data/scripts/player/ui/command_center_tab.lua ==========
 #: data/scripts/player/ui/command_center_tab.lua:
@@ -829,7 +895,6 @@ msgstr "已摧毁"
 msgid "In-Sector"
 msgstr "星区内"
 
-
 # ========== data/scripts/player/ui/factory_overview_tab.lua ==========
 #: data/scripts/player/ui/factory_overview_tab.lua:
 msgid "Factory Overview"
@@ -871,7 +936,6 @@ msgstr "联盟："
 msgid "Sort by "
 msgstr "排序方式 "
 
-
 # ========== data/scripts/player/ui/playerbulletinboard.lua ==========
 #: data/scripts/player/ui/playerbulletinboard.lua:
 msgid "Filter:"
@@ -885,40 +949,38 @@ msgstr "来源"
 msgid "No missions available in this sector!"
 msgstr "此星区没有可用任务！"
 
-
 # ========== data/scripts/player/ui/resourcedisplay.lua ==========
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Resources Display"
-msgstr ""
+msgstr "资源展示"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Enable UI movement"
-msgstr ""
+msgstr "启用 UI 移动"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Reset UI position"
-msgstr ""
+msgstr "重置用户界面位置"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show current ship cargo capacity"
-msgstr ""
+msgstr "显示当前船舶载货量"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show currently used and total inventory slots"
-msgstr ""
+msgstr "显示当前使用的库存槽位和总库存槽位"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show inventory capacity for alliance/ship at the same time"
-msgstr ""
+msgstr "同时显示联盟/舰船的库存量"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Show alliance resources when piloting an alliance ship"
-msgstr ""
+msgstr "驾驶联盟舰艇时显示联盟资源"
 
 #: data/scripts/player/ui/resourcedisplay.lua:
 msgid "Inventory Slots"
-msgstr ""
-
+msgstr "库存槽位"
 
 # ========== data/scripts/player/ui/sectorshipoverview.lua ==========
 #: data/scripts/player/ui/sectorshipoverview.lua:
@@ -973,10 +1035,1135 @@ msgstr "废料"
 msgid "Detritus"
 msgstr "碎石"
 
-
 # ========== data/scripts/sector/managestationincomes.lua ==========
-
 # ========== data/scripts/systems/transportersoftware.lua ==========
 #: data/scripts/systems/transportersoftware.lua:
 msgid " (+ scaled by Transporter Blocks)"
+msgstr "（+ 按运输块缩放）"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
 msgstr ""
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Incorrect icon"
+msgstr "\", 1, \"图标不正确"
+
+#: data/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/galaxy/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid "\", 1, \"Maximum amount of icons reached"
+msgstr "\", 1, \"已达到最大图标数量"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Missing hangar."
+msgstr "”，1，“缺少机库。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in hangar."
+msgstr "\", 1, \"机库空间不足。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space in squad."
+msgstr "”，1，“小队空间不足。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"Not enough space on the other craft."
+msgstr "\", 1, \"其他飞船上没有足够的空间。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", 1, \"The fighter type doesn't match the squad type."
+msgstr "\", 1, \"战士类型与小队类型不匹配。"
+
+#: data/scripts/player/map/galaxymapqol.lua
+#: data/scripts/scripts/player/map/galaxymapqol.lua
+msgid ""
+"\", 1, \"You don't have permission to do that in the name of your alliance."
+msgstr "”, 1, “你无权以你的联盟的名义这样做。"
+
+#: data/scripts/player/background/simulation/simulation.lua
+msgid "\", 3, \"Your captains continued working while you were away."
+msgstr "”, 3, “当你离开时，你们的队长继续工作。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free space in torpedo shaft %1%."
+msgstr "\", ChatMessageType.Error, \"鱼雷轴%1%中没有足够的可用空间。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"Not enough free torpedo storage."
+msgstr "\", ChatMessageType.Error, \"没有足够的可用鱼雷存储空间。"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"\", ChatMessageType.Error, \"Transport capacity is already at maximum "
+"(${c}/${m})."
+msgstr "\", ChatMessageType.Error, \"传输容量已达到最大值 (${c}/${m})。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You don't own this craft."
+msgstr "”，ChatMessageType.Error，“您不拥有这艘飞船。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "\", ChatMessageType.Error, \"You're too far away."
+msgstr "\", ChatMessageType.Error, \"你离得太远了。"
+
+#: data/scripts/lib/shop.lua
+msgid "#"
+msgstr ""
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${amount} ${good}"
+msgstr "${amount}${good}"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "${c}${money}"
+msgstr "${c}${money}"
+
+#: data/scripts/entity/gate.lua
+msgid "${dir} Gate to ${sector}"
+msgstr "${dir}通往${sector}的大门"
+
+#: data/scripts/entity/bulletinboard.lua
+msgid "${entity} Bulletin Board"
+msgstr "${entity}公告栏"
+
+#: data/scripts/lib/shop.lua
+msgid "${percentage} OFF!"
+msgstr "${percentage}关闭！"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession}"
+msgstr "${profession}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "${profession} (Specialist level ${level})"
+msgstr "${profession}（专家级别${level}）"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "${x} : ${y} (dist: ${num})"
+msgstr "${x}:${y}（距离：${num}）"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"%s cannot be held responsible for any damage to ships or deaths caused by "
+"salvaging."
+msgstr "%s对因打捞造成的任何船舶损坏或死亡不承担任何责任。"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */<< Transfer All"
+msgstr "/* 货物 */<< 全部转移"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "/* Goods */Transfer All >>"
+msgstr "/* 货物 */转移全部 >>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer"
+msgstr "<< 转账"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "<< Transfer All"
+msgstr "<< 全部转移"
+
+#: data/scripts/lib/shop.lua
+msgid "??"
+msgstr ""
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Accept"
+msgstr "接受"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "All"
+msgstr "全部"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Alliance"
+msgstr "联盟"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Apply"
+msgstr "申请"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Attack\", \"Attack Enemies"
+msgstr "攻击”、“攻击敌人"
+
+#: data/scripts/lib/shop.lua
+msgid "BUY NOW!"
+msgstr "立即购买！"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Background Opacity (Min: 0.0, Max: 1.0)"
+msgstr "背景不透明度（最小值：0.0，最大值：1.0）"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Best wares in the galaxy."
+msgstr "银河系中最好的商品。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Boss Swoks ${num}"
+msgstr "老板斯沃克斯${num}"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Bosses\", \"Bosses"
+msgstr "老板们”、“老板们"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Brand new offer: We now dismantle turrets into parts!"
+msgstr "全新优惠：我们现在将炮塔拆成零件！"
+
+#: data/scripts/entity/bulletinboard.lua
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Bulletin Board"
+msgstr "公告栏"
+
+#: data/scripts/lib/shop.lua
+msgid "Buy"
+msgstr "买"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Buy License"
+msgstr "购买许可证"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Buy a temporary salvaging license of maximum 60 minutes here. This license "
+"makes it legal to damage or mine wreckages in this sector."
+msgstr "在此购买最长 60 分钟的临时打捞许可证。该许可证使得在该区域破坏或开采残骸变得合法。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Buy turrets! Your crew will thank you for it!"
+msgstr "买炮塔！您的船员会为此感谢您！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Cancel"
+msgstr "取消"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Captain: ${name}"
+msgstr "队长：${name}"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Cargo"
+msgstr "货物"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Cargo Hold"
+msgstr "货舱"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Casino"
+msgstr "赌场"
+
+#: data/scripts/player/background/simulation/tradecommand.lua
+msgid "Charity mission"
+msgstr "慈善使命"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Compact number formatting (e.g. 1.5M)"
+msgstr "紧凑的数字格式（例如 1.5M）"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Confirm Dismantling"
+msgstr "确认拆解"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Credits"
+msgstr "制作人员"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Crew"
+msgstr "全体人员"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Description"
+msgstr "描述"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Difficulty"
+msgstr "困难"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle"
+msgstr "拆除"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Dismantle Trash"
+msgstr "拆除垃圾"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Don't like your ship anymore? We'll turn it into scrap and even give you "
+"some Credits for it!"
+msgstr "不再喜欢你的船了吗？我们会将其变成废品，甚至还会为您提供一些积分！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Don't make any trouble."
+msgstr "别惹任何麻烦。"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "E /*direction*/"
+msgstr "E /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ENE /*direction*/"
+msgstr "ENE /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "ESE /*direction*/"
+msgstr "ESE /*方向*/"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"EXPERIMENTAL: Highlights faction territories with various colors allowing to"
+" distinguish them from other nearby factions.\\nFactions won't have unique "
+"colors!"
+msgstr "实验：用各种颜色突出显示派系领土，以便将它们与附近的其他派系区分开来。\\n派系不会有独特的颜色！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Easy salvage, easy profit! Salvaging licenses for sale!"
+msgstr "轻松打捞，轻松获利！抢救许可证出售！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit icon"
+msgstr "编辑图标"
+
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Edit selected color"
+msgstr "编辑选定的颜色"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "Enable Resource Display HUD"
+msgstr "启用资源显示 HUD"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Equipment Dock"
+msgstr "设备坞"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Equipment of all sorts, for a great price! No refunds."
+msgstr "设备齐全，价格实惠！不予退款。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"Everything's legal here, of course. As long as you don't look too closely..."
+msgstr "当然，这里一切都是合法的。只要你不仔细看..."
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Exchange Torpedoes"
+msgstr "交换鱼雷"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Faction Colors"
+msgstr "派系颜色"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Fighter Factory"
+msgstr "战斗机工厂"
+
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighter Merchant"
+msgstr "战斗机商人"
+
+#: data/scripts/entity/transfercrewgoods.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+msgid "Fighters"
+msgstr "战士"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Get a salvaging license now and try your luck with the wreckages!"
+msgstr "立即获取打捞许可证，并在残骸中试试运气！"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Gunners not included."
+msgstr "不包括枪手。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Guns Guns Guns!"
+msgstr "枪枪枪枪！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hazard Zones"
+msgstr "危险区域"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Hide icons"
+msgstr "隐藏图标"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight Alliance Notes"
+msgstr "突出联盟笔记"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Highlight alliance notes with magenta at the bottom right corner"
+msgstr "在右下角用洋红色突出显示联盟注释"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "I'd like to see something brand new for once."
+msgstr "我想一次看到一些全新的东西。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "I'm sure you'll find what you're looking for."
+msgstr "我相信您会找到您想要的东西。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "If you get in trouble, it's your own fault."
+msgstr "如果你遇到麻烦，那是你自己的错。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Illegal salvaging will be punished by destruction. Buy a salvaging license "
+"or there will be consequences."
+msgstr "非法打捞将受到销毁的处罚。购买打捞许可证，否则会产生后果。"
+
+#: data/scripts/lib/shop.lua
+msgid "LIMITED TIME OFFER!"
+msgstr "限时优惠！"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Lock Radar Signatures"
+msgstr "锁定雷达签名"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Loop\", \"Loop"
+msgstr "循环”、“循环"
+
+#: data/scripts/lib/shop.lua
+msgid "MAT"
+msgstr "垫"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Makes radar blips always visible"
+msgstr "使雷达信号始终可见"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid ""
+"Marks Hazard Zone sectors with a red rectangle in the bottom right corner"
+msgstr "在右下角用红色矩形标记危险区域区域"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Military Outpost"
+msgstr "军事前哨"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Mine\", \"Mine"
+msgstr "我的”、“我的"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Minutes"
+msgstr "分钟"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Mobile Energy Lab"
+msgstr "移动能源实验室"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "N /*direction*/"
+msgstr "N /*方向*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "NAME"
+msgstr "姓名"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NE /*direction*/"
+msgstr "NE /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNE /*direction*/"
+msgstr "北北东 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NNW /*direction*/"
+msgstr "NNW /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "NW /*direction*/"
+msgstr "西北 /*方向*/"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Name"
+msgstr "姓名"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "New Squad"
+msgstr "新阵容"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "No refunds."
+msgstr "不予退款。"
+
+#: data/scripts/entity/TrashMan.lua
+msgid "None"
+msgstr "没有任何"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Not enough resources? Get a mining laser and change that!"
+msgstr "资源不够？购买一台采矿激光器并改变它！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "OK"
+msgstr "好的"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Off"
+msgstr "离开"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Oh. That must have gotten lost."
+msgstr "哦。那一定是迷路了。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "On"
+msgstr "在"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Only the best turrets, subsystems and fighters!"
+msgstr "只有最好的炮塔、子系统和战斗机！"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Our fighters are ready for you! Pilots not included."
+msgstr "我们的战士已经准备好迎接你了！不包括飞行员。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "PRICE/U"
+msgstr "价格/单位"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Patrol\", \"Patrol Sector"
+msgstr "巡逻”、“巡逻部门"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Pilots not included."
+msgstr "不包括飞行员。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Player"
+msgstr "玩家"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Please, do come again."
+msgstr "请您再来一次。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Problems with pirates? No more with our weaponry!"
+msgstr "海盗有问题吗？我们的武器不再可用！"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Profit"
+msgstr "利润"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Pssst! You wanna take a look?"
+msgstr "嘘！你想看一下吗？"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Recall Ship"
+msgstr "召回船"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "RefineOres\", \"Refine Ores"
+msgstr "精炼矿石”、“精炼矿石"
+
+#: data/scripts/player/ui/command_center_tab.lua
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Refresh"
+msgstr "刷新"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Remaining license time: ${time} Minutes"
+msgstr "剩余许可时间：${time}分钟"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Repair Dock"
+msgstr "维修码头"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Repair\", \"Repair"
+msgstr "修复”、“修复"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Research Station"
+msgstr "研究站"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/player/background/simulation/refinecommand.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Resource Depot"
+msgstr "资源库"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Resources\", \"Resources"
+msgstr "资源”、“资源"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "Reward"
+msgstr "报酬"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "S /*direction*/"
+msgstr "S /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SE /*direction*/"
+msgstr "SE /*方向*/"
+
+#: data/scripts/lib/shop.lua
+msgid "SOLD OUT!"
+msgstr "售罄！"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER (30% OFF)"
+msgstr "特别优惠（30% 折扣）"
+
+#: data/scripts/lib/shop.lua
+msgid "SPECIAL OFFER: -30% OFF"
+msgstr "特别优惠：-30% 折扣"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSE /*direction*/"
+msgstr "上交所 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SSW /*direction*/"
+msgstr "SSW /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "SW /*direction*/"
+msgstr "SW /*方向*/"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Salvage\", \"Salvage"
+msgstr "打捞”、“打捞"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Salvaging /*UI Tab title*/"
+msgstr "抢救 /*UI 选项卡标题*/"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging or damaging wreckages in this sector is illegal. Please buy a "
+"salvaging license."
+msgstr "打捞或破坏该区域的残骸是非法的。请购买打捞许可证。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Salvaging wreckages in this sector is forbidden. Please buy a salvaging "
+"license."
+msgstr "禁止在该区域打捞残骸。请购买打捞许可证。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Scrapyard"
+msgstr "废料场"
+
+#: data/scripts/entity/TrashMan.lua
+msgid ""
+"Select which types of inventory items to mark as trash. These items will not"
+" be destroyed or immediately sold. Instead, the next time you visit the "
+"appropriate merchant they can be sold with the merchant's 'Sell Trash' "
+"button.\\nItems that are marked as favorites will not get marked for trash!"
+msgstr ""
+"选择要标记为垃圾的库存项目类型。这些物品不会被销毁或立即出售。相反，当您下次访问相应的商家时，可以使用商家的“出售垃圾”按钮来出售它们。\\n标记为收藏夹的商品不会被标记为垃圾！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua data/scripts/lib/shop.lua
+msgid "Sell"
+msgstr "卖"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Sell Ship"
+msgstr "卖船"
+
+#: data/scripts/lib/shop.lua
+msgid "Sell Trash"
+msgstr "卖垃圾"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Shafts"
+msgstr "轴"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Ship"
+msgstr "船"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Ship Value:"
+msgstr "船舶价值："
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Shipyard"
+msgstr "船厂"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Blueprints"
+msgstr "显示蓝图"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Favorited Items"
+msgstr "显示收藏的项目"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show Galaxy Map QoL options"
+msgstr "显示 Galaxy Map 生活质量选项"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Items"
+msgstr "显示项目"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Subsystems"
+msgstr "显示子系统"
+
+#: data/scripts/lib/shop.lua
+msgid "Show Turrets"
+msgstr "显示炮塔"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Show overlay"
+msgstr "显示叠加层"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Show the Xsotan who's boss with our chain guns!"
+msgstr "用我们的链枪向 Xsotan 展示谁才是老大！"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/entity/merchants/smugglersmarket.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Smuggler's Market"
+msgstr "走私者市场"
+
+#: data/scripts/player/ui/command_center_tab.lua
+msgid "Status"
+msgstr "地位"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Storage"
+msgstr "贮存"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Subsystems"
+msgstr "子系统"
+
+#: data/scripts/lib/shop.lua
+msgid "TECH"
+msgstr "科技"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "Tech"
+msgstr "科技"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "TechLevels\", \"Tech Level"
+msgstr "技术水平”、“技术水平"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Text"
+msgstr "文本"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for choosing %1%'s salvage services. We have you listed as an "
+"licensee for the next %2% minutes."
+msgstr "感谢您选择%1%的救助服务。我们已将您列为接下来%2%分钟的被许可人。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Thank you for your continuing trust in us. We updated your salvaging license"
+" to %s minutes."
+msgstr "感谢您一直以来对我们的信任。我们将您的抢救许可证更新为%s分钟。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "That's sold out, sorry."
+msgstr "已经卖完了，抱歉。"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "The AI"
+msgstr "人工智能"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "This action is irreversible."
+msgstr "此操作是不可逆转的。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "This is a free station, where everybody can mind their own business."
+msgstr "这是一个免费站，每个人都可以管自己的事。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"This is your last warning. If you do not stop salvaging without a license, "
+"you will be destroyed."
+msgstr "这是你最后一次警告。如果你不停止无证打捞，你就会被消灭。"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "This mission is only available for owners of the Black Market DLC."
+msgstr "此任务仅适用于黑市 DLC 的所有者。"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+msgid "Tired of being chronically unarmed? We're here for you!"
+msgstr "厌倦了长期手无寸铁的状态？我们随时为您服务！"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Torpedoes"
+msgstr "鱼雷"
+
+#: data/scripts/entity/merchants/equipmentdock.lua
+#: data/scripts/entity/merchants/fightermerchant.lua
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Trade Equipment"
+msgstr "贸易设备"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer >>"
+msgstr "转乘>>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All >>"
+msgstr "全部转移>>"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer All Torpedoes of This Shaft"
+msgstr "转移该轴的所有鱼雷"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew, Cargo and Fighters"
+msgstr "转移机组人员、货物和战斗机"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Crew/Cargo/Fighters"
+msgstr "转移机组人员/货物/战斗机"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "Transfer Squad"
+msgstr "转会小队"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Travel Hub"
+msgstr "旅游中心"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Turret Dismantling /*UI Tab title*/"
+msgstr "炮塔拆解 /*UI选项卡标题*/"
+
+#: data/scripts/entity/merchants/managestationincomes.lua
+#: data/scripts/sector/managestationincomes.lua
+msgid "Turret Factory"
+msgstr "炮塔工厂"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turret Merchant"
+msgstr "炮塔商人"
+
+#: data/scripts/entity/merchants/turretmerchant.lua
+msgid "Turrets"
+msgstr "炮塔"
+
+#: data/scripts/player/ui/factory_overview_tab.lua
+msgid "Type"
+msgstr "类型"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand"
+msgstr "取消品牌"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Unbrand Stolen Goods"
+msgstr "取消被盗物品的品牌"
+
+#: data/scripts/player/map/mapcommands.lua
+msgid "Undo\",   \"Undo"
+msgstr "撤消”、“撤消"
+
+#: data/scripts/entity/merchants/factory.lua
+msgid ""
+"Upgrade to allow up to ${volume} transported volume per shuttle every "
+"${seconds} seconds."
+msgstr "升级后，每台航天飞机每${seconds}秒最多可运输${volume}量。"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "W /*direction*/"
+msgstr "W /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WNW /*direction*/"
+msgstr "西西北 /*方向*/"
+
+#: data/scripts/entity/ancientgate.lua data/scripts/entity/gate.lua
+msgid "WSW /*direction*/"
+msgstr "WSW /*方向*/"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning"
+msgstr "警告"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Warning! You will not get refunds for crews or turrets!"
+msgstr "警告！您将不会获得船员或炮塔的退款！"
+
+#: data/scripts/lib/shop.lua
+msgid "We are completely sold out."
+msgstr "我们已经完全卖完了。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "We do Secured Containers only, we don't want no bug infestations."
+msgstr "我们只做安全容器，我们不希望没有错误侵扰。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"We don't take any responsibility for any lost limbs while using the turret "
+"dismantler."
+msgstr "对于使用炮塔拆卸机时造成的肢体丢失，我们不承担任何责任。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "Welcome to the true, free market."
+msgstr "欢迎来到真正的自由市场。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What do you want?"
+msgstr "你想要什么？"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "What's up?"
+msgstr "这是怎么回事？"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckage"
+msgstr "残骸"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "Wreckages"
+msgstr "残骸"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Wreckages in this sector are the property of %s. Please buy a salvaging "
+"license."
+msgstr "该区域的残骸属于%s的财产。请购买打捞许可证。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "YOU"
+msgstr "你"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You bring 'em, we crack 'em. Secured Containers only."
+msgstr "你带来它们，我们破解它们。仅限安全容器。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You can't sell ${displayPlural} here."
+msgstr "您不能在这里出售${displayPlural}。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You don't have a valid license."
+msgstr "您没有有效的许可证。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s on your ship."
+msgstr "您的船上没有%s。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any %s to sell!"
+msgstr "您没有任何%s可供出售！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any of this!"
+msgstr "这些你都没有！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You don't have any stolen %s!"
+msgstr "您没有任何被盗的%s！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"You have been warned. You will be considered an enemy of %s if you do not "
+"stop your illegal activities."
+msgstr "你已被警告过。如果您不停止非法活动，您将被视为%s的敌人。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have no stolen goods on you."
+msgstr "你身上没有赃物。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "You have to be docked to the station to unbrand goods!"
+msgstr "你必须停靠在车站才能取消商品的品牌！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You need a salvaging license for this sector."
+msgstr "您需要获得该部门的打捞许可证。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "You will not get refunds for crews or turrets!"
+msgstr "您将不会获得船员或炮塔的退款！"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid ""
+"You'll find members for nearly everything on this station, if the coin is "
+"right."
+msgstr "如果价格合适的话，您几乎可以在这个电台上找到所有内容的会员。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license has expired. You may no longer salvage in this area."
+msgstr "您的救助许可证已过期。您可能无法再在此区域进行打捞。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s has expired. You may no longer salvage in this "
+"area."
+msgstr "您在%s的打捞许可证已过期。您可能无法再在此区域进行打捞。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 10 seconds."
+msgstr "您在%s的抢救许可证将在 10 秒内耗尽。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 2 minutes. Renew it immediately"
+" and save yourself some trouble!"
+msgstr "您在%s的打捞许可证将在 2 分钟内耗尽。立即更新，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license in %s will run out in 20 seconds."
+msgstr "您在%s的抢救许可证将在 20 秒内耗尽。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr "您在%s的抢救许可证将在 30 秒内耗尽。更新一下，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license in %s will run out in 60 seconds. Renew it NOW and "
+"save yourself some trouble!"
+msgstr "您在%s的抢救许可证将在 60 秒内耗尽。立即更新，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 10 seconds."
+msgstr "您的抢救许可证将在 10 秒内用完。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 2 minutes. Renew it immediately and "
+"save yourself some trouble!"
+msgstr "您的打捞许可证将在 2 分钟内耗尽。立即更新，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your salvaging license will run out in 20 seconds."
+msgstr "您的抢救许可证将在 20 秒内用完。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 30 seconds. Renew it and save "
+"yourself some trouble!"
+msgstr "您的抢救许可证将在 30 秒内用完。更新一下，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid ""
+"Your salvaging license will run out in 60 seconds. Renew it NOW and save "
+"yourself some trouble!"
+msgstr "您的抢救许可证将在 60 秒内用完。立即更新，省去一些麻烦！"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "Your ship will be dismantled and you will be returned to your drone."
+msgstr "你的船将被拆除，你将回到你的无人机上。"
+
+#: data/scripts/player/ui/resourcedisplay.lua
+msgid "[A]  /* Alliance resource prefix */"
+msgstr "[A] /* 联盟资源前缀 */"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "[Drag & Drop / Shift Click] Transfer Passengers"
+msgstr "[拖放/Shift 单击] 转移乘客"
+
+#: data/scripts/player/background/simulation/travelcommand.lua
+msgid ""
+"\\\\c(0d0)I know these spatial routes like the back of my hand. We'll make "
+"incredible time.\\\\c()"
+msgstr "\\\\c(0d0)我对这些空间路线了如指掌。我们将度过令人难以置信的时光。\\\\c()"
+
+#: data/scripts/lib/galaxymapqolclient.lua
+#: data/scripts/scripts/lib/galaxymapqolclient.lua
+msgid "\\n Hazard Zone"
+msgstr "\\n 危险区域"
+
+#: data/scripts/player/ui/sectorshipoverview.lua
+msgid "data/textures/icons/WreckagesTab.png\", \"Wreckages"
+msgstr "数据/纹理/图标/WreckagesTab.png\", \"残骸"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/crew.png\", \"Exchange Crew"
+msgstr "data/textures/icons/crew.png\", \"交换人员"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/domino-mask.png\", \"Unbrand Stolen Goods"
+msgstr "data/textures/icons/domino-mask.png\", \"取消被盗商品的品牌"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/fighter.png\", \"Exchange Fighters"
+msgstr "data/textures/icons/fighter.png\", \"交换战斗机"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-arrows.png\", \"Buy a salvaging license."
+msgstr "data/textures/icons/recycle-arrows.png\", \"购买回收许可证。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/recycle-turret.png\", \"Dismantle turrets into goods."
+msgstr "data/textures/icons/recycle-turret.png\", \"将炮塔拆成货物。"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "data/textures/icons/sell-ship.png\", \"Sell your ship to the scrapyard."
+msgstr "data/textures/icons/sell-ship.png\", \"将你的船卖到废品场。"
+
+#: data/scripts/entity/merchants/smugglersmarket.lua
+msgid "data/textures/icons/sell.png\", \"Sell Stolen Goods"
+msgstr "data/textures/icons/sell.png\", \"出售被盗物品"
+
+#: data/scripts/entity/transfercrewgoods.lua
+msgid "data/textures/icons/trade.png\", \"Exchange Cargo"
+msgstr "data/textures/icons/trade.png\", \"交换货物"
+
+#: data/scripts/player/ui/playerbulletinboard.lua
+msgid "data/textures/icons/warning-system.png\",\"Bulletin Board"
+msgstr "data/textures/icons/warning-system.png\",\"公告板"
+
+#: data/scripts/entity/merchants/scrapyard.lua
+msgid "¢${money}"
+msgstr "${money}__"

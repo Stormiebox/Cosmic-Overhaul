@@ -7,11 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [4.2.0] - Release Date TBD (Work In Progress)
 
+### Added
+- **Integrated Galaxy Map QoL:** Completely integrated the `Galaxy Map QoL` mod directly into Cosmic Overhaul. It has received the "Cosmic Overhaul Treatment" which includes completely stripping out the dependency on `AzimuthLib` (players no longer need to download it) and converting it to natively use standard Avorion code and UI systems. You can now freely place customizable icons and notes directly on the galaxy map!
+- **Full Localization Support:** Processed and injected over 2,400 translated strings across 7 different languages (Chinese, French, Japanese, Portuguese, Spanish, German, and Russian). The mod is now fully translated and completely localized for non-English users.
+
 ### Changed
 - **Shop Restock Buff:** Increased the maximum number of free restocks from 15 to 25 to provide players with a slightly larger buffer for finding specific modules. The 45-minute cooldown timer remains untouched.
 
 ### Fixed
 - **Reversed Merchant Pricing (Critical Economy Fix):** Fixed a massive mathematical error where the 15% Merchant Captain trade bonus was actually punishing players! Because of how the vanilla API is structured (`getBuyPrice` means what the *station* pays, not what the *player* pays), having a Merchant Captain on board was accidentally making station purchases 15% *more* expensive, and selling to stations 15% *less* profitable. This is now fully inverted and correctly working in the player's favor!
+- **Gate Travel Priority Fallback:** Restored a missing vanilla fallback when `Gate Travel Priority` is disabled. Previously, if a player disabled priority and tried to map a jump across a rift, the mod would throw a "Jump not possible" error instead of checking for a valid gate. It now correctly falls back to using gates to cross rifts when the hyperdrive cannot make the jump.
+  - *Note on Engine Behavior:* If `Gate Travel Priority` is disabled, the mod correctly feeds standard `Jump` commands to the ship. However, if the ship *still* goes through a gate, this is because the core Avorion C++ Engine natively intercepts Jump orders if there is an adjacent gate connecting to the exact same destination. The core engine does this to save hyperdrive cooldown, and cannot be bypassed by mods.
 
 ## [4.1.0]
 
