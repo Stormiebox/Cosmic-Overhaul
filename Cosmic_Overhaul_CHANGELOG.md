@@ -5,6 +5,14 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.0] - Release Date TBD (Work In Progress)
+
+### Changed
+- **Shop Restock Buff:** Increased the maximum number of free restocks from 15 to 25 to provide players with a slightly larger buffer for finding specific modules. The 45-minute cooldown timer remains untouched.
+
+### Fixed
+- **Reversed Merchant Pricing (Critical Economy Fix):** Fixed a massive mathematical error where the 15% Merchant Captain trade bonus was actually punishing players! Because of how the vanilla API is structured (`getBuyPrice` means what the *station* pays, not what the *player* pays), having a Merchant Captain on board was accidentally making station purchases 15% *more* expensive, and selling to stations 15% *less* profitable. This is now fully inverted and correctly working in the player's favor!
+
 ## [4.1.0]
 
 ### Added

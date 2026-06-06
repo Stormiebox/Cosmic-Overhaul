@@ -58,7 +58,7 @@ We have heavily modernized how you interact with your cargo holds, inventories, 
 * **Smart Transfers:** If you try to transfer 5,000 Iron to a ship that only has room for 2,000, the transfer will no longer fail! It will simply fill the receiving ship to the brim and leave the rest behind.
 * **Transfer Stacking:** If you hold down `Right Mouse Button (RMB)` while clicking "Transfer All", the game will only transfer items that the receiving ship *already has in its hold*. Perfect for topping off supply ships.
 * **The Trash Manager:** You can now safely mark unwanted inventory items as "Trash". This doesn't delete them, but it allows you to safely mass-sell them to merchants without risking your favorite gear.
-* **Shop Restock Button & Cleaner Shops:** We cleaned up the massive, cluttered lists at Equipment Docks. To compensate, you can now manually restock station shops using a built-in button (grants free uses first, then utilizes a fair cooldown system) to easily roll for the gear you actually want.
+* **Shop Restock Button & Cleaner Shops:** We cleaned up the massive, cluttered lists at Equipment Docks. To compensate, you can now manually restock station shops using a built-in button (grants 25 free uses first, then utilizes a fair cooldown system) to easily roll for the gear you actually want.
 * **Resource Display HUD:** A new, highly configurable widget on your screen lets you track your credits, resources, cargo space, and inventory slots in real-time. It automatically switches to tracking your Alliance vault if you hop into an alliance ship.
 * **Subsystem Removal:** You can now permanently remove installed subsystems at Repair Docks, Shipyards, Military Outposts, Research Stations, and Scrapyards.
 * **Relaxing Scrapyards:** The stressful time limits and restrictive friction at Scrapyards have been completely removed. Take your time and salvage in peace!
@@ -94,3 +94,4 @@ Your passive empire is now much smarter and more integrated.
 ---
 
 Enjoy your time in the Cosmic Overhaul!
+

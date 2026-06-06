@@ -104,7 +104,7 @@ Because players can now instantly refresh inventories using the **Shop Restock**
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Adds integrated restock functionality with overhaul-specific balancing (grants free uses first, then transitions to cooldown-sensitive behavior).
+Adds integrated restock functionality with overhaul-specific balancing (grants 25 free uses first, then transitions to cooldown-sensitive behavior).
 
 **Details:**
 
@@ -687,3 +687,4 @@ In vanilla Avorion, illegal and stolen loops often felt under-rewarded due to hi
 - Deep-space piracy, contraband running, and black-market alignment become completely viable standalone career paths capable of sustaining a late-game fleet.
 
 </details>
+

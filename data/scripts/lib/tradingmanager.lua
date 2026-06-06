@@ -151,8 +151,8 @@ function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
         if ship then
             local captain = ship:getCaptain()
             if captain and captain:hasClass(CaptainClass.Merchant) then
-                price = math.max(1, math.floor((price or 0) * 0.85))
-                if tax then tax = math.max(0, math.floor(tax * 0.85)) end
+                price = math.max(1, math.floor((price or 0) * 1.15))
+                if tax then tax = math.max(0, math.floor(tax * 1.15)) end
             end
         end
     end
@@ -179,8 +179,8 @@ function TradingManager:getSellPrice(goodName, amount, faction, buyer)
         if ship then
             local captain = ship:getCaptain()
             if captain and captain:hasClass(CaptainClass.Merchant) then
-                price = math.max(1, math.floor((price or 0) * 1.15))
-                if tax then tax = math.max(0, math.floor(tax * 1.15)) end
+                price = math.max(1, math.floor((price or 0) * 0.85))
+                if tax then tax = math.max(0, math.floor(tax * 0.85)) end
             end
         end
     end

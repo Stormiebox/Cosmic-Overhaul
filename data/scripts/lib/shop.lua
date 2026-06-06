@@ -853,11 +853,11 @@ if onServer() then
         local usedFreeRestocks = entity:getValue("co_free_restocks") or 0
         local restockCooldown = 45 * 60
 
-        if usedFreeRestocks < 15 then
+        if usedFreeRestocks < 25 then
             entity:setValue("co_free_restocks", usedFreeRestocks + 1)
             edr_specialOfferSeed = edr_specialOfferSeed + 1
             self:restock()
-            if player then player:sendChatMessage("Shop"%_T, 0, "Free restock used. %1% free restocks left."%_T, 15 - (usedFreeRestocks + 1)) end
+            if player then player:sendChatMessage("Shop"%_T, 0, "Free restock used. %1% free restocks left."%_T, 25 - (usedFreeRestocks + 1)) end
         elseif current - lastRestockTime >= restockCooldown then
             entity:setValue("co_last_restock", current)
             edr_specialOfferSeed = edr_specialOfferSeed + 1
