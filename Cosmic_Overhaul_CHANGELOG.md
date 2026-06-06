@@ -19,6 +19,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Gate Travel Priority Fallback:** Restored a missing vanilla fallback when `Gate Travel Priority` is disabled. Previously, if a player disabled priority and tried to map a jump across a rift, the mod would throw a "Jump not possible" error instead of checking for a valid gate. It now correctly falls back to using gates to cross rifts when the hyperdrive cannot make the jump.
   - *Note on Engine Behavior:* If `Gate Travel Priority` is disabled, the mod correctly feeds standard `Jump` commands to the ship. However, if the ship *still* goes through a gate, this is because the core Avorion C++ Engine natively intercepts Jump orders if there is an adjacent gate connecting to the exact same destination. The core engine does this to save hyperdrive cooldown, and cannot be bypassed by mods.
 
+### Removed
+- **Textures Folder:** All textures were removed and migrated into `Cosmic Vault`.
+
 ## [4.1.0]
 
 ### Added
