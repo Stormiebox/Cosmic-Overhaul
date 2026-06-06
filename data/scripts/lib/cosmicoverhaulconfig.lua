@@ -13,6 +13,10 @@ local defaults =
     enableProfitableStations = true,
     enableExoticLegendarySalvage = true,
 
+    enableOfflineCatchup = false,
+    offlineCatchupRatio = 0.667,
+    offlineCatchupMaxDuration = 28800,
+
     profitableStationsInterval = 120,
     profitableStationsPayoutMultiplier = 1.00,
 }
@@ -43,6 +47,10 @@ local function build()
     out.enableGateTravelPriority = readBool("enableGateTravelPriority", defaults.enableGateTravelPriority)
     out.enableProfitableStations = readBool("enableProfitableStations", defaults.enableProfitableStations)
     out.enableExoticLegendarySalvage = readBool("enableExoticLegendarySalvage", defaults.enableExoticLegendarySalvage)
+    
+    out.enableOfflineCatchup = readBool("enableOfflineCatchup", defaults.enableOfflineCatchup)
+    out.offlineCatchupRatio = readNumber("offlineCatchupRatio", 0.0, 1.0, defaults.offlineCatchupRatio)
+    out.offlineCatchupMaxDuration = readNumber("offlineCatchupMaxDuration", 0, 86400, defaults.offlineCatchupMaxDuration)
 
     out.profitableStationsInterval = math.floor(readNumber("profitableStationsInterval", 30, 1800,
         defaults.profitableStationsInterval))

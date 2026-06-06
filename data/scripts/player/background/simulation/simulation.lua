@@ -1,6 +1,7 @@
 if onServer() then
     -- Cosmic Overhaul: Ensure relations API is available for Trade/Charity mission yields
     include("relations")
+    include("cosmicoverhaulconfig")
 
     --[[
 Balancing:
@@ -8,8 +9,10 @@ Balancing:
         e.g. a ratio of 0.667 advances commands about 2 hours after being gone 3 hours.
     - Max replay time caps the amount of time that commands are allowed to advance.
 ]]
-    local ARCC_offlineTimeReplayRatio = 0.667
-    local ARCC_maxOfflineReplayTime = 8*60*60
+    local config = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
+    local ARCC_offlineTimeReplayRatio = config and config.offlineCatchupRatio or 0.667
+    local ARCC_maxOfflineReplayTime = config and config.offlineCatchupMaxDuration or (8*60*60)
+    local enableOfflineCatchup = config and config.enableOfflineCatchup or false
 
     -- Do the first update faster to not wait a full minute before seeing something happen
     local ARCC_Simulation_getUpdateInterval_original = Simulation.getUpdateInterval
@@ -150,11 +153,16 @@ Balancing:
             timestamp = os.date("!%c (UTC)", secureTime),
         })
 
-        local timeToApply = math.max(0, restoreTime-secureTime-(rawTimeToDeduct or 0))
+        local timeToApply = 0
+        if enableOfflineCatchup then
+            timeToApply = math.max(0, restoreTime-secureTime-(rawTimeToDeduct or 0))
 
-        -- Apply balancing factors
-        timeToApply = timeToApply*ARCC_offlineTimeReplayRatio
-        timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
+            -- Apply balancing factors
+            timeToApply = timeToApply*ARCC_offlineTimeReplayRatio
+            timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
+        else
+            print("[ARCC] Offline catch-up is disabled via MCM. Skipping catch-up.")
+        end
 
         return timeToApply
     end

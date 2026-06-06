@@ -51,5 +51,35 @@ return {
                 },
             },
         },
+        {
+            title = "Offline Simulation (ARCC)",
+            options = {
+                {
+                    key = "enableOfflineCatchup",
+                    type = "bool",
+                    title = "Enable Offline Catch-up",
+                    description = "Should captain commands continue simulating while the server is offline/empty? (Default: false)",
+                    default = false,
+                },
+                {
+                    key = "offlineCatchupMaxDuration",
+                    type = "number",
+                    title = "Max Catch-up Duration (s)",
+                    description = "Maximum offline time (in seconds) that will be simulated. (Max: 86400s / 24H) (Default: 28800s / 8h)",
+                    default = 28800,
+                    min = 0,
+                    max = 86400,
+                },
+                {
+                    key = "offlineCatchupRatio",
+                    type = "number",
+                    title = "Catch-up Efficiency Ratio",
+                    description = "What percentage of offline time is actually counted (Min 0.0, Max 1.0). (Default: 0.667)",
+                    default = 0.667,
+                    min = 0.0,
+                    max = 1.0,
+                },
+            },
+        },
     },
 }

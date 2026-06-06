@@ -486,29 +486,6 @@ Ship names now scale dynamically based on their generated block volume across fo
 - Provides immediate, intuitive feedback on the actual size and threat level of an NPC vessel simply by reading its title.
 
 </details>
-
----
-
-## Command & Captain Enhancements
-
-### A) Persistent Background Command Progression
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Background captain commands are treated more consistently during offline or return scenarios, featuring improved progression behavior and risk continuity.
-
-**Gameplay Impact:**
-
-- Better strategic continuity.
-- Less of a “frozen world” feeling when returning to active saves.
-
-</details>
-
-### B) Trade Command Overhaul (Major)
-
-<details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
@@ -698,6 +675,165 @@ In vanilla Avorion, illegal and stolen loops often felt under-rewarded due to hi
 
 **What it does:**
 Provides native language support for non-English players.
+
+**Details:**
+
+- **7 Supported Languages:** Cosmic Overhaul has been meticulously translated and integrated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese. Every custom UI, captain interaction, and background logic prompt will seamlessly display in the player's native language.
+
+</details>
+
+---
+
+## Command & Captain Enhancements
+
+### A) Persistent Background Command Progression (ARCC)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+The ARCC system calculates elapsed real-world time while the server was empty/offline and applies that time to your active captain commands upon server restart, treating it as if they kept working while you were away.
+
+**Important Note for Private/Solo Servers:**
+Because instantly processing hours of offline progression simultaneously can hang or crash small/private servers on boot (and rewards players for time the server was turned off), **offline simulation is disabled by default.**
+
+**Gameplay Impact:**
+- For 24/7 Dedicated Server admins: You can enable and strictly cap offline simulation parameters using the Mod Configuration Menu (MCM) to guarantee strategic continuity for your playerbase.
+- For Solo/Private Servers: Booting your server is fast, safe, and free from offline "free resource" exploits.
+
+</details>
+
+### B) Trade Command Overhaul (Major)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Extensively upgrades trade command behavior and outcomes.
+
+**Details:**
+
+- Broader captain usability (removes strict merchant lock-in).
+- Adjusted efficiency curves based on captain quality and class context.
+- **Immediate Delivery Toggle:** Enables quick delivery. Bypasses travel loops but significantly reduces payout.
+- **Charity Toggle:** Trades profit for significant faction relation boosts.
+
+</details>
+
+### C) New Sell Command Feature
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Adds functionality to automatically sell cargo using local supply/demand metrics.
+
+**Gameplay Impact:**
+
+- Removes the tedium of manually finding buyers for high-value cargo holds.
+- Can be chained into loops for automated factory logistics.
+
+</details>
+
+### D) Enhanced Procure Command
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Improves procurement options, expanding available goods and calculating better purchase prices.
+
+</details>
+
+### E) Expanded Salvage Command
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Significantly expands the reward table and logic behind salvaging operations.
+
+**Details:**
+
+- Exotic and Legendary items can now be recovered.
+- Salvaging operations can process raw scrap into refined metals directly if specific captain synergies exist.
+
+</details>
+
+### F) Scouting Expansion
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Scouting commands now reveal greater depth of sector information and generate rich narrative logs.
+
+</details>
+
+### G) New Captain Operations Modifiers
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Enhances captain operations with new modifiers, improved ranges, and updated loot tables.
+
+**Details:**
+
+- Adds **Exotic** and **Legendary** items into the salvage operation's loot table.
+- Adds a modifier to increase the rewards, quality of items, or swiftness for various operations.
+- Adds a modifier to double the range of various operations. *Note: This will make certain operations take longer.*
+
+</details>
+
+### H) Captain Synergy Expansion (Background Map Commands)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Fully overhauls background mechanics (Sell, Procure, Salvage, Refine, and Travel) to extensively amplify the efficiency of correctly assigned, specialized commanding classes.
+
+**Synergy Metrics:**
+
+- **Range Extension:** Matching the precise class unlocks major operational range bonuses.
+- **Velocity Tuning:** Reduces background operation completion durations and transit timings by **up to 25%**.
+- **Risk Suppression:** Significantly drops localized ambush probability scores during active operations.
+
+</details>
+
+### I) Active Captain Synergies (Piloting Passives)
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Deploys sweeping passive modifiers that activate globally exclusively when the player is **actively piloting** a flagship commanded by a specific captain class.
+
+**Active Modifiers:**
+
+- **Active Merchant:** Unlocks a global **15% discount on item purchases** paired with a **15% bonus payout on sales** across all legal commercial stations (Trading Posts, Factories, Resource Depots).
+- **Active Smuggler:** Unlocks a **15% reduction in unbranding fees** alongside a **15% bonus credit payout** on black market transactions processed through a Smuggler's Market.
+
+</details>
+
+---
+
+## Black Market / Smuggler's Market Rework
+
+### Structural Engineering: Dynamic API Injection
+
+The massive, conflict-heavy legacy file override for shiputility.lua has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion's Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
+
+<details>
+<summary><b>Click to expand Black Market details</b></summary>
+
+### What Changed
+
+The Smuggler's Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
+
+- **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
+- **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
 
 **Details:**
 

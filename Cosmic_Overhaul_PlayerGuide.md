@@ -46,7 +46,8 @@ When sending ships on background map operations, your captains are much more cap
 
 * **Class Synergies:** Specialized captains assigned to their matching jobs will travel much further, complete operations up to **25% faster**, and suffer significantly fewer ambushes.
 * **Better Salvage:** Captains running salvage operations now have a chance to find **Exotic** and **Legendary** items!
-* **Immersive Scouting:** Scout operations now generate rich, narrative-driven captain's logs. Plus, if your scouts are working while you are offline, they will instantly reveal all their progress the moment you log back in.
+* **Immersive Scouting:** Scout operations now generate rich, narrative-driven captain's logs. 
+* **Offline Catch-up (ARCC):** For 24/7 dedicated servers, captains can simulate operations while you are offline. *(Note: To protect private/solo servers from startup crashes and unintended offline progression, this feature is **disabled by default**. Server hosts can explicitly enable it via the Mod Configuration Menu!)*
 * **Trade Missions:** Trade commands are much more flexible. You can now use "Immediate Delivery" toggles or run "Charity" missions to boost faction relations instead of just making money.
 
 ---

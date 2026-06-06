@@ -19,6 +19,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Gate Travel Priority Fallback:** Restored a missing vanilla fallback when `Gate Travel Priority` is disabled. Previously, if a player disabled priority and tried to map a jump across a rift, the mod would throw a "Jump not possible" error instead of checking for a valid gate. It now correctly falls back to using gates to cross rifts when the hyperdrive cannot make the jump.
   - *Note on Engine Behavior:* If `Gate Travel Priority` is disabled, the mod correctly feeds standard `Jump` commands to the ship. However, if the ship *still* goes through a gate, this is because the core Avorion C++ Engine natively intercepts Jump orders if there is an adjacent gate connecting to the exact same destination. The core engine does this to save hyperdrive cooldown, and cannot be bypassed by mods.
 
+- **ARCC Offline Server Hangs & Exploit:** Fixed a critical issue on private multiplayer servers where booting the server would attempt to instantly calculate and simulate hours of "offline" progression for all active captain commands simultaneously. This massive burst of calculations would block the server thread, triggering Avorion's "hang detector" and crashing the server on startup. This also inadvertently rewarded players with "free" resources for time the server was turned off.
+  - **MCM Integration:** The ARCC offline simulation is now **disabled by default** to protect private/local servers. Server owners can opt back into offline simulation via the Mod Configuration Menu (MCM) under the new "Offline Simulation (ARCC)" section, where they can also cap the maximum offline simulation time and adjust the offline efficiency ratio.
+
 ### Removed
 - **Textures Folder:** All textures were removed and migrated into `Cosmic Vault`.
 
