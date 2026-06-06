@@ -7,19 +7,8 @@ local SectorSpecifics = include("sectorspecifics")
 
 
 local Azimuth, ConfigTemplate, Log = unpack(include("galaxymapqolinit"))
-local function CosmicUIHorizontalProportionalSplitter(rect, padding, innerPadding, proportions)
-    local sum = 0
-    local parts = {}
-    for _, p in ipairs(proportions) do sum = sum + p end
-    local currentX = rect.lower.x + padding
-    local totalWidth = rect.width - padding * 2 - innerPadding * (#proportions - 1)
-    for i, p in ipairs(proportions) do
-        local w = totalWidth * (p / sum)
-        parts[i] = Rect(currentX, rect.lower.y + padding, currentX + w, rect.upper.y - padding)
-        currentX = currentX + w + innerPadding
-    end
-    return parts
-end
+include("cosmicui_proportionalsplitter")
+
 
 local function UIRectangle(parent, rect, color, layer)
     local pic = parent:createPicture(rect, "data/textures/icons/galaxymapqol/ui-filled.png")
@@ -1576,5 +1565,7 @@ function GalaxyMapQoL.initOtherNamespace(namespace)
 end
 
 return GalaxyMapQoL
+
+
 
 
