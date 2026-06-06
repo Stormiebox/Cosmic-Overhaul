@@ -228,7 +228,7 @@ function GalaxyMapQoL.initUI()
 		warZoneCheckBox = optionsContainer:createCheckBox(Rect(150, rowY, 220, rowY + 30), "", "onWarZoneCheckBoxChecked")
 		warZoneCheckBox.captionLeft = false
 		warZoneCheckBox.tooltip = "Marks Hazard Zone sectors with a red rectangle in the bottom right corner"%_t
-		warZoneCheckBox:setCheckedNoCallback(Config.markHazards)
+		warZoneCheckBox:setCheckedNoCallback(Config.markHazards == true)
 		local picture = optionsContainer:createPicture(Rect(190, rowY, 220, rowY + 30), "data/textures/icons/hazard-sign.png")
 		picture.isIcon = true
 		rowY = rowY + 40
@@ -236,7 +236,7 @@ function GalaxyMapQoL.initUI()
 		lockRadarCheckBox = optionsContainer:createCheckBox(Rect(150, rowY, 220, rowY + 30), "", "onLockRadarCheckBoxChecked")
 		lockRadarCheckBox.captionLeft = false
 		lockRadarCheckBox.tooltip = "Makes radar blips always visible"%_t
-		lockRadarCheckBox:setCheckedNoCallback(Config.lockRadar)
+		lockRadarCheckBox:setCheckedNoCallback(Config.lockRadar == true)
 		local picture = optionsContainer:createPicture(Rect(190, rowY, 220, rowY + 30), "data/textures/icons/movement-sensor.png")
 		picture.isIcon = true
 		rowY = rowY + 40
@@ -244,7 +244,7 @@ function GalaxyMapQoL.initUI()
 		highlightAllianceNotesCheckBox = optionsContainer:createCheckBox(Rect(150, rowY, 220, rowY + 30), "", "onHighlightAllianceNotesChecked")
 		highlightAllianceNotesCheckBox.captionLeft = false
 		highlightAllianceNotesCheckBox.tooltip = "Highlight alliance notes with magenta at the bottom right corner"%_t
-		highlightAllianceNotesCheckBox:setCheckedNoCallback(Config.highlightAllianceNotes)
+		highlightAllianceNotesCheckBox:setCheckedNoCallback(Config.highlightAllianceNotes == true)
 		local picture = optionsContainer:createPicture(Rect(190, rowY, 220, rowY + 30), "data/textures/icons/galaxymapqol/ui-highlight-alliance-notes.png")
 		picture.isIcon = true
 	else
@@ -253,7 +253,7 @@ function GalaxyMapQoL.initUI()
 			warZoneCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Hazard Zones"%_t, "onWarZoneCheckBoxChecked")
 			warZoneCheckBox.captionLeft = false
 			warZoneCheckBox.tooltip = "Marks Hazard Zone sectors with a red rectangle in the bottom right corner"%_t
-			warZoneCheckBox:setCheckedNoCallback(Config.markHazards)
+			warZoneCheckBox:setCheckedNoCallback(Config.markHazards == true)
 			rowY = rowY + 30
 		end
 
@@ -265,13 +265,13 @@ function GalaxyMapQoL.initUI()
 		lockRadarCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Lock Radar Signatures"%_t, "onLockRadarCheckBoxChecked")
 		lockRadarCheckBox.captionLeft = false
 		lockRadarCheckBox.tooltip = "Makes radar blips always visible"%_t
-		lockRadarCheckBox:setCheckedNoCallback(Config.lockRadar)
+		lockRadarCheckBox:setCheckedNoCallback(Config.lockRadar == true)
 		rowY = rowY + 30
 
 		highlightAllianceNotesCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Highlight Alliance Notes"%_t, "onHighlightAllianceNotesChecked")
 		highlightAllianceNotesCheckBox.captionLeft = false
 		highlightAllianceNotesCheckBox.tooltip = "Highlight alliance notes with magenta at the bottom right corner"%_t
-		highlightAllianceNotesCheckBox:setCheckedNoCallback(Config.highlightAllianceNotes)
+		highlightAllianceNotesCheckBox:setCheckedNoCallback(Config.highlightAllianceNotes == true)
 	end
 
 	if not customNamespace then
@@ -1565,6 +1565,7 @@ function GalaxyMapQoL.initOtherNamespace(namespace)
 end
 
 return GalaxyMapQoL
+
 
 
 
