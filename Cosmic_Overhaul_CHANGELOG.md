@@ -8,6 +8,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [4.2.0] - 2026-06-06
 ### Fixed
 - **Galaxy Map QoL Initialization:** Fixed a fatal client-side crash caused by deprecated os.execute folder creation. The mod now correctly uses Avorion's native createDirectory() API for configuration folders.
+- **Engine Bootstrap Compliance:** Purged invalid `initialize()` wrappers from `player/init.lua`, `sector/init.lua`, and `entity/init.lua`. Avorion expects these to be global execution scripts. This resolves a fatal bug where UI tabs, sector scripts, and background entity modifiers completely failed to load on fresh saves.
+- **Galaxy Map QoL Type Safety:** Prevented stack traces and script failures by explicitly casting config file string loads to boolean values before UI injection.
 - **Improved Stashes Override Fix:** Repaired a catastrophic bug where the custom stash.lua file was completely deleting the vanilla game's stash script from memory, resulting in broken stashes that could not be opened. The stash modifications have been safely injected into a cloned vanilla file to ensure UI and interactions work flawlessly while still delivering boosted loot.
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
