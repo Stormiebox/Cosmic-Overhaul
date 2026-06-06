@@ -78,7 +78,7 @@ Whether you are making friends or making enemies, your actions have real weight.
 * **Immersive NPC Fleets:** The galaxy feels much more authentic. NPC ships now have realistic names that scale dynamically with their actual size and job. You'll see military fleets structured properly from nimble *Interceptors* up to massive *Dreadnoughts* and *Leviathans*, while industrial fleets range from small *Light Prospectors* up to colossal *Planet Crackers*.
 * **Unique Loot:** We improved the randomization of the galaxy. Enemies and merchants in the same sector will no longer drop identical "cloned" items, ensuring varied and exciting loot.
 * **Lucrative Piracy:** Destroying civilian freighters and transports will now drop massive amounts of illegal cargo (scaling up to 250,000 credits based on the sector's richness).
-* **The Smuggler's Market:** The Black Market now pays a premium for illegal and dangerous goods. Unbranding costs have been rebalanced so the "steal -> clean -> sell" loop is a genuinely viable way to fund your empire.
+* **The Smuggler's Market & Syndicate Boss:** The Black Market now pays a premium for illegal and dangerous goods. Unbranding costs have been rebalanced so the "steal -> clean -> sell" loop is a genuinely viable way to fund your empire. Best of all: if you build your *own* Smuggler's Market, you become a **Syndicate Boss**! Owning your own market grants an additional +25% payout bonus when selling contraband to your station, and a massive 90% discount on all laundering/unbranding fees!
 * **Deep Space Stashes:** Hidden stashes out in the galaxy now drop significantly better rewards as you progress into the late game, featuring massive credit multipliers (up to 10x) and much higher-tier upgrade drops.
 
 ---

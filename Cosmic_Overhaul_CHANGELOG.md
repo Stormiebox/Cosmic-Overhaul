@@ -5,7 +5,7 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.2.0] - Release Date TBD (Work In Progress)
+## [4.2.0] - 2026-06-06
 ### Fixed
 - **Galaxy Map QoL Initialization:** Fixed a fatal client-side crash caused by deprecated os.execute folder creation. The mod now correctly uses Avorion's native createDirectory() API for configuration folders.
 - **Improved Stashes Override Fix:** Repaired a catastrophic bug where the custom stash.lua file was completely deleting the vanilla game's stash script from memory, resulting in broken stashes that could not be opened. The stash modifications have been safely injected into a cloned vanilla file to ensure UI and interactions work flawlessly while still delivering boosted loot.
@@ -14,6 +14,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Added
 - **Integrated Galaxy Map QoL:** Completely integrated the `Galaxy Map QoL` mod directly into Cosmic Overhaul. It has received the "Cosmic Overhaul Treatment" which includes completely stripping out the dependency on `AzimuthLib` (players no longer need to download it) and converting it to natively use standard Avorion code and UI systems. You can now freely place customizable icons and notes directly on the galaxy map!
 - **Full Localization Support:** Processed and injected over 2,400 translated strings across 7 different languages (Chinese, French, Japanese, Portuguese, Spanish, German, and Russian). The mod is now fully translated and completely localized for non-English users.
+- **Syndicate Boss Mechanic (Player-Owned Smuggler Markets):** Added massive economic incentives for players to construct their own Smuggler's Market stations:
+  - **Syndicate Payouts:** Selling stolen or illegal goods to your *own* station now grants an additional **+25% bonus multiplier** to the final payout.
+  - **In-House Laundering:** Unbranding stolen goods at your *own* station now applies a massive **90% discount** on all laundering fees, effectively allowing you to sanitize stolen cargo for pennies.
 
 ### Changed
 - **Shop Restock Buff:** Increased the maximum number of free restocks from 15 to 25 to provide players with a slightly larger buffer for finding specific modules. The 45-minute cooldown timer remains untouched.
@@ -205,4 +208,5 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - installation and compatibility snapshot,
   - and pointer to full wiki details.
 - Wiki remains the canonical source for full detailed feature documentation.
+
 

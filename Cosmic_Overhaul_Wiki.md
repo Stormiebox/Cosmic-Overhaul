@@ -655,6 +655,7 @@ The Smuggler’s Market logic has been reworked so black-market trading is meani
 - **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
 - **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
 - **Stolen Goods Handling:** Clean unbranding friction and cost formulas have been rebalanced downwards, making the "hijack -> sanitize -> deploy" loop practical and affordable.
+- **Syndicate Boss Incentives:** Players who build their *own* Smuggler's Market receive exclusive benefits: **+25% bonus profit** when selling contraband to their own market, and a **90% discount** on all unbranding/laundering fees!
 
 ### Why This Exists
 
@@ -840,3 +841,4 @@ The Smuggler's Market logic has been reworked so black-market trading is meaning
 - **7 Supported Languages:** Cosmic Overhaul has been meticulously translated and integrated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese. Every custom UI, captain interaction, and background logic prompt will seamlessly display in the player's native language.
 
 </details>
+

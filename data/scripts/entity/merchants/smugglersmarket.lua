@@ -613,7 +613,10 @@ callable(SmugglersMarket, "unbrand")
 
 function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, buyerFaction, ship)
     local factor = SmugglersMarket.coConfig.unbrandPriceFactor
-    if ship then
+    
+    if stationFaction.index == buyerFaction.index then
+        factor = factor * 0.1 -- Syndicate Boss: 90% discount on unbranding fees at your own station!
+    elseif ship then
         local captain = ship:getCaptain()
         if captain and captain:hasClass(CaptainClass.Smuggler) then
             factor = math.max(0.10, factor - 0.15) -- Smuggler Synergy: 15% discount on unbranding fees
@@ -673,7 +676,13 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
         if captain and captain:hasClass(CaptainClass.Smuggler) then
             multiplier = multiplier + 0.15 -- Smuggler Synergy: 15% bonus payout on stolen/illegal goods
         end
+        local station = Entity()
+        if station and station.factionIndex == ship.factionIndex then
+            multiplier = multiplier + 0.25 -- Syndicate Boss: 25% extra profit for owning the market!
+        end
     end
 
     return round(good.price * multiplier)
 end
+
+
