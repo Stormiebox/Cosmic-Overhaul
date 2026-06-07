@@ -399,6 +399,7 @@ Simulates organic civilian traffic loops and service utility consumption across 
 **Gameplay Impact:**
 
 - High-conflict deployment zones face steep economic drops as commercial vessels avoid hazardous space. Players must actively defend and pacify logistics centers to maintain maximum financial output.
+- **Galactic News Synergy:** (Requires *Cosmic Chronicles*) Major wealth fluctuations caused by these traffic loops are instantly broadcast to the Galactic News Network, creating Trade Crises or Market Booms.
 
 </details>
 

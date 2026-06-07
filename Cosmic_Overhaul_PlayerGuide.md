@@ -84,6 +84,43 @@ Whether you are making friends or making enemies, your actions have real weight.
 ---
 
 ## 5. Building Your Empire
+* **Offline Catch-up (ARCC):** For 24/7 dedicated servers, captains can simulate operations while you are offline. *(Note: To protect private/solo servers from startup crashes and unintended offline progression, this feature is **disabled by default**. Server hosts can explicitly enable it via the Mod Configuration Menu!)*
+* **Trade Missions:** Trade commands are much more flexible. You can now use "Immediate Delivery" toggles or run "Charity" missions to boost faction relations instead of just making money.
+
+---
+
+## 3. Quality of Life & Logistics
+
+We have heavily modernized how you interact with your cargo holds, inventories, and ship building.
+
+* **Color-Coded Cargo Transfers:** The Cargo Transfer window now features a search bar, alphabetical sorting, and color-coded cargo bars (Red for illegal/stolen, Yellow for dangerous).
+* **Smart Transfers:** If you try to transfer 5,000 Iron to a ship that only has room for 2,000, the transfer will no longer fail! It will simply fill the receiving ship to the brim and leave the rest behind.
+* **Transfer Stacking:** If you hold down `Right Mouse Button (RMB)` while clicking "Transfer All", the game will only transfer items that the receiving ship *already has in its hold*. Perfect for topping off supply ships.
+* **The Trash Manager:** You can now safely mark unwanted inventory items as "Trash". This doesn't delete them, but it allows you to safely mass-sell them to merchants without risking your favorite gear.
+* **Shop Restock Button & Cleaner Shops:** We cleaned up the massive, cluttered lists at Equipment Docks. To compensate, you can now manually restock station shops using a built-in button (grants 25 free uses first, then utilizes a fair cooldown system) to easily roll for the gear you actually want.
+* **Resource Display HUD:** A new, highly configurable widget on your screen lets you track your credits, resources, cargo space, and inventory slots in real-time. It automatically switches to tracking your Alliance vault if you hop into an alliance ship.
+* **Subsystem Removal:** You can now permanently remove installed subsystems at Repair Docks, Shipyards, Military Outposts, Research Stations, and Scrapyards.
+* **Relaxing Scrapyards:** The stressful time limits and restrictive friction at Scrapyards have been completely removed. Take your time and salvage in peace!
+* **Scaling Subsystems:** Transporters and Trading Systems now get massive range boosts (up to 10x) based on their rarity. Transporters get even more range based on how many physical transporter blocks you've built into your ship design.
+
+---
+
+## 4. Diplomacy & The Underworld
+
+Whether you are making friends or making enemies, your actions have real weight.
+
+* **Rewarding Friendships:** Positive actions with factions now build your reputation faster, making diplomacy feel more responsive.
+* **Dynamic Reputation Decay:** Factions won't hold grudges—or alliances—forever. If you completely ignore a faction over a long period of time, your relationship will slowly drift back toward neutral. Allies forget, but Hostiles also forgive.
+* **Alliance Mirroring:** Your personal reputation changes now mirror directly to your Alliance at **2x intensity**. Your individual actions carry massive diplomatic weight for your entire group!
+* **Immersive NPC Fleets:** The galaxy feels much more authentic. NPC ships now have realistic names that scale dynamically with their actual size and job. You'll see military fleets structured properly from nimble *Interceptors* up to massive *Dreadnoughts* and *Leviathans*, while industrial fleets range from small *Light Prospectors* up to colossal *Planet Crackers*.
+* **Unique Loot:** We improved the randomization of the galaxy. Enemies and merchants in the same sector will no longer drop identical "cloned" items, ensuring varied and exciting loot.
+* **Lucrative Piracy:** Destroying civilian freighters and transports will now drop massive amounts of illegal cargo (scaling up to 250,000 credits based on the sector's richness).
+* **The Smuggler's Market & Syndicate Boss:** The Black Market now pays a premium for illegal and dangerous goods. Unbranding costs have been rebalanced so the "steal -> clean -> sell" loop is a genuinely viable way to fund your empire. Best of all: if you build your *own* Smuggler's Market, you become a **Syndicate Boss**! Owning your own market grants an additional +25% payout bonus when selling contraband to your station, and a massive 90% discount on all laundering/unbranding fees!
+* **Deep Space Stashes:** Hidden stashes out in the galaxy now drop significantly better rewards as you progress into the late game, featuring massive credit multipliers (up to 10x) and much higher-tier upgrade drops.
+
+---
+
+## 5. Building Your Empire
 
 Your passive empire is now much smarter and more integrated.
 
@@ -92,6 +129,7 @@ Your passive empire is now much smarter and more integrated.
 * **Smarter Economies:** Station shuttles scale much better into the late game, and NPC trade flow logic has been improved to make the commerce loops feel much more alive.
 * **Gate Travel Priority:** When issuing enchained travel orders to your fleet on the Galaxy Map, your ships are now smart enough to actively prioritize Gate networks and Wormholes instead of slowly hyperspace-jumping across the galaxy.
 * **Restored Automation:** Classic 1.0 map commands (Mine, Refine, Salvage, and Loop) have been restored. You can queue up multiple orders (e.g., Jump -> Mine -> Jump -> Refine) by holding `SHIFT`, and then use the **Loop** command to have your fleet repeat the sequence indefinitely.
+* **Galactic News Economy (Requires Cosmic Chronicles):** Your faction's economy shifts are now tracked and reported as Trade Crises or Market Booms on the Galactic News Board, helping you find the best trade routes.
 
 ---
 

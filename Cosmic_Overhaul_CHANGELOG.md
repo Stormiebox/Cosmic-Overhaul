@@ -5,7 +5,7 @@ All notable changes to **Cosmic Overhaul** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.2.0] - 2026-06-06
+## [4.2.0] - 2026-06-07
 ### Fixed
 - **Galaxy Map QoL Initialization:** Fixed a fatal client-side crash caused by deprecated os.execute folder creation. The mod now correctly uses Avorion's native createDirectory() API for configuration folders.
 - **Engine Bootstrap Compliance:** Purged invalid `initialize()` wrappers from `player/init.lua`, `sector/init.lua`, and `entity/init.lua`. Avorion expects these to be global execution scripts. This resolves a fatal bug where UI tabs, sector scripts, and background entity modifiers completely failed to load on fresh saves.
@@ -14,6 +14,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
 ### Added
+- **Galactic News Network Synergy (Requires Cosmic Chronicles):** The underlying economy engine (Faction Wealth tracking) now directly feeds data into the Galactic News Network. Merchant captains can use the News Board to actively hunt for "Trade Crises" and "Market Booms"!
 - **Integrated Galaxy Map QoL:** Completely integrated the `Galaxy Map QoL` mod directly into Cosmic Overhaul. It has received the "Cosmic Overhaul Treatment" which includes completely stripping out the dependency on `AzimuthLib` (players no longer need to download it) and converting it to natively use standard Avorion code and UI systems. You can now freely place customizable icons and notes directly on the galaxy map!
 - **Full Localization Support:** Processed and injected over 2,400 translated strings across 7 different languages (Chinese, French, Japanese, Portuguese, Spanish, German, and Russian). The mod is now fully translated and completely localized for non-English users.
 - **Syndicate Boss Mechanic (Player-Owned Smuggler Markets):** Added massive economic incentives for players to construct their own Smuggler's Market stations:

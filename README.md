@@ -25,6 +25,7 @@ For the complete feature breakdown and technical details, see:
 - Broad QoL and systems improvements across economy, stations, UI, and command workflows.
 - Major map-command simulation enhancements for trade, refine, scout, and related operations.
 - Massive upgrades to the Galaxy Map, including custom icons, persistent sticky notes, and rapid navigation hotkeys.
+- Dynamic economy tracking that integrates directly into the Galactic News Network (via Cosmic Chronicles).
 - Fully localized for Russian, Chinese, German, Spanish, French, Japanese, and Portuguese.
 - Integrated module approach intended to reduce mod-stack friction for common overhaul features.
 
