@@ -56,3 +56,13 @@ For the complete feature breakdown and technical details, see:
 - Review client/server logs for troubleshooting in heavily modded stacks.
 - Validate load order when combining multiple large overhauls.
 - See `CHANGELOG.md` for project change tracking.
+
+---
+
+## Credits
+In science and in modding, we stand on the shoulders of giants. A massive thank you to the original mod authors who inspired and contributed to this overhaul.
+Full credit goes to:
+
+TheDeadlyShoe, Nyrin, I has a bucket, Geterwin, Chefkoch, Rinart73, BloodyRain2k,
+Towelie, LateTide, Snuggly Wuggums!, Bubbet!, KnifeHeart, Madranis, The_Rusty_Geek,
+Druark, lyravega, luka-devnull, rglx (void catgirl rglx), kuzco's poison
