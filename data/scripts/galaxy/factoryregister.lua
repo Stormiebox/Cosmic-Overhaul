@@ -1,6 +1,12 @@
 local rf = {} -- registered factories, multi level. First level keyed by the faction index, second level by factory id
 local initial = {} -- same as above, but only gets updated once, this will be used to calculate profitability over time
 
+function initialize()
+    if onServer() then
+        Server():registerCallback("onCCNewsRequestSeed", "onSeedNews")
+    end
+end
+
 --[[
 Inner content structure
 	factoryData['id'] = self.id
@@ -209,4 +215,46 @@ function calculateProfitability(data, init_fdata, factoryData)
 	factoryData['profitability'] = profitability
 
 	return factoryData
+end
+
+function onSeedNews()
+    local server = Server()
+    if not server then return end
+
+    local bestFactory = nil
+    local worstFactory = nil
+    local highestProfit = 0
+    local lowestProfit = 0
+
+    for factionId, factories in pairs(rf) do
+        local mergedData = merge(factionId)
+        for _, f in pairs(mergedData) do
+            local prof = f.profitability or 0
+            if prof > highestProfit then
+                highestProfit = prof
+                bestFactory = f
+            elseif prof < lowestProfit then
+                lowestProfit = prof
+                worstFactory = f
+            end
+        end
+    end
+
+    if bestFactory and highestProfit > 1000 then
+        local article = {
+            title = "Economic Boom: " .. (bestFactory.title or "Unknown Factory"),
+            category = "Market Watch",
+            content = string.format("Financial analysts report massive growth for %s in sector %s. Investors are pouring credits into the surrounding regional economy as profitability skyrockets to record highs.", bestFactory.title or "Unknown Factory", bestFactory.location or "Unknown")
+        }
+        server:sendCallback("onCCNewsPublishArticle", article)
+    end
+
+    if worstFactory and lowestProfit < -1000 then
+        local article = {
+            title = "Market Crash: " .. (worstFactory.title or "Unknown Factory"),
+            category = "Market Watch",
+            content = string.format("A severe economic downturn has struck %s in sector %s. Supply chains are failing, and the station is bleeding credits rapidly. Opportunistic traders are advised to avoid the area or exploit the shortages.", worstFactory.title or "Unknown Factory", worstFactory.location or "Unknown")
+        }
+        server:sendCallback("onCCNewsPublishArticle", article)
+    end
 end
