@@ -164,9 +164,9 @@ if onClient() then
 
                 line.entityIndex = self.missions[entry].entityIndex
                 line.bulletinIndex = bulletin.bulletinIndex
-                line.brief.caption = bulletin.brief%_t % (bulletin.formatArguments or {})
-                line.difficulty.caption = bulletin.difficulty%_t % (bulletin.formatArguments or {})
-                line.reward.caption = bulletin.reward%_t % (bulletin.formatArguments or {})
+                line.brief.caption = (bulletin.brief or "")%_t % (bulletin.formatArguments or {})
+                line.difficulty.caption = (bulletin.difficulty or "")%_t % (bulletin.formatArguments or {})
+                line.reward.caption = (bulletin.reward or "")%_t % (bulletin.formatArguments or {})
 
                 if bulletin.BMDLCOwnersOnly and not Player().ownsBlackMarketDLC then
                     line.button.active = false
