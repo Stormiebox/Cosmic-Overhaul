@@ -1,3 +1,6 @@
+# 4.2.1
+- **Hotfix:** Fixed a critical issue where the server would hang and players would lose connection when a ship finished a Background Scouting Mission from the Galaxy Map.
+- **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent 	inygettext collision warnings from spamming the client log.
 # Changelog
 
 All notable changes to **Cosmic Overhaul** will be documented in this file.
@@ -211,5 +214,6 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - installation and compatibility snapshot,
   - and pointer to full wiki details.
 - Wiki remains the canonical source for full detailed feature documentation.
+
 
 

@@ -374,6 +374,21 @@ function ScoutCommand:getNotedView(view, note, captain)
     return view
 end
 
+local mcm_ScoutCommand_onFinish_original = ScoutCommand.onFinish
+function ScoutCommand:onFinish()
+    -- Finish any remaining sectors incrementally
+    self:mcm_update()
+    
+    -- Stormbox: This intercepts the vanilla onFinish to prevent a massive server hang/crash.
+    -- Vanilla onFinish attempts to reveal ALL reachableCoordinates at once. Since we already
+    -- reveal them incrementally in mcm_update(), doing it again here causes massive lag spikes.
+    -- We temporarily empty the table so the original function doesn't run its heavy loop.
+    local oldCoords = self.area.analysis.reachableCoordinates
+    self.area.analysis.reachableCoordinates = {}
+    mcm_ScoutCommand_onFinish_original(self)
+    self.area.analysis.reachableCoordinates = oldCoords
+end
+
 -- For quick testing purposes only! Makes the command almost instant and disables attacks.
 -- local scf_ScoutCommand_calculatePrediction_original = ScoutCommand.calculatePrediction
 -- function ScoutCommand:calculatePrediction(...)
