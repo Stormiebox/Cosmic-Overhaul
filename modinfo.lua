@@ -16,7 +16,7 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description = "A massive systems and Quality of Life overhaul. Enhances fleet automation, background map commands, UI (Command Center, Resource Display), diplomacy, and the economy. Designed for smoother long-session gameplay and richer captain behavior.",
+    description = "A complete, thoughtful overhaul of game systems, designed to balance tedious tasks and let you truly enjoy the galaxy. Now features full Galactic News integration!",
 
     -- Insert all authors into this list
     authors = { "Stormbox" },
