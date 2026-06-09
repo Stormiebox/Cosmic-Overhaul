@@ -103,12 +103,17 @@ function ScoutCommand:mcm_update()
     local ratioComplete = self.data.runTime/self.data.duration
     local totalSectors = self.data.mcm.numSectorsToExplore
     local expectedComplete = math.floor(ratioComplete*totalSectors)
+    -- Stormbox: Prevent infinite loop if runTime overshoots duration!
+    expectedComplete = math.min(expectedComplete, totalSectors)
 
     local sectorsThisUpdate = {}
 
     while (totalSectors-#self.data.mcm.sectorsLeftToExplore) < expectedComplete do
+        if #self.data.mcm.sectorsLeftToExplore == 0 then break end -- Stormbox: Extra safety check
         local nextSector = table.remove(self.data.mcm.sectorsLeftToExplore)
-        table.insert(sectorsThisUpdate, nextSector)
+        if nextSector then
+            table.insert(sectorsThisUpdate, nextSector)
+        end
     end
 
     -- To be as noninvasive as possible with the mod, we'll reuse revealSectors.
