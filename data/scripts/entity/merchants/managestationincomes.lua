@@ -51,7 +51,7 @@ function ManageStationIncomes.getUpdateInterval()
 end
 
 function ManageStationIncomes.isStationReserved(station)
-    local ents = { Sector():getEntitiesByScript("merchants/playerstationtrader.lua") }
+    local ents = { Sector():getEntitiesByScript("ai/playerstationtrader.lua") }
     if not ents or #ents == 0 then return false end
     for _, ent in pairs(ents) do
         if ent:getValue("plystation_partner") == station.id.string then return true end

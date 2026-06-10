@@ -382,7 +382,7 @@ function GalaxyMapQoL.updateClient(timeStep)
 		-- removed colorPicker update
 
 		local mouse = Mouse()
-		if not colorPicker.visible and mouse:mouseDown(MouseButton.Left) then
+		if mouse:mouseDown(MouseButton.Left) then
 			local pos = mouse.position
 
 			for i, pair in ipairs(colorPictures) do
@@ -712,7 +712,7 @@ function GalaxyMapQoL.updateMapIcons(isAlliance, sectorData)
 end
 
 function GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed(_, isCallback)
-	
+
 
 
 	if isCallback and not helpIconWindow.mouseOver and not editIconWindow.mouseOver and not delIconWindow.mouseOver and helpIconsMode then
@@ -1080,7 +1080,7 @@ function GalaxyMapQoL.galaxyMapQoL_onColorPickerApplyBtnPressed(color)
 end
 
 function GalaxyMapQoL.galaxyMapQoL_onEditIconApplyBtnPressed()
-    
+
 
     deleteIconsMode = false GalaxyMapQoL.updateAdditionalButtons()
 

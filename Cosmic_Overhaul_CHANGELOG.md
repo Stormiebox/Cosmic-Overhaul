@@ -1,3 +1,7 @@
+# 4.2.3
+- **Hotfix:** Fixed a bug in with an incorrect script check path was causing the sector to fail to detect existing traders, continuously spawning hundreds of AI ships in permanently-simulated sectors until the game hung.
+- **Hotfix:** Fixed a fatal client-side crash in the Map QoL UI where a missing reference to the removed `colorPicker` caused the update loop to crash, preventing players from selecting alternate colors for map icons.
+
 # 4.2.2
 - **Hotfix:** Fixed a critical server crash caused by `playerstationutils.lua` missing a `self` reference during asynchronous trader spawning. This issue was heavily exacerbated by "Sector Keep-Alive" mods forcing background traders to spawn endlessly in empty sectors.
 - **Hotfix:** Deprecated and terminated the legacy `shipinfo.lua` script to fix massive 24/7 dedicated server console log spam (`player is nil`). Background sectors kept permanently loaded by "Sector Keep-Alive" mods were constantly trying to push illegal UI updates to offline players.
