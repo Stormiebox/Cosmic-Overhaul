@@ -1,4 +1,5 @@
 # Cosmic Overhaul - Player Guide
+*Current Version: v4.2.2*
 
 Welcome to **Cosmic Overhaul**!
 

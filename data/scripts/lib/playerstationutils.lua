@@ -37,5 +37,6 @@ function PlayerStationUtils.spawnTraderFor(namespace, station, shipTypes)
         ship:addScript("ai/playerstationtrader.lua", station.id.string, station.index)
         ship:setValue("plystation_partner", station.id.string)
     end
-    AsyncShipGenerator(namespace, generatedFunc)[PlayerStationUtils.GetAsyncGenFor(chosenType)](nil, faction, matrix)
+    local gen = AsyncShipGenerator(namespace, generatedFunc)
+    gen[PlayerStationUtils.GetAsyncGenFor(chosenType)](gen, faction, matrix)
 end

@@ -1,4 +1,5 @@
 # Cosmic Overhaul - Detailed Features
+*Current Version: v4.2.2*
 
 Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
 

@@ -1,6 +1,10 @@
+# 4.2.2
+- **Hotfix:** Fixed a critical server crash caused by `playerstationutils.lua` missing a `self` reference during asynchronous trader spawning. This issue was heavily exacerbated by "Sector Keep-Alive" mods forcing background traders to spawn endlessly in empty sectors.
+- **Hotfix:** Deprecated and terminated the legacy `shipinfo.lua` script to fix massive 24/7 dedicated server console log spam (`player is nil`). Background sectors kept permanently loaded by "Sector Keep-Alive" mods were constantly trying to push illegal UI updates to offline players.
+
 # 4.2.1
 - **Hotfix:** Fixed a critical issue where the server would hang and players would lose connection when a ship finished a Background Scouting Mission from the Galaxy Map.
-- **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent 	inygettext collision warnings from spamming the client log.
+- **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent tinygettext collision warnings from spamming the client log.
 # Changelog
 
 All notable changes to **Cosmic Overhaul** will be documented in this file.

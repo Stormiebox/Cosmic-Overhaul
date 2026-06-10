@@ -3,7 +3,6 @@ if onServer() then
     if not entity then return end
 
     if not entity.aiOwned and (entity.isShip or entity.isStation) and entity.playerOrAllianceOwned then
-        entity:addScriptOnce("data/scripts/entity/shipinfo.lua")
         entity:addScriptOnce("data/scripts/entity/fleetstatus.lua")
     end
 
