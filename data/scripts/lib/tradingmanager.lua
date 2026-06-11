@@ -109,6 +109,15 @@ function TradingManager:useUpBoughtGoods(timeStep)
                     -- Generate revenue for the faction
                     self:generateRevenue(good, amount)
 
+                    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption
+                    if amount >= 50 and math.random() < 0.15 then
+                        local cve_success, cve = pcall(include, "cosmicvaulteconomy")
+                        if cve_success and cve and cve.TriggerMarketEvent then
+                            local x, y = Sector():getCoordinates()
+                            cve.TriggerMarketEvent(good.name, x, y, 10, "boom")
+                        end
+                    end
+
                     break -- Exit loop after processing a valid good
                 end
             end

@@ -7,9 +7,9 @@ local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
 include("randomext")
 
-local mcm_SalvageCommand_buildUI_original = SalvageCommand.buildUI
+local ccm_SalvageCommand_buildUI_original = SalvageCommand.buildUI
 function SalvageCommand:buildUI(...)
-    local ui = mcm_SalvageCommand_buildUI_original(self, ...)
+    local ui = ccm_SalvageCommand_buildUI_original(self, ...)
     local originalRefresh = ui.refresh
     ui.refresh = function(self, ...)
         if originalRefresh then
@@ -28,9 +28,9 @@ function SalvageCommand:buildUI(...)
     return ui
 end
 
-local mcm_SalvageCommand_onStart_original = SalvageCommand.onStart
+local ccm_SalvageCommand_onStart_original = SalvageCommand.onStart
 function SalvageCommand:onStart(...)
-    mcm_SalvageCommand_onStart_original(self, ...)
+    ccm_SalvageCommand_onStart_original(self, ...)
     if PlayerSettings then
         local player = Player()
         PlayerSettings.set(player, "CosmicOverhaul", "salvage_safeMode", self.config.safeMode)
@@ -38,11 +38,11 @@ function SalvageCommand:onStart(...)
     end
 end
 
-local mcm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
+local ccm_SalvageCommand_getAreaSize_original = SalvageCommand.getAreaSize
 function SalvageCommand:getAreaSize(ownerIndex, shipName)
     local a1, a2, a3
-    if mcm_SalvageCommand_getAreaSize_original then
-        a1, a2, a3 = mcm_SalvageCommand_getAreaSize_original(self, ownerIndex, shipName)
+    if ccm_SalvageCommand_getAreaSize_original then
+        a1, a2, a3 = ccm_SalvageCommand_getAreaSize_original(self, ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 
@@ -77,18 +77,18 @@ function SalvageCommand:getAreaSize(ownerIndex, shipName)
         { x = shorterEdge, y = longerEdge }
 end
 
-local mcm_SalvageCommand_generateItems_original = SalvageCommand.generateItems
+local ccm_SalvageCommand_generateItems_original = SalvageCommand.generateItems
 function SalvageCommand:generateItems(amount)
     local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
     if not (cfg and cfg.enableExoticLegendarySalvage) then
-        return mcm_SalvageCommand_generateItems_original(self, amount)
+        return ccm_SalvageCommand_generateItems_original(self, amount)
     end
 
-    if not mcm_SalvageCommand_generateItems_original then
+    if not ccm_SalvageCommand_generateItems_original then
         return {}
     end
 
-    local items = mcm_SalvageCommand_generateItems_original(self, amount) or {}
+    local items = ccm_SalvageCommand_generateItems_original(self, amount) or {}
     items.turrets = items.turrets or {}
     items.subsystems = items.subsystems or {}
 

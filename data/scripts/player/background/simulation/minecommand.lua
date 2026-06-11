@@ -5,9 +5,9 @@ local PlayerSettings = include("cosmicvaultplayersettings")
 local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
 
-local mcm_MineCommand_buildUI_original = MineCommand.buildUI
+local ccm_MineCommand_buildUI_original = MineCommand.buildUI
 function MineCommand:buildUI(...)
-    local ui = mcm_MineCommand_buildUI_original(self, ...)
+    local ui = ccm_MineCommand_buildUI_original(self, ...)
     local originalRefresh = ui.refresh
     ui.refresh = function(self, ...)
         if originalRefresh then
@@ -26,9 +26,9 @@ function MineCommand:buildUI(...)
     return ui
 end
 
-local mcm_MineCommand_onStart_original = MineCommand.onStart
+local ccm_MineCommand_onStart_original = MineCommand.onStart
 function MineCommand:onStart(...)
-    mcm_MineCommand_onStart_original(self, ...)
+    ccm_MineCommand_onStart_original(self, ...)
     if PlayerSettings then
         local player = Player()
         PlayerSettings.set(player, "CosmicOverhaul", "mine_safeMode", self.config.safeMode)
@@ -36,11 +36,11 @@ function MineCommand:onStart(...)
     end
 end
 
-local mcm_MineCommand_getAreaSize_original = MineCommand.getAreaSize
+local ccm_MineCommand_getAreaSize_original = MineCommand.getAreaSize
 function MineCommand:getAreaSize(ownerIndex, shipName)
     local a1, a2, a3
-    if mcm_MineCommand_getAreaSize_original then
-        a1, a2, a3 = mcm_MineCommand_getAreaSize_original(self, ownerIndex, shipName)
+    if ccm_MineCommand_getAreaSize_original then
+        a1, a2, a3 = ccm_MineCommand_getAreaSize_original(self, ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 

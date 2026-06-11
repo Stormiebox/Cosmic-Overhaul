@@ -2,13 +2,13 @@ local SimulationUtility = include 'simulationutility'
 local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
 
-local mcm_uiTimestamp
+local ccm_uiTimestamp
 
 -- After everything else with analysis, do an extra check for whether or not a resource depot is in
 -- the same sector
-local mcm_RefineCommand_onAreaAnalysisFinished_original = RefineCommand.onAreaAnalysisFinished
+local ccm_RefineCommand_onAreaAnalysisFinished_original = RefineCommand.onAreaAnalysisFinished
 function RefineCommand:onAreaAnalysisFinished(results, meta)
-    mcm_RefineCommand_onAreaAnalysisFinished_original(self, results, meta)
+    ccm_RefineCommand_onAreaAnalysisFinished_original(self, results, meta)
 
     local playerShip = ShipDatabaseEntry(meta.faction.index, meta.shipName)
     if not playerShip then return end
@@ -31,9 +31,9 @@ end
 
 -- When calculating prediction, improve things if area analysis flagged a friendly refinery in the
 -- same sector as the ship
-local mcm_RefineCommand_calculatePrediction_original = RefineCommand.calculatePrediction
+local ccm_RefineCommand_calculatePrediction_original = RefineCommand.calculatePrediction
 function RefineCommand:calculatePrediction(ownerIndex, shipName, area, config)
-    local prediction = mcm_RefineCommand_calculatePrediction_original(self, ownerIndex, shipName, area, config)
+    local prediction = ccm_RefineCommand_calculatePrediction_original(self, ownerIndex, shipName, area, config)
     if area.analysis.sameSectorDepot then
         -- If it's the same sector, reduce duration by the greater of one third or 3 minutes, but
         -- never below 3 minutes
@@ -51,16 +51,16 @@ function RefineCommand:calculatePrediction(ownerIndex, shipName, area, config)
 end
 
 -- Update the assessment generator with nice flavor text for the refine bonuses
-local mcm_RefineCommand_generateAssessmentFromPrediction_original
+local ccm_RefineCommand_generateAssessmentFromPrediction_original
 = RefineCommand.generateAssessmentFromPrediction
 function RefineCommand:generateAssessmentFromPrediction(prediction, captain, ownerIndex, shipName, area, config)
-    local originalResult = mcm_RefineCommand_generateAssessmentFromPrediction_original(
+    local originalResult = ccm_RefineCommand_generateAssessmentFromPrediction_original(
         self, prediction, captain, ownerIndex, shipName, area, config)
     if originalResult == '' then return '' end
 
     if area.analysis.sameSectorDepot then
         -- Somewhat fragile assumptions; we're going to replace the "refine lines" and "friendly lines"
-        local inSectorLine = SimulationUtility.getSameSectorDepotLine(mcm_uiTimestamp)
+        local inSectorLine = SimulationUtility.getSameSectorDepotLine(ccm_uiTimestamp)
         originalResult[1] = ''
         originalResult[2] = inSectorLine
     end
@@ -68,24 +68,24 @@ function RefineCommand:generateAssessmentFromPrediction(prediction, captain, own
     return originalResult
 end
 
-local mcm_RefineCommand_buildUI_original = RefineCommand.buildUI
+local ccm_RefineCommand_buildUI_original = RefineCommand.buildUI
 function RefineCommand:buildUI(...)
-    local ui = mcm_RefineCommand_buildUI_original(self, ...)
+    local ui = ccm_RefineCommand_buildUI_original(self, ...)
     local originalRefresh = ui.refresh
     ui.refresh = function(self, ownerIndex, shipName, area, config)
         if not config then
-            mcm_uiTimestamp = appTimeMs()
+            ccm_uiTimestamp = appTimeMs()
         end
         originalRefresh(self, ownerIndex, shipName, area, config)
     end
     return ui
 end
 
-local mcm_RefineCommand_getAreaSize_original = RefineCommand.getAreaSize
+local ccm_RefineCommand_getAreaSize_original = RefineCommand.getAreaSize
 function RefineCommand:getAreaSize(ownerIndex, shipName)
     local a1, a2, a3
-    if mcm_RefineCommand_getAreaSize_original then
-        a1, a2, a3 = mcm_RefineCommand_getAreaSize_original(self, ownerIndex, shipName)
+    if ccm_RefineCommand_getAreaSize_original then
+        a1, a2, a3 = ccm_RefineCommand_getAreaSize_original(self, ownerIndex, shipName)
     end
     if not a1 then a1 = { x = 15, y = 15 } end
 

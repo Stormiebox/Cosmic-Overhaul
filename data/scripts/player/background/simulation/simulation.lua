@@ -48,10 +48,10 @@ Balancing:
         return ARCC_Simulation_secure_original()
     end
 
-    -- ARCC and MCM logic for makeCommand
-    local mcm_Simulation_makeCommand_original = Simulation.makeCommand
+    -- ARCC and ccm logic for makeCommand
+    local ccm_Simulation_makeCommand_original = Simulation.makeCommand
     function Simulation.makeCommand(...)
-        local command = mcm_Simulation_makeCommand_original(...)
+        local command = ccm_Simulation_makeCommand_original(...)
 
         -- Hook new, generalized logic for immediate delivery into addYield
         -- Also include new generalized reputation gain logic
@@ -60,8 +60,8 @@ Balancing:
             Simulation.tryChangeRelationsForMoney(self, money)
 
             local immediate = self.config.immediateDelivery
-                or (self.config.mcm and self.config.mcm.immediateDelivery)
-            local recalled = self.data and self.data.mcm and self.data.mcm.recalled
+                or (self.config.ccm and self.config.ccm.immediateDelivery)
+            local recalled = self.data and self.data.ccm and self.data.ccm.recalled
 
             if immediate and not recalled then
                 local parent = getParentFaction()
@@ -85,13 +85,13 @@ Balancing:
         if not command
             or not command.data
             or not command.data.prediction
-            or not command.data.prediction.mcm
-            or not command.data.prediction.mcm.moneyToRelationEntries
+            or not command.data.prediction.ccm
+            or not command.data.prediction.ccm.moneyToRelationEntries
         then
             return
         end
 
-        for _, changeEntry in pairs(command.data.prediction.mcm.moneyToRelationEntries) do
+        for _, changeEntry in pairs(command.data.prediction.ccm.moneyToRelationEntries) do
             local moneyAmount = money or 0
             if changeEntry.moneyAmount then
                 if changeEntry.moneyAmount.min and changeEntry.moneyAmount.max then
@@ -161,7 +161,7 @@ Balancing:
             timeToApply = timeToApply*ARCC_offlineTimeReplayRatio
             timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
         else
-            print("[ARCC] Offline catch-up is disabled via MCM. Skipping catch-up.")
+            print("[ARCC] Offline catch-up is disabled via ccm. Skipping catch-up.")
         end
 
         return timeToApply

@@ -168,7 +168,7 @@ function CommandCenter.serverFetchData()
 
             -- Format ETA and Status
             if cmd.data then
-                if cmd.data.mcm and cmd.data.mcm.recalled then
+                if cmd.data.ccm and cmd.data.ccm.recalled then
                     entry.status = "Recalled"%_T
                     entry.eta = "-"
                 else

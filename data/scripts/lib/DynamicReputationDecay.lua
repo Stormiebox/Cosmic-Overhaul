@@ -101,9 +101,15 @@ function DynamicReputationDecay.getUpdateInterval()
     return DecayConfig.updateIntervalSec
 end
 
--- Processes the decay math for a specific entity (Player or Alliance)
 local function processDecayForEntity(entity, factionStr, now, galaxy)
+    local cv_task_success, cv_task = pcall(include, "cosmicvaulttask")
+    local iters = 0
     for idStr in string.gmatch(factionStr, "([^,]+)") do
+        iters = iters + 1
+        if cv_task_success and cv_task and cv_task.Yield and (iters % 10 == 0) then
+            cv_task.Yield()
+        end
+
         local aiFactionIndex = tonumber(idStr)
 
         -- Fetch the persistent timestamp for this faction
@@ -150,11 +156,25 @@ function DynamicReputationDecay.updateServer(timeStep)
     local factionStr = Server():getValue("factions")
     if type(factionStr) ~= "string" or factionStr == "" then return end
 
-    -- Process Player
-    processDecayForEntity(player, factionStr, now, galaxy)
+    local cv_task_success, cv_task = pcall(include, "cosmicvaulttask")
+    if cv_task_success and cv_task and cv_task.RunAsync then
+        local taskName = "Decay_" .. player.index
+        cv_task.RunAsync(taskName, function()
+            -- Process Player
+            processDecayForEntity(player, factionStr, now, galaxy)
 
-    -- Process Alliance
-    if player.alliance then
-        processDecayForEntity(player.alliance, factionStr, now, galaxy)
+            -- Process Alliance
+            if player.alliance then
+                processDecayForEntity(player.alliance, factionStr, now, galaxy)
+            end
+        end)
+    else
+        -- Process Player
+        processDecayForEntity(player, factionStr, now, galaxy)
+
+        -- Process Alliance
+        if player.alliance then
+            processDecayForEntity(player.alliance, factionStr, now, galaxy)
+        end
     end
 end

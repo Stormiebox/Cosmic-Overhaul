@@ -3,7 +3,7 @@ local CaptainUtility = include("captainutility")
 local SimulationUtility = include("simulationutility")
 
 -- Used for nicer refreshing of assessment lines
-local mcm_uiTimestamp
+local ccm_uiTimestamp
 
 -- This unfortunately needs to be entirely replaced (not shadowed) because the original
 -- threw the prediction away!
@@ -14,7 +14,7 @@ function ScoutCommand:initialize()
     self.data.attackChance = prediction.attackChance.value
     self.data.attackLocation = prediction.attackLocation
     -- This is new
-    self.data.mcm = prediction.mcm
+    self.data.ccm = prediction.ccm
 end
 
 local original_ScoutCommand_calculatePrediction = ScoutCommand.calculatePrediction
@@ -24,35 +24,35 @@ function ScoutCommand:calculatePrediction(ownerIndex, shipName, area, config)
     local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
 
     if ship then
-        prediction = ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
+        prediction = ScoutCommand.ccm_getExtendedPrediction(prediction, ship, area)
     else
-        prediction.mcm = {}
+        prediction.ccm = {}
     end
 
     return prediction
 end
 
-function ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
+function ScoutCommand.ccm_getExtendedPrediction(prediction, ship, area)
     -- Keep mod values in their own part of the prediction
-    prediction.mcm = {}
+    prediction.ccm = {}
 
     -- Record the "real" raw values in the prediction (Extract Jump Reach)
-    prediction.mcm.deepScanRange = ScoutCommand.getEstimatedDeepScanRange(ship)
+    prediction.ccm.deepScanRange = ScoutCommand.getEstimatedDeepScanRange(ship)
     local reach, passedTime, cooldown = ship:getHyperspaceProperties()
-    prediction.mcm.hyperspaceCooldown = cooldown or 0
+    prediction.ccm.hyperspaceCooldown = cooldown or 0
 
     -- We use a scaled version of the raw inputs to keep things a little smoother and not have
     -- numbers change too wildly, even if it's a little less true to simulation
-    local deepScanImpact = ScoutCommand.mcm_getDeepScanImpact(prediction.mcm.deepScanRange)
-    local scaledCooldown = ScoutCommand.mcm_getScaledHyperdriveSpeed(prediction.mcm.hyperspaceCooldown)
+    local deepScanImpact = ScoutCommand.ccm_getDeepScanImpact(prediction.ccm.deepScanRange)
+    local scaledCooldown = ScoutCommand.ccm_getScaledHyperdriveSpeed(prediction.ccm.hyperspaceCooldown)
 
     -- Keep a copy of all the sectors we might do something interesting with
-    prediction.mcm.sectorsLeftToExplore = ScoutCommand.mcm_getScoutableCandidateSectorsInArea(area)
-    prediction.mcm.numSectorsToExplore = #prediction.mcm.sectorsLeftToExplore
-    shuffle(random(), prediction.mcm.sectorsLeftToExplore)
+    prediction.ccm.sectorsLeftToExplore = ScoutCommand.ccm_getScoutableCandidateSectorsInArea(area)
+    prediction.ccm.numSectorsToExplore = #prediction.ccm.sectorsLeftToExplore
+    shuffle(random(), prediction.ccm.sectorsLeftToExplore)
 
     -- Count how many sectors are just flybys and how many might have a real look
-    local numInterestingSectors = #prediction.mcm.sectorsLeftToExplore
+    local numInterestingSectors = #prediction.ccm.sectorsLeftToExplore
     local numBoringSectors = #area.analysis.reachableCoordinates-numInterestingSectors
 
     local captain = ship:getCaptain()
@@ -81,19 +81,19 @@ function ScoutCommand.mcm_getExtendedPrediction(prediction, ship, area)
     end
 
     prediction.duration.value = duration
-    prediction.mcm.timePerSector = duration/#prediction.mcm.sectorsLeftToExplore
+    prediction.ccm.timePerSector = duration/#prediction.ccm.sectorsLeftToExplore
 
     return prediction
 end
 
-local mcm_ScoutCommand_update_original = ScoutCommand.update
+local ccm_ScoutCommand_update_original = ScoutCommand.update
 function ScoutCommand:update(...)
-    mcm_ScoutCommand_update_original(self, ...)
-    self:mcm_update()
+    ccm_ScoutCommand_update_original(self, ...)
+    self:ccm_update()
 end
 
-function ScoutCommand:mcm_update()
-    if not self.data.mcm then return end
+function ScoutCommand:ccm_update()
+    if not self.data.ccm then return end
 
     -- We're going to use update to incrementally reveal sectors instead of all at once.
     -- Even on the default 1-minute timer, it's important to not do too much work here.
@@ -101,16 +101,16 @@ function ScoutCommand:mcm_update()
     -- Figure out how many sectors we should reveal for how far we are in the command,
     -- storing them in a (small) table
     local ratioComplete = self.data.runTime/self.data.duration
-    local totalSectors = self.data.mcm.numSectorsToExplore
+    local totalSectors = self.data.ccm.numSectorsToExplore
     local expectedComplete = math.floor(ratioComplete*totalSectors)
     -- Stormbox: Prevent infinite loop if runTime overshoots duration!
     expectedComplete = math.min(expectedComplete, totalSectors)
 
     local sectorsThisUpdate = {}
 
-    while (totalSectors-#self.data.mcm.sectorsLeftToExplore) < expectedComplete do
-        if #self.data.mcm.sectorsLeftToExplore == 0 then break end -- Stormbox: Extra safety check
-        local nextSector = table.remove(self.data.mcm.sectorsLeftToExplore)
+    while (totalSectors-#self.data.ccm.sectorsLeftToExplore) < expectedComplete do
+        if #self.data.ccm.sectorsLeftToExplore == 0 then break end -- Stormbox: Extra safety check
+        local nextSector = table.remove(self.data.ccm.sectorsLeftToExplore)
         if nextSector then
             table.insert(sectorsThisUpdate, nextSector)
         end
@@ -127,7 +127,7 @@ function ScoutCommand:mcm_update()
     end
 end
 
-function ScoutCommand.mcm_getScoutableCandidateSectorsInArea(area)
+function ScoutCommand.ccm_getScoutableCandidateSectorsInArea(area)
     local seed = GameSeed()
     local faction = getParentFaction()
     local specs = SectorSpecifics()
@@ -173,7 +173,7 @@ function ScoutCommand.getEstimatedDeepScanRange(ship)
     return range
 end
 
-function ScoutCommand.mcm_getDeepScanImpact(rawRange)
+function ScoutCommand.ccm_getDeepScanImpact(rawRange)
     -- The intent of this math is to make the effect of range progression feel a little
     -- more linear and gradual on both ends
     local maxPowerBase = 9
@@ -186,7 +186,7 @@ function ScoutCommand.mcm_getDeepScanImpact(rawRange)
     return powerComponent+multComponent+flatFactor
 end
 
-function ScoutCommand.mcm_getScaledHyperdriveSpeed(rawSpeed)
+function ScoutCommand.ccm_getScaledHyperdriveSpeed(rawSpeed)
     -- The intention of this is to normalize speeds to keep cooldown as "a benefit"
     -- and not an overpowering factor; that departs from "realism" a bit but so it goes
     local powerOffset = 30
@@ -233,23 +233,23 @@ function ScoutCommand.getCargoDurationMultiplier(ship)
     return getCargoDurationMultiplierForCaptain(captain)
 end
 
-local mcm_ScoutCommand_generateAssessmentFromPrediction_original = ScoutCommand.generateAssessmentFromPrediction
+local ccm_ScoutCommand_generateAssessmentFromPrediction_original = ScoutCommand.generateAssessmentFromPrediction
 function ScoutCommand:generateAssessmentFromPrediction(prediction, ...)
-    local lines = mcm_ScoutCommand_generateAssessmentFromPrediction_original(self, prediction, ...)
-    if not prediction or not prediction.mcm then return lines end
-    local range = (prediction.mcm and prediction.mcm.deepScanRange) or 0
+    local lines = ccm_ScoutCommand_generateAssessmentFromPrediction_original(self, prediction, ...)
+    if not prediction or not prediction.ccm then return lines end
+    local range = (prediction.ccm and prediction.ccm.deepScanRange) or 0
 
-    local scanLine = SimulationUtility.getDeepScanAssessmentLine(mcm_uiTimestamp, range)
+    local scanLine = SimulationUtility.getDeepScanAssessmentLine(ccm_uiTimestamp, range)
     table.insert(lines, 2, scanLine)
 
     -- This is a fragile replacement of the "underRadar" lines
-    local reportLine = SimulationUtility.getIncrementalReportAssessmentLine(mcm_uiTimestamp)
+    local reportLine = SimulationUtility.getIncrementalReportAssessmentLine(ccm_uiTimestamp)
     lines[6] = reportLine
 
     return lines
 end
 
-local mcm_ScoutCommand_onRecall_original = ScoutCommand.onRecall
+local ccm_ScoutCommand_onRecall_original = ScoutCommand.onRecall
 function ScoutCommand:onRecall()
     --[[
         We don't want recall to do a partial reveal anymore since the command does incremental
@@ -258,16 +258,16 @@ function ScoutCommand:onRecall()
         candidates.
     ]]
     self.area.analysis.reachableCoordinates = {}
-    mcm_ScoutCommand_onRecall_original(self)
+    ccm_ScoutCommand_onRecall_original(self)
 end
 
-local mcm_ScoutCommand_buildUI_original = ScoutCommand.buildUI
+local ccm_ScoutCommand_buildUI_original = ScoutCommand.buildUI
 function ScoutCommand:buildUI(...)
-    local ui = mcm_ScoutCommand_buildUI_original(self, ...)
+    local ui = ccm_ScoutCommand_buildUI_original(self, ...)
     local refreshOriginal = ui.refresh
     ui.refresh = function(self, ...)
         if not config then
-            mcm_uiTimestamp = appTimeMs()
+            ccm_uiTimestamp = appTimeMs()
         end
         refreshOriginal(self, ...)
     end
@@ -379,18 +379,18 @@ function ScoutCommand:getNotedView(view, note, captain)
     return view
 end
 
-local mcm_ScoutCommand_onFinish_original = ScoutCommand.onFinish
+local ccm_ScoutCommand_onFinish_original = ScoutCommand.onFinish
 function ScoutCommand:onFinish()
     -- Finish any remaining sectors incrementally
-    self:mcm_update()
+    self:ccm_update()
     
     -- Stormbox: This intercepts the vanilla onFinish to prevent a massive server hang/crash.
     -- Vanilla onFinish attempts to reveal ALL reachableCoordinates at once. Since we already
-    -- reveal them incrementally in mcm_update(), doing it again here causes massive lag spikes.
+    -- reveal them incrementally in ccm_update(), doing it again here causes massive lag spikes.
     -- We temporarily empty the table so the original function doesn't run its heavy loop.
     local oldCoords = self.area.analysis.reachableCoordinates
     self.area.analysis.reachableCoordinates = {}
-    mcm_ScoutCommand_onFinish_original(self)
+    ccm_ScoutCommand_onFinish_original(self)
     self.area.analysis.reachableCoordinates = oldCoords
 end
 

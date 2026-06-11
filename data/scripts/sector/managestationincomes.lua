@@ -96,6 +96,18 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
 
     inv:addOrDrop(system)
     faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+
+    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
+    if system.rarity and system.rarity.value >= RarityType.Legendary then
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
+        if cvn_success and cvn and cvn.publishArticle then
+            cvn.publishArticle({
+                title = string.format("Experimental Tech Found in %s!", sector.name),
+                content = string.format("The Research & Development division at %s %s has successfully engineered a %s %s!", faction.name, station.name, system.rarity.name, system.name),
+                category = "Economy"
+            })
+        end
+    end
 end
 
 function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
@@ -110,6 +122,18 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
 
     inv:addOrDrop(turret)
     faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+
+    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
+    if turret.rarity and turret.rarity.value >= RarityType.Legendary then
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
+        if cvn_success and cvn and cvn.publishArticle then
+            cvn.publishArticle({
+                title = string.format("Devastating Weaponry Forged in %s!", sector.name),
+                content = string.format("The engineering teams at %s %s have successfully assembled a prototype %s %s!", faction.name, station.name, turret.rarity.name, turret.weaponPrefix),
+                category = "War"
+            })
+        end
+    end
 end
 
 function ManageStationIncomes.giveStationMoney(station, _seller)
