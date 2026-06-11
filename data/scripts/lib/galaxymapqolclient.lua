@@ -73,6 +73,7 @@ function GalaxyMapQoL.initialize()
 		["highlightAllianceNotes"] = {false},
         ["selectedOverlay"] = {0},
         ["deleteUndo"] = {{}},
+        ["draggableUI"] = {false},
 	}
 	local isModified
 	Config, isModified = Azimuth.loadConfig("GalaxyMapQoL", configOptions, true, true)
@@ -80,7 +81,9 @@ function GalaxyMapQoL.initialize()
 		Azimuth.saveConfig("GalaxyMapQoL", Config, configOptions, true, true)
 	end
 	for i = 1, 10 do
-		Config.colors[i] = ColorInt(Config.colors[i])
+		local c = Config.colors[i]
+		if not c or c == 0 then c = defaultColors[i] end
+		Config.colors[i] = ColorInt(c)
 	end
 
 	for i = 1, #Integration do
@@ -158,12 +161,23 @@ function GalaxyMapQoL.initUI()
 	end
     selectedIcon = 1
 
-	editIconWindow = map:createWindow(Rect(709, 50, 1009, 340))
+	editIconWindow = map:createWindow(Rect(709, 30, 1009, 340))
 	editIconWindow.visible = false
-	partitions = CosmicUIHorizontalProportionalSplitter(Rect(editIconWindow.size), 10, 10, {15, 20, 24, 0.5, 25})
+	editIconWindow.moveable = Config.draggableUI == true
+	partitions = CosmicUIHorizontalProportionalSplitter(Rect(editIconWindow.size), 10, 10, {35, 20, 24, 0.5, 25})
 
-	coordinatesLabel = editIconWindow:createLabel(partitions[1], "", 14)
+	local titleLabel = editIconWindow:createLabel(partitions[1], "Galaxy Map Icons"%_t, 15)
+	titleLabel.position = titleLabel.position - vec2(0, 10)
+	titleLabel.centered = true
+	coordinatesLabel = editIconWindow:createLabel(partitions[1], "", 12)
+	coordinatesLabel.position = coordinatesLabel.position + vec2(0, 10)
 	coordinatesLabel.centered = true
+	
+	local draggableCheckBox = editIconWindow:createCheckBox(Rect(10, 10, 25, 25), "", "onDraggableUICheckBoxChecked")
+	draggableCheckBox.tooltip = "Toggle Draggable Windows"%_t
+	draggableCheckBox:setCheckedNoCallback(Config.draggableUI == true)
+	local dragPic = editIconWindow:createPicture(Rect(30, 7, 48, 25), "data/textures/icons/move.png")
+	dragPic.isIcon = true
 
 	local partition = partitions[2]
 	local offset = (partition.width - 275) / 2
@@ -183,7 +197,10 @@ function GalaxyMapQoL.initUI()
 		colorPictures[i+1] = { picture = picture, color = color }
 	end
 	partition = vPartitions:partition(0)
-	colorSelector = UIRectangle(editIconWindow, Rect(partition.lower - vec2(1, 1), partition.upper + vec2(1, 1)), ColorRGB(1, 1, 1), 2)
+	colorSelector = editIconWindow:createPicture(Rect(partition.lower - vec2(1, 1), partition.upper + vec2(1, 1)), "data/textures/icons/galaxymapqol/ui-filled.png")
+	colorSelector.color = ColorRGB(1, 1, 1)
+	colorSelector.layer = 2
+	colorSelector.isIcon = true
 	selectedColorIndex = 1
 
 	-- removed edit button
@@ -208,7 +225,10 @@ function GalaxyMapQoL.initUI()
 		end
 		if i > #icons then break end
 	end
-	iconSelector = UIRectangle(editIconScrollFrame, Rect(), ColorRGB(1, 1, 1), 2)
+	iconSelector = editIconScrollFrame:createPicture(Rect(), "data/textures/icons/galaxymapqol/select.png")
+	iconSelector.color = ColorRGB(1, 1, 1)
+	iconSelector.layer = 2
+	iconSelector.isIcon = true
 	iconSelector.rect = Rect(iconPictures[1].lower - vec2(3, 3), iconPictures[1].upper + vec2(3, 3))
 
 	splitter = UIVerticalSplitter(partitions[5], 10, 0, 0.5)
@@ -280,41 +300,49 @@ function GalaxyMapQoL.initUI()
 		-- removed colorPicker
 	end
 
-	delIconWindow = map:createWindow(Rect(1009, 100, 1048, 290))
+	delIconWindow = map:createWindow(Rect(1009, 62, 1048, 290))
 	delIconWindow.visible = false
+	delIconWindow.moveable = Config.draggableUI == true
 
-    local h1splitter = UIHorizontalMultiSplitter(Rect(delIconWindow.size), 10, 5, 4)
+    local h1splitter = UIHorizontalMultiSplitter(Rect(delIconWindow.size), 10, 5, 5)
 
-    delbtn1 = delIconWindow:createButton(h1splitter:partition(0), "", "removeIconsMatchingColor")
-	delpic1 = delIconWindow:createPicture(h1splitter:partition(0), "data/textures/icons/galaxymapqol/ui-filled.png")
+    local dragPicDel = delIconWindow:createPicture(h1splitter:partition(0), "data/textures/icons/move.png")
+    dragPicDel.isIcon = true
+
+    delbtn1 = delIconWindow:createButton(h1splitter:partition(1), "", "removeIconsMatchingColor")
+	delpic1 = delIconWindow:createPicture(h1splitter:partition(1), "data/textures/icons/galaxymapqol/ui-filled.png")
     delpic1.position = delpic1.position + vec2(1, 1)
-    delbtn2 = delIconWindow:createButton(h1splitter:partition(1), "", "removeIconsMatchingIcon")
-    delpic2 = delIconWindow:createPicture(h1splitter:partition(1), "data/textures/icons/galaxymapqol/empty.png")
+    delbtn2 = delIconWindow:createButton(h1splitter:partition(2), "", "removeIconsMatchingIcon")
+    delpic2 = delIconWindow:createPicture(h1splitter:partition(2), "data/textures/icons/galaxymapqol/empty.png")
     delpic2.size = vec2(delpic2.size - 2, delpic2.size + 2) delpic2.position = delpic2.position + vec2(1, 1) delpic2.flipped = true
-    delbtn3 = delIconWindow:createButton(h1splitter:partition(2), "", "removeIconsMatching")
+    delbtn3 = delIconWindow:createButton(h1splitter:partition(3), "", "removeIconsMatching")
     delbtn3.textSize = 11
-    delpic3 = delIconWindow:createPicture(h1splitter:partition(2), "data/textures/icons/galaxymapqol/empty.png")
+    delpic3 = delIconWindow:createPicture(h1splitter:partition(3), "data/textures/icons/galaxymapqol/empty.png")
     delpic3.size = vec2(delpic3.size - 2, delpic3.size + 2) delpic3.position = delpic3.position + vec2(1, 1) delpic3.flipped = true
-    delbtn4 = delIconWindow:createButton(h1splitter:partition(3), "", "removeAllIcons")
+    delbtn4 = delIconWindow:createButton(h1splitter:partition(4), "", "removeAllIcons")
     delbtn4.textSize = 11
-    delbtn5 = delIconWindow:createButton(h1splitter:partition(4), "Off", "deleteIconsMode")
+    delbtn5 = delIconWindow:createButton(h1splitter:partition(5), "Off", "deleteIconsMode")
     delbtn5.textSize = 11 delbtn5.tooltip = "Toggle Delete Mode On/Off\nSelecting A Sector with an icon will\ndelete the icon while this is On."
-	delpic4 = delIconWindow:createPicture(h1splitter:partition(4), "data/textures/icons/galaxymapqol/select.png")
+	delpic4 = delIconWindow:createPicture(h1splitter:partition(5), "data/textures/icons/galaxymapqol/select.png")
     delpic4.position = delpic4.position + vec2(0, 0) delpic4.color = ColorARGB(0.8, 1, 0, 0)
     deleteIconsMode = false
 
-    helpIconWindow = map:createWindow(Rect(670, 173, 709, 290))
+    helpIconWindow = map:createWindow(Rect(670, 134, 709, 290))
 	helpIconWindow.visible = false
+	helpIconWindow.moveable = Config.draggableUI == true
 
-    local h2splitter = UIHorizontalMultiSplitter(Rect(helpIconWindow.size), 10, 5, 2)
+    local h2splitter = UIHorizontalMultiSplitter(Rect(helpIconWindow.size), 10, 5, 3)
 
-    helpbtn1 = helpIconWindow:createButton(h2splitter:partition(0), "", "restoreDeleteUndo")
+    local dragPicHelp = helpIconWindow:createPicture(h2splitter:partition(0), "data/textures/icons/move.png")
+    dragPicHelp.isIcon = true
+
+    helpbtn1 = helpIconWindow:createButton(h2splitter:partition(1), "", "restoreDeleteUndo")
     helpbtn1.textSize = 11 helpbtn1.tooltip = "Undo Prev Delete"
-    helppic1 = helpIconWindow:createPicture(h2splitter:partition(0), "data/textures/icons/galaxymapqol/clockwise-rotation.png")
+    helppic1 = helpIconWindow:createPicture(h2splitter:partition(1), "data/textures/icons/galaxymapqol/clockwise-rotation.png")
     helppic1.size = vec2(helppic1.size - 2, helppic1.size + 2) helppic1.position = helppic1.position + vec2(1, 1) helppic1.flipped = true helppic1.flippedX = true
-    helpbtn2 = helpIconWindow:createButton(h2splitter:partition(2), "Off", "helpIconsMode")
+    helpbtn2 = helpIconWindow:createButton(h2splitter:partition(3), "Off", "helpIconsMode")
     helpbtn2.textSize = 11 helpbtn2.tooltip = "Toggle Instant Mode On/Off\nSelecting A Sector with an icon will\nadd the icon while this is On."
-	helppic2 = helpIconWindow:createPicture(h2splitter:partition(2), "data/textures/icons/galaxymapqol/select.png")
+	helppic2 = helpIconWindow:createPicture(h2splitter:partition(3), "data/textures/icons/galaxymapqol/select.png")
     helppic2.position = helppic2.position + vec2(0, 0) helppic2.color = ColorARGB(0.8, 1, 0, 0)
     helpIconsMode = false GalaxyMapQoL.updateAdditionalButtons()
 end
@@ -1116,6 +1144,13 @@ function GalaxyMapQoL.onWarZoneCheckBoxChecked()
     if isServerUsed and warZoneCheckBox.checked then
         invokeServerFunction("syncWarZones")
     end
+end
+
+function GalaxyMapQoL.onDraggableUICheckBoxChecked(checkbox)
+    Config.draggableUI = checkbox.checked
+    if editIconWindow then editIconWindow.moveable = checkbox.checked end
+    if delIconWindow then delIconWindow.moveable = checkbox.checked end
+    if helpIconWindow then helpIconWindow.moveable = checkbox.checked end
 end
 
 function GalaxyMapQoL.onLockRadarCheckBoxChecked()

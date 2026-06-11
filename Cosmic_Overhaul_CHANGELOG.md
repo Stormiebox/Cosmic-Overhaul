@@ -1,6 +1,10 @@
 # 4.2.3
-- **Hotfix:** Fixed a bug in with an incorrect script check path was causing the sector to fail to detect existing traders, continuously spawning hundreds of AI ships in permanently-simulated sectors until the game hung.
+- **Hotfix:** Fixed a bug with an incorrect script check path causing the sector to fail to detect existing traders, continuously spawning hundreds of AI ships in permanently-simulated sectors until the game hung.
 - **Hotfix:** Fixed a fatal client-side crash in the Map QoL UI where a missing reference to the removed `colorPicker` caused the update loop to crash, preventing players from selecting alternate colors for map icons.
+- **Hotfix:** Fixed an issue where the Map QoL UI color arrays would revert to pure black upon loading. The UI will now properly fallback to vibrant default colors.
+- **Polish:** Added a toggle button allowing players to make all Galaxy Map QoL windows draggable across the screen.
+- **Polish:** Added proper UI headers and draggable icon indicators to the Galaxy Map QoL windows.
+- **Polish:** Improved the visual clarity of selecting map icons by utilizing the 4-corner targeting reticle instead of a solid white box.
 
 # 4.2.2
 - **Hotfix:** Fixed a critical server crash caused by `playerstationutils.lua` missing a `self` reference during asynchronous trader spawning. This issue was heavily exacerbated by "Sector Keep-Alive" mods forcing background traders to spawn endlessly in empty sectors.
