@@ -246,7 +246,13 @@ function onSeedNews()
             category = "Market Watch",
             content = string.format("Financial analysts report massive growth for %s in sector %s. Investors are pouring credits into the surrounding regional economy as profitability skyrockets to record highs.", bestFactory.title or "Unknown Factory", bestFactory.location or "Unknown")
         }
-        server:sendCallback("onCCNewsPublishArticle", article)
+        
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
+        if cvn_success and cvn and cvn.publishArticle then
+            cvn.publishArticle(article)
+        else
+            server:sendCallback("onCCNewsPublishArticle", article)
+        end
     end
 
     if worstFactory and lowestProfit < -1000 then
@@ -255,6 +261,12 @@ function onSeedNews()
             category = "Market Watch",
             content = string.format("A severe economic downturn has struck %s in sector %s. Supply chains are failing, and the station is bleeding credits rapidly. Opportunistic traders are advised to avoid the area or exploit the shortages.", worstFactory.title or "Unknown Factory", worstFactory.location or "Unknown")
         }
-        server:sendCallback("onCCNewsPublishArticle", article)
+        
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
+        if cvn_success and cvn and cvn.publishArticle then
+            cvn.publishArticle(article)
+        else
+            server:sendCallback("onCCNewsPublishArticle", article)
+        end
     end
 end

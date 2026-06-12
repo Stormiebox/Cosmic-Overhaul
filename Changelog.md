@@ -1,4 +1,21 @@
+# Changelog
+
+All notable changes to **Cosmic Overhaul** will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+--
+
+## v4.3.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
+
+- Fully integrated with the Cosmic Vault API framework.
+- Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
+
+### LEGACY LOGS BELOW - KEPT FOR HISTORICAL PURPOSES!
+
 # 4.2.3
+
 - **Hotfix:** Fixed a bug with an incorrect script check path causing the sector to fail to detect existing traders, continuously spawning hundreds of AI ships in permanently-simulated sectors until the game hung.
 - **Hotfix:** Fixed a fatal client-side crash in the Map QoL UI where a missing reference to the removed `colorPicker` caused the update loop to crash, preventing players from selecting alternate colors for map icons.
 - **Hotfix:** Fixed an issue where the Map QoL UI color arrays would revert to pure black upon loading. The UI will now properly fallback to vibrant default colors.
@@ -7,21 +24,19 @@
 - **Polish:** Improved the visual clarity of selecting map icons by utilizing the 4-corner targeting reticle instead of a solid white box.
 
 # 4.2.2
+
 - **Hotfix:** Fixed a critical server crash caused by `playerstationutils.lua` missing a `self` reference during asynchronous trader spawning. This issue was heavily exacerbated by "Sector Keep-Alive" mods forcing background traders to spawn endlessly in empty sectors.
 - **Hotfix:** Deprecated and terminated the legacy `shipinfo.lua` script to fix massive 24/7 dedicated server console log spam (`player is nil`). Background sectors kept permanently loaded by "Sector Keep-Alive" mods were constantly trying to push illegal UI updates to offline players.
 
 # 4.2.1
+
 - **Hotfix:** Fixed a critical issue where the server would hang and players would lose connection when a ship finished a Background Scouting Mission from the Galaxy Map.
 - **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent tinygettext collision warnings from spamming the client log.
-# Changelog
-
-All notable changes to **Cosmic Overhaul** will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [4.2.0] - 2026-06-07
+
 ### Fixed
+
 - **Galaxy Map QoL Initialization:** Fixed a fatal client-side crash caused by deprecated os.execute folder creation. The mod now correctly uses Avorion's native createDirectory() API for configuration folders.
 - **Engine Bootstrap Compliance:** Purged invalid `initialize()` wrappers from `player/init.lua`, `sector/init.lua`, and `entity/init.lua`. Avorion expects these to be global execution scripts. This resolves a fatal bug where UI tabs, sector scripts, and background entity modifiers completely failed to load on fresh saves.
 - **Galaxy Map QoL Type Safety:** Prevented stack traces and script failures by explicitly casting config file string loads to boolean values before UI injection.
@@ -29,6 +44,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
 ### Added
+
 - **Galactic News Network Synergy (Requires Cosmic Chronicles):** The underlying economy engine (Faction Wealth tracking) now directly feeds data into the Galactic News Network. Merchant captains can use the News Board to actively hunt for "Trade Crises" and "Market Booms"!
 - **Integrated Galaxy Map QoL:** Completely integrated the `Galaxy Map QoL` mod directly into Cosmic Overhaul. It has received the "Cosmic Overhaul Treatment" which includes completely stripping out the dependency on `AzimuthLib` (players no longer need to download it) and converting it to natively use standard Avorion code and UI systems. You can now freely place customizable icons and notes directly on the galaxy map!
 - **Full Localization Support:** Processed and injected over 2,400 translated strings across 7 different languages (Chinese, French, Japanese, Portuguese, Spanish, German, and Russian). The mod is now fully translated and completely localized for non-English users.
@@ -37,9 +53,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - **In-House Laundering:** Unbranding stolen goods at your *own* station now applies a massive **90% discount** on all laundering fees, effectively allowing you to sanitize stolen cargo for pennies.
 
 ### Changed
+
 - **Shop Restock Buff:** Increased the maximum number of free restocks from 15 to 25 to provide players with a slightly larger buffer for finding specific modules. The 45-minute cooldown timer remains untouched.
 
 ### Fixed
+
 - **Reversed Merchant Pricing (Critical Economy Fix):** Fixed a massive mathematical error where the 15% Merchant Captain trade bonus was actually punishing players! Because of how the vanilla API is structured (`getBuyPrice` means what the *station* pays, not what the *player* pays), having a Merchant Captain on board was accidentally making station purchases 15% *more* expensive, and selling to stations 15% *less* profitable. This is now fully inverted and correctly working in the player's favor!
 - **Gate Travel Priority Fallback:** Restored a missing vanilla fallback when `Gate Travel Priority` is disabled. Previously, if a player disabled priority and tried to map a jump across a rift, the mod would throw a "Jump not possible" error instead of checking for a valid gate. It now correctly falls back to using gates to cross rifts when the hyperdrive cannot make the jump.
   - *Note on Engine Behavior:* If `Gate Travel Priority` is disabled, the mod correctly feeds standard `Jump` commands to the ship. However, if the ship *still* goes through a gate, this is because the core Avorion C++ Engine natively intercepts Jump orders if there is an adjacent gate connecting to the exact same destination. The core engine does this to save hyperdrive cooldown, and cannot be bypassed by mods.
@@ -48,23 +66,27 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - **MCM Integration:** The ARCC offline simulation is now **disabled by default** to protect private/local servers. Server owners can opt back into offline simulation via the Mod Configuration Menu (MCM) under the new "Offline Simulation (ARCC)" section, where they can also cap the maximum offline simulation time and adjust the offline efficiency ratio.
 
 ### Removed
+
 - **Textures Folder:** All textures were removed and migrated into `Cosmic Vault`.
 
 ## [4.1.0]
 
 ### Added
+
 - **Resource Display Customization:** Added several highly requested quality-of-life toggles directly to the Resource Display player tab. Players can now completely enable/disable the HUD widget, adjust the background opacity for better text contrast against bright nebulas, and enable "Compact Number Formatting" to cleanly shrink massive late-game numbers (e.g., 1.5B credits, 12M Trinium).
 - **Dynamic Ship Naming Engine:** Safely hooked into the native game engine to completely rewrite the procedural naming arrays for NPC ships. Military ships now use realistic naval tiers (Corvette to Leviathan), Freighters use logistics terms, Miners use industrial terms, and Traders use commerce terms.
 - **Piracy Economy Buff:** Restored the massive Black Market piracy buff! Destroyed civilian ships now drop massive amounts of illegal cargo (scaling up to 250,000 credits based on sector richness), making piracy and smuggling highly lucrative again.
 
 ### Fixed
+
 - **Vanilla Function Override Fix:** Safely removed the legacy hard-override of `shiputility.lua` and replaced it with a dynamic surgical injector. This permanently resolves any conflicts with other mods that touch ship generation functions, completely preventing unexpected VM crashes while still deploying the ship naming and piracy buffs.
 
 ## Localization
+
 - Further progress in .po files translation. Still a work-in-progress to cover all new strings.
 
-
 ---
+
 ## [4.0.0]
 
 ### Added
@@ -134,10 +156,6 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Deprecated Configs:** Removed unused and deprecated captain, map command modifiers and trader toggles from the Mod Configuration Menu (MCM) to align with the new dynamic progression systems.
 - **`shipinfo.lua` (Player Tab):** Completely removed a broken, obsolete, and performance-heavy legacy player UI tab script (`data/scripts/player/ui/shipinfo.lua`) that was superseded by the Fleet Status system.
 - **`galaxymapqolclient.lua`:** Removed an obsolete, crashing legacy script that attempted to use the deleted `moddata` system to save a single map checkbox state.
-
-
---- 4.X.X versions are the new updates. As in 4.0.0 Cosmic Overhaul underwent massive code restructure and overhaul.
---- 3.2.1 and previous versions are now legacy versions of Cosmic Overhaul. Being kept for historical tracking purposes only.
 
 ## [3.2.1] - 2026/05/25
 
@@ -226,6 +244,3 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - installation and compatibility snapshot,
   - and pointer to full wiki details.
 - Wiki remains the canonical source for full detailed feature documentation.
-
-
-

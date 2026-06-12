@@ -16,7 +16,7 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description = "A complete, thoughtful overhaul of game systems, designed to balance tedious tasks and let you truly enjoy the galaxy. Now features full Galactic News integration!",
+    description = "A complete, thoughtful overhaul of game systems, designed to balance tedious tasks and let you truly enjoy the galaxy. Now features full Galactic News integration! This version fully integrates with the Cosmic Vault API framework for unified progression, enhanced background simulation safety, and global news reporting.",
 
     -- Insert all authors into this list
     authors = { "Stormbox" },
