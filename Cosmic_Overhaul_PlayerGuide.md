@@ -142,3 +142,9 @@ Enjoy your time in the Cosmic Overhaul!
 ## 6. Full Localization Support
 
 Cosmic Overhaul is fully translated into multiple languages! If you play the game in Chinese, French, Japanese, Portuguese, Spanish, German, or Russian, all custom UIs, captain commands, and items will seamlessly adapt to your native language.
+
+
+## Latest Additions & Integrations
+
+- **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
+- **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.

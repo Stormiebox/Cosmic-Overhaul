@@ -844,3 +844,9 @@ The Smuggler's Market logic has been reworked so black-market trading is meaning
 
 </details>
 
+
+
+## Latest Additions & Integrations
+
+- **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
+- **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.
