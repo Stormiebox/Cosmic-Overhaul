@@ -9,6 +9,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v5.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
+### Bug Fixes & Compliance
+- **Multiplayer Synchronization:** Replaced all instances of `math.random` with Avorion's deterministic `random()` engine to prevent massive multiplayer client/server desyncs when generating loot, stats, and enemies.
+- **Anti-Cheat Security:** Added missing `callable` definitions to UI and bulletin board scripts to prevent Dedicated Servers from silently rejecting client sync requests.
+- **Scout Mission Fix:** Fixed a massive vanilla/mod bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the `scoutcommandnotetable` lacked dialogue lines for that specific sector template.
+
 ### Added
 - **Captain Elite Traits**: Level 3 Captains now possess massive sector-wide or unique bonuses:
   - **Commodores**: Provide a global +10% Shield and +10% Damage buff to all player/alliance ships in the sector.

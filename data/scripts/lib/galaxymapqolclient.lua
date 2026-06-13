@@ -1605,3 +1605,8 @@ return GalaxyMapQoL
 
 
 
+
+-- QA Security Fixes
+callable(nil, "sync")
+callable(nil, "syncWarZones")
+callable(nil, "setSectorIcon")

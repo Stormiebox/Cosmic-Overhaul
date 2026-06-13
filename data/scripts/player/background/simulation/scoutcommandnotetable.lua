@@ -66,6 +66,14 @@ return SectorClassNoteLineTable.new()
         "A dormant, circular array of asteroids and Xsotan tech is floating in this sector."%_T,
         "There is a bizarre, ritualistic ring of marked asteroids generating faint energy spikes."%_T
     })
+    :forNewSector("sectors/factionheadquarters")
+    :forNewClass(CaptainUtility.ClassType.Explorer)
+    :addLines({
+        "Sensors are going crazy. We've discovered a massive Faction Headquarters here."%_T,
+        "We've located a heavily fortified central command station. It's a Faction HQ."%_T,
+        "This sector is bustling with military traffic protecting a Faction Headquarters."%_T,
+        "I've mapped the location of a major Faction Headquarters in this sector."%_T
+    })
     -- Functional Wreckage: special notes (Explorer/Scavenger)
     :forNewSector("sectors/functionalwreckage")
     :forNewClasses({

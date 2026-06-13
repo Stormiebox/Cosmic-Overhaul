@@ -45,7 +45,7 @@ function updateServer(timeStep)
             CosmicVaultBuffs.applyBuff(entity.id, "ShieldRecharge", 2.0, 11.0)
         end
         -- Spawn militia once every 10 minutes if enemies are present
-        if math.random() < 0.05 then
+        if random():getInt() < 0.05 then
             -- To avoid complex entity generation in this update loop, we just flag it
         end
     else

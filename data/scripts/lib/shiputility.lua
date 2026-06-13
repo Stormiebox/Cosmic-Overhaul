@@ -106,14 +106,14 @@ end
 -- Cosmic Overhaul: Piracy Economy Buff
 -- Overrides the default illegal cargo generation to make piracy highly lucrative!
 ShipUtility.addIllegalCargoToCraft = function(entity)
-    local g = illegalSpawnableGoods[math.random(1, #illegalSpawnableGoods)]
+    local g = illegalSpawnableGoods[random():getInt(1, #illegalSpawnableGoods)]
 
     local x, y = Sector():getCoordinates()
     -- Cosmic Overhaul: Massive boost to illegal cargo dropped by destroyed civil ships to encourage piracy!
     local maxValue = Balancing_GetSectorRichnessFactor(x, y) * 250000
 
     local maxAmount = maxValue / g.price
-    local amount = 1000 + math.random() * 100
+    local amount = 1000 + random():getInt() * 100
     amount = math.ceil(math.min(maxAmount, amount))
 
     entity:addCargo(g:good(), amount)

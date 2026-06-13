@@ -63,3 +63,6 @@ if onClient() then
         end
     end
 end -- onClient()
+
+-- QA Security Fixes
+callable(nil, "acceptMission")

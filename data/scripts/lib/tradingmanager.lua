@@ -2,7 +2,7 @@
 local CaptainClass = include("captainclass")
 
 function randomFloat(lesser, greater)
-    return lesser + math.random() * (greater - lesser)
+    return lesser + random():getInt() * (greater - lesser)
 end
 
 -- Custom function to determine station activity level
@@ -85,7 +85,7 @@ function TradingManager:useUpBoughtGoods(timeStep)
         local maxGoodsProcessed = 2
         for i = 1, maxGoodsProcessed do
             -- Select a random good from bought goods
-            local good = self.boughtGoods[math.random(1, #self.boughtGoods)]
+            local good = self.boughtGoods[random():getInt(1, #self.boughtGoods)]
             if good then
                 -- Determine the amount to consume based on stock and good type
                 local inStock = self:getNumGoods(good.name)
@@ -99,7 +99,7 @@ function TradingManager:useUpBoughtGoods(timeStep)
                     consumptionMultiplier = randomFloat(0.1, 0.4)   -- Default consumption rate
                 end
 
-                local amount = math.random(10, 60) + inStock * consumptionMultiplier
+                local amount = random():getInt(10, 60) + inStock * consumptionMultiplier
                 amount = math.min(inStock, amount)
 
                 if amount > 0 then
@@ -110,7 +110,7 @@ function TradingManager:useUpBoughtGoods(timeStep)
                     self:generateRevenue(good, amount)
 
                     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption
-                    if amount >= 50 and math.random() < 0.15 then
+                    if amount >= 50 and random():getInt() < 0.15 then
                         local cve_success, cve = pcall(include, "cosmicvaulteconomy")
                         if cve_success and cve and cve.TriggerMarketEvent then
                             local x, y = Sector():getCoordinates()
