@@ -1599,14 +1599,9 @@ function GalaxyMapQoL.initOtherNamespace(namespace)
     GalaxyMapQoL.initialize()
 end
 
-return GalaxyMapQoL
-
-
-
-
-
-
 -- QA Security Fixes
 callable(nil, "sync")
 callable(nil, "syncWarZones")
 callable(nil, "setSectorIcon")
+
+return GalaxyMapQoL

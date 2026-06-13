@@ -1,11 +1,10 @@
-# Cosmic Overhaul - Detailed Features
-*Current Version: v5.0.0 (Unreleased)*
+# ⚙️ Cosmic Overhaul - Detailed Features
 
 Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
 
 ---
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [System Features](#system-features)
 - [Command & Captain Enhancements](#command--captain-enhancements)
@@ -13,7 +12,7 @@ Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-faci
 
 ---
 
-## System Features
+## ⚙️ System Features
 
 ### 1) Allied Relations Enhancer
 
@@ -30,7 +29,7 @@ Improves alliance and faction relation progression by increasing the impact of y
 
 </details>
 
-### 2) Dynamic Reputation Decay & Alliance Synergy
+### 🔗 2) Dynamic Reputation Decay & Alliance Synergy
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -81,7 +80,7 @@ Adjusts station goods behavior and trade flow assumptions to feel less static an
 
 </details>
 
-### 5) Equipment Dock & Merchant Inventory Rebalance
+### ⚖️ 5) Equipment Dock & Merchant Inventory Rebalance
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -118,7 +117,7 @@ Adds integrated restock functionality with overhaul-specific balancing (grants 2
 
 </details>
 
-### 7) Permanent Subsystem Removal at More Stations
+### ⚙️ 7) Permanent Subsystem Removal at More Stations
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -133,7 +132,7 @@ Enables permanent subsystem removal at additional station types (e.g., `Repair D
 
 </details>
 
-### 8) Scrapyard QoL / Time-Limit Removal
+### ✨ 8) Scrapyard QoL / Time-Limit Removal
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -188,7 +187,7 @@ Extends sector bulletin board accessibility directly through the player window i
 
 </details>
 
-### 11) Factory Overview Tab (Economic Analytics & Self-Healing)
+### 💹 11) Factory Overview Tab (Economic Analytics & Self-Healing)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -207,7 +206,7 @@ Adds a robust analytical tracker displaying cash flows, taxes, working states, a
 
 </details>
 
-### 12) Trade Heatmap Expansion
+### 💹 12) Trade Heatmap Expansion
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -243,7 +242,7 @@ Amplifies the functional range of the Transporter Software subsystem up to a **1
 **What it does:**
 Overhauls ship info presentations to maximize strategic situational awareness while reducing nested calculation loops.
 
-#### Fleet Ship Status UI (Refactored Core Architecture)
+#### 🏗️ Fleet Ship Status UI (Refactored Core Architecture)
 
 Cosmic Overhaul features an fully integrated and highly optimized **Fleet Ship Status** architecture.
 
@@ -277,7 +276,7 @@ Injects an operational micro-variance into the 1x1 sector seed matrix for System
 
 </details>
 
-### 16) UI Settings Persistence (CosmicVault Integration)
+### 🔗 16) UI Settings Persistence (CosmicVault Integration)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -348,7 +347,7 @@ Inverts default map-routing logic, forcing player-issued travel strings to activ
 
 </details>
 
-### 20) Command Center Tab
+### 🎖️ 20) Command Center Tab
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -385,7 +384,7 @@ Restores the classic map orders from Avorion 1.0, enabling complex automation lo
 
 </details>
 
-### 22) Simulated Station Profits & War Heat Synergies
+### ⚔️ 22) Simulated Station Profits & War Heat Synergies
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -400,11 +399,10 @@ Simulates organic civilian traffic loops and service utility consumption across 
 **Gameplay Impact:**
 
 - High-conflict deployment zones face steep economic drops as commercial vessels avoid hazardous space. Players must actively defend and pacify logistics centers to maintain maximum financial output.
-- **Galactic News Synergy:** (Requires *Cosmic Chronicles*) Major wealth fluctuations caused by these traffic loops are instantly broadcast to the Galactic News Network, creating Trade Crises or Market Booms.
 
 </details>
 
-### 23) Galaxy Map Enhancements & QoL
+### ✨ 23) Galaxy Map Enhancements & QoL
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -508,7 +506,7 @@ Extensively upgrades trade command behavior and outcomes.
 
 </details>
 
-### C) Scout Command Improvements & Offline Catch-up
+### 🎖️ C) Scout Command Improvements & Offline Catch-up
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -527,7 +525,7 @@ Rewrites procedural log creation to inject rich narrative depth into exploratory
 
 </details>
 
-### D) Refine Command Improvements
+### 🎖️ D) Refine Command Improvements
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -542,7 +540,7 @@ Adds refinement-path improvements with better simulation behavior and contextual
 
 </details>
 
-### E) Travel Command Refinements
+### 🎖️ E) Travel Command Refinements
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -557,7 +555,7 @@ Refines travel behavior and practical timing outcomes under safer, no-ambush con
 
 </details>
 
-### F) Salvage / Mine / Procure / Sell Simulation QoL
+### ✨ F) Salvage / Mine / Procure / Sell Simulation QoL
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -576,7 +574,7 @@ Extends and improves several simulation command scripts for consistency and bett
 
 </details>
 
-### G) New Captain Operations Modifiers
+### 🎖️ G) New Captain Operations Modifiers
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -599,7 +597,7 @@ Enhances captain operations with new modifiers, improved ranges, and updated loo
 
 </details>
 
-### H) Captain Synergy Expansion (Background Map Commands)
+### 🎖️ H) Captain Synergy Expansion (Background Map Commands)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -619,7 +617,7 @@ Fully overhauls background mechanics (`Sell`, `Procure`, `Salvage`, `Refine`, an
 
 </details>
 
-### I) Active Captain Synergies (Piloting Passives)
+### 🎖️ I) Active Captain Synergies (Piloting Passives)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -641,9 +639,9 @@ Deploys sweeping passive modifiers that activate globally exclusively when the p
 
 ---
 
-## Black Market / Smuggler’s Market Rework
+## 🏴‍☠️ Black Market / Smuggler’s Market Rework
 
-### Structural Engineering: Dynamic API Injection
+### 🏗️ Structural Engineering: Dynamic API Injection
 
 The massive, conflict-heavy legacy file override for `shiputility.lua` has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion’s Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
 
@@ -657,7 +655,6 @@ The Smuggler’s Market logic has been reworked so black-market trading is meani
 - **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
 - **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
 - **Stolen Goods Handling:** Clean unbranding friction and cost formulas have been rebalanced downwards, making the "hijack -> sanitize -> deploy" loop practical and affordable.
-- **Syndicate Boss Incentives:** Players who build their *own* Smuggler's Market receive exclusive benefits: **+25% bonus profit** when selling contraband to their own market, and a **90% discount** on all unbranding/laundering fees!
 
 ### Why This Exists
 
@@ -687,9 +684,9 @@ Provides native language support for non-English players.
 
 ---
 
-## Command & Captain Enhancements
+## 🎖️ Command & Captain Enhancements
 
-### A) Persistent Background Command Progression (ARCC)
+### 🎖️ A) Persistent Background Command Progression (ARCC)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -706,7 +703,7 @@ Because instantly processing hours of offline progression simultaneously can han
 
 </details>
 
-### B) Trade Command Overhaul (Major)
+### 🎖️ B) Trade Command Overhaul (Major)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -723,7 +720,7 @@ Extensively upgrades trade command behavior and outcomes.
 
 </details>
 
-### C) New Sell Command Feature
+### ⚙️ C) New Sell Command Feature
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -738,7 +735,7 @@ Adds functionality to automatically sell cargo using local supply/demand metrics
 
 </details>
 
-### D) Enhanced Procure Command
+### 🎖️ D) Enhanced Procure Command
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -748,7 +745,7 @@ Improves procurement options, expanding available goods and calculating better p
 
 </details>
 
-### E) Expanded Salvage Command
+### 🎖️ E) Expanded Salvage Command
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -773,7 +770,7 @@ Scouting commands now reveal greater depth of sector information and generate ri
 
 </details>
 
-### G) New Captain Operations Modifiers
+### 🎖️ G) New Captain Operations Modifiers
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -789,7 +786,7 @@ Enhances captain operations with new modifiers, improved ranges, and updated loo
 
 </details>
 
-### H) Captain Synergy Expansion (Background Map Commands)
+### 🎖️ H) Captain Synergy Expansion (Background Map Commands)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -805,7 +802,7 @@ Fully overhauls background mechanics (Sell, Procure, Salvage, Refine, and Travel
 
 </details>
 
-### I) Active Captain Synergies (Piloting Passives)
+### 🎖️ I) Active Captain Synergies (Piloting Passives)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -822,9 +819,9 @@ Deploys sweeping passive modifiers that activate globally exclusively when the p
 
 ---
 
-## Black Market / Smuggler's Market Rework
+## 🏴‍☠️ Black Market / Smuggler's Market Rework
 
-### Structural Engineering: Dynamic API Injection
+### 🏗️ Structural Engineering: Dynamic API Injection
 
 The massive, conflict-heavy legacy file override for shiputility.lua has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion's Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
 
@@ -845,17 +842,21 @@ The Smuggler's Market logic has been reworked so black-market trading is meaning
 </details>
 
 
+---
 
-## Latest Additions & Integrations
+## 🔗 Cosmic Series Integration & Audit 3.0 Updates
+<details>
+<summary><b>Click to expand</b></summary>
 
-- **True Supply Lines**: Added the new `Supply Line` map command. Establish a continuous, automated supply route to infinitely ferry a configurable resource between your current location and a target sector, eliminating the need for cumbersome manual loop orders.
-- **Sealed Hulks (Boarding Operations)**: Explore deep space to find randomly generated "Sealed Hulks". Docking with these massive derelicts initiates a text-based "Choose Your Own Adventure" boarding operation where you risk crew lives against automated defenses and radiation leaks to breach the final vault for massive payouts and Legendary drops!
+During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems were standardized across all mods:
 
+### 📖 Cosmic Codex Integration
+All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
 
-- **Captain Elite Traits (Level 3)**: A Level 3 Captain now acts as a sector-wide commander. Level 3 Commodores provide +10% Shield and Damage to all friendly ships in the sector. Level 3 Miners gain a massive +25 sector command area radius. Level 3 Smugglers provide absolute immunity to all cargo and contraband inspections.
-- **Station Governors**: You can now dock and assign idle captains to your stations to act as "Governors", providing massive passive benefits. Merchant Governors boost passive income by 25% and increase trader traffic by 50%. Engineer Governors boost your Factory's maximum shuttle volume capacity by 50%.
-- **The Syndicate Hub Expansion**: Assigning a Smuggler as governor to your Smuggler's Market grants a massive 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees! Additionally, the "Fence System" allows your Smuggler's Market to automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
+### 🔒 Network Safety & Anti-Cheat
+- **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
+- **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
 
-
-- **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
-- **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.
+### 🛠️ Vanilla Bug Fixes
+- **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
+</details>
