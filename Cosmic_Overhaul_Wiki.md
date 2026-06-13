@@ -1,5 +1,5 @@
 # Cosmic Overhaul - Detailed Features
-*Current Version: v4.2.2*
+*Current Version: v5.0.0 (Unreleased)*
 
 Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
 
@@ -847,6 +847,11 @@ The Smuggler's Market logic has been reworked so black-market trading is meaning
 
 
 ## Latest Additions & Integrations
+
+- **Captain Elite Traits (Level 3)**: A Level 3 Captain now acts as a sector-wide commander. Level 3 Commodores provide +10% Shield and Damage to all friendly ships in the sector. Level 3 Miners gain a massive +25 sector command area radius. Level 3 Smugglers provide absolute immunity to all cargo and contraband inspections.
+- **Station Governors**: You can now dock and assign idle captains to your stations to act as "Governors", providing massive passive benefits. Merchant Governors boost passive income by 25% and increase trader traffic by 50%. Engineer Governors boost your Factory's maximum shuttle volume capacity by 50%.
+- **The Syndicate Hub Expansion**: Assigning a Smuggler as governor to your Smuggler's Market grants a massive 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees! Additionally, the "Fence System" allows your Smuggler's Market to automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
+
 
 - **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
 - **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.

@@ -119,6 +119,9 @@ function Factory.applyShuttleVolume(data)
 
     Factory.MinShuttleVolume = upgradeInterval
     Factory.MaxShuttleVolume = upgradeInterval * data.maxNumProductions
+    if Entity():getValue("governor_engineer_active") then
+        Factory.MaxShuttleVolume = Factory.MaxShuttleVolume * 1.5 -- Engineer Governor boosts logistics capacity!
+    end
     Factory.shuttleVolume = math.min(math.max(data.shuttleVolume, totalProductionVolume), Factory.MaxShuttleVolume)
 end
 

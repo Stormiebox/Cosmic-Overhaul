@@ -74,6 +74,28 @@ function SmugglersMarket.initialize()
     end
 end
 
+function SmugglersMarket.getUpdateInterval()
+    return 60.0 -- Update every 60 seconds
+end
+
+function SmugglersMarket.updateServer(timeStep)
+    local station = Entity()
+    if not station or not station:getValue("governor_smuggler_active") then return end
+    
+    -- The Fence System: Automatically unbrand up to 100 stolen goods per minute natively
+    local cargos = station:getCargos()
+    for good, amount in pairs(cargos) do
+        if good.stolen then
+            local unbrandAmount = math.min(amount, 100)
+            local cleanGood = copy(good)
+            cleanGood.stolen = false
+            
+            station:removeCargo(good, unbrandAmount)
+            station:addCargo(cleanGood, unbrandAmount)
+        end
+    end
+end
+
 function SmugglersMarket.initializationFinished()
     -- use the initilizationFinished() function on the client since in initialize() we may not be able to access Sector scripts on the client
     if onClient() then
@@ -614,6 +636,11 @@ callable(SmugglersMarket, "unbrand")
 function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, buyerFaction, ship)
     local factor = SmugglersMarket.coConfig.unbrandPriceFactor
     
+    local station = Entity()
+    if station and station:getValue("governor_smuggler_active") then
+        factor = factor * 0.5 -- 50% extra discount if Smuggler is Governor!
+    end
+    
     if stationFaction.index == buyerFaction.index then
         factor = factor * 0.1 -- Syndicate Boss: 90% discount on unbranding fees at your own station!
     elseif ship then
@@ -679,6 +706,9 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
         local station = Entity()
         if station and station.factionIndex == ship.factionIndex then
             multiplier = multiplier + 0.25 -- Syndicate Boss: 25% extra profit for owning the market!
+        end
+        if station and station:getValue("governor_smuggler_active") then
+            multiplier = multiplier + 0.35 -- Smuggler Governor: 35% extra profit!
         end
     end
 

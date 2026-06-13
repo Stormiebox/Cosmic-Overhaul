@@ -1,5 +1,5 @@
 # Cosmic Overhaul
-*Current Version: 4.3.0*
+*Current Version: 5.0.0*
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

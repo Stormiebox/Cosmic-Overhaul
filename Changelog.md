@@ -7,9 +7,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 --
 
-## v4.3.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
+## v5.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
 ### Added
+- **Captain Elite Traits**: Level 3 Captains now possess massive sector-wide or unique bonuses:
+  - **Commodores**: Provide a global +10% Shield and +10% Damage buff to all player/alliance ships in the sector.
+  - **Miners**: Gain an immense +25 area command bonus to the Mining map operation.
+  - **Smugglers**: Provide the ship with absolute immunity to all cargo and contraband inspections.
+- **Station Governors**: Players can now assign idle captains to their stations as "Governors" for massive economic and defensive bonuses:
+  - **Merchant Governors**: Boost passive station income by 25% and increase AI trader traffic by 50%.
+  - **Engineer Governors**: Boost the factory's maximum shuttle volume capacity by 50%.
+- **The Syndicate Hub Expansion**: The Smuggler's Market is now a massive criminal enterprise:
+  - **Smuggler Governors**: Assigning a Smuggler as governor to your market grants a 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees!
+  - **The Fence System**: The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
 - **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
 - **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.
 

@@ -52,6 +52,9 @@ function MineCommand:getAreaSize(ownerIndex, shipName)
         if captain then
             if captain:hasClass(CaptainClass.Miner) then
                 bonus = bonus + 15
+                if captain.level >= 3 then
+                    bonus = bonus + 25 -- Elite Miner: Massive area expansion
+                end
             elseif captain:hasClass(CaptainClass.Scavenger) then
                 bonus = bonus + 10
             end

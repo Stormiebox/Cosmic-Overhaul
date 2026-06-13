@@ -65,7 +65,7 @@ end
 
 function ManageStationIncomes.giveStationResources(station, _seller)
     local faction = Faction(station.factionIndex)
-    local amounts = ManageStationIncomes.getResourceIncome()
+    local amounts = ManageStationIncomes.getResourceIncome(station)
     local mapping = ManageStationIncomes.getMapping(station)
     local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
     local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
@@ -153,6 +153,10 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     money = math.floor(money*mapping.quantity)
     money = money*ManageStationIncomes.getWarHeatMultiplier()
     money = math.floor(money*payoutMult)
+    
+    if station:getValue("governor_merchant_active") then
+        money = math.floor(money * 1.25)
+    end
 
     local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
     local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
@@ -176,7 +180,7 @@ function ManageStationIncomes.giveStationDistribution(moneyChance, resourceChanc
     return resultFunc
 end
 
-function ManageStationIncomes.getResourceIncome()
+function ManageStationIncomes.getResourceIncome(station)
     local x, y = Sector():getCoordinates()
     local probabilities = Balancing_GetMaterialProbability(x, y)
     local richness = Balancing_GetSectorRichnessFactor(x, y, 1)
@@ -190,11 +194,15 @@ function ManageStationIncomes.getResourceIncome()
         local mats = 0
         if probFactor > 0.05 then
             local matRichness = math.max(probFactor*(richness), 0.2)
-            -- Cosmic Overhaul Balance tweak: Reduced from 8000 base to 3500 base
             mats = (0.5+math.random()/2)*3500
             mats = mats*matRichness
             mats = mats*ManageStationIncomes.getWarHeatMultiplier()
             mats = mats*payoutMult
+            
+            if station and station:getValue("governor_merchant_active") then
+                mats = mats * 1.25
+            end
+            
             if random():test(0.2) then
                 mats = mats*2
                 if random():test(0.1) then mats = mats*2 end
@@ -208,7 +216,12 @@ end
 function ManageStationIncomes.manageStation(station)
     local mapping = ManageStationIncomes.getMapping(station)
     if not mapping then return end
-    if random():test(mapping.chance) then return end
+    
+    local chance = mapping.chance
+    if station:getValue("governor_merchant_active") then
+        chance = chance * 1.5 -- 50% more frequent trader traffic / payouts
+    end
+    if random():test(chance) then return end
 
     local isInstant = ManageStationIncomes.isInstantTrade()
     if isInstant then
