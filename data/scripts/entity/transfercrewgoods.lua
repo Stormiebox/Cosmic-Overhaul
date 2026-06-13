@@ -6,6 +6,11 @@ include("stringutility")
 include("tooltipmaker")
 include("callable")
 
+function TransferCrewGoods.getUpdateInterval()
+    return 1.0
+end
+
+
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace TransferCrewGoods
 TransferCrewGoods = {}

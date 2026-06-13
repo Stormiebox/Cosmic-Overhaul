@@ -1,4 +1,9 @@
 -- Concept: add a new "Wreckages" tab to the strategy mode tabs.
+
+function getUpdateInterval()
+    return 1.0
+end
+
 -- Display a list of all wreckages in the sector, sorted by how big they are.
 -- TODO: Adding benefits for Scavenger captains and particular subsystem upgrades
 -- TODO: Possible (scanners?) to see more information, e.g. resource richness.

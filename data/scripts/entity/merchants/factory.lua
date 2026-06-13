@@ -1,4 +1,9 @@
 -- Utility function injected for Factory Tweaks
+
+function getUpdateInterval()
+    return 5.0
+end
+
 local function timer(current, period, deltaTime)
     local hasFired = false
     current = current + deltaTime

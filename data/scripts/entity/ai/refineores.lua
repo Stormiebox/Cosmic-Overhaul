@@ -1,4 +1,9 @@
 if onServer() then
+
+function getUpdateInterval()
+    return 5.0
+end
+
     -- Wrap updateServer in check to prevent waiting if refinery not found
     AIRefine._updateServer = AIRefine.updateServer
     function AIRefine.updateServer(timeStep)
