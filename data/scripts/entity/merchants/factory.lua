@@ -214,6 +214,7 @@ function Factory.renderUIIndicator(px, py, size)
     end
 end
 
+callable(Factory, "onUpgradeShuttlesButtonPressed")
 function Factory.onUpgradeShuttlesButtonPressed()
     if onClient() then
         invokeServerFunction("onUpgradeShuttlesButtonPressed")

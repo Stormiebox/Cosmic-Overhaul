@@ -408,3 +408,7 @@ if onClient() then
     end
 
 end -- onClient()
+
+function PlayerBulletinBoard.onRemove()
+    if Player() then Player():unregisterCallback("onSectorChanged", "onSectorChanged") end
+end

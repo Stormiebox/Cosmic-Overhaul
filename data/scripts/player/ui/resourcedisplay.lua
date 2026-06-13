@@ -254,3 +254,6 @@ function ResourceDisplay.saveSetting(key, value)
     p:setValue(key, value)
 end
 callable(ResourceDisplay, "saveSetting")
+function ResourceDisplay.onRemove()
+    if Player() then Player():unregisterCallback("onPreRenderHud", "onPreRenderHud") end
+end
