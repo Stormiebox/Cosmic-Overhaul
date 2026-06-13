@@ -146,6 +146,10 @@ Cosmic Overhaul is fully translated into multiple languages! If you play the gam
 
 ## Latest Additions & Integrations
 
+- **True Supply Lines**: Added the new `Supply Line` map command. Establish a continuous, automated supply route to infinitely ferry a configurable resource between your current location and a target sector, eliminating the need for cumbersome manual loop orders.
+- **Sealed Hulks (Boarding Operations)**: Explore deep space to find randomly generated "Sealed Hulks". Docking with these massive derelicts initiates a text-based "Choose Your Own Adventure" boarding operation where you risk crew lives against automated defenses and radiation leaks to breach the final vault for massive payouts and Legendary drops!
+
+
 - **Captain Elite Traits (Level 3)**: A Level 3 Captain now acts as a sector-wide commander. Level 3 Commodores provide +10% Shield and Damage to all friendly ships in the sector. Level 3 Miners gain a massive +25 sector command area radius. Level 3 Smugglers provide absolute immunity to all cargo and contraband inspections.
 - **Station Governors**: You can now dock and assign idle captains to your stations to act as "Governors", providing massive passive benefits. Merchant Governors boost passive income by 25% and increase trader traffic by 50%. Engineer Governors boost your Factory's maximum shuttle volume capacity by 50%.
 - **The Syndicate Hub Expansion**: Assigning a Smuggler as governor to your Smuggler's Market grants a massive 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees! Additionally, the "Fence System" allows your Smuggler's Market to automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.

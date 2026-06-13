@@ -20,6 +20,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **The Syndicate Hub Expansion**: The Smuggler's Market is now a massive criminal enterprise:
   - **Smuggler Governors**: Assigning a Smuggler as governor to your market grants a 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees!
   - **The Fence System**: The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
+- **True Supply Lines**: Added a new background map command `Supply Line`. Establish continuous, automated ferry routes to infinitely transfer a configurable good between your current location and a designated target sector without needing cumbersome manual loops.
+- **Sealed Hulks (Boarding Operations)**: Deep space hidden mass sectors now have a chance to generate a massive "Sealed Hulk." Docking with these derelicts initiates an interactive "Choose Your Own Adventure" text event where you risk your crew against automated defenses, radiation leaks, and blast doors for massive payouts and Legendary subsystem drops!
 - **Tag-Based AI Generation**: Replaced rigid Vanilla Faction tracking with a robust new tag-based AI (`[Aggressive]`, `[Passive]`, `[Trader]`).
 - **Dynamic AI Behaviors**: Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.
 
