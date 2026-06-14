@@ -9,6 +9,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v5.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
+### ✨ Added
+- **War Zone Blockades:** Stations located in active Cosmic War zones will instantly suspend all background AI Trader traffic and explicitly reject any Player docking requests to buy or sell goods, locking down the local economy natively through `factory.lua` injection.
+
 ### 🚀 Major Overhaul Features
 - **Captain Elite Traits:** Level 3 Captains now possess massive sector-wide or unique bonuses:
   - **Commodores:** Provide a global +10% Shield and +10% Damage buff to all player/alliance ships in the sector.

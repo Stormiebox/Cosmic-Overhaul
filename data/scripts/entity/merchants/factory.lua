@@ -42,6 +42,8 @@ local base_setProduction = Factory.setProduction
 local base_requestTraders = Factory.requestTraders
 local base_updateDeliveryToOtherStations = Factory.updateDeliveryToOtherStations
 local base_updateFetchingFromOtherStations = Factory.updateFetchingFromOtherStations
+local base_buyGoods = Factory.buyGoods
+local base_sellGoods = Factory.sellGoods
 
 -- Local values for this mod go here
 local ft_minVolume = 10
@@ -593,8 +595,13 @@ function Factory.updateGarbageDeliveryToOtherStations(timeStep)
 end
 
 function Factory.requestTraders(timestep)
-    local count = 0
     local sector = Sector()
+    if sector:getValue("war_zone") or sector:getValue("cw_contested") then
+        Factory.traderRequestCooldown = Factory.traderRequestCooldown + timestep
+        return
+    end
+
+    local count = 0
     local gates = {sector:getEntitiesByComponent(ComponentType.WormHole)}
     for _, gate in pairs(gates) do count = count + 1 end
 
@@ -605,6 +612,32 @@ function Factory.requestTraders(timestep)
     end
     base_requestTraders(timestep)
 end
+
+function Factory.buyGoods(goodName, amount, factionIndex, applyBonuses)
+    local sector = Sector()
+    if sector:getValue("war_zone") or sector:getValue("cw_contested") then
+        local player = Player(callingPlayer)
+        if player then
+            player:sendChatMessage(Entity(), ChatMessageType.Error, "Trade suspended! This station is under blockade due to an active war zone!"%_t)
+        end
+        return
+    end
+    if base_buyGoods then return base_buyGoods(goodName, amount, factionIndex, applyBonuses) end
+end
+callable(Factory, "buyGoods")
+
+function Factory.sellGoods(goodName, amount, factionIndex, applyBonuses)
+    local sector = Sector()
+    if sector:getValue("war_zone") or sector:getValue("cw_contested") then
+        local player = Player(callingPlayer)
+        if player then
+            player:sendChatMessage(Entity(), ChatMessageType.Error, "Trade suspended! This station is under blockade due to an active war zone!"%_t)
+        end
+        return
+    end
+    if base_sellGoods then return base_sellGoods(goodName, amount, factionIndex, applyBonuses) end
+end
+callable(Factory, "sellGoods")
 
 function Factory.sendDeliveryErrors()
     if base_sendDeliveryErrors then base_sendDeliveryErrors() end
