@@ -30,6 +30,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Cosmic Vault API Framework:** Fully integrated with the Cosmic Vault API framework. Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
 
 ### 🐛 Bug Fixes & Optimization
+- **Trading Manager Spam:** Fixed an issue where the "Activity level is zero or negative..." warning in `tradingmanager.lua` would spam the server logs every second. It now only prints once per session.
+- **Shop UI Crash:** Reinstated `self.currencyLabel` in `shop.lua` to prevent crashes when interacting with merchants.
 - **UI Memory Leaks Sealed:** Injected `onRemove()` functions into UI scripts like the Bulletin Board and Resource Display. Previously, jumping sectors caused the UI to secretly stack invisible event listeners, leading to massive memory bloat in late-game.
 - **Multiplayer Networking & Stability:** Added missing `callable()` declarations to Factory upgrade buttons so they work properly on Dedicated Servers. Also added `onClient()` wrappers to Stash and Galaxy Map scripts to prevent the singleplayer server thread from crashing itself with errant network calls.
 - **Performance & TPS Optimization:** Drastically reduced server load during late-game scenarios. Injected a hardcoded `getUpdateInterval` throttle into 5 major AI and UI scripts (`refineores`, `factory`, `transfercrewgoods`, `shipinfo`, `sectorshipoverview`). This prevents highly-industrialized player sectors from dragging down Server TPS by throttling factory logic to run once every 5 seconds instead of 60 times a second.

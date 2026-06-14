@@ -8,7 +8,9 @@ pcall(function() CosmicVaultBuffs = require("cosmicvaultbuffs") end)
 if not onServer() then return end
 
 local function hasEliteTrait(entity, classType)
-    local captain = entity.captain
+    if not entity.isShip and not entity.isStation then return false end
+    if not entity.hasCaptain then return false end
+    local captain = entity:getCaptain()
     if captain and captain.level >= 3 and captain:hasClass(classType) then
         return true
     end

@@ -225,8 +225,8 @@ function Shop:buildGui(window, guiType, config) -- client
     techLabel:setTopAligned()
     local amountLabel = window:createLabel(Rect(stockX, 0, priceX - 10, 30), "#"%_t, 15)
     amountLabel:setTopRightAligned()
-    local priceLabel = window:createLabel(Rect(priceX, 0, amountBoxX - 20, 30), "¢", 15)
-    priceLabel:setTopRightAligned()
+    self.currencyLabel = window:createLabel(Rect(priceX, 0, amountBoxX - 20, 30), "¢", 15)
+    self.currencyLabel:setTopRightAligned()
 
     if guiType == 0 then
         self.buyHeadlineAmountLabel = amountLabel

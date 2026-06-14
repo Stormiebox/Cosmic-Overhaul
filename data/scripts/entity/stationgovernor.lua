@@ -15,7 +15,8 @@ function updateServer(timeStep)
     local entity = Entity()
     if not entity or not entity.isStation then return end
 
-    local captain = entity.captain
+    if not entity.hasCaptain then return end
+    local captain = entity:getCaptain()
     if not captain then return end
 
     -- Merchant Governor: Trade Traffic and Passive Income
