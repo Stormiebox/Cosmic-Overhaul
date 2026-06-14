@@ -486,6 +486,21 @@ Ship names now scale dynamically based on their generated block volume across fo
 - Provides immediate, intuitive feedback on the actual size and threat level of an NPC vessel simply by reading its title.
 
 </details>
+
+### ✨ 27) War Zone Economy Blockades
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Stations located in active Cosmic War zones will instantly suspend all background AI Trader traffic and explicitly reject any Player docking requests to buy or sell goods.
+
+**Gameplay Impact:**
+
+- Locks down the local economy natively through `factory.lua` injection to prevent exploitation during active sieges.
+- Forces players to secure the sector or travel elsewhere for commerce.
+
+</details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**

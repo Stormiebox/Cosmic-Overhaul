@@ -17,6 +17,8 @@ As your fleet grows, keeping track of everything becomes difficult. We've added 
 * **Factory Overview:** Also in your Player Window, this tab lists every factory you own. It shows your exact profits, expenses, and whether a factory is currently running or stalled due to missing ingredients. *(Note: Older factories built before installing the mod will now automatically register themselves to this list!)*
 * **Universal Bulletin Board:** You no longer need to dock at every single station in a sector to find a good mission. The Bulletin Board tab lets you view, sort by reward or difficulty, and accept missions from *any* station in your current sector.
 * **The Wreckages Tab:** When you open Sector Strategy Mode (default `F9`), you will see a new **Wreckages** tab. This sorts every piece of scrap in the sector by size and distance, making post-battle salvage operations a breeze.
+* **War Zone Blockades:** If you are running Cosmic War alongside Cosmic Overhaul, stations in active war zones will reject all player docking requests to buy/sell goods. Additionally, all background AI trader traffic will be suspended until the siege is resolved.
+
 
 ### Galaxy Map Hotkeys
 
