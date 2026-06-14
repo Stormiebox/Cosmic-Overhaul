@@ -30,6 +30,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Cosmic Vault API Framework:** Fully integrated with the Cosmic Vault API framework. Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
 
 ### 🐛 Bug Fixes & Optimization
+- **RNG Calculation Math Bug:** Swept the codebase and replaced critical logic faults in Station Governors and AI Traders where probability checks were evaluating against `getInt()` instead of `getFloat()`, restoring exact percentage math for random economic events.
 - **Trading Manager Spam:** Fixed an issue where the "Activity level is zero or negative..." warning in `tradingmanager.lua` would spam the server logs every second. It now only prints once per session.
 - **Shop UI Crash:** Reinstated `self.currencyLabel` in `shop.lua` to prevent crashes when interacting with merchants.
 - **UI Memory Leaks Sealed:** Injected `onRemove()` functions into UI scripts like the Bulletin Board and Resource Display. Previously, jumping sectors caused the UI to secretly stack invisible event listeners, leading to massive memory bloat in late-game.
