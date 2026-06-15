@@ -23,8 +23,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - **The Fence System:** The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
 - **True Supply Lines:** Added a new background map command `Supply Line`. Establish continuous, automated ferry routes to infinitely transfer a configurable good between your current location and a designated target sector without needing cumbersome manual loops.
 - **Cosmic Codex Integration:** The mod now fully supports the Cosmic Codex! Comprehensive lore and mechanical documentation (such as features, UI tools, and dynamic events) are now readable directly in-game from the new Cosmic Codex tab.
+- **Dynamic Subspace Weather**: Sector environments are no longer static. Introduced `co_weather_generator.lua` to dynamically generate weather hazards across the galaxy.
+- **Ion Storms**: Completely disables radar systems and hyperspace capability.
+- **Solar Flares**: Intensely radiated sectors that strip shields and gradually disintegrate unshielded hulls over time.
+- **Global Weather Ticker**: A 15% chance per tick to spawn weather in random populated sectors (Maximum 5 active globally). Weather persists across server reboots.
 
 ### ✨ Added
+- Implemented the Famine Debuff system (`co_famine_debuff.lua`) hooked into the Vault Economy API.
 - **War Zone Blockades:** Stations located in active Cosmic War zones will instantly suspend all background AI Trader traffic and explicitly reject any Player docking requests to buy or sell goods, locking down the local economy natively through `factory.lua` injection.
 - **Deep Wiki Integration:** Injected 43+ detailed mechanical and lore articles straight from the official Wiki into the Cosmic Codex. Features like Empire Management, Captain Synergies, and the Black Market rework are fully documented in-game.
 - **Sealed Hulks (Boarding Operations):** Deep space hidden mass sectors now have a chance to generate a massive "Sealed Hulk." Docking with these derelicts initiates an interactive "Choose Your Own Adventure" text event where you risk your crew against automated defenses, radiation leaks, and blast doors for massive payouts and Legendary subsystem drops!
@@ -42,3 +47,5 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Performance & TPS Optimization:** Drastically reduced server load during late-game scenarios. Injected a hardcoded `getUpdateInterval` throttle into 5 major AI and UI scripts (`refineores`, `factory`, `transfercrewgoods`, `shipinfo`, `sectorshipoverview`). This prevents highly-industrialized player sectors from dragging down Server TPS by throttling factory logic to run once every 5 seconds instead of 60 times a second.
 - **Scout Mission Fix:** Fixed a massive vanilla/mod bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the `scoutcommandnotetable` lacked dialogue lines for that specific sector template.
 - **Multiplayer Desyncs:** Replaced `math.random` with the deterministic engine `random():getInt()` across all custom scripts to prevent massive physics and stats desyncs in multiplayer.
+- Severe Famine debuff reduces shields by 60% and velocity by 40%.
+- Removed `pcall` soft-dependencies. Core 5 mods are now hard requirements.

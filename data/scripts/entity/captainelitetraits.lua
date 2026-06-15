@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("utility")
 local CaptainClass = include("captainclass")
 local CosmicVaultBuffs = nil
-pcall(function() CosmicVaultBuffs = require("cosmicvaultbuffs") end)
+CosmicVaultBuffs = require("cosmicvaultbuffs")
 
 -- Only runs on server
 if not onServer() then return end

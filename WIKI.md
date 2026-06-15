@@ -881,3 +881,6 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 
 ### Log Streamlining
 The Trading Manager logic has been streamlined to gracefully skip dead simulation ticks without flooding server console logs.
+
+## Famine Penalties
+When an AI faction reaches 'Severe Famine', all newly spawned ships will inherently have 60% weaker shields and move 40% slower.

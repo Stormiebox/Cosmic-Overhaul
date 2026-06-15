@@ -17,7 +17,7 @@ Cosmic Overhaul introduces several QoL improvements to Avorion, including an adv
 
 ## ⚙️ Requirements
 - Avorion v2.0+
-- Dependencies: **Cosmic Vault**
+- Dependencies: **Cosmic Vault, Cosmic War, Cosmic Chronicles and Cosmic Ascendancy.**
 
 ## 🚀 Installation
 1. Place the folder in:
@@ -28,3 +28,4 @@ Cosmic Overhaul introduces several QoL improvements to Avorion, including an adv
 
 ## 📚 Documentation
 For detailed mechanics, guides, and lore, please refer to the in-game **Cosmic Codex**, or check the included `WIKI.md` and `PLAYER_GUIDE.md` files.
+ Integrates Famine Economy mechanics to cripple starving factions.

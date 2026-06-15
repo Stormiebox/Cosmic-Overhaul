@@ -122,3 +122,6 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 
 ### Log Streamlining
 The Trading Manager logic has been streamlined to gracefully skip dead simulation ticks without flooding server console logs.
+
+### Starving Your Enemies
+By destroying enemy resource sectors, you can force them into Severe Famine. Their ships will become incredibly weak, making conquest easier.
