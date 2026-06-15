@@ -39,6 +39,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Dynamic AI Behaviors:** Factions now organically calculate their AI routines (Patrol vs Trade) using the Vault Faction Tag system rather than static hardcoded tables.
 - **Cosmic Vault API Framework:** Fully integrated with the Cosmic Vault API framework. Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
 
+### ⚖️ Balance
+- **Galactic Turn Synchronization:** `respawnInterval` changed from 10m to 20m. `profitableStationsInterval` synced to 1200s (20m) to align with the global server turn, massively reducing asynchronous background processing and eliminating server micro-stutter.
+- **Economic Stabilization:** To compensate for the Profitable Stations interval doubling from 10m to 20m, the base payouts have been strictly doubled (Credit base: 8k -> 16k, Resource base: 3.5k -> 7k). The economy remains perfectly balanced without punishing players for the new performance optimizations.
+
 ### 🐛 Bug Fixes & Optimization
 - **Trading Manager Spam:** Completely eradicated the `Activity level is zero or negative` console spam which flooded server logs.
 - **RNG Calculation Math Bug:** Swept the codebase and replaced critical logic faults in Station Governors and AI Traders where probability checks were evaluating against `getInt()` instead of `getFloat()`, restoring exact percentage math for random economic events.

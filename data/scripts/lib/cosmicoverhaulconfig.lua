@@ -14,7 +14,7 @@ if ccm then
                 title = "Profit Configurations",
                 options = {
                     { key = "enableProfitableStations", type = "bool", title = "Enable Profitable Stations", description = "Enables periodic station income simulation enhancements.", default = true },
-                    { key = "profitableStationsInterval", type = "number", title = "Profitable Stations Interval (s)", description = "Update interval for profitable stations simulation. (Min: 30s | Max: 7200s)", default = 600, min = 30, max = 7200 },
+                    { key = "profitableStationsInterval", type = "number", title = "Profitable Stations Interval (s)", description = "Update interval for profitable stations simulation. (Min: 30s | Max: 7200s)", default = 1200, min = 30, max = 7200 },
                     { key = "profitableStationsPayoutMultiplier", type = "number", title = "Profitable Stations Payout Multiplier", description = "Scales profitable stations payout values. (Min: 0.1 | Max: 10.0)", default = 1.00, min = 0.10, max = 10.00 },
                 },
             },
@@ -39,7 +39,7 @@ if ccm then
                     { key = "enableResourceRegen", type = "bool", title = "Enable Resource Regeneration", description = "Globally enables or disables the persistent background asteroid regeneration.", default = true },
                     { key = "restorationPct", type = "number", title = "Restoration Target (%)", description = "Resource level to restore toward. 25% means mining has lasting impact.", default = 25, min = 0, max = 100 },
                     { key = "respawnRate", type = "number", title = "Respawn Rate (%)", description = "Percentage of the baseline asteroid count to respawn per tick.", default = 1, min = 1, max = 100 },
-                    { key = "respawnInterval", type = "number", title = "Respawn Interval (min)", description = "Minutes between respawn ticks.", default = 10, min = 1, max = 60 },
+                    { key = "respawnInterval", type = "number", title = "Respawn Interval (min)", description = "Minutes between respawn ticks.", default = 20, min = 1, max = 60 },
                     { key = "respawnedFields", type = "number", title = "Emergency Field Count", description = "Fields spawned when asteroids drop below 200.", default = 3, min = 1, max = 6 },
                     { key = "bigAsteroidChance", type = "number", title = "Big Asteroid Chance (%)", description = "Chance respawned asteroid is a big resource asteroid.", default = 1, min = 0, max = 5 },
                     { key = "hiddenTreasureChance", type = "number", title = "Hidden Treasure Chance (%)", description = "Chance asteroid is a hidden treasure.", default = 2, min = 0, max = 10 },
@@ -64,13 +64,13 @@ local defaults =
     offlineCatchupRatio = 0.667,
     offlineCatchupMaxDuration = 28800,
 
-    profitableStationsInterval = 120,
+    profitableStationsInterval = 1200,
     profitableStationsPayoutMultiplier = 1.00,
 
     enableResourceRegen = true,
     restorationPct = 25,
     respawnRate = 1,
-    respawnInterval = 10,
+    respawnInterval = 20,
     respawnedFields = 3,
     bigAsteroidChance = 1,
     hiddenTreasureChance = 2,
@@ -112,7 +112,7 @@ local function build()
     out.offlineCatchupRatio = readNumber("offlineCatchupRatio", 0.0, 1.0, defaults.offlineCatchupRatio)
     out.offlineCatchupMaxDuration = readNumber("offlineCatchupMaxDuration", 0, 86400, defaults.offlineCatchupMaxDuration)
 
-    out.profitableStationsInterval = math.floor(readNumber("profitableStationsInterval", 30, 1800,
+    out.profitableStationsInterval = math.floor(readNumber("profitableStationsInterval", 30, 7200,
         defaults.profitableStationsInterval))
     out.profitableStationsPayoutMultiplier = readNumber("profitableStationsPayoutMultiplier", 0.10, 10.0,
         defaults.profitableStationsPayoutMultiplier)
