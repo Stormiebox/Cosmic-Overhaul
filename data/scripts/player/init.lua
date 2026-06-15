@@ -9,4 +9,5 @@ if onServer() then
     player:addScriptOnce("data/scripts/lib/DynamicReputationDecay.lua")
     player:addScriptOnce("data/scripts/player/map/galaxymapqol.lua")
     player:addScriptOnce("data/scripts/player/cosmicoverhaulcodex.lua")
+    player:addScriptOnce("data/scripts/player/ui/respawnhud.lua")
 end

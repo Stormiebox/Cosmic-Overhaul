@@ -65,6 +65,8 @@ We have heavily modernized how you interact with your cargo holds, inventories, 
 * **Subsystem Removal:** You can now permanently remove installed subsystems at Repair Docks, Shipyards, Military Outposts, Research Stations, and Scrapyards.
 * **Relaxing Scrapyards:** The stressful time limits and restrictive friction at Scrapyards have been completely removed. Take your time and salvage in peace!
 * **Scaling Subsystems:** Transporters and Trading Systems now get massive range boosts (up to 10x) based on their rarity. Transporters get even more range based on how many physical transporter blocks you've built into your ship design.
+* **Persistence Resource Regeneration:** Stripped asteroid fields will now slowly regenerate their ores over real-time (even while you are offline) instead of merely on sector load. This process is deeply integrated into the economy: if the sector's owning faction falls into Severe Famine, ecological recovery is paused until the economy stabilizes.
+* **Emergency Replenishment Anomalies:** If a sector is entirely barren, an emergency geological event may trigger to spawn new fields. This massive gravity shift has a 5% chance to uncover a permanent Precursor Wreck or Spatial Rift, and in populated sectors, it will broadcast a galactic news alert.
 
 ---
 

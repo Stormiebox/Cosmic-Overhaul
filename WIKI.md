@@ -50,7 +50,28 @@ Introduces inactivity-based relation decay to AI factions over time, while linki
 
 </details>
 
-### 3) Dynamic Station Shuttle Scaling
+### ☄️ 3) Persistence Resource Regeneration
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Mined-out asteroid fields slowly regenerate their resources over real-time in the background instead of merely respawning a fraction of asteroids upon sector load.
+
+**How it works:**
+- **Background Processing:** The system connects with the Cosmic Overhaul ARCC API to process elapsed offline time mathematically, removing the need to keep sectors loaded.
+- **Economic Famine Synergy:** It actively polls the `CosmicVaultEconomy` API. If the faction owning the sector is in **"Severe Famine"**, the sector's natural recovery halts entirely. If **"Resource Starved"**, it recovers at half speed.
+- **Emergency Replenishment:** If a sector is entirely barren, an emergency geologic event will spawn new fields. This massive shift has a 5% chance to uncover hidden Precursor Wrecks or Spatial Rifts via the `CosmicVaultAnomalies` API.
+- **News Broadcasting:** Emergency replenishments in heavily populated core sectors will automatically publish a breaking news article to the galaxy via the `CosmicVaultNews` API.
+
+**Gameplay Impact:**
+- Makes the universe feel geologically active without flooding the sector with too many asteroids.
+- Allows players to establish permanent mining operations in safe sectors without worrying about them permanently drying up.
+- Creates economic vulnerability: crushing a faction's economy now actively destroys its ability to replenish mining resources.
+
+</details>
+
+### 4) Dynamic Station Shuttle Scaling
 
 <details>
 <summary><b>Click to expand details</b></summary>
