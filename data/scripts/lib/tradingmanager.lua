@@ -71,13 +71,8 @@ function TradingManager:useUpBoughtGoods(timeStep)
     -- Dynamic tickTime based on custom activity level logic
     local activityLevel = self:getActivityLevel()
     if activityLevel <= 0 then
-        if not self._activityWarningPrinted then
-            print("Warning: Activity level is zero or negative, skipping goods usage.")
-            self._activityWarningPrinted = true
-        end
         return
     end
-    self._activityWarningPrinted = false
 
     local tickTime = 120 / activityLevel -- Higher activity reduces time between consumption events
 
