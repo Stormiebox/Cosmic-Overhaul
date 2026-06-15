@@ -155,7 +155,7 @@ function receiveUpgrade(faction)
     generator.minRarity = getDropRarity()
 
     -- Safely pass DLC ownership flags to the generator
-    if faction and faction.isPlayer then
+    if faction and (faction.isPlayer or faction.isAlliance) then
         if faction.ownsBlackMarketDLC then
             generator.blackMarketUpgradesEnabled = true
         end

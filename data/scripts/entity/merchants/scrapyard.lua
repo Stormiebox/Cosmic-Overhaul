@@ -470,7 +470,7 @@ function Scrapyard.updateServer(timeStep)
             local here = false
             if faction.isAlliance then
                 faction = Alliance(factionIndex)
-            elseif faction.isPlayer then
+            elseif faction.isPlayer or faction.isAlliance then
                 faction = Player(factionIndex)
 
                 local px, py = faction:getSectorCoordinates()

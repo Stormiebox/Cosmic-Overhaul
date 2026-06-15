@@ -115,7 +115,7 @@ function TransferCrewGoods.interactionPossible(playerIndex, option)
     local shipFaction = Faction()
     if not shipFaction then return false end
 
-    if shipFaction.isPlayer then
+    if shipFaction.isPlayer or shipFaction.isAlliance then
         if shipFaction.index ~= playerIndex then
             return false
         end
