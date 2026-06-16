@@ -102,20 +102,27 @@ function SmugglersMarket.updateServer(timeStep)
     if totalUnbranded > 0 then
         SmugglersMarket.syndicateHeat = (SmugglersMarket.syndicateHeat or 0) + totalUnbranded
         if SmugglersMarket.syndicateHeat >= 5000 then
-            SmugglersMarket.syndicateHeat = 0
-            Sector():broadcastChatMessage(station.title, 2, "Syndicate Heat Critical. Fencing operation detected. Sector Lockdown Imminent.")
-            Sector():addScriptOnce("data/scripts/events/pirateattack.lua")
-            Sector():addScriptOnce("data/scripts/events/factionattackssmugglers.lua")
+            local now = Server().unpausedRuntime
+            if not SmugglersMarket.lastRaidTime or now - SmugglersMarket.lastRaidTime > 3600 then
+                SmugglersMarket.syndicateHeat = 0
+                SmugglersMarket.lastRaidTime = now
+                Sector():broadcastChatMessage(station.title, 2, "Syndicate Heat Critical. Fencing operation detected. Sector Lockdown Imminent.")
+                Sector():addScriptOnce("data/scripts/events/pirateattack.lua")
+                Sector():addScriptOnce("data/scripts/events/factionattackssmugglers.lua")
+            else
+                SmugglersMarket.syndicateHeat = 5000 -- Cap heat while on cooldown
+            end
         end
     end
 end
 
 function SmugglersMarket.secure()
-    return { syndicateHeat = SmugglersMarket.syndicateHeat }
+    return { syndicateHeat = SmugglersMarket.syndicateHeat, lastRaidTime = SmugglersMarket.lastRaidTime }
 end
 
 function SmugglersMarket.restore(data)
     SmugglersMarket.syndicateHeat = data.syndicateHeat or 0
+    SmugglersMarket.lastRaidTime = data.lastRaidTime or 0
 end
 
 function SmugglersMarket.initializationFinished()

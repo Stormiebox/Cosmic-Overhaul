@@ -867,10 +867,14 @@ The massive, conflict-heavy legacy file override for shiputility.lua has been co
 
 ### What Changed
 
-The Smuggler's Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
+The Smuggler's Market logic has been completely reworked into a massive criminal enterprise:
 
 - **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
 - **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
+- **Smuggler Governors:** Assigning a Smuggler captain as the governor of your market grants a 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees!
+- **The Fence System:** The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
+- **Syndicate Heat:** Passive unbranding generates heat. Unbranding 5,000 goods will trigger a massive Sector Lockdown, spawning both a Pirate Raid and a punitive local Faction Military attack aimed directly at your market!
+- **Raid Lockouts:** To prevent server-crashing raid queues when piping goods via Supply Lines, the Syndicate Heat system features a 1-Hour real-time cooldown. If heat caps out during the cooldown, the raid simply waits until the hour is up.
 
 **Details:**
 
