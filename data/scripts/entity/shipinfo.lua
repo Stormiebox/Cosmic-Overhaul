@@ -17,3 +17,10 @@ function shipinfo.handleCargoChanged() end
 function shipinfo.handleBlockChanged() end
 function shipinfo.handleDamaged() end
 function shipinfo.handleShieldDamaged() end
+
+function initialize(...)
+    if shipinfo.initialize then return shipinfo.initialize(...) end
+end
+function updateServer(...)
+    if shipinfo.updateServer then return shipinfo.updateServer(...) end
+end

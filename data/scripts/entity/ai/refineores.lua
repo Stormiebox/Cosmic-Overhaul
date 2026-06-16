@@ -14,3 +14,7 @@ end
         AIRefine._updateServer(timeStep)
     end
 end
+
+function updateServer(...)
+    if AIRefine.updateServer then return AIRefine.updateServer(...) end
+end

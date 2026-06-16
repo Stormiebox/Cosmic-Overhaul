@@ -40,4 +40,9 @@ function OALMapCommands.applyCommands(orderButtonType, orders)
     end
 end
 
+function initialize(...)
+    if OALMapCommands.initialize then return OALMapCommands.initialize(...) end
+end
+
+
 return OALMapCommands

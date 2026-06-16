@@ -198,3 +198,13 @@ callable(GalaxyMapQoL, "setSectorIcon")
 
 
 end
+
+function initialize(...)
+    if GalaxyMapQoL.initialize then return GalaxyMapQoL.initialize(...) end
+end
+function secure(...)
+    if GalaxyMapQoL.secure then return GalaxyMapQoL.secure(...) end
+end
+function restore(...)
+    if GalaxyMapQoL.restore then return GalaxyMapQoL.restore(...) end
+end

@@ -172,7 +172,7 @@ function GalaxyMapQoL.initUI()
 	coordinatesLabel = editIconWindow:createLabel(partitions[1], "", 12)
 	coordinatesLabel.position = coordinatesLabel.position + vec2(0, 10)
 	coordinatesLabel.centered = true
-	
+
 	local draggableCheckBox = editIconWindow:createCheckBox(Rect(10, 10, 25, 25), "", "onDraggableUICheckBoxChecked")
 	draggableCheckBox.tooltip = "Toggle Draggable Windows"%_t
 	draggableCheckBox:setCheckedNoCallback(Config.draggableUI == true)
@@ -1603,5 +1603,16 @@ end
 callable(nil, "sync")
 callable(nil, "syncWarZones")
 callable(nil, "setSectorIcon")
+
+function initialize(...)
+    if GalaxyMapQoL.initialize then return GalaxyMapQoL.initialize(...) end
+end
+function getUpdateInterval(...)
+    if GalaxyMapQoL.getUpdateInterval then return GalaxyMapQoL.getUpdateInterval(...) end
+end
+function updateClient(...)
+    if GalaxyMapQoL.updateClient then return GalaxyMapQoL.updateClient(...) end
+end
+
 
 return GalaxyMapQoL

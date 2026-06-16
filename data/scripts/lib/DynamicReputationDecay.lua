@@ -178,3 +178,11 @@ function DynamicReputationDecay.updateServer(timeStep)
         end
     end
 end
+
+
+function getUpdateInterval(...)
+    if DynamicReputationDecay.getUpdateInterval then return DynamicReputationDecay.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if DynamicReputationDecay.updateServer then return DynamicReputationDecay.updateServer(...) end
+end

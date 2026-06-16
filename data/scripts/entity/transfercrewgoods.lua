@@ -2241,3 +2241,7 @@ function TransferCrewGoods.renderUI()
         return
     end
 end
+
+function getUpdateInterval(...)
+    if TransferCrewGoods.getUpdateInterval then return TransferCrewGoods.getUpdateInterval(...) end
+end

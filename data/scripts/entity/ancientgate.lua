@@ -65,3 +65,8 @@ if onClient() then -- only do icon stuff on the clientside
         end
     end
 end
+
+
+function initialize(...)
+    if AncientGate.initialize then return AncientGate.initialize(...) end
+end

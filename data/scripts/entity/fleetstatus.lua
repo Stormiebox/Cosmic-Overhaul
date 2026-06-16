@@ -588,3 +588,11 @@ writers = {
         file:write("nil --[[userdata]]\n");
     end,
 }
+
+
+function initialize(...)
+    if fs.initialize then return fs.initialize(...) end
+end
+function update(...)
+    if fs.update then return fs.update(...) end
+end

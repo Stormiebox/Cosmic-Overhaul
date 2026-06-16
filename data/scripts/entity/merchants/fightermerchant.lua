@@ -155,3 +155,8 @@ end
 
 FighterMerchant.shop.ItemWrapper = SellableFighter
 FighterMerchant.shop.SortFunction = comp
+
+
+function initialize(...)
+    if FighterMerchant.initialize then return FighterMerchant.initialize(...) end
+end

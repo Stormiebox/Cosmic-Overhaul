@@ -90,3 +90,19 @@ function InteractPlayerStation.secure()
 end
 
 function InteractPlayerStation.getUpdateInterval() return 2 end
+
+function initialize(...)
+    if InteractPlayerStation.initialize then return InteractPlayerStation.initialize(...) end
+end
+function updateServer(...)
+    if InteractPlayerStation.updateServer then return InteractPlayerStation.updateServer(...) end
+end
+function restore(...)
+    if InteractPlayerStation.restore then return InteractPlayerStation.restore(...) end
+end
+function secure(...)
+    if InteractPlayerStation.secure then return InteractPlayerStation.secure(...) end
+end
+function getUpdateInterval(...)
+    if InteractPlayerStation.getUpdateInterval then return InteractPlayerStation.getUpdateInterval(...) end
+end

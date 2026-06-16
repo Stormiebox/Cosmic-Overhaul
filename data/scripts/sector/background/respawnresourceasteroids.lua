@@ -17,7 +17,7 @@ local KEY_RESOURCE_BASELINE = "outlands_rr_res_baseline"
 local KEY_LAST_RESPAWN = "outlands_rr_last_respawn"
 local KEY_TARGET_PCT = "outlands_rr_target_pct"
 
--- Config defaults (as fractions — loadConfig() converts from MCM integer percentages)
+-- Config defaults (as fractions â€” loadConfig() converts from MCM integer percentages)
 self.restorationPct = 0.50   -- MCM: 50%
 self.respawnRate = 0.01      -- MCM: 1%
 self.respawnInterval = 5     -- MCM: 5 min
@@ -26,7 +26,7 @@ self.hiddenTreasureChance = 0.02  -- MCM: 2%
 self.sizeModifier = 1.0     -- MCM: 100%
 self.respawnedFields = 3
 
--- Live respawn timer (not persisted — resets on sector load)
+-- Live respawn timer (not persisted â€” resets on sector load)
 self.timer = 0
 
 if onServer() then
@@ -140,14 +140,14 @@ function RespawnResourceAsteroids.initialize()
     self.timer = 0
 
     -- Register for push notifications when admin changes config via MCM
-    
+
 
     local sector = Sector()
     sector:registerCallback("onDestroyed", "onEntityDestroyed")
 
     sector:setValue(KEY_TARGET_PCT, self.restorationPct)
 
-    -- Snapshot system — take baseline BEFORE any emergency respawn
+    -- Snapshot system â€” take baseline BEFORE any emergency respawn
     -- so it reflects the sector's natural resource count, not inflated by emergency fields
     local baseline = sector:getValue(KEY_BASELINE)
     local lastRespawn = sector:getValue(KEY_LAST_RESPAWN)
@@ -189,9 +189,9 @@ function RespawnResourceAsteroids.initialize()
     end
 
 
-    -- Catch-up: simulate elapsed time since last respawn (unattended — can exceed target)
+    -- Catch-up: simulate elapsed time since last respawn (unattended â€” can exceed target)
     local elapsed = now - (lastRespawn or now)
-    
+
     -- Apply Cosmic Overhaul ARCC Limits
     if CosmicOverhaulConfig.get().enableOfflineCatchup then
         local maxDur = CosmicOverhaulConfig.get().offlineCatchupMaxDuration or 28800
@@ -265,7 +265,7 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
     -- Famine Synergy check
     local faction = Faction(sector.factionIndex)
     if faction and faction.isAIFaction then
-        local hasEconomy, economy = pcall(require, "cosmicvaulteconomy")
+        local hasEconomy, economy = pcall(include, "cosmicvaulteconomy")
         if hasEconomy and economy then
             local famineScore = economy.getFamineLevel(faction.index)
             if famineScore == "Severe Famine" then
@@ -385,7 +385,7 @@ function RespawnResourceAsteroids.respawnFields()
 
     -- Anomaly Synergy
     if random():test(0.05) then
-        local hasAnomalies, anomalies = pcall(require, "cosmicvaultanomalies")
+        local hasAnomalies, anomalies = pcall(include, "cosmicvaultanomalies")
         if hasAnomalies and anomalies then
             local anomalyType = random():test(0.5) and "PrecursorWreck" or "SpatialRift"
             local position = MatrixLookUp(vec3(math.random(), math.random(), math.random()), vec3(math.random(), math.random(), math.random()))
@@ -400,7 +400,7 @@ function RespawnResourceAsteroids.respawnFields()
     if faction and faction.isAIFaction and sector:getEntitiesByType(EntityType.Station) then
         local numStations = #{sector:getEntitiesByType(EntityType.Station)}
         if numStations >= 2 then
-            local hasNews, news = pcall(require, "cosmicvaultnews_server")
+            local hasNews, news = pcall(include, "cosmicvaultnews_server")
             if hasNews and news and news.publishArticle then
                 news.publishArticle({
                     title = "Seismic Shifts in " .. faction.name .. " Space",
@@ -450,3 +450,11 @@ function RespawnResourceAsteroids.dumpDiagnostics(sector, baseline)
 end
 
 end -- if onServer()
+
+
+function initialize(...)
+    if RespawnResourceAsteroids.initialize then return RespawnResourceAsteroids.initialize(...) end
+end
+function updateServer(...)
+    if RespawnResourceAsteroids.updateServer then return RespawnResourceAsteroids.updateServer(...) end
+end

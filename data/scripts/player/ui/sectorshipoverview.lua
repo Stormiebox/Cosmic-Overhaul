@@ -173,3 +173,10 @@ function SectorShipOverview.refreshWreckagesList()
 end
 
 end -- if onClient()
+
+function initialize(...)
+    if SectorShipOverview.initialize then return SectorShipOverview.initialize(...) end
+end
+function updateClient(...)
+    if SectorShipOverview.updateClient then return SectorShipOverview.updateClient(...) end
+end

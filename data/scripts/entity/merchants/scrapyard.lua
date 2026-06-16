@@ -990,3 +990,26 @@ function Scrapyard.initialize()
 
     Entity():setValue("remove_permanent_upgrades", true)
 end
+
+
+function restore(...)
+    if Scrapyard.restore then return Scrapyard.restore(...) end
+end
+function secure(...)
+    if Scrapyard.secure then return Scrapyard.secure(...) end
+end
+function initialize(...)
+    if Scrapyard.initialize then return Scrapyard.initialize(...) end
+end
+function getUpdateInterval(...)
+    if Scrapyard.getUpdateInterval then return Scrapyard.getUpdateInterval(...) end
+end
+function updateClient(...)
+    if Scrapyard.updateClient then return Scrapyard.updateClient(...) end
+end
+function updateServer(...)
+    if Scrapyard.updateServer then return Scrapyard.updateServer(...) end
+end
+function initialize(...)
+    if Scrapyard.initialize then return Scrapyard.initialize(...) end
+end

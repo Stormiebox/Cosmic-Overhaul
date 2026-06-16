@@ -226,3 +226,8 @@ function CommandCenter.serverRecallShip(shipName)
 end
 
 callable(CommandCenter, "serverRecallShip")
+
+
+function initialize(...)
+    if CommandCenter.initialize then return CommandCenter.initialize(...) end
+end

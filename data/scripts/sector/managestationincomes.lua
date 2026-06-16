@@ -322,3 +322,14 @@ stationMappings = {
         traderTypes = { "military", "torpedo" }
     },
 }
+
+
+function initialize(...)
+    if ManageStationIncomes.initialize then return ManageStationIncomes.initialize(...) end
+end
+function getUpdateInterval(...)
+    if ManageStationIncomes.getUpdateInterval then return ManageStationIncomes.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if ManageStationIncomes.updateServer then return ManageStationIncomes.updateServer(...) end
+end

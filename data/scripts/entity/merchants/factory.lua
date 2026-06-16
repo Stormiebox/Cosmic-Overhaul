@@ -668,3 +668,16 @@ function Factory.FactoryTweaks_refreshConfigErrors()
     garbageStationErrorLabel.color = color
     garbageStationErrorLabel.caption = garbageDeliveryError or ""
 end
+
+function restore(...)
+    if Factory.restore then return Factory.restore(...) end
+end
+function secure(...)
+    if Factory.secure then return Factory.secure(...) end
+end
+function initialize(...)
+    if Factory.initialize then return Factory.initialize(...) end
+end
+function updateServer(...)
+    if Factory.updateServer then return Factory.updateServer(...) end
+end

@@ -36,3 +36,19 @@ function PlayerStationTrader.updateServer(timeStep)
     end
     updateServerAI(timeStep)
 end
+
+function initialize(...)
+    if PlayerStationTrader.initialize then return PlayerStationTrader.initialize(...) end
+end
+function restore(...)
+    if PlayerStationTrader.restore then return PlayerStationTrader.restore(...) end
+end
+function secure(...)
+    if PlayerStationTrader.secure then return PlayerStationTrader.secure(...) end
+end
+function getUpdateInterval(...)
+    if PlayerStationTrader.getUpdateInterval then return PlayerStationTrader.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if PlayerStationTrader.updateServer then return PlayerStationTrader.updateServer(...) end
+end

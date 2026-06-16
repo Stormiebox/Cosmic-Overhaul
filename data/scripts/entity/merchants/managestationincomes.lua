@@ -153,7 +153,7 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     money = math.floor(money*mapping.quantity)
     money = money*ManageStationIncomes.getWarHeatMultiplier()
     money = math.floor(money*payoutMult)
-    
+
     if station:getValue("governor_merchant_active") then
         money = math.floor(money * 1.25)
     end
@@ -198,11 +198,11 @@ function ManageStationIncomes.getResourceIncome(station)
             mats = mats*matRichness
             mats = mats*ManageStationIncomes.getWarHeatMultiplier()
             mats = mats*payoutMult
-            
+
             if station and station:getValue("governor_merchant_active") then
                 mats = mats * 1.25
             end
-            
+
             if random():test(0.2) then
                 mats = mats*2
                 if random():test(0.1) then mats = mats*2 end
@@ -216,7 +216,7 @@ end
 function ManageStationIncomes.manageStation(station)
     local mapping = ManageStationIncomes.getMapping(station)
     if not mapping then return end
-    
+
     local chance = mapping.chance
     if station:getValue("governor_merchant_active") then
         chance = chance * 1.5 -- 50% more frequent trader traffic / payouts
@@ -339,3 +339,14 @@ stationMappings = {
         traderTypes = { "military", "torpedo" }
     },
 }
+
+
+function initialize(...)
+    if ManageStationIncomes.initialize then return ManageStationIncomes.initialize(...) end
+end
+function getUpdateInterval(...)
+    if ManageStationIncomes.getUpdateInterval then return ManageStationIncomes.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if ManageStationIncomes.updateServer then return ManageStationIncomes.updateServer(...) end
+end

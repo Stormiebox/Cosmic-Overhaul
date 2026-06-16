@@ -188,3 +188,14 @@ Balancing:
         end
     end
 end -- if onServer()
+
+
+function getUpdateInterval(...)
+    if Simulation.getUpdateInterval then return Simulation.getUpdateInterval(...) end
+end
+function update(...)
+    if Simulation.update then return Simulation.update(...) end
+end
+function secure(...)
+    if Simulation.secure then return Simulation.secure(...) end
+end

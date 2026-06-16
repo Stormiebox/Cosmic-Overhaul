@@ -257,3 +257,14 @@ callable(ResourceDisplay, "saveSetting")
 function ResourceDisplay.onRemove()
     if Player() then Player():unregisterCallback("onPreRenderHud", "onPreRenderHud") end
 end
+
+
+function initialize(...)
+    if ResourceDisplay.initialize then return ResourceDisplay.initialize(...) end
+end
+function getUpdateInterval(...)
+    if ResourceDisplay.getUpdateInterval then return ResourceDisplay.getUpdateInterval(...) end
+end
+function updateClient(...)
+    if ResourceDisplay.updateClient then return ResourceDisplay.updateClient(...) end
+end

@@ -82,7 +82,7 @@ end
 function SmugglersMarket.updateServer(timeStep)
     local station = Entity()
     if not station or not station:getValue("governor_smuggler_active") then return end
-    
+
     local totalUnbranded = 0
     -- The Fence System: Automatically unbrand up to 100 stolen goods per minute natively
     local cargos = station:getCargos()
@@ -91,14 +91,14 @@ function SmugglersMarket.updateServer(timeStep)
             local unbrandAmount = math.min(amount, 100 - totalUnbranded)
             local cleanGood = copy(good)
             cleanGood.stolen = false
-            
+
             station:removeCargo(good, unbrandAmount)
             station:addCargo(cleanGood, unbrandAmount)
-            
+
             totalUnbranded = totalUnbranded + unbrandAmount
         end
     end
-    
+
     if totalUnbranded > 0 then
         SmugglersMarket.syndicateHeat = (SmugglersMarket.syndicateHeat or 0) + totalUnbranded
         if SmugglersMarket.syndicateHeat >= 5000 then
@@ -664,12 +664,12 @@ callable(SmugglersMarket, "unbrand")
 
 function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, buyerFaction, ship)
     local factor = SmugglersMarket.coConfig.unbrandPriceFactor
-    
+
     local station = Entity()
     if station and station:getValue("governor_smuggler_active") then
         factor = factor * 0.5 -- 50% extra discount if Smuggler is Governor!
     end
-    
+
     if stationFaction.index == buyerFaction.index then
         factor = factor * 0.1 -- Syndicate Boss: 90% discount on unbranding fees at your own station!
     elseif ship then
@@ -745,3 +745,20 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
 end
 
 
+
+
+function initialize(...)
+    if SmugglersMarket.initialize then return SmugglersMarket.initialize(...) end
+end
+function getUpdateInterval(...)
+    if SmugglersMarket.getUpdateInterval then return SmugglersMarket.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if SmugglersMarket.updateServer then return SmugglersMarket.updateServer(...) end
+end
+function secure(...)
+    if SmugglersMarket.secure then return SmugglersMarket.secure(...) end
+end
+function restore(...)
+    if SmugglersMarket.restore then return SmugglersMarket.restore(...) end
+end

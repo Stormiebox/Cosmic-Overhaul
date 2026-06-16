@@ -1,6 +1,6 @@
 local CosmicOverhaul_old_init = initialize
 
-local cv_economy = require("cosmicvaulteconomy")
+local cv_economy = include("cosmicvaulteconomy")
 
 
 function initialize(...)

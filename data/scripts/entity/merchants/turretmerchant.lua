@@ -179,3 +179,8 @@ function TurretMerchant.initUI()
     local station = Entity()
     TurretMerchant.shop:initUI("Trade Equipment"%_t, station.translatedTitle, "Turrets"%_t, "data/textures/icons/bag_turret.png")
 end
+
+
+function initialize(...)
+    if TurretMerchant.initialize then return TurretMerchant.initialize(...) end
+end

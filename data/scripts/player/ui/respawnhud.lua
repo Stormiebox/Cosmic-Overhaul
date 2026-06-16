@@ -88,7 +88,7 @@ function RespawnHud.onSectorChanged()
 end
 
 function RespawnHud.initialize()
-    
+
 
     if not onClient() then return end
 
@@ -397,3 +397,14 @@ function RespawnHud.updateClient(timeStep)
     end
 end
 
+
+
+function initialize(...)
+    if RespawnHud.initialize then return RespawnHud.initialize(...) end
+end
+function getUpdateInterval(...)
+    if RespawnHud.getUpdateInterval then return RespawnHud.getUpdateInterval(...) end
+end
+function updateClient(...)
+    if RespawnHud.updateClient then return RespawnHud.updateClient(...) end
+end
