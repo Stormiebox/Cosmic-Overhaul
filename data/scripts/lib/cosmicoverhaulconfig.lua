@@ -149,3 +149,5 @@ end
 function CosmicOverhaulConfig.get()
     return build()
 end
+
+return CosmicOverhaulConfig

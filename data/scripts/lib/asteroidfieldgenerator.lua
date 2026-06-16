@@ -177,3 +177,6 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
         end
     return mat, asteroids
 end
+
+
+return AsteroidFieldGenerator

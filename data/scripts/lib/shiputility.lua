@@ -118,3 +118,5 @@ ShipUtility.addIllegalCargoToCraft = function(entity)
 
     entity:addCargo(g:good(), amount)
 end
+
+return ShipUtility

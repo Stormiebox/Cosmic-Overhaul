@@ -19,3 +19,5 @@ function SectorTurretGenerator:getTurretSeed(x, y, weaponType, rarity)
 
     return Seed(seedString), x, y
 end
+
+return SectorTurretGenerator

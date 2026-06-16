@@ -56,3 +56,6 @@ ShipGenerator.createMiningShip = function(faction, position, volume)
     end
     return ship
 end
+
+
+return ShipGenerator

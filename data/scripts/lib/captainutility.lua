@@ -27,3 +27,5 @@ CaptainUtility.getTradeBuyPricePerkImpact = ccm_scaledFuncForNonMerchant(
     CaptainUtility.getTradeBuyPricePerkImpact,
     function(original) if original < 0 then return original / 2 end return original * 2 end,
     ...)
+
+return CaptainUtility
