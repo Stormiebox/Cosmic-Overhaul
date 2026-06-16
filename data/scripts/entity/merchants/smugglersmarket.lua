@@ -18,6 +18,7 @@ SmugglersMarket = TradingAPI:CreateNamespace()
 SmugglersMarket.trader.tax = 0.2
 SmugglersMarket.trader.factionPaymentFactor = 0.0
 SmugglersMarket.interactionThreshold = -80000
+SmugglersMarket.syndicateHeat = 0
 
 -- Cosmic Overhaul Black Market tuning knobs
 SmugglersMarket.coConfig = {
@@ -82,18 +83,39 @@ function SmugglersMarket.updateServer(timeStep)
     local station = Entity()
     if not station or not station:getValue("governor_smuggler_active") then return end
     
+    local totalUnbranded = 0
     -- The Fence System: Automatically unbrand up to 100 stolen goods per minute natively
     local cargos = station:getCargos()
     for good, amount in pairs(cargos) do
-        if good.stolen then
-            local unbrandAmount = math.min(amount, 100)
+        if good.stolen and totalUnbranded < 100 then
+            local unbrandAmount = math.min(amount, 100 - totalUnbranded)
             local cleanGood = copy(good)
             cleanGood.stolen = false
             
             station:removeCargo(good, unbrandAmount)
             station:addCargo(cleanGood, unbrandAmount)
+            
+            totalUnbranded = totalUnbranded + unbrandAmount
         end
     end
+    
+    if totalUnbranded > 0 then
+        SmugglersMarket.syndicateHeat = (SmugglersMarket.syndicateHeat or 0) + totalUnbranded
+        if SmugglersMarket.syndicateHeat >= 5000 then
+            SmugglersMarket.syndicateHeat = 0
+            Sector():broadcastChatMessage(station.title, 2, "Syndicate Heat Critical. Fencing operation detected. Sector Lockdown Imminent.")
+            Sector():addScriptOnce("data/scripts/events/pirateattack.lua")
+            Sector():addScriptOnce("data/scripts/events/factionattackssmugglers.lua")
+        end
+    end
+end
+
+function SmugglersMarket.secure()
+    return { syndicateHeat = SmugglersMarket.syndicateHeat }
+end
+
+function SmugglersMarket.restore(data)
+    SmugglersMarket.syndicateHeat = data.syndicateHeat or 0
 end
 
 function SmugglersMarket.initializationFinished()

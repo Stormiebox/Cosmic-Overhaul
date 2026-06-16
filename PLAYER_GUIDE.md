@@ -81,6 +81,8 @@ Whether you are making friends or making enemies, your actions have real weight.
 * **Unique Loot:** We improved the randomization of the galaxy. Enemies and merchants in the same sector will no longer drop identical "cloned" items, ensuring varied and exciting loot.
 * **Lucrative Piracy:** Destroying civilian freighters and transports will now drop massive amounts of illegal cargo (scaling up to 250,000 credits based on the sector's richness).
 * **The Smuggler's Market:** The Black Market now pays a premium for illegal and dangerous goods. Unbranding costs have been rebalanced so the "steal -> clean -> sell" loop is a genuinely viable way to fund your empire.
+  * **The Fence System:** Your market will automatically unbrand up to 100 stolen goods per minute from its cargo hold.
+  * **Syndicate Heat:** Passive unbranding isn't without risk. It generates heat, and upon reaching 5,000 unbranded goods, triggers a massive Sector Lockdown featuring both a Pirate raid and a local Faction Military punitive strike!
 * **Deep Space Stashes:** Hidden stashes out in the galaxy now drop significantly better rewards as you progress into the late game, featuring massive credit multipliers (up to 10x) and much higher-tier upgrade drops.
 
 ---

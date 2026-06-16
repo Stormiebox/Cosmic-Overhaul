@@ -691,6 +691,7 @@ The Smuggler’s Market logic has been reworked so black-market trading is meani
 - **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
 - **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
 - **Stolen Goods Handling:** Clean unbranding friction and cost formulas have been rebalanced downwards, making the "hijack -> sanitize -> deploy" loop practical and affordable.
+- **The Fence System & Syndicate Heat:** The Smuggler's Market now natively unbrands up to 100 stolen goods per minute from its cargo hold. However, this passive fencing generates *Syndicate Heat*. Upon reaching a threshold of 5,000 unbranded goods, it triggers a massive Sector Lockdown, resulting in an immediate dual-punitive strike from both a Pirate raid and the local Faction Military!
 
 ### Why This Exists
 
