@@ -28,4 +28,4 @@ CaptainUtility.getTradeBuyPricePerkImpact = ccm_scaledFuncForNonMerchant(
     function(original) if original < 0 then return original / 2 end return original * 2 end,
     ...)
 
-return CaptainUtility
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns CaptainUtility above.

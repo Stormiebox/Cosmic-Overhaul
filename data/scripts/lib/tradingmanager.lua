@@ -110,7 +110,7 @@ function TradingManager:useUpBoughtGoods(timeStep)
 
                     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption
                     if amount >= 50 and random():getFloat() < 0.15 then
-                        local cve_success, cve = true, include("cosmicvaulteconomy")
+                        local cve_success, cve = pcall(include, "cosmicvaulteconomy")
                         if cve_success and cve and cve.TriggerMarketEvent then
                             local x, y = Sector():getCoordinates()
                             cve.TriggerMarketEvent(good.name, x, y, 10, "boom")

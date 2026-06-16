@@ -20,4 +20,4 @@ function SectorTurretGenerator:getTurretSeed(x, y, weaponType, rarity)
     return Seed(seedString), x, y
 end
 
-return SectorTurretGenerator
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns SectorTurretGenerator above.

@@ -20,4 +20,4 @@ function UpgradeGenerator:getUpgradeSeed(x, y, script, rarity)
     return Seed(seedString), x, y
 end
 
-return UpgradeGenerator
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns UpgradeGenerator above.

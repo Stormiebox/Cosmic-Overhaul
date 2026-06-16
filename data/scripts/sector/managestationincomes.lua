@@ -99,7 +99,7 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if system.rarity and system.rarity.value >= RarityType.Legendary then
-        local cvn_success, cvn = true, include("cosmicvaultnews")
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
         if cvn_success and cvn and cvn.publishArticle then
             cvn.publishArticle({
                 title = string.format("Experimental Tech Found in %s!", sector.name),
@@ -125,7 +125,7 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if turret.rarity and turret.rarity.value >= RarityType.Legendary then
-        local cvn_success, cvn = true, include("cosmicvaultnews")
+        local cvn_success, cvn = pcall(include, "cosmicvaultnews")
         if cvn_success and cvn and cvn.publishArticle then
             cvn.publishArticle({
                 title = string.format("Devastating Weaponry Forged in %s!", sector.name),

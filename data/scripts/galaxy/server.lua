@@ -1,6 +1,7 @@
 local CosmicOverhaul_old_init = initialize
 
-local cv_economy_success, cv_economy = true, require("cosmicvaulteconomy")
+local cv_economy = require("cosmicvaulteconomy")
+
 
 function initialize(...)
     if CosmicOverhaul_old_init then CosmicOverhaul_old_init(...) end
@@ -8,9 +9,7 @@ function initialize(...)
     Galaxy():addScriptOnce("galaxy/co_weather_generator.lua")
     
     -- Register to catch when new ships are spawned to apply Famine debuffs
-    if cv_economy_success then
-        Galaxy():registerCallback("onEntityCreated", "onEntityCreated")
-    end
+    Galaxy():registerCallback("onEntityCreated", "onEntityCreated")
 end
 
 function onEntityCreated(id)

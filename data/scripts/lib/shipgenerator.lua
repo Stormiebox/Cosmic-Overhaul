@@ -57,5 +57,4 @@ ShipGenerator.createMiningShip = function(faction, position, volume)
     return ship
 end
 
-
-return ShipGenerator
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns ShipGenerator above.

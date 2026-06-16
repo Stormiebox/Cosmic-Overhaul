@@ -119,4 +119,4 @@ ShipUtility.addIllegalCargoToCraft = function(entity)
     entity:addCargo(g:good(), amount)
 end
 
-return ShipUtility
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns ShipUtility above.

@@ -178,5 +178,4 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
     return mat, asteroids
 end
 
-
-return AsteroidFieldGenerator
+-- [Cosmic Overhaul] Append ends here. Vanilla already returns AsteroidFieldGenerator above.
