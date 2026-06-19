@@ -46,6 +46,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Economic Stabilization:** To compensate for the Profitable Stations interval doubling from 10m to 20m, the base payouts have been strictly doubled (Credit base: 8k -> 16k, Resource base: 3.5k -> 7k). The economy remains perfectly balanced without punishing players for the new performance optimizations.
 
 ### 🐛 Bug Fixes & Optimization
+- **Fixed:** `playerstationtrader.lua` was missing a `return` statement after `deleteEntityJumped`, leading to continued script execution on a deleted entity.
+- **Fixed:** `playerstationutils.lua` generated out-of-bounds random indices in `tableRandom` due to improper bounds scaling.
 - **Trading Manager Spam:** Completely eradicated the `Activity level is zero or negative` console spam which flooded server logs.
 - **RNG Calculation Math Bug:** Swept the codebase and replaced critical logic faults in Station Governors and AI Traders where probability checks were evaluating against `getInt()` instead of `getFloat()`, restoring exact percentage math for random economic events.
 - **Trading Manager Spam:** Fixed an issue where the "Activity level is zero or negative..." warning in `tradingmanager.lua` would spam the server logs every second. It now only prints once per session.

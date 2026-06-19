@@ -76,6 +76,3 @@ end
 -- For quick testing purposes only! Disables crew problems.
 -- function SimulationUtility.getUsableErrorAssessmentMessage(...) return nil end
 -- function SimulationUtility.isShipUsable(...) return nil end
-
-
-return SimulationUtility

@@ -172,7 +172,9 @@ Balancing:
 
         while (#Simulation.commands > 0 and timeToApply > 0) do
             local nextStep = ARCC_getSmallestTimestep()
+            nextStep = math.max(1, nextStep)
             nextStep = math.min(nextStep, timeToApply)
+            if nextStep <= 0 then break end
             print("[ARCC] Simulating catch-up of ${time} for ${num} active commands"%{
                 time = createReadableShortTimeString(nextStep),
                 num = #Simulation.commands,

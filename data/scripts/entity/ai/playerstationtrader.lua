@@ -33,6 +33,7 @@ function PlayerStationTrader.updateServer(timeStep)
     if sector.numPlayers == 0 then
         sector:sendCallback("onTradeSuccess", data.stationId, Entity().id.string)
         sector:deleteEntityJumped(Entity())
+        return
     end
     updateServerAI(timeStep)
 end

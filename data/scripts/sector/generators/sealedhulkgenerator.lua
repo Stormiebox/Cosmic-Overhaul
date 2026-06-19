@@ -22,5 +22,3 @@ function SealedHulkGenerator.generate(x, y)
     
     return hulk
 end
-
-return SealedHulkGenerator

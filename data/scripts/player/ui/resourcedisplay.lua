@@ -268,3 +268,9 @@ end
 function updateClient(...)
     if ResourceDisplay.updateClient then return ResourceDisplay.updateClient(...) end
 end
+
+
+-- Global Event Callbacks
+function onPreRenderHud(...)
+    if ResourceDisplay.onPreRenderHud then return ResourceDisplay.onPreRenderHud(...) end
+end

@@ -1,8 +1,8 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
-local cv_weather_success, cv_weather = true, include("cosmicvaultweather")
-local cv_news_success, cv_news = true, include("cosmicvaultnews")
+local cv_weather = include("cosmicvaultweather")
+local cv_news = include("cosmicvaultnews")
 
 local COWeatherGenerator = {}
 COWeatherGenerator.timer = 0
@@ -68,7 +68,7 @@ function COWeatherGenerator.spawnRandomWeather()
 
     cv_weather.triggerStorm(tx, ty, stormType, duration)
 
-    if cv_news_success and cv_news.publishArticle then
+    if cv_news.publishArticle then
         local newsType = ""
         local content = ""
 
@@ -97,6 +97,3 @@ end
 function updateServer(...)
     if COWeatherGenerator.updateServer then return COWeatherGenerator.updateServer(...) end
 end
-
-
-return COWeatherGenerator

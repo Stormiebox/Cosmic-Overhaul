@@ -102,11 +102,11 @@ function DynamicReputationDecay.getUpdateInterval()
 end
 
 local function processDecayForEntity(entity, factionStr, now, galaxy)
-    local cv_task_success, cv_task = true, include("cosmicvaulttask")
+    local cv_task = include("cosmicvaulttask")
     local iters = 0
     for idStr in string.gmatch(factionStr, "([^,]+)") do
         iters = iters + 1
-        if cv_task_success and cv_task and cv_task.Yield and (iters % 10 == 0) then
+        if cv_task and cv_task.Yield and (iters % 10 == 0) then
             cv_task.Yield()
         end
 
@@ -156,8 +156,8 @@ function DynamicReputationDecay.updateServer(timeStep)
     local factionStr = Server():getValue("factions")
     if type(factionStr) ~= "string" or factionStr == "" then return end
 
-    local cv_task_success, cv_task = true, include("cosmicvaulttask")
-    if cv_task_success and cv_task and cv_task.RunAsync then
+    local cv_task = include("cosmicvaulttask")
+    if cv_task and cv_task.RunAsync then
         local taskName = "Decay_" .. player.index
         cv_task.RunAsync(taskName, function()
             -- Process Player

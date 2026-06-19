@@ -265,8 +265,8 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
     -- Famine Synergy check
     local faction = Faction(sector.factionIndex)
     if faction and faction.isAIFaction then
-        local hasEconomy, economy = pcall(include, "cosmicvaulteconomy")
-        if hasEconomy and economy then
+        local economy = include("cosmicvaulteconomy")
+        if economy then
             local famineScore = economy.getFamineLevel(faction.index)
             if famineScore == "Severe Famine" then
                 print("Respawn paused: Faction is in Severe Famine.")
@@ -385,8 +385,8 @@ function RespawnResourceAsteroids.respawnFields()
 
     -- Anomaly Synergy
     if random():test(0.05) then
-        local hasAnomalies, anomalies = pcall(include, "cosmicvaultanomalies")
-        if hasAnomalies and anomalies then
+        local anomalies = include("cosmicvaultanomalies")
+        if anomalies then
             local anomalyType = random():test(0.5) and "PrecursorWreck" or "SpatialRift"
             local position = MatrixLookUp(vec3(math.random(), math.random(), math.random()), vec3(math.random(), math.random(), math.random()))
             position.pos = vec3(math.random(-2000, 2000), math.random(-2000, 2000), math.random(-2000, 2000))
@@ -400,8 +400,8 @@ function RespawnResourceAsteroids.respawnFields()
     if faction and faction.isAIFaction and sector:getEntitiesByType(EntityType.Station) then
         local numStations = #{sector:getEntitiesByType(EntityType.Station)}
         if numStations >= 2 then
-            local hasNews, news = pcall(include, "cosmicvaultnews_server")
-            if hasNews and news and news.publishArticle then
+            local news = include("cosmicvaultnews_server")
+            if news and news.publishArticle then
                 news.publishArticle({
                     title = "Seismic Shifts in " .. faction.name .. " Space",
                     content = "New Resource Veins Discovered in Sector [" .. x .. ":" .. y .. "] as shifting gravity wells unearth hidden riches.",
@@ -457,4 +457,10 @@ function initialize(...)
 end
 function updateServer(...)
     if RespawnResourceAsteroids.updateServer then return RespawnResourceAsteroids.updateServer(...) end
+end
+
+
+-- Global Event Callbacks
+function onEntityDestroyed(...)
+    if RespawnResourceAsteroids.onEntityDestroyed then return RespawnResourceAsteroids.onEntityDestroyed(...) end
 end

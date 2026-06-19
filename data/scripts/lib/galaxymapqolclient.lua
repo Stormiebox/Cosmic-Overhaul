@@ -1614,5 +1614,26 @@ function updateClient(...)
     if GalaxyMapQoL.updateClient then return GalaxyMapQoL.updateClient(...) end
 end
 
+-- Global Event Callbacks
+function galaxyMapQoL_onShowGalaxyMap(...)
+    if GalaxyMapQoL.galaxyMapQoL_onShowGalaxyMap then return GalaxyMapQoL.galaxyMapQoL_onShowGalaxyMap(...) end
+end
+function galaxyMapQoL_onHideGalaxyMap(...)
+    if GalaxyMapQoL.galaxyMapQoL_onHideGalaxyMap then return GalaxyMapQoL.galaxyMapQoL_onHideGalaxyMap(...) end
+end
+function galaxyMapQoL_onEditIconBtnPressed(...)
+    if GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed then return GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed(...) end
+end
+function galaxyMapQoL_onMapRenderAfterLayers(...)
+    if GalaxyMapQoL.galaxyMapQoL_onMapRenderAfterLayers then return GalaxyMapQoL.galaxyMapQoL_onMapRenderAfterLayers(...) end
+end
+function galaxyMapQoL_onGalaxyMapMouseDown(...)
+    if GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseDown then return GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseDown(...) end
+end
+function galaxyMapQoL_onGalaxyMapMouseButtonEvent(...)
+    if GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseButtonEvent then return GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseButtonEvent(...) end
+end
+
+
 
 return GalaxyMapQoL

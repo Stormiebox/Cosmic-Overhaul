@@ -106,5 +106,3 @@ end
 function SupplyLineCommand:onFinish(ownerIndex, shipName, area, config)
     -- Handle finish
 end
-
-return SupplyLineCommand

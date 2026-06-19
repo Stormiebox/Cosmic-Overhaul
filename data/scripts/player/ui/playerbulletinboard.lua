@@ -420,3 +420,9 @@ end
 function update(...)
     if PlayerBulletinBoard.update then return PlayerBulletinBoard.update(...) end
 end
+
+
+-- Global Event Callbacks
+function onSectorChanged(...)
+    if PlayerBulletinBoard.onSectorChanged then return PlayerBulletinBoard.onSectorChanged(...) end
+end

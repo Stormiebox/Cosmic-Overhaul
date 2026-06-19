@@ -16,7 +16,7 @@ function PlayerStationUtils.GetAsyncGenFor(type)
 end
 
 local function tableRandom(haystack)
-    return haystack[math.floor(random():getInt() * (#haystack - 1)) + 1]
+    return haystack[random():getInt(1, #haystack)]
 end
 
 function PlayerStationUtils.spawnTraderFor(namespace, station, shipTypes)

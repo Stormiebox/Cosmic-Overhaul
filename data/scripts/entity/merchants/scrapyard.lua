@@ -1013,3 +1013,24 @@ end
 function initialize(...)
     if Scrapyard.initialize then return Scrapyard.initialize(...) end
 end
+
+
+-- Global Event Callbacks
+function onHullHit(...)
+    if Scrapyard.onHullHit then return Scrapyard.onHullHit(...) end
+end
+function onEntityCreated(...)
+    if Scrapyard.onEntityCreated then return Scrapyard.onEntityCreated(...) end
+end
+function onEntityDestroyed(...)
+    if Scrapyard.onEntityDestroyed then return Scrapyard.onEntityDestroyed(...) end
+end
+function onEntityDocked(...)
+    if Scrapyard.onEntityDocked then return Scrapyard.onEntityDocked(...) end
+end
+function onEntityUndocked(...)
+    if Scrapyard.onEntityUndocked then return Scrapyard.onEntityUndocked(...) end
+end
+function onEntityJump(...)
+    if Scrapyard.onEntityJump then return Scrapyard.onEntityJump(...) end
+end

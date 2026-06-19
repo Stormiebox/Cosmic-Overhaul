@@ -103,8 +103,8 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if system.rarity and system.rarity.value >= RarityType.Legendary then
-        local cvn_success, cvn = true, include("cosmicvaultnews")
-        if cvn_success and cvn and cvn.publishArticle then
+        local cvn = include("cosmicvaultnews")
+        if cvn and cvn.publishArticle then
             cvn.publishArticle({
                 title = string.format("Experimental Tech Found in %s!", sector.name),
                 content = string.format("The Research & Development division at %s %s has successfully engineered a %s %s!", faction.name, station.name, system.rarity.name, system.name),
@@ -129,8 +129,8 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if turret.rarity and turret.rarity.value >= RarityType.Legendary then
-        local cvn_success, cvn = true, include("cosmicvaultnews")
-        if cvn_success and cvn and cvn.publishArticle then
+        local cvn = include("cosmicvaultnews")
+        if cvn and cvn.publishArticle then
             cvn.publishArticle({
                 title = string.format("Devastating Weaponry Forged in %s!", sector.name),
                 content = string.format("The engineering teams at %s %s have successfully assembled a prototype %s %s!", faction.name, station.name, turret.rarity.name, turret.weaponPrefix),
@@ -349,4 +349,10 @@ function getUpdateInterval(...)
 end
 function updateServer(...)
     if ManageStationIncomes.updateServer then return ManageStationIncomes.updateServer(...) end
+end
+
+
+-- Global Event Callbacks
+function onTradeSuccess(...)
+    if ManageStationIncomes.onTradeSuccess then return ManageStationIncomes.onTradeSuccess(...) end
 end

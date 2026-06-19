@@ -596,3 +596,12 @@ end
 function update(...)
     if fs.update then return fs.update(...) end
 end
+
+
+-- Global Event Callbacks
+function renderShipStatus(...)
+    if fs.renderShipStatus then return fs.renderShipStatus(...) end
+end
+function loadToShip(...)
+    if fs.loadToShip then return fs.loadToShip(...) end
+end

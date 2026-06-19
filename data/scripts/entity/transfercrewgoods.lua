@@ -2245,3 +2245,12 @@ end
 function getUpdateInterval(...)
     if TransferCrewGoods.getUpdateInterval then return TransferCrewGoods.getUpdateInterval(...) end
 end
+
+
+-- Global Event Callbacks
+function onCrewChanged(...)
+    if TransferCrewGoods.onCrewChanged then return TransferCrewGoods.onCrewChanged(...) end
+end
+function onCrewChangedRefreshUI(...)
+    if TransferCrewGoods.onCrewChangedRefreshUI then return TransferCrewGoods.onCrewChangedRefreshUI(...) end
+end
