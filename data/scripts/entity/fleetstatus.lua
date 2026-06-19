@@ -60,6 +60,10 @@ function fs.initialize(...)
     end
 end
 
+function fs.getUpdateInterval()
+    return 0.5
+end
+
 function fs.interactionPossible(playerIndex, option)
     local ship = Entity()
     local player = Player(playerIndex)
@@ -595,6 +599,9 @@ function initialize(...)
 end
 function update(...)
     if fs.update then return fs.update(...) end
+end
+function getUpdateInterval(...)
+    if fs.getUpdateInterval then return fs.getUpdateInterval(...) end
 end
 
 

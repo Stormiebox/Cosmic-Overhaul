@@ -221,6 +221,10 @@ function RespawnResourceAsteroids.initialize()
     self.dumpDiagnostics(sector, baseline)
 end
 
+function RespawnResourceAsteroids.getUpdateInterval()
+    return 10.0
+end
+
 function RespawnResourceAsteroids.updateServer(timeStep)
     if not self.enableResourceRegen then return end
 
@@ -331,7 +335,8 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
 
     -- Shuffle anchors for spatial distribution
     for i = #anchors, 2, -1 do
-        local j = math.random(1, i)
+        local random = random()
+        local j = random:getInt(1, i)
         anchors[i], anchors[j] = anchors[j], anchors[i]
     end
 
@@ -347,7 +352,7 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
         local offset = random():getFloat(20, 80)
         local translation = anchor.translationf + dir * offset
 
-        local position = MatrixLookUp(vec3(math.random(), math.random(), math.random()), vec3(math.random(), math.random(), math.random()))
+        local position = MatrixLookUp(vec3(random():getFloat(), random():getFloat(), random():getFloat()), vec3(random():getFloat(), random():getFloat(), random():getFloat()))
         position.pos = translation
 
         local asteroid
@@ -388,8 +393,8 @@ function RespawnResourceAsteroids.respawnFields()
         local anomalies = include("cosmicvaultanomalies")
         if anomalies then
             local anomalyType = random():test(0.5) and "PrecursorWreck" or "SpatialRift"
-            local position = MatrixLookUp(vec3(math.random(), math.random(), math.random()), vec3(math.random(), math.random(), math.random()))
-            position.pos = vec3(math.random(-2000, 2000), math.random(-2000, 2000), math.random(-2000, 2000))
+            local position = MatrixLookUp(vec3(random():getFloat(), random():getFloat(), random():getFloat()), vec3(random():getFloat(), random():getFloat(), random():getFloat()))
+            position.pos = vec3(random():getInt(-2000, 2000), random():getInt(-2000, 2000), random():getInt(-2000, 2000))
             anomalies.spawnAnomaly(x, y, anomalyType, position)
             print("Anomaly Spawned: " .. anomalyType)
         end
@@ -454,6 +459,9 @@ end -- if onServer()
 
 function initialize(...)
     if RespawnResourceAsteroids.initialize then return RespawnResourceAsteroids.initialize(...) end
+end
+function getUpdateInterval(...)
+    if RespawnResourceAsteroids.getUpdateInterval then return RespawnResourceAsteroids.getUpdateInterval(...) end
 end
 function updateServer(...)
     if RespawnResourceAsteroids.updateServer then return RespawnResourceAsteroids.updateServer(...) end

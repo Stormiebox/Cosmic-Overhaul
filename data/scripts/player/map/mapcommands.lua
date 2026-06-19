@@ -139,10 +139,4 @@ function MapCommands.onLoopPressed()
     if not MapCommands.enchainCoordinates then return end
     MapCommands.enqueueOrder("addLoop", MapCommands.enchainCoordinates.x, MapCommands.enchainCoordinates.y)
 end
-
-OALMapCommands.addCommand("SupplyLine", "Supply Line"%_t, "data/textures/icons/trade-route.png", "onSupplyLinePressed", nil, "co_supplyline")
-function MapCommands.onSupplyLinePressed()
-    MapCommands.clearOrdersIfNecessary()
-    MapCommands.enqueueOrder("addSupplyLineOrder")
-    if not MapCommands.isEnqueueing() then MapCommands.runOrders() end
-end
+

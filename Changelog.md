@@ -9,7 +9,6 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v5.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
 
-
 ### 🚀 Major Overhaul Features
 - **Captain Elite Traits:** Level 3 Captains now possess massive sector-wide or unique bonuses:
   - **Commodores:** Provide a global +10% Shield and +10% Damage buff to all player/alliance ships in the sector.
@@ -46,6 +45,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Economic Stabilization:** To compensate for the Profitable Stations interval doubling from 10m to 20m, the base payouts have been strictly doubled (Credit base: 8k -> 16k, Resource base: 3.5k -> 7k). The economy remains perfectly balanced without punishing players for the new performance optimizations.
 
 ### 🐛 Bug Fixes & Optimization
+- **Optimized**: Throttled `respawnresourceasteroids.lua` update loop to 10 seconds via `getUpdateInterval()` to save CPU cycles.
+- **Optimized**: Throttled `fleetstatus.lua` listbox UI repopulation to run every 0.5s instead of every frame.
+- **Fixed**: Eliminated `math.random` usage in `respawnresourceasteroids.lua` and `asteroidfieldgenerator.lua` for full multiplayer determinism.
+- **Fixed**: Removed broken `SupplyLine` and Goods order command hooks from `mapcommands.lua` that would sometimes cause the Galaxy Map empty UI crash.
 - **Fixed:** `playerstationtrader.lua` was missing a `return` statement after `deleteEntityJumped`, leading to continued script execution on a deleted entity.
 - **Fixed:** `playerstationutils.lua` generated out-of-bounds random indices in `tableRandom` due to improper bounds scaling.
 - **Trading Manager Spam:** Completely eradicated the `Activity level is zero or negative` console spam which flooded server logs.

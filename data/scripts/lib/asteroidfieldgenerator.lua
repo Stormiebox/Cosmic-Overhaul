@@ -52,20 +52,21 @@ function AsteroidFieldGenerator:createAsteroidFieldEx(numAsteroids, fieldSize, m
         local size
         local hiddenTreasure = false
 
-        if math.random() < 0.15 then
+        local random = random()
+        if random:getFloat() < 0.15 then
             -- create a bigger asteroid, but without resources
-            size = lerp(math.random(), 0, 1.0, minAsteroidSize, maxAsteroidSize);
+            size = lerp(random:getFloat(), 0, 1.0, minAsteroidSize, maxAsteroidSize);
             if resources then
                 resources = false
                 asteroidsWithResources = asteroidsWithResources + 1
             end
         else
             -- normal asteroid
-            size = lerp(math.random(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
+            size = lerp(random:getFloat(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
         end
 
         -- [Outlands: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
-        if math.random() < hiddenTreasureChance then
+        if random:getFloat() < hiddenTreasureChance then
             hiddenTreasure = true
         end
 
@@ -133,24 +134,25 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
             local size
             local hiddenTreasure = false
 
-            if math.random() < 0.15 then
-                size = lerp(math.random(), 0, 1.0, minAsteroidSize, maxAsteroidSize);
+            local random = random()
+            if random:getFloat() < 0.15 then
+                size = lerp(random:getFloat(), 0, 1.0, minAsteroidSize, maxAsteroidSize);
                 if resources then
                     resources = false
                     asteroidsWithResources = asteroidsWithResources + 1
                 end
             else
-                size = lerp(math.random(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
+                size = lerp(random:getFloat(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
             end
 
             -- [Outlands: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
-            if math.random() < hiddenTreasureChance then
+            if random:getFloat() < hiddenTreasureChance then
                 hiddenTreasure = true
             end
 
             zcoord = zcoord + 40
             counter = counter + 1
-            local randomHeight = math.random(4,9)
+            local randomHeight = random:getInt(4,9)
 
             if counter == randomHeight or counter >= 10 then
 
