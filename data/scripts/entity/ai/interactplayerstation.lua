@@ -106,3 +106,5 @@ end
 function getUpdateInterval(...)
     if InteractPlayerStation.getUpdateInterval then return InteractPlayerStation.getUpdateInterval(...) end
 end
+
+return InteractPlayerStation

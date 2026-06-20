@@ -75,3 +75,5 @@ end
 function syncConfig(...)
     FleetStatus.syncConfig(...)
 end
+
+return FleetStatus

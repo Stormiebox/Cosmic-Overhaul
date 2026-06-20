@@ -3,7 +3,6 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 include("utility")
 include("randomext")
-include("galaxy")
 
 local AsyncShipGenerator = include("asyncshipgenerator")
 
@@ -40,3 +39,5 @@ function PlayerStationUtils.spawnTraderFor(namespace, station, shipTypes)
     local gen = AsyncShipGenerator(namespace, generatedFunc)
     gen[PlayerStationUtils.GetAsyncGenFor(chosenType)](gen, faction, matrix)
 end
+
+return PlayerStationUtils

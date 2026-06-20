@@ -356,3 +356,5 @@ end
 function onTradeSuccess(...)
     if ManageStationIncomes.onTradeSuccess then return ManageStationIncomes.onTradeSuccess(...) end
 end
+
+return ManageStationIncomes

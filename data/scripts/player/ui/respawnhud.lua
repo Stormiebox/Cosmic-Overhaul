@@ -408,3 +408,5 @@ end
 function updateClient(...)
     if RespawnHud.updateClient then return RespawnHud.updateClient(...) end
 end
+
+return RespawnHud

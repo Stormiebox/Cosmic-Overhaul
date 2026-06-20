@@ -1,6 +1,5 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("utility")
-include("galaxy")
 local PassageMap = include("passagemap")
 local SectorSpecifics = include("sectorspecifics")
 

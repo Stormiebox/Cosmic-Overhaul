@@ -612,3 +612,5 @@ end
 function loadToShip(...)
     if fs.loadToShip then return fs.loadToShip(...) end
 end
+
+return FleetStatus

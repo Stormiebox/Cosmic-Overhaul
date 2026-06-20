@@ -420,3 +420,5 @@ function TrashMan.onUnmarkAllPressed()
         invokeServerFunction("onUnmarkAllPressedServer1")
     end
 end
+
+return TrashMan

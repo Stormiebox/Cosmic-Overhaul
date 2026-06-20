@@ -1,10 +1,8 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include ("galaxy")
 include ("utility")
 include ("randomext")
-include ("faction")
 include ("stringutility")
-include ("weapontype")
+
 local Multiplier = 1.5 -- Nerfed from 5 (65 turrets). 1.5 generates ~19 turrets, perfect for restocking.
 local ShopAPI = include ("shop")
 local SectorTurretGenerator = include ("sectorturretgenerator")

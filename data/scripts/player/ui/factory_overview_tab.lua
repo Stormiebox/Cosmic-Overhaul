@@ -290,3 +290,5 @@ end
 function initialize(...)
     if FactoryOverview.initialize then return FactoryOverview.initialize(...) end
 end
+
+return FactoryOverview

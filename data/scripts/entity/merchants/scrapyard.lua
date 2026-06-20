@@ -1,10 +1,8 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include ("galaxy")
 include ("utility")
-include ("faction")
 include ("randomext")
 include ("callable")
-include ("weapontype")
+
 include ("stringutility")
 include ("goods")
 include ("reconstructionutility")

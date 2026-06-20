@@ -1,7 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include ("utility")
 include ("randomext")
-include ("faction")
 local ShopAPI = include ("shop")
 local UpgradeGenerator = include("upgradegenerator")
 

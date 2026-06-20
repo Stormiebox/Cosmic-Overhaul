@@ -1,8 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include ("galaxy")
 include ("utility")
 include ("randomext")
-include ("faction")
 include ("sellableinventoryitem")
 include ("stringutility")
 local SectorFighterGenerator = include("sectorfightergenerator")

@@ -14,84 +14,6 @@ local DecayConfig = {
     updateIntervalSec = 60,            -- Throttle to once a minute for optimal server performance
 }
 
--- Cosmic Overhaul: Safely inject custom enums without destroying the vanilla table!
-local function injectRelationEnum(name)
-    if not RelationChangeType[name] then
-        local max = 0
-        for _, v in pairs(RelationChangeType) do
-            if type(v) == "number" and v > max then max = v end
-        end
-        RelationChangeType[name] = max+1
-        RelationChangeNames[max+1] = name
-    end
-end
-
-injectRelationEnum("Smuggling")
-injectRelationEnum("Raiding")
-injectRelationEnum("GeneralIllegal")
-injectRelationEnum("ServiceUsage")
-injectRelationEnum("ResourceTrade")
-injectRelationEnum("GoodsTrade")
-injectRelationEnum("EquipmentTrade")
-injectRelationEnum("WeaponsTrade")
-injectRelationEnum("Commerce")
-injectRelationEnum("Tribute")
-
-RelationChangeMaxCap = {
-    [RelationChangeType.ServiceUsage] = 45000,
-    [RelationChangeType.ResourceTrade] = 45000,
-    [RelationChangeType.GoodsTrade] = 65000,
-    [RelationChangeType.EquipmentTrade] = 75000,
-    [RelationChangeType.WeaponsTrade] = 75000,
-    [RelationChangeType.Commerce] = 50000,
-    [RelationChangeType.Tribute] = 0,
-}
-
-RelationChangeMinCap = {
-    [RelationChangeType.Smuggling] = -75000,
-    [RelationChangeType.GeneralIllegal] = -75000,
-}
-
--- Cosmic Overhaul: Non-Destructive Hook!
--- We save the vanilla function so we don't break trait processing, alliance syncing, or notifications.
--- Since the previous version of this, did exactly just that. Yikes!
-local co_vanilla_changeRelations = changeRelations
-function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
-    if not delta or delta == 0 then return end
-
-    local factionA, factionB, aiFaction, playerFaction = getInteractingFactions(a, b)
-
-    if playerFaction and aiFaction then
-        -- 1. Persistent State Tracking (Fixes Lua VM Isolation bug)
-        -- Save the timestamp to the Player/Alliance database so it survives server restarts and sector jumps
-        if playerFaction.isPlayer or playerFaction.isAlliance then
-            Player(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
-        elseif playerFaction.isAlliance then
-            Alliance(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
-        end
-
-        -- 2. Apply Custom Hard Caps before passing to Vanilla
-        local galaxy = Galaxy()
-        local relations = galaxy:getFactionRelations(factionA, factionB)
-
-        if delta > 0 then
-            local maxCap = RelationChangeMaxCap[changeType]
-            if maxCap ~= nil then
-                delta = hardCapGain(relations, delta, maxCap)
-            end
-        elseif delta < 0 then
-            local minCap = RelationChangeMinCap[changeType]
-            if minCap ~= nil then
-                delta = hardCapLoss(relations, delta, minCap)
-            end
-        end
-    end
-
-    -- 3. Pass the capped delta back to the Vanilla function
-    if co_vanilla_changeRelations then
-        co_vanilla_changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
-    end
-end
 
 -- =========================================================================
 -- Background Decay Loop (Attached to the Player via player/init.lua)
@@ -186,3 +108,5 @@ end
 function updateServer(...)
     if DynamicReputationDecay.updateServer then return DynamicReputationDecay.updateServer(...) end
 end
+
+return DynamicReputationDecay, RelationChangeMaxCap, RelationChangeMinCap

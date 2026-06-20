@@ -426,3 +426,5 @@ end
 function onSectorChanged(...)
     if PlayerBulletinBoard.onSectorChanged then return PlayerBulletinBoard.onSectorChanged(...) end
 end
+
+return PlayerBulletinBoard

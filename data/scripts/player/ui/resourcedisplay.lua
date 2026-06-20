@@ -274,3 +274,5 @@ end
 function onPreRenderHud(...)
     if ResourceDisplay.onPreRenderHud then return ResourceDisplay.onPreRenderHud(...) end
 end
+
+return ResourceDisplay

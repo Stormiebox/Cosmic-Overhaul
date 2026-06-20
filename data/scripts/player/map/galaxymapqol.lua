@@ -208,3 +208,5 @@ end
 function restore(...)
     if GalaxyMapQoL.restore then return GalaxyMapQoL.restore(...) end
 end
+
+return GalaxyMapQoL

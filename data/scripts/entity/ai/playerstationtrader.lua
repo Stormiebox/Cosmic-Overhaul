@@ -53,3 +53,5 @@ end
 function updateServer(...)
     if PlayerStationTrader.updateServer then return PlayerStationTrader.updateServer(...) end
 end
+
+return PlayerStationTrader

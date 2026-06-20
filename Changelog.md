@@ -22,7 +22,6 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   - **The Fence System:** The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
   - **Syndicate Heat:** Passive unbranding generates heat. Unbranding 5,000 goods will trigger a massive Sector Lockdown, spawning both a Pirate Raid and a punitive local Faction Military attack aimed directly at your market!
   - **Raid Lockouts:** The Syndicate Heat system is now safely capped and features a 1-Hour real-time cooldown to prevent server-crashing stacked raids when players pipe tens of thousands of stolen goods into their markets via Supply Lines.
-- **True Supply Lines:** Added a new background map command `Supply Line`. Establish continuous, automated ferry routes to infinitely transfer a configurable good between your current location and a designated target sector without needing cumbersome manual loops.
 - **Cosmic Codex Integration:** The mod now fully supports the Cosmic Codex! Comprehensive lore and mechanical documentation (such as features, UI tools, and dynamic events) are now readable directly in-game from the new Cosmic Codex tab.
 - **Dynamic Subspace Weather**: Sector environments are no longer static. Introduced `co_weather_generator.lua` to dynamically generate weather hazards across the galaxy.
 - **Ion Storms**: Completely disables radar systems and hyperspace capability.
@@ -49,6 +48,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Optimized**: Throttled `fleetstatus.lua` listbox UI repopulation to run every 0.5s instead of every frame.
 - **Fixed**: Eliminated `math.random` usage in `respawnresourceasteroids.lua` and `asteroidfieldgenerator.lua` for full multiplayer determinism.
 - **Fixed**: Removed broken `SupplyLine` and Goods order command hooks from `mapcommands.lua` that would sometimes cause the Galaxy Map empty UI crash.
+- **Fixed**: Resolved a severe issue where a missing `LuaHacks` dependency in background trade commands would abort the initialization of the Galaxy Map UI, resulting in a blank map and repeated console spam.
 - **Fixed:** `playerstationtrader.lua` was missing a `return` statement after `deleteEntityJumped`, leading to continued script execution on a deleted entity.
 - **Fixed:** `playerstationutils.lua` generated out-of-bounds random indices in `tableRandom` due to improper bounds scaling.
 - **Trading Manager Spam:** Completely eradicated the `Activity level is zero or negative` console spam which flooded server logs.
@@ -61,4 +61,5 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Scout Mission Fix:** Fixed a massive vanilla/mod bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the `scoutcommandnotetable` lacked dialogue lines for that specific sector template.
 - **Multiplayer Desyncs:** Replaced `math.random` with the deterministic engine `random():getInt()` across all custom scripts to prevent massive physics and stats desyncs in multiplayer.
 - Severe Famine debuff reduces shields by 60% and velocity by 40%.
+- **Fixed (VM Isolation):** Completely refactored the Dynamic Reputation Decay system. The reputation hard-cap hooks were previously running in an isolated player VM, rendering them as dead code. The hooks and custom Enums have now been properly extracted into a global `relations.lua` override, ensuring all relation changes across the entire galaxy natively respect the Cosmic Overhaul limits. Stray markdown syntax errors in the decay loop were also eradicated.
 - Removed `pcall` soft-dependencies. Core 5 mods are now hard requirements.

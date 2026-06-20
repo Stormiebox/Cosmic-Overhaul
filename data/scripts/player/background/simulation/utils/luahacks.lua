@@ -155,3 +155,6 @@ end
     -- The hacked captain still has the proxied function called, but the function will evaluate FALSE
     print('This should be FALSE: ' .. tostring(hackedCaptain:hasClass(CaptainClass.Merchant)))
 ]]
+
+return LuaHacks
+
