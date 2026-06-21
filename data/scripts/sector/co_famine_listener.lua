@@ -1,0 +1,36 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+
+local cv_economy = include("cosmicvaulteconomy")
+
+local COFamineListener = {}
+
+function COFamineListener.initialize()
+    if onServer() then
+        Sector():registerCallback("onEntityCreated", "onEntityCreated")
+    end
+end
+
+function COFamineListener.onEntityCreated(id)
+    local entity = Entity(id)
+    if not entity then return end
+    
+    -- Only affect AI Faction Ships (Not players, not Eclipse boss ships)
+    if entity.type == EntityType.Ship and entity.factionIndex and entity.factionIndex > 0 then
+        local faction = Faction(entity.factionIndex)
+        if faction and not faction.isPlayer and not faction.isAlliance and faction.name ~= "The Eclipse" then
+            local famineLevel = cv_economy.getFamineLevel(faction.index)
+            if famineLevel ~= "Stable" then
+                entity:addScriptOnce("data/scripts/entity/co_famine_debuff.lua", famineLevel)
+            end
+        end
+    end
+end
+
+function initialize(...)
+    if COFamineListener.initialize then return COFamineListener.initialize(...) end
+end
+function onEntityCreated(...)
+    if COFamineListener.onEntityCreated then return COFamineListener.onEntityCreated(...) end
+end
+
+return COFamineListener
