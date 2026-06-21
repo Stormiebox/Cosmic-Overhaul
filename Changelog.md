@@ -44,6 +44,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Economic Stabilization:** To compensate for the Profitable Stations interval doubling from 10m to 20m, the base payouts have been strictly doubled (Credit base: 8k -> 16k, Resource base: 3.5k -> 7k). The economy remains perfectly balanced without punishing players for the new performance optimizations.
 
 ### 🐛 Bug Fixes & Optimization
+- **Fixed:** Fixed multiple API Avorion Indexes across various scripts that could cause C++ attempt to index or attempt to call engine crashes.
+  - Corrected stat modifier functions (e.g. modifyBaseMultiplier -> addBaseMultiplier).
+  - Corrected entity bias functions (e.g. addMultiplyableFactor -> addMultiplyableBias).
+  - Replaced invalid faction relation setters with the correct global Galaxy() alternatives.
+  - Removed native calls to non-existent functions (e.g. updateStaticAttributes, tryUnloadSector).
+  - Corrected distance checks and serialization methods to match vanilla C++ bindings.
 - **Optimized**: Throttled `respawnresourceasteroids.lua` update loop to 10 seconds via `getUpdateInterval()` to save CPU cycles.
 - **Optimized**: Throttled `fleetstatus.lua` listbox UI repopulation to run every 0.5s instead of every frame.
 - **Fixed**: Eliminated `math.random` usage in `respawnresourceasteroids.lua` and `asteroidfieldgenerator.lua` for full multiplayer determinism.

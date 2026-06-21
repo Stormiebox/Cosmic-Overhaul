@@ -15,7 +15,7 @@ function interactionPossible(playerIndex)
     if not craft then return false end
 
     -- Must be close to the hulk
-    local dist = craft:getDistanceTo(Entity())
+    local dist = craft:getNearestDistance(Entity())
     if dist > 500 then return false end
 
     return true

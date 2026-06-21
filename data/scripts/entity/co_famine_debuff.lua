@@ -8,20 +8,20 @@ function initialize(famineLevel)
     
     if onServer() then
         local entity = Entity()
-        entity:addMultiplyableFactor(StatsBonuses.ShieldDurability, 0)
-        entity:removeMultiplyableFactor(StatsBonuses.ShieldDurability)
+        entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
+        entity:removeMultiplyableBias(StatsBonuses.ShieldDurability)
     end
 end
 
 function onBaseMultiplierCalculated(entity, statModifier)
     if co_famine_level == "Severe Famine" then
-        statModifier:modifyBaseMultiplier(StatsBonuses.ShieldDurability, 0.4) -- 60% weaker shields
-        statModifier:modifyBaseMultiplier(StatsBonuses.Velocity, 0.6) -- 40% slower
+        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.4) -- 60% weaker shields
+        statModifier:addBaseMultiplier(StatsBonuses.Velocity, 0.6) -- 40% slower
     elseif co_famine_level == "Resource Starved" then
-        statModifier:modifyBaseMultiplier(StatsBonuses.ShieldDurability, 0.5) -- 50% weaker shields
-        statModifier:modifyBaseMultiplier(StatsBonuses.Velocity, 0.75) -- 25% slower
+        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.5) -- 50% weaker shields
+        statModifier:addBaseMultiplier(StatsBonuses.Velocity, 0.75) -- 25% slower
     elseif co_famine_level == "Struggling" then
-        statModifier:modifyBaseMultiplier(StatsBonuses.ShieldDurability, 0.8) -- 20% weaker shields
+        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.8) -- 20% weaker shields
     end
 end
 
@@ -32,6 +32,6 @@ end
 function restore(data)
     co_famine_level = data.level
     local entity = Entity()
-    entity:addMultiplyableFactor(StatsBonuses.ShieldDurability, 0)
-    entity:removeMultiplyableFactor(StatsBonuses.ShieldDurability)
+    entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
+    entity:removeMultiplyableBias(StatsBonuses.ShieldDurability)
 end
