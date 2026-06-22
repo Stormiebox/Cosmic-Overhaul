@@ -153,6 +153,24 @@ Enables permanent subsystem removal at additional station types (e.g., `Repair D
 
 </details>
 
+### 🛠️ 8) Fleet Repair at Repair Docks
+
+<details>
+<summary><b>Click to expand details</b></summary>
+
+**What it does:**
+Upgrades the Repair Dock UI to natively process and repair your entire fleet in the sector simultaneously with a single button click.
+
+**Technical Features:**
+
+- **Alliance Fallback System:** Calculates the repair bill for the entire combined fleet. If the player is in an Alliance with `SpendResources` privileges, it automatically bills the Alliance vault. If the Alliance is broke or the player lacks permissions, the system gracefully falls back to the player's private wallet—mechanically isolating and repairing *only* private player ships to prevent unauthorized Alliance spending.
+
+**Gameplay Impact:**
+
+- Eliminates the tedious necessity of jumping between 15 different ships just to click the "Repair" button on each one individually.
+
+</details>
+
 ### ✨ 8) Scrapyard QoL / Time-Limit Removal
 
 <details>

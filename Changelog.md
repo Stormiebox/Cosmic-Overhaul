@@ -29,6 +29,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Global Weather Ticker**: A 15% chance per tick to spawn weather in random populated sectors (Maximum 5 active globally). Weather persists across server reboots.
 
 ### ✨ Added
+- **QoL - Fleet Repair:** You can now instantly repair all damaged ships in a sector! Repair Docks have been upgraded with a new "Repair Fleet" button. It securely handles the math across your private and Alliance fleets, automatically withdrawing from the Alliance vault if you have privileges, or seamlessly falling back to your personal wallet to repair your private ships.
 - **Persistence Resource Regeneration:** Asteroid fields now naturally regenerate over real-time (background processed). Regeneration is heavily tied to the Cosmic Vault economy API; factions suffering from 'Severe Famine' will see all natural resource regeneration pause in their sectors, while 'Resource Starved' factions will regenerate at half-speed.
 - **Emergency Replenishment Anomalies & News:** When a completely barren sector triggers an emergency resource replenishment, there is a 5% chance to unearth a Precursor Wreck or Spatial Rift. In populated sectors, this triggers an instant galaxy-wide breaking news alert via Cosmic Chronicles.
 - Implemented the Famine Debuff system (`co_famine_debuff.lua`) hooked into the Vault Economy API.
