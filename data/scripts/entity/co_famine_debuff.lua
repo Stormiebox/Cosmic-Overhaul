@@ -8,8 +8,8 @@ function initialize(famineLevel)
     
     if onServer() then
         local entity = Entity()
-        entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
-        entity:removeMultiplyableBias(StatsBonuses.ShieldDurability)
+        local _k = entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
+        entity:removeBonus(_k)
     end
 end
 
@@ -32,6 +32,6 @@ end
 function restore(data)
     co_famine_level = data.level
     local entity = Entity()
-    entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
-    entity:removeMultiplyableBias(StatsBonuses.ShieldDurability)
+    local _k = entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
+    entity:removeBonus(_k)
 end

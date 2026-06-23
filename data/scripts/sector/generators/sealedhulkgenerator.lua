@@ -11,7 +11,7 @@ function SealedHulkGenerator.generate(x, y)
     local plan = PlanGenerator.makeFreighterPlan(faction)
     plan:scale(vec3(5.0, 5.0, 5.0)) -- Massive scaling!
     
-    local position = generator:createPositionInSector(15000)
+    local position = generator:getPositionInSector(15000)
     local hulk = Sector():createWreckage(plan, position)
     
     hulk.title = "Sealed Hulk"%_t
