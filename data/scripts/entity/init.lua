@@ -1,4 +1,4 @@
-include("data/scripts/entity/init.lua")
+
 if onServer() then
     local entity = Entity()
     if not entity then return end
