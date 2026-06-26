@@ -3,6 +3,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 local cv_economy = include("cosmicvaulteconomy")
 
 local COFamineListener = {}
+COFamineListener.pendingEntities = {}
 
 function COFamineListener.initialize()
     if onServer() then
@@ -10,7 +11,27 @@ function COFamineListener.initialize()
     end
 end
 
+function COFamineListener.getUpdateInterval()
+    return 1.0 -- run every second
+end
+
 function COFamineListener.onEntityCreated(id)
+    -- Queue the entity ID to be processed outside of the synchronous generation phase
+    table.insert(COFamineListener.pendingEntities, id.string)
+end
+
+function COFamineListener.updateServer(timeStep)
+    if #COFamineListener.pendingEntities > 0 then
+        local count = 0
+        while #COFamineListener.pendingEntities > 0 and count < 50 do
+            local idString = table.remove(COFamineListener.pendingEntities, 1)
+            COFamineListener.processEntity(Uuid(idString))
+            count = count + 1
+        end
+    end
+end
+
+function COFamineListener.processEntity(id)
     local entity = Entity(id)
     if not entity then return end
     
@@ -31,6 +52,12 @@ function initialize(...)
 end
 function onEntityCreated(...)
     if COFamineListener.onEntityCreated then return COFamineListener.onEntityCreated(...) end
+end
+function getUpdateInterval(...)
+    if COFamineListener.getUpdateInterval then return COFamineListener.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if COFamineListener.updateServer then return COFamineListener.updateServer(...) end
 end
 
 return COFamineListener

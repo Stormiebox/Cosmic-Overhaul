@@ -2,7 +2,7 @@
 local CaptainClass = include("captainclass")
 
 function randomFloat(lesser, greater)
-    return lesser + random():getInt() * (greater - lesser)
+    return lesser + random():getFloat() * (greater - lesser)
 end
 
 -- Custom function to determine station activity level

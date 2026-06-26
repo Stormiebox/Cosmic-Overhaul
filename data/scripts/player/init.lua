@@ -1,3 +1,4 @@
+include("data/scripts/player/init.lua")
 if onServer() then
     local player = Player()
 

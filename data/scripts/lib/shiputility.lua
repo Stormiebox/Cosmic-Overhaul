@@ -113,7 +113,7 @@ ShipUtility.addIllegalCargoToCraft = function(entity)
     local maxValue = Balancing_GetSectorRichnessFactor(x, y) * 250000
 
     local maxAmount = maxValue / g.price
-    local amount = 1000 + random():getInt() * 100
+    local amount = 1000 + random():getFloat() * 100
     amount = math.ceil(math.min(maxAmount, amount))
 
     entity:addCargo(g:good(), amount)

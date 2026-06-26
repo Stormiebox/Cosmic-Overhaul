@@ -250,6 +250,7 @@ callable(ResourceDisplay, "savePosition")
 
 function ResourceDisplay.saveSetting(key, value)
     if not onServer() then return end
+    if type(key) ~= "string" or string.sub(key, 1, 6) ~= "CO_RD_" then return end
     local p = Player(callingPlayer)
     p:setValue(key, value)
 end

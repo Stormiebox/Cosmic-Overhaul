@@ -148,7 +148,7 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     if not faction then return end
 
     -- Cosmic Overhaul Balance tweak: Restored base payout to 16k to balance the new 20m interval
-    local money = math.floor((0.3+(2*random():getInt()/3))*16000)
+    local money = math.floor((0.3+(2*random():getFloat()/3))*16000)
     if random():getFloat(0, 1) < 0.2 then money = money*2 end
     money = math.floor(money*mapping.quantity)
     money = money*ManageStationIncomes.getWarHeatMultiplier()
@@ -194,7 +194,7 @@ function ManageStationIncomes.getResourceIncome(station)
         local mats = 0
         if probFactor > 0.05 then
             local matRichness = math.max(probFactor*(richness), 0.2)
-            mats = (0.5+random():getInt()/2)*7000
+            mats = (0.5+random():getFloat()/2)*7000
             mats = mats*matRichness
             mats = mats*ManageStationIncomes.getWarHeatMultiplier()
             mats = mats*payoutMult

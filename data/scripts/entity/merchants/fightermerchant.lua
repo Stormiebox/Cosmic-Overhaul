@@ -77,7 +77,7 @@ function FighterMerchant.shop:addItems()
     local generator = SectorFighterGenerator()
 
     -- Nerfed from 33-66. With on-demand restocking, a smaller, curated selection is better.
-    local fighterCount = 8 + math.floor(8 * random():getInt())
+    local fighterCount = 8 + math.floor(8 * random():getFloat())
     for i = 1, fighterCount do
         local x, y = Sector():getCoordinates()
         local fighter = generator:generate(x, y)
