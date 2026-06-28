@@ -48,6 +48,19 @@ local base_sellGoods = Factory.sellGoods
 -- Local values for this mod go here
 local ft_minVolume = 10
 local ft_maxGates = 4
+
+local cv_scaling
+local function getCosmicVaultScaling()
+    if cv_scaling ~= nil then return cv_scaling end
+    local file = io.open("data/scripts/lib/cosmicvaultscaling.lua", "r")
+    if file then
+        file:close()
+        cv_scaling = include("cosmicvaultscaling")
+    else
+        cv_scaling = false
+    end
+    return cv_scaling
+end
 local ft_gateTradeMult = 0.25
 Factory.MinShuttleVolume = ft_minVolume
 Factory.shuttleVolume = ft_minVolume
@@ -393,11 +406,33 @@ function Factory.updateServer(timeStep)
         Factory._co_registered = true
     end
 end
-
+-- Cosmic Overhaul: Halts production if zone is under war zone.
 function Factory.updateProduction(timeStep)
+    local cvs = getCosmicVaultScaling()
+    local owner = Owner()
+    if cvs and owner then
+        local hostileStrength = cvs.calculateSectorDefenderStrength(owner.index).firePower
+        if hostileStrength > 0 then
+            local friendlyStrength = 0
+            local galaxy = Galaxy()
+            for _, e in pairs({Sector():getEntitiesByComponent(ComponentType.Owner)}) do
+                if e.factionIndex then
+                    local rel = galaxy:getFactionRelations(owner.index, e.factionIndex)
+                    if rel > 80000 or e.factionIndex == owner.index then
+                        friendlyStrength = friendlyStrength + (e.firePower or 0)
+                    end
+                end
+            end
+
+            if hostileStrength > (friendlyStrength * 2) then
+                Factory.productionError = "Under Siege Blockade"%_T
+                return -- Halt production entirely
+            end
+        end
+    end
+
     if base_updateProduction then base_updateProduction(timeStep) end
 
-    local owner = Owner()
     if owner and (owner.isPlayer or owner.isAlliance) then
         local alliance = owner.isAlliance
         fo_refreshTime = fo_refreshTime + timeStep

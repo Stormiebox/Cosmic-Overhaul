@@ -2,8 +2,8 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local ReSeed_UpgradeGenerator_getUpgradeSeed = UpgradeGenerator.getUpgradeSeed
 function UpgradeGenerator:getUpgradeSeed(x, y, script, rarity)
-    -- Exotic and Legendary upgrades have a 50% chance to be completely wild/unique
-    if rarity.type >= RarityType.Exotic and self.random:test(0.5) then
+    -- Cosmic Overhaul Balance tweak: Boosted wild chance to 75% for Exotic/Legendary to prevent dupe farming in Ascendancy late game
+    if rarity.type >= RarityType.Exotic and self.random:test(0.75) then
         return self.random:createSeed(), x, y
     end
 

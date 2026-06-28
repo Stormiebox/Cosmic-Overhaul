@@ -130,3 +130,11 @@ The Trading Manager logic has been streamlined to gracefully skip dead simulatio
 
 ### Starving Your Enemies
 By destroying enemy resource sectors, you can force them into Severe Famine. Their ships will become incredibly weak, making conquest easier.
+
+## 🌌 Cosmic Vault Synergy
+- **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now tie natively into the Cosmic Vault Economy API. Extreme starvation can force factions to declare war on wealthy neighbors to survive.
+- **Unified News API:** Overhaul's ambient events and galactic occurrences are now securely routed through the global Cosmic Vault News architecture.
+- **Dynamic Trade Pricing:** Your passive Trade Command operations now sync with the galactic live economy. Send a merchant to trade with a faction suffering from a Famine to rake in massive profits!
+- **Weather-Affected Commands:** Your map operations (Travel, Scout) respect dynamic weather systems. Traveling through an Ion Storm or Nebula will delay operations by 50% unless piloted by an Explorer or Navigator.
+- **Siege Blockade Halts:** When a sector turns into an active War Zone, factory production will dynamically halt if the defenders are outgunned 2:1, simulating an economic blockade.
+- **War Profiteering:** Delivering goods to a blockaded factory or trading in a high-heat War Zone provides a massive +250% income multiplier. High Risk, High Reward!

@@ -1,6 +1,7 @@
 local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
 local SimulationUtility = include("simulationutility")
+local cv_weather = include("cosmicvaultweather")
 
 -- Used for nicer refreshing of assessment lines
 local ccm_uiTimestamp
@@ -25,6 +26,20 @@ function ScoutCommand:calculatePrediction(ownerIndex, shipName, area, config)
 
     if ship then
         prediction = ScoutCommand.ccm_getExtendedPrediction(prediction, ship, area)
+        
+        -- Cosmic Vault Weather Synergy
+        if cv_weather and prediction and prediction.duration then
+            local captain = ship:getCaptain()
+            if not (captain:hasClass(CaptainClass.Explorer) or captain:hasClass(CaptainClass.Navigator)) then
+                local cx = math.floor((area.lower.x + area.upper.x) / 2)
+                local cy = math.floor((area.lower.y + area.upper.y) / 2)
+                local weather = cv_weather.getWeatherAt(cx, cy)
+                if weather then
+                    -- 50% delay for navigating hazardous weather
+                    prediction.duration.value = prediction.duration.value * 1.5
+                end
+            end
+        end
     else
         prediction.ccm = {}
     end

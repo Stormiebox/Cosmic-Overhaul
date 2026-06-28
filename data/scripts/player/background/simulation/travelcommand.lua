@@ -2,6 +2,7 @@
 local ccm_lastPrediction
 
 local CaptainClass = include("captainclass")
+local cv_weather = include("cosmicvaultweather")
 
 local ccm_TravelCommand_initialize_original = TravelCommand.initialize
 function TravelCommand:initialize(...)
@@ -52,6 +53,19 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
                 end
                 if ccm_lastPrediction.attackChance and ccm_lastPrediction.attackChance.value then
                     ccm_lastPrediction.attackChance.value = ccm_lastPrediction.attackChance.value*0.75
+                end
+            end
+            
+            -- Cosmic Vault Weather Synergy
+            if cv_weather and ccm_lastPrediction and ccm_lastPrediction.duration then
+                if not (captain:hasClass(CaptainClass.Explorer) or captain:hasClass(CaptainClass.Navigator)) then
+                    local cx = math.floor((area.lower.x + area.upper.x) / 2)
+                    local cy = math.floor((area.lower.y + area.upper.y) / 2)
+                    local weather = cv_weather.getWeatherAt(cx, cy)
+                    if weather then
+                        -- 50% delay for navigating hazardous weather
+                        ccm_lastPrediction.duration.value = ccm_lastPrediction.duration.value * 1.5
+                    end
                 end
             end
         end

@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
 local PlayerSettings = include("cosmicvaultplayersettings")
+local cv_economy = include("cosmicvaulteconomy")
 local SimulationUtility = include 'simulationutility'
 local CaptainClass = include 'captainclass'
 local CaptainUtility = include 'captainutility'
@@ -382,6 +383,16 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
             from = 0.70 * baseProfit,
             to = baseProfit,
         }
+    end
+
+    -- Cosmic Vault Economy Synergy
+    if cv_economy and area.analysis.biggestFactionInArea then
+        local famineLevel = cv_economy.getFamineLevel(area.analysis.biggestFactionInArea)
+        if famineLevel and famineLevel ~= "Stable" then
+            -- 2.5x profit when trading in a famine-struck faction
+            prediction.profitPerFlight.from = prediction.profitPerFlight.from * 2.5
+            prediction.profitPerFlight.to = prediction.profitPerFlight.to * 2.5
+        end
     end
 
     local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)

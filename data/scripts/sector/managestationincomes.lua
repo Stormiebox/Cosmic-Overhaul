@@ -31,9 +31,9 @@ function ManageStationIncomes.getWarHeatMultiplier()
             end
         end
     end
-    -- Income is reduced as heat increases. At max heat (1.0), income is only 20%.
-    -- TODO: Keep testing to ensure it integrates properly or if values need to be increased/decreased accordingly.
-    return 1.0-(heat*0.8)
+    -- Cosmic Overhaul Balance tweak: Income is massively buffed as war heat increases.
+    -- At max heat (1.0), income is 250%. War Profiteering is highly lucrative.
+    return 1.0+(heat*1.5)
 end
 
 function ManageStationIncomes.onTradeSuccess(stationId, buyerId)

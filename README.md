@@ -15,6 +15,17 @@ Cosmic Overhaul introduces several QoL improvements to Avorion, including an adv
 - **Trash Management:** Intelligent deletion of junk to keep server TPS high.
 </details>
 
+## 🌌 Cosmic Vault Synergy
+<details>
+<summary><b>Click to expand</b></summary>
+Cosmic Overhaul deeply integrates into the central **Cosmic Vault** APIs:
+
+- **Dynamic Trade Pricing:** Passive offline trade missions scale profits up to 2.5x during local faction Famines.
+- **Weather-Affected Commands:** Offline operations face up to 50% time delays when navigating hazardous storms unless piloted by an Explorer.
+- **Siege Blockade Halts:** Factory production physically halts when a sector is invaded by an overwhelming force.
+- **War Profiteering:** Delivering goods to highly contested War Zones grants up to a +250% payout multiplier.
+</details>
+
 ## ⚙️ Requirements
 - Avorion v2.0+
 - Dependencies: **Cosmic Vault, Cosmic War, Cosmic Chronicles and Cosmic Ascendancy.**
@@ -28,4 +39,3 @@ Cosmic Overhaul introduces several QoL improvements to Avorion, including an adv
 
 ## 📚 Documentation
 For detailed mechanics, guides, and lore, please refer to the in-game **Cosmic Codex**, or check the included `WIKI.md` and `PLAYER_GUIDE.md` files.
- Integrates Famine Economy mechanics to cripple starving factions.

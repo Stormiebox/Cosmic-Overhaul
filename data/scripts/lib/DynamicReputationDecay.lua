@@ -6,7 +6,8 @@ DynamicReputationDecay = {}
 
 -- Configuration with explicit units for readability.
 local DecayConfig = {
-    baseDecayPerHour = 100,
+    -- Cosmic Overhaul Balance tweak: Reduced from 100 to 50 to accommodate longer Ascendancy campaigns
+    baseDecayPerHour = 50,
     maxDecayPerHour = 3000,
     increaseIntervalSec = 5*60*60,     -- 5 hours
     increaseAmountPerInterval = 100,

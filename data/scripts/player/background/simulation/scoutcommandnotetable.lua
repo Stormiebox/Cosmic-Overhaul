@@ -182,3 +182,12 @@ return SectorClassNoteLineTable.new()
         "Also, a lone beacon is pulsing an 'Exodus' distress signal."%_T,
         "Oh, and I noted an ancient beacon broadcasting fragments of a mysterious message."%_T,
     })
+    -- Cosmic Chronicles: Add notes for empty sectors to guide players to narrative events
+    :forNewSectors({"", "empty", "sectors/empty"})
+    :forNewClass(CaptainUtility.ClassType.Explorer)
+    :addLines({
+        "Sensors detected anomalous subspace echoes in this empty sector. Warrants personal investigation."%_T,
+        "There is nothing here, but my instruments picked up a strange, faint signal in the void."%_T,
+        "Complete deep space vacuum. However, I recorded an unusual navigational disturbance nearby."%_T,
+        "Empty space. But the background radiation here suggests a cloaked anomaly or recent event."%_T,
+    })

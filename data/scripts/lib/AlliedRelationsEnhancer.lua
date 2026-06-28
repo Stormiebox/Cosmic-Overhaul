@@ -32,7 +32,8 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
         end
 
         if alliance and aiFaction then
-            local allianceDelta = delta * 2
+            -- Cosmic Overhaul Balance tweak: Reduced from delta * 2 to 1x parity to prevent cascade wars in Ascendancy/War
+            local allianceDelta = delta
 
             -- Pass the Alliance and AI faction back through the vanilla pipeline
             -- so hard caps, traits, and UI notifications trigger correctly!

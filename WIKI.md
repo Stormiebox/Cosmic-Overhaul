@@ -9,6 +9,7 @@ Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-faci
 - [System Features](#system-features)
 - [Command & Captain Enhancements](#command--captain-enhancements)
 - [Black Market / Smuggler’s Market Rework](#black-market--smugglers-market-rework)
+- [Cosmic Vault Synergy](#cosmic-vault-synergy)
 
 ---
 
@@ -912,6 +913,10 @@ During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems
 ### 📖 Cosmic Codex Integration
 All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
 
+### 🌌 Cosmic Vault
+- **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now natively tie into the `CosmicVaultEconomy` API, which can physically force starving factions to declare war on wealthy neighbors to survive!
+- **Unified News API:** Overhaul's myriad of ambient events and galactic occurrences are now securely routed through the new `CosmicVaultNews.publishArticle` architecture, guaranteeing cross-mod UI stability.
+
 ### 🔒 Network Safety & Anti-Cheat
 - **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
 - **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
@@ -928,3 +933,18 @@ The Trading Manager logic has been streamlined to gracefully skip dead simulatio
 
 ## Famine Penalties
 When an AI faction reaches 'Severe Famine', all newly spawned ships will inherently have 60% weaker shields and move 40% slower.
+
+---
+
+## Cosmic Vault Synergy
+
+**What it is:**
+`Cosmic Overhaul` is built from the ground up to deeply integrate with the rest of the Cosmic modpack suite. When used alongside `Cosmic Vault`, `Cosmic Chronicles`, `Cosmic War`, and `Cosmic Ascendancy`, the following synergistic mechanics are unlocked:
+
+- **Dynamic Trade Pricing:** Your passive Trade Command operations now sync with the galactic live economy. If you send a merchant to trade with a faction suffering from a Famine, they can bring in up to 2.5x more profits!
+- **Weather-Affected Commands:** Your map operations (Travel, Scout) respect `Cosmic Vault`'s dynamic weather systems. Traveling through an Ion Storm or Nebula will delay operations by 50% unless piloted by an Explorer or Navigator.
+- **Siege Blockade Halts:** When a sector turns into an active War Zone, factories will dynamically calculate the strength of the invaders versus the defenders. If the defenders are outgunned 2:1, factory production completely halts, simulating an economic blockade.
+- **War Profiteering:** Delivering goods to a blockaded factory or trading in a high-heat War Zone provides a massive +250% income multiplier. High Risk, High Reward!
+- **Scout Anomalies:** Explorer captains actively leave cryptic notes on empty sectors on your galactic map, hinting at where you can find `Cosmic Chronicles` narrative events.
+- **Deep Economy Warfare:** Famines and Booms generated in Overhaul sync directly to the `CosmicVaultEconomy` API, which forces starving factions to go to war to survive.
+- **Unified News System:** All events broadcast flawlessly through the `CosmicVaultNews` API, guaranteeing your Universal Bulletin Board is always up to date.
