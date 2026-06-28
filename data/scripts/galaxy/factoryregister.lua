@@ -251,7 +251,12 @@ function onSeedNews()
         if cvn and cvn.publishArticle then
             cvn.publishArticle(article)
         else
-            server:sendCallback("onCCNewsPublishArticle", article)
+            local cv_news = include("cosmicvaultnews")
+            if cv_news and cv_news.publishArticle then
+                cv_news.publishArticle(article)
+            else
+                server:sendCallback("onCCNewsPublishArticle", article)
+            end
         end
     end
 
@@ -266,7 +271,12 @@ function onSeedNews()
         if cvn and cvn.publishArticle then
             cvn.publishArticle(article)
         else
-            server:sendCallback("onCCNewsPublishArticle", article)
+            local cv_news = include("cosmicvaultnews")
+            if cv_news and cv_news.publishArticle then
+                cv_news.publishArticle(article)
+            else
+                server:sendCallback("onCCNewsPublishArticle", article)
+            end
         end
     end
 end
