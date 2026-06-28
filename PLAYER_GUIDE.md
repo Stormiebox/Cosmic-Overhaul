@@ -130,3 +130,7 @@ The Trading Manager logic has been streamlined to gracefully skip dead simulatio
 
 ### Starving Your Enemies
 By destroying enemy resource sectors, you can force them into Severe Famine. Their ships will become incredibly weak, making conquest easier.
+
+## 🌌 Cosmic Vault Synergy
+- **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now tie natively into the Cosmic Vault Economy API. Extreme starvation can force factions to declare war on wealthy neighbors to survive.
+- **Unified News API:** Overhaul's ambient events and galactic occurrences are now securely routed through the global Cosmic Vault News architecture.

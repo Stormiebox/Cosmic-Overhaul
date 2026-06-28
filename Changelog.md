@@ -7,7 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## v5.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
+## [v5.0.0] UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
+
+### 🌌 Cosmic Vault Synergy (Cross-Mod Engine)
+- **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now natively tie into the `CosmicVaultEconomy` API, which can physically force starving factions to declare war on wealthy neighbors to survive!
+- **Unified News API:** Overhaul's myriad of ambient events and galactic occurrences are now securely routed through the new `CosmicVaultNews.publishArticle` architecture, guaranteeing cross-mod UI stability.
 
 ### 🚀 Major Overhaul Features
 - **Captain Elite Traits:** Level 3 Captains now possess massive sector-wide or unique bonuses:
