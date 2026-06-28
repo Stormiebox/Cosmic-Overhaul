@@ -12,6 +12,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### 🌌 Cosmic Vault Synergy (Cross-Mod Engine)
 - **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now natively tie into the `CosmicVaultEconomy` API, which can physically force starving factions to declare war on wealthy neighbors to survive!
 - **Unified News API:** Overhaul's myriad of ambient events and galactic occurrences are now securely routed through the new `CosmicVaultNews.publishArticle` architecture, guaranteeing cross-mod UI stability.
+<<<<<<< HEAD
 - **Dynamic Trade Pricing:** Hooked offline Merchant Trade commands into `cv_economy`. Trading with a Famine-struck faction now yields up to 2.5x more passive profit.
 - **Weather-Affected Map Commands:** Offline Travel and Scout commands now ping `cv_weather`. Navigating hazardous weather (Ion Storms, Nebulas) delays offline map operations by 50% unless piloted by an Explorer or Navigator.
 - **Siege Blockade Halts:** Factories dynamically poll `cv_scaling`. If the sector is a War Zone and the defenders are outgunned 2:1, all factory production halts entirely until the siege is lifted.
@@ -20,6 +21,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Reputation Decay Scaling:** Halved the base Dynamic Reputation Decay rate from 100/hr to 50/hr to synergize with the massive endgame campaigns in `Cosmic Ascendancy`.
 - **Alliance Mirroring Parity:** Scaled diplomatic rep gain mirroring for Alliances from 2x down to 1x to prevent massive "cascade wars" in `Cosmic War` / `Cosmic Ascendancy`.
 - **Loot Variance Boost:** Pushed the unseeded wild-generation chance for Exotic and Legendary drops from 50% to 75% for enhanced endgame loot variety.
+=======
+>>>>>>> 63a56ff646f32765337a8121d9dcc6e25f2b03fd
 
 ### 🚀 Major Overhaul Features
 - **Captain Elite Traits:** Level 3 Captains now possess massive sector-wide or unique bonuses:
