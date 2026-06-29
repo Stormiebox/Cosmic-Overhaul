@@ -951,3 +951,9 @@ When an AI faction reaches 'Severe Famine', all newly spawned ships will inheren
 - **Entrenched Diplomatic Suicide:** The Alliance reputation mirroring penalty is multiplied by 1.5x if a player commits a hostile act against a faction possessing the `Fortified` trait.
 - **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone receive a +20% Salvage Yield buff while cleaning up dreadnought wreckages.
 - **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score, stabilizing the economy through the black market.
+
+## Synergy Update
+- **Eclipse Contraband Premium**: The Smuggler's Market pays a 3x premium for "Eclipse Tech".
+- **Blockade Runner Governors**: Smuggler Governors completely bypass factory blockades during active Cosmic War sieges, allowing wartime profiteering.
+- **Privateer Subsidies**: Merchant Governors reduce all crew and captain hiring costs by 50% if the player is actively enlisted as a Mercenary for the station's faction.
+

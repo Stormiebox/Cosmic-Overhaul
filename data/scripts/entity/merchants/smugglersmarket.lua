@@ -741,6 +741,11 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
         end
     end
 
+    -- Cosmic Overhaul/Ascendancy: Eclipse Contraband Premium
+    if goodName == "Ascendant Matter" or goodName == "Eclipse Datacore" then
+        multiplier = multiplier * 3.0
+    end
+
     return round(good.price * multiplier)
 end
 

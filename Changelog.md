@@ -87,3 +87,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Severe Famine debuff reduces shields by 60% and velocity by 40%.
 - **Fixed (VM Isolation):** Completely refactored the Dynamic Reputation Decay system. The reputation hard-cap hooks were previously running in an isolated player VM, rendering them as dead code. The hooks and custom Enums have now been properly extracted into a global `relations.lua` override, ensuring all relation changes across the entire galaxy natively respect the Cosmic Overhaul limits. Stray markdown syntax errors in the decay loop were also eradicated.
 - Removed `pcall` soft-dependencies. Core 5 mods are now hard requirements.
+
+## [Latest Synergy Patch]
+- [Feature] Added Eclipse Contraband Premium at Smuggler's Markets (3x payout).
+- [Feature] Smuggler Governors now bypass Cosmic War siege blockades.
+- [Feature] Merchant Governors offer Privateer Subsidies (50% crew cost reduction) for contracted mercenaries.
+

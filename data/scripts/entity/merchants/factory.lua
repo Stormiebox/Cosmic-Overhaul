@@ -425,8 +425,13 @@ function Factory.updateProduction(timeStep)
             end
 
             if hostileStrength > (friendlyStrength * 2) then
-                Factory.productionError = "Under Siege Blockade"%_T
-                return -- Halt production entirely
+                -- Cosmic Overhaul/War: Blockade Runner Governors
+                if Entity():getValue("governor_smuggler_active") then
+                    -- Smuggler governor bypasses the blockade
+                else
+                    Factory.productionError = "Under Siege Blockade"%_T
+                    return -- Halt production entirely
+                end
             end
         end
     end
