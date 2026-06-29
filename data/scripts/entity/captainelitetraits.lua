@@ -33,7 +33,7 @@ function updateServer(timeStep)
             for _, ship in pairs(ships) do
                 if ship.isShip or ship.isStation then
                     -- Apply a 6-second buff so it refreshes continuously while Commodore is present
-                    CosmicVaultBuffs.applyBuff(ship.id, "Shields", 1.10, 6.0)
+                    CosmicVaultBuffs.applyBuff(ship.id, "Shield", 1.10, 6.0)
                     CosmicVaultBuffs.applyBuff(ship.id, "Damage", 1.10, 6.0)
                 end
             end

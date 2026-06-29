@@ -389,9 +389,17 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
     if cv_economy and area.analysis.biggestFactionInArea then
         local famineLevel = cv_economy.getFamineLevel(area.analysis.biggestFactionInArea)
         if famineLevel and famineLevel ~= "Stable" then
-            -- 2.5x profit when trading in a famine-struck faction
-            prediction.profitPerFlight.from = prediction.profitPerFlight.from * 2.5
-            prediction.profitPerFlight.to = prediction.profitPerFlight.to * 2.5
+            local multiplier = 2.5
+            local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+            if ship then
+                local captain = ship:getCaptain()
+                if captain and captain:hasClass(CaptainClass.Smuggler) then
+                    multiplier = 1.25 -- Smugglers safely bypass blockades, reducing their hazard pay
+                end
+            end
+            
+            prediction.profitPerFlight.from = prediction.profitPerFlight.from * multiplier
+            prediction.profitPerFlight.to = prediction.profitPerFlight.to * multiplier
         end
     end
 
