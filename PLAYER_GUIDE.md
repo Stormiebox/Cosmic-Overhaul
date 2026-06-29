@@ -147,3 +147,7 @@ By destroying enemy resource sectors, you can force them into Severe Famine. The
 - **Blockade Runner Governors**: Smuggler Governors completely bypass factory blockades during active Cosmic War sieges, allowing wartime profiteering.
 - **Privateer Subsidies**: Merchant Governors reduce all crew and captain hiring costs by 50% if the player is actively enlisted as a Mercenary for the station's faction.
 
+
+## [New] Rift DLC Interoperability
+- **Fencing Rift Tech:** The Smuggler's Market now eagerly accepts classified `Rift Research Data` and `Subclass Subsystems` for a massive 200%-300% markup.
+- **Reputation Consequences:** Fencing this highly sensitive technology will result in temporary reputation loss with the local faction, as they detect the illegal distribution of subspace secrets.

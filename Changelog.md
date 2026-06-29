@@ -93,3 +93,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Feature] Smuggler Governors now bypass Cosmic War siege blockades.
 - [Feature] Merchant Governors offer Privateer Subsidies (50% crew cost reduction) for contracted mercenaries.
 
+
+## [New] Rift DLC Interoperability
+- **Fencing Rift Tech:** The Smuggler's Market now eagerly accepts classified `Rift Research Data` and `Subclass Subsystems` for a massive 200%-300% markup.
+- **Reputation Consequences:** Fencing this highly sensitive technology will result in temporary reputation loss with the local faction, as they detect the illegal distribution of subspace secrets.

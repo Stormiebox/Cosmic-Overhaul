@@ -276,7 +276,7 @@ function SmugglersMarket.onShowWindow()
     for _, p in pairs(cargos) do
         local good, amount = p.good, p.amount
 
-        if good.stolen then
+        if good.stolen or good.name == "Rift Research Data" or good.name == "Subclass Subsystem" then
             table.insert(stolenGoods, p)
             if i - 1 < itemStart then
                 i = i + 1
@@ -519,7 +519,7 @@ function SmugglersMarket.buyIllegalGood(goodName, amount)
         ok, msg = self:isBoughtBySelf(g)
 
         -- Cosmic Overhaul: accept stolen OR illegal OR dangerous cargo for the black market loop
-        if ok and (g.stolen or g.illegal or g.dangerous) then
+        if ok and (g.stolen or g.illegal or g.dangerous or g.name == "Rift Research Data" or g.name == "Subclass Subsystem") then
             good = g
             break
         end
@@ -588,6 +588,19 @@ function SmugglersMarket.buyIllegalGood(goodName, amount)
     local relationsChange = GetRelationChangeFromMoney(price)
     if ship:getNumArmedTurrets() <= 1 then
         relationsChange = relationsChange * 1.5
+    end
+
+    -- Cosmic Chronicles - Black Market Rift Trade rep consequence
+    if good.name == "Rift Research Data" or good.name == "Subclass Subsystem" then
+        -- Fencing highly sensitive rift technology damages your reputation with the local faction slightly
+        local localFaction = Galaxy():getControllingFaction(x, y)
+        if localFaction and localFaction > 0 and localFaction ~= stationFaction.index then
+            local f = Faction(localFaction)
+            if f and f.isAIFaction then
+                changeRelations(seller, f, -2500, RelationChangeType.Smuggling, nil, nil, station)
+                seller:sendChatMessage(f.name, 1, "We are aware you are fencing classified Rift Technology to the black market. Cease this immediately."%_t)
+            end
+        end
     end
 
     changeRelations(seller, stationFaction, relationsChange, RelationChangeType.Commerce, nil, nil, station)
@@ -744,6 +757,11 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
     -- Cosmic Overhaul/Ascendancy: Eclipse Contraband Premium
     if goodName == "Ascendant Matter" or goodName == "Eclipse Datacore" then
         multiplier = multiplier * 3.0
+    end
+
+    -- Cosmic Chronicles - Black Market Rift Trade
+    if goodName == "Rift Research Data" or goodName == "Subclass Subsystem" then
+        multiplier = multiplier * random():getFloat(2.0, 3.0)
     end
 
     return round(good.price * multiplier)
