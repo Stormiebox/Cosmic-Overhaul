@@ -43,6 +43,11 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
                 allianceDelta = allianceDelta * 0.1
             end
 
+            -- Entrenched Diplomatic Suicide
+            if allianceDelta < 0 and aiFaction:getValue("cosmic_trait_cw_entrenched") then
+                allianceDelta = allianceDelta * 1.5
+            end
+
             -- Pass the Alliance and AI faction back through the vanilla pipeline
             -- so hard caps, traits, and UI notifications trigger correctly!
             if co_are_originalChangeRelations then

@@ -20,6 +20,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Reputation Decay Scaling:** Halved the base Dynamic Reputation Decay rate from 100/hr to 50/hr to synergize with the massive endgame campaigns in `Cosmic Ascendancy`.
 - **Alliance Mirroring Parity:** Scaled diplomatic rep gain mirroring for Alliances from 2x down to 1x to prevent massive "cascade wars" in `Cosmic War` / `Cosmic Ascendancy`.
 - **Loot Variance Boost:** Pushed the unseeded wild-generation chance for Exotic and Legendary drops from 50% to 75% for enhanced endgame loot variety.
+- **Famine Relief Charity:** Background Charity Missions sent to factions suffering from Famine natively grant a +50% Reputation multiplier.
+- **Ascendancy Trade Fear:** Merchant trade flights take 20% longer to resolve if the target faction is at war with the Ascendancy (The Eclipse). Smugglers natively bypass this hazard penalty.
+- **Entrenched Diplomatic Suicide:** The Alliance reputation mirroring penalty is multiplied by 1.5x if a player commits a hostile act against a faction possessing the `Fortified` trait.
+- **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone natively receive a +20% Salvage Yield buff while cleaning up dreadnought wreckages.
+- **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score by `-0.1` every 5 seconds.
 
 ### 🚀 Major Overhaul Features
 - **Captain Elite Traits:** Level 3 Captains now possess massive sector-wide or unique bonuses:

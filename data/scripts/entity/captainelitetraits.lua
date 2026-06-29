@@ -44,6 +44,16 @@ function updateServer(timeStep)
     -- We use the native vanilla ignore_inspections value so AI completely ignores the ship
     if hasEliteTrait(entity, CaptainClass.Smuggler) then
         entity:setValue("ignore_inspections", true)
+
+        -- Smuggler Deflation
+        local cv_eco = include("cosmicvaulteconomy")
+        if cv_eco then
+            local cx, cy = Sector():getCoordinates()
+            local faction = Galaxy():getControllingFaction(cx, cy)
+            if faction then
+                cv_eco.addFamineScore(faction.index, -0.1)
+            end
+        end
     else
         -- Only remove if it was set by us (we can't easily track who set it, but for our mod this is fine)
         if entity:getValue("ignore_inspections") then
@@ -57,5 +67,20 @@ function updateServer(timeStep)
         entity:setValue("elite_miner_yield", true)
     else
         entity:setValue("elite_miner_yield", nil)
+    end
+
+    -- 4. Scavenger Elite Trait: +20% Yield in Siege Zones
+    if hasEliteTrait(entity, CaptainClass.Scavenger) then
+        if CosmicVaultBuffs then
+            local cv_territory = include("cosmicvaultterritory")
+            if cv_territory and cv_territory.getContestedZones then
+                local x,y = Sector():getCoordinates()
+                local key = x .. "_" .. y
+                local zones = cv_territory.getContestedZones()
+                if zones and zones[key] then
+                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 1.20, 6.0)
+                end
+            end
+        end
     end
 end

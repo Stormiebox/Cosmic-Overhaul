@@ -174,6 +174,15 @@ function TradeCommand:computeRelationImpacts()
         relationType = RelationChangeType.GoodsTrade
     })
 
+    local charityRatio = TradeCommand.getRelationChangeRatioForCharity()
+    local cv_economy = include("cosmicvaulteconomy")
+    if cv_economy then
+        local famineLevel = cv_economy.getFamineLevel(factionForRelations)
+        if famineLevel and famineLevel ~= "Stable" then
+            charityRatio = charityRatio * 1.5 -- +50% Reputation in Famine
+        end
+    end
+
     if self.config and self.config.ccm and self.config.ccm.charityMission
         and self.data.prediction.ccm.charityPerFlight
     then
@@ -185,7 +194,7 @@ function TradeCommand:computeRelationImpacts()
                 min = self.data.prediction.ccm.charityPerFlight.from,
                 max = self.data.prediction.ccm.charityPerFlight.to,
             },
-            ratio = TradeCommand.getRelationChangeRatioForCharity(),
+            ratio = charityRatio,
             relationType = RelationChangeType.EquipmentTrade
         })
     end
@@ -411,6 +420,29 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
                 return ccm_tradeCaptainClassFlightTimeMultipliers[c] or ccm_tradeCaptainClassFlightTimeMultipliers[false]
             end
             local timeFactor = math.min(timeFunc(captain.primaryClass), timeFunc(captain.secondaryClass))
+
+            -- Ascendancy Trade Fear
+            if area and area.analysis and area.analysis.biggestFactionInArea then
+                local server = Server()
+                local factionStr = server and server:getValue("factions")
+                if type(factionStr) == "string" and factionStr ~= "" then
+                    local galaxy = Galaxy()
+                    local eclipseIndex = nil
+                    for id in string.gmatch(factionStr, "([^,]+)") do
+                        local f = Faction(tonumber(id))
+                        if f and f:getValue("is_eclipse") then
+                            eclipseIndex = tonumber(id)
+                            break
+                        end
+                    end
+                    if eclipseIndex then
+                        local rel = galaxy:getFactionRelations(area.analysis.biggestFactionInArea, eclipseIndex)
+                        if rel < -80000 and not captain:hasClass(CaptainClass.Smuggler) then
+                            timeFactor = timeFactor * 1.2
+                        end
+                    end
+                end
+            end
 
             prediction.flightTime.value = prediction.flightTime.value * timeFactor
         end

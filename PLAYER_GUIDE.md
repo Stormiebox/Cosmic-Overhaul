@@ -137,3 +137,7 @@ By destroying enemy resource sectors, you can force them into Severe Famine. The
 - **Weather-Affected Commands:** Your map operations (Travel, Scout) respect dynamic weather systems. Traveling through an Ion Storm or Nebula will delay operations by 50% unless piloted by an Explorer or Navigator.
 - **Siege Blockade Halts:** When a sector turns into an active War Zone, factory production will dynamically halt if the defenders are outgunned 2:1, simulating an economic blockade.
 - **War Profiteering:** Delivering goods to a blockaded factory or trading in a high-heat War Zone provides a massive +250% income multiplier. High Risk, High Reward!
+- **Famine Relief Charity:** Background Charity Missions sent to starving factions natively grant a +50% Reputation multiplier.
+- **Ascendancy Trade Fear:** Merchant trade flights take 20% longer if the target faction is at war with The Eclipse. Smugglers natively bypass this hazard penalty.
+- **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone receive a +20% Salvage Yield buff while cleaning up dreadnought wreckages.
+- **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score, stabilizing the economy through the black market.
