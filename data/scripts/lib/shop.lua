@@ -905,9 +905,9 @@ if onClient() then
         invokeServerFunction("remoteRestock")
     end
 
-    edr_CreateNamespace = PublicNamespace.CreateNamespace
+    local client_edr_CreateNamespace = PublicNamespace.CreateNamespace
     function PublicNamespace.CreateNamespace(...)
-        local result = edr_CreateNamespace(...)
+        local result = client_edr_CreateNamespace(...)
         result.edr_onRestockButtonPressed = function(...) return result.shop:edr_onRestockButtonPressed(...) end
         return result
     end

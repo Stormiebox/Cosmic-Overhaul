@@ -329,7 +329,9 @@ function setRelationStatus(a, b, status, notifyA, notifyB)
     if statusBefore ~= status then
         if player and ai then
             local key = "statuschange_timestamp_" .. tostring(player.index)
-            ai:setValue(key, Server().unpausedRuntime)
+            if onServer() then
+                ai:setValue(key, Server().unpausedRuntime)
+            end
         end
 
         galaxy:setFactionRelationStatus(a, b, status, notifyA, notifyB)
@@ -622,10 +624,12 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
     if playerFaction and aiFaction then
         -- 1. Persistent State Tracking (Fixes Lua VM Isolation bug)
         -- Save the timestamp to the Player/Alliance database so it survives server restarts and sector jumps
-        if playerFaction.isPlayer or playerFaction.isAlliance then
-            Player(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
-        elseif playerFaction.isAlliance then
-            Alliance(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+        if onServer() then
+            if playerFaction.isPlayer or playerFaction.isAlliance then
+                Player(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+            elseif playerFaction.isAlliance then
+                Alliance(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+            end
         end
 
         -- 2. Apply Custom Hard Caps before passing to Vanilla
