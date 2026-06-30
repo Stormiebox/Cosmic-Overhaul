@@ -7,21 +7,22 @@ function initialize(famineLevel)
     co_famine_level = famineLevel or "Struggling"
     
     if onServer() then
-        local entity = Entity()
-        local _k = entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
-        entity:removeBonus(_k)
+        applyDebuffs()
     end
 end
 
-function onBaseMultiplierCalculated(entity, statModifier)
+function applyDebuffs()
+    local entity = Entity()
+    entity:removeScriptBonuses()
+    
     if co_famine_level == "Severe Famine" then
-        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.4) -- 60% weaker shields
-        statModifier:addBaseMultiplier(StatsBonuses.Velocity, 0.6) -- 40% slower
+        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.6) -- 60% weaker shields
+        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.4) -- 40% slower
     elseif co_famine_level == "Resource Starved" then
-        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.5) -- 50% weaker shields
-        statModifier:addBaseMultiplier(StatsBonuses.Velocity, 0.75) -- 25% slower
+        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.5) -- 50% weaker shields
+        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.25) -- 25% slower
     elseif co_famine_level == "Struggling" then
-        statModifier:addBaseMultiplier(StatsBonuses.ShieldDurability, 0.8) -- 20% weaker shields
+        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.2) -- 20% weaker shields
     end
 end
 
@@ -31,7 +32,7 @@ end
 
 function restore(data)
     co_famine_level = data.level
-    local entity = Entity()
-    local _k = entity:addMultiplyableBias(StatsBonuses.ShieldDurability, 0)
-    entity:removeBonus(_k)
+    if onServer() then
+        applyDebuffs()
+    end
 end

@@ -10,7 +10,7 @@ COWeatherGenerator.cooldown = 0
 COWeatherGenerator.activeCount = 0
 
 function COWeatherGenerator.initialize()
-    if not cv_weather_success then
+    if not cv_weather then
         print("[Cosmic Overhaul] CosmicVaultWeather API not found! Weather generation disabled.")
     end
 end
@@ -20,7 +20,7 @@ function COWeatherGenerator.getUpdateInterval()
 end
 
 function COWeatherGenerator.updateServer(timeStep)
-    if not cv_weather_success then return end
+    if not cv_weather then return end
 
     COWeatherGenerator.cooldown = math.max(0, COWeatherGenerator.cooldown - timeStep)
     if COWeatherGenerator.cooldown > 0 then return end
