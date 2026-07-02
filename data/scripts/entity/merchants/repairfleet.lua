@@ -40,6 +40,6 @@ end
 
 function triggerFleetRepair(creditsOnly)
     -- Simply proxy the call directly to the RepairDock script on this station
-    Entity():invokeFunction("data/scripts/entity/merchants/repairdock.lua", "repairAllSectorShips", creditsOnly)
+    Entity():invokeFunction("data/scripts/entity/merchants/repairdock.lua", "repairAllSectorShips", callingPlayer, creditsOnly)
 end
 callable(nil, "triggerFleetRepair")

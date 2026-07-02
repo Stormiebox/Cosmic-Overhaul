@@ -14,10 +14,12 @@ function initialize(...)
 end
 
 
-function RepairDock.repairAllSectorShips(creditsOnly)
-    if not CheckFactionInteraction(callingPlayer, RepairDock.interactionThreshold) then return end
+function RepairDock.repairAllSectorShips(playerIndex, creditsOnly) -- Explicitly receive playerIndex
+    playerIndex = playerIndex or callingPlayer -- Fallback for other potential call sites
+    if not playerIndex then return end
+    if not CheckFactionInteraction(playerIndex, RepairDock.interactionThreshold) then return end
 
-    local player = Player(callingPlayer)
+    local player = Player(playerIndex)
     local alliance = player.allianceIndex and Alliance(player.allianceIndex) or nil
     local station = Entity()
     local sector = Sector()
