@@ -94,7 +94,7 @@ function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise
 
 	if not existingContent then
 		--print("Initial register for " .. tostring(entity_data['name']))
-		entity_data['time'] = os.time()
+		entity_data['time'] = Server().unpausedRuntime
 		initial[factionIndex][entityId] = entity_data -- registering the content for later comparisons
 	else
 		-- this is an issue, this function should be called only once for each factory

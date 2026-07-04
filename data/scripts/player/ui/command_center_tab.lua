@@ -191,12 +191,12 @@ function CommandCenter.serverFetchData()
     end
 
     -- Also fetch standard physical orders for loaded/unloaded ships tracked by the server
-    local ok, shipNames = pcall(function() return player:getShipNames() end)
-    if ok and shipNames and type(shipNames) == "table" then
+    local shipNames = player:getShipNames()
+    if shipNames and type(shipNames) == "table" then
         for _, sName in pairs(shipNames) do
             if not backgroundShips[sName] then
-                local okStatus, status = pcall(function() return player:getShipStatus(sName) end)
-                if okStatus and status and status ~= "" and status ~= "Idle"%_T and status ~= "Destroyed"%_T then
+                local status = player:getShipStatus(sName)
+                if status and status ~= "" and status ~= "Idle"%_T and status ~= "Destroyed"%_T then
                     local entry = {}
                     entry.shipName = sName
                     entry.commandName = status

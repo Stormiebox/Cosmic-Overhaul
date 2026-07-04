@@ -23,7 +23,7 @@ function initialize()
     -- Record when this asteroid was sold to an AI faction
     local entity = Entity()
     if not entity:getValue(KEY_SOLD_TIME) then
-        entity:setValue(KEY_SOLD_TIME, os.time())
+        entity:setValue(KEY_SOLD_TIME, Server().unpausedRuntime)
     end
 end
 
@@ -41,7 +41,7 @@ function updateServer()
     local soldTime = entity:getValue(KEY_SOLD_TIME)
     if not soldTime then return end
 
-    local elapsed = os.time() - soldTime
+    local elapsed = Server().unpausedRuntime - soldTime
     local elapsedHours = elapsed / 3600
 
     if elapsedHours < 0.01 then return end
@@ -50,7 +50,7 @@ function updateServer()
     -- Cumulative probability: 1 - (1 - chance)^hours
     local cumulativeChance = 1 - ((1 - chancePerHour) ^ elapsedHours)
 
-    local rng = Random(Seed(entity.id.number + os.time()))
+    local rng = Random(Seed(entity.id.number + Server().unpausedRuntime))
     if rng:test(cumulativeChance) then
         abandonAsteroid(entity)
     end

@@ -846,7 +846,7 @@ if onServer() then
 
     function Shop:remoteRestock()
         local player = Player(callingPlayer)
-        local current = os.time()
+        local current = Server().unpausedRuntime
         local entity = Entity()
 
         local lastRestockTime = entity:getValue("co_last_restock") or 0

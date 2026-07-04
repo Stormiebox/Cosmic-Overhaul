@@ -37,9 +37,9 @@ Balancing:
     local ARCC_Simulation_secure_original = Simulation.secure
     function Simulation.secure()
         if Simulation.commands and #Simulation.commands > 0 then
-            local secureTime = os.time()-1
+            local secureTime = Server().unpausedRuntime-1
             print("[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
-                timestamp = os.date("!%c (UTC)", secureTime),
+                timestamp = tostring(secureTime),
             })
             for _, command in pairs(Simulation.commands or {}) do
                 command.data.lastSecuredClockTime = secureTime
@@ -138,7 +138,7 @@ Balancing:
     end
 
     function ARCC_getTimeToApply(rawTimeToDeduct)
-        local restoreTime = os.time()
+        local restoreTime = Server().unpausedRuntime
 
         -- Assumption: all commands were secured at about the same time
         local secureTime = restoreTime

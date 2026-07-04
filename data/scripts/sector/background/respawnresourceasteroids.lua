@@ -151,7 +151,7 @@ function RespawnResourceAsteroids.initialize()
     -- so it reflects the sector's natural resource count, not inflated by emergency fields
     local baseline = sector:getValue(KEY_BASELINE)
     local lastRespawn = sector:getValue(KEY_LAST_RESPAWN)
-    local now = os.time()
+    local now = Server().unpausedRuntime
 
     if not baseline then
         -- First load: take snapshot of current state BEFORE any modifications
@@ -248,7 +248,7 @@ function RespawnResourceAsteroids.updateServer(timeStep)
     local unattended = #{sector:getPlayers()} == 0
 
     local count = self.spawnBatch(baseline, 1, unattended)
-    sector:setValue(KEY_LAST_RESPAWN, os.time())
+    sector:setValue(KEY_LAST_RESPAWN, Server().unpausedRuntime)
 
     if count > 0 then
         print("Live tick: spawned %d resource asteroids%s", count, unattended and " (unattended)" or "")
@@ -434,7 +434,7 @@ function RespawnResourceAsteroids.respawnFields()
         print("Emergency: updated resource baseline %d -> %d", resBaseline, totalRes)
     end
 
-    sector:setValue(KEY_LAST_RESPAWN, os.time())
+    sector:setValue(KEY_LAST_RESPAWN, Server().unpausedRuntime)
 
     print("Emergency: spawned %d asteroid fields (total < 200)", self.respawnedFields)
 end

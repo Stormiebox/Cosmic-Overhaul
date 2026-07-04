@@ -241,7 +241,7 @@ function RespawnHud.updateClient(timeStep)
             local lastRespawn = sector:getValue(KEY_LAST_RESPAWN)
             local interval = (CosmicOverhaulConfig.get().respawnInterval or 2) * 60
             if lastRespawn and interval > 0 then
-                local elapsed = os.time() - lastRespawn
+                local elapsed = Server().unpausedRuntime - lastRespawn
                 local remaining = interval - (elapsed % interval)
                 local mins = math.floor(remaining / 60)
                 local secs = remaining % 60
