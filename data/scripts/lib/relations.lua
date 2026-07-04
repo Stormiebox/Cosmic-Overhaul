@@ -625,10 +625,10 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
         -- 1. Persistent State Tracking (Fixes Lua VM Isolation bug)
         -- Save the timestamp to the Player/Alliance database so it survives server restarts and sector jumps
         if onServer() then
-            if playerFaction.isPlayer or playerFaction.isAlliance then
-                Player(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+            if playerFaction.isPlayer then
+                playerFaction:setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
             elseif playerFaction.isAlliance then
-                Alliance(playerFaction.index):setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
+                playerFaction:setValue("co_rep_interact_" .. aiFaction.index, Server().unpausedRuntime)
             end
         end
 

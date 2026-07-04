@@ -86,7 +86,7 @@ function pushDeeper()
     player:sendChatMessage("", 1, "Your boarding party took casualties breaching the doors.")
     
     state = 1
-    invokeClientFunction(player, "refreshDialog")
+    invokeClientFunction(player, "refreshDialog", state)
 end
 
 function extractMid()
@@ -107,7 +107,7 @@ function pushFinal()
     player:sendChatMessage("", 1, "Heavy casualties sustained breaching the final vault!")
     
     state = 2
-    invokeClientFunction(player, "refreshDialog")
+    invokeClientFunction(player, "refreshDialog", state)
 end
 
 function extractFinal()
@@ -122,7 +122,8 @@ function extractFinal()
     terminate()
 end
 
-function refreshDialog()
+function refreshDialog(newState)
+    if newState then state = newState end
     ScriptUI():showDialog(makeDialog())
 end
 
