@@ -360,7 +360,7 @@ function SmugglersMarket.onPageRightButtonPressed()
     page = math.max(page, 0)
     itemStart = page * itemsPerPage
 
-    print("page: " .. page .. ", " .. itemStart .. ", num: " .. (numStolenItems / itemsPerPage))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "page: " .. page .. ", " .. itemStart .. ", num: " .. (numStolenItems / itemsPerPage))
 
     SmugglersMarket.onShowWindow()
 end
@@ -389,7 +389,7 @@ function SmugglersMarket.onUnbrandTextEntered(textBox)
 
     local good = self.boughtGoods[goodIndex]
     if not good then
-        print ("good with index " .. goodIndex .. " can't be unbranded")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "good with index " .. goodIndex .. " can't be unbranded")
         printEntityDebugInfo();
         return
     end
@@ -436,7 +436,7 @@ function SmugglersMarket.onSellTextEntered(textBox)
 
     local good = self.boughtGoods[goodIndex]
     if not good then
-        print ("good with index " .. goodIndex .. " isn't bought")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "good with index " .. goodIndex .. " isn't bought")
         printEntityDebugInfo();
         return
     end
@@ -490,7 +490,7 @@ function SmugglersMarket.onSellButtonPressed(button)
 
     local good = self.boughtGoods[goodIndex]
     if not good then
-        print ("internal error, good with index " .. goodIndex .. " of sell button not found.")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "internal error, good with index " .. goodIndex .. " of sell button not found.")
         printEntityDebugInfo()
         return
     end

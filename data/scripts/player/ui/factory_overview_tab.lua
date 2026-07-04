@@ -39,19 +39,19 @@ function FactoryOverview.fetchDataFromGalaxy(alliance_v) -- fetches the current 
 
 	local galaxy = Galaxy()
 	if not galaxy then
-		print("Galaxy is not accessible from fetchDataFromGalaxy")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Galaxy is not accessible from fetchDataFromGalaxy")
 	else
 		local av = alliance_v and (Player().alliance ~= nil)
-		--print("Alliance: " .. tostring(Player().alliance ~= nil) .. " av: " .. tostring(av))
+		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Alliance: " .. tostring(Player().alliance ~= nil) .. " av: " .. tostring(av))
 		local index = Player().index
 		if av then
 			index = Player().allianceIndex
 		end
-		--print("Index: " .. tostring(index) .. " av: " .. tostring(av))
+		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Index: " .. tostring(index) .. " av: " .. tostring(av))
 		local errorcode, factories = galaxy:invokeFunction("galaxy/factoryregister.lua", "getFactoriesFor", index, av)
 
 		if errorcode ~= 0 then
-			print("Error while calling getFactoriesFor on Galaxy from Player: " .. tostring(errorcode))
+			include("cosmicvaultdebug").info("Cosmic Overhaul", "Error while calling getFactoriesFor on Galaxy from Player: " .. tostring(errorcode))
 			return
 		end
 
@@ -274,7 +274,7 @@ function getRowTooltip(factoryData)
 	local tooltip = ""
 
 	if not factoryData['working_state'] then
-		print("Factory data has no key called 'working_state' ")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Factory data has no key called 'working_state' ")
 		printTable(factoryData)
 		return ""
 	end

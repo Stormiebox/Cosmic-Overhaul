@@ -52,7 +52,7 @@ if onClient() then
     function BulletinBoard.checkMissionList()
         local missions = BulletinBoard.getDisplayedBulletins()
         if not missions or #missions == 0 then
-            print("No missions available in this sector!")
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "No missions available in this sector!")
             return
         end
 

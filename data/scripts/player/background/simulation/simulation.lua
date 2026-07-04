@@ -38,7 +38,7 @@ Balancing:
     function Simulation.secure()
         if Simulation.commands and #Simulation.commands > 0 then
             local secureTime = Server().unpausedRuntime-1
-            print("[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
                 timestamp = tostring(secureTime),
             })
             for _, command in pairs(Simulation.commands or {}) do
@@ -149,7 +149,7 @@ Balancing:
             end
         end
 
-        print("[ARCC] Restoring commands from a timestamp of: ${timestamp}"%{
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Restoring commands from a timestamp of: ${timestamp}"%{
             timestamp = os.date("!%c (UTC)", secureTime),
         })
 
@@ -161,7 +161,7 @@ Balancing:
             timeToApply = timeToApply*ARCC_offlineTimeReplayRatio
             timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
         else
-            print("[ARCC] Offline catch-up is disabled via ccm. Skipping catch-up.")
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Offline catch-up is disabled via ccm. Skipping catch-up.")
         end
 
         return timeToApply
@@ -175,7 +175,7 @@ Balancing:
             nextStep = math.max(1, nextStep)
             nextStep = math.min(nextStep, timeToApply)
             if nextStep <= 0 then break end
-            print("[ARCC] Simulating catch-up of ${time} for ${num} active commands"%{
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Simulating catch-up of ${time} for ${num} active commands"%{
                 time = createReadableShortTimeString(nextStep),
                 num = #Simulation.commands,
             })

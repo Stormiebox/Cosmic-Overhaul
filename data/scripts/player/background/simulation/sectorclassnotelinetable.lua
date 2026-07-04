@@ -77,11 +77,11 @@ end
 -- For diagnostic purposes
 function SectorClassNoteLineTable:dump()
     for sector, classes in pairs(self.data) do
-        print(sector)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", sector)
         for class, lines in pairs(classes) do
-            print ("   " .. class)
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "   " .. class)
             for _, line in pairs(lines) do
-              print("      " .. line)
+              include("cosmicvaultdebug").info("Cosmic Overhaul", "      " .. line)
             end
         end
     end

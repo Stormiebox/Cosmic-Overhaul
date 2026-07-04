@@ -11,7 +11,7 @@ function WarZoneCheck.declareWarZone(...)
         local sx, sy = sector:getCoordinates()
         local status = Galaxy():invokeFunction("galaxymapqol.lua", "setWarZoneData", sx, sy, true)
         if status ~= 0 then
-            eprint("[ERROR][GalaxyMapQoL]: declareWarZone - failed to call setWarZoneData: "..status)
+            include("cosmicvaultdebug").error("Cosmic Overhaul", "[ERROR][GalaxyMapQoL]: declareWarZone - failed to call setWarZoneData: "..status)
         end
     end
 
@@ -25,7 +25,7 @@ function WarZoneCheck.undeclareWarZone(...)
         local sx, sy = sector:getCoordinates()
         local status = Galaxy():invokeFunction("galaxymapqol.lua", "setWarZoneData", sx, sy, false)
         if status ~= 0 then
-            eprint("[ERROR][GalaxyMapQoL]: undeclareWarZone - failed to call setWarZoneData: "..status)
+            include("cosmicvaultdebug").error("Cosmic Overhaul", "[ERROR][GalaxyMapQoL]: undeclareWarZone - failed to call setWarZoneData: "..status)
         end
     end
 
@@ -38,7 +38,7 @@ function WarZoneCheck.onRestoredFromDisk(...)
     local sx, sy = sector:getCoordinates()
     local status = Galaxy():invokeFunction("galaxymapqol.lua", "setWarZoneData", sx, sy, sector:getValue("war_zone"))
     if status ~= 0 then
-        eprint("[ERROR][GalaxyMapQoL]: onRestoredFromDisk - failed to call setWarZoneData: "..status)
+        include("cosmicvaultdebug").error("Cosmic Overhaul", "[ERROR][GalaxyMapQoL]: onRestoredFromDisk - failed to call setWarZoneData: "..status)
     end
 
     galaxyMapQoL_onRestoredFromDisk(...)

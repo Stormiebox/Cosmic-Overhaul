@@ -196,7 +196,7 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
 
         local statusChangeThresholdOffset = getStatusChangeThresholdOffset(ai)
 
---        print ("Relation Change: " .. delta .. " (".. RelationChangeNames[changeType] .. ")")
+--        include("cosmicvaultdebug").info("Cosmic Overhaul", "Relation Change: " .. delta .. " (".. RelationChangeNames[changeType] .. ")")
 
         delta, chatterMessage = getCustomFactionRelationDelta(ai, delta, changeType)
 
@@ -209,7 +209,7 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
         end
 
         if status == RelationStatus.Neutral then
---            print ("Current Sqtatus: Neutral")
+--            include("cosmicvaultdebug").info("Cosmic Overhaul", "Current Sqtatus: Neutral")
 
             -- Craft destruction and boarding are considered acts of war
             -- damaging shields and hull can be, too, but they must be handled with more context, so we can't handle them here
@@ -233,7 +233,7 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
             end
 
         elseif status == RelationStatus.Ceasefire then
---            print ("Current Status: Ceasefire")
+--            include("cosmicvaultdebug").info("Cosmic Overhaul", "Current Status: Ceasefire")
 
             -- Craft destruction and boarding are considered acts of war
             -- damaging shields and hull can be, too, but they must be handled with more context, so we can't handle them here
@@ -258,12 +258,12 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
             end
 
         elseif status == RelationStatus.War then
---            print ("Current Status: War")
+--            include("cosmicvaultdebug").info("Cosmic Overhaul", "Current Status: War")
             -- less gain when at war
             if uncappedDelta > 0 then delta = delta / 2 end
 
         elseif status == RelationStatus.Allies then
---            print ("Current Status: Allies")
+--            include("cosmicvaultdebug").info("Cosmic Overhaul", "Current Status: Allies")
 
             if changeType == RelationChangeType.Raiding or changeType == RelationChangeType.Boarding then
                 -- raiding or boarding an allied ship will turn the pact to neutral

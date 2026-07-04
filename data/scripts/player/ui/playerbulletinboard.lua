@@ -110,7 +110,7 @@ if onClient() then
                 if valid(entity) then
                     entity:invokeFunction("entity/bulletinboard.lua", "acceptMission", line.bulletinIndex)
                 else
-                    print("DEBUG: bad entity?")
+                    include("cosmicvaultdebug").info("Cosmic Overhaul", "DEBUG: bad entity?")
                 end
             end
         end
@@ -123,7 +123,7 @@ if onClient() then
                 if valid(entity) then
                     Player().selectedObject = entity
                 else
-                    print("DEBUG: bad entity?")
+                    include("cosmicvaultdebug").info("Cosmic Overhaul", "DEBUG: bad entity?")
                 end
             end
         end

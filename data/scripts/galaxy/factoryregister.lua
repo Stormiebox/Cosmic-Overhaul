@@ -30,7 +30,7 @@ end
 
 -- Entry point to call from the factories to register.
 function register(factionIndex, allianceFactory, entity_data)
-	--print("Register called " .. tostring(factionIndex) .. " + " .. tostring(entity_data['id']) )
+	--include("cosmicvaultdebug").info("Cosmic Overhaul", "Register called " .. tostring(factionIndex) .. " + " .. tostring(entity_data['id']) )
 	if not entity_data then
 		return
 	end
@@ -66,7 +66,7 @@ function createOrUpdate(factionIndex, entity_data)
 	end
 	local entityId = tostring(entity_data['id'])
 	if not entityId or entityId == "" or entityId == "nil" then
-		print("Issue with register call in Galaxy, data is not formatted correctly")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Issue with register call in Galaxy, data is not formatted correctly")
 		return
 	end
 
@@ -74,7 +74,7 @@ function createOrUpdate(factionIndex, entity_data)
 	local existingContent = faction_registry[entityId] -- inside the faction, all entities are stored with their id
 
 	if not existingContent then
-		--print("Previously not registered: " .. entityId)
+		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Previously not registered: " .. entityId)
 		registerNewFactory(factionIndex, entity_data) -- registering the content for later comparisons
 	end
 	faction_registry[entityId] = entity_data -- overwriting the previous data
@@ -86,19 +86,19 @@ function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise
 	end
 	local entityId = tostring(entity_data['id'])
 	if not entityId or entityId == "" or entityId == "nil" then -- ideally we shouldn't be here if this is happening, but things change
-		print("Issue with registerNewFactory call in Galaxy, data is not formatted correctly")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Issue with registerNewFactory call in Galaxy, data is not formatted correctly")
 		return
 	end
 
 	local existingContent = initial[factionIndex][entityId] -- inside the faction, all entities are stored with their id
 
 	if not existingContent then
-		--print("Initial register for " .. tostring(entity_data['name']))
+		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Initial register for " .. tostring(entity_data['name']))
 		entity_data['time'] = Server().unpausedRuntime
 		initial[factionIndex][entityId] = entity_data -- registering the content for later comparisons
 	else
 		-- this is an issue, this function should be called only once for each factory
-		print("!!! Double registering " .. tostring(entity_data['name']))
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "!!! Double registering " .. tostring(entity_data['name']))
 	end
 end
 
@@ -114,7 +114,7 @@ function getFactoriesFor(factionId, allianceFactory)
 		--return rf[factionId]
 	end
 
-	print("FactionID [" .. tostring(fi) .. "] is not registered.")
+	include("cosmicvaultdebug").info("Cosmic Overhaul", "FactionID [" .. tostring(fi) .. "] is not registered.")
 	return {}
 end
 
@@ -123,7 +123,7 @@ function printRegisteredFactions() -- just for debugging
 	for key, _ in pairs(rf) do
 		retVal = retVal .. tostring(key) .. ", "
 	end
-	print("Registered faction indices: " .. retVal)
+	include("cosmicvaultdebug").info("Cosmic Overhaul", "Registered faction indices: " .. retVal)
 end
 
 -- Merges the initial and the current data into a single record for the requesting client, calculates working strings and profitability
@@ -131,7 +131,7 @@ function merge(factionId)
 	local rf_content = rf[factionId]
 	local init_content = initial[factionId]
 	if not rf_content or not init_content then
-		print("Missing content in merge for " .. tostring(factionId))
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Missing content in merge for " .. tostring(factionId))
 		return {}
 	else
 		local factories = {}
@@ -164,14 +164,14 @@ end
 function addWorkingStrings(data, init_fdata, factoryData)
 	local totalTime = data['runtime']
 	if not totalTime or totalTime == 0 then
-		print("Error elapsed time in registered factory data in Galaxy / 1")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Error elapsed time in registered factory data in Galaxy / 1")
 		factoryData['working_state'] = {}
 		factoryData['working_state']["Error with data"] = "100%"
 		return factoryData
 	end
 
 	if not data['production_register']  then
-		print("Error production register is empty in registered factory data in Galaxy")
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Error production register is empty in registered factory data in Galaxy")
 		factoryData['working_state'] = {}
 		factoryData['working_state']["Error with data"] = "100%"
 		return factoryData
@@ -189,7 +189,7 @@ function addWorkingStrings(data, init_fdata, factoryData)
 	factoryData['working_state'] = production_percentages
 
 	if time_check == 0 or math.abs( (time_check-totalTime) / totalTime) > 0.01 then
-		print("Error with time calc: " .. tostring(time_check) .. " vs. " .. tostring(totalTime))
+		include("cosmicvaultdebug").info("Cosmic Overhaul", "Error with time calc: " .. tostring(time_check) .. " vs. " .. tostring(totalTime))
 	end
 
 	return factoryData

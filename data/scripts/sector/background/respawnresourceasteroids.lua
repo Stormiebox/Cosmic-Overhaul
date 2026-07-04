@@ -115,7 +115,7 @@ local function cleanupGhostAsteroids(sector)
     end
 
     if removed > 0 then
-        print("Cleanup: removed %d depleted asteroid shells", removed)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Cleanup: removed %d depleted asteroid shells", removed)
     end
 
     return removed
@@ -161,7 +161,7 @@ function RespawnResourceAsteroids.initialize()
         sector:setValue(KEY_RESOURCE_BASELINE, getTotalResources(sector))
         sector:setValue(KEY_LAST_RESPAWN, now)
 
-        print("Snapshot taken: %d verified resource asteroids (component count: %d, ghosts: %d)", baseline, componentCount, ghosts)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Snapshot taken: %d verified resource asteroids (component count: %d, ghosts: %d)", baseline, componentCount, ghosts)
     else
         -- Backfill resource baseline for sectors that predate this key
         if not sector:getValue(KEY_RESOURCE_BASELINE) then
@@ -174,7 +174,7 @@ function RespawnResourceAsteroids.initialize()
         local totalRes = getTotalResources(sector)
         if resBaseline and totalRes > resBaseline then
             sector:setValue(KEY_RESOURCE_BASELINE, totalRes)
-            print("Corrected resource baseline %d -> %d (exceeded by current resources)", resBaseline, totalRes)
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "Corrected resource baseline %d -> %d (exceeded by current resources)", resBaseline, totalRes)
         end
     end
 
@@ -210,7 +210,7 @@ function RespawnResourceAsteroids.initialize()
             local count = self.spawnBatch(baseline, ticksPassed, true)
 
             if count > 0 then
-                print("Catch-up: %d ticks elapsed, spawned %d resource asteroids (unattended)", ticksPassed, count)
+                include("cosmicvaultdebug").info("Cosmic Overhaul", "Catch-up: %d ticks elapsed, spawned %d resource asteroids (unattended)", ticksPassed, count)
             end
         end
     end
@@ -251,7 +251,7 @@ function RespawnResourceAsteroids.updateServer(timeStep)
     sector:setValue(KEY_LAST_RESPAWN, Server().unpausedRuntime)
 
     if count > 0 then
-        print("Live tick: spawned %d resource asteroids%s", count, unattended and " (unattended)" or "")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Live tick: spawned %d resource asteroids%s", count, unattended and " (unattended)" or "")
     end
     self.dumpDiagnostics(sector, baseline)
 end
@@ -273,10 +273,10 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
         if economy then
             local famineScore = economy.getFamineLevel(faction.index)
             if famineScore == "Severe Famine" then
-                print("Respawn paused: Faction is in Severe Famine.")
+                include("cosmicvaultdebug").info("Cosmic Overhaul", "Respawn paused: Faction is in Severe Famine.")
                 return 0
             elseif famineScore == "Resource Starved" then
-                print("Respawn throttled: Faction is Resource Starved.")
+                include("cosmicvaultdebug").info("Cosmic Overhaul", "Respawn throttled: Faction is Resource Starved.")
                 ticks = math.max(1, math.floor(ticks * 0.5))
             end
         end
@@ -289,7 +289,7 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
     local resCap = resBaseline and resBaseline > 0 and resBaseline * capPct
 
     if totalRes and resCap and totalRes >= resCap then
-        print("SpawnBatch skipped: resources %d >= cap %d%s", totalRes, math.floor(resCap), unattended and " (unattended)" or " (attended)")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "SpawnBatch skipped: resources %d >= cap %d%s", totalRes, math.floor(resCap), unattended and " (unattended)" or " (attended)")
         return 0
     end
 
@@ -299,7 +299,7 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
     if current >= target then return 0 end
 
     if ghosts > 0 then
-        print("Ghost entities detected: %d asteroids have MineableMaterial component but no resources", ghosts)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Ghost entities detected: %d asteroids have MineableMaterial component but no resources", ghosts)
     end
 
     local batchSize = math.max(1, math.ceil(baseline * self.respawnRate))
@@ -396,7 +396,7 @@ function RespawnResourceAsteroids.respawnFields()
             local position = MatrixLookUp(vec3(random():getFloat(), random():getFloat(), random():getFloat()), vec3(random():getFloat(), random():getFloat(), random():getFloat()))
             position.pos = vec3(random():getInt(-2000, 2000), random():getInt(-2000, 2000), random():getInt(-2000, 2000))
             anomalies.spawnAnomaly(x, y, anomalyType, position)
-            print("Anomaly Spawned: " .. anomalyType)
+            include("cosmicvaultdebug").info("Cosmic Overhaul", "Anomaly Spawned: " .. anomalyType)
         end
     end
 
@@ -424,19 +424,19 @@ function RespawnResourceAsteroids.respawnFields()
     local baseline = sector:getValue(KEY_BASELINE) or 0
     if verified > baseline then
         sector:setValue(KEY_BASELINE, verified)
-        print("Emergency: updated asteroid baseline %d -> %d", baseline, verified)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Emergency: updated asteroid baseline %d -> %d", baseline, verified)
     end
 
     local totalRes = getTotalResources(sector)
     local resBaseline = sector:getValue(KEY_RESOURCE_BASELINE) or 0
     if totalRes > resBaseline then
         sector:setValue(KEY_RESOURCE_BASELINE, totalRes)
-        print("Emergency: updated resource baseline %d -> %d", resBaseline, totalRes)
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Emergency: updated resource baseline %d -> %d", resBaseline, totalRes)
     end
 
     sector:setValue(KEY_LAST_RESPAWN, Server().unpausedRuntime)
 
-    print("Emergency: spawned %d asteroid fields (total < 200)", self.respawnedFields)
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "Emergency: spawned %d asteroid fields (total < 200)", self.respawnedFields)
 end
 
 function RespawnResourceAsteroids.dumpDiagnostics(sector, baseline)
@@ -447,11 +447,11 @@ function RespawnResourceAsteroids.dumpDiagnostics(sector, baseline)
     local totalRes = getTotalResources(sector)
     local resTarget = math.floor(resBaseline * self.restorationPct)
 
-    print("=== DIAGNOSTICS ===")
-    print("Asteroids: %d total, %d with resources (ghosts: %d, component: %d)", totalAsteroids, verified, ghosts, componentCount)
-    print("Asteroid baseline: %d, target: %d, deficit: %d", baseline, asteroidTarget, math.max(0, asteroidTarget - verified))
-    print("Resources: %d / %d (target: %d, %d%%)", totalRes, resBaseline, resTarget, math.floor(self.restorationPct * 100))
-    print("===================")
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "=== DIAGNOSTICS ===")
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "Asteroids: %d total, %d with resources (ghosts: %d, component: %d)", totalAsteroids, verified, ghosts, componentCount)
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "Asteroid baseline: %d, target: %d, deficit: %d", baseline, asteroidTarget, math.max(0, asteroidTarget - verified))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "Resources: %d / %d (target: %d, %d%%)", totalRes, resBaseline, resTarget, math.floor(self.restorationPct * 100))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "===================")
 end
 
 end -- if onServer()

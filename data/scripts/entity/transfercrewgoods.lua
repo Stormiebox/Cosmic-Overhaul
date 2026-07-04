@@ -1306,7 +1306,7 @@ function TransferCrewGoods.transferCrew(crewmanIndex, otherIndex, selfToOther, a
 
     local p = sorted[crewmanIndex]
     if not p then
-        print("bad crewman")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "bad crewman")
         return
     end
 
@@ -1682,7 +1682,7 @@ callable(TransferCrewGoods, "transferFighter")
 function TransferCrewGoods.onTransferSquadPressed(button)
     local squadIndex = squadIndexBySelection[button.index]
     if squadIndex == nil then
-        --        print("invalid squad index")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "invalid squad index")
         return
     end
 
@@ -1715,7 +1715,7 @@ function TransferCrewGoods.transferSquad(sourceId, targetId, squadIndex)
     local missingSquads = {}
 
     if senderHangar:getSquadFighters(squadIndex) == 0 then
-        --        print("no fighters in this squad")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "no fighters in this squad")
         return
     end
 
@@ -1736,7 +1736,7 @@ function TransferCrewGoods.transferSquad(sourceId, targetId, squadIndex)
     for i = 0, senderHangar:getSquadFighters(squadIndex)-1 do
         local fighter = senderHangar:getFighter(squadIndex, 0)
         if not fighter then
-            --            print("fighter is nil")
+            --            include("cosmicvaultdebug").info("Cosmic Overhaul", "fighter is nil")
             break
         end
 
@@ -1820,7 +1820,7 @@ function TransferCrewGoods.transferAllFighters(sender, receiver)
             for i = 0, senderHangar:getSquadFighters(squad)-1 do
                 local fighter = senderHangar:getFighter(squad, 0)
                 if not fighter then
-                    --                    print("fighter is nil")
+                    --                    include("cosmicvaultdebug").info("Cosmic Overhaul", "fighter is nil")
                     return
                 end
 
@@ -1857,7 +1857,7 @@ callable(TransferCrewGoods, "transferAllFighters")
 function TransferCrewGoods.onTransferShaftButtonPressed(button)
     local shaftIndex = torpedoShaftIndexBySelection[button.index]
     if shaftIndex == nil then
-        --        print("invalid shaft index")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "invalid shaft index")
         return
     end
 
@@ -1893,12 +1893,12 @@ function TransferCrewGoods.transferShaft(sourceId, targetId, shaftIndex)
     for index = sourceLauncher:getNumTorpedoes(shaftIndex)-1, 0, -1 do
         local torpedo = sourceLauncher:getTorpedo(index, shaftIndex)
         if not valid(torpedo) then
-            --            print("torpedo not found")
+            --            include("cosmicvaultdebug").info("Cosmic Overhaul", "torpedo not found")
             break
         end
 
         if not targetLauncher:addTorpedo(torpedo, shaftIndex) then
-            --            print("failed to add torpedo")
+            --            include("cosmicvaultdebug").info("Cosmic Overhaul", "failed to add torpedo")
             if torpedoesChanged == false then
                 if shaftIndex == -1 then
                     player:sendChatMessage("", ChatMessageType.Error, "Not enough free torpedo storage."%_t)
@@ -1925,7 +1925,7 @@ callable(TransferCrewGoods, "transferShaft")
 function TransferCrewGoods.onTorpedoReceived(selectionIndex, fkx, fky, item, fromIndex, toIndex, tkx, tky)
     if not valid(item) then return end
     if fromIndex == nil or toIndex == nil then
-        --        print("from or to is nil")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "from or to is nil")
         return
     end
 
@@ -1945,7 +1945,7 @@ function TransferCrewGoods.onTorpedoReceived(selectionIndex, fkx, fky, item, fro
     end
 
     if not source or not target then
-        --        print("no source or target")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "no source or target")
         return
     end
 
@@ -1962,7 +1962,7 @@ function TransferCrewGoods.onTorpedoClicked(selectionIndex, x, y, item, button)
 
     local shaftIndex = torpedoShaftIndexBySelection[selectionIndex]
     if shaftIndex == nil then
-        --        print("no source")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "no source")
         return
     end
 
@@ -1987,7 +1987,7 @@ function TransferCrewGoods.transferTorpedo(sourceId, targetId, sourceShaftIndex,
 
     local torpedo = sourceLauncher:getTorpedo(torpedoIndex, sourceShaftIndex)
     if not valid(torpedo) then
-        --        print("torpedo not found")
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "torpedo not found")
         return
     end
 
@@ -2230,7 +2230,7 @@ function TransferCrewGoods.renderUI()
         local launcher = TorpedoLauncher(entity)
         if not launcher then return end
 
-        --        print("index: " .. tostring(key.x + key.y * activeSelection.maxHorizontalEntries))
+        --        include("cosmicvaultdebug").info("Cosmic Overhaul", "index: " .. tostring(key.x + key.y * activeSelection.maxHorizontalEntries))
         local torpedo = launcher:getTorpedo(key.x+key.y*activeSelection.maxHorizontalEntries,
             torpedoShaftIndexBySelection[activeSelection.index])
         if not torpedo then return end

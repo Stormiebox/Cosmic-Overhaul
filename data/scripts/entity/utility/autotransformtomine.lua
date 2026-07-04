@@ -73,7 +73,7 @@ function createMine()
 end
 
 function abandonAsteroid(entity)
-    print("Abandoning asteroid %s in sector %s", tostring(entity.id), tostring(Sector():getCoordinates()))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", "Abandoning asteroid %s in sector %s", tostring(entity.id), tostring(Sector():getCoordinates()))
 
     -- Unclaim: set faction to neutral (0 = no faction)
     entity.factionIndex = 0

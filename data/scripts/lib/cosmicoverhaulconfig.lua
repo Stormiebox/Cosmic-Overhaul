@@ -141,7 +141,11 @@ local function build()
     out.showResTimer = readBool("showResTimer", defaults.showResTimer)
 
     local vaultCfg = (CosmicVaultConfig and CosmicVaultConfig.get and CosmicVaultConfig.get()) or nil
-    out.debugLogs = (vaultCfg and type(vaultCfg.debugEnabled) == "boolean") and vaultCfg.debugEnabled or false
+    if vaultCfg and type(vaultCfg.debugOverhaul) == "boolean" then
+        out.debugLogs = vaultCfg.debugOverhaul
+    else
+        out.debugLogs = readBool("debugLogs", false)
+    end
 
     return out
 end

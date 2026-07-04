@@ -11,7 +11,7 @@ COWeatherGenerator.activeCount = 0
 
 function COWeatherGenerator.initialize()
     if not cv_weather then
-        print("[Cosmic Overhaul] CosmicVaultWeather API not found! Weather generation disabled.")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "[Cosmic Overhaul] CosmicVaultWeather API not found! Weather generation disabled.")
     end
 end
 

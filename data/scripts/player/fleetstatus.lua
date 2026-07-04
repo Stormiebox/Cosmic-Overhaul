@@ -12,7 +12,7 @@ local _deprecatedWarned = false
 local function warnDeprecatedOnce(endpoint)
     if _deprecatedWarned then return end
     _deprecatedWarned = true
-    print(string.format(
+    include("cosmicvaultdebug").info("Cosmic Overhaul", string.format(
     "[Cosmic Overhaul][FleetStatus][DeprecatedPlayerShim] Called '%s' on player shim. Ignoring and using entity-owned FleetStatus flow.",
         tostring(endpoint)))
 end

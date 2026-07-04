@@ -40,7 +40,7 @@ end
 function TradingManager:generateRevenue(good, amount)
     local station = Entity()
     if not station then
-        print("Error: Station is nil.")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Error: Station is nil.")
         return
     end
 
@@ -59,7 +59,7 @@ function TradingManager:generateRevenue(good, amount)
     if faction then
         faction:receive(description, received)
     else
-        print("Error: Faction is nil.")
+        include("cosmicvaultdebug").info("Cosmic Overhaul", "Error: Faction is nil.")
     end
 end
 

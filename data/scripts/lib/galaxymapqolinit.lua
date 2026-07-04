@@ -8,11 +8,12 @@ local Config = {
     HazardZoneRequestInterval = 60
 }
 
+local CosmicVaultDebug = include("cosmicvaultdebug")
 local Log = {
-    Error = function(msg) print("[GalaxyMapQoL] [ERROR] " .. tostring(msg)) end,
-    Warning = function(msg) if Config.ConsoleLogLevel >= 2 then print("[GalaxyMapQoL] [WARN] " .. tostring(msg)) end end,
-    Info = function(msg) if Config.ConsoleLogLevel >= 3 then print("[GalaxyMapQoL] [INFO] " .. tostring(msg)) end end,
-    Debug = function(msg) if Config.ConsoleLogLevel >= 4 then print("[GalaxyMapQoL] [DEBUG] " .. tostring(msg)) end end
+    Error = function(msg) CosmicVaultDebug.error("Cosmic Overhaul", tostring(msg)) end,
+    Warning = function(msg) if Config.ConsoleLogLevel >= 2 then CosmicVaultDebug.warn("Cosmic Overhaul", tostring(msg)) end end,
+    Info = function(msg) if Config.ConsoleLogLevel >= 3 then CosmicVaultDebug.info("Cosmic Overhaul", tostring(msg)) end end,
+    Debug = function(msg) if Config.ConsoleLogLevel >= 4 then CosmicVaultDebug.log("Cosmic Overhaul", tostring(msg)) end end
 }
 
 local function getModDataFolder()

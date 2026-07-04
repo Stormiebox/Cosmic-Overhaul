@@ -148,12 +148,12 @@ end
 
     -- All during the hack means it's TRUE
     local hackedCaptain = hackedDatabaseEntry:getCaptain()
-    print('This should be TRUE: ' .. tostring(hackedCaptain:hasClass(CaptainClass.Merchant)))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", 'This should be TRUE: ' .. tostring(hackedCaptain:hasClass(CaptainClass.Merchant)))
 
     LuaHacks.SetShipDatabaseEntryCaptainAlwaysHasMerchant(false)
 
     -- The hacked captain still has the proxied function called, but the function will evaluate FALSE
-    print('This should be FALSE: ' .. tostring(hackedCaptain:hasClass(CaptainClass.Merchant)))
+    include("cosmicvaultdebug").info("Cosmic Overhaul", 'This should be FALSE: ' .. tostring(hackedCaptain:hasClass(CaptainClass.Merchant)))
 ]]
 
 return LuaHacks
