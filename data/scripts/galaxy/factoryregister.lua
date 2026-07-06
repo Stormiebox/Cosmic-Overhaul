@@ -1,3 +1,5 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+
 local rf = {} -- registered factories, multi level. First level keyed by the faction index, second level by factory id
 local initial = {} -- same as above, but only gets updated once, this will be used to calculate profitability over time
 

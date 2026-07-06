@@ -146,14 +146,12 @@ local function getItemTechLevel(sItem)
         return nil
     end
 
-    local ok, tech = pcall(function()
-        if item.getValue then
-            return item:getValue("tech")
-        end
-        return nil
-    end)
+    local tech = nil
+    if item.getValue then
+        tech = item:getValue("tech")
+    end
 
-    if ok and tech then
+    if tech then
         return tech
     end
 

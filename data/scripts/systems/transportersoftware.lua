@@ -1,8 +1,8 @@
 local transporterRangeFromBlocks_getBonuses = getBonuses
 
 function getRealBonuses(seed, rarity, permanent)
-	local ok, plan = pcall(Plan)
-	if not ok or not plan then
+	local plan = Plan()
+	if not plan then
 		local oldRange, fighter = transporterRangeFromBlocks_getBonuses(seed, rarity, permanent)
 		return oldRange or 0, fighter or 0
 	end
