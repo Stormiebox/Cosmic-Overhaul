@@ -423,8 +423,12 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
 
             -- Ascendancy Trade Fear
             if area and area.analysis and area.analysis.biggestFactionInArea then
-                local server = Server()
-                local factionStr = server and server:getValue("factions")
+                local factionStr = nil
+                if onServer() then
+                    local server = Server()
+                    factionStr = server and server:getValue("factions")
+                end
+                
                 if type(factionStr) == "string" and factionStr ~= "" then
                     local galaxy = Galaxy()
                     local eclipseIndex = nil

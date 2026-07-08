@@ -27,7 +27,7 @@ function COWeatherGenerator.updateServer(timeStep)
 
     -- Sync active count
     local server = Server()
-    local ok, activeWeathers = server:invokeFunction("server/cosmicvaultweather_server.lua", "secure")
+    local ok, activeWeathers = Galaxy():invokeFunction("server/cosmicvaultweather_server.lua", "secure")
 
     local count = 0
     if ok == 0 and activeWeathers and activeWeathers.activeWeathers then
