@@ -11,7 +11,6 @@ Cosmic Overhaul introduces several QoL improvements to Avorion, including an adv
 
 - **Bulletin Board QoL:** Advanced mission filtering and sorting.
 - **Dynamic Faction Wars:** Factions organically fight, claim bounties, and alter reputation.
-- **Sector Keep-Alive:** Essential sectors dynamically respawn to keep the galaxy feeling alive.
 - **Trash Management:** Intelligent deletion of junk to keep server TPS high.
 </details>
 

@@ -137,6 +137,9 @@ function RespawnResourceAsteroids.initialize()
     self.loadConfig()
     if not self.enableResourceRegen then return end
 
+    local sector = Sector()
+    if sector:getValue("eclipse_wiped_graveyard") then return end
+
     self.timer = 0
 
     -- Register for push notifications when admin changes config via MCM
@@ -227,6 +230,9 @@ end
 
 function RespawnResourceAsteroids.updateServer(timeStep)
     if not self.enableResourceRegen then return end
+
+    local sector = Sector()
+    if sector:getValue("eclipse_wiped_graveyard") then return end
 
     self.timer = self.timer + timeStep
     if self.timer < self.respawnInterval * 60 then return end
