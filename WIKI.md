@@ -953,7 +953,7 @@ When an AI faction reaches 'Severe Famine', all newly spawned ships will inheren
 - **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score, stabilizing the economy through the black market.
 
 ## Synergy Update
-- **Eclipse Contraband Premium**: The Smuggler's Market pays a 3x premium for "Eclipse Tech".
+- **Eclipse Contraband Premium**: The Smuggler's Market pays a 1.5x premium for "Eclipse Tech".
 - **Blockade Runner Governors**: Smuggler Governors completely bypass factory blockades during active Cosmic War sieges, allowing wartime profiteering.
 - **Privateer Subsidies**: Merchant Governors reduce all crew and captain hiring costs by 50% if the player is actively enlisted as a Mercenary for the station's faction.
 

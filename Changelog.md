@@ -89,7 +89,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Removed `pcall` soft-dependencies. Core 5 mods are now hard requirements.
 
 ## [Latest Synergy Patch]
-- [Feature] Added Eclipse Contraband Premium at Smuggler's Markets (3x payout).
+- [Feature] Added Eclipse Contraband Premium at Smuggler's Markets (1.5x payout).
 - [Feature] Smuggler Governors now bypass Cosmic War siege blockades.
 - [Feature] Merchant Governors offer Privateer Subsidies (50% crew cost reduction) for contracted mercenaries.
 
