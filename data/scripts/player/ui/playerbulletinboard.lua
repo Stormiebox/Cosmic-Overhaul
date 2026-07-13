@@ -12,10 +12,13 @@ self.page = 0
 self.currentSort = "reward"
 self.sortReverse = true
 
+include("cosmicui_proportionalsplitter")
+
 if onClient() then
 
     function PlayerBulletinBoard.initialize()
         Player():registerCallback("onSectorChanged", "onSectorChanged")
+        Player():registerCallback("onPostRenderHud", "onPostRenderHud")
 
         self.tab = PlayerWindow():createTab("Bulletin Board"%_t, "data/textures/icons/warning-system.png","Bulletin Board"%_t)
 
@@ -29,15 +32,15 @@ if onClient() then
         self.tab:createLabel(filterSplit.left.lower, "Filter:"%_t, 15)
         self.filterComboBox = self.tab:createValueComboBox(filterSplit.right, "onFilterChanged")
 
-        local vsplit = UIArbitraryVerticalSplitter(lister:placeCenter(vec2(lister.inner.width, 30)), 10, 5, 430, 530, 700) -- 430, 530 originally
+        local vsplit = CosmicUIVerticalProportionalSplitter(lister:placeCenter(vec2(lister.inner.width, 30)), 10, 5, {0.5, 0.15, 0.2, 0.15})
 
-        self.btnDesc = self.tab:createButton(vsplit:partition(0), "Description"%_t, "onSortDescription")
+        self.btnDesc = self.tab:createButton(vsplit.partitions[1], "Description"%_t, "onSortDescription")
         self.btnDesc.textSize = 14
-        self.btnDiff = self.tab:createButton(vsplit:partition(1), "Difficulty"%_t, "onSortDifficulty")
+        self.btnDiff = self.tab:createButton(vsplit.partitions[2], "Difficulty"%_t, "onSortDifficulty")
         self.btnDiff.textSize = 14
-        self.btnReward = self.tab:createButton(vsplit:partition(2), "Reward"%_t, "onSortReward")
+        self.btnReward = self.tab:createButton(vsplit.partitions[3], "Reward"%_t, "onSortReward")
         self.btnReward.textSize = 14
-        self.btnSource = self.tab:createButton(vsplit:partition(3), "Source"%_t, "onSortSource")
+        self.btnSource = self.tab:createButton(vsplit.partitions[4], "Source"%_t, "onSortSource")
         self.btnSource.textSize = 14
 
         self.lines = {}
@@ -46,21 +49,21 @@ if onClient() then
             local rect = lister:placeCenter(vec2(lister.inner.width, 30))
             local vsplit = UIVerticalSplitter(rect, 10, 0, 0.85)
 
-            local avsplit = UIArbitraryVerticalSplitter(vsplit.left, 10, 7, 430, 530, 700)
+            local avsplit = CosmicUIVerticalProportionalSplitter(vsplit.left, 10, 7, {0.5, 0.15, 0.2, 0.15})
 
             local frame = self.tab:createFrame(vsplit.left)
 
-            local i = 0
+            local i = 1
 
-            local briefRect = avsplit:partition(i); i = i + 1
+            local briefRect = avsplit.partitions[i]; i = i + 1
 
             local brief = self.tab:createLabel(briefRect.lower, "", 14);
             brief.width = briefRect.width
             brief.shortenText = true
 
-            local difficulty = self.tab:createLabel(avsplit:partition(i).lower, "", 14); i = i + 1
-            local reward = self.tab:createLabel(avsplit:partition(i).lower, "", 14); i = i + 1
-            local source = self.tab:createButton(avsplit:partition(i), "Select", "onSourceButtonPressed"); i = i + 1
+            local difficulty = self.tab:createLabel(avsplit.partitions[i].lower, "", 14); i = i + 1
+            local reward = self.tab:createLabel(avsplit.partitions[i].lower, "", 14); i = i + 1
+            local source = self.tab:createButton(avsplit.partitions[i], "Select", "onSourceButtonPressed"); i = i + 1
             source.icon = "data/textures/icons/position-marker.png"
             local button = self.tab:createButton(vsplit.right, "Accept"%_t, "onTakeButtonPressed")
             local hide = function(self)
@@ -407,6 +410,24 @@ if onClient() then
         self.refreshList()
     end
 
+    function PlayerBulletinBoard.onPostRenderHud(state, timeStep)
+        local ccm = include("ccm")
+        if ccm then
+            local cocfg = ccm.bind("Cosmic_Overhaul")
+            if cocfg.isKeyComboDown("hotkeyBulletinBoard") then
+                local pw = PlayerWindow()
+                if pw and self.tab then
+                    pw:show()
+                    if pw.selectTab then
+                        pw:selectTab(self.tab)
+                    elseif pw.activateTab then
+                        pw:activateTab(self.tab)
+                    end
+                end
+            end
+        end
+    end
+
 end -- onClient()
 
 function PlayerBulletinBoard.onRemove()
@@ -425,6 +446,10 @@ end
 -- Global Event Callbacks
 function onSectorChanged(...)
     if PlayerBulletinBoard.onSectorChanged then return PlayerBulletinBoard.onSectorChanged(...) end
+end
+
+function onPostRenderHud(...)
+    if PlayerBulletinBoard.onPostRenderHud then return PlayerBulletinBoard.onPostRenderHud(...) end
 end
 
 return PlayerBulletinBoard

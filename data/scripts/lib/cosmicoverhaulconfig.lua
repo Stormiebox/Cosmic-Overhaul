@@ -11,6 +11,13 @@ if ccm then
     ccm.register("Cosmic_Overhaul", {
         pages = {
             {
+                title = "UI & Keybinds",
+                options = {
+                    { key = "hotkeyBulletinBoard", type = "keybind", title = "Open Bulletin Board", description = "Hotkey to quickly open the Bulletin Board tab.", default = ccm.keys and ccm.keys.combo(ccm.keys.KEY_B, ccm.keys.LALT) or 48 },
+                    { key = "hotkeyResourceDisplay", type = "keybind", title = "Open Resource Display", description = "Hotkey to quickly open the Resource Display tab.", default = ccm.keys and ccm.keys.combo(ccm.keys.KEY_R, ccm.keys.LALT) or 19 },
+                }
+            },
+            {
                 title = "Profit Configurations",
                 options = {
                     { key = "enableProfitableStations", type = "bool", title = "Enable Profitable Stations", description = "Enables periodic station income simulation enhancements.", default = true },
@@ -56,6 +63,9 @@ end
 
 local defaults =
 {
+    hotkeyBulletinBoard = 0,
+    hotkeyResourceDisplay = 0,
+
     enableGateTravelPriority = true,
     enableProfitableStations = true,
     enableExoticLegendarySalvage = true,

@@ -50,8 +50,9 @@ if onClient() then
         )
 
         -- Native Avorion UI window generation
-        local tab = PlayerWindow():createTab("Resources Display"%_t, "data/textures/icons/ResourceDisplayTab.png",
+        ResourceDisplay.tab = PlayerWindow():createTab("Resources Display"%_t, "data/textures/icons/ResourceDisplayTab.png",
         "Resources Display"%_t)
+        local tab = ResourceDisplay.tab
         local lister = UIVerticalLister(Rect(tab.size), 10, 0)
 
         local checkBoxEnable = tab:createCheckBox(lister:placeRight(vec2(lister.inner.width, 25)), "Enable Resource Display HUD"%_t, "onToggleEnableHUD")
@@ -156,6 +157,22 @@ if onClient() then
     end
 
     function ResourceDisplay.onPreRenderHud(state)
+        local ccm = include("ccm")
+        if ccm then
+            local cocfg = ccm.bind("Cosmic_Overhaul")
+            if cocfg.isKeyComboDown("hotkeyResourceDisplay") then
+                local pw = PlayerWindow()
+                if pw and ResourceDisplay.tab then
+                    pw:show()
+                    if pw.selectTab then
+                        pw:selectTab(ResourceDisplay.tab)
+                    elseif pw.activateTab then
+                        pw:activateTab(ResourceDisplay.tab)
+                    end
+                end
+            end
+        end
+
         if not red_config.EnableHUD then return end
         if state ~= PlayerStateType.Fly then return end
 

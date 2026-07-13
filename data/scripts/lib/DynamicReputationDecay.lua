@@ -24,7 +24,7 @@ function DynamicReputationDecay.getUpdateInterval()
     return DecayConfig.updateIntervalSec
 end
 
-local function processDecayForEntity(entity, factionStr, now, galaxy)
+local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, galaxy)
     local cv_task = include("cosmicvaulttask")
     local iters = 0
     for idStr in string.gmatch(factionStr, "([^,]+)") do
@@ -32,6 +32,9 @@ local function processDecayForEntity(entity, factionStr, now, galaxy)
         if cv_task and cv_task.Yield and (iters % 10 == 0) then
             cv_task.Yield()
         end
+        
+        local entity = isAlliance and Alliance(entityIndex) or Player(entityIndex)
+        if not entity then return end
 
         local aiFactionIndex = tonumber(idStr)
 
@@ -84,20 +87,20 @@ function DynamicReputationDecay.updateServer(timeStep)
         local taskName = "Decay_" .. player.index
         cv_task.RunAsync(taskName, function()
             -- Process Player
-            processDecayForEntity(player, factionStr, now, galaxy)
+            processDecayForEntity(player.index, false, factionStr, now, galaxy)
 
             -- Process Alliance
-            if player.alliance then
-                processDecayForEntity(player.alliance, factionStr, now, galaxy)
+            if player.allianceIndex then
+                processDecayForEntity(player.allianceIndex, true, factionStr, now, galaxy)
             end
         end)
     else
         -- Process Player
-        processDecayForEntity(player, factionStr, now, galaxy)
+        processDecayForEntity(player.index, false, factionStr, now, galaxy)
 
         -- Process Alliance
-        if player.alliance then
-            processDecayForEntity(player.alliance, factionStr, now, galaxy)
+        if player.allianceIndex then
+            processDecayForEntity(player.allianceIndex, true, factionStr, now, galaxy)
         end
     end
 end

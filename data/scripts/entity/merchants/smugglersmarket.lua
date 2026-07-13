@@ -14,6 +14,7 @@ local TradingAPI = include ("tradingmanager")
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace SmugglersMarket
 SmugglersMarket = {}
+include("cosmicui_proportionalsplitter")
 SmugglersMarket = TradingAPI:CreateNamespace()
 SmugglersMarket.trader.tax = 0.2
 SmugglersMarket.trader.factionPaymentFactor = 0.0
@@ -161,13 +162,12 @@ function SmugglersMarket.initUI()
     local lister = UIVerticalLister(Rect(tabbedWindow.size), 5, 0)
     local rect = lister:placeCenter(vec2(lister.inner.width, 21))
 
-    local split1, split2 = 640, 720
-    local vasplit1 = UIArbitraryVerticalSplitter(rect, 10, 0, split1, split2)
-    local vasplit2 = UIArbitraryVerticalSplitter(vasplit1:partition(0), 10, 0, 350, 390, 530)
+    local vasplit1 = CosmicUIVerticalProportionalSplitter(rect, 10, 0, {0.8, 0.1, 0.1})
+    local vasplit2 = CosmicUIVerticalProportionalSplitter(vasplit1.partitions[1], 10, 0, {0.55, 0.06, 0.22, 0.17})
 
-    brandTab:createLabel(vasplit2:partition(0).lower + vec2(10, 0), "NAME"%_t, 15)
-    brandTab:createLabel(vasplit2:partition(2).lower + vec2(10, 0), "PRICE/U"%_t, 15)
-    brandTab:createLabel(vasplit2:partition(3).lower + vec2(10, 0), "YOU"%_t, 15)
+    brandTab:createLabel(vasplit2.partitions[1].lower + vec2(10, 0), "NAME"%_t, 15)
+    brandTab:createLabel(vasplit2.partitions[3].lower + vec2(10, 0), "PRICE/U"%_t, 15)
+    brandTab:createLabel(vasplit2.partitions[4].lower + vec2(10, 0), "YOU"%_t, 15)
 
     -- buttons and labels for page turning
     brandTab:createButton(Rect(0, size.y - 100, 70, size.y - 70), "<", "onPageLeftButtonPressed")
@@ -183,19 +183,19 @@ function SmugglersMarket.initUI()
         local line = {}
         local rect = lister:placeCenter(vec2(lister.inner.width, 30))
 
-        local vasplit1 = UIArbitraryVerticalSplitter(rect, 10, 0, split1, split2)
-        line.frame = brandTab:createFrame(vasplit1:partition(0))
+        local vasplit1 = CosmicUIVerticalProportionalSplitter(rect, 10, 0, {0.8, 0.1, 0.1})
+        line.frame = brandTab:createFrame(vasplit1.partitions[1])
 
-        line.numbers = brandTab:createTextBox(vasplit1:partition(1), "onUnbrandTextEntered")
-        line.button = brandTab:createButton(vasplit1:partition(2), "Unbrand"%_t, "onUnbrandClicked")
+        line.numbers = brandTab:createTextBox(vasplit1.partitions[2], "onUnbrandTextEntered")
+        line.button = brandTab:createButton(vasplit1.partitions[3], "Unbrand"%_t, "onUnbrandClicked")
         line.button.maxTextSize = 16
 
-        local vasplit2 = UIArbitraryVerticalSplitter(vasplit1:partition(0), 10, 0, 350, 390, 530)
+        local vasplit2 = CosmicUIVerticalProportionalSplitter(vasplit1.partitions[1], 10, 0, {0.55, 0.06, 0.22, 0.17})
 
-        line.name = brandTab:createLabel(vasplit2:partition(0).lower + vec2(10, 6), "Name"%_t, 15)
-        line.icon = brandTab:createPicture(vasplit2:partition(1), "")
-        line.price = brandTab:createLabel(vasplit2:partition(2).lower + vec2(10, 6), "560.501", 15)
-        line.you = brandTab:createLabel(vasplit2:partition(3).lower + vec2(10, 6), "750", 15)
+        line.name = brandTab:createLabel(vasplit2.partitions[1].lower + vec2(10, 6), "Name"%_t, 15)
+        line.icon = brandTab:createPicture(vasplit2.partitions[2], "")
+        line.price = brandTab:createLabel(vasplit2.partitions[3].lower + vec2(10, 6), "560.501", 15)
+        line.you = brandTab:createLabel(vasplit2.partitions[4].lower + vec2(10, 6), "750", 15)
 
         line.icon.isIcon = 1
         line.numbers.clearOnClick = 1

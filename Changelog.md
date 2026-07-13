@@ -11,6 +11,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### ✨ New Features & 📦 Content Additions
 
+- [Content] **Ascendant Neural Implants:** You can now equip the legendary Ascendant Neural Implant subsystem, which physically transforms your ship into a biomechanical dreadnought (scaling massive stats like jump reach, fighters, and turrets while injecting extreme velocity).
+- [Feature] **CCM Keybind API:** The Bulletin Board and Resource Display panels have been fully hooked into the CCM Keybind API. Players can now assign custom hotkeys to instantly toggle these UI panels without clicking through station menus!
 - [Feature] **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now natively tie into the `CosmicVaultEconomy` API, which can physically force starving factions to declare war on wealthy neighbors to survive!
 - [Feature] **Weather-Affected Map Commands:** Offline Travel and Scout commands now ping `cv_weather`. Navigating hazardous weather (Ion Storms, Nebulas) delays offline map operations by 50% unless piloted by an Explorer or Navigator.
 - [Feature] **Siege Blockade Halts:** Factories dynamically poll `cv_scaling`. If the sector is a War Zone and the defenders are outgunned 2:1, all factory production halts entirely until the siege is lifted.
