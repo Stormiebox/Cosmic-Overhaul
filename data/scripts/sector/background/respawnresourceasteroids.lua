@@ -462,19 +462,4 @@ end
 
 end -- if onServer()
 
-
-function initialize(...)
-    if RespawnResourceAsteroids.initialize then return RespawnResourceAsteroids.initialize(...) end
-end
-function getUpdateInterval(...)
-    if RespawnResourceAsteroids.getUpdateInterval then return RespawnResourceAsteroids.getUpdateInterval(...) end
-end
-function updateServer(...)
-    if RespawnResourceAsteroids.updateServer then return RespawnResourceAsteroids.updateServer(...) end
-end
-
-
--- Global Event Callbacks
-function onEntityDestroyed(...)
-    if RespawnResourceAsteroids.onEntityDestroyed then return RespawnResourceAsteroids.onEntityDestroyed(...) end
-end
+

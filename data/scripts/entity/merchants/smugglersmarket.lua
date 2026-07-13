@@ -769,19 +769,4 @@ end
 
 
 
-
-function initialize(...)
-    if SmugglersMarket.initialize then return SmugglersMarket.initialize(...) end
-end
-function getUpdateInterval(...)
-    if SmugglersMarket.getUpdateInterval then return SmugglersMarket.getUpdateInterval(...) end
-end
-function updateServer(...)
-    if SmugglersMarket.updateServer then return SmugglersMarket.updateServer(...) end
-end
-function secure(...)
-    if SmugglersMarket.secure then return SmugglersMarket.secure(...) end
-end
-function restore(...)
-    if SmugglersMarket.restore then return SmugglersMarket.restore(...) end
-end
+
