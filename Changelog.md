@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.1]
+### 🐛 Bug Fixes & 🛠️ Optimization
+- [Bugfixed] **Instance Crash:** Fixed a critical bug causing single-player instances and dedicated servers to crash via `EXCEPTION_ACCESS_VIOLATION`. The `CosmicVaultTask.RunAsync` API was improperly used inside `DynamicReputationDecay.lua` without a pumping mechanism. Because the coroutines were never pumped via `Update()`, they were left dangling as memory leaks holding C++ userdata (such as the Galaxy object). When the Engine's Garbage Collector eventually collected the player VM, the dangling threads triggered a fatal memory boundary violation. The script has been rewritten to execute synchronously.
+
 ## [v5.0.0]
 
 ### ✨ New Features & 📦 Content Additions
@@ -55,7 +59,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Bugfixed] **Engine Crash Fixes:** Fixed multiple API Avorion Indexes across various scripts that could cause C++ attempt to index or call engine crashes (e.g. corrected stat modifiers, entity bias functions, invalid faction setters, removed native calls to non-existent functions, and corrected C++ matching distance checks).
 - [Bugfixed] **Multiplayer Desyncs:** Replaced `math.random` with the deterministic engine `random():getInt()` across all custom scripts (including `respawnresourceasteroids.lua` and `asteroidfieldgenerator.lua`) to prevent massive physics and stats desyncs in multiplayer.
 - [Bugfixed] **RNG Calculation Math Bug:** Swept the codebase and replaced critical logic faults in Station Governors and AI Traders where probability checks were evaluating against `getInt()` instead of `getFloat()`, restoring exact percentage math for random economic events.
-- [Bugfixed] **VM Isolation Reputation Bug:** Completely refactored the Dynamic Reputation Decay system. The reputation hard-cap hooks were previously running in an isolated player VM (dead code) and have now been properly extracted into a global `relations.lua` override. Stray markdown syntax errors in the decay loop were also eradicated.
+- [Bugfixed] **VM Isolation Reputation Bug:** Completely refactored the Dynamic Reputation Decay system. The reputation hard-cap hooks were previously running in an isolated player VM (dead code) and have now been properly extracted into a global `relations.lua` override.
 - [Bugfixed] **Map UI & Trading Manager Spam:** Eliminated the `Activity level is zero or negative` console spam which flooded server logs. Removed broken `SupplyLine` and Goods order command hooks from `mapcommands.lua` that caused empty Galaxy Map UI crashes, and resolved a severe issue where missing `LuaHacks` dependencies aborted map initialization.
 - [Bugfixed] **Memory Leaks & UI Crashes:** Sealed memory leaks by injecting `onRemove()` functions into UI scripts like Bulletin Board and Resource Display. Reinstated `self.currencyLabel` in `shop.lua` to prevent merchant crashes.
 - [Bugfixed] **Script Execution Faults:** Fixed `playerstationtrader.lua` missing a `return` statement after `deleteEntityJumped` and `playerstationutils.lua` generating out-of-bounds indices in `tableRandom` due to improper bounds scaling.

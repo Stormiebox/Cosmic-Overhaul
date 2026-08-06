@@ -25,14 +25,8 @@ function DynamicReputationDecay.getUpdateInterval()
 end
 
 local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, galaxy)
-    local cv_task = include("cosmicvaulttask")
-    local iters = 0
     for idStr in string.gmatch(factionStr, "([^,]+)") do
-        iters = iters + 1
-        if cv_task and cv_task.Yield and (iters % 10 == 0) then
-            cv_task.Yield()
-        end
-        
+
         local entity = isAlliance and Alliance(entityIndex) or Player(entityIndex)
         if not entity then return end
 
@@ -57,12 +51,13 @@ local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, g
 
                 -- Cosmic Overhaul: Decay towards Neutral (0)
                 -- Hostile factions slowly forgive, Allied factions slowly forget
+                local cvf = include("cosmicvaultfaction")
                 if currentRel > 0 then
                     local actualDecay = math.min(tickDecay, currentRel)
-                    galaxy:changeFactionRelations(entity.index, aiFactionIndex, -actualDecay, false, false)
+                    cvf.changeRelations(entity.index, aiFactionIndex, -actualDecay)
                 elseif currentRel < 0 then
                     local actualDecay = math.min(tickDecay, math.abs(currentRel))
-                    galaxy:changeFactionRelations(entity.index, aiFactionIndex, actualDecay, false, false)
+                    cvf.changeRelations(entity.index, aiFactionIndex, actualDecay)
                 end
             end
         end
@@ -82,26 +77,12 @@ function DynamicReputationDecay.updateServer(timeStep)
     local factionStr = Server():getValue("factions")
     if type(factionStr) ~= "string" or factionStr == "" then return end
 
-    local cv_task = include("cosmicvaulttask")
-    if cv_task and cv_task.RunAsync then
-        local taskName = "Decay_" .. player.index
-        cv_task.RunAsync(taskName, function()
-            -- Process Player
-            processDecayForEntity(player.index, false, factionStr, now, galaxy)
+    -- Process Player
+    processDecayForEntity(player.index, false, factionStr, now, galaxy)
 
-            -- Process Alliance
-            if player.allianceIndex then
-                processDecayForEntity(player.allianceIndex, true, factionStr, now, galaxy)
-            end
-        end)
-    else
-        -- Process Player
-        processDecayForEntity(player.index, false, factionStr, now, galaxy)
-
-        -- Process Alliance
-        if player.allianceIndex then
-            processDecayForEntity(player.allianceIndex, true, factionStr, now, galaxy)
-        end
+    -- Process Alliance
+    if player.allianceIndex then
+        processDecayForEntity(player.allianceIndex, true, factionStr, now, galaxy)
     end
 end
 
