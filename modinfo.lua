@@ -73,8 +73,11 @@ meta =
         { id = "3717680082", incompatible = true },
         { id = "3737337587", incompatible = true },
         { id = "3684665566", incompatible = true },
-        { id = "3727542782", min = "1.0" },
-        { id = "Avorion",    min = "1.0",        max = "5.0" }
+        { id = "3674627736", incompatible = true },
+        { id = "3727542782", min = "1.0",        max = "*.*" }, -- Cosmic Vault
+        { id = "3732507615", min = "1.0",        max = "*.*" }, -- Cosmic Chronicles
+        { id = "3727544356", min = "1.0",        max = "*.*" }, -- Cosmic War
+        { id = "Avorion",    min = "1.0",        max = "*.*" }
     },
 
     -- Set to true if the mod only has to run on the server. Clients will get notified that the mod is running on the server, but they won't download it to themselves

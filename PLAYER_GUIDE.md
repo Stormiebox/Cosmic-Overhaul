@@ -10,7 +10,7 @@ This guide will walk you through the core features of the mod so you know exactl
 
 ## 1. Managing Your Empire
 
-As your fleet grows, keeping track of everything becomes difficult. We've added several new UI panels to help you command your empire from anywhere.
+As your fleet grows, keeping track of everything becomes difficult. Added several new UI panels to help you command your empire from anywhere.
 
 * **The Command Center:** Open your Player Window (default `P`) and look for the new **Command Center** tab. This screen tracks every active ship in your fleet in real-time. You can see what operation they are running, where they are, their ETA, and even remotely recall them without having to open the Galaxy Map!
 * **Fleet Ship Status UI:** Monitor your entire fleet's health, shield, and operational status from a single, clean window without having to dig through nested menus.
@@ -114,11 +114,11 @@ Enjoy your time in the Cosmic Overhaul!
 All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
 
 ### 🔒 Network Safety & Anti-Cheat
-- **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
+- **Math.Random Fix:** Systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
 - **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
 
 ### 🛠️ Vanilla Bug Fixes
-- **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
+- **Scout Mission Fix:** Patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
 </details>
 
 

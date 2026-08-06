@@ -7,7 +7,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## [v5.0.0] UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
+## [v5.0.0]
 
 ### ✨ New Features & 📦 Content Additions
 

@@ -540,9 +540,6 @@ Stations located in active Cosmic War zones will instantly suspend all backgroun
 - Locks down the local economy natively through `factory.lua` injection to prevent exploitation during active sieges.
 - Forces players to secure the sector or travel elsewhere for commerce.
 
-</details>
-<summary><b>Click to expand details</b></summary>
-
 **What it does:**
 Extensively upgrades trade command behavior and outcomes.
 
