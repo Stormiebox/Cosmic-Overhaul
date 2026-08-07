@@ -1,4 +1,5 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
+include ("randomext")
 include("utility")
 local CaptainClass = include("captainclass")
 local CosmicVaultBuffs = nil
@@ -15,7 +16,6 @@ function updateServer(timeStep)
     local entity = Entity()
     if not entity or not entity.isStation then return end
 
-    if not entity.hasCaptain then return end
     local captain = entity:getCaptain()
     if not captain then return end
 
