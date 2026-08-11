@@ -1620,12 +1620,12 @@ function TransferCrewGoods.transferFighter(sender, squad, index, receiver, recei
     local receivingEntity = Entity(receiver)
     if not TransferCrewGoods.checkPermissionsAndDistance(player, senderEntity, receivingEntity) then return end
 
-    local senderHangar = senderEntity.hangar
+    local senderHangar = Hangar(sender)
     if not senderHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
     end
-    local receiverHangar = receivingEntity.hangar
+    local receiverHangar = Hangar(receiver)
     if not receiverHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
@@ -1703,8 +1703,8 @@ function TransferCrewGoods.transferSquad(sourceId, targetId, squadIndex)
 
     local sourceEntity = Entity(sourceId)
     local targetEntity = Entity(targetId)
-    local senderHangar = sourceEntity.hangar
-    local receiverHangar = targetEntity.hangar
+    local senderHangar = Hangar(sourceId)
+    local receiverHangar = Hangar(targetId)
     if not valid(senderHangar) or not valid(receiverHangar) then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
@@ -1791,8 +1791,8 @@ function TransferCrewGoods.transferAllFighters(sender, receiver)
 
     local senderEntity = Entity(sender)
     local receivingEntity = Entity(receiver)
-    local senderHangar = senderEntity.hangar
-    local receiverHangar = receivingEntity.hangar
+    local senderHangar = Hangar(sender)
+    local receiverHangar = Hangar(receiver)
     if not receiverHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
@@ -2171,7 +2171,7 @@ function TransferCrewGoods.renderUI()
 
         if not entity then return end
 
-        local hangar = Entity(entity).hangar
+        local hangar = Hangar(entity)
         if not hangar then return end
 
         local fighter = hangar:getFighter(squadIndexBySelection[activeSelection.index], key.x)

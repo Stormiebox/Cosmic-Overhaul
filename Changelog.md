@@ -7,7 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## [v5.0.1]
+## [v5.0.3]
+## 🐛 Bug Fix Patch Update
+- [Bugfixed] **Transfer Crew & Goods:** Fixed a critical bug in `transfercrewgoods.lua` where the `Entity().hangar` property was incorrectly referenced instead of the proper `Hangar(entity)` component API. This resolved an issue that completely blocked all fighter transfers between ships and stations by falsely claiming a hangar was missing.
+
+## [v5.0.1 & v5.0.2]
 ### 🐛 Bug Fixes & 🛠️ Optimization
 - [Bugfixed] **Instance Crash:** Fixed a critical bug causing single-player instances and dedicated servers to crash via `EXCEPTION_ACCESS_VIOLATION`. The `CosmicVaultTask.RunAsync` API was improperly used inside `DynamicReputationDecay.lua` without a pumping mechanism. Because the coroutines were never pumped via `Update()`, they were left dangling as memory leaks holding C++ userdata (such as the Galaxy object). When the Engine's Garbage Collector eventually collected the player VM, the dangling threads triggered a fatal memory boundary violation. The script has been rewritten to execute synchronously.
 
