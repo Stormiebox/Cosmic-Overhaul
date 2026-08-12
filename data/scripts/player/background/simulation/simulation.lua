@@ -37,7 +37,7 @@ Balancing:
     local ARCC_Simulation_secure_original = Simulation.secure
     function Simulation.secure()
         if Simulation.commands and #Simulation.commands > 0 then
-            local secureTime = Server().unpausedRuntime-1
+            local secureTime = os.time()
             include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
                 timestamp = tostring(secureTime),
             })
@@ -138,7 +138,7 @@ Balancing:
     end
 
     function ARCC_getTimeToApply(rawTimeToDeduct)
-        local restoreTime = Server().unpausedRuntime
+        local restoreTime = os.time()
 
         -- Assumption: all commands were secured at about the same time
         local secureTime = restoreTime
@@ -147,6 +147,10 @@ Balancing:
                 secureTime = math.min(secureTime, command.data.lastSecuredClockTime)
                 command.data.lastSecuredClockTime = nil
             end
+        end
+        
+        if secureTime < 1000000000 then
+            secureTime = restoreTime -- Ignore legacy unpausedRuntime timestamps to prevent massive catchup on first load
         end
 
         include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Restoring commands from a timestamp of: ${timestamp}"%{

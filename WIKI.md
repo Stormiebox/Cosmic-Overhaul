@@ -943,14 +943,14 @@ When an AI faction reaches 'Severe Famine', all newly spawned ships will inheren
 - **Scout Anomalies:** Explorer captains actively leave cryptic notes on empty sectors on your galactic map, hinting at where you can find `Cosmic Chronicles` narrative events.
 - **Deep Economy Warfare:** Famines and Booms generated in Overhaul sync directly to the `CosmicVaultEconomy` API, which forces starving factions to go to war to survive.
 - **Unified News System:** All events broadcast flawlessly through the `CosmicVaultNews` API, guaranteeing your Universal Bulletin Board is always up to date.
-- **Famine Relief Charity:** Background Charity Missions sent to starving factions natively grant a +50% Reputation multiplier.
-- **Ascendancy Trade Fear:** Merchant trade flights take 20% longer if the target faction is at war with The Eclipse. Smugglers natively bypass this hazard penalty.
+- **Famine Relief Charity:** Background Charity Missions sent to starving factions natively grant a +75% Reputation multiplier.
+- **Ascendancy Trade Fear:** Merchant trade flights take 35% longer if the target faction is at war with The Eclipse. Smugglers natively bypass this hazard penalty.
 - **Entrenched Diplomatic Suicide:** The Alliance reputation mirroring penalty is multiplied by 1.5x if a player commits a hostile act against a faction possessing the `Fortified` trait.
-- **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone receive a +20% Salvage Yield buff while cleaning up dreadnought wreckages.
+- **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone receive a +50% Salvage Yield buff while cleaning up dreadnought wreckages.
 - **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score, stabilizing the economy through the black market.
 
 ## Synergy Update
-- **Eclipse Contraband Premium**: The Smuggler's Market pays a 1.5x premium for "Eclipse Tech".
+- **Eclipse Contraband Premium**: The Smuggler's Market pays a 2.0x premium for "Eclipse Tech".
 - **Blockade Runner Governors**: Smuggler Governors completely bypass factory blockades during active Cosmic War sieges, allowing wartime profiteering.
 - **Privateer Subsidies**: Merchant Governors reduce all crew and captain hiring costs by 50% if the player is actively enlisted as a Mercenary for the station's faction.
 - **Ascendant Neural Implants:** You can now equip the legendary Ascendant Neural Implant subsystem natively, converting your ship into a biomechanical monstrosity.

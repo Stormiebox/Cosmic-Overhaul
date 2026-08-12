@@ -7,6 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.5]
+### 🐛 Bug Fixes & ⚖️ Balance Tweaks
+- [Bugfixed] **Offline Simulation (ARCC):** Fixed a critical logic error in `simulation.lua` where the script fetched `Server().unpausedRuntime` instead of the system's real-world clock (`os.time()`). Because `unpausedRuntime` freezes while the server is offline or the game is closed, returning players were incorrectly awarded exactly 0 seconds of background catch-up time regardless of how long they were away. This has been fully corrected.
+- [Balanced] **Scavenger Yield Buff (Cosmic War):** Increased the Salvage Yield multiplier from `1.20` (+20%) to `1.50` (+50%) when a Scavenger captain is operating inside an active Contested Siege Zone. Risking a captain inside a War Zone is now much more lucrative.
+- [Balanced] **Ascendancy Trade Fear (Cosmic Ascendancy):** Increased the flight time penalty for non-smuggler merchants trading near factions actively at war with The Eclipse from `20%` delay to `35%` delay.
+- [Balanced] **Charity Reputation Bonus (Cosmic Vault):** Buffed the diplomatic multiplier for Charity Missions sent to starving factions from `+50%` to `+75%`. Sending aid during an economic crisis is now incredibly rewarding.
+- [Balanced] **Eclipse Contraband Premium (Cosmic Chronicles):** Buffed the Smuggler's Market fence multiplier for `Ascendant Matter` and `Eclipse Datacore` from `+50%` to `+100%` payout.
+
 ## [v5.0.4]
 ### 🐛 Bug Fixes & ⚖️ Balance Tweaks
 - [Bugfixed] **Transfer Crew & Goods:** Addressed a lingering edge case in the `v5.0.3` Hangar fix. The server was attempting to resolve the `Hangar` component directly from network-transmitted UUIDs, which could silently fail during transfers between complex entity states (e.g., Alliance ships) and falsely report a "Missing hangar." The engine now securely resolves the component strictly via the verified Entity object instance.

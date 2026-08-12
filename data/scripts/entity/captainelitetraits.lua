@@ -69,7 +69,7 @@ function updateServer(timeStep)
         entity:setValue("elite_miner_yield", nil)
     end
 
-    -- 4. Scavenger Elite Trait: +20% Yield in Siege Zones
+    -- 4. Scavenger Elite Trait: +50% Yield in Siege Zones
     if hasEliteTrait(entity, CaptainClass.Scavenger) then
         if CosmicVaultBuffs then
             local cv_territory = include("cosmicvaultterritory")
@@ -78,7 +78,7 @@ function updateServer(timeStep)
                 local key = x .. "_" .. y
                 local zones = cv_territory.getContestedZones()
                 if zones and zones[key] then
-                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 1.20, 6.0)
+                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 1.50, 6.0)
                 end
             end
         end
