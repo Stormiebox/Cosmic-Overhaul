@@ -398,12 +398,20 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
     if cv_economy and area.analysis.biggestFactionInArea then
         local famineLevel = cv_economy.getFamineLevel(area.analysis.biggestFactionInArea)
         if famineLevel and famineLevel ~= "Stable" then
-            local multiplier = 2.5
+            local multiplier = 1.0
+            if famineLevel == "Severe Famine" then
+                multiplier = 2.5
+            elseif famineLevel == "Resource Starved" then
+                multiplier = 1.75
+            elseif famineLevel == "Struggling" then
+                multiplier = 1.25
+            end
+            
             local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
             if ship then
                 local captain = ship:getCaptain()
                 if captain and captain:hasClass(CaptainClass.Smuggler) then
-                    multiplier = 1.25 -- Smugglers safely bypass blockades, reducing their hazard pay
+                    multiplier = math.max(1.0, multiplier - 0.5) -- Smugglers safely bypass blockades, reducing their hazard pay but scaling with severity
                 end
             end
             

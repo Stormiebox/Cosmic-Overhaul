@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.4]
+### 🐛 Bug Fixes & ⚖️ Balance Tweaks
+- [Bugfixed] **Transfer Crew & Goods:** Addressed a lingering edge case in the `v5.0.3` Hangar fix. The server was attempting to resolve the `Hangar` component directly from network-transmitted UUIDs, which could silently fail during transfers between complex entity states (e.g., Alliance ships) and falsely report a "Missing hangar." The engine now securely resolves the component strictly via the verified Entity object instance.
+- [Balanced] **Famine Economic Multipliers:** Softened the blunt +250% trade bonus applied to all starving factions. It now appropriately scales up based on severity (Struggling: +125%, Resource Starved: +175%, Severe Famine: +250%). Smuggler blockade bypasses natively halve these bonuses.
+- [Balanced] **Famine Entity Debuffs:** Toned down the extreme stat penalties applied to factions experiencing Severe Famines (Shields: -50%, Velocity: -30%) and Resource Starved (Shields: -30%, Velocity: -20%) to keep AI fleets somewhat competitive when reacting to Cosmic War siege events.
+- [Balanced] **Rift Tech Fencing:** Lowered the profit ceiling for fencing stolen Rift Technology at the Smuggler's Market to a random scale of `1.5x - 2.5x` to prevent hyper-inflation of the late-game economy when combined with Smuggler trait bonuses.
+
 ## [v5.0.3]
 ## 🐛 Bug Fix Patch Update
 - [Bugfixed] **Transfer Crew & Goods:** Fixed a critical bug in `transfercrewgoods.lua` where the `Entity().hangar` property was incorrectly referenced instead of the proper `Hangar(entity)` component API. This resolved an issue that completely blocked all fighter transfers between ships and stations by falsely claiming a hangar was missing.

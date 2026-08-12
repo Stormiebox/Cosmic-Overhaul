@@ -16,13 +16,13 @@ function applyDebuffs()
     entity:removeScriptBonuses()
     
     if co_famine_level == "Severe Famine" then
-        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.6) -- 60% weaker shields
-        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.4) -- 40% slower
-    elseif co_famine_level == "Resource Starved" then
         entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.5) -- 50% weaker shields
-        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.25) -- 25% slower
+        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.3) -- 30% slower
+    elseif co_famine_level == "Resource Starved" then
+        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.3) -- 30% weaker shields
+        entity:addBaseMultiplier(StatsBonuses.Velocity, -0.2) -- 20% slower
     elseif co_famine_level == "Struggling" then
-        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.2) -- 20% weaker shields
+        entity:addBaseMultiplier(StatsBonuses.ShieldDurability, -0.15) -- 15% weaker shields
     end
 end
 

@@ -1620,12 +1620,12 @@ function TransferCrewGoods.transferFighter(sender, squad, index, receiver, recei
     local receivingEntity = Entity(receiver)
     if not TransferCrewGoods.checkPermissionsAndDistance(player, senderEntity, receivingEntity) then return end
 
-    local senderHangar = Hangar(sender)
+    local senderHangar = Hangar(senderEntity)
     if not senderHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
     end
-    local receiverHangar = Hangar(receiver)
+    local receiverHangar = Hangar(receivingEntity)
     if not receiverHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
@@ -1699,12 +1699,12 @@ function TransferCrewGoods.transferSquad(sourceId, targetId, squadIndex)
     local player = Player(callingPlayer)
     if not player then return end
 
-    if not TransferCrewGoods.checkPermissionsAndDistance(player, sourceId, targetId) then return end
+    local senderEntity = Entity(sourceId)
+    local receivingEntity = Entity(targetId)
+    if not TransferCrewGoods.checkPermissionsAndDistance(player, senderEntity, receivingEntity) then return end
 
-    local sourceEntity = Entity(sourceId)
-    local targetEntity = Entity(targetId)
-    local senderHangar = Hangar(sourceId)
-    local receiverHangar = Hangar(targetId)
+    local senderHangar = Hangar(senderEntity)
+    local receiverHangar = Hangar(receivingEntity)
     if not valid(senderHangar) or not valid(receiverHangar) then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return
@@ -1789,10 +1789,12 @@ function TransferCrewGoods.transferAllFighters(sender, receiver)
     local receivingEntity = Entity(receiver)
     if not TransferCrewGoods.checkPermissionsAndDistance(player, senderEntity, receivingEntity) then return end
 
-    local senderEntity = Entity(sender)
-    local receivingEntity = Entity(receiver)
-    local senderHangar = Hangar(sender)
-    local receiverHangar = Hangar(receiver)
+    local senderHangar = Hangar(senderEntity)
+    if not senderHangar then
+        player:sendChatMessage("", 1, "Missing hangar."%_t)
+        return
+    end
+    local receiverHangar = Hangar(receivingEntity)
     if not receiverHangar then
         player:sendChatMessage("", 1, "Missing hangar."%_t)
         return

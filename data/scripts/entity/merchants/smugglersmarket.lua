@@ -761,7 +761,7 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
 
     -- Cosmic Chronicles - Black Market Rift Trade
     if goodName == "Rift Research Data" or goodName == "Subclass Subsystem" then
-        multiplier = multiplier * random():getFloat(2.0, 3.0)
+        multiplier = multiplier * random():getFloat(1.5, 2.5)
     end
 
     return round(good.price * multiplier)

@@ -927,7 +927,7 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 The Trading Manager logic has been streamlined to gracefully skip dead simulation ticks without flooding server console logs.
 
 ## Famine Penalties
-When an AI faction reaches 'Severe Famine', all newly spawned ships will inherently have 60% weaker shields and move 40% slower.
+When an AI faction reaches 'Severe Famine', all newly spawned ships will inherently have 50% weaker shields and move 30% slower.
 
 ---
 
@@ -958,5 +958,5 @@ When an AI faction reaches 'Severe Famine', all newly spawned ships will inheren
 
 
 ## [New] Rift DLC Interoperability
-- **Fencing Rift Tech:** The Smuggler's Market now eagerly accepts classified `Rift Research Data` and `Subclass Subsystems` for a massive 200%-300% markup.
+- **Fencing Rift Tech:** The Smuggler's Market now eagerly accepts classified `Rift Research Data` and `Subclass Subsystems` for a massive 150%-250% markup.
 - **Reputation Consequences:** Fencing this highly sensitive technology will result in temporary reputation loss with the local faction, as they detect the illegal distribution of subspace secrets.
