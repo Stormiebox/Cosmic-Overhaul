@@ -47,17 +47,22 @@ local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, g
 
                 -- Calculate actual decay for this specific tick interval (e.g. 60 seconds)
                 local tickDecay = hourlyDecayAmount*(DecayConfig.updateIntervalSec/3600)
-                local currentRel = galaxy:getFactionRelations(entity.index, aiFactionIndex)
+                local f1 = Faction(entity.index)
+                local f2 = Faction(aiFactionIndex)
+                
+                if f1 and f2 then
+                    local currentRel = galaxy:getFactionRelations(f1, f2)
 
-                -- Cosmic Overhaul: Decay towards Neutral (0)
-                -- Hostile factions slowly forgive, Allied factions slowly forget
-                local cvf = include("cosmicvaultfaction")
-                if currentRel > 0 then
-                    local actualDecay = math.min(tickDecay, currentRel)
-                    cvf.changeRelations(entity.index, aiFactionIndex, -actualDecay)
-                elseif currentRel < 0 then
-                    local actualDecay = math.min(tickDecay, math.abs(currentRel))
-                    cvf.changeRelations(entity.index, aiFactionIndex, actualDecay)
+                    -- Cosmic Overhaul: Decay towards Neutral (0)
+                    -- Hostile factions slowly forgive, Allied factions slowly forget
+                    local cvf = include("cosmicvaultfaction")
+                    if currentRel > 0 then
+                        local actualDecay = math.min(tickDecay, currentRel)
+                        cvf.changeRelations(entity.index, aiFactionIndex, -actualDecay)
+                    elseif currentRel < 0 then
+                        local actualDecay = math.min(tickDecay, math.abs(currentRel))
+                        cvf.changeRelations(entity.index, aiFactionIndex, actualDecay)
+                    end
                 end
             end
         end

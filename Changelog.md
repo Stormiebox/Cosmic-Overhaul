@@ -7,13 +7,24 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## [v5.0.6]
+## [v5.0.7] - Hotfix
+
 ### 🐛 Bug Fixes
+
+- [Bugfix] **Dynamic Reputation Decay Error:** Fixed a severe server log spam issue originating from `DynamicReputationDecay.lua`. The script was incorrectly passing integer indices directly into the `getFactionRelations` native API, causing recurring `invalid type 'number'` errors. Indices are now properly wrapped in `Faction()` objects.
+- [Bugfix] **Weather Generator Loading:** Fixed a silent script attachment failure in `server.lua`. `co_weather_generator.lua` was missing the mandatory `data/scripts/` root path prefix, preventing the engine from properly loading the global weather script on server start.
+
+## [v5.0.6]
+
+### 🐛 Bug Fixes
+
 - [Bugfixed] **Offline Simulation (ARCC):** Resolved an issue where checking the `Enable Offline Catch-up` option in the CCM window and relaunching the game would result in the option visually or functionally reverting to disabled. The background simulation script now evaluates the configuration dynamically at runtime when parsing the first update tick, rather than caching the default values prematurely during initial script load before the Cosmic Configuration Menu completes parsing `ccm.lua`.
 - [Bugfixed] **Traders (AI Bloat & Desync):** Fixed a severe optimization bug originating from the `ft_gateTradeMult` trader influx logic within `factory.lua`. If a player sat in an accelerated sector (e.g., heavily populated with Gates/Wormholes) for an extremely extended period (8+ hours), the factory spawned traders faster than the vanilla Avorion docking AI could process them. Overwhelmed docking queues caused AI tradeship scripts to timeout or detach, leaving hundreds of permanent, unscripted ghost ships drifting thousands of kilometers away and tricking the factory into continuously spawning more. A strict sector-wide safety cap on active AI traders has been introduced to prevent runaway inflation while preserving trade volume.
 
 ## [v5.0.5]
+
 ### 🐛 Bug Fixes & ⚖️ Balance Tweaks
+
 - [Bugfixed] **Offline Simulation (ARCC):** Fixed a critical logic error in `simulation.lua` where the script fetched `Server().unpausedRuntime` instead of the system's real-world clock (`os.time()`). Because `unpausedRuntime` freezes while the server is offline or the game is closed, returning players were incorrectly awarded exactly 0 seconds of background catch-up time regardless of how long they were away. This has been fully corrected.
 - [Balanced] **Scavenger Yield Buff (Cosmic War):** Increased the Salvage Yield multiplier from `1.20` (+20%) to `1.50` (+50%) when a Scavenger captain is operating inside an active Contested Siege Zone. Risking a captain inside a War Zone is now much more lucrative.
 - [Balanced] **Ascendancy Trade Fear (Cosmic Ascendancy):** Increased the flight time penalty for non-smuggler merchants trading near factions actively at war with The Eclipse from `20%` delay to `35%` delay.
@@ -21,18 +32,24 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Balanced] **Eclipse Contraband Premium (Cosmic Chronicles):** Buffed the Smuggler's Market fence multiplier for `Ascendant Matter` and `Eclipse Datacore` from `+50%` to `+100%` payout.
 
 ## [v5.0.4]
+
 ### 🐛 Bug Fixes & ⚖️ Balance Tweaks
+
 - [Bugfixed] **Transfer Crew & Goods:** Addressed a lingering edge case in the `v5.0.3` Hangar fix. The server was attempting to resolve the `Hangar` component directly from network-transmitted UUIDs, which could silently fail during transfers between complex entity states (e.g., Alliance ships) and falsely report a "Missing hangar." The engine now securely resolves the component strictly via the verified Entity object instance.
 - [Balanced] **Famine Economic Multipliers:** Softened the blunt +250% trade bonus applied to all starving factions. It now appropriately scales up based on severity (Struggling: +125%, Resource Starved: +175%, Severe Famine: +250%). Smuggler blockade bypasses natively halve these bonuses.
 - [Balanced] **Famine Entity Debuffs:** Toned down the extreme stat penalties applied to factions experiencing Severe Famines (Shields: -50%, Velocity: -30%) and Resource Starved (Shields: -30%, Velocity: -20%) to keep AI fleets somewhat competitive when reacting to Cosmic War siege events.
 - [Balanced] **Rift Tech Fencing:** Lowered the profit ceiling for fencing stolen Rift Technology at the Smuggler's Market to a random scale of `1.5x - 2.5x` to prevent hyper-inflation of the late-game economy when combined with Smuggler trait bonuses.
 
 ## [v5.0.3]
+
 ## 🐛 Bug Fix Patch Update
+
 - [Bugfixed] **Transfer Crew & Goods:** Fixed a critical bug in `transfercrewgoods.lua` where the `Entity().hangar` property was incorrectly referenced instead of the proper `Hangar(entity)` component API. This resolved an issue that completely blocked all fighter transfers between ships and stations by falsely claiming a hangar was missing.
 
 ## [v5.0.1 & v5.0.2]
+
 ### 🐛 Bug Fixes & 🛠️ Optimization
+
 - [Bugfixed] **Instance Crash:** Fixed a critical bug causing single-player instances and dedicated servers to crash via `EXCEPTION_ACCESS_VIOLATION`. The `CosmicVaultTask.RunAsync` API was improperly used inside `DynamicReputationDecay.lua` without a pumping mechanism. Because the coroutines were never pumped via `Update()`, they were left dangling as memory leaks holding C++ userdata (such as the Galaxy object). When the Engine's Garbage Collector eventually collected the player VM, the dangling threads triggered a fatal memory boundary violation. The script has been rewritten to execute synchronously.
 
 ## [v5.0.0]
