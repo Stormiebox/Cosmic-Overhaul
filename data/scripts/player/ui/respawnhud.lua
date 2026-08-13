@@ -174,7 +174,7 @@ end
 function RespawnHud.updateClient(timeStep)
     if not ui.container then return end
 
-    -- Check MCM visibility toggle
+    -- Check CCM visibility toggle
     if CosmicOverhaulConfig.get().showHud == false then
         if ui.visible then
             ui.container.visible = false

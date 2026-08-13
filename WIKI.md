@@ -751,7 +751,7 @@ The ARCC system calculates elapsed real-world time while the server was empty/of
 Because instantly processing hours of offline progression simultaneously can hang or crash small/private servers on boot (and rewards players for time the server was turned off), **offline simulation is disabled by default.**
 
 **Gameplay Impact:**
-- For 24/7 Dedicated Server admins: You can enable and strictly cap offline simulation parameters using the Mod Configuration Menu (MCM) to guarantee strategic continuity for your playerbase.
+- For 24/7 Dedicated Server admins: You can enable and strictly cap offline simulation parameters using the Cosmic Configuration Menu (CCM) to guarantee strategic continuity for your playerbase.
 - For Solo/Private Servers: Booting your server is fast, safe, and free from offline "free resource" exploits.
 
 </details>

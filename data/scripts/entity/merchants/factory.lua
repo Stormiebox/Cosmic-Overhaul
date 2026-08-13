@@ -641,6 +641,13 @@ function Factory.requestTraders(timestep)
         return
     end
 
+    -- Cosmic Overhaul Quality Check: Prevent massive trader bloat on long background sessions
+    local traders = {sector:getEntitiesByScript("merchants/tradeship.lua")}
+    if #traders > 15 then
+        Factory.traderRequestCooldown = Factory.traderRequestCooldown + timestep
+        return
+    end
+
     local count = 0
     local gates = {sector:getEntitiesByComponent(ComponentType.WormHole)}
     for _, gate in pairs(gates) do count = count + 1 end

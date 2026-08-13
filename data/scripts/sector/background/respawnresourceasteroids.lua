@@ -17,13 +17,13 @@ local KEY_RESOURCE_BASELINE = "outlands_rr_res_baseline"
 local KEY_LAST_RESPAWN = "outlands_rr_last_respawn"
 local KEY_TARGET_PCT = "outlands_rr_target_pct"
 
--- Config defaults (as fractions â€” loadConfig() converts from MCM integer percentages)
-self.restorationPct = 0.50   -- MCM: 50%
-self.respawnRate = 0.01      -- MCM: 1%
-self.respawnInterval = 5     -- MCM: 5 min
-self.bigAsteroidChance = 0.01    -- MCM: 1%
-self.hiddenTreasureChance = 0.02  -- MCM: 2%
-self.sizeModifier = 1.0     -- MCM: 100%
+-- Config defaults (as fractions â€” loadConfig() converts from CCM integer percentages)
+self.restorationPct = 0.50   -- CCM: 50%
+self.respawnRate = 0.01      -- CCM: 1%
+self.respawnInterval = 5     -- CCM: 5 min
+self.bigAsteroidChance = 0.01    -- CCM: 1%
+self.hiddenTreasureChance = 0.02  -- CCM: 2%
+self.sizeModifier = 1.0     -- CCM: 100%
 self.respawnedFields = 3
 
 -- Live respawn timer (not persisted â€” resets on sector load)
@@ -142,7 +142,7 @@ function RespawnResourceAsteroids.initialize()
 
     self.timer = 0
 
-    -- Register for push notifications when admin changes config via MCM
+    -- Register for push notifications when admin changes config via CCM
 
 
     local sector = Sector()
@@ -462,4 +462,4 @@ end
 
 end -- if onServer()
 
-
+

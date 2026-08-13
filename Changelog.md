@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.6]
+### 🐛 Bug Fixes
+- [Bugfixed] **Offline Simulation (ARCC):** Resolved an issue where checking the `Enable Offline Catch-up` option in the CCM window and relaunching the game would result in the option visually or functionally reverting to disabled. The background simulation script now evaluates the configuration dynamically at runtime when parsing the first update tick, rather than caching the default values prematurely during initial script load before the Cosmic Configuration Menu completes parsing `ccm.lua`.
+- [Bugfixed] **Traders (AI Bloat & Desync):** Fixed a severe optimization bug originating from the `ft_gateTradeMult` trader influx logic within `factory.lua`. If a player sat in an accelerated sector (e.g., heavily populated with Gates/Wormholes) for an extremely extended period (8+ hours), the factory spawned traders faster than the vanilla Avorion docking AI could process them. Overwhelmed docking queues caused AI tradeship scripts to timeout or detach, leaving hundreds of permanent, unscripted ghost ships drifting thousands of kilometers away and tricking the factory into continuously spawning more. A strict sector-wide safety cap on active AI traders has been introduced to prevent runaway inflation while preserving trade volume.
+
 ## [v5.0.5]
 ### 🐛 Bug Fixes & ⚖️ Balance Tweaks
 - [Bugfixed] **Offline Simulation (ARCC):** Fixed a critical logic error in `simulation.lua` where the script fetched `Server().unpausedRuntime` instead of the system's real-world clock (`os.time()`). Because `unpausedRuntime` freezes while the server is offline or the game is closed, returning players were incorrectly awarded exactly 0 seconds of background catch-up time regardless of how long they were away. This has been fully corrected.
