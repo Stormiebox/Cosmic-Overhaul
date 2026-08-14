@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.11]
+
+### ⚖️ Balanced
+- [Balanced] **Dynamic Reputation Pacing:** The dynamic reputation decay interval has been increased from 60 seconds to 15 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! However, instead of spamming your screen with a tiny "-1 Relation" notification every 60 seconds, it will now cleanly process 15 minutes worth of decay all at once (e.g. "-15 Relations"). This drastically reduces UI notification spam while maintaining the exact same math and balance.
+
 ## [v5.0.10]
 
 ### ⚖️ Balanced

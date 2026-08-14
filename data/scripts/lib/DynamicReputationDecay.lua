@@ -12,7 +12,7 @@ local DecayConfig = {
     increaseIntervalSec = 5*60*60,     -- 5 hours
     increaseAmountPerInterval = 100,
     startAfterSec = 60*60,             -- 1 hour inactivity
-    updateIntervalSec = 60,            -- Throttle to once a minute for optimal server performance
+    updateIntervalSec = 15*60,         -- Throttle to once every 15 minutes to reduce UI notification spam
 }
 
 
