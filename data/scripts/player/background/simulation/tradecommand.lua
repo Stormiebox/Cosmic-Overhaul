@@ -179,7 +179,7 @@ function TradeCommand:computeRelationImpacts()
     if cv_economy then
         local famineLevel = cv_economy.getFamineLevel(factionForRelations)
         if famineLevel and famineLevel ~= "Stable" then
-            charityRatio = charityRatio * 1.75 -- +75% Reputation in Famine
+            charityRatio = charityRatio * 2.0 -- +100% Reputation in Famine
         end
     end
 
@@ -450,7 +450,7 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
                     if eclipseIndex then
                         local rel = galaxy:getFactionRelations(area.analysis.biggestFactionInArea, eclipseIndex)
                         if rel < -80000 and not captain:hasClass(CaptainClass.Smuggler) then
-                            timeFactor = timeFactor * 1.35
+                            timeFactor = timeFactor * 1.5
                         end
                     end
                 end

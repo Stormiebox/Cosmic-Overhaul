@@ -32,8 +32,8 @@ function ManageStationIncomes.getWarHeatMultiplier()
         end
     end
     -- Cosmic Overhaul Balance tweak: Income is massively buffed as war heat increases.
-    -- At max heat (1.0), income is 250%. War Profiteering is highly lucrative.
-    return 1.0+(heat*1.5)
+    -- At max heat (1.0), income is 300%. War Profiteering is highly lucrative.
+    return 1.0+(heat*2.0)
 end
 
 function ManageStationIncomes.onTradeSuccess(stationId, buyerId)
@@ -143,12 +143,18 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
     if not faction then return end
 
-    -- Cosmic Overhaul Balance tweak: Reduced base payout from 16k to 8k
+    -- Cosmic Overhaul Balance tweak: Reduced base payout from 16k to 8k, but added Core Distance multiplier
     local money = math.floor((0.3+(2*random():getFloat()/3))*8000)
     if random():getFloat(0, 1) < 0.2 then money = money*2 end
-    money = math.floor(money*mapping.quantity)
-    money = money*ManageStationIncomes.getWarHeatMultiplier()
-    money = math.floor(money*payoutMult)
+    
+    local sector = Sector()
+    local x, y = sector:getCoordinates()
+    local dist = math.sqrt(x*x + y*y)
+    local distMult = 1.0 + (2.0 * math.max(0, 1.0 - (math.min(500, dist) / 500.0)))
+
+    money = math.floor(money * mapping.quantity * distMult)
+    money = math.floor(money * ManageStationIncomes.getWarHeatMultiplier())
+    money = math.floor(money * payoutMult)
 
     local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
     local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }

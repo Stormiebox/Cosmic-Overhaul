@@ -7,6 +7,27 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.10]
+
+### ⚖️ Balanced
+- [Balanced] **Subspace Weather Rarity:** Significantly reduced the spawn rate of natural Subspace Weather events (Ion Storms, Solar Flares) to 1% (down from 15%) and massively increased the global cooldown between storms to 4-8 hours (up from 30-60 minutes). Weather events are now a very rare, high-impact phenomenon rather than a constant nuisance.
+- [Balanced] **War Profiteering:** Increased the maximum passive income multiplier for Player Stations located in a max-heat Cosmic War zone from 250% to 300%. Setting up supply chains in warzones is now incredibly lucrative.
+- [Balanced] **Eclipse Contraband Premium (Cosmic Chronicles Synergy):** Reduced the Smuggler's Market payout multiplier for fencing Ascendant Matter and Eclipse Datacores from 200% (2.0x) to 150% (1.5x) to curb late-game inflation while still offering a solid premium.
+- [Balanced] **Ascendancy Trade Fear (Cosmic Ascendancy Synergy):** Increased the flight time penalty for non-smuggler merchants trading near factions at war with the Ascendancy (The Eclipse) from 35% delay (1.35x) to 50% delay (1.5x).
+- [Balanced] **Famine Relief Charity:** Increased the reputation multiplier for Charity Missions sent to starving factions from +75% to +100%.
+- [Balanced] **War Profiteering Distance Scaling:** Player Station passive income now scales dynamically based on distance to the galactic core. Stations near the edge of the galaxy receive a standard 1.0x multiplier, while stations deep in the core receive up to a 3.0x multiplier to their base payout, heavily incentivizing core expansions.
+
+### ⚙️ Adjustments
+- [Adjustment] **Subspace Weather Generator Engine Compliance:** Hardened the structural foundation of the weather generator. It now features full state persistence (storm cooldowns will properly save/restore across server restarts instead of resetting to 0) and strict adherence to the Avorion SectorView API for coordinate parsing.
+- [Adjustment] **Cosmic Overhaul Codex:** Updated Codex with new information while adding in left out information from the official Cosmic Overhaul Wiki.
+
+### 🐛 Bug Fixes
+- [Bugfix] **Dynamic Reputation Decay Alliance Double-Penalty:** Fixed a severe logic flaw where passive reputation decay was being calculated independently for both the Player and their Alliance, but applied using an API function (`cvf.changeRelations`) that automatically mirrored the Player's decay to the Alliance. This caused the Alliance to suffer the decay penalty twice. The script now safely bypasses mirroring and applies decay directly via the vanilla `galaxy:setFactionRelations()` API.
+- [Bugfix] **Dynamic Reputation Decay Type Safety:** Added strict `tonumber()` type coercion when fetching interaction timestamps to prevent potential silent Lua exceptions if the engine cache returned a timestamp as a string.
+- [Bugfix] **Dynamic Reputation Decay Entity Script Structure:** Cleaned up the script structure by removing a leaked `return` statement at the bottom of the script that attempted to export undefined globals (a copy-paste error from vanilla's `relations.lua`).
+- [Bugfix] **Famine Event Persistence:** Fixed a critical API bug where the background Famine Listener queue lacked state persistence. Famine debuff evaluations will no longer permanently skip ships if a sector unloads or the server restarts while ships are still waiting in the queue.
+
+
 ## [v5.0.9]
 
 ### ⚙️ Changed & Balanced

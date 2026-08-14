@@ -41,10 +41,10 @@ function COWeatherGenerator.updateServer(timeStep)
     -- Ensure min of 1, max of 5
     if count >= 5 then return end
 
-    -- 15% chance to trigger a new weather event
-    if random():getFloat() < 0.15 or count == 0 then
+    -- 1% chance to trigger a new weather event
+    if random():getFloat() < 0.01 then
         COWeatherGenerator.spawnRandomWeather()
-        COWeatherGenerator.cooldown = random():getInt(1800, 3600) -- 30 to 60 minute cooldown before next roll
+        COWeatherGenerator.cooldown = random():getInt(14400, 28800) -- 4 to 8 hour cooldown before next roll
     end
 end
 
@@ -57,7 +57,7 @@ function COWeatherGenerator.spawnRandomWeather()
     if #knownSectors == 0 then return end
 
     local targetSector = knownSectors[random():getInt(1, #knownSectors)]
-    local tx, ty = targetSector.x, targetSector.y
+    local tx, ty = targetSector:getCoordinates()
 
     -- Pick weather type
     local types = {"IonStorm", "SolarFlare"}
@@ -88,6 +88,22 @@ function COWeatherGenerator.spawnRandomWeather()
     end
 end
 
+function COWeatherGenerator.secure()
+    return {
+        timer = COWeatherGenerator.timer,
+        cooldown = COWeatherGenerator.cooldown,
+        activeCount = COWeatherGenerator.activeCount
+    }
+end
+
+function COWeatherGenerator.restore(data)
+    if type(data) == "table" then
+        COWeatherGenerator.timer = data.timer or 0
+        COWeatherGenerator.cooldown = data.cooldown or 0
+        COWeatherGenerator.activeCount = data.activeCount or 0
+    end
+end
+
 function initialize(...)
     if COWeatherGenerator.initialize then return COWeatherGenerator.initialize(...) end
 end
@@ -96,4 +112,10 @@ function getUpdateInterval(...)
 end
 function updateServer(...)
     if COWeatherGenerator.updateServer then return COWeatherGenerator.updateServer(...) end
+end
+function secure(...)
+    if COWeatherGenerator.secure then return COWeatherGenerator.secure(...) end
+end
+function restore(...)
+    if COWeatherGenerator.restore then return COWeatherGenerator.restore(...) end
 end

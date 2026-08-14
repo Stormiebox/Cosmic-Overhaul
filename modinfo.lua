@@ -25,7 +25,7 @@ meta =
     -- This will be used to check for unmet dependencies or incompatibilities, and to check compatibility between clients and dedicated servers with mods.
     -- If a client with an unmatching major or minor mod version wants to log into a server, login is prohibited.
     -- Unmatching patch version still allows logging into a server. This works in both ways (server or client higher or lower version).
-    version = "5.0.9",
+    version = "5.0.10",
 
     -- If your mod requires dependencies, enter them here. The game will check that all dependencies given here are met.
     -- Possible attributes:
@@ -75,8 +75,6 @@ meta =
         { id = "3684665566", incompatible = true },
         { id = "3674627736", incompatible = true },
         { id = "3727542782", min = "1.0",        max = "*.*" }, -- Cosmic Vault
-        { id = "3732507615", min = "1.0",        max = "*.*" }, -- Cosmic Chronicles
-        { id = "3727544356", min = "1.0",        max = "*.*" }, -- Cosmic War
         { id = "Avorion",    min = "1.0",        max = "*.*" }
     },
 

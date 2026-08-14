@@ -47,6 +47,17 @@ function COFamineListener.processEntity(id)
     end
 end
 
+function COFamineListener.secure()
+    return {
+        pendingEntities = COFamineListener.pendingEntities
+    }
+end
+
+function COFamineListener.restore(data)
+    if data and data.pendingEntities then
+        COFamineListener.pendingEntities = data.pendingEntities
+    end
+end
 function initialize(...)
     if COFamineListener.initialize then return COFamineListener.initialize(...) end
 end
@@ -59,5 +70,9 @@ end
 function updateServer(...)
     if COFamineListener.updateServer then return COFamineListener.updateServer(...) end
 end
-
-return COFamineListener
+function secure(...)
+    if COFamineListener.secure then return COFamineListener.secure(...) end
+end
+function restore(...)
+    if COFamineListener.restore then return COFamineListener.restore(...) end
+end

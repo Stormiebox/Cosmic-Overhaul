@@ -33,7 +33,7 @@ local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, g
         local aiFactionIndex = tonumber(idStr)
 
         -- Fetch the persistent timestamp for this faction
-        local lastTime = entity:getValue("co_rep_interact_" .. aiFactionIndex)
+        local lastTime = tonumber(entity:getValue("co_rep_interact_" .. aiFactionIndex))
         if lastTime then
             local timeSinceLastInteraction = now-lastTime
 
@@ -55,13 +55,12 @@ local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, g
 
                     -- Cosmic Overhaul: Decay towards Neutral (0)
                     -- Hostile factions slowly forgive, Allied factions slowly forget
-                    local cvf = include("cosmicvaultfaction")
                     if currentRel and currentRel > 0 then
                         local actualDecay = math.min(tickDecay, currentRel)
-                        cvf.changeRelations(entity.index, aiFactionIndex, -actualDecay)
+                        galaxy:setFactionRelations(f1, f2, currentRel - actualDecay)
                     elseif currentRel and currentRel < 0 then
                         local actualDecay = math.min(tickDecay, math.abs(currentRel))
-                        cvf.changeRelations(entity.index, aiFactionIndex, actualDecay)
+                        galaxy:setFactionRelations(f1, f2, currentRel + actualDecay)
                     end
                 end
             end
@@ -99,4 +98,3 @@ function updateServer(...)
     if DynamicReputationDecay.updateServer then return DynamicReputationDecay.updateServer(...) end
 end
 
-return DynamicReputationDecay, RelationChangeMaxCap, RelationChangeMinCap
