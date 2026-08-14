@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.9]
+
+### ⚙️ Changed & Balanced
+- [Changed] **Keybind Adjustments:** Unbound the default keys for the Cosmic Overhaul UI tabs (Bulletin Board, Resource Display). They now default to unbound to allow players to set their own custom shortcuts without overlapping with other mods.
+
 ## [v5.0.8]
 
 ### 🐛 Bug Fixes
