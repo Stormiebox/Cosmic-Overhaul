@@ -56,10 +56,10 @@ local function processDecayForEntity(entityIndex, isAlliance, factionStr, now, g
                     -- Cosmic Overhaul: Decay towards Neutral (0)
                     -- Hostile factions slowly forgive, Allied factions slowly forget
                     local cvf = include("cosmicvaultfaction")
-                    if currentRel > 0 then
+                    if currentRel and currentRel > 0 then
                         local actualDecay = math.min(tickDecay, currentRel)
                         cvf.changeRelations(entity.index, aiFactionIndex, -actualDecay)
-                    elseif currentRel < 0 then
+                    elseif currentRel and currentRel < 0 then
                         local actualDecay = math.min(tickDecay, math.abs(currentRel))
                         cvf.changeRelations(entity.index, aiFactionIndex, actualDecay)
                     end

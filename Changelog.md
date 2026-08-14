@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.8]
+
+### 🐛 Bug Fixes
+
+- [Bugfix] **Dynamic Reputation Decay AI Halt:** Fixed a critical bug in `DynamicReputationDecay.lua` where evaluating non-existent relations caused an `attempt to compare number with nil` exception. This background error would flood the server update loop, severely disrupting faction AI logic and causing ships to ignore combat.
+- [Missions] **Delivery Missions:** Delivery missions will no longer select a destination sector owned by a faction that the questgiver is currently at war with. - Patch
+
 ## [v5.0.7] - Hotfix
 
 ### 🐛 Bug Fixes
