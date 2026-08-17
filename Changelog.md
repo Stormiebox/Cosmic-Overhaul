@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.0.12]
+
+### ⚖️ Balanced
+- [Balanced] **Dynamic Reputation Pacing:** The dynamic reputation decay interval has been further increased from 15 minutes to 45 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! This drastically reduces UI notification spam by processing 45 minutes worth of decay all at once (e.g. "-5828 Reputation with Cookie Empire").
+
 ## [v5.0.11]
 
 ### ⚖️ Balanced
