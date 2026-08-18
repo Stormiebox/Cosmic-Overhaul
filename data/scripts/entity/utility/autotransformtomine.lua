@@ -1,4 +1,4 @@
--- Outlands: Resource Respawn — Claimable Asteroid Abandonment
+-- Cosmic Overhaul: Resource Respawn — Claimable Asteroid Abandonment
 -- Same-path extension: appended after vanilla autotransformtomine.lua
 -- When abandonment is enabled, AI-owned claimable asteroids have a configurable
 -- chance per hour to become abandoned and reclaimable instead of transforming into mines.

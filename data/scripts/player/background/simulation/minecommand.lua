@@ -5,6 +5,13 @@ local PlayerSettings = include("cosmicvaultplayersettings")
 local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
 
+-- [Bugfix] Safeguard against other mods (like Cosmic Starfall) corrupting galaxy.lua exports
+if GalaxyBalancing and type(GalaxyBalancing) == "table" and not GalaxyBalancing.MineableBy then
+    GalaxyBalancing.MineableBy = Balancing_MineableBy or function(minedMaterial, laserMaterial)
+        return laserMaterial.value + 1 >= minedMaterial.value
+    end
+end
+
 local ccm_MineCommand_buildUI_original = MineCommand.buildUI
 function MineCommand:buildUI(...)
     local ui = ccm_MineCommand_buildUI_original(self, ...)

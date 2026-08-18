@@ -1,4 +1,4 @@
--- [Outlands: Resource Respawn] Extension for asteroidfieldgenerator.lua
+-- [Cosmic Overhaul: Resource Respawn] Extension for asteroidfieldgenerator.lua
 -- Injected before the vanilla return statement via include() system.
 -- AsteroidFieldGenerator is a local in scope from the vanilla file.
 
@@ -16,12 +16,12 @@ function AsteroidFieldGenerator:createAsteroidFieldEx(numAsteroids, fieldSize, m
     maxAsteroidSize = maxAsteroidSize or 25.0
     if hasResources == false then probability = 0 end
 
-    -- [Outlands: Resource Respawn] Apply configurable size modifier
+    -- [Cosmic Overhaul: Resource Respawn] Apply configurable size modifier
     local sizeModifier = CosmicOverhaulConfig.get().sizeModifier / 100
     minAsteroidSize = minAsteroidSize * sizeModifier
     maxAsteroidSize = maxAsteroidSize * sizeModifier
 
-    -- [Outlands: Resource Respawn] Read configurable hidden treasure chance
+    -- [Cosmic Overhaul: Resource Respawn] Read configurable hidden treasure chance
     local hiddenTreasureChance = CosmicOverhaulConfig.get().hiddenTreasureChance / 100
 
     local asteroidsWithResources = numAsteroids * (probability or 0.05)
@@ -65,7 +65,7 @@ function AsteroidFieldGenerator:createAsteroidFieldEx(numAsteroids, fieldSize, m
             size = lerp(random:getFloat(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
         end
 
-        -- [Outlands: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
+        -- [Cosmic Overhaul: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
         if random:getFloat() < hiddenTreasureChance then
             hiddenTreasure = true
         end
@@ -100,12 +100,12 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
     local asteroidsWithResources = numAsteroids * probability
     if not hasResources then asteroidsWithResources = 0 end
 
-    -- [Outlands: Resource Respawn] Apply configurable size modifier
+    -- [Cosmic Overhaul: Resource Respawn] Apply configurable size modifier
     local sizeModifier = CosmicOverhaulConfig.get().sizeModifier / 100
     minAsteroidSize = (minAsteroidSize or 5.0) * sizeModifier
     maxAsteroidSize = (maxAsteroidSize or 25.0) * sizeModifier
 
-    -- [Outlands: Resource Respawn] Read configurable hidden treasure chance
+    -- [Cosmic Overhaul: Resource Respawn] Read configurable hidden treasure chance
     local hiddenTreasureChance = CosmicOverhaulConfig.get().hiddenTreasureChance / 100
 
     local mat = self:getFieldPosition()
@@ -145,7 +145,7 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
                 size = lerp(random:getFloat(), 0, 2.5, minAsteroidSize, maxAsteroidSize);
             end
 
-            -- [Outlands: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
+            -- [Cosmic Overhaul: Resource Respawn] Configurable hidden treasure chance (vanilla: 1/50)
             if random:getFloat() < hiddenTreasureChance then
                 hiddenTreasure = true
             end

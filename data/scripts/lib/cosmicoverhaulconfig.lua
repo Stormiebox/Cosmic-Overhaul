@@ -15,6 +15,7 @@ if ccm then
                 options = {
                     { key = "hotkeyBulletinBoard", type = "keybind", title = "Open Bulletin Board", description = "Hotkey to quickly open the Bulletin Board tab." },
                     { key = "hotkeyResourceDisplay", type = "keybind", title = "Open Resource Display", description = "Hotkey to quickly open the Resource Display tab." },
+                    { key = "hotkeySmartJump", type = "keybind", title = "Smart Jump Autopilot", description = "Instantly aligns your ship to the plotted hyperspace jump coordinate." },
                 }
             },
             {
@@ -65,6 +66,7 @@ local defaults =
 {
     hotkeyBulletinBoard = 0,
     hotkeyResourceDisplay = 0,
+    hotkeySmartJump = 0,
 
     enableGateTravelPriority = true,
     enableProfitableStations = true,

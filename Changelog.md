@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.1.0]
+
+### ✨ Quality of Life (QoL) Updates
+- [QoL] **Consolidate Inventory to Vault:** Added a new button in the Trash Man UI allowing you to instantly transfer all unequipped and non-favorite turrets and subsystems from your private inventory directly into the Alliance Vault.
+- [QoL] **Smart Jump Orientation Hotkey:** Added a new hotkey (configurable via Cosmic Configuration Menu) that instantly aligns your ship to your plotted hyperspace jump destination, saving you the hassle of manually turning your ship.
+- [QoL] **Crew Mutiny Fallback Wallet:** Implemented an automated background protection script. If your personal funds run critically low before payday, the system will automatically transfer the missing credits from the Alliance Vault and notify you via chat, preventing a silent crew strike.
+
+### 🐛 Bug Fixes
+- [Bugfix] **Mining Operation Background Crash:** Patched a server crash occurring during background mining operations (`minecommand.lua:attempt to call field MineableBy`). This crash was caused by conflicting mods destroying the vanilla `galaxy.lua` export table. Cosmic Overhaul now injects a universal safeguard that forces the function back into memory, protecting your mining fleets from crashing out.
+- [Bugfix] **Dynamic Reputation Rapid Decay:** Fixed a critical bug where the reputation decay script was missing a namespace declaration and using global wrappers. This caused the Avorion engine to silently fail its 45-minute throttle and fallback to a 15-second loop, applying 45 minutes worth of decay every 15 seconds! Relations will now correctly decay precisely once every 45 minutes as intended.
+- [Bugfix] **Allied Relations Enhancer Crash & Silent Failure:** Patched a fatal engine crash occurring during diplomacy and reputation events. The script was incorrectly attempting to index raw integer IDs directly instead of normalizing them into Faction objects first, which would crash the server. Additionally, fixed a silent failure where the script looked for a non-existent `.alliance` property, completely preventing it from mirroring your reputation changes to your Alliance. It now properly executes the vanilla normalization pipeline and perfectly mirrors your diplomatic actions!
+
 ## [v5.0.12]
 
 ### ⚖️ Balanced

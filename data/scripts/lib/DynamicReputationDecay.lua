@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("relations") -- Include and extend vanilla relations behavior.
 
 -- Cosmic Overhaul: Dynamic Reputation Decay Namespace
+-- namespace DynamicReputationDecay
 DynamicReputationDecay = {}
 
 -- Configuration with explicit units for readability.
@@ -90,11 +91,4 @@ function DynamicReputationDecay.updateServer(timeStep)
     end
 end
 
-
-function getUpdateInterval(...)
-    if DynamicReputationDecay.getUpdateInterval then return DynamicReputationDecay.getUpdateInterval(...) end
-end
-function updateServer(...)
-    if DynamicReputationDecay.updateServer then return DynamicReputationDecay.updateServer(...) end
-end
 

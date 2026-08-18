@@ -11,4 +11,6 @@ if onServer() then
     player:addScriptOnce("data/scripts/player/map/galaxymapqol.lua")
     player:addScriptOnce("data/scripts/player/cosmicoverhaulcodex.lua")
     player:addScriptOnce("data/scripts/player/ui/respawnhud.lua")
+    player:addScriptOnce("data/scripts/player/smartjump.lua")
+    player:addScriptOnce("data/scripts/player/crewmutinyprotection.lua")
 end

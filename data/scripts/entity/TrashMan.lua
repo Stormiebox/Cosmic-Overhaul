@@ -114,6 +114,12 @@ function TrashMan.initUI()
     button2.maxTextSize = 15
     button3.maxTextSize = 15
     py = py + pyDelta + 8
+    
+    local button4Rect = Rect(column2, py, column2 + 380, py + 32)
+    local button4 = window:createButton(button4Rect, "Consolidate Inventory (To Vault)"%_t, "onConsolidatePressed")
+    button4.maxTextSize = 15
+    button4.tooltip = "Transfers all unequipped, non-favorite turrets and subsystems from your private inventory to the Alliance Vault."%_t
+    py = py + pyDelta + 8
 
     previewLabel = window:createLabel(vec2(column2, py), "Preview: not run yet"%_t, 15)
     previewLabel.color = ColorRGB(1, 1, 1)
@@ -401,6 +407,51 @@ function TrashMan.onPreviewTrashPressed()
     end
 end
 
+function TrashMan.onConsolidatePressed()
+    if checkBoxAllianz[0].checked then
+        Player():sendChatMessage("", 1, "Consolidate only moves items from Private Inventory to Alliance Vault.")
+        return
+    end
+    invokeServerFunction("onConsolidateServer")
+end
+
+function TrashMan.onConsolidateServer()
+    if onClient() then return end
+    
+    local player = Player(callingPlayer)
+    if not player then return end
+    if not player.allianceIndex then
+        player:sendChatMessage("Server", 1, "You are not in an alliance.")
+        return
+    end
+    
+    local alliance = Alliance(player.allianceIndex)
+    if not alliance then
+        player:sendChatMessage("Server", 1, "Alliance inventory is not accessible right now.")
+        return
+    end
+
+    local inv = player:getInventory()
+    local allianceInv = alliance:getInventory()
+    local movedItems = 0
+    
+    for index, slotItem in pairs(inv:getItems()) do
+        local iitem = slotItem.item
+        if iitem ~= nil and not iitem.favorite then
+            if iitem.itemType == InventoryItemType.Turret or iitem.itemType == InventoryItemType.TurretTemplate or iitem.itemType == InventoryItemType.SystemUpgrade then
+                local amount = inv:amount(index)
+                for i = 1, amount do
+                    allianceInv:add(iitem)
+                end
+                inv:removeAll(index)
+                movedItems = movedItems + amount
+            end
+        end
+    end
+    
+    player:sendChatMessage("Server", 0, movedItems .. " items consolidated to Alliance Vault.")
+end
+callable(TrashMan, "onConsolidateServer")
 function TrashMan.onMarkTrashPressed()
     local systemRarity, turretRarities, minTech, maxTech = buildFilterRequest()
 

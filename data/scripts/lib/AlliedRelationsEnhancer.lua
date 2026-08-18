@@ -20,16 +20,17 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
     if not isProcessingAlliance and delta ~= 0 then
         isProcessingAlliance = true
 
+        -- We must normalize a and b first! They can be strings, UUIDs, entities, or integers.
+        -- Vanilla provides getInteractingFactions to resolve them into Faction objects securely.
+        local fA, fB, aiFaction, playerFaction = getInteractingFactions(a, b)
+        
         local alliance
-        local aiFaction
 
-        -- Identify if the interaction is between a Player and an AI Faction
-        if a.isPlayer and b.isAIFaction then
-            alliance = a.alliance
-            aiFaction = b
-        elseif b.isPlayer and a.isAIFaction then
-            alliance = b.alliance
-            aiFaction = a
+        if fA and fB and playerFaction and aiFaction then
+            -- Safely extract the alliance if the interacting entity is a player in an alliance.
+            if playerFaction.isPlayer and playerFaction.allianceIndex then
+                alliance = Alliance(playerFaction.allianceIndex)
+            end
         end
 
         if alliance and aiFaction then
@@ -48,10 +49,10 @@ function changeRelations(a, b, delta, changeType, notifyA, notifyB, chatterer)
                 allianceDelta = allianceDelta * 1.5
             end
 
-            -- Pass the Alliance and AI faction back through the vanilla pipeline
-            -- so hard caps, traits, and UI notifications trigger correctly!
+            -- Pass the Alliance and AI faction indices back through the vanilla pipeline
+            -- Passing indices ensures getInteractingFactions correctly normalizes them into Faction objects!
             if co_are_originalChangeRelations then
-                co_are_originalChangeRelations(alliance, aiFaction, allianceDelta, changeType, notifyA, notifyB, chatterer)
+                co_are_originalChangeRelations(alliance.index, aiFaction.index, allianceDelta, changeType, notifyA, notifyB, chatterer)
             end
         end
 
