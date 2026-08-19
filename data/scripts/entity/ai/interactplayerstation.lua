@@ -3,6 +3,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 package.path = package.path .. ";data/scripts/sector/?.lua"
 
 InteractPlayerStation = {}
+include("randomext")
 local DockAI = include("ai/dock")
 local data = { stationId = Uuid(), stationIndex = nil }
 local stage, waitCount, tractorWaitCount, timeAlive, hasTraded = nil, nil, nil, 0, false

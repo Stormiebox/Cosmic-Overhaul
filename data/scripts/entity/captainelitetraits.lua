@@ -32,9 +32,14 @@ function updateServer(timeStep)
             local ships = {sector:getEntitiesByFaction(myFaction)}
             for _, ship in pairs(ships) do
                 if ship.isShip or ship.isStation then
+                    -- Terminate existing instances to prevent stacking overlaps
+                    CosmicVaultBuffs.terminateBuff(ship.id, "CommodoreShield")
+                    CosmicVaultBuffs.terminateBuff(ship.id, "CommodoreFireRate")
+                    
                     -- Apply a 6-second buff so it refreshes continuously while Commodore is present
-                    CosmicVaultBuffs.applyBuff(ship.id, "Shield", 1.10, 6.0)
-                    CosmicVaultBuffs.applyBuff(ship.id, "Damage", 1.10, 6.0)
+                    -- Uses 0.10 for +10% (Avorion addBaseMultiplier adds a percentage of the base)
+                    CosmicVaultBuffs.applyBuff(ship.id, "Shield", 0.10, 6.0, "CommodoreShield")
+                    CosmicVaultBuffs.applyBuff(ship.id, "FireRate", 0.10, 6.0, "CommodoreFireRate")
                 end
             end
         end
@@ -78,7 +83,8 @@ function updateServer(timeStep)
                 local key = x .. "_" .. y
                 local zones = cv_territory.getContestedZones()
                 if zones and zones[key] then
-                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 1.50, 6.0)
+                    CosmicVaultBuffs.terminateBuff(entity.id, "ScavengerYield")
+                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 0.50, 6.0, "ScavengerYield")
                 end
             end
         end

@@ -7,6 +7,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.1.1]
+
+### 🐛 Bug Fixes
+- [Bugfix] **AI Trader Jump Crash (`interactplayerstation.lua`):** Fixed an issue where AI station traders were unable to leave the sector and endlessly spammed `attempt to call global 'random' (a nil value)` to the server console. The script was missing an `include("randomext")` declaration to expose the engine's global `random()` helper.
+- [Bugfix] **Elite Captain Traits Oscillation & Stacking (`captainelitetraits.lua`):** Addressed multiple severe issues with Commodore and Scavenger Elite Traits:
+  - **Buff Overlaps:** Applied an idempotent refresh using strict `buffId` termination. The script previously used blindly overlapping `addScript` invocations, causing duplicate modifiers to stack continuously.
+  - **Math Correction:** Modified `addBaseMultiplier` calls to correctly pass `0.10` instead of `1.10`. The engine evaluates base multipliers as additive percentages, meaning `1.10` was mistakenly applying a +110% buff instead of +10%.
+  - **Damage Stat Mapping:** Changed the Commodore's "Damage" buff to map to `"FireRate"`. It was previously mapped to `"Damage"` which modified `StatsBonuses.ArmedTurrets`, artificially inflating turret slot counts and causing severe UI stat oscillation without providing a real damage boost.
+
 ## [v5.1.0]
 
 ### ✨ Quality of Life (QoL) Updates

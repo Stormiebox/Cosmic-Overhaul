@@ -43,7 +43,8 @@ function updateServer(timeStep)
         entity:setValue("governor_military_active", true)
         if CosmicVaultBuffs then
             -- Double shield regen rate
-            CosmicVaultBuffs.applyBuff(entity.id, "ShieldRecharge", 2.0, 11.0)
+            CosmicVaultBuffs.terminateBuff(entity.id, "GovernorMilitaryShield")
+            CosmicVaultBuffs.applyBuff(entity.id, "ShieldRecharge", 1.0, 11.0, "GovernorMilitaryShield")
         end
         -- Spawn militia once every 10 minutes if enemies are present
         if random():getFloat() < 0.05 then
