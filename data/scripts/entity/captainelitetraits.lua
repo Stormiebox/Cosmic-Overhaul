@@ -32,14 +32,16 @@ function updateServer(timeStep)
             local ships = {sector:getEntitiesByFaction(myFaction)}
             for _, ship in pairs(ships) do
                 if ship.isShip or ship.isStation then
-                    -- Terminate existing instances to prevent stacking overlaps
-                    CosmicVaultBuffs.terminateBuff(ship.id, "CommodoreShield")
-                    CosmicVaultBuffs.terminateBuff(ship.id, "CommodoreFireRate")
+                    -- Try to refresh existing buffs, otherwise apply new ones
+                    local shieldRefreshed = CosmicVaultBuffs.refreshBuff(ship.id, "CommodoreShield")
+                    if not shieldRefreshed then
+                        CosmicVaultBuffs.applyBuff(ship.id, "Shield", 0.10, 6.0, "CommodoreShield")
+                    end
                     
-                    -- Apply a 6-second buff so it refreshes continuously while Commodore is present
-                    -- Uses 0.10 for +10% (Avorion addBaseMultiplier adds a percentage of the base)
-                    CosmicVaultBuffs.applyBuff(ship.id, "Shield", 0.10, 6.0, "CommodoreShield")
-                    CosmicVaultBuffs.applyBuff(ship.id, "FireRate", 0.10, 6.0, "CommodoreFireRate")
+                    local fireRateRefreshed = CosmicVaultBuffs.refreshBuff(ship.id, "CommodoreFireRate")
+                    if not fireRateRefreshed then
+                        CosmicVaultBuffs.applyBuff(ship.id, "FireRate", 0.10, 6.0, "CommodoreFireRate")
+                    end
                 end
             end
         end
@@ -83,8 +85,10 @@ function updateServer(timeStep)
                 local key = x .. "_" .. y
                 local zones = cv_territory.getContestedZones()
                 if zones and zones[key] then
-                    CosmicVaultBuffs.terminateBuff(entity.id, "ScavengerYield")
-                    CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 0.50, 6.0, "ScavengerYield")
+                    local yieldRefreshed = CosmicVaultBuffs.refreshBuff(entity.id, "ScavengerYield")
+                    if not yieldRefreshed then
+                        CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 0.50, 6.0, "ScavengerYield")
+                    end
                 end
             end
         end

@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.1.2]
+### Fixed
+- Fixed a massive oversight in Captain Elite Traits (specifically Commodore and Scavenger) where continuously terminating and re-applying status effects caused the underlying engine to recalculate max shield capacity, completely freezing natural shield regeneration for the entire duration of the trait effect. Buffs now successfully use a seamless refresh loop.
+
 ## [v5.1.1]
 
 ### 🐛 Bug Fixes
