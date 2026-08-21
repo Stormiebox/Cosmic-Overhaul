@@ -273,7 +273,8 @@ function RespawnResourceAsteroids.spawnBatch(baseline, ticks, unattended)
     -- Attended (live tick): cap at restoration target (e.g. 80%)
     local capPct = unattended and 1.0 or self.restorationPct
     -- Famine Synergy check
-    local faction = Faction(sector.factionIndex)
+    local x, y = sector:getCoordinates()
+    local faction = Galaxy():getControllingFaction(x, y)
     if faction and faction.isAIFaction then
         local economy = include("cosmicvaulteconomy")
         if economy then
