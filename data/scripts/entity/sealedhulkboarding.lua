@@ -26,13 +26,16 @@ function getInteractionText(playerIndex)
 end
 
 function initialize()
-    if onServer() then
-        Sector():registerCallback("onRestoredFromDisk", "onRestoredFromDisk")
-    end
 end
 
-function onRestoredFromDisk()
-    -- Maintain state
+function secure()
+    return {state = state}
+end
+
+function restore(data_in)
+    if data_in and data_in.state then
+        state = data_in.state
+    end
 end
 
 function initUI()
@@ -72,7 +75,7 @@ function extractEarly()
     if onClient() then invokeServerFunction("extractEarly") return end
     
     local player = Player(callingPlayer)
-    player:receive("Extracted minor scrap", 50000)
+    player:receive("Extracted minor scrap"%_T, 50000)
     terminate()
 end
 
@@ -82,8 +85,17 @@ function pushDeeper()
     local player = Player(callingPlayer)
     local ship = player.craft
     -- Risk losing 5 crew
-    ship:removeCrew(5)
-    player:sendChatMessage("", 1, "Your boarding party took casualties breaching the doors.")
+    local crew = ship.crew
+    if crew then
+        local killed = 0
+        for crewman, num in pairs(crew:getMembers()) do
+            local toKill = math.min(5 - killed, num)
+            ship:removeCrew(toKill, crewman)
+            killed = killed + toKill
+            if killed >= 5 then break end
+        end
+    end
+    player:sendChatMessage("", 1, "Your boarding party took casualties breaching the doors."%_T)
     
     state = 1
     invokeClientFunction(player, "refreshDialog", state)
@@ -93,7 +105,7 @@ function extractMid()
     if onClient() then invokeServerFunction("extractMid") return end
     
     local player = Player(callingPlayer)
-    player:receive("Extracted mid-tier salvage", 150000)
+    player:receive("Extracted mid-tier salvage"%_T, 150000)
     terminate()
 end
 
@@ -103,8 +115,17 @@ function pushFinal()
     local player = Player(callingPlayer)
     local ship = player.craft
     -- Risk losing 15 crew
-    ship:removeCrew(15)
-    player:sendChatMessage("", 1, "Heavy casualties sustained breaching the final vault!")
+    local crew = ship.crew
+    if crew then
+        local killed = 0
+        for crewman, num in pairs(crew:getMembers()) do
+            local toKill = math.min(15 - killed, num)
+            ship:removeCrew(toKill, crewman)
+            killed = killed + toKill
+            if killed >= 15 then break end
+        end
+    end
+    player:sendChatMessage("", 1, "Heavy casualties sustained breaching the final vault!"%_T)
     
     state = 2
     invokeClientFunction(player, "refreshDialog", state)
@@ -114,7 +135,7 @@ function extractFinal()
     if onClient() then invokeServerFunction("extractFinal") return end
     
     local player = Player(callingPlayer)
-    player:receive("Extracted the Grand Vault!", 1000000)
+    player:receive("Extracted the Grand Vault!"%_T, 1000000)
     -- Also drop a legendary upgrade in the sector
     local upgrade = SystemUpgradeTemplate("data/scripts/systems/batterybooster.lua", Rarity(RarityType.Legendary), Seed(123))
     Sector():dropUpgrade(Entity().translationf, nil, nil, upgrade)

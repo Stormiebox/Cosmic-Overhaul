@@ -139,7 +139,7 @@ function TradingManager:secureTradingGoods()
     return data
 end
 
--- Merchant Captain Synergy: 15% discount when buying goods (Globally applied)
+-- Merchant Captain Synergy: Dynamic discount/bonus based on Captain Level & Tier (Globally applied)
 local original_getBuyPrice = TradingManager.getBuyPrice
 function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
     local price, tax
@@ -159,15 +159,24 @@ function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
         if ship then
             local captain = ship:getCaptain()
             if captain and captain:hasClass(CaptainClass.Merchant) then
-                price = math.max(1, math.floor((price or 0) * 1.15))
-                if tax then tax = math.max(0, math.floor(tax * 1.15)) end
+                -- Scale multiplier: 2% per tier + 2% per level (Max 16% for Tier 3 Level 5)
+                local tierBonus = (captain.tier or 0) * 0.02
+                local levelBonus = (captain.level or 1) * 0.02
+                local multiplier = 1.0 + tierBonus + levelBonus
+                
+                if price and price > 0 then
+                    price = math.max(1, math.floor(price * multiplier))
+                end
+                if tax and tax > 0 then
+                    tax = math.max(0, math.floor(tax * multiplier))
+                end
             end
         end
     end
     return price, tax
 end
 
--- Merchant Captain Synergy: 15% bonus payout when selling goods (Globally applied)
+-- Merchant Captain Synergy: Dynamic discount/bonus based on Captain Level & Tier (Globally applied)
 local original_getSellPrice = TradingManager.getSellPrice
 function TradingManager:getSellPrice(goodName, amount, faction, buyer)
     local price, tax
@@ -187,8 +196,17 @@ function TradingManager:getSellPrice(goodName, amount, faction, buyer)
         if ship then
             local captain = ship:getCaptain()
             if captain and captain:hasClass(CaptainClass.Merchant) then
-                price = math.max(1, math.floor((price or 0) * 0.85))
-                if tax then tax = math.max(0, math.floor(tax * 0.85)) end
+                -- Scale multiplier: 2% per tier + 2% per level (Max 16% for Tier 3 Level 5)
+                local tierBonus = (captain.tier or 0) * 0.02
+                local levelBonus = (captain.level or 1) * 0.02
+                local multiplier = 1.0 - (tierBonus + levelBonus)
+                
+                if price and price > 0 then
+                    price = math.max(1, math.floor(price * multiplier))
+                end
+                if tax and tax > 0 then
+                    tax = math.max(0, math.floor(tax * multiplier))
+                end
             end
         end
     end

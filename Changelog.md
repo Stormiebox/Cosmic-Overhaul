@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.1.4]
+### Fixed
+- [Bugfix] **Sealed Hulk State Exploit:** Fixed an exploit in `sealedhulkboarding.lua` where the script failed to utilize the engine's `secure()` and `restore()` pipeline to save the event state to disk. Players could previously abuse this by pushing deeper into the hulk, logging out, and reloading the sector to reset the event back to the first stage and farm resources indefinitely. The event state is now strictly serialized to the save file.
+- [Bugfix] **Sealed Hulk Boarding Crash:** Fixed a silent engine crash inside `sealedhulkboarding.lua` where choosing the aggressive options ("Blow the blast doors" or "Push through the crossfire") would attempt to execute a `ship:removeCrew` call without the strictly required `Crewman` argument. The boarding logic will now correctly iterate over the ship's crew manifest to simulate realistic casualties without throwing silent C++ exceptions!
+- [Localization] Fixed missing server-to-client UI localization tags (`%_T`) on the Sealed Hulk extraction messages.
+
+### Removed
+- [Feature] **Smart Jump Autopilot:** Completely scrapped the Smart Jump hotkey feature. Attempting to natively hijack the Avorion engine's hyperspace calculation routines and force ship alignments without a captain resulted in engine limitations that proved too drastic for the scope of the Cosmic series.
+
+### Balanced
+- [Balanced] **Merchant Captain Synergy:** The flat 15% discount/bonus payout applied globally when trading with a Merchant Captain has been rebalanced to dynamically scale based on both the captain's level and tier. The new formula adds +2% per level and +2% per tier, creating perfect synergy with the vanilla Captain progression system. A fresh Common Level 1 Merchant now provides a minimal +2% edge, while a Max Level 5 Legendary Merchant pushes the economy to a massive +16% bonus payout and discount!
+
 ## [v5.1.3]
 ### Fixed
 - [Bugfix] **Respawn Resource Asteroids Crash:** Fixed an issue in `respawnresourceasteroids.lua` where the background simulation would attempt to read `sector.factionIndex` instead of correctly resolving the sector's controlling faction via `Galaxy():getControllingFaction(x, y)`. This previously caused the Famine Synergy check to silently crash the sector's asteroid regeneration loop.
