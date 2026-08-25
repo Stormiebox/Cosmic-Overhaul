@@ -82,3 +82,39 @@ function MineCommand:getAreaSize(ownerIndex, shipName)
            { x = longerEdge, y = shorterEdge },
            { x = shorterEdge, y = longerEdge }
 end
+
+local ccm_MineCommand_calculatePrediction_original = MineCommand.calculatePrediction
+function MineCommand:calculatePrediction(ownerIndex, shipName, area, config, ...)
+    local prediction
+    if ccm_MineCommand_calculatePrediction_original then
+        prediction = ccm_MineCommand_calculatePrediction_original(self, ownerIndex, shipName, area, config, ...)
+    end
+
+    if not prediction or prediction.error then
+        return prediction
+    end
+
+    -- Mining Captain Hazard Pay Bonus
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    if ship then
+        local captain = ship:getCaptain()
+        if captain and captain:hasClass(CaptainClass.Miner) then
+            -- Deterministic check based on area coordinates to simulate if this area contains hazard events
+            local seed = GameSeed()
+            local random = Random(Seed(seed.int32 + area.lower.x + area.lower.y))
+            
+            -- 25% chance this area is considered hazardous
+            if random:test(0.25) then
+                for i = 1, NumMaterials() do
+                    if prediction.yields[i] then
+                        -- 10% bonus
+                        prediction.yields[i].from = math.floor(prediction.yields[i].from * 1.1)
+                        prediction.yields[i].to = math.floor(prediction.yields[i].to * 1.1)
+                    end
+                end
+            end
+        end
+    end
+
+    return prediction
+end

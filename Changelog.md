@@ -7,6 +7,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.2.0]
+### Added
+- [Feature] **Smuggler Captain Black Market Bonus:** Trading at Smuggler Markets or Casinos now grants dynamic payouts and discounts when using a Smuggler Captain. The bonus scales from 5% up to 25% based on the captain's Tier (Common to Legendary), and is doubled when trading directly with the Syndicate Boss (Level 5).
+- [Feature] **Dynamic Boarding Loot:** Successfully boarding a ship or station will now automatically drop 1-2 high-rarity loot crates into space (Turrets or Upgrades). A small reward for seizing control of enemy vessels!
+- [Feature] **Trade Route Rumors (Bartenders):** Bartenders at Smuggler Markets and Casinos now offer a new dialogue option to buy trade route rumors for 10,000 Credits. The rumor reveals the coordinates of a highly profitable sector on your galaxy map!
+- [Feature] **Mining Captain Hazard Pay:** When assigning a Mining Captain to a background mining operation, there is a chance the area will contain hazardous conditions (simulated). If the captain encounters a hazard, they automatically secure a 10% bonus to raw ore extraction, representing hazard pay and overtime!
+- [Feature] **Asteroid Density Rebalance:** Overhauled the asteroid generation logic. Outer rim sectors now feature fewer but significantly larger asteroids (ideal for manual mining). In contrast, sectors closer to the core now generate highly dense fields of smaller asteroids (perfect for massive fleet operations)!
+
+### ⭐ Synergy Features
+
+- **Galactic Politics Sabotage:** (Synergy with Cosmic War) You can now pay a 5,000,000 Credits bribe to the Smuggler's Market to intentionally lower the relationship between two random NPC factions, sparking proxy wars across the galaxy!
+
+
 ## [v5.1.4]
 ### Fixed
 - [Bugfix] **Sealed Hulk State Exploit:** Fixed an exploit in `sealedhulkboarding.lua` where the script failed to utilize the engine's `secure()` and `restore()` pipeline to save the event state to disk. Players could previously abuse this by pushing deeper into the hulk, logging out, and reloading the sector to reset the event back to the first stage and farm resources indefinitely. The event state is now strictly serialized to the save file.
@@ -192,3 +205,4 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Bugfixed] **Scout Mission Fix:** Fixed a massive vanilla/mod bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the `scoutcommandnotetable` lacked dialogue lines for that specific sector template.
 
 - [Bugfixed] **VFS Compliance:** Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.
+

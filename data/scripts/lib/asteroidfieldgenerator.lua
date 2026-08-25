@@ -16,10 +16,19 @@ function AsteroidFieldGenerator:createAsteroidFieldEx(numAsteroids, fieldSize, m
     maxAsteroidSize = maxAsteroidSize or 25.0
     if hasResources == false then probability = 0 end
 
-    -- [Cosmic Overhaul: Resource Respawn] Apply configurable size modifier
+    -- [Cosmic Overhaul: Asteroid Density Rebalance]
+    local x, y = Sector():getCoordinates()
+    local dist = length(vec2(x, y))
+    local tierFactor = math.max(0, math.min(1, dist / 500))
+    local numAsteroidsModifier = lerp(tierFactor, 0, 1, 2.0, 0.5)
+    local sizeModifierByTier = lerp(tierFactor, 0, 1, 0.5, 2.0)
+
+    numAsteroids = math.floor(numAsteroids * numAsteroidsModifier)
+
+    -- [Cosmic Overhaul: Resource Respawn & Density Rebalance]
     local sizeModifier = CosmicOverhaulConfig.get().sizeModifier / 100
-    minAsteroidSize = minAsteroidSize * sizeModifier
-    maxAsteroidSize = maxAsteroidSize * sizeModifier
+    minAsteroidSize = minAsteroidSize * sizeModifier * sizeModifierByTier
+    maxAsteroidSize = maxAsteroidSize * sizeModifier * sizeModifierByTier
 
     -- [Cosmic Overhaul: Resource Respawn] Read configurable hidden treasure chance
     local hiddenTreasureChance = CosmicOverhaulConfig.get().hiddenTreasureChance / 100
@@ -95,15 +104,24 @@ function AsteroidFieldGenerator:createForestAsteroidFieldEx(numAsteroids, fieldS
 
     numAsteroids = 250 -- the number of asteroids
 
+    -- [Cosmic Overhaul: Asteroid Density Rebalance]
+    local x, y = Sector():getCoordinates()
+    local dist = length(vec2(x, y))
+    local tierFactor = math.max(0, math.min(1, dist / 500))
+    local numAsteroidsModifier = lerp(tierFactor, 0, 1, 2.0, 0.5)
+    local sizeModifierByTier = lerp(tierFactor, 0, 1, 0.5, 2.0)
+
+    numAsteroids = math.floor(numAsteroids * numAsteroidsModifier)
+
     probability = probability or 0.05
 
     local asteroidsWithResources = numAsteroids * probability
     if not hasResources then asteroidsWithResources = 0 end
 
-    -- [Cosmic Overhaul: Resource Respawn] Apply configurable size modifier
+    -- [Cosmic Overhaul: Resource Respawn & Density Rebalance]
     local sizeModifier = CosmicOverhaulConfig.get().sizeModifier / 100
-    minAsteroidSize = (minAsteroidSize or 5.0) * sizeModifier
-    maxAsteroidSize = (maxAsteroidSize or 25.0) * sizeModifier
+    minAsteroidSize = (minAsteroidSize or 5.0) * sizeModifier * sizeModifierByTier
+    maxAsteroidSize = (maxAsteroidSize or 25.0) * sizeModifier * sizeModifierByTier
 
     -- [Cosmic Overhaul: Resource Respawn] Read configurable hidden treasure chance
     local hiddenTreasureChance = CosmicOverhaulConfig.get().hiddenTreasureChance / 100

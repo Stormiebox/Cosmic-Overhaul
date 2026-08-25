@@ -57,6 +57,115 @@ function SmugglersMarket.generateInteractionText()
     return randomEntry(random(), a) .. " " .. randomEntry(random(), b)
 end
 
+function SmugglersMarket.onTradeRumor()
+    local dialog = {}
+    dialog.text = "You want a rumor? I hear things. But information isn't free. 10,000 credits, upfront."%_t
+    dialog.answers = {
+        {answer = "Here's 10,000 Credits."%_t, onSelect = "onPayTradeRumor"},
+        {answer = "Nevermind."%_t}
+    }
+    ScriptUI():showDialog(dialog)
+end
+
+function SmugglersMarket.onPayTradeRumor()
+    invokeServerFunction("payTradeRumor")
+end
+
+function SmugglersMarket.payTradeRumor()
+    local player = Player(callingPlayer)
+    if not player then return end
+
+    local canPay, msg, args = player:canPay(10000)
+    if not canPay then
+        player:sendChatMessage(Entity(), 1, msg, unpack(args))
+        return
+    end
+
+    player:pay("Paid %1% Credits for a trade rumor."%_T, 10000)
+
+    local x, y = Sector():getCoordinates()
+    local dist = 30
+    local rand = random()
+    local targetX = x + rand:getInt(-dist, dist)
+    local targetY = y + rand:getInt(-dist, dist)
+    player:addKnownSector(SectorView(targetX, targetY))
+    player:sendChatMessage(Entity(), 0, "I've uploaded the coordinates to your map. Look around %1%:%2%. Lots of profit to be made there."%_t, targetX, targetY)
+end
+callable(SmugglersMarket, "payTradeRumor")
+
+function SmugglersMarket.onSabotageRumor()
+    local dialog = {}
+    dialog.text = "You want to stir the pot? Starting a proxy war takes serious resources and untraceable bribes. It will cost you 5,000,000 Credits."%_t
+    dialog.answers = {
+        {answer = "Do it. (Pay 5,000,000 Credits)"%_t, onSelect = "onPaySabotageRumor"},
+        {answer = "Too expensive."%_t}
+    }
+    ScriptUI():showDialog(dialog)
+end
+
+function SmugglersMarket.onPaySabotageRumor()
+    invokeServerFunction("paySabotageRumor")
+end
+
+function SmugglersMarket.paySabotageRumor()
+    local player = Player(callingPlayer)
+    if not player then return end
+
+    local canPay, msg, args = player:canPay(5000000)
+    if not canPay then
+        player:sendChatMessage(Entity(), 1, msg, unpack(args))
+        return
+    end
+
+    player:pay("Paid %1% Credits for Galactic Politics Sabotage."%_T, 5000000)
+
+    local server = Server()
+    local factionStr = server:getValue("factions")
+    if type(factionStr) ~= "string" or factionStr == "" then
+        player:sendChatMessage(Entity(), 1, "We couldn't find enough active factions to frame."%_t)
+        return
+    end
+
+    local validFactions = {}
+    for id in string.gmatch(factionStr, "([^,]+)") do
+        local index = tonumber(id)
+        local f = Faction(index)
+        if f and f.isAIFaction then
+            table.insert(validFactions, f)
+        end
+    end
+
+    if #validFactions < 2 then
+        player:sendChatMessage(Entity(), 1, "The galactic stage is too quiet for this right now."%_t)
+        return
+    end
+
+    local random = random()
+    local factionA = validFactions[random:getInt(1, #validFactions)]
+    local factionB = factionA
+    while factionB.index == factionA.index do
+        factionB = validFactions[random:getInt(1, #validFactions)]
+    end
+
+    -- Sabotage relationship by 25000 points
+    local currentRel = factionA:getRelations(factionB.index) or 0
+    Galaxy():setFactionRelations(factionA, factionB, currentRel - 25000)
+
+    player:sendChatMessage(Entity(), 0, "The bribes have been paid. A false-flag operation has been launched against %1% and %2%. Watch the news."%_t, factionA.name, factionB.name)
+
+    -- Post news article (Cosmic War compatibility)
+    local success, cv_news = pcall(include, "cosmicwarnews")
+    if success and cv_news then
+        local article = {
+            title = "Political Sabotage Exposed!",
+            content = "Shocking evidence has surfaced revealing deep-rooted sabotage and espionage between " .. factionA.name .. " and " .. factionB.name .. ". Diplomatic relations have plummeted, and military forces on both sides are on high alert. The threat of war looms.",
+            category = "Politics"
+        }
+        cv_news.publishArticle(article)
+    end
+end
+callable(SmugglersMarket, "paySabotageRumor")
+
 function SmugglersMarket.initialize()
     if onServer() then
         Sector():addScriptOnce("sector/traders.lua")
@@ -152,6 +261,8 @@ function SmugglersMarket.initUI()
     window.showCloseButton = 1
     window.moveable = 1
     menu:registerWindow(window, "Unbrand Stolen Goods"%_t, 10);
+    menu:registerInteraction("Trade Rumor (10,000 Cr)"%_t, "onTradeRumor", 90)
+    menu:registerInteraction("Galactic Politics Sabotage (5,000,000 Cr)"%_t, "onSabotageRumor", 91)
 
     -- create a tabbed window inside the main window
     local tabbedWindow = window:createTabbedWindow(Rect(vec2(10, 10), size - 10))
@@ -679,17 +790,20 @@ function SmugglersMarket.getUnbrandPriceAndTax(goodPrice, num, stationFaction, b
     local factor = SmugglersMarket.coConfig.unbrandPriceFactor
 
     local station = Entity()
-    if station and station:getValue("governor_smuggler_active") then
-        factor = factor * 0.5 -- 50% extra discount if Smuggler is Governor!
-    end
 
     if stationFaction.index == buyerFaction.index then
         factor = factor * 0.1 -- Syndicate Boss: 90% discount on unbranding fees at your own station!
     elseif ship then
         local captain = ship:getCaptain()
         if captain and captain:hasClass(CaptainClass.Smuggler) then
-            factor = math.max(0.10, factor - 0.15) -- Smuggler Synergy: 15% discount on unbranding fees
+            local tier = captain.tier or 0
+            local reduction = 0.10 + (tier * 0.05) -- Tier 0=10%, Tier 1=15%, Tier 2=20%, Tier 3=25%
+            factor = math.max(0.05, factor - reduction)
         end
+    end
+
+    if station and station:getValue("governor_smuggler_active") then
+        factor = factor * 0.5 -- 50% extra discount if Smuggler is Governor!
     end
 
     local price = num * round(goodPrice * factor)
@@ -743,7 +857,9 @@ function SmugglersMarket.getStolenBuyPrice(goodName, ship)
     if ship then
         local captain = ship:getCaptain()
         if captain and captain:hasClass(CaptainClass.Smuggler) then
-            multiplier = multiplier + 0.15 -- Smuggler Synergy: 15% bonus payout on stolen/illegal goods
+            local tier = captain.tier or 0
+            local bonus = 0.10 + (tier * 0.05)
+            multiplier = multiplier + bonus
         end
         local station = Entity()
         if station and station.factionIndex == ship.factionIndex then
