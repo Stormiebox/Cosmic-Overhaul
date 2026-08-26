@@ -38,6 +38,3 @@ function Shipyard.startServerJob(singleBlock, founder, withCrew, styleName, seed
     end
 end
 
-function initialize(...)
-    if Shipyard.initialize then return Shipyard.initialize(...) end
-end

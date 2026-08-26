@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/entity/merchants/?.lua;"
 package.path = package.path .. ";data/scripts/lib/?.lua;"
 include ("stringutility")
 local ConsumerGoods = include ("consumergoods")
+local SectorSpecifics = include("sectorspecifics")
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace Casino
@@ -61,9 +62,45 @@ function Casino.payTradeRumor()
     local x, y = Sector():getCoordinates()
     local dist = 30
     local rand = random()
-    local targetX = x + rand:getInt(-dist, dist)
-    local targetY = y + rand:getInt(-dist, dist)
-    player:addKnownSector(SectorView(targetX, targetY))
+    local serverSeed = Server().seed
+    local specs = SectorSpecifics(x, y, serverSeed)
+
+    local targetX, targetY
+    local found = false
+
+    -- Search for a profitable secret sector (up to 250 attempts)
+    for i = 1, 250 do
+        local tx = x + rand:getInt(-dist, dist)
+        local ty = y + rand:getInt(-dist, dist)
+
+        if not player:knowsSector(tx, ty) then
+            specs:initialize(tx, ty, serverSeed)
+            if specs.generationTemplate and specs.generationTemplate.path then
+                local path = specs.generationTemplate.path
+                if path == "sectors/hiddenstash" or 
+                   path == "sectors/smugglerhideout" or 
+                   path == "sectors/lonescrapyard" or 
+                   path == "sectors/stationwreckage" or
+                   path == "sectors/wreckageasteroidfield" then
+                    targetX = tx
+                    targetY = ty
+                    found = true
+                    break
+                end
+            end
+        end
+    end
+
+    -- Fallback to random if search fails
+    if not found then
+        targetX = x + rand:getInt(-dist, dist)
+        targetY = y + rand:getInt(-dist, dist)
+    end
+
+    local view = player:getKnownSector(targetX, targetY) or SectorView(targetX, targetY)
+    view.note = NamedFormat("Trade Rumor\nAnomalous readings indicate massive profit potential."%_T)
+    player:addKnownSector(view)
+    
     player:sendChatMessage(Entity(), 0, "I've uploaded the coordinates to your map. Look around %1%:%2%. Lots of profit to be made there."%_t, targetX, targetY)
 end
 callable(Casino, "payTradeRumor")

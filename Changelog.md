@@ -7,6 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.2.2]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Empty Trade Rumor Generation:** Fixed a severe bug where buying a 10,000 Cr "Trade Rumor" from a Smuggler's Market or Casino would simply add an empty coordinate to your map, leading you to nothing but dead space. The event now utilizes Avorion's native `SectorSpecifics` engine to algorithmically scan the galaxy map for high-profit secret sectors (Hidden Stashes, Smuggler Hideouts, Scrap Yards) up to 30 sectors away.
+- [Bugfix] **Trade Rumor Map Note:** Added a map note tooltip to the Trade Rumor coordinate, ensuring players no longer lose track of the rumored sector on the galaxy map.
+- [Bugfix] **Shipyard Tracker Overwrite & Deletion:** Fixed critical architecture flaws in the global shipyard production tracker introduced in v5.2.1. The mission script now properly utilizes arrays rather than singletons to securely manage multiple queued ships across the galaxy without overwriting data, and resolves an issue where the mission prematurely deleted itself before the player could retrieve their ships.
+- [Bugfix] **Shipyard Engine Constraints:** Removed illegal global wrapper functions from `shipyard.lua` to prevent namespace shadowing and event desynchronization.
+
 ## [v5.2.1]
 
 ### Added

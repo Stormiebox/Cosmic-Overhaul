@@ -4,13 +4,11 @@ include("utility")
 include("structuredmission")
 local ShipFounding = include("shipfounding")
 local PlanGenerator = include("plangenerator")
-local json = include("json")
 
-mission.data.title = {text = "Shipyard Production: ${ship}"%_T}
-mission.data.brief = {text = "Your ship is currently under construction."%_T}
+mission.data.title = {text = "Shipyard Production Tracker"%_T}
+mission.data.brief = {text = "Tracking your queued ships."%_T}
 mission.data.autoTrackMission = true
-mission.data.custom.location = {}
-mission.data.description = {}
+mission.data.custom.jobs = {} -- Array of ships
 
 mission.globalPhase.noBossEncountersTargetSector = true
 mission.globalPhase.noPlayerEventsTargetSector = true
@@ -18,8 +16,18 @@ mission.globalPhase.noLocalPlayerEventsTargetSector = true
 
 mission.globalPhase.onRestore = function()
     local player = Player()
-    local queueStr = player:getValue("co_pending_shipyard_spawns")
-    if queueStr then
+    
+    -- Re-register sector listener just in case there are finished ships waiting
+    local hasFinishedJob = false
+    local jobs = mission.data.custom.jobs or {}
+    for _, job in pairs(jobs) do
+        if job.finished then
+            hasFinishedJob = true
+            break
+        end
+    end
+    
+    if hasFinishedJob then
         player:registerCallback("onSectorEntered", "onSectorEntered")
         
         -- Also check if they spawned into the exact sector on load
@@ -36,11 +44,7 @@ end
 function trackShip(singleBlock, founder, withCrew, styleName, seed, volume, scale, material, shipName, duration, cx, cy, stationId, ownerIndex, stationFactionIndex)
     if not onServer() then return end
 
-    mission.data.title.arguments = {ship = shipName}
-    mission.data.brief.arguments = {ship = shipName}
-    mission.data.location = {x = cx, y = cy}
-
-    mission.data.custom.job = {
+    local newJob = {
         singleBlock = singleBlock,
         founder = founder,
         withCrew = withCrew,
@@ -56,12 +60,37 @@ function trackShip(singleBlock, founder, withCrew, styleName, seed, volume, scal
         cy = cy,
         stationId = stationId,
         ownerIndex = ownerIndex,
-        stationFactionIndex = stationFactionIndex
+        stationFactionIndex = stationFactionIndex,
+        finished = false
     }
 
-    mission.data.description[1] = {text = "Wait for construction to finish."%_T}
-    mission.data.description[2] = {text = "Shipyard Sector: (${x}:${y})"%_T, arguments = {x = cx, y = cy}, bulletPoint = true}
+    mission.data.custom.jobs = mission.data.custom.jobs or {}
+    table.insert(mission.data.custom.jobs, newJob)
     
+    updateMissionUI()
+end
+
+function updateMissionUI()
+    local jobs = mission.data.custom.jobs or {}
+    local desc = {}
+    
+    if #jobs == 0 then
+        -- Clean up mission if no jobs exist
+        finish()
+        return
+    end
+
+    local bulletCount = 1
+    for _, job in pairs(jobs) do
+        if job.finished then
+            desc[bulletCount] = {text = "Construction of '%1%' complete! Travel to (%2%:%3%) to retrieve it."%_T, arguments = {job.shipName, job.cx, job.cy}, bulletPoint = true}
+        else
+            desc[bulletCount] = {text = "Building '%1%' at (%2%:%3%)"%_T, arguments = {job.shipName, job.cx, job.cy}, bulletPoint = true}
+        end
+        bulletCount = bulletCount + 1
+    end
+
+    mission.data.description = desc
     sync()
 end
 
@@ -71,32 +100,81 @@ mission.phases[1].getUpdateInterval = function()
 end
 
 mission.phases[1].updateServer = function(timeStep)
-    local job = mission.data.custom.job
-    if not job then return end
+    local jobs = mission.data.custom.jobs or {}
+    if #jobs == 0 then return end
 
-    job.executed = (job.executed or 0) + timeStep
+    local player = Player()
+    local sx, sy
+    if Sector() then
+        sx, sy = Sector():getCoordinates()
+    end
 
-    if job.executed >= job.duration then
-        -- Timer is complete!
-        local player = Player()
-        local sx, sy
-        if Sector() then
-            sx, sy = Sector():getCoordinates()
+    local needsSync = false
+
+    for i, job in pairs(jobs) do
+        if not job.finished then
+            job.executed = (job.executed or 0) + timeStep
+
+            if job.executed >= job.duration then
+                job.finished = true
+                needsSync = true
+                
+                player:sendChatMessage("", ChatMessageType.Information, "Your ship '%1%' is finished building at Sector (%2%:%3%)!"%_T, job.shipName, job.cx, job.cy)
+
+                if sx == job.cx and sy == job.cy then
+                    -- Spawn immediately if player is in sector
+                    spawnShip(job)
+                    jobs[i] = nil
+                else
+                    -- Wait for player to arrive
+                    player:registerCallback("onSectorEntered", "onSectorEntered")
+                end
+            end
         end
+    end
 
-        -- Inform the player
-        player:sendChatMessage("", ChatMessageType.Information, "Your ship '%1%' is finished building at Sector (%2%:%3%)!"%_T, job.shipName, job.cx, job.cy)
+    -- Clean up nils from array to maintain contiguous indices for Serialization
+    local activeJobs = {}
+    for _, job in pairs(jobs) do
+        table.insert(activeJobs, job)
+    end
+    mission.data.custom.jobs = activeJobs
 
-        if sx == job.cx and sy == job.cy then
-            -- Player is IN the sector! Spawn it immediately.
+    if needsSync or #mission.data.custom.jobs == 0 then
+        updateMissionUI()
+    end
+end
+
+function onSectorEntered(playerIndex, x, y, sectorChangeType)
+    local jobs = mission.data.custom.jobs or {}
+    local needsSync = false
+    local player = Player(playerIndex)
+
+    for i, job in pairs(jobs) do
+        if job.finished and x == job.cx and y == job.cy then
             spawnShip(job)
-        else
-            -- Player is NOT in the sector. Queue it for progressive materialization.
-            queueShipForMaterialization(job)
+            jobs[i] = nil
+            needsSync = true
         end
-        
-        -- Complete the mission
-        finish()
+    end
+
+    -- Clean up nils
+    local activeJobs = {}
+    local hasFinishedJob = false
+    for _, job in pairs(jobs) do
+        table.insert(activeJobs, job)
+        if job.finished then
+            hasFinishedJob = true
+        end
+    end
+    mission.data.custom.jobs = activeJobs
+    
+    if not hasFinishedJob then
+        player:unregisterCallback("onSectorEntered", "onSectorEntered")
+    end
+
+    if needsSync or #mission.data.custom.jobs == 0 then
+        updateMissionUI()
     end
 end
 
@@ -106,7 +184,6 @@ function spawnShip(job)
 
     local station = Entity(Uuid(job.stationId))
     if not station then 
-        -- If station is dead, spawn at center
         station = { orientation = Matrix() }
         station.orientation.translation = vec3(0, 0, 0)
         station.getBoundingSphere = function() return Sphere(vec3(0,0,0), 100) end
@@ -122,7 +199,6 @@ function spawnShip(job)
         if style then
             plan = GeneratePlanFromStyle(style, Seed(job.seed), job.volume, 2000, 1, Material(job.material))
         else
-            -- Fallback
             plan = BlockPlan()
             plan:addBlock(vec3(0, 0, 0), vec3(2, 2, 2), -1, -1, ColorRGB(1, 1, 1), Material(job.material), Matrix(), BlockType.Hull, ColorNone())
         end
@@ -157,58 +233,5 @@ function spawnShip(job)
     if GameSettings().difficulty <= Difficulty.Veteran and GameSettings().reconstructionAllowed then
         local kit = createReconstructionKit(ship)
         buyer:getInventory():addOrDrop(kit, true)
-    end
-end
-
-function queueShipForMaterialization(job)
-    local player = Player()
-    
-    -- Load the existing queue
-    local queueStr = player:getValue("co_pending_shipyard_spawns")
-    local queue = {}
-    if queueStr then
-        local success, decoded = pcall(json.decode, queueStr)
-        if success and decoded then
-            queue = decoded
-        end
-    end
-    
-    table.insert(queue, job)
-    
-    -- Save the queue
-    player:setValue("co_pending_shipyard_spawns", json.encode(queue))
-    
-    -- Register the listener so when the player enters the sector, it spawns
-    player:registerCallback("onSectorEntered", "onSectorEntered")
-end
-
-function onSectorEntered(playerIndex, x, y, sectorChangeType)
-    local player = Player(playerIndex)
-    local queueStr = player:getValue("co_pending_shipyard_spawns")
-    if not queueStr then return end
-    
-    local success, queue = pcall(json.decode, queueStr)
-    if not success or not queue then return end
-    
-    local remainingQueue = {}
-    local spawnedAny = false
-    
-    for _, job in pairs(queue) do
-        if job.cx == x and job.cy == y then
-            -- The player has entered the sector where the ship was built!
-            spawnShip(job)
-            spawnedAny = true
-        else
-            table.insert(remainingQueue, job)
-        end
-    end
-    
-    if spawnedAny then
-        if #remainingQueue > 0 then
-            player:setValue("co_pending_shipyard_spawns", json.encode(remainingQueue))
-        else
-            player:setValue("co_pending_shipyard_spawns", nil)
-            player:unregisterCallback("onSectorEntered", "onSectorEntered")
-        end
     end
 end
