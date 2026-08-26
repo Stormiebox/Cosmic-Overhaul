@@ -7,8 +7,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## [v5.2.0]
+## [v5.2.1]
+
 ### Added
+
+- [Feature] **Global Shipyard Production Timers & Map Tracker:** Resolved a vanilla Avorion flaw where queued ships at a Shipyard would indefinitely pause their construction timers if the sector was unloaded by players. Shipyard timers have now been decoupled from the station itself and moved to a global background simulation attached to the player. Furthermore, whenever you queue a ship, a highly visible, silent tracker mission will automatically pinpoint the exact Shipyard sector on your Galaxy Map so you never lose it again! When the background timer finishes, the ship will automatically spawn in the sector regardless of whether you are there or not.
+
+## [v5.2.0]
+
+### Added
+
 - [Feature] **Smuggler Captain Black Market Bonus:** Trading at Smuggler Markets or Casinos now grants dynamic payouts and discounts when using a Smuggler Captain. The bonus scales from 5% up to 25% based on the captain's Tier (Common to Legendary), and is doubled when trading directly with the Syndicate Boss (Level 5).
 - [Feature] **Dynamic Boarding Loot:** Successfully boarding a ship or station will now automatically drop 1-2 high-rarity loot crates into space (Turrets or Upgrades). A small reward for seizing control of enemy vessels!
 - [Feature] **Trade Route Rumors (Bartenders):** Bartenders at Smuggler Markets and Casinos now offer a new dialogue option to buy trade route rumors for 10,000 Credits. The rumor reveals the coordinates of a highly profitable sector on your galaxy map!
@@ -19,30 +27,38 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - **Galactic Politics Sabotage:** (Synergy with Cosmic War) You can now pay a 5,000,000 Credits bribe to the Smuggler's Market to intentionally lower the relationship between two random NPC factions, sparking proxy wars across the galaxy!
 
-
 ## [v5.1.4]
+
 ### Fixed
+
 - [Bugfix] **Sealed Hulk State Exploit:** Fixed an exploit in `sealedhulkboarding.lua` where the script failed to utilize the engine's `secure()` and `restore()` pipeline to save the event state to disk. Players could previously abuse this by pushing deeper into the hulk, logging out, and reloading the sector to reset the event back to the first stage and farm resources indefinitely. The event state is now strictly serialized to the save file.
 - [Bugfix] **Sealed Hulk Boarding Crash:** Fixed a silent engine crash inside `sealedhulkboarding.lua` where choosing the aggressive options ("Blow the blast doors" or "Push through the crossfire") would attempt to execute a `ship:removeCrew` call without the strictly required `Crewman` argument. The boarding logic will now correctly iterate over the ship's crew manifest to simulate realistic casualties without throwing silent C++ exceptions!
 - [Localization] Fixed missing server-to-client UI localization tags (`%_T`) on the Sealed Hulk extraction messages.
 
 ### Removed
+
 - [Feature] **Smart Jump Autopilot:** Completely scrapped the Smart Jump hotkey feature. Attempting to natively hijack the Avorion engine's hyperspace calculation routines and force ship alignments without a captain resulted in engine limitations that proved too drastic for the scope of the Cosmic series.
 
 ### Balanced
+
 - [Balanced] **Merchant Captain Synergy:** The flat 15% discount/bonus payout applied globally when trading with a Merchant Captain has been rebalanced to dynamically scale based on both the captain's level and tier. The new formula adds +2% per level and +2% per tier, creating perfect synergy with the vanilla Captain progression system. A fresh Common Level 1 Merchant now provides a minimal +2% edge, while a Max Level 5 Legendary Merchant pushes the economy to a massive +16% bonus payout and discount!
 
 ## [v5.1.3]
+
 ### Fixed
+
 - [Bugfix] **Respawn Resource Asteroids Crash:** Fixed an issue in `respawnresourceasteroids.lua` where the background simulation would attempt to read `sector.factionIndex` instead of correctly resolving the sector's controlling faction via `Galaxy():getControllingFaction(x, y)`. This previously caused the Famine Synergy check to silently crash the sector's asteroid regeneration loop.
 
 ## [v5.1.2]
+
 ### Fixed
+
 - Fixed a massive oversight in Captain Elite Traits (specifically Commodore and Scavenger) where continuously terminating and re-applying status effects caused the underlying engine to recalculate max shield capacity, completely freezing natural shield regeneration for the entire duration of the trait effect. Buffs now successfully use a seamless refresh loop.
 
 ## [v5.1.1]
 
 ### 🐛 Bug Fixes
+
 - [Bugfix] **AI Trader Jump Crash (`interactplayerstation.lua`):** Fixed an issue where AI station traders were unable to leave the sector and endlessly spammed `attempt to call global 'random' (a nil value)` to the server console. The script was missing an `include("randomext")` declaration to expose the engine's global `random()` helper.
 - [Bugfix] **Elite Captain Traits Oscillation & Stacking (`captainelitetraits.lua`):** Addressed multiple severe issues with Commodore and Scavenger Elite Traits:
   - **Buff Overlaps:** Applied an idempotent refresh using strict `buffId` termination. The script previously used blindly overlapping `addScript` invocations, causing duplicate modifiers to stack continuously.
@@ -52,11 +68,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [v5.1.0]
 
 ### ✨ Quality of Life (QoL) Updates
+
 - [QoL] **Consolidate Inventory to Vault:** Added a new button in the Trash Man UI allowing you to instantly transfer all unequipped and non-favorite turrets and subsystems from your private inventory directly into the Alliance Vault.
 - [QoL] **Smart Jump Orientation Hotkey:** Added a new hotkey (configurable via Cosmic Configuration Menu) that instantly aligns your ship to your plotted hyperspace jump destination, saving you the hassle of manually turning your ship.
 - [QoL] **Crew Mutiny Fallback Wallet:** Implemented an automated background protection script. If your personal funds run critically low before payday, the system will automatically transfer the missing credits from the Alliance Vault and notify you via chat, preventing a silent crew strike.
 
 ### 🐛 Bug Fixes
+
 - [Bugfix] **Mining Operation Background Crash:** Patched a server crash occurring during background mining operations (`minecommand.lua:attempt to call field MineableBy`). This crash was caused by conflicting mods destroying the vanilla `galaxy.lua` export table. Cosmic Overhaul now injects a universal safeguard that forces the function back into memory, protecting your mining fleets from crashing out.
 - [Bugfix] **Dynamic Reputation Rapid Decay:** Fixed a critical bug where the reputation decay script was missing a namespace declaration and using global wrappers. This caused the Avorion engine to silently fail its 45-minute throttle and fallback to a 15-second loop, applying 45 minutes worth of decay every 15 seconds! Relations will now correctly decay precisely once every 45 minutes as intended.
 - [Bugfix] **Allied Relations Enhancer Crash & Silent Failure:** Patched a fatal engine crash occurring during diplomacy and reputation events. The script was incorrectly attempting to index raw integer IDs directly instead of normalizing them into Faction objects first, which would crash the server. Additionally, fixed a silent failure where the script looked for a non-existent `.alliance` property, completely preventing it from mirroring your reputation changes to your Alliance. It now properly executes the vanilla normalization pipeline and perfectly mirrors your diplomatic actions!
@@ -64,16 +82,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [v5.0.12]
 
 ### ⚖️ Balanced
+
 - [Balanced] **Dynamic Reputation Pacing:** The dynamic reputation decay interval has been further increased from 15 minutes to 45 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! This drastically reduces UI notification spam by processing 45 minutes worth of decay all at once (e.g. "-5828 Reputation with Cookie Empire").
 
 ## [v5.0.11]
 
 ### ⚖️ Balanced
+
 - [Balanced] **Dynamic Reputation Pacing:** The dynamic reputation decay interval has been increased from 60 seconds to 15 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! However, instead of spamming your screen with a tiny "-1 Relation" notification every 60 seconds, it will now cleanly process 15 minutes worth of decay all at once (e.g. "-15 Relations"). This drastically reduces UI notification spam while maintaining the exact same math and balance.
 
 ## [v5.0.10]
 
 ### ⚖️ Balanced
+
 - [Balanced] **Subspace Weather Rarity:** Significantly reduced the spawn rate of natural Subspace Weather events (Ion Storms, Solar Flares) to 1% (down from 15%) and massively increased the global cooldown between storms to 4-8 hours (up from 30-60 minutes). Weather events are now a very rare, high-impact phenomenon rather than a constant nuisance.
 - [Balanced] **War Profiteering:** Increased the maximum passive income multiplier for Player Stations located in a max-heat Cosmic War zone from 250% to 300%. Setting up supply chains in warzones is now incredibly lucrative.
 - [Balanced] **Eclipse Contraband Premium (Cosmic Chronicles Synergy):** Reduced the Smuggler's Market payout multiplier for fencing Ascendant Matter and Eclipse Datacores from 200% (2.0x) to 150% (1.5x) to curb late-game inflation while still offering a solid premium.
@@ -82,19 +103,21 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Balanced] **War Profiteering Distance Scaling:** Player Station passive income now scales dynamically based on distance to the galactic core. Stations near the edge of the galaxy receive a standard 1.0x multiplier, while stations deep in the core receive up to a 3.0x multiplier to their base payout, heavily incentivizing core expansions.
 
 ### ⚙️ Adjustments
+
 - [Adjustment] **Subspace Weather Generator Engine Compliance:** Hardened the structural foundation of the weather generator. It now features full state persistence (storm cooldowns will properly save/restore across server restarts instead of resetting to 0) and strict adherence to the Avorion SectorView API for coordinate parsing.
 - [Adjustment] **Cosmic Overhaul Codex:** Updated Codex with new information while adding in left out information from the official Cosmic Overhaul Wiki.
 
 ### 🐛 Bug Fixes
+
 - [Bugfix] **Dynamic Reputation Decay Alliance Double-Penalty:** Fixed a severe logic flaw where passive reputation decay was being calculated independently for both the Player and their Alliance, but applied using an API function (`cvf.changeRelations`) that automatically mirrored the Player's decay to the Alliance. This caused the Alliance to suffer the decay penalty twice. The script now safely bypasses mirroring and applies decay directly via the vanilla `galaxy:setFactionRelations()` API.
 - [Bugfix] **Dynamic Reputation Decay Type Safety:** Added strict `tonumber()` type coercion when fetching interaction timestamps to prevent potential silent Lua exceptions if the engine cache returned a timestamp as a string.
 - [Bugfix] **Dynamic Reputation Decay Entity Script Structure:** Cleaned up the script structure by removing a leaked `return` statement at the bottom of the script that attempted to export undefined globals (a copy-paste error from vanilla's `relations.lua`).
 - [Bugfix] **Famine Event Persistence:** Fixed a critical API bug where the background Famine Listener queue lacked state persistence. Famine debuff evaluations will no longer permanently skip ships if a sector unloads or the server restarts while ships are still waiting in the queue.
 
-
 ## [v5.0.9]
 
 ### ⚙️ Changed & Balanced
+
 - [Changed] **Keybind Adjustments:** Unbound the default keys for the Cosmic Overhaul UI tabs (Bulletin Board, Resource Display). They now default to unbound to allow players to set their own custom shortcuts without overlapping with other mods.
 
 ## [v5.0.8]
@@ -205,4 +228,3 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Bugfixed] **Scout Mission Fix:** Fixed a massive vanilla/mod bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the `scoutcommandnotetable` lacked dialogue lines for that specific sector template.
 
 - [Bugfixed] **VFS Compliance:** Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.
-
