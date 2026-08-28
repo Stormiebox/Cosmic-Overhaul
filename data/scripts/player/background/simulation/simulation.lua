@@ -59,11 +59,19 @@ Balancing:
     function Simulation.secure()
         if Simulation.commands and #Simulation.commands > 0 then
             local secureTime = os.time()
-            include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
-                timestamp = tostring(secureTime),
-            })
             for _, command in pairs(Simulation.commands or {}) do
-                command.data.lastSecuredClockTime = secureTime
+                -- Safeguard: Only overwrite the offline timestamp if we have already 
+                -- processed the catch-up tick, or if the command is brand new.
+                -- Otherwise, early autosaves will destroy the player's offline time.
+                if ARCC_hasRunFirstUpdate or not command.data.lastSecuredClockTime then
+                    command.data.lastSecuredClockTime = secureTime
+                end
+            end
+            
+            if ARCC_hasRunFirstUpdate then
+                include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Securing commands with a timestamp of: ${timestamp}"%{
+                    timestamp = tostring(secureTime),
+                })
             end
         end
         return ARCC_Simulation_secure_original()

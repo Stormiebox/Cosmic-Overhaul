@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.2.4]
+
+### 🪲 Bug Fixes
+- [Bugfix] **ARCC Offline Catch-up Singleplayer/Private Server Fix:** Resolved a critical bug where the ARCC offline simulation catch-up would fail to process time elapsed for singleplayer and private server users who completely shut down the game. The issue was caused by Avorion's aggressive early autosave mechanism wiping the player's offline timestamp on startup before the catch-up system could evaluate it. The simulation now strictly safeguards the offline timestamp until the catch-up logic successfully runs.
+
 ## [v5.2.3]
 
 ### 🪲 Bug Fixes
