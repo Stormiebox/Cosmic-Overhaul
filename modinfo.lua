@@ -25,7 +25,7 @@ meta =
     -- This will be used to check for unmet dependencies or incompatibilities, and to check compatibility between clients and dedicated servers with mods.
     -- If a client with an unmatching major or minor mod version wants to log into a server, login is prohibited.
     -- Unmatching patch version still allows logging into a server. This works in both ways (server or client higher or lower version).
-    version = "5.2.2",
+    version = "5.2.3",
 
     -- If your mod requires dependencies, enter them here. The game will check that all dependencies given here are met.
     -- Possible attributes:
@@ -43,38 +43,6 @@ meta =
     --      {id = "OptionalMod", min = "0.2", optional = true}, -- we support OptionalMod optionally, starting at version 0.2
     -- },
     dependencies = {
-        { id = "2565262170", incompatible = true },
-        { id = "2746508433", incompatible = true },
-        { id = "3629149685", incompatible = true },
-        { id = "3713051056", incompatible = true },
-        { id = "3504174674", incompatible = true },
-        { id = "2853246039", incompatible = true },
-        { id = "2853141522", incompatible = true },
-        { id = "2853436262", incompatible = true },
-        { id = "3352306685", incompatible = true },
-        { id = "3715684735", incompatible = true },
-        { id = "2778851215", incompatible = true },
-        { id = "2323452485", incompatible = true },
-        { id = "2305699026", incompatible = true },
-        { id = "3042506675", incompatible = true },
-        { id = "2614650527", incompatible = true },
-        { id = "2606086199", incompatible = true },
-        { id = "2619827652", incompatible = true },
-        { id = "2900683208", incompatible = true },
-        { id = "3290187742", incompatible = true },
-        { id = "2597082448", incompatible = true },
-        { id = "3689503637", incompatible = true },
-        { id = "2058470633", incompatible = true },
-        { id = "2087839890", incompatible = true },
-        { id = "3710420396", incompatible = true },
-        { id = "1924206157", incompatible = true },
-        { id = "1769379152", incompatible = true },
-        { id = "1765619430", incompatible = true },
-        { id = "3717680082", incompatible = true },
-        { id = "3737337587", incompatible = true },
-        { id = "3684665566", incompatible = true },
-        { id = "3674627736", incompatible = true },
-        { id = "3651548355", incompatible = true },
         { id = "3727542782", min = "1.0",        max = "*.*" }, -- Cosmic Vault
         { id = "Avorion",    min = "1.0",        max = "*.*" }
     },

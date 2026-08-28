@@ -21,6 +21,18 @@ function Shop:buildGui(window, guiType, config) -- client
         -- buying from the NPC
         buttonCaption = "Buy"%_t
         buttonCallback = "onBuyButtonPressed"
+
+        self.playerCurrencyTypeLabel = window:createLabel(Rect(priceX - 200, size.y - 40, priceX - 10, size.y - 20), "", 14)
+        self.playerCurrencyTypeLabel:setRightAligned()
+
+        self.playerCurrencyAmountLabel = window:createLabel(Rect(buttonX - 100, size.y - 40, buttonX - 20, size.y - 20), "", 14)
+        self.playerCurrencyAmountLabel:setRightAligned()
+
+        local rect = Rect(buttonX - 5, size.y - 42, buttonX - 20, size.y - 20)
+        rect.upper = rect.lower + vec2(24)
+        self.playerCurrencyIcon = window:createPicture(rect, "")
+        self.playerCurrencyIcon.isIcon = true
+
         window:createButton(Rect(0, 50 + 35 * 15, 70, 80 + 35 * 15), "<", "onSoldLeftButtonPressed")
         window:createButton(Rect(size.x - 70, 50 + 35 * 15, 60 + size.x - 60, 80 + 35 * 15), ">",
             "onSoldRightButtonPressed")
@@ -399,8 +411,12 @@ function Shop:updateSellGui() -- client
             line.icon.color = item.rarity.color
         end
 
-        local price = self:getSellPriceAndTax(item.price, faction, buyer)
-        line.priceLabel.caption = createMonetaryString(price)
+        if item.displayedPrice then
+            line.priceLabel.caption = item.displayedPrice
+        else
+            local price = self:getSellPriceAndTax(item.price, faction, buyer)
+            line.priceLabel.caption = createMonetaryString(price)
+        end
 
         if self.priceRatio < 1 then
             line.priceReductionLabel:show()

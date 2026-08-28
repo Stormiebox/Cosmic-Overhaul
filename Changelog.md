@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.2.3]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Rift Research Center Shop UI:** Fixed an issue where the Rift Research Center shop displayed all data costs as 0 Credits and completely failed to show the player's Xsotan Data inventory. Injected the missing DLC layout elements and dynamic price checks back into the shop overrides to fully restore Vanilla DLC shop functionality while retaining custom pagination.
+
 ## [v5.2.2]
 
 ### 🪲 Bug Fixes
