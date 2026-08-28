@@ -17,16 +17,41 @@ Balancing:
         return ARCC_Simulation_getUpdateInterval_original()
     end
 
+    local ARCC_lastUpdateClockTime = nil
+
     -- Combined Simulation.update logic
     local ARCC_Simulation_update_original = Simulation.update
     function Simulation.update(timestep)
         ARCC_Simulation_update_original(timestep)
 
+        local currentTime = os.time()
+
         if not ARCC_hasRunFirstUpdate then
             ARCC_hasRunFirstUpdate = true
             local timeToApply = ARCC_getTimeToApply(timestep)
             ARCC_applyCatchUpTime(timeToApply)
+        elseif ARCC_lastUpdateClockTime then
+            -- Detect if the server was paused (empty) for a long time
+            local gap = currentTime - ARCC_lastUpdateClockTime
+            -- If the gap is larger than 5 minutes (300 seconds), we missed ticks
+            if gap > 300 then
+                local config = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
+                local enableOfflineCatchup = config and config.enableOfflineCatchup or false
+                if enableOfflineCatchup then
+                    include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Detected server pause gap of ${gap}s. Catching up..."%{gap=tostring(gap)})
+                    
+                    local ARCC_offlineTimeReplayRatio = config and config.offlineCatchupRatio or 0.667
+                    local ARCC_maxOfflineReplayTime = config and config.offlineCatchupMaxDuration or (8*60*60)
+                    
+                    local timeToApply = gap * ARCC_offlineTimeReplayRatio
+                    timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
+                    
+                    ARCC_applyCatchUpTime(timeToApply)
+                end
+            end
         end
+
+        ARCC_lastUpdateClockTime = currentTime
     end
 
     -- Combined Simulation.secure logic

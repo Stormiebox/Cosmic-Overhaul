@@ -11,6 +11,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### 🪲 Bug Fixes
 - [Bugfix] **Rift Research Center Shop UI:** Fixed an issue where the Rift Research Center shop displayed all data costs as 0 Credits and completely failed to show the player's Xsotan Data inventory. Injected the missing DLC layout elements and dynamic price checks back into the shop overrides to fully restore Vanilla DLC shop functionality while retaining custom pagination.
+- [Bugfix] **ARCC Offline Catch-up Multiplayer Sync:** Fixed a critical issue on multiplayer dedicated servers where the ARCC offline simulation catch-up would fail to trigger when players logged back into a previously empty (paused) server. The system now utilizes a gap-detection mechanism to properly calculate elapsed real-world time during server pauses, ensuring commands correctly progress as if the player was offline.
 
 ## [v5.2.2]
 
