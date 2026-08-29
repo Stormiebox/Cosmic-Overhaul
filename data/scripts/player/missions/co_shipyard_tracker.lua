@@ -2,8 +2,9 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 include("utility")
 include("structuredmission")
-local ShipFounding = include("shipfounding")
-local PlanGenerator = include("plangenerator")
+include("plangenerator")
+include("defaultscripts")
+include("reconstructionutility")
 
 mission.data.title = {text = "Shipyard Production Tracker"%_T}
 mission.data.brief = {text = "Tracking your queued ships."%_T}

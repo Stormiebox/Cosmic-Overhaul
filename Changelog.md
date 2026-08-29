@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.2.5]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Shipyard Infinite Spawning Exploit:** Fixed a critical bug in the background Shipyard Production Tracker where the script would crash trying to initialize vanilla components without the proper dependencies loaded. This crash prevented the tracker from removing the job from the player's queue, resulting in the ship spawning infinitely every time the player re-entered the sector. 
+- [Bugfix] **Shipyard Veteran Reconstruction Crash:** Added missing dependencies to ensure that if the player builds a ship on Veteran difficulty or lower, the script can safely hand out the Reconstruction Token without crashing the server.
+
 ## [v5.2.4]
 
 ### 🪲 Bug Fixes
