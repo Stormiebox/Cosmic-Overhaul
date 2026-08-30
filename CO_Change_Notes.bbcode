@@ -1,0 +1,373 @@
+[i]Version 5.2.5[/i]
+[hr][/hr]
+[h1]v5.2.5 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix directly targets a major issue with the background shipyard production tracker crashing on initialization and duplicating ships infinitely.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Shipyard Infinite Spawning Exploit:[/b] Fixed a critical bug in the background Shipyard Production Tracker where the script would crash trying to initialize vanilla components without the proper dependencies loaded. This crash prevented the tracker from removing the job from the player's queue, resulting in the ship spawning infinitely every time the player re-entered the sector.
+[*]🐛 [b]Shipyard Veteran Reconstruction Crash:[/b] Added missing dependencies to ensure that if the player builds a ship on Veteran difficulty or lower, the script can safely hand out the Reconstruction Token without crashing the server.
+[*]🐛 [b]Shipyard Null Entity Crash:[/b] Fixed an issue in the Shipyard Production Tracker where restoring a mission with a missing entity pointer would crash the script on load. The tracker now safely verifies entity existence or falls back to generic coordinates, preventing mission corruption upon server restarts.
+[/list]
+
+[i]Version 5.2.4[/i]
+[hr][/hr]
+[h1]v5.2.4 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix directly targets a major issue with the ARCC Offline Simulation not working for Singleplayer and Private Server saves.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]ARCC Offline Catch-up Singleplayer Fix:[/b] Resolved a critical bug where the ARCC offline simulation catch-up would fail to process time elapsed for singleplayer and private server users who completely shut down the game. The issue was caused by Avorion's aggressive early autosave mechanism wiping the player's offline timestamp on startup before the catch-up system could evaluate it. The simulation now strictly safeguards the offline timestamp until the catch-up logic successfully runs.
+[/list]
+
+[i]Version 5.2.3[/i]
+[hr][/hr]
+[h1]v5.2.3 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets UI rendering issues within DLC shops caused by outdated layout overrides. While providing a bugfix for AARC multiplayer sync issues.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Rift Research Center Shop UI:[/b] Fixed an issue where the Rift Research Center shop displayed all data costs as 0 Credits and completely failed to show the player's Xsotan Data inventory. Injected the missing DLC layout elements and dynamic price checks back into the shop overrides to fully restore Vanilla DLC shop functionality while retaining custom pagination.
+[*]🐛 [b]ARCC Offline Catch-up Multiplayer Sync:[/b] Fixed a critical issue on multiplayer dedicated servers where the ARCC offline simulation catch-up would fail to trigger when players logged back into a previously empty (paused) server. The system now utilizes a gap-detection mechanism to properly calculate elapsed real-world time during server pauses, ensuring commands correctly progress as if the player was offline.
+[/list]
+
+[i]Version 5.2.2[/i]
+[hr][/hr]
+[h1]v5.2.2 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets a severe issue regarding empty sector generation during Trade Rumors![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Empty Trade Rumor Generation:[/b] Fixed a severe bug where buying a 10,000 Cr "Trade Rumor" from a Smuggler's Market or Casino would simply add an empty coordinate to your map, leading you to nothing but dead space. The event now utilizes Avorion's native engine to algorithmically scan the galaxy map for high-profit secret sectors (Hidden Stashes, Smuggler Hideouts, Scrap Yards) up to 30 sectors away.
+[*]🐛 [b]Trade Rumor Map Note:[/b] Added a map note tooltip to the Trade Rumor coordinate, ensuring players no longer lose track of the rumored sector on the galaxy map.
+[*]🐛 [b]Shipyard Tracker Overwrite & Deletion:[/b] Fixed critical architecture flaws in the global shipyard production tracker introduced in v5.2.1. The mission script now properly utilizes arrays rather than singletons to securely manage multiple queued ships across the galaxy without overwriting data, and resolves an issue where the mission prematurely deleted itself before the player could retrieve their ships.
+[*]🐛 [b]Shipyard Engine Constraints:[/b] Removed illegal global wrapper functions from `shipyard.lua` to prevent namespace shadowing and event desynchronization.
+[/list]
+
+[i]Version 5.2.1[/i]
+[hr][/hr]
+[h1]v5.2.1 🛠️QOL PATCH UPDATE!🛠️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch introduces a major Quality of Life improvement for player Shipyards![/i]
+
+[b]✨NEW FEATURES[/b]
+[list]
+[*]🔥 [b]Global Shipyard Production Timers & Map Tracker:[/b] Resolved a vanilla Avorion flaw where queued ships at a Shipyard would indefinitely pause their construction timers if the sector was unloaded by players. Shipyard timers have now been decoupled from the station itself and moved to a global background simulation attached to the player. Furthermore, whenever you queue a ship, a highly visible, silent tracker mission will automatically pinpoint the exact Shipyard sector on your Galaxy Map so you never lose it again! When the background timer finishes, the ship will automatically spawn in the sector regardless of whether you are there or not.
+[/list]
+
+[i]Version 5.2.0[/i]
+[hr][/hr]
+[h1]v5.2.0 ✨FEATURE UPDATE!✨[/h1]
+[hr][/hr]
+[b]🛠️ MINOR EXPANSION PATCH[/b]
+[i]This minor update introduces a brand new dynamic economy and multiple Quality of Life features, including Boarding Loot, Trade Route Rumors, Mining Hazard Pay, and an Asteroid Density Rebalance![/i]
+
+[b]✨NEW FEATURES[/b]
+[list]
+[*]🔥 [b]Smuggler Captain Black Market Bonus:[/b] Trading at Smuggler Markets or Casinos now grants dynamic payouts and discounts when using a Smuggler Captain. The bonus scales from 5% up to 25% based on the captain's Tier (Common to Legendary), and is doubled when trading directly with the Syndicate Boss (Level 5).
+[*]🔥 [b]Dynamic Boarding Loot:[/b] Successfully boarding a ship or station will now automatically drop 1-2 high-rarity loot crates into space (Turrets or Upgrades). A small reward for seizing control of enemy vessels!
+[*]🔥 [b]Trade Route Rumors (Bartenders):[/b] Bartenders at Smuggler Markets and Casinos now offer a new dialogue option to buy trade route rumors for 10,000 Credits. The rumor reveals the coordinates of a highly profitable sector on your galaxy map!
+[*]🔥 [b]Mining Captain Hazard Pay:[/b] When assigning a Mining Captain to a background mining operation, there is a chance the area will contain hazardous conditions (simulated). If the captain encounters a hazard, they automatically secure a 10% bonus to raw ore extraction, representing hazard pay and overtime!
+[*]🔥 [b]Asteroid Density Rebalance:[/b] Overhauled the asteroid generation logic. Outer rim sectors now feature fewer but significantly larger asteroids (ideal for manual mining). In contrast, sectors closer to the core now generate highly dense fields of smaller asteroids (perfect for massive fleet operations)!
+[*]🔥 [b]Galactic Politics Sabotage:[/b] You can now pay a 5,000,000 Credits bribe to the Smuggler's Market to intentionally lower the relationship between two random NPC factions across the galaxy. This triggers a news broadcast and sparks proxy wars!
+[/list]
+
+[i]Version 5.1.4[/i]
+[hr][/hr]
+[h1]v5.1.4 🐛BUGFIX & BALANCE PATCH UPDATE!⚖️[/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This hotfix revolves around fixing a fatal Boarding Crash, the complete removal of Smart Jump, and a huge Merchant Captain economy rebalance![/i]
+
+[b]🖥️BALANCING[/b]
+[list]
+[*]⚖️ [b]Merchant Captain Synergy:[/b] The flat 15% discount/bonus payout applied globally when trading with a Merchant Captain has been rebalanced to dynamically scale based on both the captain's level and tier. The new formula adds +2% per level and +2% per tier, creating perfect synergy with the vanilla Captain progression system. A fresh Common Level 1 Merchant now provides a minimal +2% edge, while a Max Level 5 Legendary Merchant pushes the economy to a massive +16% bonus payout and discount!
+[/list]
+
+[b]🔧ADJUSTMENTS[/b]
+[list]
+[*]❌ [b]Smart Jump Autopilot:[/b] Completely scrapped the Smart Jump hotkey feature. Attempting to natively hijack the Avorion engine's hyperspace calculation routines and force ship alignments without a captain resulted in engine limitations that proved too drastic for the scope of the Cosmic series.
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Sealed Hulk State Exploit:[/b] Fixed an exploit in `sealedhulkboarding.lua` where the script failed to utilize the engine's `secure()` and `restore()` pipeline to save the event state to disk. Players could previously abuse this by pushing deeper into the hulk, logging out, and reloading the sector to reset the event back to the first stage and farm resources indefinitely. The event state is now strictly serialized to the save file.
+[*]🐛 [b]Sealed Hulk Boarding Crash:[/b] Fixed a silent engine crash inside `sealedhulkboarding.lua` where choosing the aggressive options ("Blow the blast doors" or "Push through the crossfire") would attempt to execute a `ship:removeCrew` call without the strictly required `Crewman` argument. The boarding logic will now correctly iterate over the ship's crew manifest to simulate realistic casualties without throwing silent C++ exceptions!
+[*]🐛 [b]Localization:[/b] Fixed missing server-to-client UI localization tags (`%_T`) on the Sealed Hulk extraction messages.
+[/list]
+
+[i]Version 5.1.3[/i]
+[hr][/hr]
+[h1]v5.1.3 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix resolves a severe background crash preventing asteroids from properly regenerating![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Respawn Resource Asteroids Crash:[/b] Fixed a critical issue where the background simulation would attempt to read the sector's controlling faction incorrectly. This caused the Famine Synergy check to silently crash the sector's asteroid regeneration loop. The script now natively and securely resolves the controlling faction!
+[/list]
+
+[i]Version 5.1.2[/i]
+[hr][/hr]
+[h1]v5.1.2 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets a severe shield regeneration bug linked to Captain Elite Traits![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Elite Captain Shield Stutter:[/b] Fixed a major logic flaw where Elite Captains (Commodore / Scavenger) were continuously applying and removing their status buffs every 5 seconds. This micro-stutter was constantly forcing the game engine to reset the "out of combat" regeneration timer, completely preventing shields from naturally recharging. The buffs now correctly "refresh" instead, allowing shields to recharge normally while the captain is assigned!
+[/list]
+
+[i]Version 5.1.1[/i]
+[hr][/hr]
+[h1]V5.1.1 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix directly addresses two reported bugs causing AI trader crashes and severe UI stat oscillation with Elite Captain traits![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]AI Trader Sector Jump Crash:[/b] Fixed an engine error that caused AI station traders to endlessly crash and spam the console when trying to jump out of the sector. They will now properly calculate their jump trajectories and leave the sector cleanly!
+[*]🐛 [b]Elite Captain Buff Stacking & UI Oscillation:[/b] Fixed the background logic for Commodore and Scavenger Elite Traits!
+- Fixed an issue where the buffs were applying massively inflated percentages (+110% instead of +10%).
+- Fixed a bug where the buffs would overlap every 5 seconds and continuously stack with themselves.
+- The Commodore's damage buff now correctly boosts Fire Rate instead of magically inflating your Armed Turret slots!
+[/list]
+
+[i]Version 5.1.0[/i]
+[hr][/hr]
+[h1]V5.1.0 ✨FEATURES & 🪲BUGFIX UPDATE![/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This patch introduces new features and squashes critical background simulation bugs.[/i]
+
+[b]🔬QUALITY OF LIFE (QoL) UPDATES[/b]
+[list]
+[*]✨ [b]Consolidate Inventory to Vault:[/b] Added a new button in the Trash Man UI allowing you to instantly transfer all unequipped and non-favorite turrets and subsystems from your private inventory directly into the Alliance Vault.
+[*]✨ [b]Smart Jump Orientation Hotkey:[/b] Added a new hotkey (configurable via Cosmic Configuration Menu) that instantly aligns your ship to your plotted hyperspace jump destination, saving you the hassle of manually turning your ship.
+[*]✨ [b]Crew Mutiny Fallback Wallet:[/b] Implemented an automated background protection script. If your personal funds run critically low before payday, the system will automatically transfer the missing credits from the Alliance Vault and notify you via chat, preventing a silent crew strike.
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Mining Operation Background Crash:[/b] Patched a server crash occurring during background mining operations (`minecommand.lua:attempt to call field MineableBy`). This crash was caused by conflicting mods destroying the vanilla `galaxy.lua` export table. Cosmic Overhaul now injects a universal safeguard that forces the function back into memory, protecting your mining fleets from crashing out.
+[*]🐛 [b]Dynamic Reputation Rapid Decay:[/b] Fixed a critical bug where the reputation decay script was missing a namespace declaration and using global wrappers. This caused the Avorion engine to silently fail its 45-minute throttle and fallback to a 15-second loop, applying 45 minutes worth of decay every 15 seconds! Relations will now correctly decay precisely once every 45 minutes as intended.
+[*]🐛 [b]Allied Relations Enhancer Crash & Silent Failure:[/b] Patched a fatal engine crash occurring during diplomacy and reputation events. The script was incorrectly attempting to index raw integer IDs directly instead of normalizing them into Faction objects first, which would crash the server. Additionally, fixed a silent failure where the script looked for a non-existent `.alliance` property, completely preventing it from mirroring your reputation changes to your Alliance. It now properly executes the vanilla normalization pipeline and perfectly mirrors your diplomatic actions!
+[/list]
+
+[i]Version 5.0.12[/i]
+[hr][/hr]
+[h1]V5.0.12 ⚙️ADJUSTMENTS UPDATE![/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This small patch further refines the dynamic reputation decay to drastically reduce UI notification spam![/i]
+
+[b]🔧ADJUSTMENTS[/b]
+[list]
+[*]⚙️ [b]Dynamic Reputation Pacing:[/b] The dynamic reputation decay interval has been further increased from 15 minutes to 45 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! This drastically reduces UI notification spam by processing 45 minutes worth of decay all at once (e.g. "-5828 Reputation with Cookie Empire").
+[/list]
+
+[i]Version 5.0.11[/i]
+[hr][/hr]
+[h1]v5.0.11 ⚖️BALANCING UPDATE![/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This patch refines the dynamic reputation decay to reduce UI notification spam![/i]
+
+[b]🖥️BALANCING[/b]
+[list]
+[*]⚙️ [b]Dynamic Reputation Pacing:[/b] The dynamic reputation decay interval has been increased from 60 seconds to 15 minutes. Because the background script mathematically scales the penalty to match the interval, your overall hourly reputation loss remains exactly the same! However, instead of spamming your screen with a tiny "-1 Relation" notification every 60 seconds, it will now cleanly process 15 minutes worth of decay all at once (e.g. "-15 Relations"). This drastically reduces UI notification spam while maintaining the exact same math and balance.
+[/list]
+
+[i]Version 5.0.10[/i]
+[hr][/hr]
+[h1]V5.0.10 ⚖️BALANCE, ⚙️ADJUSTMENTS & 🐛BUGFIX PATCH UPDATE![/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This patch addresses several bugs reported, balancing game mechanics and system adjustments.[/i]
+
+[b]🖥️BALANCING[/b]
+[list]
+[*]⚖️ [b]Subspace Weather Rarity:[/b] Significantly reduced the spawn rate of natural Subspace Weather events (Ion Storms, Solar Flares) to 1% (down from 15%) and massively increased the global cooldown between storms to 4-8 hours (up from 30-60 minutes). Weather events are now a very rare, high-impact phenomenon rather than a constant nuisance.
+[*]⚖️ [b]War Profiteering:[/b] Increased the maximum passive income multiplier for Player Stations located in a max-heat Cosmic War zone from 250% to 300%. Setting up supply chains in warzones is now incredibly lucrative.
+[*]⚖️ [b]Eclipse Contraband Premium (Cosmic Chronicles Synergy):[/b] Reduced the Smuggler's Market payout multiplier for fencing Ascendant Matter and Eclipse Datacores from 200% (2.0x) to 150% (1.5x) to curb late-game inflation while still offering a solid premium.
+[*]⚖️ [b]Ascendancy Trade Fear (Cosmic Ascendancy Synergy):[/b] Increased the flight time penalty for non-smuggler merchants trading near factions at war with the Ascendancy (The Eclipse) from 35% delay (1.35x) to 50% delay (1.5x).
+[*]⚖️ [b]Famine Relief Charity:[/b] Increased the reputation multiplier for Charity Missions sent to starving factions from +75% to +100%.
+[*]⚖️ [b]War Profiteering Distance Scaling:[/b] Player Station passive income now scales dynamically based on distance to the galactic core. Stations near the edge of the galaxy receive a standard 1.0x multiplier, while stations deep in the core receive up to a 3.0x multiplier to their base payout, heavily incentivizing core expansions.
+[/list]
+
+[b]🔧ADJUSTMENTS[/b]
+[list]
+[*]⚙️ [b]Subspace Weather Generator Engine Compliance:[/b] Hardened the structural foundation of the weather generator. It now features full state persistence (storm cooldowns will properly save/restore across server restarts instead of resetting to 0) and strict adherence to the Avorion SectorView API for coordinate parsing.
+[*]⚙️ [b]Cosmic Overhaul Codex:[/b] Updated the Codex with new information while adding in left out information from the official Cosmic Overhaul Wiki.
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Dynamic Reputation Decay Alliance Double-Penalty:[/b] Fixed a severe logic flaw where passive reputation decay was being calculated independently for both the Player and their Alliance, but applied using an API function (`cvf.changeRelations`) that automatically mirrored the Player's decay to the Alliance. This caused the Alliance to suffer the decay penalty twice. The script now safely bypasses mirroring and applies decay directly via the vanilla `galaxy:setFactionRelations()` API.
+[*]🐛 [b]Dynamic Reputation Decay Type Safety:[/b] Added strict `tonumber()` type coercion when fetching interaction timestamps to prevent potential silent Lua exceptions if the engine cache returned a timestamp as a string.
+[*]🐛 [b]Dynamic Reputation Decay Entity Script Structure:[/b] Cleaned up the script structure by removing a leaked `return` statement at the bottom of the script that attempted to export undefined globals (a copy-paste error from vanilla's `relations.lua`).
+[*]🐛 [b]Famine Event Persistence:[/b] Fixed a critical API bug where the background Famine Listener queue lacked state persistence. Famine debuff evaluations will no longer permanently skip ships if a sector unloads or the server restarts while ships are still waiting in the queue.
+[/list]
+
+[i]Version 5.0.9[/i]
+[hr][/hr]
+[h1]⚙️V5.0.9 HOTFIX PATCH UPDATE!⚙️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This small patch addresses UI keybind overlaps.[/i]
+[*]⚙️ [b]Keybind Adjustments:[/b] Unbound the default keys for the Cosmic Overhaul UI tabs (Bulletin Board, Resource Display). They now default to unbound to allow players to set their own custom shortcuts without overlapping with other mods.
+
+[i]Version 5.0.8[/i]
+[hr][/hr]
+[h1]🐛V5.0.8 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch addresses severe AI combat disruptions caused by background logic crashes.[/i]
+[*]📦 [b]Delivery Missions Logic:[/b] Delivery missions will no longer select a destination sector owned by a faction that the questgiver is currently at war with.
+[*]🐛 [b]Dynamic Reputation Decay AI Halt:[/b] Fixed a critical bug in `DynamicReputationDecay.lua` where evaluating non-existent relations caused an `attempt to compare number with nil` exception. This background error would flood the server update loop, severely disrupting faction AI logic and causing ships to ignore combat.
+
+[i]Version 5.0.7[/i]
+[hr][/hr]
+[h1]🐛V5.0.7 CRITICAL BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ CRITICAL HOTFIX PATCH[/b]
+[i]This patch addresses issues with offline simulation and severe AI single sector population.[/i]
+[*]🐛 [b]Dynamic Reputation Decay Error:[/b] Fixed a severe server log spam issue originating from `DynamicReputationDecay.lua`. The script was incorrectly passing integer indices directly into the `getFactionRelations` native API, causing recurring `invalid type 'number'` errors. Indices are now properly wrapped in `Faction()` objects.
+[*]🐛 [b]Weather Generator Loading:[/b] Fixed a silent script attachment failure in `server.lua`. `co_weather_generator.lua` was missing the mandatory `data/scripts/` root path prefix, preventing the engine from properly loading the global weather script on server start.
+
+[i]Version 5.0.6[/i]
+[hr][/hr]
+[h1]🐛V5.0.6 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch addresses issues with offline simulation and severe AI single sector population.[/i]
+[*]🐛 [b]Offline Simulation:[/b] Resolved an issue where checking the `Enable Offline Catch-up` option in the CCM window and relaunching the game would result in the option visually or functionally reverting to disabled. The background simulation script now evaluates the configuration dynamically at runtime when parsing the first update tick, rather than caching the default values prematurely during initial script load before the Cosmic Configuration Menu completes parsing `ccm.lua`.
+
+[*]🐛 [b]Traders (AI Bloat & Desync):[/b] Fixed a severe optimization bug originating from the `ft_gateTradeMult` trader influx logic within `factory.lua`. If a player sat in an accelerated sector (e.g., heavily populated with Gates/Wormholes) for an extremely extended period (8+ hours), the factory spawned traders faster than the vanilla Avorion docking AI could process them. Overwhelmed docking queues caused AI tradeship scripts to timeout or detach, leaving hundreds of permanent, unscripted ghost ships drifting thousands of kilometers away and tricking the factory into continuously spawning more. A strict sector-wide safety cap on active AI traders has been introduced to prevent runaway inflation while preserving trade volume.
+
+[i]Version 5.0.5[/i]
+[hr][/hr]
+[h1]🐛V5.0.5 BUGFIX & BALANCING UPDATE!⚖️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX & GAME BALANCE PATCH[/b]
+[i]This patch addresses issues with map commands offline simulation, while balancing a few numbers..[/i]
+[*]🐛 [b]Offline Simulation:[/b] Fixed a critical logic error in `simulation.lua` where the script fetched `Server().unpausedRuntime` instead of the system's real-world clock (`os.time()`). Because `unpausedRuntime` freezes while the server is offline or the game is closed, returning players were incorrectly awarded exactly 0 seconds of background catch-up time regardless of how long they were away. This has been fully corrected.
+[*]⚖️ [b]Scavenger Yield Buff (Cosmic War):[/b] Increased the Salvage Yield multiplier from `1.20` (+20%) to `1.50` (+50%) when a Scavenger captain is operating inside an active Contested Siege Zone. Risking a captain inside a War Zone is now much more lucrative.
+[*]⚖️ [b]Ascendancy Trade Fear (Cosmic Ascendancy):[/b] Increased the flight time penalty for non-smuggler merchants trading near factions actively at war with The Eclipse from `20%` delay to `35%` delay.
+[*]⚖️ [b]Charity Reputation Bonus (Cosmic Vault):[/b] Buffed the diplomatic multiplier for Charity Missions sent to starving factions from `+50%` to `+75%`. Sending aid during an economic crisis is now incredibly rewarding.
+[*]⚖️ [b]Eclipse Contraband Premium (Cosmic Chronicles):[/b] Buffed the Smuggler's Market fence multiplier for `Ascendant Matter` and `Eclipse Datacore` from `+50%` to `+100%` payout.
+
+[i]Version 5.0.4[/i]
+[hr][/hr]
+[h1]🐛V5.0.4 BUGFIX & BALANCING UPDATE!⚖️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX & GAME BALANCE PATCH[/b]
+[i]This patch addresses lingering issues with transfer crews, cargo and goods, while balancing a few numbers and there.[/i]
+[*]🐛 Addressed a lingering edge case in the `v5.0.3` Hangar fix. The server was attempting to resolve the `Hangar` component directly from network-transmitted UUIDs, which could silently fail during transfers between complex entity states (e.g., Alliance ships) and falsely report a "Missing hangar." The engine now securely resolves the component strictly via the verified Entity object instance.
+[*]⚖️ Softened the blunt +250% trade bonus applied to all starving factions. It now appropriately scales up based on severity (Struggling: +125%, Resource Starved: +175%, Severe Famine: +250%). Smuggler blockade bypasses natively halve these bonuses.
+[*]⚖️ Toned down the extreme stat penalties applied to factions experiencing Severe Famines (Shields: -50%, Velocity: -30%) and Resource Starved (Shields: -30%, Velocity: -20%) to keep AI fleets somewhat competitive when reacting to Cosmic War siege events.
+[*]⚖️ Lowered the profit ceiling for fencing stolen Rift Technology at the Smuggler's Market to a random scale of `1.5x - 2.5x` to prevent hyper-inflation of the late-game economy when combined with Smuggler trait bonuses.
+
+[i]Version 5.0.3[/i]
+[hr][/hr]
+[h1]🐛V5.0.3 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This very small patch fixes a reported issue regarding hangar and transfer crews![/i]
+[*]🐛 Fixed a critical bug in `transfercrewgoods.lua` where the `Entity().hangar` property was incorrectly referenced instead of the proper `Hangar(entity)` component API. This resolved an issue that completely blocked all fighter transfers between ships and stations by falsely claiming a hangar was missing.
+
+[i]Version 5.0.2[/i]
+[hr][/hr]
+[h1]🐛V5.0.2 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This very small patch fixes reported issues. Special thanks to "Xaneas (GitHub)" for the hotfix![/i]
+[*]🐛 Fixed errors due to property not found with captains/stations and missing alliance transfer menu option on ship/stations.
+
+[i]Version 5.0.1[/i]
+[hr][/hr]
+[h1]🐛V5.0.1 CRITICAL BUG FIX!🐛[/h1]
+[hr][/hr]
+[b]🛠️ CRITICAL HOTFIX PATCH[/b]
+[i]This very small patch fixes a critical issue reported. Oops![/i]
+[*]🐛 Fixed a critical bug causing single-player, multiplayer instances and dedicated servers to crash via `EXCEPTION_ACCESS_VIOLATION`.
+
+
+
+[h1]⭐ [THE ASCENSION ERA] - Cosmic Overhaul Update 5.0.0! ⭐[/h1]
+
+[hr][/hr]
+
+[h3]📡 What's New in The Ascension Era?[/h3]
+Welcome to the biggest Overhaul update ever! Version 5.0.0 completely reinvents the mid-to-late game economy, introduces brutal dynamic weather hazards, and brings unparalleled Quality of Life to your massive fleets.
+
+[b]⚠️ NEW SAVE FILE HARD REQUIRED ⚠️[/b]
+Ascendancy dependencies and massive structural overhauls requires a new galaxy.
+
+[hr][/hr]
+
+✅ [b]NEW MECHANICS, FEATURES & CONTENT[/b]
+[list]
+[*]🧠 [b]Ascendant Neural Implants:[/b] Transform your flagship! Equip legendary Ascendant subsystems that fuse your captain with the ship, granting god-tier scaling multipliers like jump reach, fighters, and extreme velocity.
+[*]🌩️ [b]Dynamic Subspace Weather:[/b] Travel is no longer safe. Dynamic Ion Storms (disables radar/hyperspace) and Solar Flares (strips shields/hulls) ravage sectors. Navigating through hazards delays offline commands by 50% unless piloted by an Explorer or Navigator.
+[*]👑 [b]Station Governors:[/b] Put your idle Captains to work! Assigning a Governor to your stations grants massive buffs. (e.g., Smugglers bypass siege blockades, Merchants slash crew hiring costs by 50% and boost passive income).
+[*]🏅 [b]Captain Elite Traits:[/b] Level 3 Captains now possess massive sector-wide or unique bonuses (e.g., Commodores provide +10% Shield/Damage to player/alliance ships, Miners gain +25 area command bonus).
+[*]📉 [b]Deep Economy Warfare:[/b] Localized Famine Events force starving factions to declare war on wealthy neighbors! Factions suffering from Severe Famine receive a devastating 60% shield debuff and 40% velocity penalty to all ships.
+[*]🛑 [b]Siege & War Zone Blockades:[/b] Stations in active Cosmic War zones suspend all background AI Trader traffic and reject docking requests. If defenders are outgunned 2:1, factory production halts entirely until the siege is lifted.
+[*]💼 [b]Syndicate Smuggler Rework & Hub Expansion:[/b] The Black Market is a massive enterprise! Fence classified Eclipse/Rift tech for a massive 200-300% premium! Passive unbranding generates "Syndicate Heat" that triggers brutal punitive raids if neglected.
+[*]🛠️ [b]Fleet Repair Terminal:[/b] Instantly repair your entire Private and Alliance fleet in the sector simultaneously with a single button click at Repair Docks!
+[*]⛏️ [b]Persistent Resource Regeneration:[/b] Stripped asteroid fields now regenerate naturally over real-time! Severe Famine pauses the ecology, and completely barren sectors may spawn an "Emergency Replenishment" anomaly event!
+[*]🚀 [b]Gate Travel Priority:[/b] Map enchaining now correctly routes ships through Gate Networks and Wormholes instead of blindly hyper-jumping across the galaxy.
+[*]⌨️ [b]CCM Keybind API:[/b] Assign custom hotkeys to instantly toggle the Bulletin Board and Resource Display panels without clicking through station menus!
+[*]📖 [b]Cosmic Codex & Wiki Integration:[/b] The mod now fully supports the Cosmic Codex! 43+ articles of lore, mechanics, and synergies natively readable directly in-game.
+[*]👻 [b]Sealed Hulks (Boarding Operations):[/b] Deep space hidden mass sectors now have a chance to generate a massive "Sealed Hulk." Risk your crew in interactive text events for Legendary subsystem drops!
+[*]🔍 [b]Scout & Emergency Anomalies:[/b] Explorer Captains charting empty sectors leave notes hinting at Cosmic Chronicles events. Emergency Replenishments have a chance to unearth Precursor Wrecks or Spatial Rifts!
+[*]🏪 [b]Shop Restock Button:[/b] Natively refresh inventories at Equipment Docks and Merchants without closing the window!
+[*]🗑️ [b]Scrapyard Freedom:[/b] Time limits and tedious restrictions at Scrapyards have been completely eradicated!
+[*]📛 [b]NPC Naming & AI Overhaul:[/b] NPC ship names scale dynamically based on volume. Factions now organically calculate AI routines using a robust new tag-based AI (Aggressive, Passive, Trader) rather than static tables.
+[*]😨 [b]Ascendancy Trade Fear:[/b] Merchant trade flights take 20% longer if the target faction is at war with the Ascendancy (The Eclipse). Smugglers natively bypass this!
+[*]🔌 [b]Cosmic Vault API Framework:[/b] Fully integrated with the new framework. Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
+[/list]
+
+⚙️ [b]CHANGED & BALANCED[/b]
+[list]
+[*]📰 [b]Unified News API:[/b] Ambient events and galactic occurrences are securely routed through the new architecture for cross-mod UI stability.
+[*]🔗 [b]Core Dependencies:[/b] Core 5 mods are now hard requirements for maximum stability.
+[*]📈 [b]Dynamic Trade Pricing:[/b] Trading with a Famine-struck faction now yields up to 2.5x more passive profit.
+[*]💰 [b]War Profiteering:[/b] Supplying 100% Heat War Zones now yields a massive 250% income bonus!
+[*]📉 [b]Reputation Decay Scaling:[/b] Halved the base Dynamic Reputation Decay rate to 50/hr to synergize with Cosmic Ascendancy endgame campaigns.
+[*]🤝 [b]Alliance Mirroring Parity:[/b] Scaled diplomatic rep gain mirroring for Alliances down to 1x to prevent "cascade wars". Penalty increases if attacking a Fortified faction.
+[*]🎲 [b]Loot Variance Boost:[/b] Pushed the unseeded wild-generation chance for Exotic and Legendary drops to 75% for enhanced endgame loot variety.
+[*]❤️ [b]Famine Relief Charity:[/b] Background Charity Missions sent to famished factions natively grant a +50% Reputation multiplier.
+[*]♻️ [b]Siege Salvage Yield:[/b] Scavenger captains actively flying inside a Contested Siege Zone get a +20% Salvage Yield buff.
+[*]🤫 [b]Smuggler Deflation:[/b] Idling Smuggler captains passively heal the controlling faction's Famine Score over time.
+[*]⏱️ [b]Galactic Turn Synchronization:[/b] Synced intervals to 20 minutes to align with the global server turn, massively reducing asynchronous micro-stutters.
+[*]⚖️ [b]Economic Stabilization:[/b] Base payouts strictly doubled to compensate for the 20-minute interval changes, keeping the economy perfectly balanced without punishing players.
+[/list]
+
+🐛 [b]BUG FIXES & OPTIMIZATION[/b]
+[list]
+[*]⚡ [b]Performance & TPS Optimization:[/b] Drastically reduced server load! Throttled update intervals on major AI/UI scripts to prevent industrialized sectors from dragging down TPS.
+[*]💥 [b]Engine Crash Fixes:[/b] Fixed multiple API Avorion Indexes that caused C++ crashes (corrected stat modifiers, invalid faction setters, matching distance checks).
+[*]🔒 [b]Multiplayer Desyncs:[/b] Safely replaced all `math.random` instances with deterministic `random():getInt()` to prevent server physics and stats desyncs.
+[*]🧮 [b]RNG Calculation Math Bug:[/b] Replaced critical logic faults in Station Governors and AI Traders for exact percentage math on random economic events.
+[*]🤝 [b]Alliance Ghost Ship Fix:[/b] Patched a critical UI thread crash inside background handlers when tracking Alliance commands.
+[*]🐞 [b]Scout Mission Fix:[/b] Scouts will no longer completely ignore Faction HQ sectors!
+[*]🛡️ [b]VM Isolation Reputation Bug:[/b] Completely refactored Dynamic Reputation Decay, extracting isolated hooks into a global override.
+[*]🗺️ [b]Map UI & Trading Manager Spam:[/b] Eliminated the "Activity level is zero" console spam and removed broken command hooks causing Map UI crashes.
+[*]🧠 [b]Memory Leaks & UI Crashes:[/b] Sealed memory leaks by injecting `onRemove()` functions into UI scripts. Reinstated missing UI labels to prevent merchant crashes.
+[*]📜 [b]Script Execution Faults:[/b] Fixed missing return statements and out-of-bounds indices in player station scripts.
+[*]🌐 [b]Multiplayer Networking & Stability:[/b] Added missing `callable()` declarations to Factory upgrades and `onClient()` wrappers to Stash/Map scripts for Dedicated Server stability.
+
