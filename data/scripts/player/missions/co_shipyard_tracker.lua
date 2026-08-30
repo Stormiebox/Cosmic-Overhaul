@@ -228,7 +228,14 @@ function spawnShip(job)
         ship.crew = crew
     end
 
-    local senderInfo = makeCallbackSenderInfo(Entity())
+    local senderInfo
+    local senderEntity = Entity(Uuid(job.stationId))
+    if valid(senderEntity) then
+        senderInfo = makeCallbackSenderInfo(senderEntity)
+    else
+        local x, y = Sector():getCoordinates()
+        senderInfo = {id = Uuid(job.stationId), coordinates = {x = x, y = y}}
+    end
     buyer:sendCallback("onShipCreationFinished", senderInfo, ship.id, job.founder)
 
     if GameSettings().difficulty <= Difficulty.Veteran and GameSettings().reconstructionAllowed then

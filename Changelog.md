@@ -10,8 +10,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [v5.2.5]
 
 ### 🪲 Bug Fixes
-- [Bugfix] **Shipyard Infinite Spawning Exploit:** Fixed a critical bug in the background Shipyard Production Tracker where the script would crash trying to initialize vanilla components without the proper dependencies loaded. This crash prevented the tracker from removing the job from the player's queue, resulting in the ship spawning infinitely every time the player re-entered the sector. 
+- [Bugfix] **Shipyard Infinite Spawning Exploit:** Fixed a critical bug in the background Shipyard Production Tracker where the script would crash trying to initialize vanilla components without the proper dependencies loaded. This crash prevented the tracker from removing the job from the player's queue, resulting in the ship spawning infinitely every time the player re-entered the sector.
 - [Bugfix] **Shipyard Veteran Reconstruction Crash:** Added missing dependencies to ensure that if the player builds a ship on Veteran difficulty or lower, the script can safely hand out the Reconstruction Token without crashing the server.
+- [Bugfix] **Shipyard Null Entity Crash:** Fixed an issue in the Shipyard Production Tracker where restoring a mission with a `nil` entity pointer would crash the script on load. The `makeCallbackSenderInfo` function now safely verifies entity existence or falls back to generic coordinates, preventing mission corruption upon server restarts.
 
 ## [v5.2.4]
 
