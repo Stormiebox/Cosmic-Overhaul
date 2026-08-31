@@ -277,20 +277,4 @@ function ResourceDisplay.onRemove()
 end
 
 
-function initialize(...)
-    if ResourceDisplay.initialize then return ResourceDisplay.initialize(...) end
-end
-function getUpdateInterval(...)
-    if ResourceDisplay.getUpdateInterval then return ResourceDisplay.getUpdateInterval(...) end
-end
-function updateClient(...)
-    if ResourceDisplay.updateClient then return ResourceDisplay.updateClient(...) end
-end
-
-
--- Global Event Callbacks
-function onPreRenderHud(...)
-    if ResourceDisplay.onPreRenderHud then return ResourceDisplay.onPreRenderHud(...) end
-end
-
 return ResourceDisplay

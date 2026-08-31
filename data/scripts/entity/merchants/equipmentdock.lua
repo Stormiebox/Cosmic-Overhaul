@@ -167,8 +167,3 @@ function EquipmentDock.initializationFinished()
         })
     end
 end
-
-
-function initialize(...)
-    if EquipmentDock.initialize then return EquipmentDock.initialize(...) end
-end

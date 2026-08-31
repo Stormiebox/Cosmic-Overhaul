@@ -340,21 +340,4 @@ stationMappings = {
     },
 }
 
-
-function initialize(...)
-    if ManageStationIncomes.initialize then return ManageStationIncomes.initialize(...) end
-end
-function getUpdateInterval(...)
-    if ManageStationIncomes.getUpdateInterval then return ManageStationIncomes.getUpdateInterval(...) end
-end
-function updateServer(...)
-    if ManageStationIncomes.updateServer then return ManageStationIncomes.updateServer(...) end
-end
-
-
--- Global Event Callbacks
-function onTradeSuccess(...)
-    if ManageStationIncomes.onTradeSuccess then return ManageStationIncomes.onTradeSuccess(...) end
-end
-
 return ManageStationIncomes

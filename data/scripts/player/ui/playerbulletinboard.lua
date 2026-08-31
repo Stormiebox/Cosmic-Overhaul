@@ -435,21 +435,4 @@ function PlayerBulletinBoard.onRemove()
 end
 
 
-function initialize(...)
-    if PlayerBulletinBoard.initialize then return PlayerBulletinBoard.initialize(...) end
-end
-function update(...)
-    if PlayerBulletinBoard.update then return PlayerBulletinBoard.update(...) end
-end
-
-
--- Global Event Callbacks
-function onSectorChanged(...)
-    if PlayerBulletinBoard.onSectorChanged then return PlayerBulletinBoard.onSectorChanged(...) end
-end
-
-function onPostRenderHud(...)
-    if PlayerBulletinBoard.onPostRenderHud then return PlayerBulletinBoard.onPostRenderHud(...) end
-end
-
 return PlayerBulletinBoard

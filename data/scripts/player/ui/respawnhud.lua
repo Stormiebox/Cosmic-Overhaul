@@ -398,15 +398,4 @@ function RespawnHud.updateClient(timeStep)
 end
 
 
-
-function initialize(...)
-    if RespawnHud.initialize then return RespawnHud.initialize(...) end
-end
-function getUpdateInterval(...)
-    if RespawnHud.getUpdateInterval then return RespawnHud.getUpdateInterval(...) end
-end
-function updateClient(...)
-    if RespawnHud.updateClient then return RespawnHud.updateClient(...) end
-end
-
 return RespawnHud

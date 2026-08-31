@@ -48,10 +48,6 @@ function FleetStatus.syncConfig(...)
 end
 
 -- legacy global bridge
-function initialize()
-    FleetStatus.initialize()
-end
-
 function showWindow()
     FleetStatus.showWindow()
 end
