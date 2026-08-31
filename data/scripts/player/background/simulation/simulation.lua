@@ -77,6 +77,22 @@ Balancing:
         return ARCC_Simulation_secure_original()
     end
 
+    -- Command Center Tab: tracks cumulative fleet income across both payout paths a
+    -- background command can take -- the immediate-delivery branch below (paid out the
+    -- instant a yield is added) and Simulation.takeYield (vanilla's normal deferred
+    -- payout, claimed when the player collects a finished command's yield). Stored on
+    -- the owning faction so it works identically for Player and Alliance-owned ships.
+    function ARCC_trackFleetIncome(amount)
+        if not amount or amount <= 0 then return end
+        local faction = getParentFaction()
+        if not faction then return end
+        local total = faction:getValue("co_fleet_income_total") or 0
+        faction:setValue("co_fleet_income_total", total + amount)
+        if not faction:getValue("co_fleet_income_since") then
+            faction:setValue("co_fleet_income_since", os.time())
+        end
+    end
+
     -- ARCC and ccm logic for makeCommand
     local ccm_Simulation_makeCommand_original = Simulation.makeCommand
     function Simulation.makeCommand(...)
@@ -97,6 +113,7 @@ Balancing:
                 money = math.max(0, money or 0)
                 resources = resources or {}
                 parent:receive(message, money, unpack(resources))
+                ARCC_trackFleetIncome(money)
                 if items then
                     originalAddYield(self, "", 0, {}, items)
                     self.simulation.takeYield(self.shipName)
@@ -108,6 +125,19 @@ Balancing:
 
         return command
     end
+
+    -- Track the vanilla deferred payout path too (Simulation.takeYield is what actually
+    -- pays a faction when a completed command's yield is collected, whether that happens
+    -- via the Fleet window or the immediate-delivery self-call above).
+    local ARCC_Simulation_takeYield_original = Simulation.takeYield
+    function Simulation.takeYield(shipName)
+        local yield = ARCC_Simulation_takeYield_original(shipName)
+        if yield and yield.money then
+            ARCC_trackFleetIncome(yield.money)
+        end
+        return yield
+    end
+    callable(Simulation, "takeYield")
 
     -- Handles changing relations based on money yield
     function Simulation.tryChangeRelationsForMoney(command, money)

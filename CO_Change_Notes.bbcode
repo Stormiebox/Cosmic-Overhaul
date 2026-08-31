@@ -1,18 +1,22 @@
 [i]Version 5.3.0[/i]
 [hr][/hr]
-[h1]v5.3.0 🛠️TRASH MANAGER & STABILITY UPDATE!🛠️[/h1]
+[h1]v5.3.0 🛠️TRASH MANAGER, COMMAND CENTER & FLEET STATUS OVERHAUL!🛠️[/h1]
 [hr][/hr]
 [b]🛠️ GAMEPLAY & HOTFIX PATCH[/b]
-[i]This patch is an internal reliability pass across a wide range of scripts - no visible features changed, just fewer things that can quietly go wrong under the hood. While integrated newly overhauled Trash Manager.[/i]
+[i]Three UI features got a real upgrade this patch, alongside the newly overhauled Trash Manager and an internal reliability pass across a wide range of scripts.[/i]
 
 [b]✨NEW FEATURES[/b]
 [list]
 [*]🔥 [b]Trash Manager Revamped[/b] Integrated "Trash Manager Revamped" version of the overhaul Trash Man UI.
+[*]🎖️ [b]Command Center Tab Rebuilt:[/b] The old Command Center just listed your ships' orders with no way to sort or filter it - and honestly, vanilla's own Fleet window already covered that. It's now a proper Fleet Operations & Earnings Dashboard: track cumulative credits earned from all your background trading/mining/salvaging in one place (with a reset button), instantly see which ships are sitting idle doing nothing, get one-click filters for ships completing soon or recently recalled, and sort the whole list by any column. The layout is also a lot less cramped now.
+[*]💹 [b]Factory Overview Tab Enhanced:[/b] Added a Location column so you can see exactly where each factory is without clicking through, and a Status column that shows at a glance whether a factory is running smoothly or stalled out (and why) - no more hovering every single row to find your underperforming factories. There's also a new Totals line up top showing your combined income, expenses, and profit across every factory shown.
+[*]🚑 [b]Fleet Status Screen Improved:[/b] Your ship selection lists now show each ship's current hull durability right next to its name, color-coded so a damaged ship jumps out at you, plus a running count of how many ships you have pinned to the HUD. A ship critically low on hull will now pulse on your HUD overlay instead of just sitting there in flat red - much harder to miss while you're busy elsewhere.
 [/list]
 
 [b]🪲BUGFIXES[/b]
 [list]
 [*]🐛 [b]Internal Script Reliability Pass:[/b] Cleaned up internal script wiring across 16 files, including the Gates, Equipment Dock, Fighter Merchant, Turret Merchant, Scrapyard, Station Income Management, Fleet Status, Galaxy Map QoL, Command Center, Factory Overview, Player Bulletin Board, Resource Display, and Respawn HUD. This prevents rare event desyncs, double-triggered logic, and cases where a script could silently fall back to a much slower update rate than intended.
+[*]🐛 [b]Fleet Status Screen Ship Lists Fixed:[/b] Found and fixed a deeper wiring bug in the Fleet Status Screen (separate from the pass above) that could prevent its two ship-selection lists from populating correctly, plus a crash risk when clicking a ship right as it was renamed, sold, or destroyed.
 [/list]
 
 [i]Version 5.2.5[/i]

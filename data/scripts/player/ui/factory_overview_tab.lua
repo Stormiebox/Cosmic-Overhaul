@@ -63,11 +63,37 @@ callable(FactoryOverview, "fetchDataFromGalaxy")
 
 -- Declarations of the different literals and variables
 local factory_ui_list     -- the ui element for showing the list
+local totalsLabel         -- summary of income/expense/profit across the currently shown factories
 local sortingButtons = {} -- all the sorting buttons, this is used later to update the sorting arrows
-local sortingLabels = { "Name"%_t, "Type"%_t, "Income"%_t, "Expense"%_t, "Profit"%_t, "Profit / h"%_t }
+local sortingLabels = { "Name"%_t, "Type"%_t, "Location"%_t, "Income"%_t, "Expense"%_t, "Profit"%_t, "Profit / h"%_t, "Status"%_t }
 
-local selectedSorting = 5   -- which column do we use for sorting, same as sortingLabels
+local selectedSorting = 6   -- which column do we use for sorting, same as sortingLabels (defaults to Profit)
 local sortingType = -1      -- ascending: 1 or descending: -1
+
+-- Parses a working_state percentage ("57.32%") back into a plain number. Values are always
+-- pre-formatted strings by factoryregister.lua's addWorkingStrings, never raw numbers.
+local function parsePercentage(pctText)
+	local num = tonumber(string.match(tostring(pctText or ""), "[%d%.]+"))
+	return num or 0
+end
+
+-- Finds the working_state reason the factory spent the most time in, so the list can show a
+-- single, glanceable health indicator instead of requiring a tooltip hover on every row.
+local function getDominantState(workingState)
+	-- Plain string default (not %_t-wrapped) so factory['_statusReason'] is always the same
+	-- type regardless of path, matching pairs(workingState)'s tostring(reason) entries below --
+	-- %_t is applied exactly once, where the value is actually displayed.
+	local bestReason, bestPct = "Unknown", -1
+	for reason, pctText in pairs(workingState or {}) do
+		local pct = parsePercentage(pctText)
+		if pct > bestPct then
+			bestPct = pct
+			bestReason = tostring(reason)
+		end
+	end
+	if bestPct < 0 then bestPct = 0 end
+	return bestReason, bestPct
+end
 
 local sortingFunctions = {} --
 sortingFunctions[1] = function(f1, f2) return f1['name'] < f2['name'] end
@@ -76,19 +102,25 @@ sortingFunctions[-1] = function(f1, f2) return f1['name'] > f2['name'] end
 sortingFunctions[2] = function(f1, f2) return f1['title'] < f2['title'] end
 sortingFunctions[-2] = function(f1, f2) return f1['title'] > f2['title'] end
 
-sortingFunctions[3] = function(f1, f2) return f1['money_gained']+f1['money_tax'] < f2['money_gained']+f2['money_tax'] end
-sortingFunctions[-3] = function(f1, f2) return f1['money_gained']+f1['money_tax'] > f2['money_gained']+f2['money_tax'] end
+sortingFunctions[3] = function(f1, f2) return (f1['location'] or "") < (f2['location'] or "") end
+sortingFunctions[-3] = function(f1, f2) return (f1['location'] or "") > (f2['location'] or "") end
 
-sortingFunctions[4] = function(f1, f2) return f1['money_spent'] < f2['money_spent'] end
-sortingFunctions[-4] = function(f1, f2) return f1['money_spent'] > f2['money_spent'] end
+sortingFunctions[4] = function(f1, f2) return f1['money_gained']+f1['money_tax'] < f2['money_gained']+f2['money_tax'] end
+sortingFunctions[-4] = function(f1, f2) return f1['money_gained']+f1['money_tax'] > f2['money_gained']+f2['money_tax'] end
 
-sortingFunctions[5] = function(f1, f2) return f1['money_gained']+f1['money_tax']-f1['money_spent'] <
+sortingFunctions[5] = function(f1, f2) return f1['money_spent'] < f2['money_spent'] end
+sortingFunctions[-5] = function(f1, f2) return f1['money_spent'] > f2['money_spent'] end
+
+sortingFunctions[6] = function(f1, f2) return f1['money_gained']+f1['money_tax']-f1['money_spent'] <
 	f2['money_gained']+f2['money_tax']-f2['money_spent'] end
-sortingFunctions[-5] = function(f1, f2) return f1['money_gained']+f1['money_tax']-f1['money_spent'] >
+sortingFunctions[-6] = function(f1, f2) return f1['money_gained']+f1['money_tax']-f1['money_spent'] >
 	f2['money_gained']+f2['money_tax']-f2['money_spent'] end
 
-sortingFunctions[6] = function(f1, f2) return f1['profitability'] < f2['profitability'] end
-sortingFunctions[-6] = function(f1, f2) return f1['profitability'] > f2['profitability'] end
+sortingFunctions[7] = function(f1, f2) return f1['profitability'] < f2['profitability'] end
+sortingFunctions[-7] = function(f1, f2) return f1['profitability'] > f2['profitability'] end
+
+sortingFunctions[8] = function(f1, f2) return f1['_statusPct'] < f2['_statusPct'] end
+sortingFunctions[-8] = function(f1, f2) return f1['_statusPct'] > f2['_statusPct'] end
 
 -- sets the sorting values and refreshes the table
 function FactoryOverview.updateSorting(newSorting)
@@ -104,39 +136,44 @@ end
 
 --[[
 The window should show a scrollable, sortable, table where each line is a factory, showing
-name, type, income, expense, profit, profit/time (based on initial data)
-Tooltip is working state, line data is location <- should use an id and look this up from stored data
+name, type, location, income, expense, profit, profit/time and a glanceable health status.
+Tooltip lists the full working-state breakdown.
 ]] --
 function FactoryOverview.buildWindow(container)
-	local hsplit = UIHorizontalSplitter(Rect(container.size), 5, 5, 0.1)
+	-- Two header rows (title/totals, then controls) so nothing has to share horizontal
+	-- space and risk overlapping on a narrower player window.
+	local hsplit = UIHorizontalSplitter(Rect(container.size), 5, 5, 0.16)
 
 	local margin = 10
-	-- Account for the scrollbar width (~20px) so the last column doesn't get clipped
-	local b_width = (container.size.x-2*margin-20)/#sortingLabels
+	local topWidth = hsplit.top.width
+	local topHeight = hsplit.top.height
 
-	local refreshButton = container:createButton(
-	Rect(hsplit.top.width-40, 5, hsplit.top.width, hsplit.top.height-25), "Refresh"%_t, "clientFetchDataFromGalaxy")
+	local row1Bottom = topHeight * 0.42
+	local row2Top = topHeight * 0.46
+	local row2Bottom = topHeight - 4
+
+	-- Row 1: title (left) + aggregate totals for the currently shown factories (right)
+	container:createLabel(Rect(margin, 2, margin + 200, row1Bottom), "Factory Overview"%_t, 20)
+
+	totalsLabel = container:createLabel(Rect(topWidth * 0.32, 2, topWidth - margin, row1Bottom), "", 15)
+	totalsLabel:setTopLeftAligned()
+
+	-- Row 2: refresh, goto, alliance toggle -- left-to-right with fixed spacing
+	local refreshButton = container:createButton(Rect(margin, row2Top, margin + 120, row2Bottom), "Refresh"%_t, "clientFetchDataFromGalaxy")
 	refreshButton.icon = "data/textures/icons/refresh.png"
 	refreshButton.tooltip = "Refresh Factory Data"%_t
 
-	local gotoButton = container:createButton(
-	Rect(hsplit.top.width-85, 5, hsplit.top.width-45, hsplit.top.height-25), "Goto Selected"%_t,
+	local gotoButton = container:createButton(Rect(margin + 135, row2Top, margin + 275, row2Bottom), "Goto Selected"%_t,
 		"gotoSelectedCoordinates")
 	gotoButton.icon = "data/textures/icons/wire.png"
 	gotoButton.tooltip = "Jump to selected station"%_t
 
-	local separator = container:createLine(vec2(hsplit.top.width-90, 0),
-		vec2(hsplit.top.width-90, hsplit.top.height-23))
-	separator.color = ColorRGB(0.6, 0.6, 0.6)
-	local separator2 = container:createLine(vec2(hsplit.top.width-91, 0),
-		vec2(hsplit.top.width-91, hsplit.top.height-23))
-	separator2.color = ColorRGB(0.6, 0.6, 0.6)
-
-	container:createLabel(Rect(margin, 5, margin+70, hsplit.top.height-5), "Sorting: "%_t, 20)
-
-	all_check = container:createCheckBox(Rect(hsplit.top.width-197, 5, hsplit.top.width-97, hsplit.top.height-5),
+	all_check = container:createCheckBox(Rect(margin + 290, row2Top, margin + 460, row2Bottom),
 		"Alliance: "%_t, "switchAllianceFlag")
 	all_check.checked = false
+
+	-- Account for the scrollbar width (~20px) so the last column doesn't get clipped
+	local b_width = (container.size.x-2*margin-20)/#sortingLabels
 
 	-- This is not the most beautiful solution, but I couldn't make clicking on the List Header work for this
 	for ndx, sortingLabel in pairs(sortingLabels) do
@@ -153,11 +190,11 @@ function FactoryOverview.buildWindow(container)
 
 	factory_ui_list = container:createListBoxEx(Rect(margin, hsplit.top.height, hsplit.bottom.width-2*margin,
 		hsplit.bottom.height))
-	factory_ui_list.columns = 6 -- name, type, income, expense, profit, profit / hour, see sortingLabels
+	factory_ui_list.columns = #sortingLabels
 	factory_ui_list.rowHeight = 40
 
 
-	for ndx = 0, 5, 1 do
+	for ndx = 0, #sortingLabels - 1, 1 do
 		factory_ui_list:setColumnWidth(ndx, b_width)
 	end
 
@@ -184,11 +221,20 @@ function FactoryOverview.loadData(factory_list)
 	end
 
 	local sortedList = {}
+	local totalIncome, totalExpense = 0, 0
 	for _, val in pairs(list_to_use) do
+		-- Pre-compute the dominant working-state reason once per factory so both the
+		-- Status column and its sort function can reuse it without re-parsing.
+		val['_statusReason'], val['_statusPct'] = getDominantState(val['working_state'])
 		table.insert(sortedList, val)
+
+		totalIncome = totalIncome + (val['money_gained'] or 0) + (val['money_tax'] or 0)
+		totalExpense = totalExpense + (val['money_spent'] or 0)
 	end
 
 	table.sort(sortedList, sortingFunctions[selectedSorting*sortingType]) -- pick sorting function based on column and direction
+
+	FactoryOverview.updateTotals(#sortedList, totalIncome, totalExpense)
 
 	factory_ui_list:clear()
 	local white = ColorRGB(1, 1, 1)
@@ -203,20 +249,52 @@ function FactoryOverview.loadData(factory_list)
 		local income = factory['money_gained']+factory['money_tax']
 		local profit = income-factory['money_spent']
 
-		factory_ui_list:addRow(factory['location']) -- name, type, income, expense, profit, profit / hour
+		local statusColor = gray
+		local reasonLower = string.lower(factory['_statusReason'] or "")
+		if factory['_statusPct'] >= 80 and string.find(reasonLower, "run") then
+			statusColor = ColorRGB(0.2, 1.0, 0.2) -- Green: healthy and running most of the time
+		elseif string.find(reasonLower, "run") then
+			statusColor = ColorRGB(1.0, 0.85, 0.2) -- Amber: running, but noticeable downtime
+		else
+			statusColor = ColorRGB(1.0, 0.3, 0.3) -- Red: dominant state is something other than running
+		end
+
+		factory_ui_list:addRow(factory['location']) -- name, type, location, income, expense, profit, profit / hour, status
 		factory_ui_list:setEntryNoCallback(0, factory_ui_list.rows-1, factory['name'], false, false, gray)
 		factory_ui_list:setEntryNoCallback(1, factory_ui_list.rows-1, (factory['title'] or "")%_t, false, false, gray)
-		factory_ui_list:setEntryNoCallback(2, factory_ui_list.rows-1,
-			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(income) }, false, false, gray)
+		factory_ui_list:setEntryNoCallback(2, factory_ui_list.rows-1, factory['location'] or "?", false, false, gray)
 		factory_ui_list:setEntryNoCallback(3, factory_ui_list.rows-1,
-			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(factory['money_spent']) }, false, false, gray)
+			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(income) }, false, false, gray)
 		factory_ui_list:setEntryNoCallback(4, factory_ui_list.rows-1,
-			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(profit) }, false, false, gray)
+			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(factory['money_spent']) }, false, false, gray)
 		factory_ui_list:setEntryNoCallback(5, factory_ui_list.rows-1,
+			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(profit) }, false, false, gray)
+		factory_ui_list:setEntryNoCallback(6, factory_ui_list.rows-1,
 			"${c}${money}"%_t%{ c = credits(), money = createMonetaryString(factory['profitability']) }, false, false,
 			gray)
+		factory_ui_list:setEntryNoCallback(7, factory_ui_list.rows-1,
+			string.format("%d%% %s", math.floor(factory['_statusPct']), factory['_statusReason']%_t), false, false, statusColor)
 		factory_ui_list:setTooltip(factory_ui_list.rows-1, getRowTooltip(factory))
 	end
+end
+
+function FactoryOverview.updateTotals(count, totalIncome, totalExpense)
+	if not totalsLabel then return end
+
+	if count == 0 then
+		totalsLabel.caption = "No factories to display."%_t
+		totalsLabel.color = ColorRGB(0.6, 0.6, 0.6)
+		return
+	end
+
+	local totalProfit = totalIncome - totalExpense
+	local profitColor = totalProfit >= 0 and ColorRGB(0.4, 1.0, 0.6) or ColorRGB(1.0, 0.4, 0.4)
+
+	totalsLabel.caption = string.format("Totals (%d factories): "%_t, count) ..
+		"Income "%_t .. credits() .. createMonetaryString(totalIncome) .. "  |  " ..
+		"Expense "%_t .. credits() .. createMonetaryString(totalExpense) .. "  |  " ..
+		"Profit "%_t .. credits() .. createMonetaryString(totalProfit)
+	totalsLabel.color = profitColor
 end
 
 -- is this really the only way to do this?! These functions receive the button as input, but that holds no information to help
@@ -231,6 +309,10 @@ function FactoryOverview.updateSorting4() FactoryOverview.updateSorting(4) end
 function FactoryOverview.updateSorting5() FactoryOverview.updateSorting(5) end
 
 function FactoryOverview.updateSorting6() FactoryOverview.updateSorting(6) end
+
+function FactoryOverview.updateSorting7() FactoryOverview.updateSorting(7) end
+
+function FactoryOverview.updateSorting8() FactoryOverview.updateSorting(8) end
 
 -- sets the selected sorting button to an up or down arrow and the rest to empty
 function FactoryOverview.updateSortingIcons()

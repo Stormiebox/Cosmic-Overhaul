@@ -141,14 +141,21 @@ function fs.initUI()
 
     local ShipsSplit = UIVerticalSplitter(ShipsListAndLabelsSplit.bottom, 5, 5, 0.5)
 
+    fs.hudShipListLabel = hudShipListLabel
+    fs.otherShipListLabel = otherShipListLabel
+
+    -- Column 1 shows a live hull-durability readout so a damaged ship stands out right in
+    -- the settings window too, not only on the in-flight HUD overlay.
     fs.hudShipListBox = fs.window:createListBoxEx(ShipsSplit.left)
-    fs.hudShipListBox.columns = 1
-    fs.hudShipListBox:setColumnWidth(0, 200)
+    fs.hudShipListBox.columns = 2
+    fs.hudShipListBox:setColumnWidth(0, 150)
+    fs.hudShipListBox:setColumnWidth(1, 55)
     fs.hudShipListBox.onSelectFunction = "onHudShipListSelect"
 
     fs.otherShipListBox = fs.window:createListBoxEx(ShipsSplit.right)
-    fs.otherShipListBox.columns = 1
-    fs.otherShipListBox:setColumnWidth(0, 200)
+    fs.otherShipListBox.columns = 2
+    fs.otherShipListBox:setColumnWidth(0, 150)
+    fs.otherShipListBox:setColumnWidth(1, 55)
     fs.otherShipListBox.onSelectFunction = "onOtherShipListSelect"
 end
 
@@ -174,12 +181,48 @@ function fs.update(timeStep)
     fs.hudShipListBox:clear()
     fs.otherShipListBox:clear()
 
+    local hudCount, otherCount = 0, 0
+
     for _, ship in pairs(fs.config["ships"]) do
         local useList = ship.selected and fs.hudShipListBox or fs.otherShipListBox
+        if ship.selected then hudCount = hudCount + 1 else otherCount = otherCount + 1 end
+
         useList:addRow(ship.name)
-        useList:setEntry(0, useList.size - 1, ship.name, false, false, fs._menu_white)
-        useList:setEntryType(0, useList.size - 1, ListBoxEntryType.Text)
+        -- .size is the widget's pixel dimensions (vec2), not a row count -- .rows is the
+        -- real read-only row-count property, matching every other ListBoxEx in this mod
+        -- suite (command_center_tab.lua, factory_overview_tab.lua, galacticpolitics_tab.lua).
+        local row = useList.rows - 1
+        useList:setEntry(0, row, ship.name, false, false, fs._menu_white)
+        useList:setEntryType(0, row, ListBoxEntryType.Text)
+
+        local statusText, statusColor = fs.GetDurabilityStatus(ship.faction, ship.name)
+        useList:setEntryNoCallback(1, row, statusText, false, false, statusColor)
+        useList:setEntryType(1, row, ListBoxEntryType.Text)
     end
+
+    if fs.hudShipListLabel then fs.hudShipListLabel.caption = string.format("Show in HUD (%d)", hudCount) end
+    if fs.otherShipListLabel then fs.otherShipListLabel.caption = string.format("Available Ships (%d)", otherCount) end
+end
+
+-- Returns a compact durability readout (and matching color) for the settings-window ship
+-- lists, so a damaged ship is visible without opening the HUD overlay or the Galaxy Map.
+function fs.GetDurabilityStatus(faction, name)
+    local entry = ShipDatabaseEntry(faction, name)
+    if not entry or not entry:exists() then
+        return "?", fs._menu_white
+    end
+
+    local _, durability_perc = entry:getDurabilityProperties()
+    durability_perc = durability_perc or 0
+
+    local color = ColorRGB(0.2, 1.0, 0.2)
+    if durability_perc <= 0.25 then
+        color = ColorRGB(1.0, 0.2, 0.2)
+    elseif durability_perc <= 0.5 then
+        color = ColorRGB(1.0, 0.65, 0.0)
+    end
+
+    return string.format("%d%%", math.floor(durability_perc * 100)), color
 end
 
 function fs.loadToShip(playerIndex, craftId)
@@ -232,13 +275,16 @@ function fs.onAllToHUDButton(button)
 end
 
 function fs.onHudShipListSelect(index, value)
-    if not value or value == "" then return end
+    -- The list only repaints every getUpdateInterval() tick, so a stale row (the ship was
+    -- renamed, sold, or destroyed since the last repaint) can still be clicked in the gap --
+    -- guard against indexing a ship entry that no longer exists in the config.
+    if not value or value == "" or not fs.config.ships[value] then return end
     fs.config.ships[value].selected = false
     fs.SaveConfigs()
 end
 
 function fs.onOtherShipListSelect(index, value)
-    if not value or value == "" then return end
+    if not value or value == "" or not fs.config.ships[value] then return end
     fs.config.ships[value].selected = true
     fs.SaveConfigs()
 end
@@ -276,8 +322,11 @@ function fs.renderShipStatus()
         if fs.config.ships ~= nil and fs.config.ships[shipData.name].selected == false then goto continue end
         if player.craft.name == shipData.name then goto continue end
 
+        -- ShipDatabaseEntry() is a constructor, not a lookup -- it always returns a valid
+        -- handle even for a name that no longer exists, so "if entry then" never actually
+        -- guarded anything. exists() is the real check.
         local entry = ShipDatabaseEntry(shipData.faction, shipData.name)
-        if entry then
+        if entry and entry:exists() then
             fs._drawShipStatus(entry, y_offset)
             y_offset = y_offset + 75
         end
@@ -323,7 +372,11 @@ function fs._drawShipStatus(entry, y_offset)
     if durability_perc > 0.0 then
         local color = fs._hud_durabilityGreen
         if durability_perc <= 0.25 then
-            color = fs._hud_durabilityCritical
+            -- Pulse the bar's brightness for critically damaged ships so a hull about to be
+            -- lost while the player is elsewhere actually draws the eye, instead of blending
+            -- into every other steady-colored bar on the HUD.
+            local pulse = 0.6 + 0.4 * math.sin(Client().unpausedRuntime * 6)
+            color = ColorARGB(fs.config.opacity * pulse, 1.0, 0.0, 0.0)
         elseif durability_perc <= 0.5 then
             color = fs._hud_durabilityLow
         end
@@ -594,23 +647,13 @@ writers = {
 }
 
 
-function initialize(...)
-    if fs.initialize then return fs.initialize(...) end
-end
-function update(...)
-    if fs.update then return fs.update(...) end
-end
-function getUpdateInterval(...)
-    if fs.getUpdateInterval then return fs.getUpdateInterval(...) end
-end
-
-
--- Global Event Callbacks
-function renderShipStatus(...)
-    if fs.renderShipStatus then return fs.renderShipStatus(...) end
-end
-function loadToShip(...)
-    if fs.loadToShip then return fs.loadToShip(...) end
-end
+-- namespace-shadowing bare global wrappers around initialize/update/getUpdateInterval and the
+-- registerCallback-invoked renderShipStatus/loadToShip used to live here. The engine natively
+-- routes lifecycle hooks and registered callbacks (registerCallback("onPreRenderHud",
+-- "renderShipStatus") etc.) into this namespace's own fs.* functions directly -- confirmed
+-- against vanilla's enemystrengthindicators.lua, which registers
+-- player:registerCallback("onShipChanged", "onRefreshRequired") and defines only the
+-- namespaced EnemyStrengthIndicators.onRefreshRequired, no bare global. A same-named bare
+-- global here shadows that native routing rather than helping it.
 
 return FleetStatus

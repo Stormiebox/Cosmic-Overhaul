@@ -239,10 +239,13 @@ Adds a robust analytical tracker displaying cash flows, taxes, working states, a
 
 - **V4.0.0 Icon Update:** Fully integrated native custom iconography tracking (`data/textures/icons/FactoryOverviewTab.png`).
 - **Self-Healing Loop:** Implemented a real-time tracking cycle that scans sectors on-load. Any claimed neutral station (e.g., Ice Mines) or factory constructed prior to Cosmic Overhaul's installation automatically repairs its missing network registrations and cleanly injects itself into the UI layout.
+- **Location Column:** Every factory's sector coordinates are now a visible, sortable column, not just something you can jump to blind via "Goto Selected."
+- **Status Column:** Shows the dominant working-state reason and the percentage of time spent in it (e.g. "94% Running", "62% Missing Ingredients"), color-coded green/amber/red, derived from the same working-state breakdown the tooltip has always shown.
+- **Totals Summary:** A header readout aggregates Income, Expense, and Profit across every factory currently shown, respecting the Alliance toggle.
 
 **Gameplay Impact:**
 
-- Complete strategy-level visibility over multi-sector industrial supply chains, highlighting supply blocks and underperforming installations instantly.
+- Complete strategy-level visibility over multi-sector industrial supply chains, highlighting supply blocks and underperforming installations instantly -- now genuinely at a glance, without hovering every row.
 
 </details>
 
@@ -291,10 +294,15 @@ Cosmic Overhaul features an fully integrated and highly optimized **Fleet Ship S
 - **Script Ownership Reset:** Completely migrated code hooks from the unstable player context down to the strict entity management layers.
 - **Active Path:** `data/scripts/entity/fleetstatus.lua` (Attached cleanly via `data/scripts/entity/init.lua`).
 - **Safety No-Op Shim:** The legacy script path at `data/scripts/player/init.lua` has been fully decommissioned. A safety fallback shim remains at the old player path to catch stale legacy save references, completely eliminating engine stack traces and visual layout failures.
+- **Namespace Routing Fixed:** Removed a set of bare global wrapper functions (`initialize`, `update`, `getUpdateInterval`, and the `onPreRenderHud`/`onShipChanged`-registered `renderShipStatus`/`loadToShip` callbacks) that shadowed the script's own namespaced functions instead of the engine calling them directly, per the same class of fix already applied to 16 other scripts this version.
+- **Ship List Row Indexing Fixed:** The settings window's two ship lists were reading a UI widget's pixel-size property instead of its row count when addressing a just-added row -- corrected to the real row-count property.
+- **Live Durability Column:** Both ship lists in the settings window now show each ship's current hull durability percentage, color-coded green/amber/red, instead of a bare name with no health context.
+- **Critical Damage Pulse:** A ship at or below 25% hull durability now pulses its HUD durability bar instead of sitting at a flat, easy-to-miss red, so a ship taking a beating while you're elsewhere actually draws your eye.
 
 **Gameplay Impact:**
 
 - Ensures the FSS HUD icon initializes perfectly, updates without memory leaks, and reliably functions across deep, multi-fleet late-game setups.
+- Damaged ships are now visible both in the settings window (via the new durability column) and on the HUD overlay (via the pulse), instead of only showing up once you happen to glance at the right HUD bar.
 
 </details>
 
@@ -387,23 +395,27 @@ Inverts default map-routing logic, forcing player-issued travel strings to activ
 
 </details>
 
-### 🎖️ 20) Command Center Tab
+### 🎖️ 20) Command Center Tab (Fleet Operations & Earnings Dashboard)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Adds a centralized "Command Center" tab to the Player Window that tracks every active ship in your fleet.
+Adds a "Command Center" tab to the Player Window that goes beyond a simple ship list -- it's a dashboard for what your background fleet is actually doing and earning, deliberately complementing (rather than duplicating) vanilla's own Fleet window.
 
 **Technical Adjustments:**
 
 - Overhauled texture paths to look modern and sharp (`data/textures/icons/CommandCenterTab.png`), wired to `command_center_tab.lua`.
+- **Fleet Income Tracker:** A cumulative counter of credits earned through background commands (Trade, Mine, Salvage, etc.), tracked in `simulation.lua` across both payout paths a command can take, with a manual reset button.
+- **Attention Needed Strip:** Live, clickable counts of Idle Ships, Operations Completing Soon (under a minute), and Recalled ships.
+- **Full Column Sorting:** The operations table sorts by Ship, Operation, Location, ETA, or Status, defaulting to soonest-ETA-first.
 
 **Gameplay Impact:**
 
 - Real-time tracking of background simulation commands (Mine, Trade, etc.) and physical sector orders (Looping, Patrolling).
-- Displays ETAs for background missions and current status (Active, Recalled, Idle).
+- Displays ETAs for background missions and current status (Active, Recalled, Idle) -- including ships that are sitting Idle with no orders at all, which is now surfaced explicitly instead of silently omitted.
 - **Remote Recall:** Recall any ship from its operation directly from the list without opening the Galaxy Map.
+- **Financial Awareness:** See how much your background fleet has actually earned you, without cross-referencing chat logs or guessing.
 
 </details>
 
