@@ -7,7 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## [v5.2.6]
+## [v5.3.0]
+
+### New Feature
+- [Feature] **Trash Manager Revamped:** Integrated the newly overhauled "Trash Manager Revamped".
 
 ### 🪲 Bug Fixes
 - [Bugfix] **Namespace Shadowing Engine Constraints (Systemwide):** Removed illegal global wrapper functions that shadowed native namespace-routed lifecycle and event callbacks (`initialize`, `updateServer`, `updateClient`, `secure`, `restore`, `getUpdateInterval`, and registered sector/entity/player event callbacks) across 16 script files: the Ancient Gate, Gate, Ship Info, Equipment Dock, Fighter Merchant, Turret Merchant, and Scrapyard entity scripts; both the entity-side and sector-side Station Income Management scripts; and the Fleet Status, Galaxy Map QoL, Command Center, Factory Overview, Player Bulletin Board, Resource Display, and Respawn HUD player scripts. These wrappers could cause event desynchronization, double-execution logic loops, or the engine silently falling back to its default 15-second background update loop instead of the script's intended update interval.
