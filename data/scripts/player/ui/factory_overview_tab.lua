@@ -150,7 +150,10 @@ function FactoryOverview.buildWindow(container)
 
 	local row1Bottom = topHeight * 0.42
 	local row2Top = topHeight * 0.46
-	local row2Bottom = topHeight - 4
+	-- The sorting-header row below is drawn in the last 20px of hsplit.top itself (see the
+	-- loop further down: Rect(..., hsplit.top.height-20, ..., hsplit.top.height)), so row 2's
+	-- controls must stay clear of that band or they visually collide with the header buttons.
+	local row2Bottom = topHeight - 24
 
 	-- Row 1: title (left) + aggregate totals for the currently shown factories (right)
 	container:createLabel(Rect(margin, 2, margin + 200, row1Bottom), "Factory Overview"%_t, 20)
@@ -158,19 +161,21 @@ function FactoryOverview.buildWindow(container)
 	totalsLabel = container:createLabel(Rect(topWidth * 0.32, 2, topWidth - margin, row1Bottom), "", 15)
 	totalsLabel:setTopLeftAligned()
 
-	-- Row 2: refresh, goto, alliance toggle -- left-to-right with fixed spacing
-	local refreshButton = container:createButton(Rect(margin, row2Top, margin + 120, row2Bottom), "Refresh"%_t, "clientFetchDataFromGalaxy")
-	refreshButton.icon = "data/textures/icons/refresh.png"
-	refreshButton.tooltip = "Refresh Factory Data"%_t
+	-- Row 2: refresh, goto, alliance toggle -- right-aligned in their own corner instead of
+	-- sitting over the leftmost sort-header columns, and narrower since these are icon
+	-- buttons that don't need the extra width.
+	all_check = container:createCheckBox(Rect(topWidth - margin - 150, row2Top, topWidth - margin, row2Bottom),
+		"Alliance: "%_t, "switchAllianceFlag")
+	all_check.checked = false
 
-	local gotoButton = container:createButton(Rect(margin + 135, row2Top, margin + 275, row2Bottom), "Goto Selected"%_t,
+	local gotoButton = container:createButton(Rect(topWidth - margin - 250, row2Top, topWidth - margin - 160, row2Bottom), "Goto Selected"%_t,
 		"gotoSelectedCoordinates")
 	gotoButton.icon = "data/textures/icons/wire.png"
 	gotoButton.tooltip = "Jump to selected station"%_t
 
-	all_check = container:createCheckBox(Rect(margin + 290, row2Top, margin + 460, row2Bottom),
-		"Alliance: "%_t, "switchAllianceFlag")
-	all_check.checked = false
+	local refreshButton = container:createButton(Rect(topWidth - margin - 350, row2Top, topWidth - margin - 260, row2Bottom), "Refresh"%_t, "clientFetchDataFromGalaxy")
+	refreshButton.icon = "data/textures/icons/refresh.png"
+	refreshButton.tooltip = "Refresh Factory Data"%_t
 
 	-- Account for the scrollbar width (~20px) so the last column doesn't get clipped
 	local b_width = (container.size.x-2*margin-20)/#sortingLabels
