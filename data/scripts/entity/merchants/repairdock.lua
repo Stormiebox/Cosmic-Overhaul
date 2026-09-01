@@ -34,6 +34,19 @@ function RepairDock.repairAllSectorShips(playerIndex, creditsOnly) -- Explicitly
 
         for _, ship in pairs(ships) do
             local owner = Faction(ship.factionIndex)
+            -- getShipPlan/getShipTurretDesigns/restoreTurrets only exist on Player and
+            -- Alliance, not on the generic Faction() -- re-resolve into the specific type,
+            -- matching vanilla repairdock.lua's own buyer-resolution pattern (see e.g.
+            -- RepairDock.getRepairMoneyCostAndTaxTest()).
+            if owner then
+                if owner.isPlayer then
+                    owner = Player(owner.index)
+                elseif owner.isAlliance then
+                    owner = Alliance(owner.index)
+                else
+                    owner = nil
+                end
+            end
             if owner then
                 local perfectPlan = owner:getShipPlan(ship.name)
                 local damagedPlan = ship:getFullPlanCopy()
