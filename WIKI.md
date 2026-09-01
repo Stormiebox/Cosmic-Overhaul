@@ -1,6 +1,6 @@
-# ⚙️ Cosmic Overhaul - Detailed Features
+# ⚙️ Cosmic Overhaul — Wiki
 
-Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-facing rundown of the features currently included in the mod, complete with practical details on how each mechanic impacts your gameplay.
+Complete technical reference for **Cosmic Overhaul**, covering every system currently in the mod as of **v5.3.0**. This document favors precision over brevity — file names, exact multipliers, and mechanic thresholds are included wherever they matter. If you just want a friendly tour of what the mod does, read `PLAYER_GUIDE.md` instead; if you want the version-by-version history, read `Changelog.md`.
 
 ---
 
@@ -8,8 +8,10 @@ Welcome to the **Cosmic Overhaul** official wiki! Below is a complete, user-faci
 
 - [System Features](#system-features)
 - [Command & Captain Enhancements](#command--captain-enhancements)
-- [Black Market / Smuggler’s Market Rework](#black-market--smugglers-market-rework)
-- [Cosmic Vault Synergy](#cosmic-vault-synergy)
+- [Captain Elite Traits](#captain-elite-traits)
+- [Black Market / Smuggler's Market Rework](#black-market--smugglers-market-rework)
+- [Localization](#localization)
+- [Cross-Mod Synergy](#cross-mod-synergy)
 
 ---
 
@@ -30,24 +32,25 @@ Improves alliance and faction relation progression by increasing the impact of y
 
 </details>
 
-### 🔗 2) Dynamic Reputation Decay & Alliance Synergy
+### 🔗 2) Dynamic Reputation Decay & Alliance Mirroring
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Introduces inactivity-based relation decay to AI factions over time, while linking individual actions directly to the player's group entity with heightened impact.
+Introduces inactivity-based relation decay to AI factions over time, and mirrors your personal reputation changes onto your Alliance so individual actions carry real diplomatic weight for the whole group.
 
 **How it works:**
 
-- **Inactivity Drift:** Server-side timed decay checks cause ignored faction relations to slowly drift back towards neutral (Allies forget over time, while Hostiles eventually forgive).
-- **Alliance Mirroring:** Individual player reputation changes mirror to their Alliance at **2x intensity**.
+- **Inactivity Drift:** After an hour of no interaction with a faction, relations begin drifting back toward neutral — Allies slowly forget your good deeds, Hostiles slowly forgive your past sins. Decay starts at 50 relation/hour and escalates the longer a faction is ignored (up to a 3,000/hour cap), applied in a single batch every 45 minutes rather than trickling out constantly.
+- **Alliance Mirroring:** Personal reputation changes mirror onto your Alliance at **1:1 parity** (reduced from an earlier 2x multiplier to prevent cascading multi-faction wars once Cosmic War/Ascendancy content is in play).
+- **Forgiveness Buffer:** Small reputation losses (down to -25,000) are dampened by 90% before they reach the Alliance ledger, so one player's stray shot doesn't tank the whole group's standing.
+- **Entrenched Diplomatic Suicide:** If the mirrored loss targets a faction with the Cosmic War `Fortified` trait, the penalty is multiplied by an additional 1.5x.
 
 **Gameplay Impact:**
 
-- Encourages ongoing diplomacy and active interstellar engagement.
-- Prevents permanent "set-and-forget" max reputation states in long-term campaigns.
-- Forces individual actions to carry massive diplomatic weight for your entire faction group.
+- Encourages ongoing diplomacy instead of "set it and forget it" max-reputation states.
+- Individual actions matter to the whole Alliance, but minor accidents won't sink it.
 
 </details>
 
@@ -60,15 +63,16 @@ Introduces inactivity-based relation decay to AI factions over time, while linki
 Mined-out asteroid fields slowly regenerate their resources over real-time in the background instead of merely respawning a fraction of asteroids upon sector load.
 
 **How it works:**
-- **Background Processing:** The system connects with the Cosmic Overhaul ARCC API to process elapsed offline time mathematically, removing the need to keep sectors loaded.
-- **Economic Famine Synergy:** It actively polls the `CosmicVaultEconomy` API. If the faction owning the sector is in **"Severe Famine"**, the sector's natural recovery halts entirely. If **"Resource Starved"**, it recovers at half speed.
-- **Emergency Replenishment:** If a sector is entirely barren, an emergency geologic event will spawn new fields. This massive shift has a 5% chance to uncover hidden Precursor Wrecks or Spatial Rifts via the `CosmicVaultAnomalies` API.
-- **News Broadcasting:** Emergency replenishments in heavily populated core sectors will automatically publish a breaking news article to the galaxy via the `CosmicVaultNews` API.
+
+- **Background Processing:** Ties into the ARCC offline-catch-up API to process elapsed time mathematically, so sectors don't need to stay loaded to recover.
+- **Economic Famine Synergy:** Polls the `CosmicVaultEconomy` API. If the controlling faction is in **Severe Famine**, natural recovery halts entirely. If **Resource Starved**, it recovers at half speed.
+- **Emergency Replenishment:** A fully barren sector has a chance to trigger an emergency geologic event that spawns new fields, with a 5% chance to also uncover a hidden Precursor Wreck or Spatial Rift via the `CosmicVaultAnomalies` API.
+- **News Broadcasting:** Emergency replenishments in populated core sectors publish a breaking news article galaxy-wide via `CosmicVaultNews`.
 
 **Gameplay Impact:**
-- Makes the universe feel geologically active without flooding the sector with too many asteroids.
-- Allows players to establish permanent mining operations in safe sectors without worrying about them permanently drying up.
-- Creates economic vulnerability: crushing a faction's economy now actively destroys its ability to replenish mining resources.
+
+- Permanent mining operations in safe sectors don't permanently dry up.
+- Crushing a faction's economy now measurably damages its ability to replenish resources.
 
 </details>
 
@@ -87,7 +91,7 @@ Expands and rebalances shuttle behavior and capacity progression for station log
 
 </details>
 
-### 4) Dynamic Stock / Goods Flow Improvements
+### 5) Dynamic Stock / Goods Flow Improvements
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -102,7 +106,7 @@ Adjusts station goods behavior and trade flow assumptions to feel less static an
 
 </details>
 
-### ⚖️ 5) Equipment Dock & Merchant Inventory Rebalance
+### ⚖️ 6) Equipment Dock & Merchant Inventory Rebalance
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -111,7 +115,7 @@ Adjusts station goods behavior and trade flow assumptions to feel less static an
 Drastically cleans up and optimizes the volume of procedurally generated items within Equipment Docks, Fighter Merchants, and Turret Merchants.
 
 **Why it changed:**
-Because players can now instantly refresh inventories using the **Shop Restock** utility, massive legacy lists of 100+ items became unnecessary UI bloat.
+Because players can now instantly refresh inventories using the Shop Restock button (below), massive legacy lists of 100+ items became unnecessary UI bloat.
 
 **Gameplay Impact:**
 
@@ -120,7 +124,7 @@ Because players can now instantly refresh inventories using the **Shop Restock**
 
 </details>
 
-### 6) Shop Restock Button (Overhaul Variant)
+### 7) Shop Restock Button (Overhaul Variant)
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -130,22 +134,21 @@ Adds integrated restock functionality with overhaul-specific balancing (grants 2
 
 **Details:**
 
-- Server-to-Client translation fixes prevent cooldown broadcasts from locking to the server host's language, ensuring localized text displays accurately for all players.
+- Server-to-client translation fixes prevent cooldown broadcasts from locking to the server host's language, ensuring localized text displays accurately for all players.
 
 **Gameplay Impact:**
 
-- Exceptional quality-of-life improvement during active fitting and ship-building sessions.
 - Preserves economy balancing by tracking cooldown metrics via the persistent database.
 
 </details>
 
-### ⚙️ 7) Permanent Subsystem Removal at More Stations
+### ⚙️ 8) Permanent Subsystem Removal at More Stations
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Enables permanent subsystem removal at additional station types (e.g., `Repair Dock`, `Shipyard`, `Military Outpost`, `Research Station`, and `Scrapyard`).
+Enables permanent subsystem removal at additional station types (Repair Dock, Shipyard, Military Outpost, Research Station, and Scrapyard).
 
 **Gameplay Impact:**
 
@@ -154,7 +157,7 @@ Enables permanent subsystem removal at additional station types (e.g., `Repair D
 
 </details>
 
-### 🛠️ 8) Fleet Repair at Repair Docks
+### 🛠️ 9) Fleet Repair at Repair Docks
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -164,15 +167,15 @@ Upgrades the Repair Dock UI to natively process and repair your entire fleet in 
 
 **Technical Features:**
 
-- **Alliance Fallback System:** Calculates the repair bill for the entire combined fleet. If the player is in an Alliance with `SpendResources` privileges, it automatically bills the Alliance vault. If the Alliance is broke or the player lacks permissions, the system gracefully falls back to the player's private wallet—mechanically isolating and repairing *only* private player ships to prevent unauthorized Alliance spending.
+- **Alliance Fallback System:** Calculates the repair bill for the entire combined fleet. If the player is in an Alliance with `SpendResources` privileges, it automatically bills the Alliance vault. If the Alliance is broke or the player lacks permissions, the system falls back to the player's private wallet, repairing only private ships to prevent unauthorized Alliance spending.
 
 **Gameplay Impact:**
 
-- Eliminates the tedious necessity of jumping between 15 different ships just to click the "Repair" button on each one individually.
+- Eliminates jumping between a dozen ships just to click "Repair" on each one individually.
 
 </details>
 
-### ✨ 8) Scrapyard QoL / Time-Limit Removal
+### ✨ 10) Scrapyard QoL / Time-Limit Removal
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -187,163 +190,157 @@ Removes restrictive scrapyard timing friction and improves overall scrapyard flo
 
 </details>
 
-### 9) Transfer Window Enhancements (Cargo UX & Smart Stacking)
+### 11) Transfer Window Enhancements (Cargo UX & Smart Stacking)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Completely modernizes and refactors the legacy Cargo Transfer UI (`transfercrewgoods.lua`) to natively handle massive, late-game ship manifests.
+Modernizes and refactors the legacy Cargo Transfer UI (`transfercrewgoods.lua`) to natively handle massive, late-game ship manifests.
 
 **Details:**
 
-- **Live Filtering & Sorting:** Fully functional text search filtering and alphabetical sorting configurations.
-- **Visual Indicators:** Color-coded cargo capacity feedback bars (Red for illegal/stolen, Yellow for dangerous).
-- **Fractional Delivery Overfill:** Transfers no longer fail completely if the receiving ship lacks sufficient volumetric storage; instead, the script fills the target hold to maximum capacity and leaves the surplus behind.
-- **Inventory Smart Stacking:** Holding **Right Mouse Button (RMB)** when clicking the "Transfer All" macro restricts the action to only transfer commodities that the receiving ship *already possesses* in its inventory hold.
+- **Live Filtering & Sorting:** Text search filtering and alphabetical sorting.
+- **Visual Indicators:** Color-coded cargo capacity bars (red for illegal/stolen, yellow for dangerous).
+- **Fractional Delivery Overfill:** Transfers no longer fail outright if the receiving ship lacks sufficient volume — the script fills the target hold to capacity and leaves the surplus behind.
+- **Inventory Smart Stacking:** Holding **Right Mouse Button (RMB)** while clicking "Transfer All" restricts the action to commodities the receiving ship already has in its hold.
 
 **Gameplay Impact:**
 
-- Unprecedented efficiency during bulk logistics operations, automated cargo distributions, and asset management.
+- Major efficiency gains during bulk logistics operations and asset management.
 
 </details>
 
-### 10) Universal Bulletin Board (Player-Centric Access)
+### 12) Universal Bulletin Board (Player-Centric Access)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Extends sector bulletin board accessibility directly through the player window interface, augmented by hardened string parsing fixes.
+Extends sector bulletin board accessibility directly through the player window interface.
 
 **Details:**
 
-- Features advanced grouping filters and dropdown macros to sort by Reward, Difficulty, or Source.
-- **Stability Fix:** Patched string formatting routines (`playerbulletinboard.lua`) to provide explicit safety fallbacks for empty argument lists, entirely eliminating client UI crashes when displaying text-lite procedurally generated contracts.
+- Grouping filters and dropdown macros to sort by Reward, Difficulty, or Source.
+- **Stability Fix:** Patched string formatting routines (`playerbulletinboard.lua`) with explicit safety fallbacks for empty argument lists, eliminating client UI crashes on text-lite procedurally generated contracts.
 
 **Gameplay Impact:**
 
-- Instant, centralized access to mission parameters across entire sectors without requiring physical docking maneuvers.
+- Instant, centralized access to mission parameters across an entire sector without physical docking.
 
 </details>
 
-### 💹 11) Factory Overview Tab (Economic Analytics & Self-Healing)
+### 💹 13) Factory Overview Tab (Economic Analytics & Self-Healing)
 
 <details>
-<summary><b>Click to expand details</b></summary>
+<summary><b>Click to expand details — updated in v5.3.0</b></summary>
 
 **What it does:**
-Adds a robust analytical tracker displaying cash flows, taxes, working states, and performance trajectories over time, backed by automated structural registration routines.
+Adds an analytical tracker displaying cash flows, taxes, working states, and performance trends across every factory you own.
 
 **Technical Features:**
 
-- **V4.0.0 Icon Update:** Fully integrated native custom iconography tracking (`data/textures/icons/FactoryOverviewTab.png`).
-- **Self-Healing Loop:** Implemented a real-time tracking cycle that scans sectors on-load. Any claimed neutral station (e.g., Ice Mines) or factory constructed prior to Cosmic Overhaul's installation automatically repairs its missing network registrations and cleanly injects itself into the UI layout.
-- **Location Column:** Every factory's sector coordinates are now a visible, sortable column, not just something you can jump to blind via "Goto Selected."
-- **Status Column:** Shows the dominant working-state reason and the percentage of time spent in it (e.g. "94% Running", "62% Missing Ingredients"), color-coded green/amber/red, derived from the same working-state breakdown the tooltip has always shown.
-- **Totals Summary:** A header readout aggregates Income, Expense, and Profit across every factory currently shown, respecting the Alliance toggle.
+- **Self-Healing Loop:** A real-time tracking cycle scans sectors on-load. Any claimed neutral station (e.g. Ice Mines) or factory built before Cosmic Overhaul was installed automatically repairs its missing network registrations and injects itself into the UI.
+- **🆕 Location Column (v5.3.0):** Every factory's sector coordinates are now a visible, sortable column instead of something you can only reach blind via "Goto Selected."
+- **🆕 Status Column (v5.3.0):** Shows the dominant working-state reason and the percentage of time spent in it (e.g. "94% Running" in green, "62% Missing Ingredients" in red), computed from the same working-state breakdown the tooltip has always shown — so a stalled factory is visible without hovering every row.
+- **🆕 Totals Summary (v5.3.0):** A header readout aggregates Income, Expense, and Profit across every factory currently shown, respecting the Alliance toggle.
+- All seven columns (the original five plus Location and Status) are fully sortable. The header is split across two rows so the title/totals no longer crowd the Refresh/Goto/Alliance controls.
 
 **Gameplay Impact:**
 
-- Complete strategy-level visibility over multi-sector industrial supply chains, highlighting supply blocks and underperforming installations instantly -- now genuinely at a glance, without hovering every row.
+- Complete strategy-level visibility over multi-sector industrial supply chains — a stalled or underperforming factory is now visible at a glance, not just on hover.
 
 </details>
 
-### 💹 12) Trade Heatmap Expansion
+### 💹 14) Trade Heatmap Expansion
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Progressively scales the underlying tracking range of the Trading Overview subsystem up to a massive **10x multiplier** based directly on component rarity.
+Progressively scales the tracking range of the Trading Overview subsystem up to a **10x multiplier** based on component rarity.
 
 **Gameplay Impact:**
 
-- Drastically improves strategic route layout planning and systemic commodity tracking in high-tier sectors.
+- Drastically improves route planning and commodity tracking in high-tier sectors.
 
 </details>
 
-### 13) Transporter Range Scaling by Block Investment
+### 15) Transporter Range Scaling by Block Investment
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Amplifies the functional range of the Transporter Software subsystem up to a **10x multiplier**, scaling non-linearly based on both component rarity and the total volume of dedicated transporter blocks installed within the active ship plan.
+Amplifies the range of the Transporter Software subsystem up to a **10x multiplier**, scaling non-linearly based on both component rarity and the number of dedicated transporter blocks installed on the ship.
 
 **Gameplay Impact:**
 
-- Seamlessly bridges the gap between mechanical scale and block investment, heavily rewarding specialized freighter and shuttle hulls.
+- Rewards specialized freighter and shuttle hulls that invest in transporter blocks.
 
 </details>
 
-### 14) Ship/Fleet Info Extensions
+### 🏗️ 16) Fleet Ship Status UI (Fleet Status Screen)
+
+<details>
+<summary><b>Click to expand details — overhauled in v5.3.0</b></summary>
+
+**What it does:**
+A standalone Player UI window (opened from a ship, not a Player Window tab — deliberately kept that way) that tracks shield/hull status for any ships you pin to the HUD.
+
+**v5.3.0 changes:**
+
+- **🆕 Live Durability Column:** Both ship-selection lists (Show in HUD / Available Ships) now show a live, color-coded **hull durability percentage** next to every ship name instead of a bare name with no health context. Each list header also shows a running count (e.g. "Show in HUD (3)").
+- **🆕 Critical Damage Pulse:** A ship at or below **25% hull durability** now pulses its durability bar on the HUD overlay instead of sitting at a flat, easy-to-miss red — a ship taking damage while you're elsewhere now actually draws your eye.
+- **Script Ownership Reset:** Fully migrated from the unstable player context to the entity management layer. Active path: `data/scripts/entity/fleetstatus.lua`. The legacy path at `data/scripts/player/init.lua` is fully decommissioned; a no-op safety shim remains there only to catch stale legacy save references.
+- **Namespace Routing Fixed:** Removed bare global wrapper functions (`initialize`, `update`, `getUpdateInterval`, `renderShipStatus`, `loadToShip`) that shadowed the script's own namespaced functions instead of letting the engine call them directly.
+- **Row Indexing Fixed:** Both ship lists were reading a UI widget's pixel size (`.size`) instead of its row count (`.rows`) when addressing a just-added row, which could scramble the name/status columns — corrected to the real row-count property.
+- **Stale Reference Guard:** `ShipDatabaseEntry(...)` is a constructor, not a lookup, so it never returned `nil` even for a ship that no longer existed — the old `if entry then` guard never caught it. Replaced with a real `entry:exists()` check, plus a guard against clicking a stale row for a ship renamed, sold, or destroyed between UI repaints.
+
+**Gameplay Impact:**
+
+- Damaged ships are now visible both in the settings window (durability column) and on the HUD overlay (pulse), instead of only if you happen to glance at the right bar at the right time.
+
+</details>
+
+### 17) Seed Randomization & Micro-Variance
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Overhauls ship info presentations to maximize strategic situational awareness while reducing nested calculation loops.
-
-#### 🏗️ Fleet Ship Status UI (Refactored Core Architecture)
-
-Cosmic Overhaul features an fully integrated and highly optimized **Fleet Ship Status** architecture.
-
-**Technical Architecture Adjustments:**
-
-- **Script Ownership Reset:** Completely migrated code hooks from the unstable player context down to the strict entity management layers.
-- **Active Path:** `data/scripts/entity/fleetstatus.lua` (Attached cleanly via `data/scripts/entity/init.lua`).
-- **Safety No-Op Shim:** The legacy script path at `data/scripts/player/init.lua` has been fully decommissioned. A safety fallback shim remains at the old player path to catch stale legacy save references, completely eliminating engine stack traces and visual layout failures.
-- **Namespace Routing Fixed:** Removed a set of bare global wrapper functions (`initialize`, `update`, `getUpdateInterval`, and the `onPreRenderHud`/`onShipChanged`-registered `renderShipStatus`/`loadToShip` callbacks) that shadowed the script's own namespaced functions instead of the engine calling them directly, per the same class of fix already applied to 16 other scripts this version.
-- **Ship List Row Indexing Fixed:** The settings window's two ship lists were reading a UI widget's pixel-size property instead of its row count when addressing a just-added row -- corrected to the real row-count property.
-- **Live Durability Column:** Both ship lists in the settings window now show each ship's current hull durability percentage, color-coded green/amber/red, instead of a bare name with no health context.
-- **Critical Damage Pulse:** A ship at or below 25% hull durability now pulses its HUD durability bar instead of sitting at a flat, easy-to-miss red, so a ship taking a beating while you're elsewhere actually draws your eye.
-
-**Gameplay Impact:**
-
-- Ensures the FSS HUD icon initializes perfectly, updates without memory leaks, and reliably functions across deep, multi-fleet late-game setups.
-- Damaged ships are now visible both in the settings window (via the new durability column) and on the HUD overlay (via the pulse), instead of only showing up once you happen to glance at the right HUD bar.
-
-</details>
-
-### 15) Seed Randomization & Micro-Variance
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Injects an operational micro-variance into the 1x1 sector seed matrix for System Upgrades and Turrets, while resolving legacy generation collisions.
+Injects operational micro-variance into the 1x1 sector seed matrix for System Upgrades and Turrets, while resolving legacy generation collisions.
 
 **Technical Adjustments:**
 
-- **Hash Collision Fix:** Patched a coordinate overlap bug within `upgradegenerator.lua` and `sectorturretgenerator.lua` that previously forced hundreds of distinctly separate coordinate sectors to share identical loot tables.
+- **Hash Collision Fix:** Patched a coordinate overlap bug in `upgradegenerator.lua` and `sectorturretgenerator.lua` that previously forced hundreds of distinct coordinate sectors to share identical loot tables.
 
 **Gameplay Impact:**
 
-- Merchants and Pirate drops residing within the exact same grid coordinates will no longer yield repetitive, mirrored clones of identical items, creating a significantly more dynamic loot environment.
+- Merchants and pirate drops at the same grid coordinates no longer yield repetitive, mirrored clones of identical items.
 
 </details>
 
-### 🔗 16) UI Settings Persistence (CosmicVault Integration)
+### 🔗 18) UI Settings Persistence (Cosmic Vault Integration)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Saves selected UI elements, filter drop-downs, widget configurations, and command preferences seamlessly across sessions.
+Saves selected UI elements, filter drop-downs, widget configurations, and command preferences across sessions.
 
 **Backend Refactor:**
 
-- The fragile, crash-prone legacy file-based database system (`moddata.lua`) has been **completely removed**.
-- All operational persistence parameters are now funneled through the high-performance, unified `CosmicVaultPlayerSettings` API.
+- The fragile, crash-prone legacy file-based database (`moddata.lua`) has been completely removed.
+- All persistence now runs through the unified `CosmicVaultPlayerSettings` API.
 
 **Gameplay Impact:**
 
-- Complete workflow continuity across map sectors and game restarts, eliminating repetitive reconfiguration hurdles.
+- Workflow continuity across map sectors and game restarts, with no repetitive reconfiguration.
 
 </details>
 
-### 17) Wreckage / Salvage Workflow Improvements
+### 19) Wreckage / Salvage Workflow Improvements
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -353,73 +350,78 @@ Adds strategy-mode salvage quality-of-life support for quicker targeting and cle
 
 **Gameplay Impact:**
 
-- Faster post-combat salvage management.
-- Better high-volume debris handling.
+- Faster post-combat salvage management and high-volume debris handling.
 
 </details>
 
-### 18) Trash Manager (Integrated & UI Stabilized)
+### 20) Trash Manager (Integrated & UI Stabilized)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Adds robust inventory filtering and a bulk trash marking flow with preview support, available for both private and alliance inventory contexts.
+Adds reliable inventory filtering and a bulk trash-marking flow with preview support, for both private and Alliance inventory contexts. As of v5.3.0, this runs the newly overhauled standalone **Trash Manager Revamped** mod, integrated directly into Cosmic Overhaul.
 
 **Technical Adjustments:**
 
-- Fixed a rendering bug where the Trash Man icon would fail to compile when switching into an Alliance ship or pilot Drone. The underlying attachment logic now runs safe ownership checks via `entity/init.lua` to guarantee stable rendering at all times.
+- Fixed a rendering bug where the Trash Man icon would fail to compile when switching into an Alliance ship or pilot drone — attachment logic now runs safe ownership checks via `entity/init.lua`.
 
 **Gameplay Impact:**
 
-- Streamlined inventory maintenance that safely segregates high-value marked favorites while enabling rapid "Sell Trash" vendor transactions.
+- Streamlined inventory maintenance that segregates favorited gear from bulk "Sell Trash" transactions.
 
 </details>
 
-### 19) Gate Travel Priority & Icon Compasses
+### 21) Gate Travel Priority & Icon Compasses
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Inverts default map-routing logic, forcing player-issued travel strings to actively prioritize localized Gate networks and Wormholes rather than burning jump-drive charges.
+Inverts default map-routing logic so player-issued travel orders actively prioritize localized Gate networks and Wormholes rather than burning jump-drive charges.
 
 **Details:**
 
-- Enchained route instructions automatically check system structures. If an established gate link exists towards your target direction, the ship steers directly into the transit gate.
-- Re-rendered asset icons display precise vector compass markers (`North`, `South`, `North-West`, etc.) on the map plane.
+- Enchained route instructions check system structures; if an established gate link exists toward your target, the ship steers into the transit gate instead.
+- Re-rendered map icons display precise compass markers (North, South, North-West, etc.).
 
 **Gameplay Impact:**
 
-- Massive reduction in micro-management travel orders across populated space, paired with explicit visual layout tracking.
+- Major reduction in micro-management for travel orders across populated space.
 
 </details>
 
-### 🎖️ 20) Command Center Tab (Fleet Operations & Earnings Dashboard)
+### 🎖️ 22) Command Center Tab (Fleet Operations & Earnings Dashboard)
 
 <details>
-<summary><b>Click to expand details</b></summary>
+<summary><b>Click to expand details — reworked in v5.3.0</b></summary>
 
 **What it does:**
-Adds a "Command Center" tab to the Player Window that goes beyond a simple ship list -- it's a dashboard for what your background fleet is actually doing and earning, deliberately complementing (rather than duplicating) vanilla's own Fleet window.
+The Command Center tab in your Player Window was previously just a list of active background/physical orders with no sorting, filtering, or financial context — largely redundant with vanilla's own Fleet window. It's now a dedicated dashboard for what your background fleet is actually doing and earning, deliberately complementing rather than duplicating vanilla's Fleet window. *(See [Command & Captain Enhancements](#command--captain-enhancements) below for the underlying background-command mechanics this dashboard surfaces — that section covers Trade/Scout/Salvage/etc. behavior itself, this one covers the UI that tracks it.)*
 
-**Technical Adjustments:**
+**v5.3.0 rework:**
 
-- Overhauled texture paths to look modern and sharp (`data/textures/icons/CommandCenterTab.png`), wired to `command_center_tab.lua`.
-- **Fleet Income Tracker:** A cumulative counter of credits earned through background commands (Trade, Mine, Salvage, etc.), tracked in `simulation.lua` across both payout paths a command can take, with a manual reset button.
-- **Attention Needed Strip:** Live, clickable counts of Idle Ships, Operations Completing Soon (under a minute), and Recalled ships.
-- **Full Column Sorting:** The operations table sorts by Ship, Operation, Location, ETA, or Status, defaulting to soonest-ETA-first.
+- **🆕 Fleet Income Tracker:** A cumulative counter of credits earned through background commands (Trade, Mine, Salvage, etc.), aggregated across your own faction and your Alliance, with a manual reset button. Backed by two hooks in `simulation.lua` (`ARCC_trackFleetIncome`) wired into both payout paths a background command can take — immediate delivery and the deferred `Simulation.takeYield` path — so nothing slips through uncounted.
+- **🆕 Idle Ship Surfacing:** Ships with no active order at all are now shown as their own rows instead of being silently skipped, so the tab can answer "which of my ships are doing nothing."
+- **🆕 Attention Needed Strip:** Live, clickable counts of Idle Ships, Operations Completing Soon (ETA under 60 seconds), and Recalled ships — click any count to jump straight to that filter.
+- **🆕 Full Column Sorting:** The operations table sorts by Ship, Operation, Location, ETA, or Status, defaulting to soonest-ETA-first.
+- Header layout was split across separate rows so controls no longer share horizontal space and risk overlapping on a narrower player window.
+
+**Three bugs fixed while rebuilding this tab:**
+
+- `invokeFunction`'s first return value is a call-status code (`0` means success), not a boolean — the original `if not ok then` guard could never detect a failed call, because in Lua every number (including `0`) is truthy.
+- Several server-authored strings were wrapped in the network-deferred `%_T` marker and then re-translated client-side with `%_t` — instead of being sent as plain text and translated once on receipt. Non-English clients could have seen incorrectly or doubly-resolved text in the operation list.
+- `Player:getShipNames()` was captured into a single local (`local shipNames = player:getShipNames()`) and gated on `type(shipNames) == "table"`. The engine's own docs and every real vanilla call site confirm it returns a vararg of strings, not a table — the unwrapped capture silently truncated to just the first ship name, so the check always failed and the physical-ship/idle-ship listing never ran. Fixed by wrapping the call as `{ player:getShipNames() }`, matching vanilla convention.
 
 **Gameplay Impact:**
 
-- Real-time tracking of background simulation commands (Mine, Trade, etc.) and physical sector orders (Looping, Patrolling).
-- Displays ETAs for background missions and current status (Active, Recalled, Idle) -- including ships that are sitting Idle with no orders at all, which is now surfaced explicitly instead of silently omitted.
+- Real-time tracking of background simulation commands and physical sector orders, ETAs, and status (Active, Recalled, Idle).
 - **Remote Recall:** Recall any ship from its operation directly from the list without opening the Galaxy Map.
-- **Financial Awareness:** See how much your background fleet has actually earned you, without cross-referencing chat logs or guessing.
+- **Financial Awareness:** See exactly how much your background fleet has earned you without cross-referencing chat logs.
 
 </details>
 
-### 21) Restored 1.0 Orders & Looping
+### 23) Restored 1.0 Orders & Looping
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -430,323 +432,122 @@ Restores the classic map orders from Avorion 1.0, enabling complex automation lo
 **Gameplay Impact:**
 
 - **Restored Orders:** Mine, Refine, Salvage, and Loop.
-- **Advanced Looping:** Queue multiple orders (e.g., Jump -> Mine -> Jump -> Refine) and use the Loop command to repeat the entire sequence indefinitely.
+- **Advanced Looping:** Queue multiple orders (e.g. Jump → Mine → Jump → Refine) and use the Loop command to repeat the sequence indefinitely.
 
-**How To Use:** Hold down the "SHIFT" key while clicking orders to queue them to run one after another from the galaxy view map.
+**How To Use:** Hold `SHIFT` while clicking orders on the Galaxy Map to queue them one after another.
 
 </details>
 
-### ⚔️ 22) Simulated Station Profits & War Heat Synergies
+### ⚔️ 24) Simulated Station Profits & War Heat Synergies
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Simulates organic civilian traffic loops and service utility consumption across player-owned installations (Casinos, Depots, Repair Docks), yielding steady credit inflows and item generation.
+Simulates organic civilian traffic and service utility consumption across player-owned installations (Casinos, Depots, Repair Docks), yielding steady credit inflows and item generation.
 
 **Ecosystem Integration:**
 
-- Passive income yields are dynamically modified in real-time by local **War Heat** metrics calculated from the companion *Cosmic War* mod framework.
+- Passive income is dynamically modified in real time by local **War Heat**, calculated by the companion *Cosmic War* mod when it's installed. At maximum war heat, this civilian-traffic income drops to 20% of normal — commercial vessels avoid hazardous space. (This is the opposite direction from — and a separate mechanic than — the War Profiteering bonus described under [Cross-Mod Synergy](#cross-mod-synergy), which rewards *supplying into* a warzone rather than passively operating near one.)
 
 **Gameplay Impact:**
 
-- High-conflict deployment zones face steep economic drops as commercial vessels avoid hazardous space. Players must actively defend and pacify logistics centers to maintain maximum financial output.
+- High-conflict deployment zones face steep economic drops; players must actively defend and pacify logistics centers to maintain maximum financial output.
 
 </details>
 
-### ✨ 23) Galaxy Map Enhancements & QoL
+### ✨ 25) Galaxy Map Enhancements & QoL
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-The Galaxy Map has received massive visual and mechanical upgrades to reduce friction when planning out trade routes or organizing your fleets.
+Visual and mechanical upgrades to the Galaxy Map to reduce friction when planning trade routes or organizing fleets.
 
 **Details:**
 
-- **Custom Notes & Icons:** You can now freely place customizable icons, draw colorful rectangles, and leave persistent "sticky notes" directly on your galaxy map to mark hazard zones, lucrative trade routes, or alliance borders.
-- **[T] Switch to Selected:** Instantly teleport to and take control of the ship you currently have selected on the galaxy map.
-- **[Shift + C] Center on Home:** Instantly centers the galaxy map camera on your home sector. Dynamically centers on your Alliance home sector if you are piloting an alliance ship, or your personal home sector if piloting a personal ship.
+- **Custom Notes & Icons:** Place customizable icons, draw colored rectangles, and leave persistent sticky notes directly on the map to mark hazard zones, trade routes, or alliance borders.
+- **`[T]` Switch to Selected:** Instantly teleport into the ship you currently have selected on the map.
+- **`[Shift + C]` Center on Home:** Instantly centers the camera on your home sector (or your Alliance's home sector if piloting an alliance ship).
 
 **Gameplay Impact:**
 
 - Drastically reduces mouse travel and clicking when managing large fleets.
-- Faster recovery when panning across massive distances on the map.
 
 </details>
 
-### 24) Resource Display UI (Native Framework)
+### 26) Resource Display UI (Native Framework)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Deploys a lightweight, native HUD widget configured to monitor credits, raw minerals, cargo capacity metrics, and inventory allocations in real-time.
+A lightweight, native HUD widget that monitors credits, raw minerals, cargo capacity, and inventory allocations in real time.
 
 **Technical Architecture:**
 
-- Fully engineered from scratch to completely isolate and **remove legacy AzimuthLib dependencies**.
-- Automatically senses current vessel contexts, seamlessly swapping between personal accounting and Alliance vaults.
-- Integrates custom graphical layouts (`data/textures/icons/ResourceDisplayTab.png`).
+- Rebuilt from scratch to remove legacy AzimuthLib dependencies.
+- Automatically detects the current vessel context, swapping between personal and Alliance vaults as needed.
 
 **Gameplay Impact:**
 
-- Zero-latency oversight over structural empire assets without opening heavy system submenus.
+- Zero-latency oversight over empire assets without opening heavy system submenus.
 
 </details>
 
-### 25) Wreckages Strategy Tab
+### 27) Wreckages Strategy Tab
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Adds a new "Wreckages" tab to the Sector Strategy map (F9).
+Adds a "Wreckages" tab to the Sector Strategy map (`F9`).
 
 **Details:**
 
-- Displays a sortable list of all wrecked ships and stations in the current sector.
+- Sortable list of every wrecked ship and station in the current sector.
 - Sorts by mass/size (from "Tiny Scraps" up to "Colossal Husks") and distance from your ship.
-- Uses dedicated texture asset hooks (`data/textures/icons/WreckagesTab.png`).
 
 **Gameplay Impact:**
 
-- Makes cleaning up massive post-battle graveyards much easier.
-- Helps identify the largest and most lucrative salvage targets at a glance.
+- Makes cleaning up post-battle graveyards much easier and helps identify the most lucrative salvage targets at a glance.
 
 </details>
 
-### 26) NPC Ship Naming Overhaul
+### 28) NPC Ship Naming Overhaul
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Completely rewrites the procedural naming arrays for NPC ships, safely injecting new terminology into the vanilla generation engine. Replaces generic, repetitive titles with highly immersive, volume-scaled naval and industrial classes.
+Rewrites the procedural naming arrays for NPC ships, replacing generic, repetitive titles with immersive, volume-scaled naval and industrial classes.
 
 **Details:**
-Ship names now scale dynamically based on their generated block volume across four primary archetypes:
+Ship names scale dynamically based on generated block volume across four archetypes:
 
-- **Military:** Scales realistically from nimble *Interceptors* and *Corvettes* up through *Cruisers*, *Dreadnoughts*, and colossal *Leviathans*.
-- **Freighters:** Progresses from humble *Cargo Shuttles* and *Loaders* up to massive *Superfreighters* and *Logistics Leviathans*.
-- **Miners:** Ranges from small *Light Prospectors* up through heavy *Mining Barges* to staggering *Planet Crackers* and *Mining Molochs*.
-- **Traders:** Scales from fast *Couriers* to massive *Trade Galleons* and *Commercial Colossuses*.
+- **Military:** *Interceptors* and *Corvettes* up through *Cruisers*, *Dreadnoughts*, and colossal *Leviathans*.
+- **Freighters:** *Cargo Shuttles* and *Loaders* up to massive *Superfreighters* and *Logistics Leviathans*.
+- **Miners:** *Light Prospectors* up through *Mining Barges* to *Planet Crackers* and *Mining Molochs*.
+- **Traders:** *Couriers* up to *Trade Galleons* and *Commercial Colossuses*.
 
 **Gameplay Impact:**
 
-- Massively improves immersion when scanning sectors or evaluating neutral traffic.
-- Provides immediate, intuitive feedback on the actual size and threat level of an NPC vessel simply by reading its title.
+- Immediate, intuitive feedback on an NPC vessel's size and threat level simply by reading its title.
 
 </details>
 
-### ✨ 27) War Zone Economy Blockades
+### ✨ 29) War Zone Economy Blockades
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Stations located in active Cosmic War zones will instantly suspend all background AI Trader traffic and explicitly reject any Player docking requests to buy or sell goods.
+Stations located in active Cosmic War zones instantly suspend all background AI trader traffic and reject any player docking requests to buy or sell goods.
 
 **Gameplay Impact:**
 
 - Locks down the local economy natively through `factory.lua` injection to prevent exploitation during active sieges.
 - Forces players to secure the sector or travel elsewhere for commerce.
-
-**What it does:**
-Extensively upgrades trade command behavior and outcomes.
-
-**Details:**
-
-- Broader captain usability (removes strict merchant lock-in).
-- Adjusted efficiency curves based on captain quality and class context.
-- Immediate delivery toggle support.
-- Charity mission mode for relationship-focused runs.
-- Improved prediction, assessment messaging, and balancing.
-
-**Gameplay Impact:**
-
-- Trade commands are more flexible, less binary, and more strategic.
-- Better alignment between captain identity, ship capability, and command output.
-
-</details>
-
-### 🎖️ C) Scout Command Improvements & Offline Catch-up
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Rewrites procedural log creation to inject rich narrative depth into exploratory feedback loops, while correcting execution priorities.
-
-**Technical Adjustments:**
-
-- **Execution Order Fix:** Corrected a logic bug within `scoutcommand.lua` where the offline simulation catch-up check was evaluated *after* the incremental sector loop completed.
-
-**Gameplay Impact:**
-
-- Highly immersive narrative scouting data.
-- Scout fleets returning from offline simulation loops will now correctly and instantly reveal all discovered coordinate data the moment the server boots.
-
-</details>
-
-### 🎖️ D) Refine Command Improvements
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Adds refinement-path improvements with better simulation behavior and contextual outcomes.
-
-**Gameplay Impact:**
-
-- Better usability and reduced friction in refinement operations.
-- More coherent risk vs. time feel.
-
-</details>
-
-### 🎖️ E) Travel Command Refinements
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Refines travel behavior and practical timing outcomes under safer, no-ambush contexts.
-
-**Gameplay Impact:**
-
-- Better pacing in non-combat logistics travel.
-- Reduced dead-time during routine route execution.
-
-</details>
-
-### ✨ F) Salvage / Mine / Procure / Sell Simulation QoL
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Extends and improves several simulation command scripts for consistency and better persistence of selected behavior toggles.
-
-**Technical Adjustments:**
-
-- **Boundary Optimization:** Corrected an "off-by-one cell" boundary truncation calculation across map execution routines that previously forced a spurious "ship is not inside the target area" failure when drag-boxes hit absolute sector grid boundaries.
-- **Alliance Ghost Ship Fix:** Patched a critical UI thread crash inside background handlers when tracking Alliance commands. The routine now safely rejects temporary 'Faction 0' placeholder tags passed during standard map updates.
-
-**Gameplay Impact:**
-
-- Perfectly stable automated operations across expansive server frameworks.
-
-</details>
-
-### 🎖️ G) New Captain Operations Modifiers
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Enhances captain operations with new modifiers, improved ranges, and updated loot tables.
-
-**Details:**
-
-- Adds **Exotic** and **Legendary** items into the salvage operation's loot table.
-- Adds a modifier to increase the rewards, quality of items, or swiftness for various operations (currently modifies mining, scrap, travel, and scout).
-- Adds a modifier to double the range of various operations. *Note: This will make certain operations take longer.*
-- Adds a modifier to lower the ambush chance of various operations by 40%.
-
-**Gameplay Impact:**
-
-- Stronger incentives to run salvage operations late-game.
-- Increased operational flexibility with improved ranges and rewards.
-- Less frustration from random ambushes during map commands.
-
-</details>
-
-### 🎖️ H) Captain Synergy Expansion (Background Map Commands)
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Fully overhauls background mechanics (`Sell`, `Procure`, `Salvage`, `Refine`, and `Travel`) to extensively amplify the efficiency of correctly assigned, specialized commanding classes.
-
-**Synergy Metrics:**
-
-- **Range Extension:** Matching the precise class to its native operation unlocks major operational range bonuses.
-- **Velocity Tuning:** Reduces background operation completion durations and transit timings by **up to 25%**.
-- **Risk Suppression:** Significantly drops localized ambush probability scores during active operations.
-
-**Gameplay Impact:**
-
-- Drives strategic crew assignments, heavily rewarding players who place specialized or multi-class captains into matching commercial, combat, or logistical roles.
-
-</details>
-
-### 🎖️ I) Active Captain Synergies (Piloting Passives)
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Deploys sweeping passive modifiers that activate globally exclusively when the player is **actively piloting** a flagship commanded by a specific captain class.
-
-**Active Modifiers:**
-
-- **Active Merchant:** Unlocks a global **15% discount on item purchases** paired with a **15% bonus payout on sales** across all legal commercial stations (Trading Posts, Factories, Resource Depots).
-- **Active Smuggler:** Unlocks a **15% reduction in unbranding fees** alongside a **15% bonus credit payout** on black market transactions processed through a Smuggler's Market.
-- **Scavenger Strategy Intel:** Directly augments the Sector Strategy interface (F9). While piloting a Scavenger flagship, the system strips out obfuscated wreck names (such as "Husk" or "Derelict") and projects the **exact original vessel identity and class**, pinpointing high-value targets across post-battle debris fields.
-
-**Gameplay Impact:**
-
-- Provides compelling reasons to retain distinct elite captains on your personal flagship, shifting the role from a background numbers-booster into an active playstyle enhancer.
-
-</details>
-
----
-
-## 🏴‍☠️ Black Market / Smuggler’s Market Rework
-
-### 🏗️ Structural Engineering: Dynamic API Injection
-
-The massive, conflict-heavy legacy file override for `shiputility.lua` has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion’s Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
-
-<details>
-<summary><b>Click to expand Black Market details</b></summary>
-
-### What Changed
-
-The Smuggler’s Market logic has been reworked so black-market trading is meaningfully profitable relative to risk and effort:
-
-- **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
-- **Boarding System Enhancements:** Successfully boarding an enemy ship will now yield a random assortment of valuable System Upgrades stripped from the vessel's bridge.
-- **Smuggler Market Generation & Scaling:** Smugglers Markets will now dynamically scale their illegal goods inventory based on the local faction's wealth and traits. Additionally, they are now more likely to spawn in off-the-grid hidden mass sectors.
-- **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
-- **Smuggler Governors:** Assigning a Smuggler captain as the governor of your market grants a 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees!
-- **Stolen Goods Handling:** Clean unbranding friction and cost formulas have been rebalanced downwards, making the "hijack -> sanitize -> deploy" loop practical and affordable.
-- **The Fence System & Syndicate Heat:** The Smuggler's Market now natively unbrands up to 100 stolen goods per minute from its cargo hold. However, this passive fencing generates *Syndicate Heat*. Upon reaching a threshold of 5,000 unbranded goods, it triggers a massive Sector Lockdown, resulting in an immediate dual-punitive strike from both a Pirate raid and the local Faction Military!
-
-### Why This Exists
-
-In vanilla Avorion, illegal and stolen loops often felt under-rewarded due to high procurement risks, law enforcement scans, sector lockouts, and insufficient financial upside. This overhaul aims to keep the high-stakes fantasy and risk alive while making the reward side economically competitive with standard legal trade lanes.
-
-### Gameplay Impact
-
-- Deep-space piracy, contraband running, and black-market alignment become completely viable standalone career paths capable of sustaining a late-game fleet.
-
-</details>
-
-
-
-### 24) Full Localization Support
-
-<details>
-<summary><b>Click to expand details</b></summary>
-
-**What it does:**
-Provides native language support for non-English players.
-
-**Details:**
-
-- **7 Supported Languages:** Cosmic Overhaul has been meticulously translated and integrated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese. Every custom UI, captain interaction, and background logic prompt will seamlessly display in the player's native language.
 
 </details>
 
@@ -754,20 +555,23 @@ Provides native language support for non-English players.
 
 ## 🎖️ Command & Captain Enhancements
 
+This section covers the *background command mechanics* themselves — how Trade, Scout, Salvage, Procure, and Travel orders behave, and how captain class affects them. For the v5.3.0 **Command Center dashboard** that displays and tracks these commands (Fleet Income, Idle Ships, Attention Needed strip), see [System Features → item 22](#system-features) — the two are complementary, not overlapping: one is the mechanic, the other is the UI that surfaces it.
+
 ### 🎖️ A) Persistent Background Command Progression (ARCC)
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-The ARCC system calculates elapsed real-world time while the server was empty/offline and applies that time to your active captain commands upon server restart, treating it as if they kept working while you were away.
+Calculates elapsed real-world time while the server was empty/offline and applies it to your active captain commands on server restart, as if they kept working while you were away.
 
 **Important Note for Private/Solo Servers:**
-Because instantly processing hours of offline progression simultaneously can hang or crash small/private servers on boot (and rewards players for time the server was turned off), **offline simulation is disabled by default.**
+Instantly processing hours of offline progress at once can hang or crash small/private servers on boot, and rewards players for time the server was simply turned off — so **offline simulation is disabled by default.**
 
 **Gameplay Impact:**
-- For 24/7 Dedicated Server admins: You can enable and strictly cap offline simulation parameters using the Cosmic Configuration Menu (CCM) to guarantee strategic continuity for your playerbase.
-- For Solo/Private Servers: Booting your server is fast, safe, and free from offline "free resource" exploits.
+
+- 24/7 dedicated server admins can enable and cap offline simulation via the Cosmic Configuration Menu (CCM).
+- Solo/private servers boot fast, safe, and free of offline "free resource" exploits.
 
 </details>
 
@@ -782,13 +586,17 @@ Extensively upgrades trade command behavior and outcomes.
 **Details:**
 
 - Broader captain usability (removes strict merchant lock-in).
-- Adjusted efficiency curves based on captain quality and class context.
-- **Immediate Delivery Toggle:** Enables quick delivery. Bypasses travel loops but significantly reduces payout.
-- **Charity Toggle:** Trades profit for significant faction relation boosts.
+- Efficiency curves adjusted by captain quality and class context.
+- **Immediate Delivery Toggle:** Bypasses travel loops for a quick delivery, at a significantly reduced payout.
+- **Charity Toggle:** Trades profit for a significant faction relation boost instead of credits.
+
+**Gameplay Impact:**
+
+- Trade commands are more flexible, less binary, and more strategic.
 
 </details>
 
-### ⚙️ C) New Sell Command Feature
+### ⚙️ C) New Sell Command
 
 <details>
 <summary><b>Click to expand details</b></summary>
@@ -819,22 +627,30 @@ Improves procurement options, expanding available goods and calculating better p
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Significantly expands the reward table and logic behind salvaging operations.
+Significantly expands the reward table and logic behind salvage operations.
 
 **Details:**
 
 - Exotic and Legendary items can now be recovered.
-- Salvaging operations can process raw scrap into refined metals directly if specific captain synergies exist.
+- Salvage operations can process raw scrap into refined metals directly if the right captain synergy is present.
 
 </details>
 
-### F) Scouting Expansion
+### 🎖️ F) Scout Command Improvements & Offline Catch-up
 
 <details>
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Scouting commands now reveal greater depth of sector information and generate rich narrative logs.
+Rewrites procedural log creation to inject narrative depth into exploratory feedback loops, and corrects execution priorities.
+
+**Technical Adjustments:**
+
+- **Execution Order Fix:** Corrected a logic bug in `scoutcommand.lua` where the offline simulation catch-up check ran *after* the incremental sector loop completed.
+
+**Gameplay Impact:**
+
+- Scout fleets returning from an offline simulation loop now correctly and instantly reveal all discovered coordinates the moment the server boots.
 
 </details>
 
@@ -848,9 +664,15 @@ Enhances captain operations with new modifiers, improved ranges, and updated loo
 
 **Details:**
 
-- Adds **Exotic** and **Legendary** items into the salvage operation's loot table.
-- Adds a modifier to increase the rewards, quality of items, or swiftness for various operations.
-- Adds a modifier to double the range of various operations. *Note: This will make certain operations take longer.*
+- Adds **Exotic** and **Legendary** items to the salvage loot table.
+- A modifier that increases rewards, item quality, or swiftness for various operations (currently mining, scrap, travel, and scout).
+- A modifier that doubles the range of various operations. *Note: this also makes those operations take longer.*
+- A modifier that lowers ambush chance on various operations by **40%**.
+
+**Gameplay Impact:**
+
+- Stronger incentive to run salvage operations late-game.
+- Increased operational flexibility and less frustration from random ambushes during map commands.
 
 </details>
 
@@ -860,13 +682,17 @@ Enhances captain operations with new modifiers, improved ranges, and updated loo
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Fully overhauls background mechanics (Sell, Procure, Salvage, Refine, and Travel) to extensively amplify the efficiency of correctly assigned, specialized commanding classes.
+Amplifies the efficiency of correctly assigned, specialized captains across Sell, Procure, Salvage, Refine, and Travel commands.
 
 **Synergy Metrics:**
 
-- **Range Extension:** Matching the precise class unlocks major operational range bonuses.
-- **Velocity Tuning:** Reduces background operation completion durations and transit timings by **up to 25%**.
-- **Risk Suppression:** Significantly drops localized ambush probability scores during active operations.
+- **Range Extension:** Matching the precise class to its native operation unlocks major operational range bonuses.
+- **Velocity Tuning:** Reduces background operation completion time and transit duration by **up to 25%**.
+- **Risk Suppression:** Significantly drops ambush probability during active operations.
+
+**Gameplay Impact:**
+
+- Rewards placing specialized or multi-class captains into matching commercial, combat, or logistical roles.
 
 </details>
 
@@ -876,14 +702,30 @@ Fully overhauls background mechanics (Sell, Procure, Salvage, Refine, and Travel
 <summary><b>Click to expand details</b></summary>
 
 **What it does:**
-Deploys sweeping passive modifiers that activate globally exclusively when the player is **actively piloting** a flagship commanded by a specific captain class.
+Deploys passive modifiers that activate globally, only while you are **actively piloting** a flagship commanded by a specific captain class.
 
 **Active Modifiers:**
 
-- **Active Merchant:** Unlocks a global **15% discount on item purchases** paired with a **15% bonus payout on sales** across all legal commercial stations (Trading Posts, Factories, Resource Depots).
-- **Active Smuggler:** Unlocks a **15% reduction in unbranding fees** alongside a **15% bonus credit payout** on black market transactions processed through a Smuggler's Market.
+- **Active Merchant:** A global **15% discount on purchases** paired with a **15% bonus payout on sales**, across all legal commercial stations (Trading Posts, Factories, Resource Depots).
+- **Active Smuggler:** A **15% reduction in unbranding fees** alongside a **15% bonus payout** on Smuggler's Market black-market sales.
+- **Scavenger Strategy Intel:** While piloting a Scavenger flagship, the Sector Strategy interface (`F9`) strips out obfuscated wreck names ("Husk", "Derelict") and shows the exact original vessel identity and class, pinpointing high-value targets across post-battle debris fields.
+
+**Gameplay Impact:**
+
+- Gives distinct elite captains a reason to stay on your personal flagship, turning captain class from a background numbers-booster into an active playstyle choice.
 
 </details>
+
+---
+
+## 🎖️ Captain Elite Traits
+
+Reaching **Level 3** with a captain unlocks a sector-wide passive Elite Trait tied to their class, active whenever that captain is piloting the ship you're currently in. These stack with the piloting passives above and are separate from them.
+
+- **Commodore:** Every friendly ship and station in the sector gets a **+10% Shield** and **+10% Fire Rate** buff, refreshed continuously while the Commodore remains in the sector.
+- **Smuggler:** The ship becomes immune to cargo/contraband inspections (uses the vanilla `ignore_inspections` flag, so AI ignores it completely). Also passively drains the local controlling faction's Famine Score by `-0.1` every 5 seconds ("Smuggler Deflation").
+- **Miner:** A **+15% bonus to rich asteroid yields** while actively mining.
+- **Scavenger:** A **+50% Salvage Yield** buff while inside an active Cosmic War Contested Siege Zone.
 
 ---
 
@@ -891,87 +733,129 @@ Deploys sweeping passive modifiers that activate globally exclusively when the p
 
 ### 🏗️ Structural Engineering: Dynamic API Injection
 
-The massive, conflict-heavy legacy file override for shiputility.lua has been completely refactored and replaced with a surgical dynamic hook script. This advanced implementation strictly abides by Avorion's Highlander Virtual File System specifications, guaranteeing total protection against mod conflicts, while completely isolating and restoring the black-market infrastructure.
+The old, conflict-heavy legacy override of `shiputility.lua` has been replaced with a surgical dynamic hook script that abides strictly by Avorion's Virtual File System rules — total protection against mod conflicts, while fully restoring the black-market infrastructure.
 
 <details>
 <summary><b>Click to expand Black Market details</b></summary>
 
-### What Changed
+### Why This Exists
 
-The Smuggler's Market logic has been completely reworked into a massive criminal enterprise:
+In vanilla Avorion, illegal and stolen-goods loops often felt under-rewarded relative to the risk of procurement, scans, and lockouts. This rework keeps the high-stakes fantasy alive while making the payoff economically competitive with standard legal trade.
 
-- **Lucrative Cargo Scales:** The hard-cap ceiling on illegal cargo dropped from annihilated civilian freighters has been elevated from a minor 25,000 credits to a massive **250,000 credits**, scaling relative to local sector richness.
-- **Contraband Multipliers:** Illegal and high-risk goods can now be flipped at significantly stronger multipliers, pushing all the way up to full baseline value under optimal conditions.
-- **Smuggler Governors:** Assigning a Smuggler captain as the governor of your market grants a 35% bonus profit payout on stolen goods and a 50% extra discount on unbranding fees!
-- **The Fence System:** The Smuggler's Market will now automatically unbrand up to 100 stolen goods per minute natively from its cargo hold.
-- **Syndicate Heat:** Passive unbranding generates heat. Unbranding 5,000 goods will trigger a massive Sector Lockdown, spawning both a Pirate Raid and a punitive local Faction Military attack aimed directly at your market!
-- **Raid Lockouts:** To prevent server-crashing raid queues when piping goods via Supply Lines, the Syndicate Heat system features a 1-Hour real-time cooldown. If heat caps out during the cooldown, the raid simply waits until the hour is up.
+### Buy Multipliers (What the Smuggler's Market Pays You)
 
-**Details:**
+The base rate the Smuggler's Market pays for goods you sell it depends on the good's classification:
 
-- **7 Supported Languages:** Cosmic Overhaul has been meticulously translated and integrated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese. Every custom UI, captain interaction, and background logic prompt will seamlessly display in the player's native language.
+- **Stolen goods:** 75% of item value (vanilla default is 25%).
+- **Illegal, non-stolen goods:** 100% of item value.
+- **Dangerous goods:** 60% of item value.
+
+Stacking bonuses on top of the base rate, all multiplicative:
+
+- **Smuggler captain aboard:** +10% at Tier 0, up to +25% at Tier 3 (+5% per tier).
+- **You own the station** (Syndicate Boss): +25% profit.
+- **Smuggler Governor assigned:** +35% profit.
+- **Eclipse Contraband Premium** (Ascendant Matter, Eclipse Datacore — Cosmic Chronicles synergy): a further **1.5x (150%)** flat multiplier.
+- **Rift Tech fencing** (Rift Research Data, Subclass Subsystem — Rift DLC synergy): a further random **1.5x–2.5x (150%–250%)** multiplier. Fencing this sensitive technology also costs 2,500 reputation with the local AI faction.
+
+### Unbranding Stolen Goods
+
+Cleaning ("unbranding") stolen cargo so it can be sold at a normal station uses a price factor of **40%** of item value (vanilla is 50%), reduced further by:
+
+- **Smuggler captain aboard:** -10% at Tier 0, up to -25% at Tier 3.
+- **Smuggler Governor assigned:** an additional -50% (half price).
+- **You own the station:** -90% (unbranding your own stolen goods at your own market is almost free).
+
+### The Fence System & Syndicate Heat
+
+The Smuggler's Market automatically unbrands up to **100 stolen goods per minute** straight from its own cargo hold — a passive fencing operation that doesn't need you present. Each unbranded good adds to a running **Syndicate Heat** counter. At **5,000 heat**, the market triggers a Sector Lockdown: a simultaneous Pirate raid and local Faction Military strike. Heat is capped and the raid gated behind a **1-hour real-time cooldown**, so heat can't queue up multiple overlapping raids.
+
+### Other Changes
+
+- **Lucrative Cargo Scales:** The illegal-cargo drop cap from destroyed civilian freighters rose from a vanilla 25,000 credits to **up to 250,000 credits**, scaling with local sector richness.
+- **Boarding Loot:** Successfully boarding a ship or station drops 1-2 high-rarity loot crates (turrets or upgrades).
+- **Smuggler Market Generation:** Markets scale their illegal goods inventory to local faction wealth and traits, and spawn more often in off-the-grid hidden-mass sectors.
+
+### Gameplay Impact
+
+- Deep-space piracy, contraband running, and black-market alignment are viable standalone career paths capable of sustaining a late-game fleet.
 
 </details>
 
-
 ---
 
-## 🔗 Cosmic Series Integration
+## 🌐 Localization
+
 <details>
-<summary><b>Click to expand</b></summary>
+<summary><b>Click to expand details</b></summary>
 
-### 📖 Cosmic Codex Integration
-All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
+**7 Supported Languages:** Cosmic Overhaul is fully translated into Russian, Chinese, German, Spanish, French, Japanese, and Portuguese, alongside English. Every custom UI, captain interaction, and background logic prompt displays in the player's own language.
 
-### 🌌 Cosmic Vault
-- **Deep Economy Warfare:** Cosmic Overhaul's localized Famine Events now natively tie into the `CosmicVaultEconomy` API, which can physically force starving factions to declare war on wealthy neighbors to survive!
-- **Unified News API:** Overhaul's myriad of ambient events and galactic occurrences are now securely routed through the new `CosmicVaultNews.publishArticle` architecture, guaranteeing cross-mod UI stability.
-
-### 🔒 Network Safety & Anti-Cheat
-- **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
-- **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
-
-### 🛠️ Vanilla Bug Fixes
-- **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
 </details>
 
-
 ---
 
-### Log Streamlining
-The Trading Manager logic has been streamlined to gracefully skip dead simulation ticks without flooding server console logs.
-
-## Famine Penalties
-When an AI faction reaches 'Severe Famine', all newly spawned ships will inherently have 50% weaker shields and move 30% slower.
-
----
-
-## Cosmic Vault Synergy
+## 🔗 Cross-Mod Synergy
 
 **What it is:**
-`Cosmic Overhaul` is built from the ground up to deeply integrate with the rest of the Cosmic modpack suite. When used alongside `Cosmic Vault`, `Cosmic Chronicles`, `Cosmic War`, and `Cosmic Ascendancy`, the following synergistic mechanics are unlocked:
+Cosmic Overhaul is built to deeply integrate with the rest of the Cosmic Series. It only *requires* `Cosmic Vault` to run (see `README.md` for the exact dependency), but the mechanics below light up automatically when `Cosmic War`, `Cosmic Chronicles`, and/or `Cosmic Ascendancy` are also installed — no configuration needed.
 
-- **Dynamic Trade Pricing:** Your passive Trade Command operations now sync with the galactic live economy. If you send a merchant to trade with a faction suffering from a Famine, they can bring in up to 2.5x more profits!
-- **Weather-Affected Commands:** Your map operations (Travel, Scout) respect `Cosmic Vault`'s dynamic weather systems. Traveling through an Ion Storm or Nebula will delay operations by 50% unless piloted by an Explorer or Navigator.
-- **Siege Blockade Halts:** When a sector turns into an active War Zone, factories will dynamically calculate the strength of the invaders versus the defenders. If the defenders are outgunned 2:1, factory production completely halts, simulating an economic blockade.
-- **War Profiteering:** Delivering goods to a blockaded factory or trading in a high-heat War Zone provides a massive +300% income multiplier (which natively stacks up to an additional 3.0x scaling modifier depending on how close to the core the sector is). High Risk, High Reward!
-- **Scout Anomalies:** Explorer captains actively leave cryptic notes on empty sectors on your galactic map, hinting at where you can find `Cosmic Chronicles` narrative events.
-- **Deep Economy Warfare:** Famines and Booms generated in Overhaul sync directly to the `CosmicVaultEconomy` API, which forces starving factions to go to war to survive.
-- **Unified News System:** All events broadcast flawlessly through the `CosmicVaultNews` API, guaranteeing your Universal Bulletin Board is always up to date.
-- **Famine Relief Charity:** Background Charity Missions sent to starving factions natively grant a +100% Reputation multiplier.
-- **Ascendancy Trade Fear:** Merchant trade flights take 50% longer if the target faction is at war with The Eclipse. Smugglers natively bypass this hazard penalty.
-- **Entrenched Diplomatic Suicide:** The Alliance reputation mirroring penalty is multiplied by 1.5x if a player commits a hostile act against a faction possessing the `Fortified` trait.
-- **Siege Salvage Yield:** Scavenger captains actively flying inside a Contested Siege Zone receive a +50% Salvage Yield buff while cleaning up dreadnought wreckages.
-- **Smuggler Deflation:** A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score, stabilizing the economy through the black market.
+### 🌌 With Cosmic Vault (always active)
 
-## Synergy Update
-- **Eclipse Contraband Premium**: The Smuggler's Market pays a 1.5x premium for "Eclipse Tech".
-- **Blockade Runner Governors**: Smuggler Governors completely bypass factory blockades during active Cosmic War sieges, allowing wartime profiteering.
-- **Privateer Subsidies**: Merchant Governors reduce all crew and captain hiring costs by 50% if the player is actively enlisted as a Mercenary for the station's faction.
-- **Ascendant Neural Implants:** You can now equip the legendary Ascendant Neural Implant subsystem natively, converting your ship into a biomechanical monstrosity.
-- **CCM Keybind Interoperability:** Overhaul's major UI panels (Bulletin Board, Resource Display) natively support user-defined hotkey toggling via the Vault's CCM config.
+- **Deep Economy Warfare:** Overhaul's localized Famine Events tie into the `CosmicVaultEconomy` API, which can force starving factions to declare war on wealthy neighbors to survive.
+- **Unified News API:** Ambient events and galactic occurrences route through `CosmicVaultNews.publishArticle`, keeping the Universal Bulletin Board and news feed in sync across the whole suite.
+- **Weather-Affected Commands:** Offline Travel and Scout operations respect Cosmic Vault's dynamic weather. Navigating an Ion Storm or Nebula delays the operation by 50%, unless piloted by an Explorer or Navigator.
+- **Dynamic Trade Pricing:** Trading with a Famine-struck faction via the Trade Command can yield up to **2.5x** more profit — this maxes out alongside the Severe Famine trade-bonus tier.
+- **CCM Keybind Interoperability:** The Bulletin Board and Resource Display panels support user-defined hotkey toggling via Cosmic Vault's CCM.
 
+### 📉 Famine Stat Debuffs (Cosmic Vault Economy)
 
-## [New] Rift DLC Interoperability
-- **Fencing Rift Tech:** The Smuggler's Market now eagerly accepts classified `Rift Research Data` and `Subclass Subsystems` for a massive 150%-250% markup.
-- **Reputation Consequences:** Fencing this highly sensitive technology will result in temporary reputation loss with the local faction, as they detect the illegal distribution of subspace secrets.
+Ships belonging to a faction suffering economic collapse take real combat penalties, scaled to severity:
+
+| Famine Tier | Shield Penalty | Velocity Penalty |
+|---|---|---|
+| Struggling | -15% | — |
+| Resource Starved | -30% | -20% |
+| Severe Famine | -50% | -30% |
+
+Destroying enemy resource sectors to push a faction into Famine is a legitimate way to soften them up before an invasion.
+
+### ⚔️ With Cosmic War
+
+- **Siege Blockade Halts:** In a War Zone, if the defenders are outgunned 2:1, factory production halts entirely until the siege lifts.
+- **War Zone Blockades:** Stations in active war zones suspend all AI trader traffic and reject player docking for trade (see [System Features → item 29](#system-features)).
+- **War Profiteering:** Delivering goods to a blockaded factory, or trading in a max-heat War Zone, grants up to a **+300% (3.0x)** income multiplier from war heat alone. This stacks with a separate **distance-to-core scaling** multiplier — stations near the galactic edge get a standard 1.0x, while stations deep in the core get up to an additional 3.0x. High risk, high reward.
+- **Siege Salvage Yield:** A Scavenger captain actively flying inside a Contested Siege Zone gets a **+50% Salvage Yield** buff (Elite Trait; see above).
+- **Blockade Runner Governors:** Smuggler Governors bypass factory blockades entirely during active sieges, enabling wartime profiteering.
+- **Entrenched Diplomatic Suicide:** Alliance reputation mirroring penalties are multiplied by 1.5x against a faction with the `Fortified` trait.
+
+### 🌌 With Cosmic Chronicles
+
+- **Scout Anomalies:** Explorer captains charting empty sectors leave notes hinting at Cosmic Chronicles narrative events.
+- **Eclipse Contraband Premium:** See [Black Market rework](#black-market--smugglers-market-rework) above — a 1.5x fencing premium on Ascendant Matter and Eclipse Datacores.
+- **Famine Relief Charity:** Background Charity Missions to starving factions grant a **+100%** reputation multiplier.
+- **Ascendancy Trade Fear:** Non-smuggler merchant trade flights take **50% longer** to resolve if the target faction is at war with The Eclipse. Smugglers bypass this penalty entirely.
+
+### 🧬 With Cosmic Ascendancy
+
+- **Ascendant Neural Implants:** Equip the legendary Ascendant Neural Implant subsystem, physically transforming your ship into a biomechanical dreadnought (massive jump reach, fighters, turrets, and velocity scaling).
+
+### 👔 Station Governors
+
+- **Merchant Governors:** +25% passive station income, +50% AI traffic, and Privateer Subsidies (50% crew/captain hiring cost reduction while enlisted as a Mercenary for the station's faction).
+- **Engineer Governors:** +50% factory shuttle capacity.
+- **Smuggler Governors:** Bypass Cosmic War siege blockades and grant the Black Market bonuses listed above.
+
+### 🔒 Network Safety & Stability
+
+- All Lua `math.random` calls were replaced with Avorion's deterministic `random():getInt()` generator, eliminating desyncs during multiplayer fleet spawns.
+- Remote-callable UI and background functions are hardened against spoofed client calls — the server verifies execution context before processing requests.
+- The Trading Manager gracefully skips dead simulation ticks instead of flooding server console logs.
+
+### 🛠️ Notable Vanilla Bug Fixes
+
+- **Scout Mission Fix:** Scout Missions previously skipped Faction Headquarters sectors entirely because the vanilla dialogue tree lacked a template for that sector type — now fixed.
+
+### 📖 In-Game Documentation
+
+All of the above is also available in-game through the **Cosmic Codex** — no need to tab out to read mechanics or lore while you play.
