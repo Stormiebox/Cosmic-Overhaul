@@ -41,7 +41,11 @@ if onClient() then
         -- Three header rows (title/income, filter controls, attention chips) stacked above
         -- the operations list, each on its own strip so nothing has to share horizontal
         -- space and risk overlapping on a narrower player window.
-        local hsplit = UIHorizontalSplitter(Rect(container.size), 5, 5, 0.20)
+        -- The margin (3rd arg) needs to clear the 22px sorting-header strip the loop below
+        -- reserves above the list's top edge (see the same overlap bug fixed in
+        -- galacticpolitics_tab.lua and factory_overview_tab.lua) -- otherwise row 3's chips
+        -- visually collide with the column headers underneath them.
+        local hsplit = UIHorizontalSplitter(Rect(container.size), 5, 26, 0.20)
         local margin = 10
         local topWidth = hsplit.top.width
         local topHeight = hsplit.top.height
@@ -67,25 +71,25 @@ if onClient() then
         filterComboBox:addEntry("Recalled", "Recalled"%_t)
         filterComboBox.tooltip = "Filter the fleet list"%_t
 
-        local refreshButton = container:createButton(Rect(margin + 235, row2Top, margin + 355, row2Bottom), "Refresh"%_t, "clientFetchData")
+        local refreshButton = container:createButton(Rect(margin + 235, row2Top, margin + 345, row2Bottom), "Refresh"%_t, "clientFetchData")
         refreshButton.icon = "data/textures/icons/refresh.png"
         refreshButton.tooltip = "Refresh Active Operations"%_t
 
-        local recallButton = container:createButton(Rect(margin + 370, row2Top, margin + 520, row2Bottom), "Recall Ship"%_t, "clientRecallShip")
+        local recallButton = container:createButton(Rect(margin + 370, row2Top, margin + 505, row2Bottom), "Recall Ship"%_t, "clientRecallShip")
         recallButton.icon = "data/textures/icons/cancel.png"
         recallButton.tooltip = "Recall selected ship from its operation"%_t
 
-        local resetIncomeButton = container:createButton(Rect(margin + 535, row2Top, margin + 700, row2Bottom), "Reset Income Tracker"%_t, "clientResetIncome")
+        local resetIncomeButton = container:createButton(Rect(margin + 535, row2Top, margin + 680, row2Bottom), "Reset Income Tracker"%_t, "clientResetIncome")
         resetIncomeButton.tooltip = "Reset the cumulative Fleet Income counter back to zero"%_t
 
         -- Row 3: clickable "attention needed" chips -- clicking one jumps the filter straight to it
-        idleChip = container:createButton(Rect(margin, row3Top, margin + 220, row3Bottom), "", "onIdleChipPressed")
+        idleChip = container:createButton(Rect(margin, row3Top, margin + 205, row3Bottom), "", "onIdleChipPressed")
         idleChip.tooltip = "Show idle ships not currently running any operation"%_t
 
-        soonChip = container:createButton(Rect(margin + 235, row3Top, margin + 455, row3Bottom), "", "onSoonChipPressed")
+        soonChip = container:createButton(Rect(margin + 235, row3Top, margin + 440, row3Bottom), "", "onSoonChipPressed")
         soonChip.tooltip = "Show operations completing within a minute"%_t
 
-        recalledChip = container:createButton(Rect(margin + 470, row3Top, margin + 690, row3Bottom), "", "onRecalledChipPressed")
+        recalledChip = container:createButton(Rect(margin + 470, row3Top, margin + 675, row3Bottom), "", "onRecalledChipPressed")
         recalledChip.tooltip = "Show ships that were recalled and are returning"%_t
 
         -- Operations list
