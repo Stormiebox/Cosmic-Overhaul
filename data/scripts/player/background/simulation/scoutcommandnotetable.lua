@@ -14,6 +14,18 @@ local CaptainUtility = include("captainutility")
 --       :forNewSector(...)
 --       :addLines(...)
 --
+-- Wrapped in an immediately-invoked function: this file is include()'d
+-- unconditionally from scoutcommand.lua (a server-authoritative background
+-- simulation script - confirmed via its own :getLines() call site), and
+-- %_T at unguarded global/module scope crashes a dedicated server on
+-- startup (no UI localization metatable server-side; see
+-- engine_constraints.md and the Codex's "UI Development" section).
+-- Function scope defers evaluation past that dangerous window - vanilla's
+-- own data/scripts/entity/stationfounder.lua proves an immediately-called
+-- builder chain with inline %_t is safe once it's not literal top-level
+-- module code. This keeps the exact same builder chain and return value,
+-- just moved inside a function.
+return (function()
 return SectorClassNoteLineTable.new()
     -- Explorer-only hidden mass sectors start here
     :forNewClass(CaptainUtility.ClassType.Explorer)
@@ -191,3 +203,4 @@ return SectorClassNoteLineTable.new()
         "Complete deep space vacuum. However, I recorded an unusual navigational disturbance nearby."%_T,
         "Empty space. But the background radiation here suggests a cloaked anomaly or recent event."%_T,
     })
+end)()

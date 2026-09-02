@@ -17,6 +17,7 @@ local stationMappings
 function ManageStationIncomes.initialize()
     local sector = Sector()
     sector:registerCallback("onTradeSuccess", "onTradeSuccess")
+    ManageStationIncomes.buildStationMappings()
 end
 
 function ManageStationIncomes.getWarHeatMultiplier()
@@ -76,6 +77,10 @@ function ManageStationIncomes.giveStationResources(station, _seller)
         local mat = Material(i-1)
         amount = math.floor(amount*mapping.quantity)
         amount = math.floor(amount*payoutMult)
+        -- Station Governors: Merchant Governor grants +25% passive station income (Wiki/Player Guide).
+        if station:getValue("governor_merchant_active") then
+            amount = math.floor(amount * 1.25)
+        end
         if amount > 0 then
             local amountStr = createMonetaryString(amount) .. " " .. mat.name
             local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
@@ -146,7 +151,7 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     -- Cosmic Overhaul Balance tweak: Reduced base payout from 16k to 8k, but added Core Distance multiplier
     local money = math.floor((0.3+(2*random():getFloat()/3))*8000)
     if random():getFloat(0, 1) < 0.2 then money = money*2 end
-    
+
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local dist = math.sqrt(x*x + y*y)
@@ -155,6 +160,11 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
     money = math.floor(money * mapping.quantity * distMult)
     money = math.floor(money * ManageStationIncomes.getWarHeatMultiplier())
     money = math.floor(money * payoutMult)
+
+    -- Station Governors: Merchant Governor grants +25% passive station income (Wiki/Player Guide).
+    if station:getValue("governor_merchant_active") then
+        money = math.floor(money * 1.25)
+    end
 
     local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
     local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
@@ -210,7 +220,17 @@ end
 function ManageStationIncomes.manageStation(station)
     local mapping = ManageStationIncomes.getMapping(station)
     if not mapping then return end
-    if random():test(mapping.chance) then return end
+
+    local chance = mapping.chance
+    if station:getValue("governor_merchant_active") then
+        -- Station Governors: Merchant Governor grants +50% AI traffic / trade frequency (Wiki/Player Guide).
+        -- `chance` is a SKIP probability (a successful random():test(chance) below means "skip this
+        -- tick, no income"), so "+50% more frequent" means reducing the skip chance, not increasing
+        -- it - scale the success rate (1 - chance) up by 1.5x instead, capped at 100%.
+        local successChance = math.min(1.0, (1.0 - chance) * 1.5)
+        chance = 1.0 - successChance
+    end
+    if random():test(chance) then return end
 
     local isInstant = ManageStationIncomes.isInstantTrade()
     if isInstant then
@@ -249,84 +269,96 @@ function ManageStationIncomes.updateServer(timeStep)
     end
 end
 
-stationMappings = {
-    ["Resource Depot"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationResources,
-        giveMsg = "Earned ${amount} in taxes from Resource Depot ${station}."%_T,
-        chance = 0.5,
-        quantity = 1.0,
-        traderTypes = { "freighter" },
-    },
-    ["Smuggler's Market"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received ${amount} in unbranding fees from Smuggler's Market ${station}."%_T,
-        chance = 0.6,
-        quantity = 1.25,
-        traderTypes = { "freighter", "trader", "military" }
-    },
-    ["Casino"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received ${amount} in gambling income from Casino ${station}."%_T,
-        chance = 0.7,
-        quantity = 1.5,
-        traderTypes = { "freighter", "trader", "military" }
-    },
-    ["Repair Dock"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received ${amount} in repair fees from Repair Dock ${station}."%_T,
-        chance = 0.2,
-        quantity = 3.0,
-        traderTypes = { "freighter", "trader", "military" }
-    },
-    ["Shipyard"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Received ${amount} in repair fees from Shipyard ${station}."%_T,
-        chance = 0.3,
-        quantity = 2.3,
-        traderTypes = { "freighter", "trader", "military" }
-    },
-    ["Travel Hub"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Gained ${amount} in travel fees from Travel Hub ${station}."%_T,
-        chance = 0.3,
-        quantity = 2.3,
-        traderTypes = { "freighter", "trader", "military", "torpedo" }
-    },
-    ["Equipment Dock"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationDistribution(0.1, 0.0, 0.7, 0.2),
-        giveMsg = "Received ${amount} in taxes from Equipment Dock ${station}."%_T,
-        chance = 0.4,
-        quantity = 1.0,
-        traderTypes = { "military", "torpedo", "freighter", "trader" }
-    },
-    ["Research Station"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.8, 0.2),
-        giveMsg = "Received ${amount} in taxes from Research Station ${station}."%_T,
-        chance = 0.4,
-        quantity = 1.0,
-        traderTypes = { "freighter", "trader", "military", "torpedo" }
-    },
-    ["Military Outpost"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.3, 0.7),
-        giveMsg = "Received ${amount} in taxes from Military Outpost ${station}."%_T,
-        chance = 0.35,
-        quantity = 1.0,
-        traderTypes = { "military", "torpedo" }
-    },
-    ["Turret Factory"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationTurret,
-        giveMsg = "Gained ${amount} in taxes from Turret Factory ${station}."%_T,
-        chance = 0.4,
-        quantity = 1.0,
-        traderTypes = { "military", "torpedo" }
-    },
-    ["Fighter Factory"%_t] = {
-        giveFunction = ManageStationIncomes.giveStationMoney,
-        giveMsg = "Earned ${amount} in fighter costs from Fighter Factory ${station}."%_T,
-        chance = 0.4,
-        quantity = 1.0,
-        traderTypes = { "military", "torpedo" }
-    },
-}
+-- Built by buildStationMappings(), called from initialize(). This table used
+-- to be a bare top-level literal, which put its %_t/%_T translation calls at
+-- unguarded global (module-load) scope - since this file is forced server-only
+-- by the `if not onServer() then return end` guard above, the server evaluated
+-- it directly, and %_t at global scope crashes a dedicated server on startup
+-- (no UI localization metatable server-side; see engine_constraints.md).
+-- Function scope is safe per the same rule, so wrapping the literal in a
+-- function and calling it from initialize() keeps identical behavior/timing
+-- (built once, at script init) while moving the %_t evaluation out of the
+-- dangerous global scope.
+function ManageStationIncomes.buildStationMappings()
+    stationMappings = {
+        ["Resource Depot"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationResources,
+            giveMsg = "Earned ${amount} in taxes from Resource Depot ${station}."%_T,
+            chance = 0.5,
+            quantity = 1.0,
+            traderTypes = { "freighter" },
+        },
+        ["Smuggler's Market"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Received ${amount} in unbranding fees from Smuggler's Market ${station}."%_T,
+            chance = 0.6,
+            quantity = 1.25,
+            traderTypes = { "freighter", "trader", "military" }
+        },
+        ["Casino"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Received ${amount} in gambling income from Casino ${station}."%_T,
+            chance = 0.7,
+            quantity = 1.5,
+            traderTypes = { "freighter", "trader", "military" }
+        },
+        ["Repair Dock"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Received ${amount} in repair fees from Repair Dock ${station}."%_T,
+            chance = 0.2,
+            quantity = 3.0,
+            traderTypes = { "freighter", "trader", "military" }
+        },
+        ["Shipyard"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Received ${amount} in repair fees from Shipyard ${station}."%_T,
+            chance = 0.3,
+            quantity = 2.3,
+            traderTypes = { "freighter", "trader", "military" }
+        },
+        ["Travel Hub"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Gained ${amount} in travel fees from Travel Hub ${station}."%_T,
+            chance = 0.3,
+            quantity = 2.3,
+            traderTypes = { "freighter", "trader", "military", "torpedo" }
+        },
+        ["Equipment Dock"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationDistribution(0.1, 0.0, 0.7, 0.2),
+            giveMsg = "Received ${amount} in taxes from Equipment Dock ${station}."%_T,
+            chance = 0.4,
+            quantity = 1.0,
+            traderTypes = { "military", "torpedo", "freighter", "trader" }
+        },
+        ["Research Station"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.8, 0.2),
+            giveMsg = "Received ${amount} in taxes from Research Station ${station}."%_T,
+            chance = 0.4,
+            quantity = 1.0,
+            traderTypes = { "freighter", "trader", "military", "torpedo" }
+        },
+        ["Military Outpost"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationDistribution(0.0, 0.0, 0.3, 0.7),
+            giveMsg = "Received ${amount} in taxes from Military Outpost ${station}."%_T,
+            chance = 0.35,
+            quantity = 1.0,
+            traderTypes = { "military", "torpedo" }
+        },
+        ["Turret Factory"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationTurret,
+            giveMsg = "Gained ${amount} in taxes from Turret Factory ${station}."%_T,
+            chance = 0.4,
+            quantity = 1.0,
+            traderTypes = { "military", "torpedo" }
+        },
+        ["Fighter Factory"%_t] = {
+            giveFunction = ManageStationIncomes.giveStationMoney,
+            giveMsg = "Earned ${amount} in fighter costs from Fighter Factory ${station}."%_T,
+            chance = 0.4,
+            quantity = 1.0,
+            traderTypes = { "military", "torpedo" }
+        },
+    }
+end
 
 return ManageStationIncomes

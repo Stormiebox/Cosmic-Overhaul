@@ -1,3 +1,16 @@
+[i]Version 5.3.1[/i]
+[hr][/hr]
+[h1]v5.3.1 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets two dedicated server crashes and restores a Station Governor bonus that stopped working.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Dedicated Server Crash on Scout Reports & Station Income:[/b] Fixed two scripts that could crash a dedicated server on startup: the Scout Command dialogue table and the Station Income Manager. Both built a piece of translated text too early, before the server was ready to translate it.
+[*]🐛 [b]Merchant Governor Income Bonus Restored:[/b] Found and fixed a duplicate Station Income Manager script. Only one copy was ever actually running, and it was missing the Merchant Governor bonuses (+25% passive station income, +50% AI traffic) that the Wiki and Player Guide have always promised. Consolidated to one script with the bonuses working again, on top of the current War Profiteering and Core Distance income scaling. Also fixed the trade-frequency half of the bonus, which was quietly making trades less frequent instead of more.
+[/list]
+
 [i]Version 5.3.0[/i]
 [hr][/hr]
 [h1]v5.3.0 🛠️TRASH MANAGER, COMMAND CENTER & FLEET STATUS OVERHAUL!🛠️[/h1]
