@@ -64,5 +64,9 @@ if onClient() then
     end
 end -- onClient()
 
--- QA Security Fixes
-callable(nil, "acceptMission")
+-- BulletinBoard is namespaced (vanilla declares "-- namespace BulletinBoard" and
+-- itself correctly does callable(BulletinBoard, "acceptMission")); callable(nil, ...)
+-- here registered into the unrelated global Callable table instead of this script's
+-- own namespace, which the linter's namespaced-script rule flags as illegal (see
+-- engine_constraints.md).
+callable(BulletinBoard, "acceptMission")

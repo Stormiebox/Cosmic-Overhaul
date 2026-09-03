@@ -25,6 +25,21 @@ if onClient() then
 	function FactoryOverview.refresh()
 		FactoryOverview.clientFetchDataFromGalaxy()
 	end
+
+	-- Matches the server's own fo_refreshFrequency push cadence in factory.lua -- polling the
+	-- server any faster than it actually refreshes its data would just re-fetch the same numbers.
+	function FactoryOverview.getUpdateInterval()
+		return 10
+	end
+
+	-- Live-refresh while this tab is the one actually on screen, following the same pattern as
+	-- vanilla's own player/ui/sectorshipoverview.lua (self.window.visible guard). Before this,
+	-- data only ever refreshed on tab-select/show or a manual Refresh click, so a player sitting
+	-- on the tab watching would see genuinely static numbers even with no bug involved.
+	function FactoryOverview.updateClient(timeStep)
+		if not self.tab or not self.tab.visible or not self.tab.isActiveTab then return end
+		FactoryOverview.clientFetchDataFromGalaxy()
+	end
 end
 
 function FactoryOverview.clientFetchDataFromGalaxy()
@@ -41,11 +56,19 @@ function FactoryOverview.fetchDataFromGalaxy(alliance_v) -- fetches the current 
 	if not galaxy then
 		include("cosmicvaultdebug").info("Cosmic Overhaul", "Galaxy is not accessible from fetchDataFromGalaxy")
 	else
-		local av = alliance_v and (Player().alliance ~= nil)
-		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Alliance: " .. tostring(Player().alliance ~= nil) .. " av: " .. tostring(av))
-		local index = Player().index
+		-- Player(callingPlayer), not bare Player(): this function runs server-side as an RPC target
+		-- (invoked via invokeServerFunction above), and vanilla's own player scripts (playerdiplomacy.lua,
+		-- alliancediplomacy.lua) confirm bare Player() is not a reliable way to resolve "the player who
+		-- made this call" server-side -- callingPlayer is the documented, engine-provided index for
+		-- exactly this purpose (see Globals.lua's invokeServerFunction doc comment). On a singleplayer
+		-- or hosted game there's only ever one player to resolve to, so this went unnoticed; on a real
+		-- dedicated server with several players calling this at once, bare Player() has no such
+		-- guarantee.
+		local requestingPlayer = Player(callingPlayer)
+		local av = alliance_v and (requestingPlayer.alliance ~= nil)
+		local index = requestingPlayer.index
 		if av then
-			index = Player().allianceIndex
+			index = requestingPlayer.allianceIndex
 		end
 		--include("cosmicvaultdebug").info("Cosmic Overhaul", "Index: " .. tostring(index) .. " av: " .. tostring(av))
 		local errorcode, factories = galaxy:invokeFunction("galaxy/factoryregister.lua", "getFactoriesFor", index, av)
@@ -367,7 +390,10 @@ function getRowTooltip(factoryData)
 	end
 
 	for reason, percentage in pairs(factoryData['working_state']) do
-		tooltip = tooltip .. string.format("%7s:  '%s'\n", percentage, reason)
+		-- reason arrives as a plain, untranslated string from the server (factory.lua's
+		-- newProductionError values) -- %_t is applied here, once, at the point of display,
+		-- matching the convention already used for factory['_statusReason']%_t below in loadData.
+		tooltip = tooltip .. string.format("%7s:  '%s'\n", percentage, reason%_t)
 	end
 
 	return tooltip

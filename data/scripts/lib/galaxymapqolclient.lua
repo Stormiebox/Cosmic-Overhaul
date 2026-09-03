@@ -1,4 +1,13 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
+
+-- This is a pure client-side UI library: it uses %_t at unguarded module scope below
+-- (bossDistances), which crashes a dedicated server on startup if this file is ever loaded
+-- there (see engine_constraints.md's "UI Scripts & Localization" rule). Its only current
+-- include() site (player/map/galaxymapqol.lua) already wraps this in `if onClient() then`,
+-- so it's not reachable server-side today -- but that safety currently depends entirely on
+-- every future includer remembering the same guard.
+if onServer() then return end
+
 include("utility")
 local PassageMap = include("passagemap")
 local SectorSpecifics = include("sectorspecifics")
@@ -19,13 +28,11 @@ local function UIRectangle(parent, rect, color, layer)
     return pic
 end
 
-local Integration = include("GalaxyMapQoLIntegration")
-
 GalaxyMapQoL = {}
 
 local editIconBtn, iconsFactionComboBox, showOverlayComboBox, legendRows, editIconWindow, coordinatesLabel, editIconScrollFrame, colorSelector, colorPictures, colorPicker, iconSelector, warZoneCheckBox, factionColorsCheckBox, playerIconsContainer, allianceIconsContainer, lockRadarCheckBox, highlightAllianceNotesCheckBox, allianceNotesContainer, optionsContainer
 
-local Config, customNamespace, sectorsPlayer, sectorsAlliance, isServerUsed, isEditIconShown, iconsFactionBoxHasAlliance, iconPictures, selectedIcon, editedX, editedY, materialDistances, distToCenter, selectedColorIndex, factionColorsIsRunning, factionsColorsCache, techLevels
+local Config, sectorsPlayer, sectorsAlliance, isServerUsed, isEditIconShown, iconsFactionBoxHasAlliance, iconPictures, selectedIcon, editedX, editedY, materialDistances, distToCenter, selectedColorIndex, factionColorsIsRunning, factionsColorsCache, techLevels, deleteUndo
 local factionColorsUpdated = -30
 local overlays = {}
 local warZoneData = {}
@@ -45,7 +52,6 @@ local allianceMapIcons = {}
 local lockedRadarBlips = {}
 local specs = SectorSpecifics()
 local GT112 = GameVersion() >= Version(1, 1, 2)
-local galaxyMapQoL_updateClient
 local delIconWindow, deleteIconsMode, delbtn1, delbtn2, delbtn3, delbtn4, delbtn5, delpic1, delpic2, delpic3, delpic4
 local helpIconWindow, helpIconsMode, helpbtn1, helpbtn2, helppic1, helppic2
 local dragStart, selectedArea, isDragging, dragMoveCount
@@ -85,10 +91,6 @@ function GalaxyMapQoL.initialize()
 		Config.colors[i] = ColorInt(c)
 	end
 
-	for i = 1, #Integration do
-		icons[#icons + 1] = Integration[i]
-	end
-
     deleteUndo = Config.deleteUndo or {}
 
 	local maxCoords = Balancing_GetMaxCoordinates()
@@ -119,9 +121,7 @@ function GalaxyMapQoL.initialize()
     player:registerCallback("onGalaxyMapMouseButtonEvent", "galaxyMapQoL_onGalaxyMapMouseButtonEvent")
     player:registerCallback("onGalaxyMapMouseMoveEvent", "galaxyMapQoL_onGalaxyMapMouseMove")
 
-	if not customNamespace then
-		invokeServerFunction("sync", true)
-	end
+	invokeServerFunction("sync", true)
 end
 
 function GalaxyMapQoL.initUI()
@@ -268,13 +268,11 @@ function GalaxyMapQoL.initUI()
 		picture.isIcon = true
 	else
 		local rowY = 200
-		if not customNamespace then
-			warZoneCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Hazard Zones"%_t, "onWarZoneCheckBoxChecked")
-			warZoneCheckBox.captionLeft = false
-			warZoneCheckBox.tooltip = "Marks Hazard Zone sectors with a red rectangle in the bottom right corner"%_t
-			warZoneCheckBox:setCheckedNoCallback(Config.markHazards == true)
-			rowY = rowY + 30
-		end
+		warZoneCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Hazard Zones"%_t, "onWarZoneCheckBoxChecked")
+		warZoneCheckBox.captionLeft = false
+		warZoneCheckBox.tooltip = "Marks Hazard Zone sectors with a red rectangle in the bottom right corner"%_t
+		warZoneCheckBox:setCheckedNoCallback(Config.markHazards == true)
+		rowY = rowY + 30
 
 		factionColorsCheckBox = container:createCheckBox(Rect(150, rowY, 450, rowY + 20), "Faction Colors"%_t, "galaxyMapQoL_onFactionColorsCheckBoxChecked")
 		factionColorsCheckBox.captionLeft = false
@@ -293,11 +291,7 @@ function GalaxyMapQoL.initUI()
 		highlightAllianceNotesCheckBox:setCheckedNoCallback(Config.highlightAllianceNotes == true)
 	end
 
-	if not customNamespace then
-		-- removed colorPicker
-	else
-		-- removed colorPicker
-	end
+	-- removed colorPicker
 
 	delIconWindow = map:createWindow(Rect(1009, 62, 1048, 290))
 	delIconWindow.visible = false
@@ -961,18 +955,28 @@ function GalaxyMapQoL.galaxyMapQoL_onShowOverlayBoxChanged()
     end
 end
 
-function GalaxyMapQoL.onResourcesOverlaySelected(isSelected)
+-- Shared "turn this overlay off" behavior: every overlay clears the map's custom
+-- color layer and hides the legend identically -- only what happens when an overlay
+-- is turned ON differs enough per overlay (per-material distances, per-tech-level
+-- colors, per-boss min/max ranges with alternating colors) that unifying that branch
+-- too would need real indirection for no real simplification. This extracts only the
+-- part that was genuinely byte-for-byte identical in all three functions.
+local function clearOverlayDisplay()
     local map = GalaxyMap()
+    map.showCustomColorLayer = false
+    map:clearCustomColors()
+
+    for _, row in ipairs(legendRows) do
+        row.picture.visible = false
+        row.label.visible = false
+    end
+end
+
+function GalaxyMapQoL.onResourcesOverlaySelected(isSelected)
     if not isSelected then
-        map.showCustomColorLayer = false
-        map:clearCustomColors()
-
-        for _, row in ipairs(legendRows) do
-            row.picture.visible = false
-            row.label.visible = false
-        end
+        clearOverlayDisplay()
     else
-
+        local map = GalaxyMap()
         local tbl = {}
         for i, dist in ipairs(materialDistances) do
             local color = Material(i).color
@@ -1005,17 +1009,10 @@ function GalaxyMapQoL.onResourcesOverlayRendered(renderer)
 end
 
 function GalaxyMapQoL.onTechLevelsOverlaySelected(isSelected)
-    local map = GalaxyMap()
     if not isSelected then
-        map.showCustomColorLayer = false
-        map:clearCustomColors()
-
-        for _, row in ipairs(legendRows) do
-            row.picture.visible = false
-            row.label.visible = false
-        end
+        clearOverlayDisplay()
     else
-
+        local map = GalaxyMap()
         local tbl = {}
         for _, dist in pairs(techLevels) do
             local color = ColorRGB(0.7, 0.7, 0.7)
@@ -1037,17 +1034,10 @@ function GalaxyMapQoL.onTechLevelsOverlayRendered()
 end
 
 function GalaxyMapQoL.onBossesOverlaySelected(isSelected)
-    local map = GalaxyMap()
     if not isSelected then
-        map.showCustomColorLayer = false
-        map:clearCustomColors()
-
-        for _, row in ipairs(legendRows) do
-            row.picture.visible = false
-            row.label.visible = false
-        end
+        clearOverlayDisplay()
     else
-
+        local map = GalaxyMap()
         local distances = {}
         for _, boss in ipairs(bossDistances) do
             local dist = distances[boss.min]
@@ -1573,66 +1563,8 @@ function GalaxyMapQoL.startFactionColorsCalculation()
     factionColorsIsRunning = true
 end
 
-function GalaxyMapQoL.initOtherNamespace(namespace)
-    customNamespace = namespace
-
-
-    galaxyMapQoL_updateClient = namespace.updateClient
-    namespace.updateClient = function(...)
-        if galaxyMapQoL_updateClient then galaxyMapQoL_updateClient(...) end
-        GalaxyMapQoL.updateClient(...)
-    end
-
-    namespace.galaxyMapQoL_onShowGalaxyMap = GalaxyMapQoL.galaxyMapQoL_onShowGalaxyMap
-    namespace.galaxyMapQoL_onHideGalaxyMap = GalaxyMapQoL.galaxyMapQoL_onHideGalaxyMap
-    namespace.galaxyMapQoL_onMapRenderAfterLayers = GalaxyMapQoL.galaxyMapQoL_onMapRenderAfterLayers
-    namespace.galaxyMapQoL_onEditIconBtnPressed = GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed
-    namespace.galaxyMapQoL_onIconsFactionBoxChanged = GalaxyMapQoL.galaxyMapQoL_onIconsFactionBoxChanged
-    namespace.galaxyMapQoL_onShowOverlayBoxChanged = GalaxyMapQoL.galaxyMapQoL_onShowOverlayBoxChanged
-    namespace.galaxyMapQoL_onEditSelectedColorBtnPressed = GalaxyMapQoL.galaxyMapQoL_onEditSelectedColorBtnPressed
-    namespace.galaxyMapQoL_onColorPickerApplyBtnPressed = GalaxyMapQoL.galaxyMapQoL_onColorPickerApplyBtnPressed
-    namespace.galaxyMapQoL_onEditIconApplyBtnPressed = GalaxyMapQoL.galaxyMapQoL_onEditIconApplyBtnPressed
-    namespace.galaxyMapQoL_onEditIconCancelBtnPressed = GalaxyMapQoL.galaxyMapQoL_onEditIconCancelBtnPressed
-    namespace.galaxyMapQoL_onFactionColorsCheckBoxChecked = GalaxyMapQoL.galaxyMapQoL_onFactionColorsCheckBoxChecked
-
-    GalaxyMapQoL.initialize()
-end
-
--- QA Security Fixes
-callable(nil, "sync")
-callable(nil, "syncWarZones")
-callable(nil, "setSectorIcon")
-
-function initialize(...)
-    if GalaxyMapQoL.initialize then return GalaxyMapQoL.initialize(...) end
-end
-function getUpdateInterval(...)
-    if GalaxyMapQoL.getUpdateInterval then return GalaxyMapQoL.getUpdateInterval(...) end
-end
-function updateClient(...)
-    if GalaxyMapQoL.updateClient then return GalaxyMapQoL.updateClient(...) end
-end
-
--- Global Event Callbacks
-function galaxyMapQoL_onShowGalaxyMap(...)
-    if GalaxyMapQoL.galaxyMapQoL_onShowGalaxyMap then return GalaxyMapQoL.galaxyMapQoL_onShowGalaxyMap(...) end
-end
-function galaxyMapQoL_onHideGalaxyMap(...)
-    if GalaxyMapQoL.galaxyMapQoL_onHideGalaxyMap then return GalaxyMapQoL.galaxyMapQoL_onHideGalaxyMap(...) end
-end
-function galaxyMapQoL_onEditIconBtnPressed(...)
-    if GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed then return GalaxyMapQoL.galaxyMapQoL_onEditIconBtnPressed(...) end
-end
-function galaxyMapQoL_onMapRenderAfterLayers(...)
-    if GalaxyMapQoL.galaxyMapQoL_onMapRenderAfterLayers then return GalaxyMapQoL.galaxyMapQoL_onMapRenderAfterLayers(...) end
-end
-function galaxyMapQoL_onGalaxyMapMouseDown(...)
-    if GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseDown then return GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseDown(...) end
-end
-function galaxyMapQoL_onGalaxyMapMouseButtonEvent(...)
-    if GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseButtonEvent then return GalaxyMapQoL.galaxyMapQoL_onGalaxyMapMouseButtonEvent(...) end
-end
-
-
+-- initOtherNamespace (a cross-mod integration point letting another mod's namespace
+-- adopt these callbacks directly) removed here: zero callers anywhere in this
+-- workspace.
 
 return GalaxyMapQoL

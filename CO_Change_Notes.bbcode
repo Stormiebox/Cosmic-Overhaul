@@ -1,3 +1,30 @@
+[i]Version 5.4.0[/i]
+[hr][/hr]
+[h1]v5.4.0 🎨UI OVERHAUL: FACTORY OVERVIEW, RESOURCE DISPLAY & GALAXY MAP QOL🎨[/h1]
+[hr][/hr]
+[b]🛠️ UPDATE[/b]
+[i]This update fixes the Factory Overview tab freezing up and always showing "Running," an offline catch-up bug, and a trade network chat spam issue, then carries the same care into a broader pass: Resource Display and Galaxy Map QoL all got bug fixes and, where it made sense, a visual refresh.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]⏱️ [b]Offline Catch-Up Over-Applied After a Paused Server:[/b] Pausing the server (common in singleplayer) and resuming could apply the same "captains kept working while you were away" catch-up many times in a row instead of once, finishing long fleet commands almost instantly. Catch-up now applies exactly once per pause.
+[*]🐛 [b]Trade Network Blockade Spam:[/b] Linking a Headquarters to supply stations through the delivery network could spam "Trade suspended, under blockade" chat messages every second once any linked station sat in an active war zone, no matter what sector you were actually in. A Smuggler governor now correctly bypasses this, matching how it already works for the production-halt blockade check, and the warning shows in the station's own status instead of spamming your chat.
+[*]🐛 [b]Factory Overview Always Said "Running":[/b] Fixed a bug where the Status column read the wrong internal value, so it almost always showed a factory as running fine even when it wasn't producing anything at all.
+[*]🐛 [b]Factory Overview Freezing During Sieges:[/b] Fixed a bug where a factory caught in an active Cosmic War siege blockade would completely stop updating in the Factory Overview tab, even after the siege ended.
+[*]🐛 [b]Newly Claimed Asteroid Mines Not Appearing:[/b] Fixed a bug that could prevent freshly claimed asteroid mines, like Ice Mines, from ever showing up in the Factory Overview tab.
+[*]🐛 [b]Tooltip Text Fix:[/b] Fixed the per-factory tooltip occasionally showing untranslated text for non-English players.
+[*]🐛 [b]Dedicated Server Reliability:[/b] Fixed a couple of internal issues that could cause Factory Overview to fetch the wrong player's data, or a rare crash risk, specifically on dedicated servers with multiple players.
+[*]🐛 [b]Galaxy Map QoL Internal Reliability Pass:[/b] Fixed a deep-seated internal wiring issue that risked the whole Galaxy Map QoL feature silently misbehaving, plus a handful of smaller cleanups. No visible changes, just a more solid foundation.
+[/list]
+
+[b]✨IMPROVEMENTS[/b]
+[list]
+[*]🔄 [b]Live Auto-Refresh:[/b] The Factory Overview tab now automatically refreshes itself every 10 seconds while it's open, instead of only updating when you switch tabs or click Refresh.
+[*]📊 [b]More Accurate Status Percentages:[/b] The Status column now reflects roughly the last 30 minutes of activity instead of averaging over your whole play session, so a new problem shows up quickly instead of getting buried under hours of good history.
+[*]💾 [b]Stats Now Survive Restarts:[/b] Factory Overview's tracking now properly saves and reloads with your game instead of quietly resetting every time a sector unloads or the server restarts.
+[*]⚙️ [b]Resource Display Settings Made More Reliable:[/b] Your HUD preferences are now saved through a more robust system under the hood — your existing settings carry over, no action needed.
+[/list]
+
 [i]Version 5.3.1[/i]
 [hr][/hr]
 [h1]v5.3.1 🐛BUGFIX UPDATE!🐛[/h1]

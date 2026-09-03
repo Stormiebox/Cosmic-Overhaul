@@ -3,7 +3,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 -- namespace GalaxyMapQoL
 GalaxyMapQoL = {}
 
-local Azimuth, Config, Log, Integration, data, allianceIcons, allianceIndex, allianceLastRequest, isAllianceDataSynced, warZoneTimestamp -- server
+local Azimuth, Config, Log, data, allianceIcons, allianceIndex, allianceLastRequest, isAllianceDataSynced, warZoneTimestamp -- server
 local icons = {"empty", "adopt", "alliance", "anchor", "bag", "bug-report", "cattle", "checkmark", "clockwise-rotation", "cog", "crew", "cross-mark", "diamonds", "domino-mask", "electric", "fighter", "look-at", "flying-flag", "halt", "health-normal", "hourglass", "inventory", "move", "round-star", "select", "shield", "trash-can", "unchecked", "vortex"} -- server
 
 if onClient() then
@@ -17,7 +17,6 @@ else -- onServer
 
 include("callable")
 Azimuth, Config, Log = unpack(include("galaxymapqolinit"))
-Integration = include("GalaxyMapQoLIntegration")
 
 data = { playerIcons = {}, playerIconsCount = 0 }
 allianceIcons = {}
@@ -28,11 +27,8 @@ warZoneTimestamp = -1 -- last time player requested war zone data
 
 function GalaxyMapQoL.initialize()
     local arr = {}
-    -- custom icons
-    for i = 1, #Integration do
-        arr[Integration[i]] = true
-    end
-    -- reformat icons
+    -- reformat icons into a lookup set, used server-side to validate that a client's
+    -- setSectorIcon RPC names a real icon rather than an arbitrary string
     for i = 1, #icons do
         arr[icons[i]] = true
     end

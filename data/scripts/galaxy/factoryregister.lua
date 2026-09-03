@@ -164,7 +164,13 @@ end
 
 -- Work out the percentage of time spent in different working states, as in working vs. errors
 function addWorkingStrings(data, init_fdata, factoryData)
-	local totalTime = data['runtime']
+	-- status_window_runtime is the rolling-window counter factory.lua resets alongside
+	-- production_register every 30 minutes, so a problem that started recently isn't averaged
+	-- down into invisibility by hours of prior healthy runtime. Falls back to the old lifetime
+	-- 'runtime' field so a factory whose data hasn't refreshed since this change (or restored
+	-- from an older save) doesn't hit the "no data" branch below instead of just showing lifetime
+	-- stats for one cycle.
+	local totalTime = data['status_window_runtime'] or data['runtime']
 	if not totalTime or totalTime == 0 then
 		include("cosmicvaultdebug").info("Cosmic Overhaul", "Error elapsed time in registered factory data in Galaxy / 1")
 		factoryData['working_state'] = {}

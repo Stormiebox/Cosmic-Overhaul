@@ -25,33 +25,38 @@ Balancing:
         ARCC_Simulation_update_original(timestep)
 
         local currentTime = os.time()
+        local previousUpdateClockTime = ARCC_lastUpdateClockTime
+        -- Record the new clock time up front, before any catch-up branch below runs.
+        -- ARCC_applyCatchUpTime's own replay loop advances simulated time by calling
+        -- ARCC_Simulation_update_original directly (not this wrapper), so it no longer
+        -- re-enters this function -- but updating the clock here first, rather than at
+        -- the end, keeps this function safe to call re-entrantly regardless.
+        ARCC_lastUpdateClockTime = currentTime
 
         if not ARCC_hasRunFirstUpdate then
             ARCC_hasRunFirstUpdate = true
             local timeToApply = ARCC_getTimeToApply(timestep)
             ARCC_applyCatchUpTime(timeToApply)
-        elseif ARCC_lastUpdateClockTime then
+        elseif previousUpdateClockTime then
             -- Detect if the server was paused (empty) for a long time
-            local gap = currentTime - ARCC_lastUpdateClockTime
+            local gap = currentTime - previousUpdateClockTime
             -- If the gap is larger than 5 minutes (300 seconds), we missed ticks
             if gap > 300 then
                 local config = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or nil
                 local enableOfflineCatchup = config and config.enableOfflineCatchup or false
                 if enableOfflineCatchup then
                     include("cosmicvaultdebug").info("Cosmic Overhaul", "[ARCC] Detected server pause gap of ${gap}s. Catching up..."%{gap=tostring(gap)})
-                    
+
                     local ARCC_offlineTimeReplayRatio = config and config.offlineCatchupRatio or 0.667
                     local ARCC_maxOfflineReplayTime = config and config.offlineCatchupMaxDuration or (8*60*60)
-                    
+
                     local timeToApply = gap * ARCC_offlineTimeReplayRatio
                     timeToApply = math.min(timeToApply, ARCC_maxOfflineReplayTime)
-                    
+
                     ARCC_applyCatchUpTime(timeToApply)
                 end
             end
         end
-
-        ARCC_lastUpdateClockTime = currentTime
     end
 
     -- Combined Simulation.secure logic
@@ -247,7 +252,10 @@ Balancing:
                 time = createReadableShortTimeString(nextStep),
                 num = #Simulation.commands,
             })
-            Simulation.update(nextStep)
+            -- Calls the raw vanilla update directly, not the ARCC-wrapped Simulation.update
+            -- above -- this loop's job is to advance simulated command state by nextStep,
+            -- not to re-run wall-clock pause detection against itself on every replay tick.
+            ARCC_Simulation_update_original(nextStep)
             timeToApply = timeToApply-nextStep
         end
 

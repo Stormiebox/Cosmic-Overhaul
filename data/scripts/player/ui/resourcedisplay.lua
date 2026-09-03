@@ -5,6 +5,33 @@ include("utility")
 -- namespace ResourceDisplay
 ResourceDisplay = {}
 
+local CosmicVaultSettingsSchema = include("cosmicvaultsettingsschema")
+
+-- One schema entry per HUD setting: {field} is this file's own red_config key,
+-- {key} is the persisted storage key (kept identical to the pre-schema raw
+-- Player():setValue() key of the same name so existing installs' saved values are
+-- still found -- see readSettingWithLegacyFallback below for how the transition
+-- from the old unprefixed storage to the schema's prefixed one is handled without
+-- resetting anyone's preferences).
+local RD_MOD_ID = "CosmicOverhaul_ResourceDisplay"
+local RD_SETTINGS_DEF = {
+    { field = "EnableHUD",                       key = "CO_RD_Enabled", default = true,  type = "bool" },
+    { field = "PositionX",                       key = "CO_RD_PosX",    default = 5,     type = "number" },
+    { field = "PositionY",                       key = "CO_RD_PosY",    default = 28,    type = "number" },
+    { field = "ShowCargoCapacity",                key = "CO_RD_Cargo",   default = true,  type = "bool" },
+    { field = "ShowInventoryCapacity",            key = "CO_RD_Inv",     default = true,  type = "bool" },
+    { field = "InventoryCapacityShowBothAlways",  key = "CO_RD_InvBoth", default = false, type = "bool" },
+    { field = "ShowAllianceResources",            key = "CO_RD_Alli",    default = true,  type = "bool" },
+    { field = "BackgroundOpacity",                key = "CO_RD_BgOp",    default = 0.0,   type = "number" },
+    { field = "CompactNumbers",                   key = "CO_RD_CmpNum",  default = false, type = "bool" },
+}
+local RD_SETTINGS = CosmicVaultSettingsSchema.define(RD_MOD_ID, RD_SETTINGS_DEF)
+
+local RD_KEY_BY_FIELD = {}
+for _, entry in ipairs(RD_SETTINGS_DEF) do
+    RD_KEY_BY_FIELD[entry.field] = entry.key
+end
+
 local red_config = {
     EnableHUD = true,
     PositionX = 5,
@@ -22,27 +49,36 @@ local red_moveUI = false
 local red_dragged = nil
 
 if onClient() then
-    function ResourceDisplay.initialize()
-        -- Load settings natively stored on the player database
+    -- Reads one setting client-side, checking the schema's own storage location
+    -- first (where every write lands from now on), falling back to the pre-schema
+    -- raw key of the same name so a returning player's saved HUD preferences don't
+    -- silently reset to defaults the moment they load a version of this file that
+    -- switched to CosmicVaultSettingsSchema. Both reads are the same bare,
+    -- no-argument Player():getValue() call this file has always made client-side --
+    -- see cosmicvaultsettingsschema.lua's own header comment for why that's trusted
+    -- here despite cosmicvaultplayersettings.lua's unrelated, documented client-crash
+    -- restriction (that restriction is about a different call shape; see the note).
+    local function readSettingWithLegacyFallback(key, default)
         local p = Player()
-        local enabled = p:getValue("CO_RD_Enabled")
-        if enabled ~= nil then red_config.EnableHUD = enabled end
-        red_config.PositionX = p:getValue("CO_RD_PosX") or 5
-        red_config.PositionY = p:getValue("CO_RD_PosY") or 28
+        if not p then return default end
+        local v = p:getValue("cv_ps_" .. RD_MOD_ID .. "_" .. key)
+        if v == nil then v = p:getValue(key) end
+        if v == nil then return default end
+        return v
+    end
 
-        local cargo = p:getValue("CO_RD_Cargo")
-        if cargo ~= nil then red_config.ShowCargoCapacity = cargo end
-        local inv = p:getValue("CO_RD_Inv")
-        if inv ~= nil then red_config.ShowInventoryCapacity = inv end
-        local invBoth = p:getValue("CO_RD_InvBoth")
-        if invBoth ~= nil then red_config.InventoryCapacityShowBothAlways = invBoth end
-        local alli = p:getValue("CO_RD_Alli")
-        if alli ~= nil then red_config.ShowAllianceResources = alli end
+    -- Updates the local HUD state instantly and persists it server-side through the
+    -- schema (real key/type validation instead of the old bare string-prefix check).
+    local function setLocalAndSave(field, value)
+        red_config[field] = value
+        local key = RD_KEY_BY_FIELD[field]
+        if key then invokeServerFunction("saveSetting", key, value) end
+    end
 
-        local bgOp = p:getValue("CO_RD_BgOp")
-        if bgOp ~= nil then red_config.BackgroundOpacity = bgOp end
-        local cmpNum = p:getValue("CO_RD_CmpNum")
-        if cmpNum ~= nil then red_config.CompactNumbers = cmpNum end
+    function ResourceDisplay.initialize()
+        for _, entry in ipairs(RD_SETTINGS_DEF) do
+            red_config[entry.field] = readSettingWithLegacyFallback(entry.key, entry.default)
+        end
 
         red_rect = Rect(
             red_config.PositionX, red_config.PositionY,
@@ -141,19 +177,33 @@ if onClient() then
     end
 
     function ResourceDisplay.onToggleMovement(checkbox, value) red_moveUI = value end
-    function ResourceDisplay.onToggleEnableHUD(_, state) red_config.EnableHUD = state; invokeServerFunction("saveSetting", "CO_RD_Enabled", state) end
-    function ResourceDisplay.onToggleCargo(_, state) red_config.ShowCargoCapacity = state; invokeServerFunction("saveSetting", "CO_RD_Cargo", state) end
-    function ResourceDisplay.onToggleInventory(_, state) red_config.ShowInventoryCapacity = state; invokeServerFunction("saveSetting", "CO_RD_Inv", state) end
-    function ResourceDisplay.onToggleInventoryBoth(_, state) red_config.InventoryCapacityShowBothAlways = state; invokeServerFunction("saveSetting", "CO_RD_InvBoth", state) end
-    function ResourceDisplay.onToggleAlliance(_, state) red_config.ShowAllianceResources = state; invokeServerFunction("saveSetting", "CO_RD_Alli", state) end
-    function ResourceDisplay.onToggleCompactNumbers(_, state) red_config.CompactNumbers = state; invokeServerFunction("saveSetting", "CO_RD_CmpNum", state) end
-    function ResourceDisplay.onSliderOpacity(slider) red_config.BackgroundOpacity = slider.value; invokeServerFunction("saveSetting", "CO_RD_BgOp", slider.value) end
+    function ResourceDisplay.onToggleEnableHUD(_, state) setLocalAndSave("EnableHUD", state) end
+    function ResourceDisplay.onToggleCargo(_, state) setLocalAndSave("ShowCargoCapacity", state) end
+    function ResourceDisplay.onToggleInventory(_, state) setLocalAndSave("ShowInventoryCapacity", state) end
+    function ResourceDisplay.onToggleInventoryBoth(_, state) setLocalAndSave("InventoryCapacityShowBothAlways", state) end
+    function ResourceDisplay.onToggleAlliance(_, state) setLocalAndSave("ShowAllianceResources", state) end
+    function ResourceDisplay.onToggleCompactNumbers(_, state) setLocalAndSave("CompactNumbers", state) end
+    function ResourceDisplay.onSliderOpacity(slider) setLocalAndSave("BackgroundOpacity", slider.value) end
 
     function ResourceDisplay.onResetPosition()
         local x, y = 5, 28
         red_rect = Rect(x, y, x + 290, y + 180)
         red_config.PositionX = x; red_config.PositionY = y
         invokeServerFunction("savePosition", x, y)
+    end
+
+    -- Picks which faction's data a HUD section should read: the alliance (when this
+    -- craft is alliance-owned) or the player's own personal data, according to
+    -- `showAlliance`. Used by the resources block directly; the inventory block
+    -- inverts its own toggle's meaning ("show both" implies "show personal here,
+    -- alliance separately below") so it does NOT reuse this helper -- forcing both
+    -- call sites through one signature would hide that the two toggles mean
+    -- different things, not simplify anything real.
+    local function pickDisplayFaction(player, allianceFaction, allianceOwned, showAlliance, prefix)
+        if allianceOwned and showAlliance then
+            return allianceFaction, prefix
+        end
+        return player, ""
     end
 
     function ResourceDisplay.onPreRenderHud(state)
@@ -177,12 +227,9 @@ if onClient() then
         if state ~= PlayerStateType.Fly then return end
 
         local player = Player()
-        local faction = player
-        local prefix = ""
-        if player.craft and player.craft.allianceOwned then
-            faction = Alliance()
-            prefix = "[A]  /* Alliance resource prefix */"%_t
-        end
+        local allianceOwned = player.craft and player.craft.allianceOwned
+        local alliance = allianceOwned and Alliance() or nil
+        local alliancePrefix = "[A]  /* Alliance resource prefix */"%_t
 
         local x, x2, y = red_rect.lower.x, red_rect.upper.x, red_rect.lower.y
 
@@ -195,9 +242,18 @@ if onClient() then
             else return createMonetaryString(num) end
         end
 
+        -- craftFaction (alliance-if-owned, regardless of the display toggle below) is
+        -- what the original code gated infiniteResources on -- kept separate from
+        -- matFaction/matPrefix (which IS toggle-adjusted) so that gating behavior is
+        -- unchanged: whether the resources block shows at all still depends on the
+        -- owning craft's faction, not on which faction's numbers the toggle picks to
+        -- actually display.
+        local craftFaction = allianceOwned and alliance or player
+        local matFaction, matPrefix = pickDisplayFaction(player, alliance, allianceOwned, red_config.ShowAllianceResources, alliancePrefix)
+
         -- Calculate how much height the background box needs
         local numLines = 0
-        if not faction.infiniteResources then
+        if not craftFaction.infiniteResources then
             numLines = numLines + NumMaterials() + 1
         end
         if red_config.ShowInventoryCapacity then
@@ -211,9 +267,7 @@ if onClient() then
             drawRect(Rect(x - 5, y - 2, x2 + 5, y + (numLines * 18)), ColorARGB(red_config.BackgroundOpacity, 0, 0, 0))
         end
 
-        if not faction.infiniteResources then
-            local matFaction = (not red_config.ShowAllianceResources and player) or faction
-            local matPrefix = (not red_config.ShowAllianceResources and "") or prefix
+        if not craftFaction.infiniteResources then
             for i, amount in ipairs({matFaction:getResources()}) do
                 local material = Material(i-1)
                 drawTextRect(matPrefix..material.name, Rect(x, y, x2, y + 16), -1, -1, material.color, 15, 0, 0, 2)
@@ -226,8 +280,8 @@ if onClient() then
         end
 
         if red_config.ShowInventoryCapacity then
-            local invFaction = (red_config.InventoryCapacityShowBothAlways and player) or faction
-            local invPrefix = (red_config.InventoryCapacityShowBothAlways and "") or prefix
+            local invFaction = (red_config.InventoryCapacityShowBothAlways and player) or (allianceOwned and alliance) or player
+            local invPrefix = (red_config.InventoryCapacityShowBothAlways and "") or (allianceOwned and alliancePrefix) or ""
             local inv = invFaction:getInventory()
             local color = ColorRGB(0.8, 0.8, 0.8)
             drawTextRect(invPrefix.."Inventory Slots"%_t, Rect(x, y, x2, y + 16), -1, -1, color, 15, 0, 0, 2)
@@ -235,7 +289,7 @@ if onClient() then
             y = y + 18
             if red_config.InventoryCapacityShowBothAlways and player.alliance then
                 inv = player.alliance:getInventory()
-                drawTextRect("[A]  /* Alliance resource prefix */"%_t.."Inventory Slots"%_t, Rect(x, y, x2, y + 16), -1, -1, color, 15, 0, 0, 2)
+                drawTextRect(alliancePrefix.."Inventory Slots"%_t, Rect(x, y, x2, y + 16), -1, -1, color, 15, 0, 0, 2)
                 drawTextRect(inv.occupiedSlots.."/"..inv.maxSlots, Rect(x, y, x2, y + 16), 1, -1, color, 15, 0, 0, 2)
                 y = y + 18
             end
@@ -260,16 +314,15 @@ end
 function ResourceDisplay.savePosition(x, y)
     if not onServer() then return end
     local p = Player(callingPlayer)
-    p:setValue("CO_RD_PosX", x)
-    p:setValue("CO_RD_PosY", y)
+    RD_SETTINGS:set(p, "CO_RD_PosX", x)
+    RD_SETTINGS:set(p, "CO_RD_PosY", y)
 end
 callable(ResourceDisplay, "savePosition")
 
 function ResourceDisplay.saveSetting(key, value)
     if not onServer() then return end
-    if type(key) ~= "string" or string.sub(key, 1, 6) ~= "CO_RD_" then return end
     local p = Player(callingPlayer)
-    p:setValue(key, value)
+    RD_SETTINGS:set(p, key, value) -- validates key/type against RD_SETTINGS_DEF; unknown keys are rejected and logged
 end
 callable(ResourceDisplay, "saveSetting")
 function ResourceDisplay.onRemove()

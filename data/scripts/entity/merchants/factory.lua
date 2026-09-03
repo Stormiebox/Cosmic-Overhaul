@@ -44,6 +44,8 @@ local base_updateDeliveryToOtherStations = Factory.updateDeliveryToOtherStations
 local base_updateFetchingFromOtherStations = Factory.updateFetchingFromOtherStations
 local base_buyGoods = Factory.buyGoods
 local base_sellGoods = Factory.sellGoods
+local base_getBuyGoodsErrorMessage = Factory.getBuyGoodsErrorMessage
+local base_getSellGoodsErrorMessage = Factory.getSellGoodsErrorMessage
 
 -- Local values for this mod go here
 local ft_minVolume = 10
@@ -67,9 +69,18 @@ Factory.shuttleVolume = ft_minVolume
 
 -- Factory Overview Telemetry Variables
 local fo_refreshFrequency = 10
-local fo_runtime = 0
+local fo_runtime = 0 -- lifetime runtime since this factory was first registered; feeds the profit/hour calc in factoryregister.lua, never resets
 local fo_refreshTime = fo_refreshFrequency
 local fo_productionStateRegister = {}
+
+-- The Status column's working-state breakdown used to be a lifetime-since-load average, so a
+-- factory that ran fine for hours before getting stuck would still show ~100% Running for a long
+-- time afterwards -- new problems were diluted into invisibility by old history. fo_statusWindowRuntime
+-- and fo_productionStateRegister above now represent only the current rolling window (reset every
+-- fo_statusWindowDuration seconds), kept deliberately separate from fo_runtime so the profitability
+-- calculation (which needs the true lifetime runtime) is unaffected by the window resetting.
+local fo_statusWindowDuration = 1800 -- 30 minutes
+local fo_statusWindowRuntime = 0
 
 local garbageStations = {}
 local garbageStationCombo = nil
@@ -154,11 +165,25 @@ end
 function Factory.restore(data)
     base_restore(data)
     Factory.applyShuttleVolume(data)
+
+    -- Factory Overview Telemetry: without this, fo_runtime/fo_productionStateRegister/etc. silently
+    -- reset to their default (0 / {}) every time this script reloads (sector unload, server restart),
+    -- even though nothing about the factory's actual history changed.
+    fo_runtime = data.fo_runtime or 0
+    fo_productionStateRegister = data.fo_productionStateRegister or {}
+    fo_statusWindowRuntime = data.fo_statusWindowRuntime or 0
+    Factory._co_registered = data.fo_co_registered or false
 end
 
 function Factory.secure()
     local data = base_secure()
     data.MinShuttleVolume = Factory.MinShuttleVolume
+
+    data.fo_runtime = fo_runtime
+    data.fo_productionStateRegister = fo_productionStateRegister
+    data.fo_statusWindowRuntime = fo_statusWindowRuntime
+    data.fo_co_registered = Factory._co_registered
+
     return data
 end
 
@@ -398,16 +423,25 @@ function Factory.updateServer(timeStep)
 
     -- Cosmic Overhaul Self-Healing: Asteroid Mines (like Ice Mines) are claimed from neutral entities,
     -- so their initialize() fires before the player owns them! We catch them here in the update loop instead.
+    -- _co_registered is only set once a player/alliance faction is actually confirmed, so this keeps
+    -- retrying on every tick (cheap: one boolean check) until the claim actually goes through, instead
+    -- of giving up permanently on the first tick if the entity is still neutral at that exact moment --
+    -- which was the whole scenario this self-heal exists to catch.
     if not Factory._co_registered then
         local faction = Faction()
         if faction and (faction.isPlayer or faction.isAlliance) then
-            Galaxy():invokeFunction("galaxy/factoryregister.lua", "register", Entity().id)
+            -- Reuse the same factoryData construction FactoryOverview_updateGalaxy already does,
+            -- rather than calling register() directly with the wrong argument shape (factionIndex,
+            -- allianceFactory, entity_data all required -- a bare Entity().id left entity_data nil,
+            -- which register() silently no-ops on).
+            Factory.FactoryOverview_updateGalaxy(faction.isAlliance)
+            Factory._co_registered = true
         end
-        Factory._co_registered = true
     end
 end
 -- Cosmic Overhaul: Halts production if zone is under war zone.
 function Factory.updateProduction(timeStep)
+    local blockaded = false
     local cvs = getCosmicVaultScaling()
     local owner = Owner()
     if cvs and owner then
@@ -429,27 +463,44 @@ function Factory.updateProduction(timeStep)
                 if Entity():getValue("governor_smuggler_active") then
                     -- Smuggler governor bypasses the blockade
                 else
-                    Factory.productionError = "Under Siege Blockade"%_T
-                    return -- Halt production entirely
+                    -- newProductionError (not Factory.productionError, which nothing in vanilla ever
+                    -- reads or writes) is vanilla's own file-scope local for the in-station error sign
+                    -- and Factory.sendProductionError's client sync -- setting it here is what actually
+                    -- surfaces "Under Siege Blockade" to the player, both in that sign and below.
+                    newProductionError = "Under Siege Blockade"%_T
+                    blockaded = true -- Halt production entirely, but keep reporting to Factory Overview below
                 end
             end
         end
     end
 
-    if base_updateProduction then base_updateProduction(timeStep) end
+    if not blockaded and base_updateProduction then base_updateProduction(timeStep) end
 
     if owner and (owner.isPlayer or owner.isAlliance) then
         local alliance = owner.isAlliance
         fo_refreshTime = fo_refreshTime + timeStep
         fo_runtime = fo_runtime + timeStep
+        fo_statusWindowRuntime = fo_statusWindowRuntime + timeStep
 
-        -- Capture vanilla production error state, default to "Running" if no error
-        local currentError = Factory.productionError
+        -- Capture vanilla's real production error state (set by base_updateProduction just above,
+        -- or forced to "Under Siege Blockade" above if we skipped it), default to "Running" if none.
+        -- newProductionError is vanilla's own variable (see comment above); Factory.productionError
+        -- was a table field nothing else in this file or vanilla ever wrote outside the blockade
+        -- branch, so this always read empty/nil in the ordinary case -- meaning every factory always
+        -- looked "100% Running" here regardless of its actual working state.
+        local currentError = newProductionError
         if not currentError or currentError == "" then
             currentError = "Running"%_T
         end
 
         fo_productionStateRegister[currentError] = (fo_productionStateRegister[currentError] or 0) + timeStep
+
+        -- Roll the status window over once it's run its full duration, so a problem that started
+        -- recently isn't averaged down into invisibility by hours of prior healthy runtime.
+        if fo_statusWindowRuntime > fo_statusWindowDuration then
+            fo_statusWindowRuntime = 0
+            fo_productionStateRegister = {}
+        end
 
         if fo_refreshTime > fo_refreshFrequency then
             fo_refreshTime = 0
@@ -475,7 +526,8 @@ function Factory.FactoryOverview_updateGalaxy(allianceFactory)
         money_tax = stats.moneyGainedFromTax or 0,
         money_spent = stats.moneySpentOnGoods or 0,
         location = tostring(x) .. "," .. tostring(y),
-        runtime = fo_runtime,
+        runtime = fo_runtime, -- lifetime runtime, used for the profit/hour calculation only
+        status_window_runtime = fo_statusWindowRuntime, -- rolling-window runtime, used as the Status % denominator
         production_register = fo_productionStateRegister
     }
 
@@ -660,14 +712,15 @@ function Factory.requestTraders(timestep)
     base_requestTraders(timestep)
 end
 
+-- Blocked-by-blockade trades report through the delivery-error UI (below), not a direct chat message --
+-- this function is reached every tick per linked station pair via the automated delivery network, not
+-- just by a direct player action.
+local TRADE_BLOCKADE_ERROR_CODE = 10
+
 function Factory.buyGoods(goodName, amount, factionIndex, applyBonuses)
     local sector = Sector()
-    if sector:getValue("war_zone") or sector:getValue("cw_contested") then
-        local player = Player(callingPlayer)
-        if player then
-            player:sendChatMessage(Entity(), ChatMessageType.Error, "Trade suspended! This station is under blockade due to an active war zone!"%_t)
-        end
-        return
+    if (sector:getValue("war_zone") or sector:getValue("cw_contested")) and not Entity():getValue("governor_smuggler_active") then
+        return TRADE_BLOCKADE_ERROR_CODE
     end
     if base_buyGoods then return base_buyGoods(goodName, amount, factionIndex, applyBonuses) end
 end
@@ -675,16 +728,22 @@ callable(Factory, "buyGoods")
 
 function Factory.sellGoods(goodName, amount, factionIndex, applyBonuses)
     local sector = Sector()
-    if sector:getValue("war_zone") or sector:getValue("cw_contested") then
-        local player = Player(callingPlayer)
-        if player then
-            player:sendChatMessage(Entity(), ChatMessageType.Error, "Trade suspended! This station is under blockade due to an active war zone!"%_t)
-        end
-        return
+    if (sector:getValue("war_zone") or sector:getValue("cw_contested")) and not Entity():getValue("governor_smuggler_active") then
+        return TRADE_BLOCKADE_ERROR_CODE
     end
     if base_sellGoods then return base_sellGoods(goodName, amount, factionIndex, applyBonuses) end
 end
 callable(Factory, "sellGoods")
+
+function Factory.getBuyGoodsErrorMessage(code)
+    if code == TRADE_BLOCKADE_ERROR_CODE then return "Trade suspended: station is under blockade."%_T end
+    if base_getBuyGoodsErrorMessage then return base_getBuyGoodsErrorMessage(code) end
+end
+
+function Factory.getSellGoodsErrorMessage(code)
+    if code == TRADE_BLOCKADE_ERROR_CODE then return "Trade suspended: station is under blockade."%_T end
+    if base_getSellGoodsErrorMessage then return base_getSellGoodsErrorMessage(code) end
+end
 
 function Factory.sendDeliveryErrors()
     if base_sendDeliveryErrors then base_sendDeliveryErrors() end
