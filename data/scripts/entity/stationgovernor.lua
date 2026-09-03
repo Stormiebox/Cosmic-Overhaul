@@ -42,9 +42,11 @@ function updateServer(timeStep)
     if captain:hasClass(CaptainClass.Commodore) or captain:hasClass(CaptainClass.General) then
         entity:setValue("governor_military_active", true)
         if CosmicVaultBuffs then
-            -- Double shield regen rate
+            -- Double shield regen rate. CosmicVaultBuffs.applyBuff's multiplier is a scale
+            -- factor (1.0 = unchanged), so doubling needs 2.0, not 1.0 (which is a no-op) --
+            -- also needed a matching "ShieldRecharge" case in cosmicbuff.lua, which was missing.
             CosmicVaultBuffs.terminateBuff(entity.id, "GovernorMilitaryShield")
-            CosmicVaultBuffs.applyBuff(entity.id, "ShieldRecharge", 1.0, 11.0, "GovernorMilitaryShield")
+            CosmicVaultBuffs.applyBuff(entity.id, "ShieldRecharge", 2.0, 11.0, "GovernorMilitaryShield")
         end
         -- Spawn militia once every 10 minutes if enemies are present
         if random():getFloat() < 0.05 then

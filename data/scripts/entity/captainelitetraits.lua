@@ -33,14 +33,20 @@ function updateServer(timeStep)
             for _, ship in pairs(ships) do
                 if ship.isShip or ship.isStation then
                     -- Try to refresh existing buffs, otherwise apply new ones
+                    -- CosmicVaultBuffs.applyBuff's multiplier is a SCALE factor (cosmicbuff.lua
+                    -- converts it to an addBaseMultiplier delta via multiplier - 1.0, matching the
+                    -- engine's own "a factor of 0.3 becomes 1.3" semantics for addBaseMultiplier) --
+                    -- 1.10 for +10%, not 0.10. Passing 0.10 previously computed a delta of -0.9,
+                    -- silently applying a -90% Shield/FireRate penalty instead of the advertised
+                    -- +10% Commodore bonus.
                     local shieldRefreshed = CosmicVaultBuffs.refreshBuff(ship.id, "CommodoreShield")
                     if not shieldRefreshed then
-                        CosmicVaultBuffs.applyBuff(ship.id, "Shield", 0.10, 6.0, "CommodoreShield")
+                        CosmicVaultBuffs.applyBuff(ship.id, "Shield", 1.10, 6.0, "CommodoreShield")
                     end
-                    
+
                     local fireRateRefreshed = CosmicVaultBuffs.refreshBuff(ship.id, "CommodoreFireRate")
                     if not fireRateRefreshed then
-                        CosmicVaultBuffs.applyBuff(ship.id, "FireRate", 0.10, 6.0, "CommodoreFireRate")
+                        CosmicVaultBuffs.applyBuff(ship.id, "FireRate", 1.10, 6.0, "CommodoreFireRate")
                     end
                 end
             end

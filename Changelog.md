@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.4.1] - Emergency Hotfix
+
+### 🪲 Bug Fixes
+- [Bugfix] **Commodore Elite Trait Was Cutting Shields by 90% Instead of Boosting Them by 10% (captainelitetraits.lua):** Player report: shields collapsing from full to near-nothing with no clear cause, ships getting one-shot that shouldn't have been. Root cause: `CosmicVaultBuffs.applyBuff`'s `multiplier` argument is a scale factor (`1.0` = unchanged, matching its documented "0.5 for half speed, 2.0 for double damage" contract), but the Commodore's "+10% Sector-Wide Shield and Damage" buff passed `0.10` for both the Shield and FireRate buffs. `cosmicbuff.lua` converts that into `delta = multiplier - 1.0 = -0.9`, so every player/alliance ship in a sector with a level-3 Commodore captain (a normal, common feature, not an edge case) had its Shield and FireRate cut by 90% instead of boosted by 10%, refreshed every 5-6 seconds for as long as the Commodore stayed in the sector. Fixed both calls to pass `1.10`.
+- [Bugfix] **Station Governor's Shield Regen Bonus Did Nothing (stationgovernor.lua):** The Military Governor's "double shield regen rate" buff targeted `"ShieldRecharge"`, a stat name `cosmicbuff.lua` didn't handle (fixed in this same patch, see Cosmic Vault's changelog), and passed `1.0` as the multiplier, which is a no-op even once the stat name is fixed. Corrected to `2.0` to actually double the rate as advertised.
+
 ## [v5.4.0]
 
 ### 🪲 Bug Fixes
