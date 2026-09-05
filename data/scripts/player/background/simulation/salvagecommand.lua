@@ -5,6 +5,7 @@ local PlayerSettings = include("cosmicvaultplayersettings")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 local CaptainClass = include("captainclass")
 local CaptainUtility = include("captainutility")
+local CosmicVaultTerritory = include("cosmicvaultterritory")
 include("randomext")
 
 local ccm_SalvageCommand_buildUI_original = SalvageCommand.buildUI
@@ -136,4 +137,42 @@ function SalvageCommand:generateItems(amount)
     upgradeListRarities(items.subsystems)
 
     return items
+end
+
+local ccm_SalvageCommand_calculatePrediction_original = SalvageCommand.calculatePrediction
+function SalvageCommand:calculatePrediction(ownerIndex, shipName, area, config, ...)
+    local prediction
+    if ccm_SalvageCommand_calculatePrediction_original then
+        prediction = ccm_SalvageCommand_calculatePrediction_original(self, ownerIndex, shipName, area, config, ...)
+    end
+
+    if not prediction or prediction.error then
+        return prediction
+    end
+
+    -- Scavenger Elite Trait: +50% Salvage Yield in Contested/Siege Zones. Replaces the old
+    -- CosmicVaultBuffs.applyBuff("SalvageYield", ...) call in captainelitetraits.lua, which never
+    -- worked ("SalvageYield" isn't a real stat) -- multiplies the predicted yield range directly,
+    -- the same mechanism minecommand.lua's own Mining Captain Hazard Pay bonus already uses.
+    local ship = (ownerIndex and ownerIndex > 0 and shipName) and ShipDatabaseEntry(ownerIndex, shipName)
+    if ship then
+        local captain = ship:getCaptain()
+        if captain and captain.level >= 3 and captain:hasClass(CaptainClass.Scavenger) then
+            if CosmicVaultTerritory and CosmicVaultTerritory.getContestedZones then
+                local x, y = ship:getCoordinates()
+                local zones = CosmicVaultTerritory.getContestedZones()
+                local key = x .. "_" .. y
+                if zones and zones[key] then
+                    for i = 1, NumMaterials() do
+                        if prediction.yields[i] then
+                            prediction.yields[i].from = math.floor(prediction.yields[i].from * 1.5)
+                            prediction.yields[i].to = math.floor(prediction.yields[i].to * 1.5)
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    return prediction
 end

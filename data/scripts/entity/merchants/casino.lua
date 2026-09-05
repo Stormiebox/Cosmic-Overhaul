@@ -98,7 +98,7 @@ function Casino.payTradeRumor()
     end
 
     local view = player:getKnownSector(targetX, targetY) or SectorView(targetX, targetY)
-    view.note = NamedFormat("Trade Rumor\nAnomalous readings indicate massive profit potential."%_T)
+    view.note = NamedFormat("Trade Rumor\nAnomalous readings indicate massive profit potential."%_T, {})
     player:addKnownSector(view)
     
     player:sendChatMessage(Entity(), 0, "I've uploaded the coordinates to your map. Look around %1%:%2%. Lots of profit to be made there."%_t, targetX, targetY)

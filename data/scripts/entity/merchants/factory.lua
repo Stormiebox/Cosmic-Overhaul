@@ -1,9 +1,5 @@
 -- Utility function injected for Factory Tweaks
 
-function getUpdateInterval()
-    return 5.0
-end
-
 local function timer(current, period, deltaTime)
     local hasFired = false
     current = current + deltaTime
@@ -27,21 +23,16 @@ local base_sync = Factory.sync
 local base_updateServer = Factory.updateServer
 local base_updateProduction = Factory.updateProduction
 local base_onRemove = Factory.onRemove
-
-local base_getShuttleUpgradeCost = Factory.getShuttleUpgradeCost
-local base_onUpgradeShuttlesButtonPressed = Factory.onUpgradeShuttlesButtonPressed
+local base_onDelete = Factory.onDelete
+local base_getUpdateInterval = Factory.getUpdateInterval
 
 local base_onShowWindow = Factory.onShowWindow
 local base_buildConfigUI = Factory.buildConfigUI
 local base_refreshConfigUI = Factory.refreshConfigUI
-local base_refreshConfigCombos = Factory.refreshConfigCombos
 local base_sendDeliveryErrors = Factory.sendDeliveryErrors
-local base_renderUIIndicator = Factory.renderUIIndicator
 
 local base_setProduction = Factory.setProduction
 local base_requestTraders = Factory.requestTraders
-local base_updateDeliveryToOtherStations = Factory.updateDeliveryToOtherStations
-local base_updateFetchingFromOtherStations = Factory.updateFetchingFromOtherStations
 local base_buyGoods = Factory.buyGoods
 local base_sellGoods = Factory.sellGoods
 local base_getBuyGoodsErrorMessage = Factory.getBuyGoodsErrorMessage
@@ -82,14 +73,21 @@ local fo_productionStateRegister = {}
 local fo_statusWindowDuration = 1800 -- 30 minutes
 local fo_statusWindowRuntime = 0
 
+-- Cached identity for the unregister-on-destruction fix below: kept fresh on every successful
+-- FactoryOverview_updateGalaxy push so Factory.onDelete has something to unregister with even in
+-- the case (see jumprangeboost.lua's onDelete, the one vanilla precedent for "clean up a shared
+-- registry entry when this entity is gone") where Entity()/Faction() context can't be trusted to
+-- still resolve this late in the entity's lifecycle.
+local fo_lastFactionIndex = nil
+local fo_lastAlliance = false
+local fo_lastEntityId = nil
+
 local garbageStations = {}
 local garbageStationCombo = nil
 local garbageStationErrorLabel = nil
 local garbageDeliveryError = ""
 local garbageDeliveryErrorOld = ""
 local garbageDeliveryErrorCode = 0
-local numGarbageGoods = 0
-local garbageVolumeByGood = nil
 Factory.trader.garbageStations = {}
 Factory.garbageDeliveryTimer = 0
 Factory.garbageDeliveryInterval = 30.0
@@ -111,17 +109,6 @@ function Factory.getProductionVolume()
     local spaceForInput = volumeFromProductionParts({production.ingredients})
     local spaceForOutput = volumeFromProductionParts({production.results, production.garbages})
     return math.max(spaceForInput, spaceForOutput)
-end
-
-function Factory.updateGarbageVolumes()
-    numGarbageGoods = 0
-    garbageVolumeByGood = {}
-    for _, garbage in pairs(production.garbages) do
-        local size = 1
-        if goods[garbage.name] then size = goods[garbage.name].size end
-        numGarbageGoods = numGarbageGoods + garbage.amount
-        garbageVolumeByGood[garbage.name] = { size = size, count = garbage.amount }
-    end
 end
 
 function Factory.isDockedTo(station)
@@ -156,9 +143,20 @@ function Factory.applyShuttleVolume(data)
     Factory.shuttleVolume = math.min(math.max(data.shuttleVolume, totalProductionVolume), Factory.MaxShuttleVolume)
 end
 
+-- Performance: floor factories at a 5s tick instead of vanilla's ~1s default (still respecting
+-- vanilla's own ~5s idle-sector throttle if that's ever higher than our floor). This used to be a
+-- bare global `function getUpdateInterval()` at the top of this file, which is the exact
+-- namespace-shadowing anti-pattern this codebase's own engine_constraints.md and Modding Codex
+-- ("Namespaced scripts vs. global scripts") warn causes double-execution, VFS corruption, or
+-- silent hangs -- Factory is a real engine-routed namespace (see vanilla's own
+-- `-- namespace Factory` declaration), so the override belongs on Factory.getUpdateInterval, not
+-- the global scope.
+function Factory.getUpdateInterval()
+    return math.max(base_getUpdateInterval(), 5.0)
+end
+
 function Factory.setProduction(production_in, size)
     base_setProduction(production_in, size)
-    Factory.updateGarbageVolumes()
     Factory.applyShuttleVolume()
 end
 
@@ -531,15 +529,52 @@ function Factory.FactoryOverview_updateGalaxy(allianceFactory)
         production_register = fo_productionStateRegister
     }
 
+    fo_lastFactionIndex = self.factionIndex
+    fo_lastAlliance = allianceFactory
+    fo_lastEntityId = factoryData.id
+
     galaxy:invokeFunction("galaxy/factoryregister.lua", "register", self.factionIndex, allianceFactory, factoryData)
 end
 
+-- Unregisters this factory from the galaxy's Factory Overview registry. Prefers live Entity()/
+-- Faction() context, falling back to the values FactoryOverview_updateGalaxy last cached above --
+-- see the fo_lastFactionIndex comment for why a fallback exists at all.
+local function co_unregisterFromFactoryOverview()
+    local factionIndex, alliance, entityId = fo_lastFactionIndex, fo_lastAlliance, fo_lastEntityId
+
+    local entity = Entity()
+    if entity then
+        entityId = entity.id.string
+        local faction = Faction()
+        if faction then
+            factionIndex = faction.index
+            alliance = faction.isAlliance
+        end
+    end
+
+    if not factionIndex or not entityId then return end
+    Galaxy():invokeFunction("galaxy/factoryregister.lua", "unregister", factionIndex, alliance, entityId)
+end
+
+-- onRemove() only fires when this SCRIPT is detached from a surviving entity -- it does NOT fire
+-- when the entity itself is destroyed (confirmed against the engine's own EntityFunctions.html:
+-- onRemove is "called when the script is about to be removed from the object", while onDelete is
+-- "the last call that will be done to an object script... also called when the object it is
+-- attached to is deleted"). Vanilla's own jumprangeboost.lua uses onDelete, never onRemove, for
+-- exactly this "clean up my entry in a shared registry" pattern. Without onDelete here, a factory
+-- destroyed in combat (or scrapped) never called unregister() at all, leaving a permanent stale
+-- "ghost" row in the Factory Overview list with its last-known numbers frozen forever. Both hooks
+-- are kept: onRemove covers the (rarer) case of the script being explicitly detached from a
+-- surviving station; onDelete covers actual destruction. unregister() is idempotent (nil-safe), so
+-- there's no harm if both ever fire for the same removal.
 function Factory.onRemove()
     if base_onRemove then base_onRemove() end
-    local faction = Faction()
-    if faction and (faction.isPlayer or faction.isAlliance) then
-        Galaxy():invokeFunction("galaxy/factoryregister.lua", "unregister", faction.index, Entity().id.string)
-    end
+    co_unregisterFromFactoryOverview()
+end
+
+function Factory.onDelete()
+    if base_onDelete then base_onDelete() end
+    co_unregisterFromFactoryOverview()
 end
 
 function Factory.updateDelivery(stations, dockedOnly, isSelling, debugSource)
@@ -773,17 +808,4 @@ function Factory.FactoryTweaks_refreshConfigErrors()
     else color = ColorRGB(1, 0, 0) end
     garbageStationErrorLabel.color = color
     garbageStationErrorLabel.caption = garbageDeliveryError or ""
-end
-
-function restore(...)
-    if Factory.restore then return Factory.restore(...) end
-end
-function secure(...)
-    if Factory.secure then return Factory.secure(...) end
-end
-function initialize(...)
-    if Factory.initialize then return Factory.initialize(...) end
-end
-function updateServer(...)
-    if Factory.updateServer then return Factory.updateServer(...) end
 end

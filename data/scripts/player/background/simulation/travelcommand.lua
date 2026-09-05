@@ -2,6 +2,7 @@
 local ccm_lastPrediction
 
 local CaptainClass = include("captainclass")
+local CaptainUtility = include("captainutility")
 local cv_weather = include("cosmicvaultweather")
 
 local ccm_TravelCommand_initialize_original = TravelCommand.initialize
@@ -39,8 +40,11 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
     if ship then
         local captain = ship:getCaptain()
         if captain then
-            -- Navigators and Explorers have supreme mastery over long-distance routes
-            if captain:hasClass(CaptainClass.Navigator) then
+            -- Navigators and Explorers have supreme mastery over long-distance routes.
+            -- Navigator is a captain PERK (CaptainUtility.PerkType.Navigator), not a captain
+            -- class -- CaptainClass has no "Navigator" entry, so the old hasClass() check here
+            -- always evaluated captain:hasClass(nil) and errored instead of ever matching.
+            if captain:hasPerk(CaptainUtility.PerkType.Navigator) then
                 if ccm_lastPrediction.duration and ccm_lastPrediction.duration.value then
                     ccm_lastPrediction.duration.value = ccm_lastPrediction.duration.value*0.75
                 end
@@ -58,7 +62,7 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
             
             -- Cosmic Vault Weather Synergy
             if cv_weather and ccm_lastPrediction and ccm_lastPrediction.duration then
-                if not (captain:hasClass(CaptainClass.Explorer) or captain:hasClass(CaptainClass.Navigator)) then
+                if not (captain:hasClass(CaptainClass.Explorer) or captain:hasPerk(CaptainUtility.PerkType.Navigator)) then
                     local cx = math.floor((area.lower.x + area.upper.x) / 2)
                     local cy = math.floor((area.lower.y + area.upper.y) / 2)
                     local weather = cv_weather.getWeatherAt(cx, cy)
@@ -81,7 +85,7 @@ function TravelCommand:generateAssessmentFromPrediction(prediction, captain, ...
     if type(lines) == "string" and lines == "" then return "" end
     if type(lines) ~= "table" then return lines end
 
-    if captain:hasClass(CaptainClass.Navigator) then
+    if captain:hasPerk(CaptainUtility.PerkType.Navigator) then
         table.insert(lines, 2,
             "\\c(0d0)I know these spatial routes like the back of my hand. We'll make incredible time.\\c()"%_t)
     end

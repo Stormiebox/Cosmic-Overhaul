@@ -74,29 +74,18 @@ function updateServer(timeStep)
         end
     end
 
-    -- 3. Miner Elite Trait: +15% Rich Asteroid Yields
-    -- Handled via hook in minecommand / harvest, but we can set a flag here
-    if hasEliteTrait(entity, CaptainClass.Miner) then
-        entity:setValue("elite_miner_yield", true)
-    else
-        entity:setValue("elite_miner_yield", nil)
-    end
+    -- 3. Miner Elite Trait: this flag was set here but never read anywhere in the workspace --
+    -- confirmed dead (grepped for "elite_miner_yield" workspace-wide, only writer, no reader).
+    -- The real Elite Miner bonus already exists, correctly working, in minecommand.lua's own
+    -- MineCommand:getAreaSize (+25 mining area at captain level 3+) and MineCommand:calculatePrediction
+    -- (Mining Captain Hazard Pay: 25% chance of a +10% yield event). Removed the orphaned flag
+    -- rather than wire it to a second, redundant bonus mechanism.
 
-    -- 4. Scavenger Elite Trait: +50% Yield in Siege Zones
-    if hasEliteTrait(entity, CaptainClass.Scavenger) then
-        if CosmicVaultBuffs then
-            local cv_territory = include("cosmicvaultterritory")
-            if cv_territory and cv_territory.getContestedZones then
-                local x,y = Sector():getCoordinates()
-                local key = x .. "_" .. y
-                local zones = cv_territory.getContestedZones()
-                if zones and zones[key] then
-                    local yieldRefreshed = CosmicVaultBuffs.refreshBuff(entity.id, "ScavengerYield")
-                    if not yieldRefreshed then
-                        CosmicVaultBuffs.applyBuff(entity.id, "SalvageYield", 0.50, 6.0, "ScavengerYield")
-                    end
-                end
-            end
-        end
-    end
+    -- 4. Scavenger Elite Trait: +50% Salvage Yield in Contested/Siege Zones. This used to route
+    -- through CosmicVaultBuffs.applyBuff("SalvageYield", ...) -- "SalvageYield" was never one of
+    -- cosmicbuff.lua's handled stat names (no native StatsBonuses enum for salvage yield exists
+    -- either), so the buff silently did nothing, every time, since this was written. Moved to a
+    -- real fix in salvagecommand.lua's own SalvageCommand:calculatePrediction override, which
+    -- multiplies the predicted resource yield directly -- the same hookable mechanism
+    -- minecommand.lua's own Mining Captain Hazard Pay bonus already uses successfully.
 end

@@ -4,8 +4,3 @@ function MilitaryOutpost.initialize()
 
     Entity():setValue("remove_permanent_upgrades", true)
 end
-
-
-function initialize(...)
-    if MilitaryOutpost.initialize then return MilitaryOutpost.initialize(...) end
-end

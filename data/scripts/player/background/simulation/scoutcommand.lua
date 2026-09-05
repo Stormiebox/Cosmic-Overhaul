@@ -30,7 +30,8 @@ function ScoutCommand:calculatePrediction(ownerIndex, shipName, area, config)
         -- Cosmic Vault Weather Synergy
         if cv_weather and prediction and prediction.duration then
             local captain = ship:getCaptain()
-            if not (captain:hasClass(CaptainClass.Explorer) or captain:hasClass(CaptainClass.Navigator)) then
+            -- Navigator is a captain PERK, not a class -- see travelcommand.lua's matching fix.
+            if not (captain:hasClass(CaptainClass.Explorer) or captain:hasPerk(CaptainUtility.PerkType.Navigator)) then
                 local cx = math.floor((area.lower.x + area.upper.x) / 2)
                 local cy = math.floor((area.lower.y + area.upper.y) / 2)
                 local weather = cv_weather.getWeatherAt(cx, cy)

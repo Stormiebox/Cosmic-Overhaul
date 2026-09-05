@@ -1,3 +1,27 @@
+[i]Version 5.5.0[/i]
+[hr][/hr]
+[h1]v5.5.0 🛒SPECIALIZED SHOP TABS🛒[/h1]
+[hr][/hr]
+[b]🛠️ UPDATE[/b]
+[i]Equipment Dock and Turret Merchant now sort their stock into specialized tabs instead of one big random pool, plus fixes for the Scavenger captain's Salvage Yield bonus, a Navigator captain error, and a Trade Rumor error.[/i]
+
+[b]✨ NEW[/b]
+[list]
+[*]🛒 [b]Equipment Dock: 3 New Tabs:[/b] Subsystems are now sorted into Civilian, Military, and Misc Upgrades tabs instead of one mixed pool, so you can find what you're after without scrolling past everything else. Every eligible upgrade type is guaranteed to show up somewhere.
+[*]🎯 [b]Turret Merchant: 3 New Tabs:[/b] Turrets are now sorted into Civilian, Military, and Defensive Turrets tabs the same way. Works with any turret type from any installed mod, not just vanilla's own.
+[*]🔓 [b]Turret Merchant Now Removes Permanent Upgrades:[/b] You can now uninstall permanently-installed subsystems at a Turret Merchant, not just at an Equipment Dock.
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Scavenger Salvage Yield Bonus Fixed:[/b] The Scavenger Elite Trait's "+50% Salvage Yield in Contested/Siege Zones" bonus never actually applied. It now correctly boosts your salvage yield by 50% when scavenging in a contested zone with a level-3+ Scavenger captain.
+[*]🧹 [b]Miner Cleanup:[/b] Removed a leftover, unused internal flag from Miner captains. Their real mining bonuses (bigger mining area, bonus yield chance) were already working correctly and are unaffected.
+[*]🐛 [b]Navigator Captain Error Fixed:[/b] Ships piloted by a captain with the Navigator perk could trigger an error during travel-time and scouting predictions. Fixed.
+[*]🎰 [b]Trade Rumor Error Fixed:[/b] Buying a Trade Rumor at the Casino or Smuggler's Market logged a server error and left the saved sector's map note blank, even though you were still charged and still got your coordinates. Fixed — the map note now shows up correctly too.
+[*]🏭 [b]Factory Overview: Destroyed Factories No Longer Stick Around:[/b] A factory that got destroyed used to stay listed in your Factory Overview tab forever, showing its last-known numbers as if it were still running. It's now correctly removed as soon as it's gone.
+[*]🏭 [b]Factory Overview: Update Timing Fixed:[/b] Fixed an internal bug in how factories reported their update timing to the game, which could have caused inconsistent behavior. No player-facing change expected, just a correctness fix under the hood.
+[/list]
+
 [i]Version 5.4.1[/i]
 [hr][/hr]
 [h1]v5.4.1 🚨EMERGENCY HOTFIX🚨[/h1]

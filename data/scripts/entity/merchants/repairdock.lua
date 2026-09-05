@@ -9,11 +9,6 @@ function RepairDock.initialize()
     end
 end
 
-function initialize(...)
-    if RepairDock.initialize then return RepairDock.initialize(...) end
-end
-
-
 function RepairDock.repairAllSectorShips(playerIndex, creditsOnly) -- Explicitly receive playerIndex
     playerIndex = playerIndex or callingPlayer -- Fallback for other potential call sites
     if not playerIndex then return end
