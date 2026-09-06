@@ -30,7 +30,12 @@ end
 function CO_MiscUpgradeMerchant.shop:addItems()
     local x, y = Sector():getCoordinates()
     local validScripts = CO_ShopUtils.GetScriptsOfCategory(CosmicVaultUpgradeCategories.Category.Misc)
-    local systems = CO_ShopUtils.GenerateCategoryUpgrades(x, y, validScripts, CO_MiscUpgradeMerchant.rarityFactors)
+    -- Passing the Misc category here (unlike the Civilian/Military tabs) lets the padding pass
+    -- also pull from the full generator pool -- see GenerateCategoryUpgrades/
+    -- RollMiscUpgradeFromFullPool in co_shopgenerationutils.lua -- so an external mod's own
+    -- upgrade system, never registered with CosmicVaultUpgradeCategories, still shows up here
+    -- instead of in no tab at all.
+    local systems = CO_ShopUtils.GenerateCategoryUpgrades(x, y, validScripts, CO_MiscUpgradeMerchant.rarityFactors, CosmicVaultUpgradeCategories.Category.Misc)
     for _, pair in pairs(systems) do
         CO_MiscUpgradeMerchant.shop:add(pair.upgrade, pair.amount)
     end
@@ -38,15 +43,30 @@ end
 
 function CO_MiscUpgradeMerchant.shop:onSpecialOfferSeedChanged()
     local x, y = Sector():getCoordinates()
-    local validScripts = CO_ShopUtils.GetScriptsOfCategory(CosmicVaultUpgradeCategories.Category.Misc)
-    if #validScripts == 0 then return end
-
     local generator = UpgradeGenerator(CO_MiscUpgradeMerchant.shop:generateSeed())
-    local script = getRandomEntry(validScripts)
     local rarities = generator:getSectorRarityDistribution(x, y)
-    local rarity = Rarity(getValueFromDistribution(rarities, generator.random))
-    local seed = generator:getUpgradeSeed(x, y, script, rarity)
 
+    -- Try the full generator pool first (same mechanism as the regular stock above) so an
+    -- external mod's unregistered upgrade system has a chance to be the special offer here too,
+    -- not just the regular list. Falls back to the explicitly-registered Misc list if 10 rolls in
+    -- a row all land Military/Civilian.
+    local script, rarity
+    for _ = 1, 10 do
+        local prototype = CO_ShopUtils.RollMiscUpgradeFromFullPool(generator, x, y, rarities)
+        if prototype then
+            script, rarity = prototype.script, prototype.rarity
+            break
+        end
+    end
+
+    if not script then
+        local validScripts = CO_ShopUtils.GetScriptsOfCategory(CosmicVaultUpgradeCategories.Category.Misc)
+        if #validScripts == 0 then return end
+        script = getRandomEntry(validScripts)
+        rarity = Rarity(getValueFromDistribution(rarities, generator.random))
+    end
+
+    local seed = generator:getUpgradeSeed(x, y, script, rarity)
     CO_MiscUpgradeMerchant.shop:setSpecialOffer(SystemUpgradeTemplate(script, rarity, seed))
 end
 

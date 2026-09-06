@@ -5,9 +5,7 @@ local cv_weather = include("cosmicvaultweather")
 local cv_news = include("cosmicvaultnews")
 
 local COWeatherGenerator = {}
-COWeatherGenerator.timer = 0
 COWeatherGenerator.cooldown = 0
-COWeatherGenerator.activeCount = 0
 
 function COWeatherGenerator.initialize()
     if not cv_weather then
@@ -25,20 +23,20 @@ function COWeatherGenerator.updateServer(timeStep)
     COWeatherGenerator.cooldown = math.max(0, COWeatherGenerator.cooldown - timeStep)
     if COWeatherGenerator.cooldown > 0 then return end
 
-    -- Sync active count
-    local server = Server()
+    -- Count currently active weather events galaxy-wide
     local ok, activeWeathers = Galaxy():invokeFunction("server/cosmicvaultweather_server.lua", "secure")
 
     local count = 0
     if ok == 0 and activeWeathers and activeWeathers.activeWeathers then
-        for k, v in pairs(activeWeathers.activeWeathers) do
+        for _ in pairs(activeWeathers.activeWeathers) do
             -- Only count random overhauls, ignore Eclipse specific ones if we wanted to
             count = count + 1
         end
     end
-    COWeatherGenerator.activeCount = count
 
-    -- Ensure min of 1, max of 5
+    -- Hard cap at 5 concurrent events galaxy-wide -- no guaranteed minimum. With thousands of
+    -- sectors and a dedicated server's players spread across many of them, the 1% per-check roll
+    -- below is intentionally rare so this never feels like it's spamming the galaxy.
     if count >= 5 then return end
 
     -- 1% chance to trigger a new weather event
@@ -49,7 +47,7 @@ function COWeatherGenerator.updateServer(timeStep)
 end
 
 function COWeatherGenerator.spawnRandomWeather()
-    local players = {Server():getPlayers()}
+    local players = {Server():getOnlinePlayers()}
     if #players == 0 then return end
 
     local player = players[random():getInt(1, #players)]
@@ -90,17 +88,13 @@ end
 
 function COWeatherGenerator.secure()
     return {
-        timer = COWeatherGenerator.timer,
-        cooldown = COWeatherGenerator.cooldown,
-        activeCount = COWeatherGenerator.activeCount
+        cooldown = COWeatherGenerator.cooldown
     }
 end
 
 function COWeatherGenerator.restore(data)
     if type(data) == "table" then
-        COWeatherGenerator.timer = data.timer or 0
         COWeatherGenerator.cooldown = data.cooldown or 0
-        COWeatherGenerator.activeCount = data.activeCount or 0
     end
 end
 

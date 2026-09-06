@@ -27,8 +27,27 @@ function EquipmentDock.initialize()
     station:addScriptOnce("data/scripts/entity/merchants/co_miscupgrademerchant.lua")
 end
 
+-- Vanilla's data/scripts/items/equipmentmerchantcaller.lua (the "Trade Guild Beacon" behind the
+-- main story's "buy an artifact from a Mobile Merchant" quest step) reaches into THIS namespace
+-- by name -- ship:invokeFunction("equipmentdock", "setSpecialOffer", ...) -- to force the quest's
+-- unique item into EquipmentDock.shop.specialOffer.item, entirely independent of the three
+-- category sub-shops above. That call still succeeds and still writes the item correctly; it just
+-- has nowhere to render once initUI() below stops building this namespace's own tab, silently
+-- soft-locking the quest. Keep the captured original so the one entity that actually needs it (the
+-- caller-spawned Mobile Merchant, flagged by its own "called_equipment_merchant" value) still gets
+-- a tab to show it on.
+local CosmicOverhaul_originalEquipmentDockInitUI = EquipmentDock.initUI
+
 function EquipmentDock.initUI()
-    -- Replaces vanilla's own initUI (which would create the old "Subsystems" tab): the three
-    -- attached category shops above each register their own tab under the same shared
-    -- "Trade Equipment" window instead.
+    -- Permanent stations: replaces vanilla's own initUI (which would create the old "Subsystems"
+    -- tab) with nothing -- the three attached category shops above each register their own tab
+    -- under the same shared "Trade Equipment" window instead.
+    --
+    -- The Mobile Merchant spawned by equipmentmerchantcaller.lua is the one exception: rebuild
+    -- vanilla's own tab for it so its externally-forced special offer has somewhere to display.
+    -- addItems is still neutered, so the tab's regular item list stays correctly empty ("We are
+    -- completely sold out.") -- only the special offer slot is ever populated on this entity.
+    if Entity():getValue("called_equipment_merchant") then
+        CosmicOverhaul_originalEquipmentDockInitUI()
+    end
 end

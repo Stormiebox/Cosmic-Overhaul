@@ -108,18 +108,52 @@ local function upgradeCompare(a, b)
     return sa.rarity.value > sb.rarity.value
 end
 
+--- Rolls ONE upgrade system prototype from the FULL generator pool (every upgrade system any
+--- installed mod has registered into UpgradeGenerator, not just Cosmic Vault's own category
+--- registry) and returns it only if CosmicVaultUpgradeCategories.getCategory() resolves it to
+--- Misc -- which it already does by default for any script nobody explicitly registered a category
+--- for. This is the mechanism that actually keeps getCategory()'s own documented promise
+--- ("unregistered scripts default to Misc instead of vanishing"): CO_ShopUtils.GetScriptsOfCategory
+--- (== CosmicVaultUpgradeCategories.getScriptsOfCategory) can't honor it on its own, since it only
+--- enumerates scripts someone explicitly called registerCategory() on -- an external mod's own
+--- custom upgrade system, never registered anywhere, would otherwise never appear in any tab.
+--- Returns nil on a miss (the roll landed Military/Civilian); callers loop this themselves so they
+--- can bound their own total attempts instead of this function hiding an unbounded retry.
+--- @param generator (UpgradeGenerator)
+--- @param x, y (number) sector coordinates
+--- @param rarities (table) rarity.value -> weight, already scaled by the caller's rarityFactors
+--- @return (table|nil) a system prototype ({script, rarity, ...}) as returned by
+---         generator:generateSectorSystem, or nil if this particular roll wasn't Misc
+function CO_ShopUtils.RollMiscUpgradeFromFullPool(generator, x, y, rarities)
+    local prototype = generator:generateSectorSystem(x, y, nil, rarities)
+    if CosmicVaultUpgradeCategories.getCategory(prototype.script) == CosmicVaultUpgradeCategories.Category.Misc then
+        return prototype
+    end
+    return nil
+end
+
 --- Generates a category tab's upgrade stock: one of every system script in validScripts
 --- (unconditionally -- a guarantee is a guarantee, regardless of rolled rarity), then random
---- extras (also drawn only from validScripts, but with petty-rarity rolls kept only 25% of the
---- time, matching the original unsplit equipmentdock.lua's curation) padded up to
---- CO_ShopUtils.MIN_ITEMS_PER_TAB.
+--- extras padded up to CO_ShopUtils.MIN_ITEMS_PER_TAB, with petty-rarity rolls kept only 25% of
+--- the time so a small category doesn't end up mostly petty filler.
+---
+--- When category is Category.Misc, the padding extras are drawn from the FULL generator pool via
+--- RollMiscUpgradeFromFullPool above instead of only validScripts, so an external mod's own
+--- unregistered upgrade system actually gets a chance to show up in the Misc tab instead of never
+--- appearing in any tab at all. Military/Civilian tabs keep drawing padding only from their own
+--- curated validScripts -- an unregistered script has no business showing up in a curated category
+--- it was never sorted into; Misc is specifically the safe catch-all.
 --- @param x (number) sector x
 --- @param y (number) sector y
---- @param validScripts (table) array of upgrade system script paths eligible for this tab
+--- @param validScripts (table) array of upgrade system script paths explicitly registered to this category
 --- @param rarityFactors (table) rarity.value -> weight multiplier, applied to the sector's rarity distribution
+--- @param category (CosmicVaultUpgradeCategories.Category|nil) pass Category.Misc to also pad from
+---        the full generator pool; omit (or pass Military/Civilian) for curated-only behavior
 --- @return (table) array of {upgrade = SystemUpgradeTemplate, amount = int}, sorted rarity-then-script-then-price
-function CO_ShopUtils.GenerateCategoryUpgrades(x, y, validScripts, rarityFactors)
-    if not validScripts or #validScripts == 0 then return {} end
+function CO_ShopUtils.GenerateCategoryUpgrades(x, y, validScripts, rarityFactors, category)
+    local isMisc = category == CosmicVaultUpgradeCategories.Category.Misc
+    validScripts = validScripts or {}
+    if #validScripts == 0 and not isMisc then return {} end
 
     local generator = UpgradeGenerator()
     local rand = random()
@@ -141,18 +175,31 @@ function CO_ShopUtils.GenerateCategoryUpgrades(x, y, validScripts, rarityFactors
         table.insert(systems, { upgrade = upgrade, amount = random():getInt(5, 10) })
     end
 
-    -- Guarantee pass: every registered script appears at least once, at whatever rarity rolls --
-    -- never skipped, or "guaranteed" wouldn't mean anything.
+    -- Guarantee pass: every explicitly-registered script appears at least once, at whatever
+    -- rarity rolls -- never skipped, or "guaranteed" wouldn't mean anything.
     for _, script in pairs(validScripts) do
         insertOne(script, rollRarity())
     end
 
-    -- Padding pass: random extras up to the minimum, with petty rolls kept only 25% of the time
-    -- so a small category doesn't end up mostly petty filler.
+    -- Padding pass: random extras up to the minimum. Capped at a fixed number of full-pool roll
+    -- attempts (Misc only) so a sector/mod combination with pathologically few Misc-eligible
+    -- systems degrades to fewer items instead of hanging the server.
+    local miscRollAttempts = 0
+    local maxMiscRollAttempts = CO_ShopUtils.MIN_ITEMS_PER_TAB * 20
     while #systems < CO_ShopUtils.MIN_ITEMS_PER_TAB do
         local rarity = rollRarity()
         if rarity.value >= 0 or rand:test(0.25) then
-            insertOne(getRandomEntry(validScripts), rarity)
+            if isMisc then
+                miscRollAttempts = miscRollAttempts + 1
+                if miscRollAttempts > maxMiscRollAttempts then break end
+
+                local prototype = CO_ShopUtils.RollMiscUpgradeFromFullPool(generator, x, y, rarities)
+                if prototype then
+                    insertOne(prototype.script, prototype.rarity)
+                end
+            else
+                insertOne(getRandomEntry(validScripts), rarity)
+            end
         end
     end
 
