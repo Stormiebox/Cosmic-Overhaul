@@ -69,8 +69,16 @@ function ManageStationIncomes.giveStationResources(station, _seller)
     local mapping = ManageStationIncomes.getMapping(station)
     local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
     local payoutMult = cfg.profitableStationsPayoutMultiplier or 1.0
+    local showMessages = cfg.enableStationIncomeMessages ~= false
 
     if not faction then return end
+
+    -- receiveResource() has no "without notify" sibling (unlike receive()/pay()), so when
+    -- messages are off, the amounts are collected into one resources array and handed to
+    -- receiveWithoutNotify() in a single call after the loop instead -- same resources land
+    -- in the faction's inventory either way, only the per-material popup differs.
+    local silentResources = {}
+    local anySilent = false
 
     for i = 1, NumMaterials() do
         local amount = math.floor(amounts[i])
@@ -82,10 +90,19 @@ function ManageStationIncomes.giveStationResources(station, _seller)
             amount = math.floor(amount * 1.25)
         end
         if amount > 0 then
-            local amountStr = createMonetaryString(amount) .. " " .. mat.name
-            local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
-            faction:receiveResource(msg, mat, amount)
+            if showMessages then
+                local amountStr = createMonetaryString(amount) .. " " .. mat.name
+                local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
+                faction:receiveResource(msg, mat, amount)
+            else
+                silentResources[i] = amount
+                anySilent = true
+            end
         end
+    end
+
+    if anySilent then
+        faction:receiveWithoutNotify("Station Income"%_T, 0, silentResources)
     end
 end
 
@@ -94,13 +111,16 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
     local x, y = sector:getCoordinates()
     local system = UpgradeGenerator:generateSectorSystem(x, y)
     local mapping = ManageStationIncomes.getMapping(station)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
 
     local faction = Faction(station.factionIndex)
     local inv = faction:getInventory()
-    local msg = mapping.giveMsg%{ amount = "a system"%_T, station = station.name }
 
     inv:addOrDrop(system)
-    faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+    if cfg.enableStationIncomeMessages ~= false then
+        local msg = mapping.giveMsg%{ amount = "a system"%_T, station = station.name }
+        faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+    end
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if system.rarity and system.rarity.value >= RarityType.Legendary then
@@ -119,14 +139,17 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local mapping = ManageStationIncomes.getMapping(station)
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
 
     local turret = InventoryTurret(TurretGenerator:generate(x, y))
     local faction = Faction(station.factionIndex)
     local inv = faction:getInventory()
-    local msg = mapping.giveMsg%{ amount = "a turret"%_T, station = station.name }
 
     inv:addOrDrop(turret)
-    faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+    if cfg.enableStationIncomeMessages ~= false then
+        local msg = mapping.giveMsg%{ amount = "a turret"%_T, station = station.name }
+        faction:sendChatMessage(station, ChatMessageType.Economy, msg)
+    end
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if turret.rarity and turret.rarity.value >= RarityType.Legendary then
@@ -166,9 +189,13 @@ function ManageStationIncomes.giveStationMoney(station, _seller)
         money = math.floor(money * 1.25)
     end
 
-    local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
-    local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
-    faction:receive(msg, money)
+    if cfg.enableStationIncomeMessages ~= false then
+        local amountStr = "${c}${money}"%_T%{ c = credits(), money = createMonetaryString(money) }
+        local msg = mapping.giveMsg%{ amount = amountStr, station = station.name }
+        faction:receive(msg, money)
+    else
+        faction:receiveWithoutNotify("Station Income"%_T, money, {})
+    end
 end
 
 function ManageStationIncomes.giveStationDistribution(moneyChance, resourceChance, systemChance, turretChance)

@@ -1,5 +1,6 @@
 -- Cosmic Overhaul Dynamic Stock Management starts here
 local CaptainClass = include("captainclass")
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 function randomFloat(lesser, greater)
     return lesser + random():getFloat() * (greater - lesser)
@@ -108,8 +109,13 @@ function TradingManager:useUpBoughtGoods(timeStep)
                     -- Generate revenue for the faction
                     self:generateRevenue(good, amount)
 
-                    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption
-                    if amount >= 50 and random():getFloat() < 0.15 then
+                    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption.
+                    -- TriggerMarketEvent()'s entire implementation is a broadcastChatMessage -- it has
+                    -- no other side effect (see cosmicvaulteconomy.lua's own "In a full implementation
+                    -- this would..." comment) -- so skipping the call when messages are disabled is a
+                    -- pure no-op, not a lost mechanic.
+                    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+                    if amount >= 50 and random():getFloat() < 0.15 and cfg.enableEconomyEventMessages ~= false then
                         local cve = include("cosmicvaulteconomy")
                         if cve and cve.TriggerMarketEvent then
                             local x, y = Sector():getCoordinates()

@@ -1,10 +1,16 @@
-# Cosmic Overhaul — Player Guide
+# 📘 Cosmic Overhaul — Player Guide
+
+![Version](https://img.shields.io/badge/version-5.6.0-6f42c1?style=flat-square)
+![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
 Welcome to **Cosmic Overhaul**!
 
 Avorion is an incredible game, but managing a massive late-game fleet can feel like a second job. Cosmic Overhaul was built to reduce the friction of fleet management, expand the usefulness of your captains, and make the galaxy's economy more rewarding to interact with.
 
-This guide walks through the core features so you know exactly what tools are at your disposal. For exact numbers and mechanic-by-mechanic detail, see `WIKI.md`.
+This guide walks through the core features so you know exactly what tools are at your disposal.
+
+> [!TIP]
+> For exact numbers and mechanic-by-mechanic detail, see [`WIKI.md`](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Features-and-Enhancements). See [`README.md`](https://github.com/Stormiebox/Cosmic-Overhaul) for installation.
 
 ---
 
@@ -125,7 +131,7 @@ Your passive empire is now much smarter and more integrated.
 
 ## 🔗 6. Playing Alongside the Rest of the Cosmic Series
 
-Cosmic Overhaul only *requires* `Cosmic Vault` to run — but it's built to recognize the rest of the Cosmic Series automatically. Install `Cosmic War`, `Cosmic Chronicles`, and/or `Cosmic Ascendancy` alongside it and these extra mechanics switch on with no setup needed:
+Cosmic Overhaul is one of the Core 4, and requires `Cosmic Vault`, `Cosmic War`, `Cosmic Chronicles`, and `Cosmic Ascendancy` (installing Cosmic Overhaul from the Workshop pulls in the rest automatically). These mechanics switch on with no setup needed:
 
 * **Dynamic Trade Pricing:** Send a merchant to trade with a faction suffering a Famine and they can bring back up to 2.5x more profit.
 * **Weather-Affected Commands:** Your Travel and Scout operations respect Cosmic Vault's dynamic weather. An Ion Storm or Nebula delays operations by 50%, unless piloted by an Explorer or Navigator.
@@ -144,3 +150,11 @@ Cosmic Overhaul only *requires* `Cosmic Vault` to run — but it's built to reco
 ---
 
 Enjoy your time in Cosmic Overhaul!
+
+---
+
+<div align="center">
+
+[⬆ Back to top](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Player-Guide) · [🌌 README](https://github.com/Stormiebox/Cosmic-Overhaul) · [⚙️ Wiki](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Features-and-Enhancements)
+
+</div>

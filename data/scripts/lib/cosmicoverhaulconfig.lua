@@ -24,6 +24,8 @@ if ccm then
                     { key = "enableProfitableStations", type = "bool", title = "Enable Profitable Stations", description = "Enables periodic station income simulation enhancements.", default = true },
                     { key = "profitableStationsInterval", type = "number", title = "Profitable Stations Interval (s)", description = "Update interval for profitable stations simulation. (Min: 30s | Max: 7200s)", default = 1200, min = 30, max = 7200 },
                     { key = "profitableStationsPayoutMultiplier", type = "number", title = "Profitable Stations Payout Multiplier", description = "Scales profitable stations payout values. (Min: 0.1 | Max: 10.0)", default = 1.00, min = 0.10, max = 10.00 },
+                    { key = "enableEconomyEventMessages", type = "bool", title = "Enable Economic Event Messages", description = "Shows market boom broadcasts and Economic Boom/Market Crash news articles. Turning this off only hides the messages -- the events still happen.", default = true },
+                    { key = "enableStationIncomeMessages", type = "bool", title = "Enable Station Income Messages", description = "Shows per-transaction income notifications from your Profitable Stations (money, resources, systems, turrets). Turning this off only hides the messages -- the income still happens.", default = true },
                 },
             },
             {
@@ -71,6 +73,8 @@ local defaults =
     enableGateTravelPriority = true,
     enableProfitableStations = true,
     enableExoticLegendarySalvage = true,
+    enableEconomyEventMessages = true,
+    enableStationIncomeMessages = true,
 
     enableOfflineCatchup = false,
     offlineCatchupRatio = 0.667,
@@ -129,6 +133,8 @@ local function build()
     out.enableGateTravelPriority = readBool("enableGateTravelPriority", defaults.enableGateTravelPriority)
     out.enableProfitableStations = readBool("enableProfitableStations", defaults.enableProfitableStations)
     out.enableExoticLegendarySalvage = readBool("enableExoticLegendarySalvage", defaults.enableExoticLegendarySalvage)
+    out.enableEconomyEventMessages = readBool("enableEconomyEventMessages", defaults.enableEconomyEventMessages)
+    out.enableStationIncomeMessages = readBool("enableStationIncomeMessages", defaults.enableStationIncomeMessages)
     
     out.enableOfflineCatchup = readBool("enableOfflineCatchup", defaults.enableOfflineCatchup)
     out.offlineCatchupRatio = readNumber("offlineCatchupRatio", 0.0, 1.0, defaults.offlineCatchupRatio)

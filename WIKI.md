@@ -1,6 +1,12 @@
 # ⚙️ Cosmic Overhaul — Wiki
 
-Complete technical reference for **Cosmic Overhaul**, covering every system currently in the mod as of **v5.3.0**. This document favors precision over brevity — file names, exact multipliers, and mechanic thresholds are included wherever they matter. If you just want a friendly tour of what the mod does, read `PLAYER_GUIDE.md` instead; if you want the version-by-version history, read `Changelog.md`.
+![Version](https://img.shields.io/badge/version-5.6.0-6f42c1?style=flat-square)
+![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
+
+Complete technical reference for **Cosmic Overhaul**, covering every system currently in the mod as of **v5.3.0**. This document favors precision over brevity — file names, exact multipliers, and mechanic thresholds are included wherever they matter.
+
+> [!TIP]
+> If you just want a friendly tour of what the mod does, read [`PLAYER_GUIDE.md`](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Player-Guide) instead. For the version-by-version history, read `Changelog.md`. See [`README.md`](https://github.com/Stormiebox/Cosmic-Overhaul) for installation.
 
 ---
 
@@ -798,7 +804,7 @@ The Smuggler's Market automatically unbrands up to **100 stolen goods per minute
 ## 🔗 Cross-Mod Synergy
 
 **What it is:**
-Cosmic Overhaul is built to deeply integrate with the rest of the Cosmic Series. It only *requires* `Cosmic Vault` to run (see `README.md` for the exact dependency), but the mechanics below light up automatically when `Cosmic War`, `Cosmic Chronicles`, and/or `Cosmic Ascendancy` are also installed — no configuration needed.
+Cosmic Overhaul is built to deeply integrate with the rest of the Cosmic Series. As one of the Core 4, it requires `Cosmic Vault`, `Cosmic War`, `Cosmic Chronicles`, and `Cosmic Ascendancy` (enforced through Steam Workshop "Require Items" rather than `modinfo.lua` — see `README.md`), and the mechanics below light up automatically once they're installed — no configuration needed.
 
 ### 🌌 With Cosmic Vault (always active)
 
@@ -859,3 +865,11 @@ Destroying enemy resource sectors to push a faction into Famine is a legitimate 
 ### 📖 In-Game Documentation
 
 All of the above is also available in-game through the **Cosmic Codex** — no need to tab out to read mechanics or lore while you play.
+
+---
+
+<div align="center">
+
+[⬆ Back to top](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Features-and-Enhancements) · [🌌 README](https://github.com/Stormiebox/Cosmic-Overhaul) · [📘 Player Guide](https://github.com/Stormiebox/Cosmic-Overhaul/wiki/Player-Guide)
+
+</div>

@@ -1,5 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
+
 local rf = {} -- registered factories, multi level. First level keyed by the faction index, second level by factory id
 local initial = {} -- same as above, but only gets updated once, this will be used to calculate profitability over time
 
@@ -228,6 +230,9 @@ end
 function onSeedNews()
     local server = Server()
     if not server then return end
+
+    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
+    if cfg.enableEconomyEventMessages == false then return end
 
     local bestFactory = nil
     local worstFactory = nil

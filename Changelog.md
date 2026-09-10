@@ -7,6 +7,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.6.0] - Economy Message Toggles
+
+### ⭐ New Features
+
+- [Feature] **Two CCM Toggles for Economy Chat Messages (`lib/cosmicoverhaulconfig.lua`, `sector/managestationincomes.lua`, `lib/tradingmanager.lua`, `galaxy/factoryregister.lua`):** Two highly requested options in the Config Menu's Profit Configurations page turn off the routine economy chatter independently of each other, so a player can keep either category while dropping the other:
+  - `enableStationIncomeMessages` (default `true`) covers player-owned Profitable Stations' per-transaction income notifications — money, resources, systems, and turrets, all four `ManageStationIncomes.giveStation*` payout paths.
+  - `enableEconomyEventMessages` (default `true`) covers the "Market event boom..." chat broadcast `tradingmanager.lua` triggers via Cosmic Vault's `TriggerMarketEvent` on heavy goods consumption, and `factoryregister.lua`'s "Economic Boom"/"Market Crash" Galactic News articles.
+
+  Turning either option off only suppresses that category's notifications; every underlying payout, event, and mechanic still happens exactly as before. Money and system/turret income use `Faction:receive()`/`sendChatMessage()`'s documented silent counterparts (`receiveWithoutNotify`, or simply skipping the chat call) so the actual credits/items are never affected — `receiveResource()` has no such counterpart, so when `enableStationIncomeMessages` is off, `giveStationResources` collects the tick's per-material amounts and hands them to a single `receiveWithoutNotify` call instead of one `receiveResource` call per material, landing the same resources with no popup. `TriggerMarketEvent`'s entire implementation is the chat broadcast itself (confirmed via its own "In a full implementation this would..." comment in `cosmicvaulteconomy.lua`) so skipping that call when `enableEconomyEventMessages` is off is a pure no-op, not a lost mechanic.
+
 ## [v5.5.1] - Emergency Hotfix
 
 ### 🪲 Bug Fixes
