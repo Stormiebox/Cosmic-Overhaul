@@ -109,17 +109,24 @@ function TradingManager:useUpBoughtGoods(timeStep)
                     -- Generate revenue for the faction
                     self:generateRevenue(good, amount)
 
-                    -- Cosmic Overhaul <-> Cosmic Vault Synergy: Trigger a Market Boom occasionally for huge consumption.
-                    -- TriggerMarketEvent()'s entire implementation is a broadcastChatMessage -- it has
-                    -- no other side effect (see cosmicvaulteconomy.lua's own "In a full implementation
-                    -- this would..." comment) -- so skipping the call when messages are disabled is a
-                    -- pure no-op, not a lost mechanic.
+                    -- Cosmic Overhaul <-> Cosmic Vault Synergy: major consumption can create a regional boom.
                     local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
-                    if amount >= 50 and random():getFloat() < 0.15 and cfg.enableEconomyEventMessages ~= false then
+                    if amount >= 50 and random():getFloat() < 0.15 then
                         local cve = include("cosmicvaulteconomy")
-                        if cve and cve.TriggerMarketEvent then
+                        if cve and cve.StartMarketEvent then
                             local x, y = Sector():getCoordinates()
-                            cve.TriggerMarketEvent(good.name, x, y, 10, "boom")
+                            local sourceId = table.concat({"cosmic_overhaul", "consumption",
+                                Entity().id.string, good.name}, ":")
+                            cve.StartMarketEvent({
+                                eventId = sourceId,
+                                sourceId = sourceId,
+                                goodName = good.name,
+                                x = x,
+                                y = y,
+                                radius = 10,
+                                eventType = "boom",
+                                notify = cfg.enableEconomyEventMessages ~= false
+                            })
                         end
                     end
 

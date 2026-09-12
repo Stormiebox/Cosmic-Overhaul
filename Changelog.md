@@ -7,6 +7,24 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v5.6.1] - Persistent Regional Market Events
+
+### 📈 Economy Integration
+
+- [Feature] **Heavy Consumption Now Starts A Real Market Event (`lib/tradingmanager.lua`):** Large
+  player-station consumption now calls Cosmic Vault 4.1.0's `StartMarketEvent` with the consumed
+  good, source station, sector coordinates, radius, boom delta, and duration. The event changes
+  regional prices through Vault's economy updater, persists across restarts, expires after 30
+  minutes, and refreshes rather than stacks when the same station triggers it again.
+- [Fix] **`enableEconomyEventMessages` Controls Messages, Not Mechanics:** The event is created
+  regardless of the notification preference. When messages are enabled, `StartMarketEvent` retains
+  the existing broadcast; when disabled, the same event is started with notification suppressed.
+  This corrects v5.6.0's assumption that Vault's former broadcast-only `TriggerMarketEvent` already
+  represented a separate underlying mechanic.
+- [Docs] **Player Documentation Corrected (`README.md`, `PLAYER_GUIDE.md`, `WIKI.md`):** Economy
+  event descriptions now match the live regional price behavior and make clear that the toggle only
+  controls the broadcast.
+
 ## [v5.6.0] - Economy Message Toggles
 
 ### ⭐ New Features

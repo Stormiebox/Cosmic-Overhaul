@@ -812,6 +812,7 @@ Cosmic Overhaul is built to deeply integrate with the rest of the Cosmic Series.
 - **Unified News API:** Ambient events and galactic occurrences route through `CosmicVaultNews.publishArticle`, keeping the Universal Bulletin Board and news feed in sync across the whole suite.
 - **Weather-Affected Commands:** Offline Travel and Scout operations respect Cosmic Vault's dynamic weather. Navigating an Ion Storm or Nebula delays the operation by 50%, unless piloted by an Explorer or Navigator.
 - **Dynamic Trade Pricing:** Trading with a Famine-struck faction via the Trade Command can yield up to **2.5x** more profit — this maxes out alongside the Severe Famine trade-bonus tier.
+- **Persistent Market Events:** Boom and crash events are created independently of notification preferences. `enableEconomyEventMessages` controls only their broadcast; muted events still change prices, persist across restarts, and expire normally.
 - **CCM Keybind Interoperability:** The Bulletin Board and Resource Display panels support user-defined hotkey toggling via Cosmic Vault's CCM.
 
 ### 📉 Famine Stat Debuffs (Cosmic Vault Economy)

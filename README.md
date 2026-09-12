@@ -38,6 +38,7 @@ Cosmic Overhaul deeply integrates into the central **Cosmic Vault** APIs:
 - **Weather-Affected Commands:** Offline operations face up to 50% time delays when navigating hazardous storms, unless piloted by an Explorer.
 - **Siege Blockade Halts:** Factory production halts when a sector is invaded by an overwhelming force (requires Cosmic War).
 - **War Profiteering:** Delivering goods to highly contested War Zones grants up to a +300% payout multiplier (requires Cosmic War).
+- **Persistent Market Events:** Boom and crash mechanics always affect prices for their configured lifetime. Disabling economy-event messages suppresses the broadcast only; it does not disable the event.
 </details>
 
 ## ⚙️ Requirements

@@ -145,6 +145,7 @@ Cosmic Overhaul is one of the Core 4, and requires `Cosmic Vault`, `Cosmic War`,
 * **Privateer Subsidies:** Merchant Governors cut crew and captain hiring costs in half while you're enlisted as a Mercenary for the station's faction.
 * **CCM Keybind Interoperability:** The Bulletin Board and Resource Display panels support your own custom hotkeys through Cosmic Vault's Cosmic Configuration Menu.
 * **Deep Economy Warfare:** Famine and prosperity generated in Overhaul feed directly into the shared Cosmic Vault economy, which can push starving factions to declare war on wealthy neighbors just to survive.
+* **Market Event Messages:** Turning off economy-event messages hides their announcements only. Boom and crash price changes still start, persist, and expire normally.
 * **In-Game Codex:** Everything above — plus the full technical detail from `WIKI.md` — is also readable in-game through the **Cosmic Codex**, so you never have to tab out to look something up.
 
 ---
