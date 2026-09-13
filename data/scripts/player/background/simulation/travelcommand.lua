@@ -65,8 +65,8 @@ function TravelCommand:calculatePrediction(ownerIndex, shipName, area, config)
                 if not (captain:hasClass(CaptainClass.Explorer) or captain:hasPerk(CaptainUtility.PerkType.Navigator)) then
                     local cx = math.floor((area.lower.x + area.upper.x) / 2)
                     local cy = math.floor((area.lower.y + area.upper.y) / 2)
-                    local weather = cv_weather.getWeatherAt(cx, cy)
-                    if weather then
+                    local conditions = cv_weather.ListWeatherAt(cx, cy)
+                    if type(conditions) == "table" and #conditions > 0 then
                         -- 50% delay for navigating hazardous weather
                         ccm_lastPrediction.duration.value = ccm_lastPrediction.duration.value * 1.5
                     end

@@ -23,14 +23,17 @@ function COWeatherGenerator.updateServer(timeStep)
     COWeatherGenerator.cooldown = math.max(0, COWeatherGenerator.cooldown - timeStep)
     if COWeatherGenerator.cooldown > 0 then return end
 
-    -- Count currently active weather events galaxy-wide
-    local ok, activeWeathers = Galaxy():invokeFunction("server/cosmicvaultweather_server.lua", "secure")
-
+    -- Count only this generator's canonical conditions. Permanent conditions
+    -- owned by Ascendancy or War must not consume Overhaul's five-event budget.
+    local snapshot = cv_weather.GetWeatherSnapshot()
     local count = 0
-    if ok == 0 and activeWeathers and activeWeathers.activeWeathers then
-        for _ in pairs(activeWeathers.activeWeathers) do
-            -- Only count random overhauls, ignore Eclipse specific ones if we wanted to
-            count = count + 1
+    if snapshot and type(snapshot.conditions) == "table" then
+        for _, condition in pairs(snapshot.conditions) do
+            if type(condition.sourceId) == "string"
+                    and string.find(condition.sourceId,
+                        "cosmic-overhaul:random-weather:", 1, true) == 1 then
+                count = count + 1
+            end
         end
     end
 
@@ -64,7 +67,20 @@ function COWeatherGenerator.spawnRandomWeather()
     -- 4 to 6 hours duration
     local duration = random():getInt(14400, 21600)
 
-    cv_weather.triggerStorm(tx, ty, stormType, duration)
+    local record, errorCode = cv_weather.StartWeather({
+        sourceId = "cosmic-overhaul:random-weather:" .. tostring(tx) .. ":" .. tostring(ty),
+        weatherType = stormType,
+        x = tx,
+        y = ty,
+        duration = duration,
+        conflictPolicy = "reject"
+    })
+    if not record then
+        include("cosmicvaultdebug").info("Cosmic Overhaul",
+            "[Cosmic Overhaul] Weather request rejected at %s:%s: %s",
+            tostring(tx), tostring(ty), tostring(errorCode))
+        return nil, errorCode
+    end
 
     if cv_news.publishArticle then
         local newsType = ""
@@ -84,6 +100,7 @@ function COWeatherGenerator.spawnRandomWeather()
             category = "Galactic Dread"
         })
     end
+    return record, nil
 end
 
 function COWeatherGenerator.secure()

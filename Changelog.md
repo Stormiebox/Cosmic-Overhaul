@@ -25,6 +25,20 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   event descriptions now match the live regional price behavior and make clear that the toggle only
   controls the broadcast.
 
+### 🌩️ Weather Integration
+
+- [Reliability] **Random Weather Uses Canonical Source-Owned Conditions
+  (`galaxy/co_weather_generator.lua`):** Random Ion Storms and Solar Flares now submit stable
+  coordinate-based source IDs through Vault's versioned weather lifecycle. Galactic News is
+  published only after Vault accepts the condition, so a stacking conflict or persistence failure
+  can no longer announce weather that does not exist. The generator's five-event budget counts only
+  conditions owned by this generator; permanent Ascendancy or War hazards do not consume it.
+- [Fix] **Travel And Scout Commands Read The Full Coordinate Snapshot
+  (`player/background/simulation/travelcommand.lua`, `scoutcommand.lua`):** Both simulations now
+  query `ListWeatherAt` rather than the legacy one-atmosphere lookup. Coexisting atmospheric and
+  Rift conditions are detected through the same canonical record, while the command still applies
+  its 50% delay no more than once per prediction.
+
 ## [v5.6.0] - Economy Message Toggles
 
 ### ⭐ New Features
