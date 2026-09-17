@@ -11,6 +11,7 @@ include ("relations")
 local CaptainClass = include ("captainclass")
 local TradingAPI = include ("tradingmanager")
 local SectorSpecifics = include("sectorspecifics")
+local CosmicOverhaulNews = include("co_news")
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace SmugglersMarket
@@ -102,9 +103,9 @@ function SmugglersMarket.payTradeRumor()
             specs:initialize(tx, ty, serverSeed)
             if specs.generationTemplate and specs.generationTemplate.path then
                 local path = specs.generationTemplate.path
-                if path == "sectors/hiddenstash" or 
-                   path == "sectors/smugglerhideout" or 
-                   path == "sectors/lonescrapyard" or 
+                if path == "sectors/hiddenstash" or
+                   path == "sectors/smugglerhideout" or
+                   path == "sectors/lonescrapyard" or
                    path == "sectors/stationwreckage" or
                    path == "sectors/wreckageasteroidfield" then
                     targetX = tx
@@ -125,7 +126,7 @@ function SmugglersMarket.payTradeRumor()
     local view = player:getKnownSector(targetX, targetY) or SectorView(targetX, targetY)
     view.note = NamedFormat("Trade Rumor\nAnomalous readings indicate massive profit potential."%_T, {})
     player:addKnownSector(view)
-    
+
     player:sendChatMessage(Entity(), 0, "I've uploaded the coordinates to your map. Look around %1%:%2%. Lots of profit to be made there."%_t, targetX, targetY)
 end
 callable(SmugglersMarket, "payTradeRumor")
@@ -190,16 +191,35 @@ function SmugglersMarket.paySabotageRumor()
 
     player:sendChatMessage(Entity(), 0, "The bribes have been paid. A false-flag operation has been launched against %1% and %2%. Watch the news."%_t, factionA.name, factionB.name)
 
-    -- Post news article (Cosmic War compatibility)
-    local success, cv_news = pcall(include, "cosmicwarnews")
-    if success and cv_news then
-        local article = {
+    -- The relationship mutation above is the authoritative result. Publish it through
+    -- Overhaul's own source identity; Cosmic War may react through its public systems.
+    local x, y = Sector():getCoordinates()
+    local operationTime = math.floor(server.unpausedRuntime)
+    local pairLow = math.min(factionA.index, factionB.index)
+    local pairHigh = math.max(factionA.index, factionB.index)
+    CosmicOverhaulNews.Publish({
+        kind = "politics",
+        eventId = table.concat({"sabotage", tostring(player.index), tostring(pairLow),
+            tostring(pairHigh), tostring(operationTime)}, ":"),
+        threadId = "faction-pair:" .. tostring(pairLow) .. ":" .. tostring(pairHigh),
+        eventType = "overhaul.politics.sabotage",
+        topic = "politics",
+        severity = "warning",
+        location = {x = x, y = y, radius = 0},
+        provenance = {
+            recordType = "overhaul_smugglers_market",
+            sourceRevision = operationTime,
+            sourceState = "relations_changed",
+            factionA = factionA.index,
+            factionB = factionB.index,
+            playerIndex = player.index,
+        },
+        article = {
             title = "Political Sabotage Exposed!",
             content = "Shocking evidence has surfaced revealing deep-rooted sabotage and espionage between " .. factionA.name .. " and " .. factionB.name .. ". Diplomatic relations have plummeted, and military forces on both sides are on high alert. The threat of war looms.",
             category = "Politics"
-        }
-        cv_news.publishArticle(article)
-    end
+        },
+    })
 end
 callable(SmugglersMarket, "paySabotageRumor")
 
@@ -922,4 +942,4 @@ end
 
 
 
-
+

@@ -39,6 +39,24 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   Rift conditions are detected through the same canonical record, while the command still applies
   its 50% delay no more than once per prediction.
 
+### 📰 Galactic News & Captain's Logs
+
+- [Refactor] **Overhaul Reports Use Vault News v2 (`lib/co_news.lua`):** Market, weather, factory,
+  station, asteroid, and resource reports now use stable source identities through one adapter.
+  Publications follow the owning mechanic's verified result, so retries converge on one article and
+  notification preferences suppress messages without suppressing stored news or gameplay.
+- [Feature] **Optional Personal Captain's Logs (`player/background/simulation/simulation.lua`):**
+  Background-command yields can add a Dialogue v2 Captain's Log and publish the completed command
+  to the owning player's News feed when `enableCommandCompletionNews` is enabled. The callback is
+  registered only for player-owned simulations, and the existing yield path and return values are
+  preserved.
+- [Compatibility] **No Chronicle Path Dependency:** The factory and resource-asteroid publishers no
+  longer use a direct legacy callback or include a private Vault server script. Overhaul owns its
+  facts, Vault stores the report, and Chronicles presents it through the public query API.
+- [Bugfix] **Simulation Wrapper Uses Lua 5.1-Safe Vararg Preservation:** The initialize wrapper no
+  longer relies on `table.pack` or `table.unpack`, while still returning every value from the
+  original vanilla function.
+
 ## [v5.6.0] - Economy Message Toggles
 
 ### ⭐ New Features

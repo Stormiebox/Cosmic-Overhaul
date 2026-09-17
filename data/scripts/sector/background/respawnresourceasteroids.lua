@@ -388,12 +388,16 @@ function RespawnResourceAsteroids.respawnFields()
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local generator = SectorGenerator(x, y)
+    local operationTime = math.floor(Server().unpausedRuntime)
+    local beforeVerified = getVerifiedMineable(sector)
 
     for i = 1, self.respawnedFields do
         generator:createAsteroidField()
     end
 
     Placer.resolveIntersections()
+    isSectorDirty = true
+    local afterVerified = getVerifiedMineable(sector)
 
     -- Anomaly Synergy
     if random():test(0.05) then
@@ -407,20 +411,36 @@ function RespawnResourceAsteroids.respawnFields()
         end
     end
 
-    -- News Integration
+    -- News is emitted only when the post-spawn resource count proves that the emergency
+    -- regeneration actually materialized mineable asteroids.
     local faction = Faction(sector.factionIndex)
-    if faction and faction.isAIFaction and sector:getEntitiesByType(EntityType.Station) then
+    if afterVerified > beforeVerified and faction and faction.isAIFaction
+            and sector:getEntitiesByType(EntityType.Station) then
         local numStations = #{sector:getEntitiesByType(EntityType.Station)}
         if numStations >= 2 then
-            local news = include("cosmicvaultnews_server")
-            if news and news.publishArticle then
-                news.publishArticle({
+            local news = include("co_news")
+            news.Publish({
+                kind = "resources",
+                eventId = table.concat({"restoration", tostring(x), tostring(y),
+                    tostring(operationTime)}, ":"),
+                threadId = "resources:" .. tostring(x) .. ":" .. tostring(y),
+                eventType = "overhaul.resources.restored",
+                topic = "discovery",
+                severity = "info",
+                location = {x = x, y = y, radius = 0},
+                provenance = {
+                    recordType = "overhaul_resource_regeneration",
+                    sourceRevision = operationTime,
+                    sourceState = "materialized",
+                    beforeCount = beforeVerified,
+                    afterCount = afterVerified,
+                },
+                article = {
                     title = "Seismic Shifts in " .. faction.name .. " Space",
                     content = "New Resource Veins Discovered in Sector [" .. x .. ":" .. y .. "] as shifting gravity wells unearth hidden riches.",
                     category = "Economy",
-                    author = "Cosmic Chronicles"
-                })
-            end
+                },
+            })
         end
     end
 

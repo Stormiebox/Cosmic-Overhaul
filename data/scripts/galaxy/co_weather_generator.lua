@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 local cv_weather = include("cosmicvaultweather")
-local cv_news = include("cosmicvaultnews")
+local co_news = include("co_news")
 
 local COWeatherGenerator = {}
 COWeatherGenerator.cooldown = 0
@@ -82,24 +82,46 @@ function COWeatherGenerator.spawnRandomWeather()
         return nil, errorCode
     end
 
-    if cv_news.publishArticle then
-        local newsType = ""
-        local content = ""
+    local newsType = ""
+    local content = ""
+    local severity = "warning"
 
-        if stormType == "IonStorm" then
-            newsType = "Category 5 Ion Storm"
-            content = "A massive Ion Storm has erupted at coordinates [" .. tx .. ":" .. ty .. "]. All vessels in the area are warned: Hyperspace and Radar systems will be completely disabled. Travel is highly advised against."
-        else
-            newsType = "Class-X Solar Flare"
-            content = "A dangerous Solar Flare is currently bathing coordinates [" .. tx .. ":" .. ty .. "] in intense radiation. Unshielded vessels will be rapidly destroyed. Evacuate immediately."
-        end
+    if stormType == "IonStorm" then
+        newsType = "Category 5 Ion Storm"
+        content = "A massive Ion Storm has erupted at coordinates [" .. tx .. ":" .. ty .. "]. All vessels in the area are warned: Hyperspace and Radar systems will be completely disabled. Travel is highly advised against."
+    else
+        newsType = "Class-X Solar Flare"
+        content = "A dangerous Solar Flare is currently bathing coordinates [" .. tx .. ":" .. ty .. "] in intense radiation. Unshielded vessels will be rapidly destroyed. Evacuate immediately."
+        severity = "critical"
+    end
 
-        cv_news.publishArticle({
+    -- The weather record is already durable at this point. News is a projection of that
+    -- verified condition and a publication failure must never undo the mechanical event.
+    co_news.Upsert({
+        kind = "weather",
+        eventId = record.conditionId,
+        threadId = record.conditionId,
+        eventType = "overhaul.weather.active",
+        topic = "weather",
+        severity = severity,
+        breaking = severity == "critical",
+        location = {x = tx, y = ty, radius = 0},
+        expiresAt = record.expiresAt ~= -1 and record.expiresAt or nil,
+        sourceRevision = record.revision or 1,
+        sourceState = record.state or "active",
+        provenance = {
+            recordType = "vault_weather_condition",
+            conditionId = tostring(record.conditionId),
+            weatherType = tostring(record.weatherType or stormType),
+            sourceRevision = record.revision or 1,
+            sourceState = tostring(record.state or "active"),
+        },
+        article = {
             title = "Hazard Warning: " .. newsType,
             content = content,
-            category = "Galactic Dread"
-        })
-    end
+            category = "Galactic Dread",
+        },
+    })
     return record, nil
 end
 

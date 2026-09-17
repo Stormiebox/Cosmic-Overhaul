@@ -2,6 +2,67 @@ if onServer() then
     -- Cosmic Overhaul: Ensure relations API is available for Trade/Charity mission yields
     include("relations")
     include("cosmicoverhaulconfig")
+    include("stringutility")
+    local CosmicVaultDialogue = include("cosmicvaultdialogue")
+    local CosmicOverhaulNews = include("co_news")
+    local cw_success = pcall(include, "cosmicwarbridge")
+    local ARCC_pendingCommandReports = {}
+    local ARCC_unpackValues = table.unpack or unpack
+
+    local function ARCC_packValues(...)
+        return {n = select("#", ...), ...}
+    end
+
+    local ARCC_Simulation_initialize_original = Simulation.initialize
+    function Simulation.initialize(...)
+        local results = ARCC_packValues(ARCC_Simulation_initialize_original(...))
+        local faction = getParentFaction()
+        if faction and faction.isPlayer then
+            faction:registerCallback("onBackgroundCommandFinished", "ARCC_onBackgroundCommandFinished")
+        end
+        return ARCC_unpackValues(results, 1, results.n)
+    end
+
+    function ARCC_onBackgroundCommandFinished(shipName, commandType)
+        local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get
+            and CosmicOverhaulConfig.get() or {}
+        if cfg.enableCommandCompletionNews ~= true then return end
+
+        local faction = getParentFaction()
+        if not faction or not faction.isPlayer then return end
+        local report = ARCC_pendingCommandReports[shipName]
+        ARCC_pendingCommandReports[shipName] = nil
+        if not report then return end
+
+        local content = string.format("The crew of %s has completed its %s background command.",
+            tostring(shipName or "an assigned ship"), tostring(commandType or "assigned"))
+        if report.logText then
+            content = content .. "\n\nCaptain's Log:\n\"" .. tostring(report.logText) .. "\""
+        end
+
+        CosmicOverhaulNews.PublishCommand({
+            playerIndex = faction.index,
+            eventId = table.concat({"command", tostring(faction.index),
+                tostring(shipName), tostring(report.sequence)}, ":"),
+            threadId = "command:" .. tostring(faction.index) .. ":" .. tostring(shipName),
+            location = report.location,
+            sourceRevision = report.sequence,
+            sourceState = "completed",
+            provenance = {
+                recordType = "overhaul_background_command",
+                playerIndex = faction.index,
+                shipName = tostring(shipName),
+                commandType = tostring(commandType or "unknown"),
+                sourceRevision = report.sequence,
+                sourceState = "completed",
+            },
+            article = {
+                title = "Captain's Report: " .. tostring(shipName or "Command Complete"),
+                content = content,
+                category = "Captain's Log",
+            },
+        })
+    end
 
     --[[
 Balancing:
@@ -107,6 +168,53 @@ Balancing:
         -- Also include new generalized reputation gain logic
         local originalAddYield = command.addYield
         command.addYield = function(self, message, money, resources, items)
+            local context = {}
+            local location
+
+            if self.area and self.area.lower and self.area.upper then
+                local x = math.floor((self.area.lower.x + self.area.upper.x) / 2)
+                local y = math.floor((self.area.lower.y + self.area.upper.y) / 2)
+                location = {x = x, y = y, radius = 0}
+                context.distanceToCenter = math.sqrt(x * x + y * y)
+
+                -- Vanilla's simulation.lua has a local Galaxy library that shadows the
+                -- global constructor in appended VFS code. Reach the constructor explicitly.
+                local galaxy = _G.Galaxy and _G.Galaxy() or nil
+                local nearestFaction = galaxy and galaxy:getNearestFaction(x, y) or nil
+                if nearestFaction then
+                    local parentFaction = getParentFaction()
+                    if parentFaction then
+                        context.reputation = parentFaction:getRelations(nearestFaction.index)
+                    end
+                    if cw_success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
+                        local rawHeat = CosmicWarBridge.getFactionWarHeat(nearestFaction.index) or 0
+                        context.warHeat = math.floor(rawHeat * 100)
+                    end
+                end
+            end
+
+            local logText
+            local query = CosmicVaultDialogue.Query("captain_log", context, nil)
+            if type(query) == "table" and type(query.entry) == "table" then
+                logText = query.entry.text
+                message = Format("%1%\n\n%2%\n\"%3%\""%_T,
+                    message or "", "Captain's Log:"%_T, logText)
+            end
+
+            local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get
+                and CosmicOverhaulConfig.get() or {}
+            local owner = getParentFaction()
+            if cfg.enableCommandCompletionNews == true and owner and owner.isPlayer then
+                local key = "co_command_news_sequence"
+                local sequence = math.floor(tonumber(owner:getValue(key)) or 0) + 1
+                owner:setValue(key, sequence)
+                ARCC_pendingCommandReports[self.shipName] = {
+                    sequence = sequence,
+                    location = location,
+                    logText = logText,
+                }
+            end
+
             Simulation.tryChangeRelationsForMoney(self, money)
 
             local immediate = self.config.immediateDelivery

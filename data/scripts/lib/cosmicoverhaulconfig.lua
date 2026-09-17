@@ -39,6 +39,7 @@ if ccm then
                 title = "Offline Simulation (ARCC)",
                 options = {
                     { key = "enableOfflineCatchup", type = "bool", title = "Enable Offline Catch-up", description = "Should captain commands continue simulating while the server is offline/empty?", default = false },
+                    { key = "enableCommandCompletionNews", type = "bool", title = "Personal Command News", description = "Stores a private Galactic News Network report when one of your background commands finishes. Disabled by default; Captain's Log text in command yields is unaffected.", default = false },
                     { key = "offlineCatchupMaxDuration", type = "number", title = "Max Catch-up Duration (s)", description = "Maximum offline time (in seconds) that will be simulated. (Max: 86400s / 24H)", default = 28800, min = 0, max = 86400 },
                     { key = "offlineCatchupRatio", type = "number", title = "Catch-up Efficiency Ratio", description = "What percentage of offline time is actually counted (Min 0.0, Max 1.0).", default = 0.667, min = 0.0, max = 1.0 },
                 },
@@ -77,6 +78,7 @@ local defaults =
     enableStationIncomeMessages = true,
 
     enableOfflineCatchup = false,
+    enableCommandCompletionNews = false,
     offlineCatchupRatio = 0.667,
     offlineCatchupMaxDuration = 28800,
 
@@ -137,6 +139,8 @@ local function build()
     out.enableStationIncomeMessages = readBool("enableStationIncomeMessages", defaults.enableStationIncomeMessages)
     
     out.enableOfflineCatchup = readBool("enableOfflineCatchup", defaults.enableOfflineCatchup)
+    out.enableCommandCompletionNews = readBool(
+        "enableCommandCompletionNews", defaults.enableCommandCompletionNews)
     out.offlineCatchupRatio = readNumber("offlineCatchupRatio", 0.0, 1.0, defaults.offlineCatchupRatio)
     out.offlineCatchupMaxDuration = readNumber("offlineCatchupMaxDuration", 0, 86400, defaults.offlineCatchupMaxDuration)
 

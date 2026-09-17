@@ -8,11 +8,19 @@ local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 local cw_success = true; include("cosmicwarbridge")
 local UpgradeGenerator = include("upgradegenerator")()
 local TurretGenerator = include("sectorturretgenerator")()
+local CosmicOverhaulNews = include("co_news")
 
 -- namespace ManageStationIncomes
 ManageStationIncomes = {}
 if not onServer() then return end
 local stationMappings
+
+local function nextStationNewsIdentity(station, kind)
+    local key = "co_news_sequence"
+    local sequence = math.floor(tonumber(station:getValue(key)) or 0) + 1
+    station:setValue(key, sequence)
+    return table.concat({tostring(station.id.string), tostring(kind), tostring(sequence)}, ":"), sequence
+end
 
 function ManageStationIncomes.initialize()
     local sector = Sector()
@@ -124,14 +132,28 @@ function ManageStationIncomes.giveStationSystem(station, _seller)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if system.rarity and system.rarity.value >= RarityType.Legendary then
-        local cvn = include("cosmicvaultnews")
-        if cvn and cvn.publishArticle then
-            cvn.publishArticle({
+        local eventId, sequence = nextStationNewsIdentity(station, "system")
+        CosmicOverhaulNews.Publish({
+            kind = "station",
+            eventId = eventId,
+            threadId = "station:" .. tostring(station.id.string),
+            eventType = "overhaul.station.legendary_system",
+            topic = "economy",
+            severity = "info",
+            location = {x = x, y = y, radius = 0},
+            provenance = {
+                recordType = "overhaul_station_income",
+                stationId = tostring(station.id.string),
+                itemKind = "system",
+                sourceRevision = sequence,
+                sourceState = "delivered",
+            },
+            article = {
                 title = string.format("Experimental Tech Found in %s!", sector.name),
                 content = string.format("The Research & Development division at %s %s has successfully engineered a %s %s!", faction.name, station.name, system.rarity.name, system.name),
                 category = "Economy"
-            })
-        end
+            },
+        })
     end
 end
 
@@ -153,14 +175,28 @@ function ManageStationIncomes.giveStationTurret(station, _seller, weapontype)
 
     -- Cosmic Overhaul <-> Cosmic Vault Synergy: Publish global news for rare drops
     if turret.rarity and turret.rarity.value >= RarityType.Legendary then
-        local cvn = include("cosmicvaultnews")
-        if cvn and cvn.publishArticle then
-            cvn.publishArticle({
+        local eventId, sequence = nextStationNewsIdentity(station, "turret")
+        CosmicOverhaulNews.Publish({
+            kind = "station",
+            eventId = eventId,
+            threadId = "station:" .. tostring(station.id.string),
+            eventType = "overhaul.station.legendary_turret",
+            topic = "conflict",
+            severity = "info",
+            location = {x = x, y = y, radius = 0},
+            provenance = {
+                recordType = "overhaul_station_income",
+                stationId = tostring(station.id.string),
+                itemKind = "turret",
+                sourceRevision = sequence,
+                sourceState = "delivered",
+            },
+            article = {
                 title = string.format("Devastating Weaponry Forged in %s!", sector.name),
                 content = string.format("The engineering teams at %s %s have successfully assembled a prototype %s %s!", faction.name, station.name, turret.rarity.name, turret.weaponPrefix),
                 category = "War"
-            })
-        end
+            },
+        })
     end
 end
 

@@ -1,9 +1,10 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
-local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
+local CosmicOverhaulNews = include("co_news")
 
 local rf = {} -- registered factories, multi level. First level keyed by the faction index, second level by factory id
 local initial = {} -- same as above, but only gets updated once, this will be used to calculate profitability over time
+local newsRevisions = {} -- durable lifecycle number for re-registration of the same entity
 
 function initialize()
     if onServer() then
@@ -24,12 +25,13 @@ Inner content structure
 ]]--
 
 function secure()
-	return {rf = rf, initial = initial}
+	return {rf = rf, initial = initial, newsRevisions = newsRevisions}
 end
 
 function restore(data)
 	rf = data.rf or {}
 	initial = data.initial or {}
+	newsRevisions = data.newsRevisions or {}
 end
 
 -- Entry point to call from the factories to register.
@@ -43,7 +45,13 @@ function register(factionIndex, allianceFactory, entity_data)
 	if allianceFactory then
 		fi = "a_" .. tostring(factionIndex)
 	end
-	createOrUpdate(fi, entity_data)
+	local isNew = createOrUpdate(fi, entity_data)
+	if isNew then
+		local entityId = tostring(entity_data.id)
+		newsRevisions[entityId] = math.floor(tonumber(newsRevisions[entityId]) or 0) + 1
+		entity_data._newsRevision = newsRevisions[entityId]
+		publishFactoryRegistration(entity_data)
+	end
 end
 
 -- Called to clean up destroyed/sold factories so they disappear from the UI
@@ -59,8 +67,12 @@ function unregister(factionIndex, allianceFactory, entityIdString)
 	if allianceFactory then
 		fi = "a_" .. tostring(factionIndex)
 	end
+	local removed = rf[fi] and rf[fi][entityIdString] or nil
 	if rf[fi] then rf[fi][entityIdString] = nil end
 	if initial[fi] then initial[fi][entityIdString] = nil end
+	if removed then
+		publishFactoryLoss(removed)
+	end
 end
 
 -- creates or updates the factory registry with the state passed in
@@ -82,6 +94,78 @@ function createOrUpdate(factionIndex, entity_data)
 		registerNewFactory(factionIndex, entity_data) -- registering the content for later comparisons
 	end
 	faction_registry[entityId] = entity_data -- overwriting the previous data
+	return existingContent == nil
+end
+
+local function parseLocation(location)
+	if type(location) ~= "string" then return nil end
+	local x, y = string.match(location, "^%s*(-?%d+)%s*[,x:]%s*(-?%d+)%s*$")
+	x, y = tonumber(x), tonumber(y)
+	if not x or not y then return nil end
+	return {x = x, y = y, radius = 0}
+end
+
+function publishFactoryRegistration(factoryData)
+	if type(factoryData) ~= "table" or factoryData.id == nil then return end
+	local location = parseLocation(factoryData.location)
+	local title = tostring(factoryData.title or factoryData.name or "Factory")
+	local lifecycle = math.floor(tonumber(factoryData._newsRevision) or 1)
+	CosmicOverhaulNews.Publish({
+		kind = "factory",
+		eventId = "registry:" .. tostring(factoryData.id) .. ":" .. tostring(lifecycle),
+		threadId = "factory:" .. tostring(factoryData.id),
+		eventType = "overhaul.factory.registered",
+		topic = "economy",
+		severity = "info",
+		location = location,
+		provenance = {
+			recordType = "overhaul_factory_registry",
+			factoryId = tostring(factoryData.id),
+			sourceRevision = lifecycle,
+			sourceState = "registered",
+		},
+		article = {
+			title = "Factory Joins Production Registry",
+			category = "Market Watch",
+			content = title .. " has begun reporting verified production data"
+				.. (location and string.format(" from sector [%d:%d].", location.x, location.y)
+					or "."),
+		},
+	})
+end
+
+function publishFactoryLoss(factoryData)
+	if type(factoryData) ~= "table" or factoryData.id == nil then return end
+	local location = parseLocation(factoryData.location)
+	local title = tostring(factoryData.title or factoryData.name or "A factory")
+	local factoryId = tostring(factoryData.id)
+	local lifecycle = math.floor(tonumber(factoryData._newsRevision)
+		or tonumber(newsRevisions[factoryId]) or 1)
+	CosmicOverhaulNews.Resolve("factory",
+		"registry:" .. factoryId .. ":" .. tostring(lifecycle),
+		"Factory left the production registry.", "resolved")
+	CosmicOverhaulNews.Publish({
+		kind = "factory",
+		eventId = "loss:" .. factoryId .. ":" .. tostring(lifecycle),
+		threadId = "factory:" .. factoryId,
+		eventType = "overhaul.factory.unregistered",
+		topic = "economy",
+		severity = "warning",
+		location = location,
+		provenance = {
+			recordType = "overhaul_factory_registry",
+			factoryId = factoryId,
+			sourceRevision = lifecycle,
+			sourceState = "unregistered",
+		},
+		article = {
+			title = "Factory Leaves Production Registry",
+			category = "Market Watch",
+			content = title .. " is no longer reporting production data"
+				.. (location and string.format(" from sector [%d:%d].", location.x, location.y)
+					or "."),
+		},
+	})
 end
 
 function registerNewFactory(factionIndex, entity_data) -- too lazy to generalise both the previous function and this one. You can repeat yourself once, right?
@@ -228,12 +312,6 @@ function calculateProfitability(data, init_fdata, factoryData)
 end
 
 function onSeedNews()
-    local server = Server()
-    if not server then return end
-
-    local cfg = CosmicOverhaulConfig and CosmicOverhaulConfig.get and CosmicOverhaulConfig.get() or {}
-    if cfg.enableEconomyEventMessages == false then return end
-
     local bestFactory = nil
     local worstFactory = nil
     local highestProfit = 0
@@ -254,42 +332,40 @@ function onSeedNews()
     end
 
     if bestFactory and highestProfit > 1000 then
-        local article = {
-            title = "Economic Boom: " .. (bestFactory.title or "Unknown Factory"),
-            category = "Market Watch",
-            content = string.format("Financial analysts report massive growth for %s in sector %s. Investors are pouring credits into the surrounding regional economy as profitability skyrockets to record highs.", bestFactory.title or "Unknown Factory", bestFactory.location or "Unknown")
-        }
-        
-        local cvn = include("cosmicvaultnews")
-        if cvn and cvn.publishArticle then
-            cvn.publishArticle(article)
-        else
-            local cv_news = include("cosmicvaultnews")
-            if cv_news and cv_news.publishArticle then
-                cv_news.publishArticle(article)
-            else
-                server:sendCallback("onCCNewsPublishArticle", article)
-            end
-        end
+        CosmicOverhaulNews.Upsert({
+            kind = "factory",
+            eventId = "performance:boom:" .. tostring(bestFactory.id),
+            threadId = "factory:" .. tostring(bestFactory.id),
+            eventType = "overhaul.factory.performance.boom",
+            topic = "economy",
+            severity = "info",
+            location = parseLocation(bestFactory.location),
+            sourceRevision = 1,
+            sourceState = "profitable",
+            article = {
+                title = "Economic Boom: " .. (bestFactory.title or "Unknown Factory"),
+                category = "Market Watch",
+                content = string.format("Financial analysts report massive growth for %s in sector %s. Investors are pouring credits into the surrounding regional economy as profitability skyrockets to record highs.", bestFactory.title or "Unknown Factory", bestFactory.location or "Unknown")
+            },
+        })
     end
 
     if worstFactory and lowestProfit < -1000 then
-        local article = {
-            title = "Market Crash: " .. (worstFactory.title or "Unknown Factory"),
-            category = "Market Watch",
-            content = string.format("A severe economic downturn has struck %s in sector %s. Supply chains are failing, and the station is bleeding credits rapidly. Opportunistic traders are advised to avoid the area or exploit the shortages.", worstFactory.title or "Unknown Factory", worstFactory.location or "Unknown")
-        }
-        
-        local cvn = include("cosmicvaultnews")
-        if cvn and cvn.publishArticle then
-            cvn.publishArticle(article)
-        else
-            local cv_news = include("cosmicvaultnews")
-            if cv_news and cv_news.publishArticle then
-                cv_news.publishArticle(article)
-            else
-                server:sendCallback("onCCNewsPublishArticle", article)
-            end
-        end
+        CosmicOverhaulNews.Upsert({
+            kind = "factory",
+            eventId = "performance:crash:" .. tostring(worstFactory.id),
+            threadId = "factory:" .. tostring(worstFactory.id),
+            eventType = "overhaul.factory.performance.crash",
+            topic = "economy",
+            severity = "warning",
+            location = parseLocation(worstFactory.location),
+            sourceRevision = 1,
+            sourceState = "unprofitable",
+            article = {
+                title = "Market Crash: " .. (worstFactory.title or "Unknown Factory"),
+                category = "Market Watch",
+                content = string.format("A severe economic downturn has struck %s in sector %s. Supply chains are failing, and the station is bleeding credits rapidly. Opportunistic traders are advised to avoid the area or exploit the shortages.", worstFactory.title or "Unknown Factory", worstFactory.location or "Unknown")
+            },
+        })
     end
 end
