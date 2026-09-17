@@ -8,6 +8,7 @@ include("utility")
 FactoryOverview = {}
 local self = FactoryOverview
 local all_check
+local getRowTooltip -- forward-declared so the definition below stays a file-local, not an implicit global
 
 if onClient() then
 	function FactoryOverview.initialize()

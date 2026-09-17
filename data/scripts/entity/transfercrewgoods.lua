@@ -6,14 +6,16 @@ include("stringutility")
 include("tooltipmaker")
 include("callable")
 
-function TransferCrewGoods.getUpdateInterval()
-    return 1.0
-end
-
-
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace TransferCrewGoods
 TransferCrewGoods = {}
+
+-- Must be assigned after the table is (re)created above, not before it -- this used to sit above
+-- the "TransferCrewGoods = {}" line, which immediately wiped it back to nil before the engine ever
+-- read it, silently discarding the custom 1s tick rate.
+function TransferCrewGoods.getUpdateInterval()
+    return 1.0
+end
 
 -- crew
 local playerTotalCrewBar = nil
@@ -2244,15 +2246,8 @@ function TransferCrewGoods.renderUI()
     end
 end
 
-function getUpdateInterval(...)
-    if TransferCrewGoods.getUpdateInterval then return TransferCrewGoods.getUpdateInterval(...) end
-end
-
-
--- Global Event Callbacks
-function onCrewChanged(...)
-    if TransferCrewGoods.onCrewChanged then return TransferCrewGoods.onCrewChanged(...) end
-end
-function onCrewChangedRefreshUI(...)
-    if TransferCrewGoods.onCrewChangedRefreshUI then return TransferCrewGoods.onCrewChangedRefreshUI(...) end
-end
+-- No global wrapper functions here (see engine_constraints.md's "Prohibition of Global Wrappers"):
+-- the engine already routes getUpdateInterval to the namespace directly, and registerCallback
+-- resolves "onCrewChanged"/"onCrewChangedRefreshUI" against TransferCrewGoods natively -- vanilla's
+-- own transfercrewgoods.lua registers the exact same callbacks with no global wrapper either. A
+-- global function with these names would shadow the namespace instead of helping it.

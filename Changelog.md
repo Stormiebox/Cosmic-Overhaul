@@ -24,6 +24,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Docs] **Player Documentation Corrected (`README.md`, `PLAYER_GUIDE.md`, `WIKI.md`):** Economy
   event descriptions now match the live regional price behavior and make clear that the toggle only
   controls the broadcast.
+- [Fix] **`enableEconomyEventMessages` Now Actually Gates the Factory News Articles
+  (`galaxy/factoryregister.lua`):** The v5.6.0 toggle description promised this option would control
+  the "Economic Boom"/"Market Crash" Galactic News articles, but `onSeedNews` published them
+  unconditionally. `onSeedNews` now checks the toggle before publishing either article; the
+  underlying factory profitability tracking is unaffected.
 
 ### 🌩️ Weather Integration
 

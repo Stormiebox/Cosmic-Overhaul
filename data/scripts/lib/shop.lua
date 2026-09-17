@@ -850,6 +850,7 @@ local edr_restockButton                    -- UI
 local edr_specialOfferSeed = 0             -- restock the special offer
 
 -- Handle the actual restocking part
+local edr_generateSeed -- forward-declared so this stays a file-local, not an implicit global in this merged VFS chunk
 if onServer() then
     edr_generateSeed = Shop.generateSeed
     function Shop:generateSeed(...)

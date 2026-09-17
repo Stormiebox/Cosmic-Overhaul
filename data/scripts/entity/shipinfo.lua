@@ -1,9 +1,5 @@
 -- namespace shipinfo
 
-function getUpdateInterval()
-    return 1.0
-end
-
 shipinfo = shipinfo or {}
 
 function shipinfo.initialize()

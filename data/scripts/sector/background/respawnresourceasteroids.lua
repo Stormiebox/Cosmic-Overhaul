@@ -44,12 +44,6 @@ local cachedGhosts = 0
 local cachedComponentCount = 0
 local cachedTotalRes = 0
 
-local isSectorDirty = true
-local cachedVerified = 0
-local cachedGhosts = 0
-local cachedComponentCount = 0
-local cachedTotalRes = 0
-
 -- Raw counting function (internal)
 local function _countVerifiedMineable(sector)
     local entities = {sector:getEntitiesByComponent(ComponentType.MineableMaterial)}

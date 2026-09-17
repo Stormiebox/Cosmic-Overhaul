@@ -1,6 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local CosmicOverhaulNews = include("co_news")
+local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
 local rf = {} -- registered factories, multi level. First level keyed by the faction index, second level by factory id
 local initial = {} -- same as above, but only gets updated once, this will be used to calculate profitability over time
@@ -8,6 +9,7 @@ local newsRevisions = {} -- durable lifecycle number for re-registration of the 
 
 function initialize()
     if onServer() then
+        -- onCCNewsRequestSeed is a Cosmic Vault compatibility-window callback (see Vault's frozen-contracts.md) -- check this call site before assuming it's permanent
         Server():registerCallback("onCCNewsRequestSeed", "onSeedNews")
     end
 end
@@ -312,6 +314,9 @@ function calculateProfitability(data, init_fdata, factoryData)
 end
 
 function onSeedNews()
+    local cfg = CosmicOverhaulConfig.get()
+    if cfg.enableEconomyEventMessages == false then return end
+
     local bestFactory = nil
     local worstFactory = nil
     local highestProfit = 0

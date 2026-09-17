@@ -194,6 +194,7 @@ Balancing:
             end
 
             local logText
+            -- "captain_log" dialogue entries are only registered by Cosmic Chronicles' catalog; without it this query simply returns nothing
             local query = CosmicVaultDialogue.Query("captain_log", context, nil)
             if type(query) == "table" and type(query.entry) == "table" then
                 logText = query.entry.text
