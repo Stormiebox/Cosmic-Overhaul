@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("stringutility")
-include("callable")
+include("data/scripts/lib/callable")
 
 local __CMB_Base_BulletinBoard_receiveData = BulletinBoard.receiveData
 
@@ -64,9 +64,6 @@ if onClient() then
     end
 end -- onClient()
 
--- BulletinBoard is namespaced (vanilla declares "-- namespace BulletinBoard" and
--- itself correctly does callable(BulletinBoard, "acceptMission")); callable(nil, ...)
--- here registered into the unrelated global Callable table instead of this script's
--- own namespace, which the linter's namespaced-script rule flags as illegal (see
--- engine_constraints.md).
+-- BulletinBoard is namespaced (vanilla declares "-- namespace BulletinBoard"), so the RPC
+-- registration must bind to the namespace table, not to callable(nil, ...).
 callable(BulletinBoard, "acceptMission")

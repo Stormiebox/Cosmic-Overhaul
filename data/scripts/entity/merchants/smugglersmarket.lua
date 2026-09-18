@@ -6,7 +6,7 @@ include ("utility")
 include ("randomext")
 include ("merchantutility")
 include ("stringutility")
-include ("callable")
+include("data/scripts/lib/callable")
 include ("relations")
 local CaptainClass = include ("captainclass")
 local TradingAPI = include ("tradingmanager")
@@ -446,39 +446,39 @@ function SmugglersMarket.onShowWindow()
 
         if good.stolen or good.name == "Rift Research Data" or good.name == "Subclass Subsystem" then
             table.insert(stolenGoods, p)
-            if i - 1 < itemStart then
-                i = i + 1
-            else
 
-                if i - itemStart <= #brandLines then
-                    -- do sell lines
-                    local line = SmugglersMarket.trader.boughtLines[i - itemStart]
-                    line:show()
-                    line.icon.picture = good.icon
-                    line.name.caption = good:displayName(2)
-                    line.price.caption = createMonetaryString(round(SmugglersMarket.getStolenBuyPrice(good.name, ship)))
-                    line.size.caption = round(good.size, 2)
-                    line.you.caption = amount
-                    line.stock.caption = "   -"
+            -- i must advance for every stolen/contraband item regardless of whether it falls on the
+            -- currently displayed page, otherwise numStolenItems (= i - 1 below) undercounts as soon
+            -- as the player owns more stolen items than fit on one page, and onPageRightButtonPressed's
+            -- max-page calculation silently caps out one page early.
+            if i - 1 >= itemStart and i - itemStart <= #brandLines then
+                -- do sell lines
+                local line = SmugglersMarket.trader.boughtLines[i - itemStart]
+                line:show()
+                line.icon.picture = good.icon
+                line.name.caption = good:displayName(2)
+                line.price.caption = createMonetaryString(round(SmugglersMarket.getStolenBuyPrice(good.name, ship)))
+                line.size.caption = round(good.size, 2)
+                line.you.caption = amount
+                line.stock.caption = "   -"
 
-                    boughtGoods[i - itemStart] = good
+                boughtGoods[i - itemStart] = good
 
-                    -- do unbranding lines
-                    local line = brandLines[i - itemStart]
+                -- do unbranding lines
+                local line = brandLines[i - itemStart]
 
-                    line:show()
-                    line.icon.picture = good.icon
-                    line.name.caption = good:displayName(2)
+                line:show()
+                line.icon.picture = good.icon
+                line.name.caption = good:displayName(2)
 
-                    local unbrandPrice = SmugglersMarket.getUnbrandPriceAndTax(good.price, 1, faction, buyer, ship)
-                    line.price.caption = createMonetaryString(round(unbrandPrice))
-                    line.numbers.text = amount
+                local unbrandPrice = SmugglersMarket.getUnbrandPriceAndTax(good.price, 1, faction, buyer, ship)
+                line.price.caption = createMonetaryString(round(unbrandPrice))
+                line.numbers.text = amount
 
-                    line.you.caption = amount
-                end
-
-                i = i + 1
+                line.you.caption = amount
             end
+
+            i = i + 1
         end
     end
 

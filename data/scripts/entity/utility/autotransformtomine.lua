@@ -15,8 +15,15 @@ local vanilla_onPlayerLeft = onPlayerLeft
 local vanilla_createMine = createMine
 
 function initialize()
+    -- Always run vanilla's initialize (registers onPlayerLeft), regardless of the current config
+    -- state: onPlayerLeft() below re-checks abandonmentEnabled live on every call, so registering
+    -- unconditionally here (instead of only on the disabled branch) keeps a mid-game CCM toggle
+    -- working for asteroids that were attached while abandonment was enabled -- otherwise those
+    -- asteroids never call Sector():registerCallback at all and permanently lose the vanilla
+    -- mine-transformation path even after the admin disables abandonment again.
+    vanilla_initialize()
+
     if not CosmicOverhaulConfig.get().abandonmentEnabled then
-        vanilla_initialize()
         return
     end
 
@@ -28,9 +35,10 @@ function initialize()
 end
 
 function getUpdateInterval()
-    if not CosmicOverhaulConfig.get().abandonmentEnabled then
-        return 0
-    end
+    -- Tick at 60s either way -- when disabled, updateServer() below immediately no-ops, so a
+    -- fast interval only adds pointless per-tick config lookups across every claimed asteroid
+    -- in the galaxy. (The previous version returned 0 -- "as fast as possible" -- specifically
+    -- when disabled, which is the opposite of the intended throttle.)
     return 60
 end
 

@@ -27,7 +27,6 @@ function LuaHackCategory:anyEnabled()
     return false
 end
 function LuaHackCategory.new(includedHacks)
-    local m = { hacks = includedHacks }
     return setmetatable({ hacks = includedHacks }, {
         __index = function(self, k)
             for hackKey, hackValue in pairs(self.hacks) do
@@ -90,7 +89,10 @@ ShipDatabaseEntry = function(...)
     end
 
     proxyDatabaseEntry.getCaptain = function(self, ...)
-        local proxyGetCaptain = { _proxied = self._proxied:getCaptain(self._proxied, ...) }
+        -- ShipDatabaseEntry:getCaptain() takes no arguments -- the ":" call syntax already
+        -- passes self._proxied as the implicit first argument, so re-passing it here would
+        -- have doubled it up as an unexpected extra argument to the native binding.
+        local proxyGetCaptain = { _proxied = self._proxied:getCaptain(...) }
         proxyGetCaptain.hasClass = function(self, checkedClass)
             if LuaHacks.Hacks.ShipDatabaseEntry.CaptainAlwaysHasMerchant:isEnabled()
                 and checkedClass == CaptainClass.Merchant

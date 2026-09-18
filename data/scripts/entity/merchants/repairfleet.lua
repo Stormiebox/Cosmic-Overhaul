@@ -1,15 +1,10 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include ("faction")
 include ("utility")
-include ("callable")
-local Dialog = include("dialogutility")
-local RepairDock = include("merchantutility") -- Not strictly merchantutility but we'll use include("repairdock") if needed, wait. RepairDock is technically `data/scripts/entity/merchants/repairdock.lua`. But we can just duplicate the getRepairMoneyCost logic, or `invokeFunction` on the script.
--- Stormbox: Important Notes Below!
--- To avoid duplicating the RepairDock's complex tax/cost calculations, we can simply invoke them if they are exposed,
--- but RepairDock doesn't expose them globally in a way we can easily include without loading the entity script.
--- Wait, actually we can call `Entity():invokeFunction("repairdock.lua", "getRepairMoneyCostAndTaxCreditsOnly", ...)`!
--- But since it's a server function, we can just let `repairfleet.lua` handle the UI and invoke the actual server function that we leave inside `repairdock.lua`!
--- That is brilliant! I don't need to move the server logic!
+include("data/scripts/lib/callable")
+-- The actual repair-cost/tax math lives entirely in repairdock.lua, attached to the same station
+-- entity by RepairDock.initialize(). This script only builds the dialog/UI and proxies the server
+-- call via invokeFunction, so that calculation never has to be duplicated here.
 
 function interactionPossible(playerIndex, option)
     return CheckFactionInteraction(playerIndex, -30000)

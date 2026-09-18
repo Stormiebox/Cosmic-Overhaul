@@ -4,15 +4,14 @@ local CaptainUtility = include("captainutility")
 include("utility")
 include("stringutility")
 include("tooltipmaker")
-include("callable")
+include("data/scripts/lib/callable")
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace TransferCrewGoods
 TransferCrewGoods = {}
 
--- Must be assigned after the table is (re)created above, not before it -- this used to sit above
--- the "TransferCrewGoods = {}" line, which immediately wiped it back to nil before the engine ever
--- read it, silently discarding the custom 1s tick rate.
+-- Must be assigned after the table is (re)created above, not before it -- an assignment made to
+-- TransferCrewGoods before that table exists would be wiped out the moment the table is created.
 function TransferCrewGoods.getUpdateInterval()
     return 1.0
 end

@@ -175,7 +175,6 @@ function TradeCommand:computeRelationImpacts()
     })
 
     local charityRatio = TradeCommand.getRelationChangeRatioForCharity()
-    local cv_economy = include("cosmicvaulteconomy")
     if cv_economy then
         local famineLevel = cv_economy.getFamineLevel(factionForRelations)
         if famineLevel and famineLevel ~= "Stable" then
@@ -463,11 +462,15 @@ function TradeCommand:calculatePrediction(ownerIndex, shipName, area, config)
     return prediction
 end
 
--- These two functions are just tweaked to pretend the captain's always a merchant
+-- These two functions are just tweaked to pretend the captain's always a merchant.
+-- HackedFunc(hacks, func) returns a new closure that captures its OWN "..." whenever it's
+-- later actually called (e.g. command:onAreaAnalysisFinished(results, meta)) -- any extra
+-- arguments passed here at wrap time are just captured and discarded, never used, so "self"
+-- and "..." were never doing anything at this call site.
 TradeCommand.onAreaAnalysisFinished = LuaHacks.HackedFunc(
     LuaHacks.Hacks.ShipDatabaseEntry.CaptainAlwaysHasMerchant,
-    TradeCommand.onAreaAnalysisFinished, self, ...)
+    TradeCommand.onAreaAnalysisFinished)
 
 TradeCommand.getErrors = LuaHacks.HackedFunc(
     LuaHacks.Hacks.ShipDatabaseEntry.CaptainAlwaysHasMerchant,
-    TradeCommand.getErrors, self, ...)
+    TradeCommand.getErrors)

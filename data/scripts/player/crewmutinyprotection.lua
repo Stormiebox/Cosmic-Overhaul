@@ -4,13 +4,16 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 MutinyProtection = {}
 
 function MutinyProtection.initialize()
-    if onServer() then
-        Player():registerCallback("onPreUpdate", "onPreUpdate")
-    end
+    -- no-op: the engine drives MutinyProtection.updateServer() natively via the
+    -- namespace lifecycle hook, same as every other Namespace.updateServer() in this
+    -- suite. "onPreUpdate" is not a real Player callback (confirmed absent from the
+    -- Avorion Stubs and raw HTML docs), so registering it here never fired -- this
+    -- whole feature was silently dead.
 end
 
 local updateTimer = 0
-function MutinyProtection.onPreUpdate(timeStep)
+function MutinyProtection.updateServer(timeStep)
+    if not onServer() then return end
     updateTimer = updateTimer + timeStep
     if updateTimer > 60 then
         updateTimer = 0
@@ -26,9 +29,12 @@ function MutinyProtection.checkWallets()
     if not alliance then return end
     
     local totalWages = 0
-    local shipNames = player:getShipNames()
-    if not shipNames then return end
-    
+    -- getShipNames() returns a vararg of strings, not a table (confirmed against the
+    -- engine's own docs and every vanilla call site) -- must be wrapped in {} or the
+    -- capture silently truncates to just the first ship name.
+    local shipNames = { player:getShipNames() }
+    if #shipNames == 0 then return end
+
     for _, name in pairs(shipNames) do
         local amount = player:getShipPayment(name)
         if amount and amount > 0 then

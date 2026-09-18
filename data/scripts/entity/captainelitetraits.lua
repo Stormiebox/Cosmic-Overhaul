@@ -32,13 +32,11 @@ function updateServer(timeStep)
             local ships = {sector:getEntitiesByFaction(myFaction)}
             for _, ship in pairs(ships) do
                 if ship.isShip or ship.isStation then
-                    -- Try to refresh existing buffs, otherwise apply new ones
+                    -- Try to refresh existing buffs, otherwise apply new ones.
                     -- CosmicVaultBuffs.applyBuff's multiplier is a SCALE factor (cosmicbuff.lua
                     -- converts it to an addBaseMultiplier delta via multiplier - 1.0, matching the
-                    -- engine's own "a factor of 0.3 becomes 1.3" semantics for addBaseMultiplier) --
-                    -- 1.10 for +10%, not 0.10. Passing 0.10 previously computed a delta of -0.9,
-                    -- silently applying a -90% Shield/FireRate penalty instead of the advertised
-                    -- +10% Commodore bonus.
+                    -- engine's own "a factor of 0.3 becomes 1.3" semantics for addBaseMultiplier),
+                    -- so +10% needs 1.10, not 0.10.
                     local shieldRefreshed = CosmicVaultBuffs.refreshBuff(ship.id, "CommodoreShield")
                     if not shieldRefreshed then
                         CosmicVaultBuffs.applyBuff(ship.id, "Shield", 1.10, 6.0, "CommodoreShield")
@@ -74,18 +72,9 @@ function updateServer(timeStep)
         end
     end
 
-    -- 3. Miner Elite Trait: this flag was set here but never read anywhere in the workspace --
-    -- confirmed dead (grepped for "elite_miner_yield" workspace-wide, only writer, no reader).
-    -- The real Elite Miner bonus already exists, correctly working, in minecommand.lua's own
-    -- MineCommand:getAreaSize (+25 mining area at captain level 3+) and MineCommand:calculatePrediction
-    -- (Mining Captain Hazard Pay: 25% chance of a +10% yield event). Removed the orphaned flag
-    -- rather than wire it to a second, redundant bonus mechanism.
-
-    -- 4. Scavenger Elite Trait: +50% Salvage Yield in Contested/Siege Zones. This used to route
-    -- through CosmicVaultBuffs.applyBuff("SalvageYield", ...) -- "SalvageYield" was never one of
-    -- cosmicbuff.lua's handled stat names (no native StatsBonuses enum for salvage yield exists
-    -- either), so the buff silently did nothing, every time, since this was written. Moved to a
-    -- real fix in salvagecommand.lua's own SalvageCommand:calculatePrediction override, which
-    -- multiplies the predicted resource yield directly -- the same hookable mechanism
-    -- minecommand.lua's own Mining Captain Hazard Pay bonus already uses successfully.
+    -- Miner and Scavenger Elite Traits are implemented elsewhere: the Miner mining-area/yield
+    -- bonus lives in minecommand.lua's MineCommand:getAreaSize and :calculatePrediction, and the
+    -- Scavenger salvage-yield bonus lives in salvagecommand.lua's SalvageCommand:calculatePrediction
+    -- -- both multiply their predicted yield directly rather than going through a stat buff, since
+    -- neither "mining yield" nor "salvage yield" is a real StatsBonuses/cosmicbuff stat name.
 end

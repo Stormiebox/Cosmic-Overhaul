@@ -2,7 +2,7 @@
 local CaptainClass = include("captainclass")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 
-function randomFloat(lesser, greater)
+local function randomFloat(lesser, greater)
     return lesser + random():getFloat() * (greater - lesser)
 end
 

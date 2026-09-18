@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 include("stringutility")
 include("randomext")
-include("callable")
+include("data/scripts/lib/callable")
 include("playerstationutils")
 local CosmicOverhaulConfig = include("cosmicoverhaulconfig")
 local cw_success = true; include("cosmicwarbridge")

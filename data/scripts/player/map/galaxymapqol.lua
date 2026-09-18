@@ -15,7 +15,7 @@ GalaxyMapQoL = include("galaxymapqolclient")
 else -- onServer
 
 
-include("callable")
+include("data/scripts/lib/callable")
 Azimuth, Config, Log = unpack(include("galaxymapqolinit"))
 
 data = { playerIcons = {}, playerIconsCount = 0 }

@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include ("utility")
 include ("randomext")
-include ("callable")
+include("data/scripts/lib/callable")
 
 include ("stringutility")
 include ("goods")

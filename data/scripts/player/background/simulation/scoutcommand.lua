@@ -54,7 +54,7 @@ function ScoutCommand.ccm_getExtendedPrediction(prediction, ship, area)
 
     -- Record the "real" raw values in the prediction (Extract Jump Reach)
     prediction.ccm.deepScanRange = ScoutCommand.getEstimatedDeepScanRange(ship)
-    local reach, passedTime, cooldown = ship:getHyperspaceProperties()
+    local reach, canPassRifts, cooldown = ship:getHyperspaceProperties()
     prediction.ccm.hyperspaceCooldown = cooldown or 0
 
     -- We use a scaled version of the raw inputs to keep things a little smoother and not have
@@ -281,11 +281,11 @@ local ccm_ScoutCommand_buildUI_original = ScoutCommand.buildUI
 function ScoutCommand:buildUI(...)
     local ui = ccm_ScoutCommand_buildUI_original(self, ...)
     local refreshOriginal = ui.refresh
-    ui.refresh = function(self, ...)
+    ui.refresh = function(self, ownerIndex, shipName, area, config)
         if not config then
             ccm_uiTimestamp = appTimeMs()
         end
-        refreshOriginal(self, ...)
+        refreshOriginal(self, ownerIndex, shipName, area, config)
     end
     return ui
 end

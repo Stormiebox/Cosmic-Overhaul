@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 include("stringutility")
 include("utility")
-include("callable")
+include("data/scripts/lib/callable")
 local SellableInventoryItem = include("sellableinventoryitem")
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.

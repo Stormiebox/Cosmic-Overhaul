@@ -23,7 +23,9 @@ if onClient() then
         -- Insert managed orders
         OALMapCommands.applyCommands(OrderButtonType, orders)
 
-        -- Re-insert base orders/missions, excluding those which are now managed
+        -- Re-insert base orders/missions, excluding those which are now managed. The four
+        -- Overhaul-managed types (Undo/Patrol/Attack/Repair) always land at 1-4 regardless of
+        -- which numbering OrderButtonType currently holds; Stop/Recall always stay at 6/7.
         for i = #baseOrders, 1, -1 do
             if type(baseOrders[i].type) == "string" or baseOrders[i].type > 5 then
                 table.insert(orders, table.remove(baseOrders, i))
@@ -106,7 +108,10 @@ if onClient() then
     end
 end
 
--- Base commands with fixed integer IDs from vanilla
+-- Base commands, matched to vanilla's Undo/Patrol/Attack/Repair buttons by name (not by these
+-- integer IDs, which don't line up with vanilla's own OrderButtonType numbering -- vanilla
+-- reserves 2 for Loop, which only exists as a command in this mod). Safe because every vanilla
+-- read of OrderButtonType compares by name, never a hardcoded number.
 OALMapCommands.addCommand("Undo",   "Undo"%_t,           "data/textures/icons/undo.png",           "onUndoPressed", nil, 1)
 OALMapCommands.addCommand("Patrol", "Patrol Sector"%_t,  "data/textures/icons/back-forth.png",     "onPatrolPressed", nil, 2)
 OALMapCommands.addCommand("Attack", "Attack Enemies"%_t, "data/textures/icons/crossed-rifles.png", "onAggressivePressed", true, 3)

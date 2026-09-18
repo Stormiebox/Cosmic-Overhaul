@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/player/background/simulation/?.lua"
 
-include("callable")
+include("data/scripts/lib/callable")
 include("utility")
 include("stringutility")
 

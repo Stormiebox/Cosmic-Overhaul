@@ -4,7 +4,6 @@ include ("randomext")
 include ("sellableinventoryitem")
 include ("stringutility")
 local SectorFighterGenerator = include("sectorfightergenerator")
-local Dialog = include("dialogutility")
 local ShopAPI = include ("shop")
 local SellableFighter = include ("sellablefighter")
 

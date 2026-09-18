@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("stringutility")
-include("callable")
+include("data/scripts/lib/callable")
 
 -- Script for interacting with a Sealed Hulk
 -- State 0 = Initial approach

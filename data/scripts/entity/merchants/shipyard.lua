@@ -25,7 +25,7 @@ function Shipyard.startServerJob(singleBlock, founder, withCrew, styleName, seed
                 local stationId = Entity().id.string
                 
                 -- Add and start the tracker mission
-                player:addScriptOnce("player/missions/co_shipyard_tracker.lua")
+                player:addScriptOnce("data/scripts/player/missions/co_shipyard_tracker.lua")
                 player:invokeFunction("co_shipyard_tracker", "trackShip", 
                     extractedJob.singleBlock, extractedJob.founder, extractedJob.withCrew, 
                     extractedJob.styleName, extractedJob.seed, extractedJob.volume, 

@@ -231,7 +231,7 @@ function GalaxyMapQoL.initUI()
 	iconSelector.rect = Rect(iconPictures[1].lower - vec2(3, 3), iconPictures[1].upper + vec2(3, 3))
 
 	splitter = UIVerticalSplitter(partitions[5], 10, 0, 0.5)
-	btn = editIconWindow:createButton(splitter.left, "Apply"%_t, "galaxyMapQoL_onEditIconApplyBtnPressed")
+	local btn = editIconWindow:createButton(splitter.left, "Apply"%_t, "galaxyMapQoL_onEditIconApplyBtnPressed")
 	btn.maxTextSize = 14
 	btn = editIconWindow:createButton(splitter.right, "Cancel"%_t, "galaxyMapQoL_onEditIconCancelBtnPressed")
 	btn.maxTextSize = 14

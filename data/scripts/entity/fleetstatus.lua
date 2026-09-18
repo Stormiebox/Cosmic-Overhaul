@@ -323,8 +323,8 @@ function fs.renderShipStatus()
         if player.craft.name == shipData.name then goto continue end
 
         -- ShipDatabaseEntry() is a constructor, not a lookup -- it always returns a valid
-        -- handle even for a name that no longer exists, so "if entry then" never actually
-        -- guarded anything. exists() is the real check.
+        -- handle even for a name that doesn't exist, so "if entry then" alone is not a real
+        -- guard. exists() is the check that actually confirms the ship is still around.
         local entry = ShipDatabaseEntry(shipData.faction, shipData.name)
         if entry and entry:exists() then
             fs._drawShipStatus(entry, y_offset)
@@ -647,13 +647,8 @@ writers = {
 }
 
 
--- namespace-shadowing bare global wrappers around initialize/update/getUpdateInterval and the
--- registerCallback-invoked renderShipStatus/loadToShip used to live here. The engine natively
--- routes lifecycle hooks and registered callbacks (registerCallback("onPreRenderHud",
--- "renderShipStatus") etc.) into this namespace's own fs.* functions directly -- confirmed
--- against vanilla's enemystrengthindicators.lua, which registers
--- player:registerCallback("onShipChanged", "onRefreshRequired") and defines only the
--- namespaced EnemyStrengthIndicators.onRefreshRequired, no bare global. A same-named bare
--- global here shadows that native routing rather than helping it.
+-- No bare global wrapper functions here: the engine natively routes lifecycle hooks and
+-- registered callbacks (registerCallback("onPreRenderHud", "renderShipStatus") etc.) into this
+-- namespace's own fs.* functions directly -- a same-named bare global would shadow that routing.
 
 return FleetStatus

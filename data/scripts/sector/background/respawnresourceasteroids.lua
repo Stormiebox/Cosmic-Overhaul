@@ -137,9 +137,6 @@ function RespawnResourceAsteroids.initialize()
     self.timer = 0
 
     -- Register for push notifications when admin changes config via CCM
-
-
-    local sector = Sector()
     sector:registerCallback("onDestroyed", "onEntityDestroyed")
 
     sector:setValue(KEY_TARGET_PCT, self.restorationPct)
@@ -232,7 +229,6 @@ function RespawnResourceAsteroids.updateServer(timeStep)
     if self.timer < self.respawnInterval * 60 then return end
     self.timer = self.timer - self.respawnInterval * 60
 
-    local sector = Sector()
     local baseline = sector:getValue(KEY_BASELINE)
     if not baseline then return end
 

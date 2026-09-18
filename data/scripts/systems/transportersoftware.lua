@@ -54,8 +54,11 @@ function getTooltipLines(seed, rarity, permanent)
 
 	local texts = right or left or {}
 	if texts[1] and texts[1].rtext then
-		-- Cosmic Overhaul: Updated tooltip to explicitly mention the progressive scaling
-		texts[1].rtext = texts[1].rtext .. " (+ scaled by Transporter Blocks)"%_t
+		-- Cosmic Overhaul: the vanilla tooltip line above only reflects the unscaled rarity roll
+		-- (from vanilla getBonuses); recompute the displayed number from getRealBonuses so it
+		-- matches the scaled value onInstalled actually applies.
+		local range = getRealBonuses(seed, rarity, permanent)
+		texts[1].rtext = "+${distance} km"%_t % {distance = range / 100} .. " (+ scaled by Transporter Blocks)"%_t
 	end
 
 	if not permanent then

@@ -9,6 +9,48 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [v5.6.1] - Persistent Regional Market Events
 
+### 🛰️ Trading Overview (Vanilla Override — Compatibility Disclosure)
+
+- [Feature] **Trading Subsystem Now Scales Economy Scan Range By Rarity
+  (`systems/tradingoverview.lua`):** The Trading Subsystem/Hypertrading System's galaxy-map economy
+  scan range is now multiplied by 2x (Petty/Common) up to 10x (Legendary) based on the installed
+  subsystem's rarity, instead of the flat vanilla range (5–25 sectors depending on rarity).
+- [Compatibility] **What was overridden:** This required a direct VFS override of vanilla's
+  `data/scripts/systems/tradingoverview.lua`, replacing only its `getEconomyRange` function. Every
+  other function in the file — UI construction, trade route detection, buy/sell tabs, supply &
+  demand — is untouched and runs exactly as vanilla wrote it; the override captures vanilla's
+  `getEconomyRange` before redefining it and calls through to it, only scaling the returned range.
+- [Compatibility] **Why no additive alternative exists:** Each installed system-upgrade item
+  (including Trading Subsystem/Hypertrading System) runs in its own isolated Lua VM, so a separate,
+  additive upgrade item cannot see or modify another item's returned economy range. The galaxy-map
+  economy overview consumer, `EconomyInfo.getBestEconomyOverviewRange`
+  (`data/scripts/player/map/economyinfo.lua:341-349`), makes this architecturally unavoidable: it
+  hardcodes exactly two accepted script paths it will ever call `getEconomyRange` on —
+  `/systems/tradingoverview.lua` and `/systems/hypertradingsystem.lua` — and calls neither with any
+  hook or event a standalone item could intercept. A fully additive system-upgrade item is
+  confirmed impossible for this specific mechanic.
+- [Compatibility] **Consequence for other Workshop mods:** Any other Workshop mod that also
+  overrides `data/scripts/systems/tradingoverview.lua` — in particular, any mod that itself changes
+  `getEconomyRange`, `getTooltipLines`, or `getComparableValues` in that file — will collide with
+  this override at the VFS merge/load-order level. Since this override only wraps
+  `getEconomyRange` and leaves the rest of the file undefined (VFS resolves the remaining functions
+  from vanilla or from whichever mod defines them), the practical collision surface is narrow: it is
+  only a problem for a mod that also redefines `getEconomyRange` in the same file, where load order
+  determines whose scaling wins.
+- [Removed] **`systems/TradeHeatmapEmbiggener.lua` Deleted:** This file implemented the same
+  rarity-scaling logic as a standalone system-upgrade item, but was dead code — no upgrade pool or
+  script ever installed it, and even if installed, item VM isolation (above) meant it could never
+  have reached `economyinfo.lua`'s two-path check regardless. Its rarity-multiplier ladder was
+  ported into the `tradingoverview.lua` override above; nothing else referenced this file.
+
+### 📖 Documentation
+
+- [Docs] **In-Game Codex Accuracy Pass:** Corrected or removed roughly 20 `infoCo.lua` Codex
+  articles that described features, numbers, or fixes with no basis in the live code (dead
+  AlliedRelationsEnhancer content, an inverted War Zone economy claim, several fabricated
+  "modifier" systems and fix descriptions, a misattributed FleetStatus shim path, and more).
+  Articles now describe only what the shipped code does, with numbers matching the actual values.
+
 ### 📈 Economy Integration
 
 - [Feature] **Heavy Consumption Now Starts A Real Market Event (`lib/tradingmanager.lua`):** Large
@@ -61,6 +103,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Bugfix] **Simulation Wrapper Uses Lua 5.1-Safe Vararg Preservation:** The initialize wrapper no
   longer relies on `table.pack` or `table.unpack`, while still returning every value from the
   original vanilla function.
+
+### 🔧 System Upgrade Fixes
+
+- [Fix] **Transporter Software Tooltip Shows the Real Scaled Range (`systems/transportersoftware.lua`):**
+  The Docking Distance tooltip line recomputes its displayed number from `getRealBonuses` (the
+  Transporter-Block-scaled value `onInstalled` actually applies) instead of the unscaled vanilla
+  roll, so it no longer under-reports the range right next to text claiming it's already scaled.
 
 ## [v5.6.0] - Economy Message Toggles
 
