@@ -1,6 +1,6 @@
 # 📘 Cosmic Overhaul — Player Guide
 
-![Version](https://img.shields.io/badge/version-5.6.0-6f42c1?style=flat-square)
+![Version](https://img.shields.io/badge/version-5.7.0-6f42c1?style=flat-square)
 ![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
 Welcome to **Cosmic Overhaul**!

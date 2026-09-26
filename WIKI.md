@@ -1,6 +1,6 @@
 # ⚙️ Cosmic Overhaul — Wiki
 
-![Version](https://img.shields.io/badge/version-5.6.0-6f42c1?style=flat-square)
+![Version](https://img.shields.io/badge/version-5.7.0-6f42c1?style=flat-square)
 ![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
 Complete technical reference for **Cosmic Overhaul**, covering every system currently in the mod as of **v5.3.0**. This document favors precision over brevity — file names, exact multipliers, and mechanic thresholds are included wherever they matter.

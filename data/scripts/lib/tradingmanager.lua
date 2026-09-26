@@ -154,10 +154,12 @@ end
 
 -- Merchant Captain Synergy: Dynamic discount/bonus based on Captain Level & Tier (Globally applied)
 local original_getBuyPrice = TradingManager.getBuyPrice
-function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
-    local price, tax
+-- Vanilla returns five values: price, basePrice, supplyDemandFactor, relationFactor, priceFactor.
+-- The factory config panel reads the last three, so all five are passed back.
+function TradingManager:getBuyPrice(goodName, sellingFactionIndex)
+    local price, basePrice, supplyDemandFactor, relationFactor, priceFactor
     if original_getBuyPrice then
-        price, tax = original_getBuyPrice(self, goodName, amount, faction, buyer)
+        price, basePrice, supplyDemandFactor, relationFactor, priceFactor = original_getBuyPrice(self, goodName, sellingFactionIndex)
     end
 
     local player
@@ -176,25 +178,26 @@ function TradingManager:getBuyPrice(goodName, amount, faction, buyer)
                 local tierBonus = (captain.tier or 0) * 0.02
                 local levelBonus = (captain.level or 1) * 0.02
                 local multiplier = 1.0 + tierBonus + levelBonus
-                
+
                 if price and price > 0 then
                     price = math.max(1, math.floor(price * multiplier))
                 end
-                if tax and tax > 0 then
-                    tax = math.max(0, math.floor(tax * multiplier))
+                if basePrice and basePrice > 0 then
+                    basePrice = math.max(0, math.floor(basePrice * multiplier))
                 end
             end
         end
     end
-    return price, tax
+    return price, basePrice, supplyDemandFactor, relationFactor, priceFactor
 end
 
 -- Merchant Captain Synergy: Dynamic discount/bonus based on Captain Level & Tier (Globally applied)
 local original_getSellPrice = TradingManager.getSellPrice
-function TradingManager:getSellPrice(goodName, amount, faction, buyer)
-    local price, tax
+-- Same five return values as getBuyPrice above.
+function TradingManager:getSellPrice(goodName, buyingFaction)
+    local price, basePrice, supplyDemandFactor, relationFactor, priceFactor
     if original_getSellPrice then
-        price, tax = original_getSellPrice(self, goodName, amount, faction, buyer)
+        price, basePrice, supplyDemandFactor, relationFactor, priceFactor = original_getSellPrice(self, goodName, buyingFaction)
     end
 
     local player
@@ -213,16 +216,16 @@ function TradingManager:getSellPrice(goodName, amount, faction, buyer)
                 local tierBonus = (captain.tier or 0) * 0.02
                 local levelBonus = (captain.level or 1) * 0.02
                 local multiplier = 1.0 - (tierBonus + levelBonus)
-                
+
                 if price and price > 0 then
                     price = math.max(1, math.floor(price * multiplier))
                 end
-                if tax and tax > 0 then
-                    tax = math.max(0, math.floor(tax * multiplier))
+                if basePrice and basePrice > 0 then
+                    basePrice = math.max(0, math.floor(basePrice * multiplier))
                 end
             end
         end
     end
-    return price, tax
+    return price, basePrice, supplyDemandFactor, relationFactor, priceFactor
 end
 -- Cosmic Overhaul Dynamic Stock Management ends here

@@ -111,6 +111,23 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
   Transporter-Block-scaled value `onInstalled` actually applies) instead of the unscaled vanilla
   roll, so it no longer under-reports the range right next to text claiming it's already scaled.
 
+### 🏭 Factory Fixes
+
+- [Fix] **Factory Panel Showed Only the Last Ingredient, and Profit Per Production Read 0
+  (`lib/tradingmanager.lua`, `TradingManager:getBuyPrice` / `getSellPrice`):** The Merchant Captain
+  price wrappers unpacked vanilla's return values as `price, tax` and returned only those two.
+  Vanilla returns five: `price, basePrice, supplyDemandFactor, relationFactor, priceFactor`. The
+  second is the base price, not a tax. Vanilla's `Factory.refreshConfigUI` reads the third to fifth
+  and jumps to `::continue::` when `supplyDemandFactor` is `nil`, which skips its `i = i + 1` row
+  counter. With every ingredient taking that path, each one was written into the first label row
+  and the next overwrote it, so only the last ingredient of the recipe stayed on screen. In the
+  Transformator Factory that is the optional Energy Cell, so the panel looked as if Energy Cells
+  were the only requirement while the factory still ran the full vanilla recipe (Steel, Plastic,
+  Silicon, Silver, plus the optional Energy Cell). The same skip left the ingredient and product
+  price sums at 0, so "Profit / production" always read ¢0, and multi-product factories lost
+  their product rows the same way. Both wrappers now capture and return all five values under
+  their real names, and scale `basePrice` together with `price` as the old `tax` slot was.
+
 ## [v5.6.0] - Economy Message Toggles
 
 ### ⭐ New Features
